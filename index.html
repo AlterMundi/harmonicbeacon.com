@@ -232,8 +232,14 @@ tailwind.config = {
 </section>
 
 <!-- =================== HIT (panel) =================== -->
-<section data-panel="hit" class="panel relative pt-36 md:pt-44 pb-28 md:pb-36">
-  <div class="mx-auto max-w-7xl px-6">
+<section data-panel="hit" class="panel relative pt-36 md:pt-44 pb-28 md:pb-36 overflow-hidden">
+
+  <!-- Lissajous de fondo — la firma armónica del libro -->
+  <div class="hit-bg" aria-hidden="true">
+    <canvas class="hit-lissajous" data-a="3" data-b="2" data-phase="0.78"></canvas>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-7xl px-6">
     <header class="text-center max-w-4xl mx-auto reveal">
       <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">03 · La teoría</p>
       <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">

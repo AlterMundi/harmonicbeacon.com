@@ -182,45 +182,40 @@ body[data-route="home"] footer{ display: none; }
 .aurora{
   position: absolute;
   border-radius: 9999px;
-  filter: blur(110px);
+  filter: blur(120px) saturate(1.15);
   pointer-events: none;
   z-index: 1;
-  mix-blend-mode: soft-light;
+  /* sin mix-blend-mode → los colores se ven directos sobre el crema */
   will-change: transform;
 }
 .aurora-1{
-  width: 70vmin; height: 70vmin;
+  width: 75vmin; height: 75vmin;
   top: -18vmin; left: -10vmin;
-  background: radial-gradient(circle at 38% 38%, var(--glow-rose) 0%, transparent 70%);
-  opacity: .85;
+  background: radial-gradient(circle at 38% 38%, rgba(232,160,188,.85) 0%, rgba(232,160,188,0) 70%);
   animation: aurora1 52s ease-in-out infinite alternate;
 }
 .aurora-2{
-  width: 80vmin; height: 80vmin;
+  width: 85vmin; height: 85vmin;
   top: -8vmin; right: -22vmin;
-  background: radial-gradient(circle at 60% 40%, var(--glow-mint) 0%, transparent 70%);
-  opacity: .80;
+  background: radial-gradient(circle at 60% 40%, rgba(140,218,178,.82) 0%, rgba(140,218,178,0) 70%);
   animation: aurora2 64s ease-in-out infinite alternate;
 }
 .aurora-3{
-  width: 90vmin; height: 90vmin;
+  width: 95vmin; height: 95vmin;
   bottom: -28vmin; left: 18vmin;
-  background: radial-gradient(circle at 35% 65%, var(--glow-violet) 0%, transparent 70%);
-  opacity: .80;
+  background: radial-gradient(circle at 35% 65%, rgba(178,160,224,.85) 0%, rgba(178,160,224,0) 70%);
   animation: aurora3 78s ease-in-out infinite alternate;
 }
 .aurora-4{
-  width: 60vmin; height: 60vmin;
+  width: 65vmin; height: 65vmin;
   top: 22vmin; left: 26vmin;
-  background: radial-gradient(circle at 50% 50%, var(--glow-sand) 0%, transparent 70%);
-  opacity: .70;
+  background: radial-gradient(circle at 50% 50%, rgba(244,210,150,.75) 0%, rgba(244,210,150,0) 70%);
   animation: aurora4 46s ease-in-out infinite alternate;
 }
 .aurora-5{
-  width: 75vmin; height: 75vmin;
+  width: 80vmin; height: 80vmin;
   bottom: -10vmin; right: -8vmin;
-  background: radial-gradient(circle at 55% 35%, var(--glow-sky) 0%, transparent 70%);
-  opacity: .65;
+  background: radial-gradient(circle at 55% 35%, rgba(150,200,232,.78) 0%, rgba(150,200,232,0) 70%);
   animation: aurora5 70s ease-in-out infinite alternate;
 }
 
@@ -355,8 +350,28 @@ body[data-route="home"] footer{ display: none; }
 }
 
 /* ==========================================================
-   HIT — cards
+   HIT — Lissajous de fondo + cards
    ========================================================== */
+.hit-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hit-lissajous{
+  width: min(78vmin, 720px);
+  height: min(78vmin, 720px);
+  opacity: .55;
+  filter: drop-shadow(0 0 22px rgba(74,61,46,.06));
+}
+@media (max-width: 768px){
+  .hit-lissajous{ opacity: .35; }
+}
+
 .hit-card{
   position: relative;
   background:

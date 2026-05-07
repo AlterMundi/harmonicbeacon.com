@@ -214,6 +214,104 @@
   freqRig = initLissajous();
 
   /* =========================================================
+     HIT — Lissajous de fondo (réplica del estilo del libro)
+     Curva cerrada con ratio 3:2, animación lenta de fase.
+     ========================================================= */
+  (function initHitLissajous(){
+    const c = document.querySelector('.hit-lissajous');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+    let W = 600, H = 600;
+    function sizeCanvas(){
+      const r = c.getBoundingClientRect();
+      const w = Math.max(Math.floor(r.width),  200);
+      const h = Math.max(Math.floor(r.height), 200);
+      if (w === W && h === H && c.width === w * DPR) return;
+      W = w; H = h;
+      c.width  = W * DPR;
+      c.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    new ResizeObserver(sizeCanvas).observe(c);
+    sizeCanvas();
+
+    const a  = parseFloat(c.dataset.a)     || 3;
+    const b  = parseFloat(c.dataset.b)     || 2;
+    const ph = parseFloat(c.dataset.phase) || 0.78;
+    const STEPS = 320;
+    const INTERVAL = 56; // ~18fps
+
+    let t = 0, last = 0, raf = 0, active = true;
+
+    function draw(ts){
+      if (!active) return;
+      if (!reduced && ts - last < INTERVAL){
+        raf = requestAnimationFrame(draw); return;
+      }
+      last = ts;
+
+      const cx = W / 2, cy = H / 2;
+      const rx = cx - 14, ry = cy - 14;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // glow suave detrás
+      ctx.beginPath();
+      for (let i = 0; i <= STEPS; i++){
+        const p = (i / STEPS) * Math.PI * 2;
+        const x = cx + rx * Math.sin(a * p + ph + (reduced ? 0 : t));
+        const y = cy + ry * Math.sin(b * p);
+        if (i === 0) ctx.moveTo(x, y);
+        else         ctx.lineTo(x, y);
+      }
+      ctx.lineWidth   = 6;
+      ctx.strokeStyle = 'rgba(75, 60, 42, 0.10)';
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      ctx.stroke();
+
+      // trazo principal (tinta)
+      ctx.beginPath();
+      for (let i = 0; i <= STEPS; i++){
+        const p = (i / STEPS) * Math.PI * 2;
+        const x = cx + rx * Math.sin(a * p + ph + (reduced ? 0 : t));
+        const y = cy + ry * Math.sin(b * p);
+        if (i === 0) ctx.moveTo(x, y);
+        else         ctx.lineTo(x, y);
+      }
+      ctx.lineWidth   = 1.4;
+      ctx.strokeStyle = 'rgba(42, 33, 24, 0.55)';
+      ctx.stroke();
+
+      if (!reduced){
+        t += 0.005;
+        raf = requestAnimationFrame(draw);
+      }
+    }
+
+    function setActive(on){
+      active = on && !reduced;
+      if (active && !raf) raf = requestAnimationFrame(draw);
+      if (!active){ if (raf) cancelAnimationFrame(raf); raf = 0; }
+    }
+
+    // Activar solo cuando el panel HIT está visible
+    function syncToRoute(){
+      setActive(body.dataset.route === 'hit');
+    }
+    new MutationObserver(syncToRoute).observe(body, { attributes: true, attributeFilter: ['data-route'] });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) setActive(false);
+      else syncToRoute();
+    });
+    syncToRoute();
+    // dibujo inicial estático aunque no esté activa
+    if (reduced) draw(0);
+  })();
+
+  /* =========================================================
      Espiral logarítmica (Mito)
      ========================================================= */
   const spiralPath = document.querySelector('.mito-spiral-path');
