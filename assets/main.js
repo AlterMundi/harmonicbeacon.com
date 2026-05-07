@@ -5,7 +5,7 @@
   /* =========================================================
      SPA — routing por hash
      ========================================================= */
-  const VALID = ['home','beacon','experiencia','hit','altermundi','mito'];
+  const VALID = ['home','beacon','experiencia','hit','altermundi'];
   const body = document.body;
 
   function showRoute(name){

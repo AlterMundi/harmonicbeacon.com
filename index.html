@@ -71,7 +71,6 @@ tailwind.config = {
       <li><a class="tab-link" data-tab="experiencia" href="#experiencia">Experiencia</a></li>
       <li><a class="tab-link" data-tab="hit"         href="#hit">HIT</a></li>
       <li><a class="tab-link" data-tab="altermundi"  href="#altermundi">AlterMundi</a></li>
-      <li><a class="tab-link" data-tab="mito"        href="#mito">Mito</a></li>
     </ul>
 
     <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener"
@@ -87,7 +86,6 @@ tailwind.config = {
         <option value="experiencia">Experiencia</option>
         <option value="hit">HIT</option>
         <option value="altermundi">AlterMundi</option>
-        <option value="mito">Mito</option>
       </select>
     </div>
   </nav>
@@ -164,18 +162,15 @@ tailwind.config = {
 
     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 text-left">
       <div class="reveal">
-        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">1:1</div>
-        <h3 class="mt-3 font-serif text-2xl text-ink-900">Coherencia</h3>
+        <h3 class="font-serif text-2xl text-ink-900">Coherencia</h3>
         <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Las proporciones armónicas son restricciones físicas que llevan a las ondas a una geometría repetida y estable, en lugar de colapsar en ruido.</p>
       </div>
       <div class="reveal">
-        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">2:3</div>
-        <h3 class="mt-3 font-serif text-2xl text-ink-900">Eficiencia</h3>
+        <h3 class="font-serif text-2xl text-ink-900">Eficiencia</h3>
         <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Cuando un sistema se acopla armónicamente, gasta menos energía en sostenerse. El universo favorece estas configuraciones.</p>
       </div>
       <div class="reveal">
-        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">3:5</div>
-        <h3 class="mt-3 font-serif text-2xl text-ink-900">Homeostasis</h3>
+        <h3 class="font-serif text-2xl text-ink-900">Homeostasis</h3>
         <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Cuando el campo alrededor es matemáticamente coherente, el sistema nervioso encuentra más fácil su propia regulación interna.</p>
       </div>
     </div>
@@ -221,6 +216,25 @@ tailwind.config = {
     <p class="mt-10 max-w-3xl mx-auto text-center text-[15px] leading-[1.65] text-ink-700 italic font-serif reveal">
       Estas observaciones repetidas, en personas y contextos distintos, son las que hoy guían el diseño de los protocolos clínicos y las mediciones fisiológicas (variabilidad cardíaca, respuesta cortical) del proyecto.
     </p>
+
+    <!-- Invitación · Proyección del Mito Personal -->
+    <div class="mt-24 md:mt-32 pt-16 border-t border-pearl-300/60 text-center reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">Una invitación</p>
+      <p class="mt-6 font-serif italic text-2xl md:text-[34px] leading-[1.28] text-ink-900 max-w-3xl mx-auto">
+        Trabajamos como un <span class="not-italic font-medium">colchón armónico</span><br class="hidden md:block">
+        para las experiencias profundas de otros seres.
+      </p>
+      <p class="mt-8 text-[16.5px] leading-[1.7] text-ink-700 max-w-xl mx-auto">
+        Te invitamos a conocer a <strong class="font-medium text-ink-900">Julián de la Reta</strong> y la <em>Proyección del Mito Personal</em> — la línea clínica del Beacon que integra Jung, Campbell y Psicodrama sobre el campo armónico sostenido.
+      </p>
+      <a href="https://proyecciondelmitopersonal.harmonicbeacon.com" target="_blank" rel="noopener"
+         class="cta-primary mt-10 inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
+        Conocer la Proyección del Mito
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <p class="mt-3 text-[11px] tracking-[0.22em] uppercase text-ink-600">proyecciondelmitopersonal.harmonicbeacon.com</p>
+    </div>
+
   </div>
 </section>
 
@@ -337,84 +351,6 @@ tailwind.config = {
         altermundi.net
         <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- =================== MITO (panel) =================== -->
-<section data-panel="mito" class="panel relative pt-36 md:pt-44 pb-28 md:pb-44 overflow-hidden">
-  <div class="absolute inset-0 -z-10">
-    <div class="absolute inset-0 bg-gradient-to-b from-pearl-50 via-pearl-100 to-pearl-200"></div>
-    <div class="mito-aura"></div>
-
-    <!-- Espiral logarítmica (nautilus) -->
-    <svg class="mito-spiral" viewBox="-200 -200 400 400" aria-hidden="true">
-      <defs>
-        <radialGradient id="mitoSpiralGrad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"  stop-color="#5A4631" stop-opacity=".55"/>
-          <stop offset="65%" stop-color="#8B7355" stop-opacity=".25"/>
-          <stop offset="100%" stop-color="#C7B89A" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <g stroke="url(#mitoSpiralGrad)" fill="none" stroke-width="0.6">
-        <path class="mito-spiral-path" d="" />
-      </g>
-    </svg>
-
-    <div class="mito-particles">
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-      <span class="mito-particle"></span><span class="mito-particle"></span>
-    </div>
-
-    <div class="mito-lines">
-      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </div>
-
-  <div class="relative mx-auto max-w-5xl px-6">
-    <header class="text-center reveal">
-      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">05 · Práctica integrada</p>
-      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">
-        Proyección del<br><span class="italic">Mito Personal</span>
-      </h1>
-    </header>
-
-    <div class="mt-14 grid md:grid-cols-12 gap-10">
-      <div class="md:col-span-7 space-y-5 text-[17px] leading-[1.75] text-ink-700 reveal">
-        <p>La <strong class="font-medium text-ink-900">Proyección del Mito Personal</strong> es una técnica terapéutica y de autoconocimiento profundo desarrollada hace más de 16 años por Julián de la Reta. Se basa en la <em>imaginación activa</em> de Jung, la primera parte del Monomito del Héroe de Joseph Campbell, herramientas de psicodrama y la función trascendente de la psique.</p>
-        <p>Durante una sesión de aproximadamente una hora y media a dos —desde un estado de relajación y atención flotante— se acompaña a la persona para que surja espontáneamente un flujo de imágenes, sensaciones y símbolos propios. Forman una narrativa viva: tu mito personal, un mensaje codificado que proviene directamente del Sí Mismo.</p>
-        <p>Por una hermosa sincronicidad, la técnica se encontró con el Harmonic Beacon y ambos se ensamblaron de manera natural y potente. El Beacon genera un campo armónico sostenido que actúa como <em>referencia armónica externa</em>, reforzando la misma referencia interior que representa el Sí Mismo.</p>
-      </div>
-
-      <aside class="md:col-span-5 reveal">
-        <div class="card-mist rounded-[24px] p-7">
-          <p class="font-display tracking-[0.24em] uppercase text-[11px] text-ink-600">Efecto observado</p>
-          <ul class="mt-5 space-y-4 text-[15.5px] leading-[1.6] text-ink-800">
-            <li class="flex gap-3"><span class="mito-bullet"></span><span>Hace más nítida la señal que viene del inconsciente.</span></li>
-            <li class="flex gap-3"><span class="mito-bullet"></span><span>Refuerza la función trascendente, el puente entre inconsciente y consciente.</span></li>
-            <li class="flex gap-3"><span class="mito-bullet"></span><span>Facilita el acceso a capas más profundas, más allá de las resistencias habituales.</span></li>
-            <li class="flex gap-3"><span class="mito-bullet"></span><span>Ilumina y ayuda a atravesar la Sombra con mayor fluidez y seguridad.</span></li>
-            <li class="flex gap-3"><span class="mito-bullet"></span><span>Da sentido y dirección clara a la búsqueda hacia las profundidades.</span></li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-
-    <p class="mt-14 max-w-3xl mx-auto text-center font-serif italic text-xl md:text-2xl leading-[1.45] text-ink-900 reveal">
-      «Cuando se realiza la Proyección del Mito junto al Harmonic Beacon encendido, el campo armónico actúa como un ancla estable que permite al mito personal desplegarse con mayor claridad y fuerza sanadora.»
-    </p>
-
-    <div class="mt-14 flex flex-col items-center gap-3 reveal">
-      <a href="https://calendly.com/juliandelareta/new-meeting?month=2026-05" target="_blank" rel="noopener"
-         class="cta-primary inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
-        Reservar sesión con Julián
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <p class="text-[12px] tracking-[0.18em] uppercase text-ink-600">La experiencia queda registrada en audio · se entrega material escrito y visual</p>
     </div>
   </div>
 </section>

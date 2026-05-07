@@ -57,8 +57,7 @@ body[data-route="home"]        .panel[data-panel="home"],
 body[data-route="beacon"]      .panel[data-panel="beacon"],
 body[data-route="experiencia"] .panel[data-panel="experiencia"],
 body[data-route="hit"]         .panel[data-panel="hit"],
-body[data-route="altermundi"]  .panel[data-panel="altermundi"],
-body[data-route="mito"]        .panel[data-panel="mito"]{
+body[data-route="altermundi"]  .panel[data-panel="altermundi"]{
   display: block;
   animation: panelIn .6s cubic-bezier(.2,.7,.2,1);
 }
