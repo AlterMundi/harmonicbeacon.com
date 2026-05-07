@@ -113,17 +113,65 @@
       ctx.strokeStyle = 'rgba(58, 46, 34, 0.62)';
       ctx.stroke();
 
-      // Cabeza tenue (suave, no protagonista)
+      // Cabeza: estrellita fugaz — halo + chispa + cruz
       const xH = cx + amp * Math.sin(A_RATIO * tau + delta);
       const yH = cy + amp * Math.sin(B_RATIO * tau);
-      const grad = ctx.createRadialGradient(xH, yH, 0, xH, yH, 16);
-      grad.addColorStop(0.00, 'rgba(255, 246, 220, 0.55)');
-      grad.addColorStop(0.50, 'rgba(255, 230, 180, 0.18)');
-      grad.addColorStop(1.00, 'rgba(255, 220, 160, 0)');
-      ctx.fillStyle = grad;
+
+      // sparkle leve (twinkle)
+      const tw = 0.85 + Math.sin(t * 4.2) * 0.15;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+
+      // halo exterior amplio
+      const halo = ctx.createRadialGradient(xH, yH, 0, xH, yH, 36);
+      halo.addColorStop(0.00, `rgba(255, 240, 200, ${0.40 * tw})`);
+      halo.addColorStop(0.45, 'rgba(255, 225, 170, 0.10)');
+      halo.addColorStop(1.00, 'rgba(255, 220, 160, 0)');
+      ctx.fillStyle = halo;
       ctx.beginPath();
-      ctx.arc(xH, yH, 16, 0, Math.PI * 2);
+      ctx.arc(xH, yH, 36, 0, Math.PI * 2);
       ctx.fill();
+
+      // glow caliente interior
+      const hot = ctx.createRadialGradient(xH, yH, 0, xH, yH, 11);
+      hot.addColorStop(0.00, `rgba(255, 250, 235, ${0.95 * tw})`);
+      hot.addColorStop(0.55, 'rgba(255, 232, 185, 0.45)');
+      hot.addColorStop(1.00, 'rgba(255, 220, 160, 0)');
+      ctx.fillStyle = hot;
+      ctx.beginPath();
+      ctx.arc(xH, yH, 11, 0, Math.PI * 2);
+      ctx.fill();
+
+      // cruz de chispa (lens flare)
+      const spike = (angle, len, alpha) => {
+        const c = Math.cos(angle), s = Math.sin(angle);
+        const x1 = xH - c * len, y1 = yH - s * len;
+        const x2 = xH + c * len, y2 = yH + s * len;
+        const lg = ctx.createLinearGradient(x1, y1, x2, y2);
+        lg.addColorStop(0.0,  'rgba(255, 240, 200, 0)');
+        lg.addColorStop(0.5,  `rgba(255, 250, 230, ${alpha * tw})`);
+        lg.addColorStop(1.0,  'rgba(255, 240, 200, 0)');
+        ctx.strokeStyle = lg;
+        ctx.lineWidth = 1.2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      };
+      spike(0,            28, 0.75); // horizontal
+      spike(Math.PI / 2,  28, 0.75); // vertical
+      spike(Math.PI / 4,  18, 0.32); // diagonales sutiles
+      spike(-Math.PI / 4, 18, 0.32);
+
+      // núcleo blanco
+      ctx.fillStyle = `rgba(255, 252, 240, ${0.95 * tw})`;
+      ctx.beginPath();
+      ctx.arc(xH, yH, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
 
       if (active) raf = requestAnimationFrame(frame);
     }
