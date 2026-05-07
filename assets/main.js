@@ -37,164 +37,156 @@
   }
 
   /* =========================================================
-     Three.js — 5 frecuencias en espacio 3D
+     Lissajous — figura armónica que respira entre ratios consonantes
+     trazada con efecto trail (tipo osciloscopio nácar)
      ========================================================= */
   let freqRig = null;
-  function initThree(){
-    if (!window.THREE) return;
+  function initLissajous(){
     const canvas = document.getElementById('freq-canvas');
-    if (!canvas) return;
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d', { alpha: false });
 
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0xF5EFE4, 18, 42);
-
-    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
-    camera.position.set(0, 0, 22);
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: 'low-power'
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    let W = 0, H = 0;
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
     function resize(){
       const r = canvas.getBoundingClientRect();
-      const w = Math.max(r.width  | 0, 320);
-      const h = Math.max(r.height | 0, 240);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h, false);
+      const w = Math.floor(r.width);
+      const h = Math.floor(r.height);
+      if (w < 8 || h < 8) return; // panel oculto / no medible aún
+      W = w; H = h;
+      canvas.width  = W * DPR;
+      canvas.height = H * DPR;
+      // No tocamos inline style: el CSS (width:100%; height:100%) controla el display
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctx.fillStyle = '#F5EFE4';
+      ctx.fillRect(0, 0, W, H);
     }
     new ResizeObserver(resize).observe(canvas);
     resize();
 
-    // 5 frecuencias armónicas — cada una es una línea en 3D
-    const COUNT     = 5;
-    const SAMPLES   = 220;
-    const LINE_LEN  = 36;     // ancho en mundo
-    const Y_SPACING = 1.9;
-    const harmonics = [1, 2, 3, 4, 5];
-    // Tonos nácar / tinta (más oscuro al centro)
-    const colors = [
-      0x6B5C49, 0x4A3D2E, 0x2A2118, 0x4A3D2E, 0x6B5C49
+    // Ratios consonantes (la firma armónica de HIT)
+    const ratios = [
+      [1, 2], [2, 3], [3, 4], [3, 5], [4, 5], [5, 6]
     ];
-    const lines = [];
+    const HOLD = 6.0;   // segundos por ratio (incluye morph)
+    const MORPH = 0.28; // último 28% del ciclo es la transición
+    const TAU_SPEED = 4.6; // velocidad de trazado (tau/seg)
 
-    for (let i = 0; i < COUNT; i++){
-      const positions = new Float32Array((SAMPLES + 1) * 3);
-      for (let s = 0; s <= SAMPLES; s++){
-        const x = (s / SAMPLES - 0.5) * LINE_LEN;
-        positions[s*3]     = x;
-        positions[s*3 + 1] = 0;
-        positions[s*3 + 2] = 0;
-      }
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      const mat = new THREE.LineBasicMaterial({
-        color: colors[i],
-        transparent: true,
-        opacity: 0.55,
-        linewidth: 1
-      });
-
-      const line = new THREE.Line(geo, mat);
-      line.position.y = (i - (COUNT - 1) / 2) * Y_SPACING;
-      scene.add(line);
-
-      lines.push({
-        line,
-        geo,
-        positions,
-        harmonic: harmonics[i],
-        ampBase: 0.45 + i * 0.05,
-        zAmpBase: 1.6 + i * 0.18,
-        phaseSpeed: 0.0006 + i * 0.0004,   // velocidad de fase (latente)
-        zSpeed: 0.0004 + i * 0.0002,
-        phase0: i * 1.3
-      });
-    }
-
-    // Glow halos (puntos suaves al fondo)
-    const haloGeo = new THREE.BufferGeometry();
-    const haloCount = 80;
-    const haloPos = new Float32Array(haloCount * 3);
-    for (let i = 0; i < haloCount; i++){
-      haloPos[i*3]     = (Math.random() - 0.5) * 38;
-      haloPos[i*3 + 1] = (Math.random() - 0.5) * 14;
-      haloPos[i*3 + 2] = -8 - Math.random() * 14;
-    }
-    haloGeo.setAttribute('position', new THREE.BufferAttribute(haloPos, 3));
-    const haloMat = new THREE.PointsMaterial({
-      color: 0xCFBC9B,
-      size: 0.18,
-      transparent: true,
-      opacity: 0.45,
-      sizeAttenuation: true
-    });
-    const halos = new THREE.Points(haloGeo, haloMat);
-    scene.add(halos);
+    const lerp   = (a, b, t) => a + (b - a) * t;
+    const smooth = (t) => t * t * (3 - 2 * t);
 
     let active = true;
     let raf = 0;
-    const start = performance.now();
+    let last = performance.now();
+    let tau = 0;
 
     function frame(now){
-      const t = (now - start) * 0.001;
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      const prevTau = tau;
+      tau += dt * TAU_SPEED;
 
-      // animar líneas
-      for (const L of lines){
-        const arr = L.positions;
-        const ph = L.phase0 + t * L.phaseSpeed * 1000;
-        for (let s = 0; s <= SAMPLES; s++){
-          const u = s / SAMPLES;
-          const x = (u - 0.5) * LINE_LEN;
-          // onda principal
-          const wave = Math.sin(u * Math.PI * 2 * L.harmonic + ph);
-          // modulación lenta (espacio latente)
-          const latent = Math.sin(u * Math.PI + ph * 0.18) * 0.35;
-          arr[s*3 + 1] = (wave + latent) * L.ampBase;
-          // profundidad ondulante
-          arr[s*3 + 2] = Math.cos(u * Math.PI * L.harmonic * 0.7 + ph * 0.6) * L.zAmpBase;
-          arr[s*3]     = x;
-        }
-        L.geo.attributes.position.needsUpdate = true;
-        L.geo.computeBoundingSphere();
+      // Morph entre ratios
+      const cycleT  = (now / 1000) / HOLD;
+      const idx     = Math.floor(cycleT) % ratios.length;
+      const nextIdx = (idx + 1) % ratios.length;
+      const phase   = cycleT - Math.floor(cycleT);
+      let a, b;
+      if (phase < (1 - MORPH)){
+        a = ratios[idx][0];
+        b = ratios[idx][1];
+      } else {
+        const p = smooth((phase - (1 - MORPH)) / MORPH);
+        a = lerp(ratios[idx][0],     ratios[nextIdx][0], p);
+        b = lerp(ratios[idx][1],     ratios[nextIdx][1], p);
       }
 
-      // suave deriva de cámara/escena
-      scene.rotation.y = Math.sin(t * 0.06) * 0.18;
-      scene.rotation.x = Math.cos(t * 0.04) * 0.10;
-      camera.position.z = 22 + Math.sin(t * 0.08) * 0.6;
+      // Rotación lenta de fase (la figura "respira")
+      const delta = (now / 1000) * 0.32;
 
-      // halos rotan apenas
-      halos.rotation.z = t * 0.02;
+      // Trail fade — leve cremoso por encima
+      ctx.fillStyle = 'rgba(245, 239, 228, 0.045)';
+      ctx.fillRect(0, 0, W, H);
 
-      renderer.render(scene, camera);
+      // Geometría
+      const cx = W / 2;
+      const cy = H / 2;
+      const amp = Math.min(W, H) * 0.36;
+
+      // Sub-pasos para suavidad del polyline entre prevTau y tau
+      const SUB = Math.max(24, Math.ceil((tau - prevTau) * 220));
+      ctx.beginPath();
+      for (let i = 0; i <= SUB; i++){
+        const t = prevTau + (tau - prevTau) * (i / SUB);
+        const x = cx + amp * Math.sin(a * t + delta);
+        const y = cy + amp * Math.sin(b * t);
+        if (i === 0) ctx.moveTo(x, y);
+        else         ctx.lineTo(x, y);
+      }
+      ctx.lineWidth   = 1.4;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      ctx.strokeStyle = 'rgba(42, 33, 24, 0.78)';
+      ctx.stroke();
+
+      // Cabeza luminosa (cream/oro) en el punto actual
+      const xH = cx + amp * Math.sin(a * tau + delta);
+      const yH = cy + amp * Math.sin(b * tau);
+      const grad = ctx.createRadialGradient(xH, yH, 0, xH, yH, 22);
+      grad.addColorStop(0.00, 'rgba(255, 246, 220, 0.95)');
+      grad.addColorStop(0.30, 'rgba(255, 230, 180, 0.45)');
+      grad.addColorStop(1.00, 'rgba(255, 220, 160, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(xH, yH, 22, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Pequeño punto sólido en la cabeza
+      ctx.fillStyle = 'rgba(255, 246, 220, 0.95)';
+      ctx.beginPath();
+      ctx.arc(xH, yH, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
       if (active) raf = requestAnimationFrame(frame);
     }
 
     function setActive(on){
       active = on && !reduced;
-      if (active && !raf) raf = requestAnimationFrame(frame);
+      if (active && !raf){
+        last = performance.now();
+        raf = requestAnimationFrame(frame);
+      }
       if (!active && raf){ cancelAnimationFrame(raf); raf = 0; }
     }
 
-    // pausar cuando la pestaña no está visible
+    // pausar al cambiar de pestaña
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) setActive(false);
       else if (body.dataset.route === 'home') setActive(true);
     });
 
     if (!reduced) setActive(true);
-    else { renderer.render(scene, camera); }
+    else {
+      // Modo reducido: dibujar una sola figura estática
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(42, 33, 24, 0.55)';
+      ctx.beginPath();
+      const a = 3, b = 5;
+      const steps = 1200;
+      for (let i = 0; i <= steps; i++){
+        const t = (i / steps) * Math.PI * 2;
+        const x = (W/2) + Math.min(W, H) * 0.36 * Math.sin(a * t + 0.6);
+        const y = (H/2) + Math.min(W, H) * 0.36 * Math.sin(b * t);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
 
     return { setActive };
   }
 
-  freqRig = initThree();
+  freqRig = initLissajous();
 
   /* =========================================================
      Espiral logarítmica (Mito)
