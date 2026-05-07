@@ -278,6 +278,7 @@ body[data-route="home"] footer{ display: none; }
   height: max(100vh, calc(100vw * 9 / 16));
   transform: translate(-50%, -50%);
   border: 0;
+  object-fit: cover;
   /* filtro nácar */
   filter: sepia(.45) saturate(.6) brightness(1.05) contrast(.95) blur(.6px);
   pointer-events: none;
