@@ -65,16 +65,13 @@
     new ResizeObserver(resize).observe(canvas);
     resize();
 
-    // Ratios consonantes (la firma armónica de HIT)
-    const ratios = [
-      [1, 2], [2, 3], [3, 4], [3, 5], [4, 5], [5, 6]
-    ];
-    const HOLD = 6.0;   // segundos por ratio (incluye morph)
-    const MORPH = 0.28; // último 28% del ciclo es la transición
-    const TAU_SPEED = 4.6; // velocidad de trazado (tau/seg)
-
-    const lerp   = (a, b, t) => a + (b - a) * t;
-    const smooth = (t) => t * t * (3 - 2 * t);
+    // Lissajous de φ (proporción áurea) — fluye sin repetirse,
+    // se siente respiración orgánica, no caos.
+    const PHI = (1 + Math.sqrt(5)) / 2; // 1.6180339887…
+    const A_RATIO = 1;
+    const B_RATIO = PHI;
+    const TAU_SPEED = 1.9;   // trazo lento, meditativo
+    const TRAIL_FADE = 0.055; // fade rápido = menos saturación visual
 
     let active = true;
     let raf = 0;
@@ -87,65 +84,45 @@
       const prevTau = tau;
       tau += dt * TAU_SPEED;
 
-      // Morph entre ratios
-      const cycleT  = (now / 1000) / HOLD;
-      const idx     = Math.floor(cycleT) % ratios.length;
-      const nextIdx = (idx + 1) % ratios.length;
-      const phase   = cycleT - Math.floor(cycleT);
-      let a, b;
-      if (phase < (1 - MORPH)){
-        a = ratios[idx][0];
-        b = ratios[idx][1];
-      } else {
-        const p = smooth((phase - (1 - MORPH)) / MORPH);
-        a = lerp(ratios[idx][0],     ratios[nextIdx][0], p);
-        b = lerp(ratios[idx][1],     ratios[nextIdx][1], p);
-      }
+      // Respiración: la fase se mueve lento, la amplitud "inhala/exhala"
+      const t = now / 1000;
+      const delta = t * 0.16;
+      const breath = 1 + Math.sin(t * 0.35) * 0.04; // ±4%
 
-      // Rotación lenta de fase (la figura "respira")
-      const delta = (now / 1000) * 0.32;
-
-      // Trail fade — leve cremoso por encima
-      ctx.fillStyle = 'rgba(245, 239, 228, 0.045)';
+      // Trail fade cremoso — nácar lavado
+      ctx.fillStyle = `rgba(245, 239, 228, ${TRAIL_FADE})`;
       ctx.fillRect(0, 0, W, H);
 
-      // Geometría
       const cx = W / 2;
       const cy = H / 2;
-      const amp = Math.min(W, H) * 0.36;
+      const amp = Math.min(W, H) * 0.34 * breath;
 
-      // Sub-pasos para suavidad del polyline entre prevTau y tau
-      const SUB = Math.max(24, Math.ceil((tau - prevTau) * 220));
+      // Sub-pasos para suavidad
+      const SUB = Math.max(20, Math.ceil((tau - prevTau) * 220));
       ctx.beginPath();
       for (let i = 0; i <= SUB; i++){
-        const t = prevTau + (tau - prevTau) * (i / SUB);
-        const x = cx + amp * Math.sin(a * t + delta);
-        const y = cy + amp * Math.sin(b * t);
+        const tt = prevTau + (tau - prevTau) * (i / SUB);
+        const x = cx + amp * Math.sin(A_RATIO * tt + delta);
+        const y = cy + amp * Math.sin(B_RATIO * tt);
         if (i === 0) ctx.moveTo(x, y);
         else         ctx.lineTo(x, y);
       }
-      ctx.lineWidth   = 1.4;
+      ctx.lineWidth   = 1.2;
       ctx.lineCap     = 'round';
       ctx.lineJoin    = 'round';
-      ctx.strokeStyle = 'rgba(42, 33, 24, 0.78)';
+      ctx.strokeStyle = 'rgba(58, 46, 34, 0.62)';
       ctx.stroke();
 
-      // Cabeza luminosa (cream/oro) en el punto actual
-      const xH = cx + amp * Math.sin(a * tau + delta);
-      const yH = cy + amp * Math.sin(b * tau);
-      const grad = ctx.createRadialGradient(xH, yH, 0, xH, yH, 22);
-      grad.addColorStop(0.00, 'rgba(255, 246, 220, 0.95)');
-      grad.addColorStop(0.30, 'rgba(255, 230, 180, 0.45)');
+      // Cabeza tenue (suave, no protagonista)
+      const xH = cx + amp * Math.sin(A_RATIO * tau + delta);
+      const yH = cy + amp * Math.sin(B_RATIO * tau);
+      const grad = ctx.createRadialGradient(xH, yH, 0, xH, yH, 16);
+      grad.addColorStop(0.00, 'rgba(255, 246, 220, 0.55)');
+      grad.addColorStop(0.50, 'rgba(255, 230, 180, 0.18)');
       grad.addColorStop(1.00, 'rgba(255, 220, 160, 0)');
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(xH, yH, 22, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Pequeño punto sólido en la cabeza
-      ctx.fillStyle = 'rgba(255, 246, 220, 0.95)';
-      ctx.beginPath();
-      ctx.arc(xH, yH, 2.2, 0, Math.PI * 2);
+      ctx.arc(xH, yH, 16, 0, Math.PI * 2);
       ctx.fill();
 
       if (active) raf = requestAnimationFrame(frame);
@@ -172,12 +149,12 @@
       ctx.lineWidth = 1.2;
       ctx.strokeStyle = 'rgba(42, 33, 24, 0.55)';
       ctx.beginPath();
-      const a = 3, b = 5;
-      const steps = 1200;
+      const PHI = (1 + Math.sqrt(5)) / 2;
+      const steps = 4000;
       for (let i = 0; i <= steps; i++){
-        const t = (i / steps) * Math.PI * 2;
-        const x = (W/2) + Math.min(W, H) * 0.36 * Math.sin(a * t + 0.6);
-        const y = (H/2) + Math.min(W, H) * 0.36 * Math.sin(b * t);
+        const t = (i / steps) * Math.PI * 14;
+        const x = (W/2) + Math.min(W, H) * 0.34 * Math.sin(t + 0.4);
+        const y = (H/2) + Math.min(W, H) * 0.34 * Math.sin(PHI * t);
         if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
       ctx.stroke();
