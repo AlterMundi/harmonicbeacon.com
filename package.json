@@ -1,0 +1,11 @@
+{
+  "name": "harmonic-beacon",
+  "version": "1.0.0",
+  "description": "Harmonic Beacon — sitio estático para Hostinger",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

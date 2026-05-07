@@ -17,3 +17,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Build output
+dist/
+node_modules/
+*.zip
