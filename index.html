@@ -182,13 +182,9 @@ tailwind.config = {
 
   <!-- Video de fondo silenciado con filtro nácar -->
   <div class="exp-bg" aria-hidden="true">
-    <iframe
-      class="exp-bg-iframe"
-      src="https://www.youtube-nocookie.com/embed/MOVy4NOzX2s?autoplay=1&mute=1&loop=1&playlist=MOVy4NOzX2s&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
-      title=""
-      frameborder="0"
-      allow="autoplay; encrypted-media; picture-in-picture"
-      tabindex="-1"></iframe>
+    <video class="exp-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="./videoplayback.mp4" type="video/mp4">
+    </video>
     <div class="exp-bg-veil"></div>
   </div>
 

@@ -269,7 +269,8 @@ body[data-route="home"] footer{ display: none; }
   overflow: hidden;
   pointer-events: none;
 }
-.exp-bg-iframe{
+.exp-bg-iframe,
+.exp-bg-video{
   position: absolute;
   top: 50%; left: 50%;
   /* cubrir cualquier aspect 16:9: ancho = 100vw + alto proporcional, vh-based fallback */
@@ -660,7 +661,8 @@ body[data-route="home"] footer{ display: none; }
   .mito-particle{ animation: none; opacity: .6; }
   .mito-lines span{ animation: none; opacity: .3; }
   .cover-video,
-  .aurora-video{ display: none; }
+  .aurora-video,
+  .exp-bg-video{ display: none; }
   .reveal, .reveal-img{
     opacity: 1 !important;
     transform: none !important;
