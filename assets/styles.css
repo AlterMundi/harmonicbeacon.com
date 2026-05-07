@@ -177,91 +177,17 @@ body[data-route="home"] footer{ display: none; }
 .cta-primary > *{ position: relative; z-index: 1; }
 
 /* ==========================================================
-   HOME — Aurora nácar (gradientes iridiscentes flotando)
+   HOME — Aurora boreal (canvas con ruido)
    ========================================================== */
-.aurora{
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(120px) saturate(1.15);
-  pointer-events: none;
-  z-index: 1;
-  /* sin mix-blend-mode → los colores se ven directos sobre el crema */
-  will-change: transform;
-}
-.aurora-1{
-  width: 75vmin; height: 75vmin;
-  top: -18vmin; left: -10vmin;
-  background: radial-gradient(circle at 38% 38%, rgba(232,160,188,.85) 0%, rgba(232,160,188,0) 70%);
-  animation: aurora1 52s ease-in-out infinite alternate;
-}
-.aurora-2{
-  width: 85vmin; height: 85vmin;
-  top: -8vmin; right: -22vmin;
-  background: radial-gradient(circle at 60% 40%, rgba(140,218,178,.82) 0%, rgba(140,218,178,0) 70%);
-  animation: aurora2 64s ease-in-out infinite alternate;
-}
-.aurora-3{
-  width: 95vmin; height: 95vmin;
-  bottom: -28vmin; left: 18vmin;
-  background: radial-gradient(circle at 35% 65%, rgba(178,160,224,.85) 0%, rgba(178,160,224,0) 70%);
-  animation: aurora3 78s ease-in-out infinite alternate;
-}
-.aurora-4{
-  width: 65vmin; height: 65vmin;
-  top: 22vmin; left: 26vmin;
-  background: radial-gradient(circle at 50% 50%, rgba(244,210,150,.75) 0%, rgba(244,210,150,0) 70%);
-  animation: aurora4 46s ease-in-out infinite alternate;
-}
-.aurora-5{
-  width: 80vmin; height: 80vmin;
-  bottom: -10vmin; right: -8vmin;
-  background: radial-gradient(circle at 55% 35%, rgba(150,200,232,.78) 0%, rgba(150,200,232,0) 70%);
-  animation: aurora5 70s ease-in-out infinite alternate;
-}
-
-@keyframes aurora1{
-  0%   { transform: translate(0, 0)         scale(1);    }
-  50%  { transform: translate(18vw, 14vh)   scale(1.15); }
-  100% { transform: translate(8vw, -6vh)    scale(0.95); }
-}
-@keyframes aurora2{
-  0%   { transform: translate(0, 0)         scale(1);    }
-  50%  { transform: translate(-22vw, 18vh)  scale(0.9);  }
-  100% { transform: translate(-8vw, -10vh)  scale(1.1);  }
-}
-@keyframes aurora3{
-  0%   { transform: translate(0, 0)         scale(1);    }
-  50%  { transform: translate(14vw, -16vh)  scale(1.1);  }
-  100% { transform: translate(-12vw, -6vh)  scale(0.95); }
-}
-@keyframes aurora4{
-  0%   { transform: translate(0, 0)         scale(1);    }
-  50%  { transform: translate(20vw, 8vh)    scale(1.2);  }
-  100% { transform: translate(-6vw, 18vh)   scale(0.9);  }
-}
-@keyframes aurora5{
-  0%   { transform: translate(0, 0)         scale(1);    }
-  50%  { transform: translate(-16vw, -12vh) scale(1.05); }
-  100% { transform: translate(8vw, 6vh)     scale(1.15); }
-}
-
-/* shimmer general — gradiente iridiscente que respira */
-.aurora-shimmer{
+.aurora-canvas{
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background:
-    linear-gradient(135deg,
-      rgba(233,212,220,.10) 0%,
-      rgba(214,229,221,.04) 35%,
-      rgba(217,210,225,.10) 65%,
-      rgba(239,224,201,.10) 100%);
-  mix-blend-mode: soft-light;
-  animation: shimmerBreathe 18s ease-in-out infinite alternate;
-}
-@keyframes shimmerBreathe{
-  0%   { opacity: .85; }
-  100% { opacity: 1.0; }
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(38px) saturate(1.08);
+  opacity: .92;
 }
 
 /* ==========================================================
@@ -350,26 +276,18 @@ body[data-route="home"] footer{ display: none; }
 }
 
 /* ==========================================================
-   HIT — Lissajous de fondo + cards
+   HIT — sigilo Lissajous + cards
    ========================================================== */
-.hit-bg{
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
 .hit-lissajous{
-  width: min(78vmin, 720px);
-  height: min(78vmin, 720px);
-  opacity: .55;
-  filter: drop-shadow(0 0 22px rgba(74,61,46,.06));
+  display: block;
+  width: 132px;
+  height: 132px;
+  margin: 22px auto 14px;
+  opacity: .92;
+  filter: drop-shadow(0 4px 14px rgba(74,61,46,.10));
 }
 @media (max-width: 768px){
-  .hit-lissajous{ opacity: .35; }
+  .hit-lissajous{ width: 108px; height: 108px; margin: 18px auto 10px; }
 }
 
 .hit-card{

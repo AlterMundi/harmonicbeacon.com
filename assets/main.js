@@ -18,7 +18,8 @@
     if (sel && sel.value !== name) sel.value = name;
     window.scrollTo({ top: 0, behavior: 'instant' });
     runReveals();
-    if (freqRig) freqRig.setActive(name === 'home');
+    if (freqRig)   freqRig.setActive(name === 'home');
+    if (auroraRig) auroraRig.setActive(name === 'home');
   }
 
   function syncFromHash(){
@@ -214,6 +215,132 @@
   freqRig = initLissajous();
 
   /* =========================================================
+     Aurora boreal — canvas + ruido FBM (cortinas que ondulan)
+     ========================================================= */
+  let auroraRig = null;
+  function initAurora(){
+    const canvas = document.querySelector('.aurora-canvas');
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d');
+    // DPR moderado: el canvas va con blur grande, no necesita full DPR
+    const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+
+    let W = 0, H = 0;
+    function resize(){
+      const r = canvas.getBoundingClientRect();
+      const w = Math.floor(r.width), h = Math.floor(r.height);
+      if (w < 8 || h < 8) return;
+      W = w; H = h;
+      canvas.width  = W * DPR;
+      canvas.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+
+    // Ruido 1D suave (smoothstep-interpolated random)
+    const SEED_LEN = 2048;
+    const seeds = new Float32Array(SEED_LEN);
+    for (let i = 0; i < SEED_LEN; i++) seeds[i] = Math.random();
+    function smooth(x){ return x * x * (3 - 2 * x); }
+    function noise1(x){
+      const xi = Math.floor(x);
+      const xf = x - xi;
+      const u = smooth(xf);
+      const a = seeds[((xi % SEED_LEN) + SEED_LEN) % SEED_LEN];
+      const b = seeds[((xi + 1) % SEED_LEN + SEED_LEN) % SEED_LEN];
+      return a * (1 - u) + b * u;
+    }
+    function fbm(x){
+      // 3 octavas, fractal brownian motion
+      let s = 0, amp = 0.5, freq = 1, norm = 0;
+      for (let i = 0; i < 3; i++){
+        s    += noise1(x * freq) * amp;
+        norm += amp;
+        amp  *= 0.5;
+        freq *= 2;
+      }
+      return s / norm;
+    }
+
+    // Cortinas — colores aurora boreal (verde, cyan-azul, magenta, violeta, dorado)
+    const curtains = [
+      { color: [110, 232, 178], cx: 0.18, w: 0.22, amp: 0.07, sp: 0.10, drift: 0.06, seed: 7   },
+      { color: [148, 200, 240], cx: 0.36, w: 0.24, amp: 0.09, sp: 0.07, drift: 0.05, seed: 23  },
+      { color: [228, 132, 184], cx: 0.56, w: 0.22, amp: 0.10, sp: 0.13, drift: 0.07, seed: 41  },
+      { color: [186, 150, 232], cx: 0.74, w: 0.24, amp: 0.11, sp: 0.06, drift: 0.05, seed: 67  },
+      { color: [238, 218, 158], cx: 0.50, w: 0.42, amp: 0.04, sp: 0.04, drift: 0.03, seed: 103 },
+    ];
+    const N = 36;
+
+    let active = true;
+    let raf = 0;
+
+    function frame(now){
+      const t = now * 0.0008;
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (const c of curtains){
+        // deriva horizontal lenta del centro
+        const cx = c.cx + Math.sin(t * 0.4 + c.seed) * c.drift;
+
+        ctx.beginPath();
+        // borde izquierdo
+        for (let i = 0; i <= N; i++){
+          const u = i / N;
+          const y = u * H;
+          const n = fbm(u * 1.7 + c.seed + t * c.sp) - 0.5;
+          const x = (cx - c.w / 2 + n * c.amp) * W;
+          if (i === 0) ctx.moveTo(x, y);
+          else         ctx.lineTo(x, y);
+        }
+        // borde derecho (descendiendo)
+        for (let i = N; i >= 0; i--){
+          const u = i / N;
+          const y = u * H;
+          const n = fbm(u * 1.7 + c.seed + 1000 + t * c.sp * 1.15) - 0.5;
+          const x = (cx + c.w / 2 + n * c.amp) * W;
+          ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+
+        // gradiente vertical: transparente arriba/abajo, denso al medio
+        const grad = ctx.createLinearGradient(0, 0, 0, H);
+        const [r, g, b] = c.color;
+        grad.addColorStop(0.00, `rgba(${r},${g},${b},0)`);
+        grad.addColorStop(0.18, `rgba(${r},${g},${b},0.32)`);
+        grad.addColorStop(0.46, `rgba(${r},${g},${b},0.66)`);
+        grad.addColorStop(0.78, `rgba(${r},${g},${b},0.30)`);
+        grad.addColorStop(1.00, `rgba(${r},${g},${b},0)`);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+      if (active) raf = requestAnimationFrame(frame);
+    }
+
+    function setActive(on){
+      active = on && !reduced;
+      if (active && !raf) raf = requestAnimationFrame(frame);
+      if (!active && raf){ cancelAnimationFrame(raf); raf = 0; }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) setActive(false);
+      else if (body.dataset.route === 'home') setActive(true);
+    });
+
+    if (!reduced) setActive(true);
+    else { frame(performance.now()); }
+
+    return { setActive };
+  }
+
+  auroraRig = initAurora();
+
+  /* =========================================================
      HIT — Lissajous de fondo (réplica del estilo del libro)
      Curva cerrada con ratio 3:2, animación lenta de fase.
      ========================================================= */
@@ -253,11 +380,15 @@
       last = ts;
 
       const cx = W / 2, cy = H / 2;
-      const rx = cx - 14, ry = cy - 14;
+      const pad = Math.max(6, W * 0.06);
+      const rx = cx - pad, ry = cy - pad;
 
       ctx.clearRect(0, 0, W, H);
 
-      // glow suave detrás
+      // glow suave detrás (proporcional al tamaño)
+      const glowW  = Math.max(2.5, W * 0.035);
+      const traceW = Math.max(1.0, W * 0.011);
+
       ctx.beginPath();
       for (let i = 0; i <= STEPS; i++){
         const p = (i / STEPS) * Math.PI * 2;
@@ -266,7 +397,7 @@
         if (i === 0) ctx.moveTo(x, y);
         else         ctx.lineTo(x, y);
       }
-      ctx.lineWidth   = 6;
+      ctx.lineWidth   = glowW;
       ctx.strokeStyle = 'rgba(75, 60, 42, 0.10)';
       ctx.lineCap     = 'round';
       ctx.lineJoin    = 'round';
@@ -281,8 +412,8 @@
         if (i === 0) ctx.moveTo(x, y);
         else         ctx.lineTo(x, y);
       }
-      ctx.lineWidth   = 1.4;
-      ctx.strokeStyle = 'rgba(42, 33, 24, 0.55)';
+      ctx.lineWidth   = traceW;
+      ctx.strokeStyle = 'rgba(42, 33, 24, 0.78)';
       ctx.stroke();
 
       if (!reduced){
