@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Harmonic Beacon — AlterMundi</title>
+<meta name="description" content="Un campo armónico sostenido construido sobre los armónicos naturales. Una tecnología de bienestar e instrumento científico de AlterMundi." />
+<meta name="theme-color" content="#F5EFE4" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'serif'],
+        display: ['Marcellus', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        pearl: {
+          50:  '#FBF8F2',
+          100: '#F5EFE4',
+          200: '#EDE3D2',
+          300: '#E0D2BA',
+          400: '#CFBC9B',
+          500: '#B8A07B',
+        },
+        ink: {
+          900: '#2A2118',
+          800: '#3A2E22',
+          700: '#4A3D2E',
+          600: '#6B5C49',
+          500: '#8C7F6C',
+        },
+        glow: {
+          rose:   '#E9D4DC',
+          mint:   '#D6E5DD',
+          sand:   '#EFE0C9',
+          violet: '#D9D2E1',
+          sky:    '#D0DDE3',
+        },
+      },
+    },
+  },
+};
+</script>
+<link rel="stylesheet" href="./assets/styles.css" />
+</head>
+
+<body class="bg-pearl-100 text-ink-800 font-sans antialiased selection:bg-pearl-300 selection:text-ink-900" data-route="home">
+
+<!-- Iridescent grain overlay -->
+<div class="grain pointer-events-none fixed inset-0 z-[60] opacity-[0.18]" aria-hidden="true"></div>
+<div class="iridescent pointer-events-none fixed inset-0 z-[1]" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:py-6">
+    <a href="#home" data-tab="home" class="flex items-center gap-3 group">
+      <span class="block h-9 w-9 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint shadow-[inset_0_0_12px_rgba(255,255,255,.7),0_2px_8px_rgba(74,61,46,.18)]"></span>
+      <span class="font-display tracking-[0.18em] text-sm md:text-[15px] text-ink-800 uppercase">Harmonic Beacon</span>
+    </a>
+
+    <ul class="tab-bar hidden md:flex items-center gap-1 text-[12px] tracking-[0.16em] uppercase text-ink-700">
+      <li><a class="tab-link" data-tab="beacon"      href="#beacon">El Beacon</a></li>
+      <li><a class="tab-link" data-tab="experiencia" href="#experiencia">Experiencia</a></li>
+      <li><a class="tab-link" data-tab="hit"         href="#hit">HIT</a></li>
+      <li><a class="tab-link" data-tab="altermundi"  href="#altermundi">AlterMundi</a></li>
+      <li><a class="tab-link" data-tab="mito"        href="#mito">Mito</a></li>
+    </ul>
+
+    <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener"
+       class="cta-shell hidden md:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-medium">
+      <span class="dot-live"></span> Abrir la app
+    </a>
+
+    <!-- Mobile tab-bar selector -->
+    <div class="md:hidden flex items-center gap-3">
+      <select class="mobile-tabs" aria-label="Sección">
+        <option value="home">Inicio</option>
+        <option value="beacon">El Beacon</option>
+        <option value="experiencia">Experiencia</option>
+        <option value="hit">HIT</option>
+        <option value="altermundi">AlterMundi</option>
+        <option value="mito">Mito</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<!-- =================== HOME (panel) =================== -->
+<section data-panel="home" class="panel panel-home relative min-h-[100svh] overflow-hidden">
+  <!-- nacar gradient base -->
+  <div class="absolute inset-0 bg-gradient-to-b from-pearl-50 via-pearl-100 to-pearl-200"></div>
+
+  <!-- 3D frequencies background (Three.js) -->
+  <canvas id="freq-canvas" class="freq-canvas" aria-hidden="true"></canvas>
+
+  <!-- iridescent veil over canvas -->
+  <div class="freq-veil pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 md:pt-40 md:pb-32 text-center min-h-[100svh]">
+
+    <h1 class="hero-title font-serif font-light leading-[0.96] text-ink-900 text-[14vw] md:text-[88px] lg:text-[110px]">
+      <span class="block italic font-light">Harmonic</span>
+      <span class="block">Beacon</span>
+    </h1>
+
+    <p class="hero-sub mt-6 max-w-2xl font-serif text-[19px] md:text-[22px] leading-[1.55] text-ink-700 italic">
+      Un campo armónico sostenido sobre los armónicos naturales. <br class="hidden md:block">
+      Una referencia para que tu sistema encuentre su propio orden.
+    </p>
+
+    <div class="hero-ctas mt-14 flex flex-col items-center gap-4">
+      <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener"
+         class="cta-primary group inline-flex items-center gap-3 rounded-full px-10 py-5 text-[13px] tracking-[0.24em] uppercase font-medium">
+        <span class="dot-live"></span>
+        Abrir la app · escuchar en vivo
+        <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="hero-foot text-[11px] tracking-[0.22em] uppercase text-ink-600">
+        beacon.altermundi.net
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- =================== BEACON (panel) =================== -->
+<section data-panel="beacon" class="panel relative pb-28 md:pb-36">
+
+  <!-- COVER: video del mar como fondo nácar -->
+  <header class="beacon-cover relative overflow-hidden">
+    <video class="cover-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4" type="video/mp4">
+      <source src="https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="cover-veil"></div>
+    <div class="cover-content relative z-10 mx-auto max-w-5xl px-6 text-center">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600 reveal">01 · El instrumento</p>
+      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0] reveal">
+        Un campo <span class="italic">acústico,<br>medible, repetible.</span>
+      </h1>
+    </div>
+  </header>
+
+  <div class="mx-auto max-w-3xl px-6 mt-20 md:mt-24 reveal">
+    <div class="space-y-6 text-[17.5px] leading-[1.75] text-ink-700">
+      <p>El <strong class="font-medium text-ink-900">Harmonic Beacon</strong> es un dispositivo físico que genera y sostiene un campo acústico dentro de una sala. Una persona puede ingresar y permanecer en él.</p>
+      <p>No es un instrumento musical: sus fundamentos son los <em>armónicos naturales</em> derivados de los sistemas físicos, no la armonía temperada de la música. Por eso los campos que produce son <strong class="font-medium text-ink-900">medibles, repetibles y contrastables</strong> contra sí mismos y contra otros campos.</p>
+      <p>Lo desarrollamos como tecnología de bienestar y, al mismo tiempo, como instrumento científico para investigar de manera trazable y falsable lo que ese campo hace en el cuerpo y en la psique.</p>
+    </div>
+  </div>
+
+  <!-- Principio armónico -->
+  <div class="mx-auto max-w-6xl px-6 mt-24 md:mt-32 text-center">
+    <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600 reveal">Principio</p>
+    <p class="mt-6 font-serif italic text-3xl md:text-5xl leading-[1.2] text-ink-900 reveal">
+      «Lo que llamamos armonía es la forma más eficiente en que la materia<br class="hidden md:block">
+      y la información se organizan a sí mismas.»
+    </p>
+
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-14 text-left">
+      <div class="reveal">
+        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">1:1</div>
+        <h3 class="mt-3 font-serif text-2xl text-ink-900">Coherencia</h3>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Las proporciones armónicas son restricciones físicas que llevan a las ondas a una geometría repetida y estable, en lugar de colapsar en ruido.</p>
+      </div>
+      <div class="reveal">
+        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">2:3</div>
+        <h3 class="mt-3 font-serif text-2xl text-ink-900">Eficiencia</h3>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Cuando un sistema se acopla armónicamente, gasta menos energía en sostenerse. El universo favorece estas configuraciones.</p>
+      </div>
+      <div class="reveal">
+        <div class="ratio-num font-serif italic text-6xl text-ink-800/40">3:5</div>
+        <h3 class="mt-3 font-serif text-2xl text-ink-900">Homeostasis</h3>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed">Cuando el campo alrededor es matemáticamente coherente, el sistema nervioso encuentra más fácil su propia regulación interna.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== EXPERIENCIA (panel) =================== -->
+<section data-panel="experiencia" class="panel relative pt-36 md:pt-44 pb-28 md:pb-36 overflow-hidden">
+
+  <!-- Video de fondo silenciado con filtro nácar -->
+  <div class="exp-bg" aria-hidden="true">
+    <iframe
+      class="exp-bg-iframe"
+      src="https://www.youtube-nocookie.com/embed/MOVy4NOzX2s?autoplay=1&mute=1&loop=1&playlist=MOVy4NOzX2s&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
+      title=""
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      tabindex="-1"></iframe>
+    <div class="exp-bg-veil"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-5xl px-6">
+    <header class="text-center max-w-3xl mx-auto reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">02 · La vivencia</p>
+      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">
+        Lo que las personas <span class="italic">manifiestan</span>
+      </h1>
+    </header>
+
+    <div class="exp-card mt-14 reveal">
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        <ul class="space-y-5 text-[17px] leading-[1.65] text-ink-800">
+          <li class="pl-6 border-l border-pearl-300/80">Estados de relajación profunda y un cambio en la calidad de la atención.</li>
+          <li class="pl-6 border-l border-pearl-300/80">Modificaciones en la autopercepción de la corporalidad.</li>
+        </ul>
+        <ul class="space-y-5 text-[17px] leading-[1.65] text-ink-800">
+          <li class="pl-6 border-l border-pearl-300/80">Acceso a material simbólico que en otros estados queda obturado.</li>
+          <li class="pl-6 border-l border-pearl-300/80">Audición de melodías o contornos musicales que el dispositivo no produce técnicamente: emergen del propio sistema escuchante.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-10 max-w-3xl mx-auto text-center text-[15px] leading-[1.65] text-ink-700 italic font-serif reveal">
+      Estas observaciones repetidas, en personas y contextos distintos, son las que hoy guían el diseño de los protocolos clínicos y las mediciones fisiológicas (variabilidad cardíaca, respuesta cortical) del proyecto.
+    </p>
+  </div>
+</section>
+
+<!-- =================== HIT (panel) =================== -->
+<section data-panel="hit" class="panel relative pt-36 md:pt-44 pb-28 md:pb-36">
+  <div class="mx-auto max-w-7xl px-6">
+    <header class="text-center max-w-4xl mx-auto reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">03 · La teoría</p>
+      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">
+        Harmonic <span class="italic">Information<br>Theory</span>
+      </h1>
+      <p class="mt-8 max-w-2xl mx-auto text-[17px] leading-[1.7] text-ink-700">
+        HIT es el marco teórico desarrollado en AlterMundi por <strong class="font-medium text-ink-900">Mariano Fernández Méndez y Nicolás Echániz</strong>. Sostiene que la armonía no es una metáfora estética, sino una <em>restricción física</em>: una manera concreta en que sistemas distintos —neuronas, ondas, ecosistemas, redes— se acoplan para mantener su coherencia.
+      </p>
+    </header>
+
+    <div class="mt-16 grid md:grid-cols-3 gap-6">
+      <div class="hit-card reveal">
+        <div class="hit-card-num">I</div>
+        <h3 class="font-serif text-2xl text-ink-900 mt-4">Información relacional</h3>
+        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700">No solo bits aislados: lo que organiza a un sistema vivo es la <em>relación</em> entre sus procesos.</p>
+      </div>
+      <div class="hit-card reveal">
+        <div class="hit-card-num">II</div>
+        <h3 class="font-serif text-2xl text-ink-900 mt-4">Consonancia como estabilidad</h3>
+        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700">Una proporción simple es un punto donde las partes interactuantes encuentran un modo de coexistir con poco conflicto.</p>
+      </div>
+      <div class="hit-card reveal">
+        <div class="hit-card-num">III</div>
+        <h3 class="font-serif text-2xl text-ink-900 mt-4">Triangulación</h3>
+        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700">Mismo patrón observado en modelos computacionales (Phideus), sensores fisiológicos y sesiones psicológicas. Coincidencia que es señal.</p>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 reveal">
+      <p class="font-serif italic text-xl md:text-2xl text-ink-900 max-w-2xl">
+        El libro <em>Harmonic Information Theory: Foundations</em> está disponible en línea, bajo licencia abierta CC BY 4.0.
+      </p>
+      <a href="https://hit.altermundi.net" target="_blank" rel="noopener"
+         class="cta-primary inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium whitespace-nowrap">
+        Leer el libro
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ALTERMUNDI (panel) =================== -->
+<section data-panel="altermundi" class="panel relative pt-36 md:pt-44 pb-28 md:pb-36 overflow-hidden">
+  <div class="alter-aura pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-5xl px-6">
+    <header class="text-center reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">04 · AlterMundi</p>
+      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">
+        Un ecosistema de<br><span class="italic">investigación y experimentación</span>
+      </h1>
+    </header>
+
+    <!-- About AlterMundi -->
+    <div class="mt-12 max-w-3xl mx-auto space-y-5 text-[17px] leading-[1.75] text-ink-700 reveal">
+      <p><strong class="font-medium text-ink-900">AlterMundi</strong> es un ecosistema de investigación y experimentación centrado en la exploración de la <em>Teoría de la Información Armónica (HIT)</em> y el desarrollo de tecnologías que investigan patrones armónicos en sistemas físicos, biológicos, perceptuales y computacionales.</p>
+      <p>Con enfoque humano, sustenta trabajos en conectividad, producción agroecológica, monitoreo, salud e IA. Hoy trabaja con sistemas multi-agente humano-IA en la mayoría de sus proyectos. Sus valores: <em>colaboración como fundamento, tecnología abierta, propiedad comunitaria, accesibilidad técnica</em>.</p>
+    </div>
+
+    <!-- Proyectos -->
+    <div class="mt-14 grid md:grid-cols-5 gap-3 reveal">
+      <div class="project-chip"><span class="project-dot"></span><span>Conectividad<br><em>routers libres</em></span></div>
+      <div class="project-chip"><span class="project-dot"></span><span>LibreAgro<br><em>incubadora</em></span></div>
+      <div class="project-chip"><span class="project-dot"></span><span>SAI<br><em>incendios</em></span></div>
+      <div class="project-chip"><span class="project-dot"></span><span>Phideus<br><em>investigación HIT</em></span></div>
+      <div class="project-chip is-current"><span class="project-dot"></span><span>Harmonic Beacon<br><em>campos armónicos</em></span></div>
+    </div>
+
+    <!-- Equipo -->
+    <div class="mt-20 reveal">
+      <div class="team-band">
+        <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600 text-center">El equipo que hace esto posible</p>
+
+        <div class="mt-10 team-authors">
+          <p class="font-display tracking-[0.24em] uppercase text-[10px] text-ink-600 text-center">Autores · Harmonic Information Theory</p>
+          <ul class="mt-3 team-list team-list--lg">
+            <li>Mariano Fernández Méndez</li>
+            <li>Nicolás Echániz</li>
+          </ul>
+        </div>
+
+        <div class="team-divider" role="presentation"></div>
+
+        <div class="team-research">
+          <p class="font-display tracking-[0.24em] uppercase text-[10px] text-ink-600 text-center">Investigación y desarrollo</p>
+          <ul class="mt-3 team-list">
+            <li>Anabella Scigliano</li>
+            <li>Federico Bonino</li>
+            <li>John Sarbon</li>
+            <li>Julián De La Reta</li>
+            <li>Martín Fernández Méndez</li>
+            <li>Pablo Bustos</li>
+            <li>Saira Asua</li>
+            <li>Santiago Cetrán</li>
+            <li>Sofía Campagnoli</li>
+          </ul>
+        </div>
+
+        <p class="mt-10 text-center text-[12px] tracking-[0.18em] uppercase text-ink-600">
+          Asociación Civil AlterMundi · Córdoba, Argentina
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center reveal">
+      <a href="https://altermundi.net" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 text-[12px] tracking-[0.22em] uppercase text-ink-700 hover:text-ink-900 transition border-b border-ink-700/30 hover:border-ink-900/60 pb-1">
+        altermundi.net
+        <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== MITO (panel) =================== -->
+<section data-panel="mito" class="panel relative pt-36 md:pt-44 pb-28 md:pb-44 overflow-hidden">
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-b from-pearl-50 via-pearl-100 to-pearl-200"></div>
+    <div class="mito-aura"></div>
+
+    <!-- Espiral logarítmica (nautilus) -->
+    <svg class="mito-spiral" viewBox="-200 -200 400 400" aria-hidden="true">
+      <defs>
+        <radialGradient id="mitoSpiralGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"  stop-color="#5A4631" stop-opacity=".55"/>
+          <stop offset="65%" stop-color="#8B7355" stop-opacity=".25"/>
+          <stop offset="100%" stop-color="#C7B89A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g stroke="url(#mitoSpiralGrad)" fill="none" stroke-width="0.6">
+        <path class="mito-spiral-path" d="" />
+      </g>
+    </svg>
+
+    <div class="mito-particles">
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+      <span class="mito-particle"></span><span class="mito-particle"></span>
+    </div>
+
+    <div class="mito-lines">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="relative mx-auto max-w-5xl px-6">
+    <header class="text-center reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600">05 · Práctica integrada</p>
+      <h1 class="mt-5 font-serif font-light text-5xl md:text-7xl text-ink-900 leading-[1.0]">
+        Proyección del<br><span class="italic">Mito Personal</span>
+      </h1>
+    </header>
+
+    <div class="mt-14 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-7 space-y-5 text-[17px] leading-[1.75] text-ink-700 reveal">
+        <p>La <strong class="font-medium text-ink-900">Proyección del Mito Personal</strong> es una técnica terapéutica y de autoconocimiento profundo desarrollada hace más de 16 años por Julián de la Reta. Se basa en la <em>imaginación activa</em> de Jung, la primera parte del Monomito del Héroe de Joseph Campbell, herramientas de psicodrama y la función trascendente de la psique.</p>
+        <p>Durante una sesión de aproximadamente una hora y media a dos —desde un estado de relajación y atención flotante— se acompaña a la persona para que surja espontáneamente un flujo de imágenes, sensaciones y símbolos propios. Forman una narrativa viva: tu mito personal, un mensaje codificado que proviene directamente del Sí Mismo.</p>
+        <p>Por una hermosa sincronicidad, la técnica se encontró con el Harmonic Beacon y ambos se ensamblaron de manera natural y potente. El Beacon genera un campo armónico sostenido que actúa como <em>referencia armónica externa</em>, reforzando la misma referencia interior que representa el Sí Mismo.</p>
+      </div>
+
+      <aside class="md:col-span-5 reveal">
+        <div class="card-mist rounded-[24px] p-7">
+          <p class="font-display tracking-[0.24em] uppercase text-[11px] text-ink-600">Efecto observado</p>
+          <ul class="mt-5 space-y-4 text-[15.5px] leading-[1.6] text-ink-800">
+            <li class="flex gap-3"><span class="mito-bullet"></span><span>Hace más nítida la señal que viene del inconsciente.</span></li>
+            <li class="flex gap-3"><span class="mito-bullet"></span><span>Refuerza la función trascendente, el puente entre inconsciente y consciente.</span></li>
+            <li class="flex gap-3"><span class="mito-bullet"></span><span>Facilita el acceso a capas más profundas, más allá de las resistencias habituales.</span></li>
+            <li class="flex gap-3"><span class="mito-bullet"></span><span>Ilumina y ayuda a atravesar la Sombra con mayor fluidez y seguridad.</span></li>
+            <li class="flex gap-3"><span class="mito-bullet"></span><span>Da sentido y dirección clara a la búsqueda hacia las profundidades.</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <p class="mt-14 max-w-3xl mx-auto text-center font-serif italic text-xl md:text-2xl leading-[1.45] text-ink-900 reveal">
+      «Cuando se realiza la Proyección del Mito junto al Harmonic Beacon encendido, el campo armónico actúa como un ancla estable que permite al mito personal desplegarse con mayor claridad y fuerza sanadora.»
+    </p>
+
+    <div class="mt-14 flex flex-col items-center gap-3 reveal">
+      <a href="https://calendly.com/juliandelareta/new-meeting?month=2026-05" target="_blank" rel="noopener"
+         class="cta-primary inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
+        Reservar sesión con Julián
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="text-[12px] tracking-[0.18em] uppercase text-ink-600">La experiencia queda registrada en audio · se entrega material escrito y visual</p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="relative bg-pearl-100 border-t border-pearl-300/60">
+  <div class="mx-auto max-w-7xl px-6 py-12 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3">
+        <span class="block h-8 w-8 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint shadow-[inset_0_0_12px_rgba(255,255,255,.7),0_2px_8px_rgba(74,61,46,.18)]"></span>
+        <span class="font-display tracking-[0.18em] text-[13px] text-ink-800 uppercase">Harmonic Beacon</span>
+      </div>
+      <p class="mt-4 max-w-md text-[14px] leading-[1.65] text-ink-600">
+        Un proyecto de Asociación Civil AlterMundi · Córdoba, Argentina.
+      </p>
+    </div>
+    <div>
+      <p class="font-display tracking-[0.22em] uppercase text-[11px] text-ink-600">Enlaces</p>
+      <ul class="mt-4 space-y-2 text-[14px] text-ink-700">
+        <li><a class="hover:text-ink-900 transition" href="https://beacon.altermundi.net/" target="_blank" rel="noopener">Abrir la app</a></li>
+        <li><a class="hover:text-ink-900 transition" href="https://hit.altermundi.net" target="_blank" rel="noopener">Libro HIT</a></li>
+        <li><a class="hover:text-ink-900 transition" href="https://altermundi.net" target="_blank" rel="noopener">AlterMundi</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="font-display tracking-[0.22em] uppercase text-[11px] text-ink-600">Contacto</p>
+      <ul class="mt-4 space-y-2 text-[14px] text-ink-700">
+        <li><a class="hover:text-ink-900 transition" href="mailto:editorial@altermundi.net">editorial@altermundi.net</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-pearl-300/60">
+    <div class="mx-auto max-w-7xl px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] tracking-[0.16em] uppercase text-ink-600">
+      <p>© 2026 AlterMundi · Harmonic Beacon</p>
+      <p>CC BY 4.0</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
+<script src="./assets/main.js"></script>
+
+</body>
+</html>

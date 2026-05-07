@@ -1,0 +1,19 @@
+# Source materials (no se publican en el sitio)
+*.pdf
+*.md
+!README.md
+*.txt
+*.png
+
+# Image library no usada actualmente por el sitio
+becon/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Logs
+*.log
