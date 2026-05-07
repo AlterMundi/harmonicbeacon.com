@@ -269,8 +269,8 @@ body[data-route="home"] footer{ display: none; }
    ========================================================== */
 .beacon-cover{
   position: relative;
-  min-height: 78vh;
-  padding: 12rem 0 8rem;
+  min-height: 48vh;
+  padding: 9rem 0 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
