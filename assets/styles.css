@@ -177,17 +177,45 @@ body[data-route="home"] footer{ display: none; }
 .cta-primary > *{ position: relative; z-index: 1; }
 
 /* ==========================================================
-   HOME — Aurora boreal (canvas con ruido)
+   HOME — Aurora boreal real (video con filtro nácar)
    ========================================================== */
-.aurora-canvas{
+.aurora-video{
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  filter: blur(38px) saturate(1.08);
-  opacity: .92;
+  /* filtro nácar: sube algo el calor sin matar los verdes/violetas */
+  filter:
+    hue-rotate(-6deg)
+    saturate(1.05)
+    brightness(1.04)
+    contrast(0.96);
+  transform: scale(1.04);
+}
+.aurora-veil{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  /* halo cremoso al centro (legibilidad del texto) y bordes suaves */
+  background:
+    radial-gradient(70% 55% at 50% 50%,
+      rgba(245,239,228,.55) 0%,
+      rgba(245,239,228,.30) 45%,
+      rgba(245,239,228,.55) 100%),
+    linear-gradient(180deg,
+      rgba(245,239,228,.40) 0%,
+      rgba(245,239,228,.10) 30%,
+      rgba(245,239,228,.10) 70%,
+      rgba(245,239,228,.55) 100%),
+    linear-gradient(135deg,
+      rgba(233,212,220,.10) 0%,
+      rgba(214,229,221,.06) 50%,
+      rgba(239,224,201,.10) 100%);
+  mix-blend-mode: normal;
 }
 
 /* ==========================================================
@@ -632,9 +660,8 @@ body[data-route="home"] footer{ display: none; }
   .mito-spiral{ animation: none; }
   .mito-particle{ animation: none; opacity: .6; }
   .mito-lines span{ animation: none; opacity: .3; }
-  .cover-video{ display: none; }
-  .aurora,
-  .aurora-shimmer{ animation: none; }
+  .cover-video,
+  .aurora-video{ display: none; }
   .reveal, .reveal-img{
     opacity: 1 !important;
     transform: none !important;

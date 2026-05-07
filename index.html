@@ -98,8 +98,13 @@ tailwind.config = {
   <!-- nacar gradient base -->
   <div class="absolute inset-0 bg-gradient-to-b from-pearl-50 via-pearl-100 to-pearl-200"></div>
 
-  <!-- Aurora boreal — cortinas con ruido (canvas) -->
-  <canvas class="aurora-canvas" aria-hidden="true"></canvas>
+  <!-- Aurora boreal real — video con filtro nácar -->
+  <video class="aurora-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="https://videos.pexels.com/video-files/7648007/7648007-hd_1920_1080_30fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/855233/855233-hd_1920_1080_30fps.mp4" type="video/mp4">
+    <source src="https://videos.pexels.com/video-files/6981411/6981411-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="aurora-veil" aria-hidden="true"></div>
 
   <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 md:pt-40 md:pb-32 text-center min-h-[100svh]">
 
