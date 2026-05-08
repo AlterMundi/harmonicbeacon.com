@@ -3,6 +3,26 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* =========================================================
+     Language switch (ES/EN) — persistente en localStorage
+     ========================================================= */
+  (function initLangSwitch(){
+    const html = document.documentElement;
+    const stored = (() => { try { return localStorage.getItem('hb-lang'); } catch { return null; } })();
+    const initial = (stored === 'en' || stored === 'es') ? stored : 'es';
+    setLang(initial);
+    document.querySelectorAll('.lang-switch').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLang(html.dataset.activeLang === 'es' ? 'en' : 'es');
+      });
+    });
+    function setLang(l){
+      html.dataset.activeLang = l;
+      html.lang = l;
+      try { localStorage.setItem('hb-lang', l); } catch {}
+    }
+  })();
+
+  /* =========================================================
      SPA — routing por hash
      ========================================================= */
   const VALID = ['home','beacon','experiencia','hit','altermundi'];
@@ -14,8 +34,7 @@
     document.querySelectorAll('[data-tab]').forEach(t => {
       t.classList.toggle('is-active', t.dataset.tab === name && name !== 'home');
     });
-    const sel = document.querySelector('.mobile-tabs');
-    if (sel && sel.value !== name) sel.value = name;
+    document.querySelectorAll('.mobile-tabs').forEach(s => { if (s.value !== name) s.value = name; });
     window.scrollTo({ top: 0, behavior: 'instant' });
     runReveals();
     if (freqRig)   freqRig.setActive(name === 'home');
@@ -28,14 +47,13 @@
   }
   window.addEventListener('hashchange', syncFromHash);
 
-  // Mobile select
-  const sel = document.querySelector('.mobile-tabs');
-  if (sel){
+  // Mobile select (one per language; both wired)
+  document.querySelectorAll('.mobile-tabs').forEach(sel => {
     sel.addEventListener('change', (e) => {
       location.hash = e.target.value === 'home' ? '' : '#' + e.target.value;
       if (e.target.value === 'home') syncFromHash();
     });
-  }
+  });
 
   /* =========================================================
      Lissajous — figura armónica que respira entre ratios consonantes

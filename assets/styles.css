@@ -22,6 +22,46 @@
 
 html{ scroll-behavior: smooth; }
 
+/* ==========================================================
+   Language switch (ES/EN) — dual markup, CSS toggle
+   ========================================================== */
+html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+
+.lang-switch{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+  background: linear-gradient(135deg, rgba(255,250,240,.55), rgba(240,226,199,.40));
+  border: 1px solid rgba(75,60,42,.18);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.lang-switch:hover{
+  color: var(--ink-900);
+  border-color: rgba(75,60,42,.40);
+  background: linear-gradient(135deg, rgba(255,250,240,.85), rgba(240,226,199,.65));
+  transform: translateY(-1px);
+}
+.lang-switch [data-lang-tag]{
+  transition: color .25s ease, opacity .25s ease;
+  opacity: .55;
+}
+html[data-active-lang="es"] .lang-switch [data-lang-tag="es"],
+html[data-active-lang="en"] .lang-switch [data-lang-tag="en"]{
+  color: var(--ink-900);
+  opacity: 1;
+  font-weight: 500;
+}
+.lang-switch .sep{ opacity: .35; }
+
 body{
   background-color: var(--pearl-100);
   background-image:
@@ -186,12 +226,11 @@ body[data-route="home"] footer{ display: none; }
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  /* filtro nácar: sube algo el calor sin matar los verdes/violetas */
+  /* filtro nácar suave: respetamos los verdes/violetas reales del aurora */
   filter:
-    hue-rotate(-6deg)
-    saturate(1.05)
-    brightness(1.04)
-    contrast(0.96);
+    saturate(1.18)
+    brightness(0.96)
+    contrast(1.06);
   transform: scale(1.04);
 }
 .aurora-veil{
@@ -199,22 +238,32 @@ body[data-route="home"] footer{ display: none; }
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  /* halo cremoso al centro (legibilidad del texto) y bordes suaves */
+  /* abrimos el centro para que el aurora respire; bordes nácar para fundir */
   background:
-    radial-gradient(70% 55% at 50% 50%,
-      rgba(245,239,228,.55) 0%,
-      rgba(245,239,228,.30) 45%,
-      rgba(245,239,228,.55) 100%),
+    radial-gradient(80% 65% at 50% 55%,
+      rgba(245,239,228,0) 0%,
+      rgba(245,239,228,.06) 35%,
+      rgba(245,239,228,.42) 90%,
+      rgba(245,239,228,.62) 100%),
     linear-gradient(180deg,
-      rgba(245,239,228,.40) 0%,
-      rgba(245,239,228,.10) 30%,
-      rgba(245,239,228,.10) 70%,
-      rgba(245,239,228,.55) 100%),
+      rgba(245,239,228,.45) 0%,
+      rgba(245,239,228,.05) 22%,
+      rgba(245,239,228,.05) 70%,
+      rgba(245,239,228,.62) 100%),
     linear-gradient(135deg,
       rgba(233,212,220,.10) 0%,
-      rgba(214,229,221,.06) 50%,
-      rgba(239,224,201,.10) 100%);
+      rgba(214,229,221,.08) 50%,
+      rgba(239,224,201,.12) 100%);
   mix-blend-mode: normal;
+}
+/* legibilidad del hero sobre aurora visible */
+.panel-home .hero-title{
+  text-shadow:
+    0 1px 2px rgba(245,239,228,0.55),
+    0 0 18px rgba(245,239,228,0.42);
+}
+.panel-home .hero-sub{
+  text-shadow: 0 1px 2px rgba(245,239,228,0.55);
 }
 
 /* ==========================================================
