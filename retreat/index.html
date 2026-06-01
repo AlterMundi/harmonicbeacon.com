@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-active-lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Harmonic Beacon Retreat — Costa Rica</title>
-  <meta name="description" content="A three-day retreat to reorganize your perception through harmonic resonance, personal myth projection, yoga and collective reflection. Playa Hermosa, Costa Rica.">
+  <meta name="description" lang="es" content="Retiro de tres dias en Costa Rica para reorganizar tu percepcion a traves de la resonancia armonica, la proyeccion del mito personal, yoga y reflexion colectiva.">
+  <meta name="description" lang="en" content="A three-day retreat in Costa Rica to reorganize your perception through harmonic resonance, personal myth projection, yoga and collective reflection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
@@ -28,6 +29,8 @@
   </script>
   <style>
     html { scroll-behavior: smooth; }
+    html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+    html[data-active-lang="en"] [lang="es"]{ display: none !important; }
     body {
       font-family: 'Inter Tight', system-ui, sans-serif;
       background: linear-gradient(135deg, #0f172a 0%, #042f2e 50%, #0f172a 100%);
@@ -66,6 +69,15 @@
       background: rgba(255,255,255,.12);
       border-color: rgba(94,234,212,.35);
     }
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      transition: all .35s ease;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(37,211,102,.25);
+    }
     .schedule-line {
       border-left: 1px solid rgba(94,234,212,.2);
     }
@@ -103,20 +115,50 @@
       opacity: 1;
       transform: translateY(0);
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all .25s ease;
     }
-    .animate-float { animation: float 6s ease-in-out infinite; }
+    .lang-switch:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.25);
+    }
+    .lang-switch [data-lang-tag] { transition: all .25s; opacity: .45; }
+    html[data-active-lang="es"] .lang-switch [data-lang-tag="es"],
+    html[data-active-lang="en"] .lang-switch [data-lang-tag="en"] {
+      color: #fff; opacity: 1; font-weight: 500;
+    }
+    .lang-switch .sep { opacity: .3; }
+    input, textarea, select {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #e2e8f0;
+      transition: all .3s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: rgba(94,234,212,.45);
+      background: rgba(255,255,255,.08);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.25); }
+    option { background: #0f172a; color: #e2e8f0; }
   </style>
 </head>
 
 <body class="antialiased min-h-screen relative overflow-x-hidden">
 
-<!-- Grain overlay -->
 <div class="grain pointer-events-none fixed inset-0 z-[60]"></div>
-
-<!-- Glow orbs -->
 <div class="glow-orb w-[500px] h-[500px] bg-teal-400 top-[-100px] left-[-100px]"></div>
 <div class="glow-orb w-[400px] h-[400px] bg-cyan-400 top-[40%] right-[-80px]"></div>
 <div class="glow-orb w-[350px] h-[350px] bg-teal-300 bottom-[-50px] left-[30%]"></div>
@@ -128,10 +170,15 @@
       <span class="block h-8 w-8 rounded-full bg-gradient-to-br from-teal-300 via-cyan-300 to-amber-200 shadow-[0_0_20px_rgba(94,234,212,.25)]"></span>
       <span class="font-display tracking-[0.18em] text-sm text-white/90 uppercase">Harmonic Beacon</span>
     </a>
-    <a href="../" class="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium">
-      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
-    </a>
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch" aria-label="Language / Idioma" onclick="toggleLang()">
+        <span data-lang-tag="es">ES</span><span class="sep">/</span><span data-lang-tag="en">EN</span>
+      </button>
+      <a href="../" class="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span lang="es">Volver</span><span lang="en">Back</span>
+      </a>
+    </div>
   </nav>
 </header>
 
@@ -147,52 +194,50 @@
     <h1 class="font-serif font-light text-white text-[13vw] md:text-[80px] lg:text-[100px] leading-[0.95]">
       <span class="block italic">Costa Rica</span>
     </h1>
-    <p class="mt-8 max-w-xl mx-auto font-serif text-lg md:text-xl text-white/50 italic leading-relaxed">
+    <p class="mt-8 max-w-xl mx-auto font-serif text-lg md:text-xl text-white/50 italic leading-relaxed" lang="es">
+      Una inmersion de tres dias para reorganizar tu percepcion a traves de la resonancia armonica, la proyeccion del mito personal y la escala viva de la naturaleza.
+    </p>
+    <p class="mt-8 max-w-xl mx-auto font-serif text-lg md:text-xl text-white/50 italic leading-relaxed" lang="en">
       A three-day immersion to reorganize your perception through harmonic resonance, personal myth projection and the living scale of nature.
     </p>
     <p class="mt-4 text-[11px] tracking-[0.3em] uppercase text-white/30 font-sans">
-      Friday · Saturday · Sunday &nbsp;|&nbsp; Playa Hermosa, Costa Rica
+      <span lang="es">Viernes · Sabado · Domingo</span><span lang="en">Friday · Saturday · Sunday</span>
+      &nbsp;|&nbsp; Playa Hermosa, Costa Rica
     </p>
 
     <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="#reserve" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
-        Reserve your place
+      <a href="#reservar" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
+        <span lang="es">Reservar mi lugar</span><span lang="en">Reserve your place</span>
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
-        Open the app
+        <span lang="es">Abrir la app</span><span lang="en">Open the app</span>
         <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
       </a>
     </div>
 
-    <!-- Email signup -->
-    <div class="mt-8 max-w-sm mx-auto reveal">
-      <p class="text-[11px] tracking-[0.2em] uppercase text-white/25 mb-3">Get updates about the retreat</p>
-      <form action="https://altermundi.us1.list-manage.com/subscribe/post" method="post" target="_blank" class="flex items-center gap-2">
-        <input type="email" name="EMAIL" placeholder="your@email.com" required
-          class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-3 text-[13px] text-white placeholder-white/25 focus:outline-none focus:border-teal-400/50 focus:bg-white/8 transition">
-        <button type="submit" class="btn-ghost rounded-full px-5 py-3 text-[11px] tracking-[0.18em] uppercase font-medium whitespace-nowrap">
-          Notify me
-        </button>
-      </form>
-      <p class="text-[10px] text-white/15 mt-2">We respect your privacy. Unsubscribe anytime.</p>
-    </div>
-
-    <a href="#experience" class="text-[12px] tracking-[0.22em] uppercase text-white/30 hover:text-white/60 transition mt-8 inline-block border-b border-white/10 hover:border-white/30 pb-1">
-      Discover the experience
+    <a href="#experiencia" class="text-[12px] tracking-[0.22em] uppercase text-white/30 hover:text-white/60 transition mt-8 inline-block border-b border-white/10 hover:border-white/30 pb-1">
+      <span lang="es">Descubrir la experiencia</span><span lang="en">Discover the experience</span>
     </a>
   </div>
 </section>
 
-<!-- THE EXPERIENCE -->
-<section id="experience" class="relative py-28 md:py-36">
+<!-- EXPERIENCIA -->
+<section id="experiencia" class="relative py-28 md:py-36">
   <div class="max-w-5xl mx-auto px-6">
     <div class="text-center max-w-3xl mx-auto reveal">
-      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">The experience</p>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">La experiencia</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">The experience</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">
+        Un retiro para reorganizar<br class="hidden md:block"> tu percepcion
+      </h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">
         A retreat to reorganize<br class="hidden md:block"> your perception
       </h2>
-      <p class="mt-6 text-white/45 leading-relaxed text-[17px]">
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="es">
+        Durante tres dias en el corazon de Costa Rica, vas a experimentar el Harmonic Beacon en su forma mas pura: sesiones de profunda resonancia armonica, proyeccion del mito personal, yoga, caminatas contemplativas, espacios grupales de reflexion, ciencias corporales y estados de meditacion profunda — todo en un entorno natural de extraordinaria belleza.
+      </p>
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="en">
         For three days in the heart of Costa Rica, you will experience the Harmonic Beacon in its purest form: sessions of deep harmonic resonance, personal myth projection, yoga, contemplative walks, group reflection spaces, body sciences and states of deep meditation — all within a natural environment of extraordinary beauty.
       </p>
     </div>
@@ -203,33 +248,69 @@
           <svg class="w-5 h-5 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/></svg>
         </div>
         <h3 class="font-serif text-xl text-white mb-2">Harmonic Beacon</h3>
-        <p class="text-[14.5px] text-white/40 leading-relaxed">Sessions with the Harmonic Beacon to synchronize your nervous system through natural proportions. A sustained field that acts as an external harmonic reference.</p>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="es">Sesiones con el Harmonic Beacon para sincronizar tu sistema nervioso a traves de las proporciones naturales. Un campo sostenido que actua como referencia armonica externa.</p>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="en">Sessions with the Harmonic Beacon to synchronize your nervous system through natural proportions. A sustained field that acts as an external harmonic reference.</p>
       </div>
       <div class="card-glass rounded-2xl p-7 reveal">
         <div class="w-10 h-10 rounded-xl bg-cyan-500/15 flex items-center justify-center mb-5">
           <svg class="w-5 h-5 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
-        <h3 class="font-serif text-xl text-white mb-2">Personal Myth Projection</h3>
-        <p class="text-[14.5px] text-white/40 leading-relaxed">A clinical technique for deep self-knowledge empowered by the Beacon. Access your Self through active imagination, traverse the Shadow and integrate symbolic material.</p>
+        <h3 class="font-serif text-xl text-white mb-2" lang="es">Proyeccion del Mito Personal</h3>
+        <h3 class="font-serif text-xl text-white mb-2" lang="en">Personal Myth Projection</h3>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="es">Tecnica clinica de autoconocimiento profundo potenciada por el Beacon. Accede al Si-Mismo a traves de la imaginacion activa, atraviesa la Sombra e integra material simbolico.</p>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="en">A clinical technique for deep self-knowledge empowered by the Beacon. Access your Self through active imagination, traverse the Shadow and integrate symbolic material.</p>
       </div>
       <div class="card-glass rounded-2xl p-7 reveal">
         <div class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center mb-5">
           <svg class="w-5 h-5 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 6 4 9 4 13a8 8 0 0016 0c0-4-4-7-8-11z"/></svg>
         </div>
-        <h3 class="font-serif text-xl text-white mb-2">Yoga &amp; Nature</h3>
-        <p class="text-[14.5px] text-white/40 leading-relaxed">Morning yoga practice with ocean views, contemplative beach walks, group reflection circles and body sciences to integrate body and environment.</p>
+        <h3 class="font-serif text-xl text-white mb-2" lang="es">Yoga y Naturaleza</h3>
+        <h3 class="font-serif text-xl text-white mb-2" lang="en">Yoga &amp; Nature</h3>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="es">Practica matutina de yoga con vista al oceano, caminatas contemplativas, circulos grupales de reflexion y ciencias corporales para integrar cuerpo y entorno.</p>
+        <p class="text-[14.5px] text-white/40 leading-relaxed" lang="en">Morning yoga practice with ocean views, contemplative beach walks, group reflection circles and body sciences to integrate body and environment.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PATHWAYS -->
+<!-- SOBRE EL BEACON -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">El colchon armonico</p>
+        <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">The harmonic cushion</p>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]">Harmonic Beacon</h2>
+        <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="es">
+          Un colchon armonico compuesto por una escala armonica natural basada en la afinacion de la naturaleza. Proporciona un espacio de imaginacion, presencia y conexion con ciencias corporales que ayuda a mejorar los estados de meditacion, acompanar procesos de viajes interiores y elevar estados de conciencia.
+        </p>
+        <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="en">
+          A harmonic cushion composed of a natural harmonic scale based on the tuning of nature. It provides a space of imagination, presence and connection with body sciences that helps improve meditation states, accompany inner journey processes and elevate states of consciousness.
+        </p>
+        <p class="mt-4 text-white/30 leading-relaxed text-[15px]" lang="es">
+          Acompanado de la proyeccion del mito, permite a sus usuarios atravesar resistencias en sus estados subconscientes mas profundos a traves de la imaginacion activa presente, pudiendo visualizar estas resistencias como si fuese un sueno. Al no tener una guia especifica al punto de convencimiento de ninguna religion o fantasia guru, cada persona puede encontrar su propio camino y su propio estado reflexivo y meditativo presente.
+        </p>
+        <p class="mt-4 text-white/30 leading-relaxed text-[15px]" lang="en">
+          Accompanied by myth projection, it allows users to traverse resistances in their deepest subconscious states through present active imagination, being able to visualize these resistances as if it were a dream. Without having a specific guide to the point of conviction of any religion or guru fantasy, each person can find their own path and their own reflective and meditative present state.
+        </p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-white/10 reveal">
+        <img src="https://beacon.altermundi.net/retiro-assets/guitar.jpg" onerror="this.src='../assets/retreat-place.jpg'" alt="Harmonic Beacon" class="w-full h-80 md:h-[28rem] object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODALIDADES -->
 <section class="relative py-28 md:py-36">
   <div class="max-w-5xl mx-auto px-6">
     <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-      <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans">Pathways</p>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Choose your path</h2>
-      <p class="mt-5 text-white/45 leading-relaxed text-[17px]">Both pathways include full team support and access to the wellness space for maximum comfort during the experience.</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans" lang="es">Modalidades</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans" lang="en">Pathways</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Elegi tu camino</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Choose your path</h2>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="es">Ambas modalidades incluyen acompanamiento integral del equipo y acceso al espacio wellness para mayor comodidad durante la experiencia.</p>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="en">Both pathways include full team support and access to the wellness space for maximum comfort during the experience.</p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-6">
@@ -238,18 +319,21 @@
           <div class="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center">
             <svg class="w-6 h-6 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           </div>
-          <h3 class="font-serif text-2xl text-white">Wellness Path</h3>
+          <h3 class="font-serif text-2xl text-white" lang="es">Camino Wellness</h3>
+          <h3 class="font-serif text-2xl text-white" lang="en">Wellness Path</h3>
         </div>
-        <p class="text-white/45 mb-6 leading-relaxed">Self-knowledge, wellness, meditation and harmony. Simply enjoy the experience without research protocols.</p>
+        <p class="text-white/45 mb-6 leading-relaxed" lang="es">Autoconocimiento, wellness, meditacion y armonia. Solo disfrutar la experiencia sin protocolos de investigacion.</p>
+        <p class="text-white/45 mb-6 leading-relaxed" lang="en">Self-knowledge, wellness, meditation and harmony. Simply enjoy the experience without research protocols.</p>
         <ul class="space-y-3 text-[14px] text-white/35">
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Harmonic Beacon sessions</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Personal Myth Projection</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Morning yoga</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Contemplative walks</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Guided deep meditation</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Group reflection spaces</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Body sciences</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Additional experiences with experts that join throughout the retreat</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Sesiones con Harmonic Beacon</span><span lang="en">Harmonic Beacon sessions</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Proyeccion del mito personal</span><span lang="en">Personal Myth Projection</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Yoga matutino</span><span lang="en">Morning yoga</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Caminatas contemplativas</span><span lang="en">Contemplative walks</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Meditacion profunda guiada</span><span lang="en">Guided deep meditation</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Espacios grupales de reflexion</span><span lang="en">Group reflection spaces</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Ciencias corporales</span><span lang="en">Body sciences</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Tiempo libre en playa y selva</span><span lang="en">Free time at beach and jungle</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Otras experiencias con expertos que se suman durante el retiro</span><span lang="en">Additional experiences with experts that join throughout the retreat</span></li>
         </ul>
       </div>
 
@@ -258,17 +342,185 @@
           <div class="w-12 h-12 rounded-xl bg-cyan-500/15 flex items-center justify-center">
             <svg class="w-6 h-6 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M17.636 17.636l-.707-.707M12 21v-1M6.343 17.636l-.707.707M3 12h1M6.343 6.343l-.707-.707"/></svg>
           </div>
-          <h3 class="font-serif text-2xl text-white">Labs Path</h3>
+          <h3 class="font-serif text-2xl text-white" lang="es">Camino Labs</h3>
+          <h3 class="font-serif text-2xl text-white" lang="en">Labs Path</h3>
         </div>
-        <p class="text-white/45 mb-6 leading-relaxed">Join the Beacon research protocol. EEG monitoring and other measurement elements during your journey.</p>
+        <p class="text-white/45 mb-6 leading-relaxed" lang="es">Te sumas al protocolo de investigacion de los efectos del Beacon. Monitoreo con EEG y otros elementos de medicion durante tu paso por la experiencia.</p>
+        <p class="text-white/45 mb-6 leading-relaxed" lang="en">Join the Beacon research protocol. EEG monitoring and other measurement elements during your journey.</p>
         <ul class="space-y-3 text-[14px] text-white/35">
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Everything included in Wellness</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>EEG monitoring during sessions</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Biometric data logging</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Pre, during and post-experience interviews</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Labs instances for qualitative recording</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Personalized results report</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Todo lo incluido en Wellness</span><span lang="en">Everything included in Wellness</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Monitoreo EEG durante sesiones</span><span lang="en">EEG monitoring during sessions</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Registro de datos biometricos</span><span lang="en">Biometric data logging</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Entrevistas pre, durante y post experiencia</span><span lang="en">Pre, during and post-experience interviews</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Instancias de Labs para registro cualitativo</span><span lang="en">Labs instances for qualitative recording</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Informe personalizado de resultados</span><span lang="en">Personalized results report</span></li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOCOLO -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-emerald-300/50 mb-5 font-sans" lang="es">Protocolo</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-emerald-300/50 mb-5 font-sans" lang="en">Protocol</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]" lang="es">Condiciones de cuidado</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]" lang="en">Conditions of care</h2>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="es">El programa Beacon organiza su practica como una linea de investigacion aplicada, exploratoria y situada. Estas son las condiciones que sostienen cada experiencia.</p>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="en">The Beacon program organizes its practice as an applied, exploratory and situated research line. These are the conditions that sustain each experience.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">🔊</span>
+          <div>
+            <h3 class="text-lg text-white mb-2" lang="es">Calidad de escucha</h3>
+            <h3 class="text-lg text-white mb-2" lang="en">Listening quality</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">La experiencia requiere una salida de audio suficiente para una escucha sostenida. Auriculares comodos o sistemas de sonido de buena calidad. No se recomiendan parlantes de telefono.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">The experience requires sufficient audio output for sustained listening. Comfortable headphones or good quality sound systems. Phone speakers are not recommended.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">🏠</span>
+          <div>
+            <h3 class="text-lg text-white mb-2">Set and setting</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">Un lugar comodo, con interrupciones minimizadas, temperatura aceptable y postura sostenible. El entorno, la atencion y la comodidad corporal forman parte de la experiencia.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">A comfortable place with minimized interruptions, acceptable temperature and sustainable posture. The environment, attention and bodily comfort are part of the experience.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">⏸️</span>
+          <div>
+            <h3 class="text-lg text-white mb-2" lang="es">Pausa y salida</h3>
+            <h3 class="text-lg text-white mb-2" lang="en">Pause and exit</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">La participacion es no obligatoria. Podes pausar, salir, permanecer en silencio o no compartir relato posterior. La salida no es falla: es parte de las condiciones reales de uso.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">Participation is not mandatory. You can pause, exit, remain silent or not share a later account. Exiting is not failure: it is part of the real conditions of use.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">🧠</span>
+          <div>
+            <h3 class="text-lg text-white mb-2" lang="es">Sin promesas clinicas</h3>
+            <h3 class="text-lg text-white mb-2" lang="en">No clinical promises</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">El Beacon se formula como dispositivo de bienestar y exploracion, no como tratamiento medico. No declara curas milagrosas ni seguridad absoluta.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">Beacon is formulated as a wellbeing and exploration device, not as medical treatment. It does not claim miraculous cures or absolute safety.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">🛡️</span>
+          <div>
+            <h3 class="text-lg text-white mb-2" lang="es">Acompanamiento humano</h3>
+            <h3 class="text-lg text-white mb-2" lang="en">Human accompaniment</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">Cuando la experiencia incluye Proyeccion del Mito o trabajo simbolico, el acompanamiento humano cercano es parte del encuadre. Si emerge malestar, se cierra, se cuida la salida y se orienta.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">When the experience includes Myth Projection or symbolic work, close human accompaniment is part of the framework. If discomfort emerges, it is closed, the exit is cared for and guidance is provided.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <div class="flex items-start gap-4">
+          <span class="text-2xl">📊</span>
+          <div>
+            <h3 class="text-lg text-white mb-2" lang="es">Investigacion exploratoria</h3>
+            <h3 class="text-lg text-white mb-2" lang="en">Exploratory research</h3>
+            <p class="text-sm text-white/40 leading-relaxed" lang="es">La fase actual estudia una practica real y organiza sus condiciones de observacion. Documentamos experiencia, aceptabilidad, seguridad operacional y criterios de progresion.</p>
+            <p class="text-sm text-white/40 leading-relaxed" lang="en">The current phase studies a real practice and organizes its observation conditions. We document experience, acceptability, operational safety and progression criteria.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-amber-300/50 mb-5 font-sans" lang="es">Inversion</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-amber-300/50 mb-5 font-sans" lang="en">Investment</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Precios</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Pricing</h2>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="es">Elegi la duracion que mejor se adapte a tu disponibilidad</p>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]" lang="en">Choose the duration that best fits your availability</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Dia completo -->
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <h3 class="font-serif text-xl text-white mb-2" lang="es">Dia completo</h3>
+        <h3 class="font-serif text-xl text-white mb-2" lang="en">Full day</h3>
+        <div class="flex items-baseline gap-2 mb-4">
+          <span class="text-4xl font-serif text-white">$700</span>
+          <span class="text-white/40 text-sm">USD</span>
+        </div>
+        <p class="text-white/40 text-sm mb-6" lang="es">Sin pernocte</p>
+        <p class="text-white/40 text-sm mb-6" lang="en">No overnight</p>
+        <ul class="space-y-3 text-[14px] text-white/35 mb-8">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Acceso a todas las actividades del dia</span><span lang="en">Access to all activities of the day</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Almuerzo y merienda incluidos</span><span lang="en">Lunch and snack included</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Uso de instalaciones del centro</span><span lang="en">Use of center facilities</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Transporte local</span><span lang="en">Local transport</span></li>
+        </ul>
+        <a href="#reservar" class="btn-ghost w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Reservar</span><span lang="en">Book</span>
+        </a>
+      </div>
+
+      <!-- Fin de semana -->
+      <div class="card-glass rounded-2xl p-8 border-amber-400/20 bg-white/[0.06] reveal relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400/20 border border-amber-400/30 text-amber-300 text-[10px] tracking-[0.2em] uppercase px-4 py-1 rounded-full" lang="es">Mas popular</div>
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400/20 border border-amber-400/30 text-amber-300 text-[10px] tracking-[0.2em] uppercase px-4 py-1 rounded-full" lang="en">Most popular</div>
+        <h3 class="font-serif text-xl text-white mb-2" lang="es">Fin de semana</h3>
+        <h3 class="font-serif text-xl text-white mb-2" lang="en">Weekend</h3>
+        <div class="flex items-baseline gap-2 mb-4">
+          <span class="text-4xl font-serif text-white">$1,500</span>
+          <span class="text-white/40 text-sm">USD</span>
+        </div>
+        <p class="text-white/40 text-sm mb-6" lang="es">Sabado y domingo — 2 dias, 1 noche</p>
+        <p class="text-white/40 text-sm mb-6" lang="en">Saturday and Sunday — 2 days, 1 night</p>
+        <ul class="space-y-3 text-[14px] text-white/35 mb-8">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Todas las actividades del fin de semana</span><span lang="en">All weekend activities</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Desayuno, almuerzo y cena incluidos</span><span lang="en">Breakfast, lunch and dinner included</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">1 noche de alojamiento</span><span lang="en">1 night accommodation</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Sesiones Beacon y proyeccion del mito</span><span lang="en">Beacon sessions and myth projection</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Transporte local</span><span lang="en">Local transport</span></li>
+        </ul>
+        <a href="#reservar" class="btn-primary w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Reservar</span><span lang="en">Book</span>
+        </a>
+      </div>
+
+      <!-- Experiencia completa -->
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <h3 class="font-serif text-xl text-white mb-2" lang="es">Experiencia completa</h3>
+        <h3 class="font-serif text-xl text-white mb-2" lang="en">Full experience</h3>
+        <div class="flex items-baseline gap-2 mb-4">
+          <span class="text-4xl font-serif text-white">$2,000</span>
+          <span class="text-white/40 text-sm">USD</span>
+        </div>
+        <p class="text-white/40 text-sm mb-6" lang="es">3 dias, 2 noches</p>
+        <p class="text-white/40 text-sm mb-6" lang="en">3 days, 2 nights</p>
+        <ul class="space-y-3 text-[14px] text-white/35 mb-8">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Todas las actividades de los 3 dias</span><span lang="en">All activities for 3 days</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Todas las comidas incluidas</span><span lang="en">All meals included</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">2 noches de alojamiento</span><span lang="en">2 nights accommodation</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Todas las sesiones Beacon y proyecciones</span><span lang="en">All Beacon sessions and projections</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Regalo de bienvenida</span><span lang="en">Welcome gift</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-amber-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Transporte local</span><span lang="en">Local transport</span></li>
+        </ul>
+        <a href="#reservar" class="btn-ghost w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Reservar</span><span lang="en">Book</span>
+        </a>
       </div>
     </div>
   </div>
@@ -278,222 +530,235 @@
 <section class="relative py-28 md:py-36">
   <div class="max-w-4xl mx-auto px-6">
     <div class="text-center mb-16 reveal">
-      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">Schedule</p>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Three-day program</h2>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">Programa</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">Schedule</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Programa de tres dias</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Three-day program</h2>
     </div>
 
     <div class="space-y-14">
-      <!-- Friday -->
+      <!-- Viernes -->
       <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6">Friday</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Viernes</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Friday</h3>
         <div class="space-y-5">
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">14:00 — Welcome and check-in</p>
-              <p class="text-[14px] text-white/30">Arrival at the wellness center, check-in and team introduction.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">16:00 — Opening circle</p>
-              <p class="text-[14px] text-white/30">Intention setting and first harmonic immersion.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">17:30 — Grounding walk</p>
-              <p class="text-[14px] text-white/30">Contemplative beach walk to land in the body and in the place.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">18:30 — Beacon session at sunset</p>
-              <p class="text-[14px] text-white/30">First session with the harmonic cushion by the ocean.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">20:00 — Community dinner</p>
-              <p class="text-[14px] text-white/30">Vegetarian dinner with local products.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">21:30 — Group reflection circle</p>
-              <p class="text-[14px] text-white/30">Group space to share first sensations and set intentions.</p>
-            </div>
-          </div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">14:00</p><p class="text-[14px] text-white/30" lang="es">Bienvenida y check-in</p><p class="text-[14px] text-white/30" lang="en">Welcome and check-in</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">16:00</p><p class="text-[14px] text-white/30" lang="es">Circulo de apertura</p><p class="text-[14px] text-white/30" lang="en">Opening circle</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">17:30</p><p class="text-[14px] text-white/30" lang="es">Caminata de grounding</p><p class="text-[14px] text-white/30" lang="en">Grounding walk</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">18:30</p><p class="text-[14px] text-white/30" lang="es">Sesion Beacon al atardecer</p><p class="text-[14px] text-white/30" lang="en">Beacon session at sunset</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">20:00</p><p class="text-[14px] text-white/30" lang="es">Cena comunitaria</p><p class="text-[14px] text-white/30" lang="en">Community dinner</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">21:30</p><p class="text-[14px] text-white/30" lang="es">Circulo de reflexion grupal</p><p class="text-[14px] text-white/30" lang="en">Group reflection circle</p></div></div>
         </div>
       </div>
 
-      <!-- Saturday -->
+      <!-- Sabado -->
       <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6">Saturday</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Sabado</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Saturday</h3>
         <div class="space-y-5">
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">07:00 — Morning yoga</p>
-              <p class="text-[14px] text-white/30">Yoga practice at sunrise with ocean views.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">08:30 — Breakfast</p>
-              <p class="text-[14px] text-white/30">Healthy breakfast with tropical fruits.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">10:00 — Personal Myth Projection</p>
-              <p class="text-[14px] text-white/30">Clinical deep self-knowledge session with Beacon.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">12:30 — Lunch</p>
-              <p class="text-[14px] text-white/30">Light lunch with local products.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">14:00 — Group reflection space</p>
-              <p class="text-[14px] text-white/30">Integration circle to share experiences from the process.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">16:00 — Body sciences</p>
-              <p class="text-[14px] text-white/30">Body integration practices and harmonic breathing.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">17:30 — Labs: interviews</p>
-              <p class="text-[14px] text-white/30">Interview and recording instance for Labs pathway participants.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">18:30 — Second Beacon session</p>
-              <p class="text-[14px] text-white/30">Deep harmonic resonance session.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">20:30 — Dinner and sharing circle</p>
-              <p class="text-[14px] text-white/30">Dinner and space to share experiences.</p>
-            </div>
-          </div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">07:00</p><p class="text-[14px] text-white/30" lang="es">Yoga matutino</p><p class="text-[14px] text-white/30" lang="en">Morning yoga</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">08:30</p><p class="text-[14px] text-white/30" lang="es">Desayuno</p><p class="text-[14px] text-white/30" lang="en">Breakfast</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">10:00</p><p class="text-[14px] text-white/30" lang="es">Proyeccion del Mito Personal</p><p class="text-[14px] text-white/30" lang="en">Personal Myth Projection</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">12:30</p><p class="text-[14px] text-white/30" lang="es">Almuerzo</p><p class="text-[14px] text-white/30" lang="en">Lunch</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">14:00</p><p class="text-[14px] text-white/30" lang="es">Espacio de reflexion grupal</p><p class="text-[14px] text-white/30" lang="en">Group reflection space</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">16:00</p><p class="text-[14px] text-white/30" lang="es">Ciencias corporales</p><p class="text-[14px] text-white/30" lang="en">Body sciences</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">17:30</p><p class="text-[14px] text-white/30" lang="es">Labs: entrevistas</p><p class="text-[14px] text-white/30" lang="en">Labs: interviews</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">18:30</p><p class="text-[14px] text-white/30" lang="es">Segunda sesion Beacon</p><p class="text-[14px] text-white/30" lang="en">Second Beacon session</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">20:30</p><p class="text-[14px] text-white/30" lang="es">Cena y circulo de compartir</p><p class="text-[14px] text-white/30" lang="en">Dinner and sharing circle</p></div></div>
         </div>
       </div>
 
-      <!-- Sunday -->
+      <!-- Domingo -->
       <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6">Sunday</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Domingo</h3>
+        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Sunday</h3>
         <div class="space-y-5">
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">07:00 — Closing yoga</p>
-              <p class="text-[14px] text-white/30">Gentle integration and gratitude practice.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">08:30 — Breakfast</p>
-              <p class="text-[14px] text-white/30">Farewell breakfast.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">10:00 — Closing circle</p>
-              <p class="text-[14px] text-white/30">Share experiences and close the retreat.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">11:30 — Farewell walk</p>
-              <p class="text-[14px] text-white/30">Final contemplative beach walk.</p>
-            </div>
-          </div>
-          <div class="flex gap-5 schedule-line pl-5">
-            <div class="schedule-dot flex-shrink-0"></div>
-            <div>
-              <p class="text-[15px] font-medium text-white/80">12:30 — Check-out</p>
-              <p class="text-[14px] text-white/30">Check-out and farewell.</p>
-            </div>
-          </div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">07:00</p><p class="text-[14px] text-white/30" lang="es">Yoga de cierre</p><p class="text-[14px] text-white/30" lang="en">Closing yoga</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">08:30</p><p class="text-[14px] text-white/30" lang="es">Desayuno</p><p class="text-[14px] text-white/30" lang="en">Breakfast</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">10:00</p><p class="text-[14px] text-white/30" lang="es">Circulo de cierre</p><p class="text-[14px] text-white/30" lang="en">Closing circle</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">11:30</p><p class="text-[14px] text-white/30" lang="es">Caminata de despedida</p><p class="text-[14px] text-white/30" lang="en">Farewell walk</p></div></div>
+          <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">12:30</p><p class="text-[14px] text-white/30" lang="es">Check-out</p><p class="text-[14px] text-white/30" lang="en">Check-out</p></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOCATION -->
+<!-- LUGAR -->
 <section class="relative py-28 md:py-36">
   <div class="max-w-5xl mx-auto px-6">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="reveal">
-        <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans">The place</p>
+        <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans" lang="es">El lugar</p>
+        <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans" lang="en">The place</p>
         <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]">Playa Hermosa,<br>Costa Rica</h2>
-        <p class="mt-6 text-white/45 leading-relaxed text-[17px]">
+        <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="es">
+          Un santuario natural donde la selva tropical se encuentra con el oceano Pacifico. El centro wellness ofrece un entorno seguro, tranquilo y lujoso para sumergirte completamente en la experiencia Harmonic Beacon.
+        </p>
+        <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="en">
           A natural sanctuary where tropical jungle meets the Pacific Ocean. The wellness center offers a safe, tranquil and luxurious environment to fully immerse yourself in the Harmonic Beacon experience.
         </p>
         <ul class="mt-6 space-y-3 text-[15px] text-white/35">
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Natural environment of extraordinary beauty</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Ideal tropical climate year-round</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Quality accommodation with ocean views</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Healthy local gastronomy</li>
-          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Direct beach access</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Entorno natural de extraordinaria belleza</span><span lang="en">Natural environment of extraordinary beauty</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Clima tropical ideal todo el ano</span><span lang="en">Ideal tropical climate year-round</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Alojamiento de calidad con vista al oceano</span><span lang="en">Quality accommodation with ocean views</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Gastronomia local saludable</span><span lang="en">Healthy local gastronomy</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Acceso directo a la playa</span><span lang="en">Direct beach access</span></li>
         </ul>
       </div>
       <div class="rounded-2xl overflow-hidden border border-white/10 reveal">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Playa Hermosa Costa Rica" class="w-full h-80 md:h-[28rem] object-cover">
+        <img src="../assets/retreat-place.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80'" alt="Playa Hermosa Costa Rica" class="w-full h-80 md:h-[28rem] object-cover">
       </div>
     </div>
   </div>
 </section>
 
-<!-- RESERVE -->
-<section id="reserve" class="relative py-28 md:py-36 overflow-hidden">
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-teal-500/8 blur-3xl"></div>
-  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
-    <div class="reveal">
-      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">Reserve</p>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Book your place</h2>
-      <p class="mt-6 text-white/45 leading-relaxed text-[17px] max-w-2xl mx-auto">
-        Spots are limited to maintain intimacy and quality of the experience. Write to us to confirm your place and resolve any questions.
-      </p>
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="mailto:info@altermundi.net?subject=Harmonic%20Beacon%20Retreat%20Reservation" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
-          Reserve by email
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
-          Explore the Beacon
-        </a>
+<!-- FACILITADORES -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">Facilitadores</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">Facilitators</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]" lang="es">Retiro a cargo del equipo de Harmonic Beacon</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]" lang="en">Retreat led by the Harmonic Beacon team</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Nico -->
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400/30 to-cyan-400/30 flex items-center justify-center text-2xl">NE</div>
+          <div>
+            <h3 class="font-serif text-xl text-white">Nico Echaniz</h3>
+            <a href="https://nicolasechaniz.altermundi.net" target="_blank" rel="noopener" class="text-[12px] text-teal-300/60 hover:text-teal-300 transition">nicolasechaniz.altermundi.net</a>
+          </div>
+        </div>
+        <p class="text-white/45 leading-relaxed text-[15px]" lang="es">
+          Creador de DaemonMetrix y la Harmonic Information Theory (HIT). Investigador y desarrollador de tecnologias de resonancia armonica para bienestar y exploracion de la conciencia. Su trabajo integra rigor cientifico con profunda sensibilidad humana.
+        </p>
+        <p class="text-white/45 leading-relaxed text-[15px]" lang="en">
+          Creator of DaemonMetrix and Harmonic Information Theory (HIT). Researcher and developer of harmonic resonance technologies for wellbeing and consciousness exploration. His work integrates scientific rigor with deep human sensitivity.
+        </p>
       </div>
-      <p class="mt-6 text-[11px] tracking-[0.22em] uppercase text-white/25">
-        Friday · Saturday · Sunday &nbsp;|&nbsp; Playa Hermosa, Costa Rica
+
+      <!-- Julian -->
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400/30 to-teal-400/30 flex items-center justify-center text-2xl">JdR</div>
+          <div>
+            <h3 class="font-serif text-xl text-white">Julian de la Reta</h3>
+            <a href="https://proyecciondelmito.harmonicbeacon.com" target="_blank" rel="noopener" class="text-[12px] text-teal-300/60 hover:text-teal-300 transition">proyecciondelmito.harmonicbeacon.com</a>
+          </div>
+        </div>
+        <p class="text-white/45 leading-relaxed text-[15px]" lang="es">
+          Creador de la Proyeccion del Mito Personal, tecnica clinica de autoconocimiento profundo con mas de 16 anos de desarrollo. Su trabajo integra la psicologia de profundidad de Carl Jung, la narrativa mitica de Joseph Campbell y el psicodrama para facilitar procesos de individuacion.
+        </p>
+        <p class="text-white/45 leading-relaxed text-[15px]" lang="en">
+          Creator of Personal Myth Projection, a clinical deep self-knowledge technique with more than 16 years of development. His work integrates Carl Jung's depth psychology, Joseph Campbell's mythic narrative and psychodrama to facilitate individuation processes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVAR -->
+<section id="reservar" class="relative py-28 md:py-36 overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-teal-500/8 blur-3xl"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">Reservar</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">Reserve</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Reserva tu lugar</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Book your place</h2>
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px] max-w-2xl mx-auto" lang="es">
+        Los lugares son limitados para mantener la intimidad y calidad de la experiencia. Completa el formulario o escribinos por WhatsApp.
       </p>
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px] max-w-2xl mx-auto" lang="en">
+        Spots are limited to maintain intimacy and quality of the experience. Fill out the form or write to us on WhatsApp.
+      </p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="card-glass rounded-2xl p-8 md:p-10 reveal mb-10">
+      <form action="https://formsubmit.co/sairaasua@gmail.com" method="POST" class="space-y-5">
+        <input type="hidden" name="_subject" value="Nueva reserva - Harmonic Beacon Retreat">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://altermundi.net/harmonicbeacon.com/retreat/">
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2" lang="es">Nombre completo</label>
+            <label class="block text-[13px] text-white/50 mb-2" lang="en">Full name</label>
+            <input type="text" name="nombre" required placeholder="Tu nombre" class="w-full rounded-xl px-4 py-3 text-[14px]">
+          </div>
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2">Email</label>
+            <input type="email" name="email" required placeholder="tu@email.com" class="w-full rounded-xl px-4 py-3 text-[14px]">
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2" lang="es">Telefono</label>
+            <label class="block text-[13px] text-white/50 mb-2" lang="en">Phone</label>
+            <input type="tel" name="telefono" required placeholder="+54 9..." class="w-full rounded-xl px-4 py-3 text-[14px]">
+          </div>
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2" lang="es">Pais</label>
+            <label class="block text-[13px] text-white/50 mb-2" lang="en">Country</label>
+            <input type="text" name="pais" placeholder="Argentina" class="w-full rounded-xl px-4 py-3 text-[14px]">
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2" lang="es">Modalidad</label>
+            <label class="block text-[13px] text-white/50 mb-2" lang="en">Pathway</label>
+            <select name="modalidad" class="w-full rounded-xl px-4 py-3 text-[14px] appearance-none cursor-pointer">
+              <option value="wellness" lang="es">Camino Wellness</option>
+              <option value="wellness" lang="en">Wellness Path</option>
+              <option value="labs" lang="es">Camino Labs</option>
+              <option value="labs" lang="en">Labs Path</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[13px] text-white/50 mb-2" lang="es">Duracion</label>
+            <label class="block text-[13px] text-white/50 mb-2" lang="en">Duration</label>
+            <select name="duracion" class="w-full rounded-xl px-4 py-3 text-[14px] appearance-none cursor-pointer">
+              <option value="completa" lang="es">Experiencia completa — 3 dias, 2 noches ($2,000 USD)</option>
+              <option value="completa" lang="en">Full experience — 3 days, 2 nights ($2,000 USD)</option>
+              <option value="finde" lang="es">Fin de semana — 2 dias, 1 noche ($1,500 USD)</option>
+              <option value="finde" lang="en">Weekend — 2 days, 1 night ($1,500 USD)</option>
+              <option value="dia" lang="es">Dia completo — sin pernocte ($700 USD)</option>
+              <option value="dia" lang="en">Full day — no overnight ($700 USD)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[13px] text-white/50 mb-2" lang="es">Mensaje (opcional)</label>
+          <label class="block text-[13px] text-white/50 mb-2" lang="en">Message (optional)</label>
+          <textarea name="mensaje" rows="3" placeholder="Cualquier duda o informacion adicional..." class="w-full rounded-xl px-4 py-3 text-[14px] resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          <span lang="es">Enviar reserva</span><span lang="en">Send reservation</span>
+        </button>
+
+        <p class="text-center text-[11px] text-white/25" lang="es">Te responderemos a la brevedad por email. Tambien podes escribirnos por WhatsApp.</p>
+        <p class="text-center text-[11px] text-white/25" lang="en">We will reply shortly by email. You can also write to us on WhatsApp.</p>
+      </form>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="text-center reveal">
+      <p class="text-[11px] tracking-[0.22em] uppercase text-white/25 mb-4" lang="es">O reserva directamente por WhatsApp</p>
+      <p class="text-[11px] tracking-[0.22em] uppercase text-white/25 mb-4" lang="en">Or book directly via WhatsApp</p>
+      <a href="https://wa.me/3547469632?text=Hola%20Saira!%20Me%20interesa%20reservar%20el%20retiro%20Harmonic%20Beacon%20en%20Costa%20Rica." target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center gap-3 rounded-full px-10 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span lang="es">Reservar por WhatsApp</span><span lang="en">Book via WhatsApp</span>
+      </a>
     </div>
   </div>
 </section>
@@ -513,22 +778,37 @@
   </div>
   <div class="border-t border-white/8">
     <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.16em] uppercase text-white/20">
-      <p>© 2026 AlterMundi · Harmonic Beacon</p>
+      <p>&copy; 2026 AlterMundi &middot; Harmonic Beacon</p>
       <p>CC BY 4.0</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // Simple scroll reveal
+  // Language toggle
+  function toggleLang() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-active-lang') || 'es';
+    const next = current === 'es' ? 'en' : 'es';
+    html.setAttribute('data-active-lang', next);
+    html.setAttribute('lang', next);
+    localStorage.setItem('hb-lang', next);
+  }
+  // Restore saved language
+  (function() {
+    const saved = localStorage.getItem('hb-lang');
+    if (saved) {
+      document.documentElement.setAttribute('data-active-lang', saved);
+      document.documentElement.setAttribute('lang', saved);
+    }
+  })();
+
+  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
