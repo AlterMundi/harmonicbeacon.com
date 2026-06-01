@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harmonic Beacon Retreat — Costa Rica</title>
+  <meta name="description" content="A three-day retreat to reorganize your perception through harmonic resonance, personal myth projection, yoga and collective reflection. Playa Hermosa, Costa Rica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            display: ['Marcellus', 'serif'],
+            sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            teal: { 300: '#5eead4', 400: '#2dd4bf', 500: '#14b8a6', 950: '#042f2e' },
+            cyan: { 300: '#67e8f9', 400: '#22d3ee', 500: '#06b6d4', 950: '#083344' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #042f2e 50%, #0f172a 100%);
+      color: #e2e8f0;
+    }
+    .grain {
+      background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: .15;
+      mix-blend-mode: overlay;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .12;
+      pointer-events: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(240,248,255,.85));
+      color: #0f172a;
+      transition: all .35s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(94,234,212,.15);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: #e2e8f0;
+      transition: all .35s ease;
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(94,234,212,.35);
+    }
+    .schedule-line {
+      border-left: 1px solid rgba(94,234,212,.2);
+    }
+    .schedule-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #2dd4bf;
+      margin-left: -4.5px;
+      margin-top: 7px;
+      box-shadow: 0 0 0 3px rgba(45,212,191,.15);
+    }
+    .card-glass {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      transition: all .4s ease;
+    }
+    .card-glass:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(94,234,212,.25);
+      transform: translateY(-3px);
+    }
+    .text-gradient {
+      background: linear-gradient(90deg, #5eead4, #22d3ee, #fde68a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen relative overflow-x-hidden">
+
+<!-- Grain overlay -->
+<div class="grain pointer-events-none fixed inset-0 z-[60]"></div>
+
+<!-- Glow orbs -->
+<div class="glow-orb w-[500px] h-[500px] bg-teal-400 top-[-100px] left-[-100px]"></div>
+<div class="glow-orb w-[400px] h-[400px] bg-cyan-400 top-[40%] right-[-80px]"></div>
+<div class="glow-orb w-[350px] h-[350px] bg-teal-300 bottom-[-50px] left-[30%]"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="../" class="flex items-center gap-3 group">
+      <span class="block h-8 w-8 rounded-full bg-gradient-to-br from-teal-300 via-cyan-300 to-amber-200 shadow-[0_0_20px_rgba(94,234,212,.25)]"></span>
+      <span class="font-display tracking-[0.18em] text-sm text-white/90 uppercase">Harmonic Beacon</span>
+    </a>
+    <a href="../" class="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium">
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="../assets/retreat-hero.jpg" alt="Playa Hermosa Costa Rica" class="w-full h-full object-cover opacity-40">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-teal-950/50 to-slate-900/90"></div>
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
+    <p class="text-[11px] tracking-[0.4em] uppercase text-teal-300/60 mb-6 font-sans">Harmonic Beacon Retreat</p>
+    <h1 class="font-serif font-light text-white text-[13vw] md:text-[80px] lg:text-[100px] leading-[0.95]">
+      <span class="block italic">Costa Rica</span>
+    </h1>
+    <p class="mt-8 max-w-xl mx-auto font-serif text-lg md:text-xl text-white/50 italic leading-relaxed">
+      A three-day immersion to reorganize your perception through harmonic resonance, personal myth projection and the living scale of nature.
+    </p>
+    <p class="mt-4 text-[11px] tracking-[0.3em] uppercase text-white/30 font-sans">
+      Friday · Saturday · Sunday &nbsp;|&nbsp; Playa Hermosa, Costa Rica
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#reserve" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
+        Reserve your place
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+        Open the app
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      </a>
+    </div>
+
+    <!-- Email signup -->
+    <div class="mt-8 max-w-sm mx-auto reveal">
+      <p class="text-[11px] tracking-[0.2em] uppercase text-white/25 mb-3">Get updates about the retreat</p>
+      <form action="https://altermundi.us1.list-manage.com/subscribe/post" method="post" target="_blank" class="flex items-center gap-2">
+        <input type="email" name="EMAIL" placeholder="your@email.com" required
+          class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-3 text-[13px] text-white placeholder-white/25 focus:outline-none focus:border-teal-400/50 focus:bg-white/8 transition">
+        <button type="submit" class="btn-ghost rounded-full px-5 py-3 text-[11px] tracking-[0.18em] uppercase font-medium whitespace-nowrap">
+          Notify me
+        </button>
+      </form>
+      <p class="text-[10px] text-white/15 mt-2">We respect your privacy. Unsubscribe anytime.</p>
+    </div>
+
+    <a href="#experience" class="text-[12px] tracking-[0.22em] uppercase text-white/30 hover:text-white/60 transition mt-8 inline-block border-b border-white/10 hover:border-white/30 pb-1">
+      Discover the experience
+    </a>
+  </div>
+</section>
+
+<!-- THE EXPERIENCE -->
+<section id="experience" class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">The experience</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">
+        A retreat to reorganize<br class="hidden md:block"> your perception
+      </h2>
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px]">
+        For three days in the heart of Costa Rica, you will experience the Harmonic Beacon in its purest form: sessions of deep harmonic resonance, personal myth projection, yoga, contemplative walks, group reflection spaces, body sciences and states of deep meditation — all within a natural environment of extraordinary beauty.
+      </p>
+    </div>
+
+    <div class="mt-16 grid md:grid-cols-3 gap-5">
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-white mb-2">Harmonic Beacon</h3>
+        <p class="text-[14.5px] text-white/40 leading-relaxed">Sessions with the Harmonic Beacon to synchronize your nervous system through natural proportions. A sustained field that acts as an external harmonic reference.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/15 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-white mb-2">Personal Myth Projection</h3>
+        <p class="text-[14.5px] text-white/40 leading-relaxed">A clinical technique for deep self-knowledge empowered by the Beacon. Access your Self through active imagination, traverse the Shadow and integrate symbolic material.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 6 4 9 4 13a8 8 0 0016 0c0-4-4-7-8-11z"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-white mb-2">Yoga &amp; Nature</h3>
+        <p class="text-[14.5px] text-white/40 leading-relaxed">Morning yoga practice with ocean views, contemplative beach walks, group reflection circles and body sciences to integrate body and environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PATHWAYS -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans">Pathways</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Choose your path</h2>
+      <p class="mt-5 text-white/45 leading-relaxed text-[17px]">Both pathways include full team support and access to the wellness space for maximum comfort during the experience.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-teal-500/15 flex items-center justify-center">
+            <svg class="w-6 h-6 text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl text-white">Wellness Path</h3>
+        </div>
+        <p class="text-white/45 mb-6 leading-relaxed">Self-knowledge, wellness, meditation and harmony. Simply enjoy the experience without research protocols.</p>
+        <ul class="space-y-3 text-[14px] text-white/35">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Harmonic Beacon sessions</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Personal Myth Projection</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Morning yoga</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Contemplative walks</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Guided deep meditation</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Group reflection spaces</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Body sciences</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Additional experiences with experts that join throughout the retreat</li>
+        </ul>
+      </div>
+
+      <div class="card-glass rounded-2xl p-8 reveal">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/15 flex items-center justify-center">
+            <svg class="w-6 h-6 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M17.636 17.636l-.707-.707M12 21v-1M6.343 17.636l-.707.707M3 12h1M6.343 6.343l-.707-.707"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl text-white">Labs Path</h3>
+        </div>
+        <p class="text-white/45 mb-6 leading-relaxed">Join the Beacon research protocol. EEG monitoring and other measurement elements during your journey.</p>
+        <ul class="space-y-3 text-[14px] text-white/35">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Everything included in Wellness</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>EEG monitoring during sessions</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Biometric data logging</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Pre, during and post-experience interviews</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Labs instances for qualitative recording</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400/50 mt-1.5 flex-shrink-0"></span>Personalized results report</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">Schedule</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Three-day program</h2>
+    </div>
+
+    <div class="space-y-14">
+      <!-- Friday -->
+      <div class="reveal">
+        <h3 class="font-serif text-2xl text-white mb-6">Friday</h3>
+        <div class="space-y-5">
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">14:00 — Welcome and check-in</p>
+              <p class="text-[14px] text-white/30">Arrival at the wellness center, check-in and team introduction.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">16:00 — Opening circle</p>
+              <p class="text-[14px] text-white/30">Intention setting and first harmonic immersion.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">17:30 — Grounding walk</p>
+              <p class="text-[14px] text-white/30">Contemplative beach walk to land in the body and in the place.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">18:30 — Beacon session at sunset</p>
+              <p class="text-[14px] text-white/30">First session with the harmonic cushion by the ocean.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">20:00 — Community dinner</p>
+              <p class="text-[14px] text-white/30">Vegetarian dinner with local products.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">21:30 — Group reflection circle</p>
+              <p class="text-[14px] text-white/30">Group space to share first sensations and set intentions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saturday -->
+      <div class="reveal">
+        <h3 class="font-serif text-2xl text-white mb-6">Saturday</h3>
+        <div class="space-y-5">
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">07:00 — Morning yoga</p>
+              <p class="text-[14px] text-white/30">Yoga practice at sunrise with ocean views.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">08:30 — Breakfast</p>
+              <p class="text-[14px] text-white/30">Healthy breakfast with tropical fruits.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">10:00 — Personal Myth Projection</p>
+              <p class="text-[14px] text-white/30">Clinical deep self-knowledge session with Beacon.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">12:30 — Lunch</p>
+              <p class="text-[14px] text-white/30">Light lunch with local products.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">14:00 — Group reflection space</p>
+              <p class="text-[14px] text-white/30">Integration circle to share experiences from the process.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">16:00 — Body sciences</p>
+              <p class="text-[14px] text-white/30">Body integration practices and harmonic breathing.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">17:30 — Labs: interviews</p>
+              <p class="text-[14px] text-white/30">Interview and recording instance for Labs pathway participants.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">18:30 — Second Beacon session</p>
+              <p class="text-[14px] text-white/30">Deep harmonic resonance session.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">20:30 — Dinner and sharing circle</p>
+              <p class="text-[14px] text-white/30">Dinner and space to share experiences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday -->
+      <div class="reveal">
+        <h3 class="font-serif text-2xl text-white mb-6">Sunday</h3>
+        <div class="space-y-5">
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">07:00 — Closing yoga</p>
+              <p class="text-[14px] text-white/30">Gentle integration and gratitude practice.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">08:30 — Breakfast</p>
+              <p class="text-[14px] text-white/30">Farewell breakfast.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">10:00 — Closing circle</p>
+              <p class="text-[14px] text-white/30">Share experiences and close the retreat.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">11:30 — Farewell walk</p>
+              <p class="text-[14px] text-white/30">Final contemplative beach walk.</p>
+            </div>
+          </div>
+          <div class="flex gap-5 schedule-line pl-5">
+            <div class="schedule-dot flex-shrink-0"></div>
+            <div>
+              <p class="text-[15px] font-medium text-white/80">12:30 — Check-out</p>
+              <p class="text-[14px] text-white/30">Check-out and farewell.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="relative py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans">The place</p>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]">Playa Hermosa,<br>Costa Rica</h2>
+        <p class="mt-6 text-white/45 leading-relaxed text-[17px]">
+          A natural sanctuary where tropical jungle meets the Pacific Ocean. The wellness center offers a safe, tranquil and luxurious environment to fully immerse yourself in the Harmonic Beacon experience.
+        </p>
+        <ul class="mt-6 space-y-3 text-[15px] text-white/35">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Natural environment of extraordinary beauty</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Ideal tropical climate year-round</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Quality accommodation with ocean views</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Healthy local gastronomy</li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span>Direct beach access</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-white/10 reveal">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Playa Hermosa Costa Rica" class="w-full h-80 md:h-[28rem] object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section id="reserve" class="relative py-28 md:py-36 overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-teal-500/8 blur-3xl"></div>
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <div class="reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans">Reserve</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]">Book your place</h2>
+      <p class="mt-6 text-white/45 leading-relaxed text-[17px] max-w-2xl mx-auto">
+        Spots are limited to maintain intimacy and quality of the experience. Write to us to confirm your place and resolve any questions.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="mailto:info@altermundi.net?subject=Harmonic%20Beacon%20Retreat%20Reservation" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
+          Reserve by email
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+          Explore the Beacon
+        </a>
+      </div>
+      <p class="mt-6 text-[11px] tracking-[0.22em] uppercase text-white/25">
+        Friday · Saturday · Sunday &nbsp;|&nbsp; Playa Hermosa, Costa Rica
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-white/8">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <span class="block h-7 w-7 rounded-full bg-gradient-to-br from-teal-300 via-cyan-300 to-amber-200 shadow-[0_0_16px_rgba(94,234,212,.2)]"></span>
+      <span class="font-display tracking-[0.18em] text-[13px] text-white/80 uppercase">Harmonic Beacon</span>
+    </div>
+    <div class="flex items-center gap-6 text-[11px] tracking-[0.22em] uppercase text-white/30">
+      <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="hover:text-teal-300 transition">Open the app</a>
+      <a href="https://hit.altermundi.net" target="_blank" rel="noopener" class="hover:text-teal-300 transition">HIT book</a>
+      <a href="https://altermundi.net" target="_blank" rel="noopener" class="hover:text-teal-300 transition">AlterMundi</a>
+    </div>
+  </div>
+  <div class="border-t border-white/8">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.16em] uppercase text-white/20">
+      <p>© 2026 AlterMundi · Harmonic Beacon</p>
+      <p>CC BY 4.0</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Simple scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
