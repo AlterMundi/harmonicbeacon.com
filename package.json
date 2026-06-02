@@ -1,7 +1,7 @@
 {
   "name": "harmonic-beacon",
   "version": "1.0.0",
-  "description": "Harmonic Beacon — sitio estático para Hostinger",
+  "description": "Harmonic Beacon — sitio estático en GitHub Pages",
   "scripts": {
     "build": "node build.js"
   },
