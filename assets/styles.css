@@ -216,45 +216,48 @@ body[data-route="home"] footer{ display: none; }
 .cta-primary > *{ position: relative; z-index: 1; }
 
 /* ==========================================================
-   HOME — Aurora boreal real (video con filtro nácar)
+   HOME — Campo armónico vivo (Lissajous φ en canvas nácar)
    ========================================================== */
-.aurora-video{
+#freq-canvas{
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  /* filtro nácar suave: respetamos los verdes/violetas reales del aurora */
-  filter:
-    saturate(1.18)
-    brightness(0.96)
-    contrast(1.06);
-  transform: scale(1.04);
 }
-.aurora-veil{
+/* halo luminoso que respira detrás del título */
+.field-glow{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(125vw, 1150px);
+  height: min(125vw, 1150px);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(255,251,240,.42) 0%,
+    rgba(245,239,228,.18) 32%,
+    rgba(245,239,228,0) 62%);
+}
+/* velo que funde el campo hacia los bordes para legibilidad */
+.field-veil{
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  /* abrimos el centro para que el aurora respire; bordes nácar para fundir */
   background:
-    radial-gradient(80% 65% at 50% 55%,
+    radial-gradient(78% 62% at 50% 50%,
       rgba(245,239,228,0) 0%,
-      rgba(245,239,228,.06) 35%,
-      rgba(245,239,228,.42) 90%,
-      rgba(245,239,228,.62) 100%),
+      rgba(245,239,228,.10) 46%,
+      rgba(245,239,228,.55) 82%,
+      rgba(245,239,228,.84) 100%),
     linear-gradient(180deg,
-      rgba(245,239,228,.45) 0%,
-      rgba(245,239,228,.05) 22%,
-      rgba(245,239,228,.05) 70%,
-      rgba(245,239,228,.62) 100%),
-    linear-gradient(135deg,
-      rgba(233,212,220,.10) 0%,
-      rgba(214,229,221,.08) 50%,
-      rgba(239,224,201,.12) 100%);
-  mix-blend-mode: normal;
+      rgba(245,239,228,.42) 0%,
+      rgba(245,239,228,0) 26%,
+      rgba(245,239,228,0) 72%,
+      rgba(245,239,228,.58) 100%);
 }
 /* legibilidad del hero sobre aurora visible */
 .panel-home .hero-title{
@@ -711,7 +714,6 @@ body[data-route="home"] footer{ display: none; }
   .mito-particle{ animation: none; opacity: .6; }
   .mito-lines span{ animation: none; opacity: .3; }
   .cover-video,
-  .aurora-video,
   .exp-bg-video{ display: none; }
   .reveal, .reveal-img{
     opacity: 1 !important;

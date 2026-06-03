@@ -90,7 +90,7 @@
     const A_RATIO = 1;
     const B_RATIO = PHI;
     const TAU_SPEED = 1.9;   // trazo lento, meditativo
-    const TRAIL_FADE = 0.055; // fade rápido = menos saturación visual
+    const TRAIL_FADE = 0.014; // fade lento = la figura armónica persiste como traza viva
 
     let active = true;
     let raf = 0;
@@ -114,7 +114,7 @@
 
       const cx = W / 2;
       const cy = H / 2;
-      const amp = Math.min(W, H) * 0.34 * breath;
+      const amp = Math.min(W, H) * 0.42 * breath;
 
       // Sub-pasos para suavidad
       const SUB = Math.max(20, Math.ceil((tau - prevTau) * 220));
@@ -126,10 +126,10 @@
         if (i === 0) ctx.moveTo(x, y);
         else         ctx.lineTo(x, y);
       }
-      ctx.lineWidth   = 1.2;
+      ctx.lineWidth   = 1.5;
       ctx.lineCap     = 'round';
       ctx.lineJoin    = 'round';
-      ctx.strokeStyle = 'rgba(58, 46, 34, 0.62)';
+      ctx.strokeStyle = 'rgba(74, 61, 46, 0.50)';
       ctx.stroke();
 
       // Cabeza: estrellita fugaz — halo + chispa + cruz

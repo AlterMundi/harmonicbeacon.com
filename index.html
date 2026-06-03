@@ -121,13 +121,10 @@ tailwind.config = {
   <!-- nacar gradient base -->
   <div class="absolute inset-0 bg-gradient-to-b from-pearl-50 via-pearl-100 to-pearl-200"></div>
 
-  <!-- Aurora boreal real — Northern Lights, time-lapse loopable -->
-  <video class="aurora-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-    <source src="https://videos.pexels.com/video-files/31280471/13358080_1920_1080_25fps.mp4" type="video/mp4">
-    <source src="https://videos.pexels.com/video-files/27791489/12225760_1920_1080_30fps.mp4" type="video/mp4">
-    <source src="https://videos.pexels.com/video-files/5701988/5701988-uhd_3238_2160_25fps.mp4" type="video/mp4">
-  </video>
-  <div class="aurora-veil" aria-hidden="true"></div>
+  <!-- Campo armónico vivo: Lissajous φ (osciloscopio nácar) -->
+  <canvas id="freq-canvas" aria-hidden="true"></canvas>
+  <div class="field-glow" aria-hidden="true"></div>
+  <div class="field-veil" aria-hidden="true"></div>
 
   <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 py-28 md:py-36 text-center min-h-[100svh]">
 
@@ -145,21 +142,23 @@ tailwind.config = {
       A reference for your system to find its own order.
     </p>
 
-    <div class="hero-ctas mt-12 flex flex-col items-center gap-3">
-      <a href="./retreat/#reservar" target="_blank" rel="noopener"
-         class="cta-primary group inline-flex items-center gap-3 rounded-full px-10 py-5 text-[13px] tracking-[0.24em] uppercase font-medium">
-        <span class="dot-live"></span>
-        <span lang="es">Reserva tu lugar</span><span lang="en">Book your place</span>
-        <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div class="hero-ctas mt-12 flex flex-col items-center gap-4">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener"
+           class="cta-primary group inline-flex items-center gap-3 rounded-full px-10 py-5 text-[13px] tracking-[0.24em] uppercase font-medium">
+          <span lang="es">Entrá a la app</span><span lang="en">Enter the app</span>
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="https://wa.me/3547469632?text=Hola!%20Quiero%20saber%20mas%20sobre%20el%20Harmonic%20Beacon." target="_blank" rel="noopener"
+           class="cta-shell inline-flex items-center gap-3 rounded-full px-9 py-4 text-[12px] tracking-[0.22em] uppercase font-medium">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          <span lang="es">Hablá con nosotros</span><span lang="en">Talk to us</span>
+        </a>
+      </div>
+      <a href="https://youtube.com/live/h0Ktg7lCT08" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 mt-2 text-[11px] tracking-[0.22em] uppercase text-ink-600 hover:text-ink-900 transition">
+        <span class="dot-live"></span><span lang="es">Beacon en vivo</span><span lang="en">Beacon live</span>
       </a>
-      <a href="./retreat/" target="_blank" rel="noopener"
-         class="cta-shell inline-flex items-center gap-2 rounded-full px-8 py-3 text-[12px] tracking-[0.22em] uppercase font-medium mt-2">
-        <span lang="es">Experiencia</span><span lang="en">Experience</span>
-        <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <p class="hero-foot text-[11px] tracking-[0.22em] uppercase text-ink-600">
-        <span lang="es">Retiro Harmonic Beacon · Costa Rica</span><span lang="en">Harmonic Beacon Retreat · Costa Rica</span>
-      </p>
     </div>
 
   </div>
