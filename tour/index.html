@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Tour Costa Rica — Harmonic Beacon</title>
+<meta name="description" lang="es" content="La experiencia Harmonic Beacon se muda a Costa Rica. Agenda de paradas y mapa, de San José a Playa Hermosa, hasta el retiro de fin de junio." />
+<meta name="description" lang="en" content="The Harmonic Beacon experience moves to Costa Rica. Tour schedule and map, from San José to Playa Hermosa, up to the end-of-June retreat." />
+<meta name="theme-color" content="#F5EFE4" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<!-- Leaflet (mapa OpenStreetMap, sin API key) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<style>
+  html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+  html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'serif'],
+        display: ['Marcellus', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        pearl: { 50:'#FBF8F2', 100:'#F5EFE4', 200:'#EDE3D2', 300:'#E0D2BA', 400:'#CFBC9B', 500:'#B8A07B' },
+        ink:   { 900:'#2A2118', 800:'#3A2E22', 700:'#4A3D2E', 600:'#6B5C49', 500:'#8C7F6C' },
+        glow:  { rose:'#E9D4DC', mint:'#D6E5DD', sand:'#EFE0C9', violet:'#D9D2E1', sky:'#D0DDE3' },
+      },
+    },
+  },
+};
+</script>
+<style>
+  body{
+    background:
+      radial-gradient(120% 80% at 50% -10%, #FBF8F2 0%, #F5EFE4 45%, #EDE3D2 100%);
+    color:#3A2E22;
+  }
+  .grain{
+    background-image: radial-gradient(rgba(74,61,46,.5) .5px, transparent .5px);
+    background-size: 3px 3px; opacity:.05; mix-blend-mode:multiply;
+  }
+  .font-feature{ font-feature-settings:"liga" 1,"kern" 1; }
+
+  /* Hero con foto de playa + velo nácar */
+  .tour-hero-veil{
+    background:
+      radial-gradient(75% 65% at 50% 42%, rgba(251,248,242,.26) 0%, rgba(245,239,228,.60) 68%, rgba(245,239,228,.86) 100%),
+      linear-gradient(180deg, rgba(251,248,242,.52) 0%, rgba(245,239,228,.36) 38%, rgba(245,239,228,.52) 70%, rgba(237,227,210,.96) 100%);
+  }
+  .tour-hero h1{ text-shadow:0 1px 2px rgba(245,239,228,.6), 0 0 26px rgba(245,239,228,.55); }
+  .tour-hero p, .tour-hero .font-display{ text-shadow:0 1px 2px rgba(245,239,228,.6); }
+
+  .cta-primary{
+    position:relative; color:#2A2118;
+    background:linear-gradient(135deg,#FFFAF0 0%,#F0E2C7 50%,#FFFAF0 100%);
+    border:1px solid rgba(75,60,42,.22);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -8px 18px rgba(207,188,155,.35), 0 6px 22px rgba(74,61,46,.10);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  }
+  .cta-primary:hover{ transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,1), inset 0 -10px 22px rgba(207,188,155,.45), 0 14px 34px rgba(74,61,46,.18); }
+  .cta-shell{
+    background:rgba(255,255,255,.5); border:1px solid rgba(75,60,42,.18); color:#3A2E22;
+    backdrop-filter:blur(8px); transition:all .35s ease;
+  }
+  .cta-shell:hover{ background:rgba(255,255,255,.8); border-color:rgba(75,60,42,.32); transform:translateY(-2px); }
+  .btn-whatsapp{ background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; transition:all .35s ease; }
+  .btn-whatsapp:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(37,211,102,.25); }
+
+  .card-pearl{
+    background:rgba(255,255,255,.55); border:1px solid rgba(224,210,186,.7);
+    backdrop-filter:blur(8px); transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card-pearl:hover, .card-pearl.is-active{
+    transform:translateY(-3px);
+    box-shadow:0 16px 40px rgba(74,61,46,.12);
+    border-color:rgba(184,160,123,.85);
+  }
+  .card-pearl.featured{
+    background:linear-gradient(135deg, rgba(255,250,240,.85), rgba(239,224,201,.5));
+    border-color:rgba(184,160,123,.9);
+  }
+
+  .stop-num{
+    font-family:'Marcellus',serif; font-size:12px; letter-spacing:.35em;
+    color:#8C7F6C;
+  }
+  .pill{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; padding:.25rem .7rem; border-radius:999px; border:1px solid; }
+  .pill-confirmed{ color:#3f6f57; background:rgba(214,229,221,.5); border-color:rgba(120,170,140,.4); }
+  .pill-tentative{ color:#8a6d2f; background:rgba(239,224,201,.5); border-color:rgba(190,160,90,.4); }
+  .pill-featured{ color:#2A2118; background:rgba(255,250,240,.8); border-color:rgba(184,160,123,.7); }
+
+  /* Mapa */
+  #map{ height:520px; border-radius:1.25rem; z-index:1; }
+  @media (min-width:768px){ #map{ height:620px; } }
+  .leaflet-container{ background:#EDE3D2; font-family:'Inter',sans-serif; }
+  .leaflet-popup-content-wrapper{ border-radius:.9rem; box-shadow:0 10px 30px rgba(74,61,46,.18); }
+  .leaflet-popup-content{ margin:.85rem 1rem; }
+  .hb-marker{ display:flex; align-items:center; justify-content:center; }
+  .hb-dot{
+    width:18px; height:18px; border-radius:999px;
+    background:radial-gradient(circle at 35% 35%, #fff, #B8A07B 75%);
+    box-shadow:0 0 0 4px rgba(184,160,123,.22), 0 2px 8px rgba(74,61,46,.3);
+  }
+  .hb-dot.featured{
+    width:24px; height:24px;
+    background:radial-gradient(circle at 35% 35%, #fff, #C8A24E 75%);
+    box-shadow:0 0 0 6px rgba(200,162,78,.25), 0 0 22px rgba(200,162,78,.4);
+    animation:hbpulse 2.4s ease-in-out infinite;
+  }
+  @keyframes hbpulse{ 0%,100%{ box-shadow:0 0 0 6px rgba(200,162,78,.25),0 0 22px rgba(200,162,78,.35);} 50%{ box-shadow:0 0 0 10px rgba(200,162,78,.10),0 0 30px rgba(200,162,78,.5);} }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  .map-chip{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; padding:.5rem 1rem; border-radius:999px; border:1px solid rgba(75,60,42,.2); background:rgba(255,255,255,.6); color:#4A3D2E; transition:all .3s ease; }
+  .map-chip:hover, .map-chip.active{ background:#2A2118; color:#FBF8F2; border-color:#2A2118; }
+
+  /* Botón Ir + modal de detalle */
+  .ir-btn{ margin-left:auto; padding:.5rem 1.15rem; border-radius:999px; background:#2A2118; color:#FBF8F2; font-size:11px; letter-spacing:.18em; text-transform:uppercase; transition:all .3s ease; flex-shrink:0; }
+  .ir-btn:hover{ background:#4A3D2E; transform:translateY(-1px); box-shadow:0 6px 18px rgba(74,61,46,.22); }
+  #detail-modal.open{ display:flex; }
+  .modal-backdrop{ background:rgba(42,33,24,.45); backdrop-filter:blur(6px); }
+  .modal-panel{ animation:modalIn .35s cubic-bezier(.2,.7,.2,1); box-shadow:0 30px 80px rgba(42,33,24,.28); }
+  @keyframes modalIn{ from{ opacity:0; transform:translateY(18px) scale(.98);} to{ opacity:1; transform:none;} }
+  .modal-close{ position:absolute; top:1rem; right:1rem; width:36px; height:36px; border-radius:999px; background:rgba(255,255,255,.65); border:1px solid rgba(75,60,42,.18); color:#4A3D2E; display:flex; align-items:center; justify-content:center; font-size:15px; transition:all .25s ease; }
+  .modal-close:hover{ background:#fff; transform:rotate(90deg); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1 !important; transform:none !important; }
+    .hb-dot.featured{ animation:none; }
+    .modal-panel{ animation:none; }
+  }
+</style>
+</head>
+
+<body class="font-sans antialiased text-ink-800 font-feature selection:bg-pearl-300 selection:text-ink-900">
+
+<div class="grain pointer-events-none fixed inset-0 z-[60]" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="../" class="flex items-center gap-3 group">
+      <span class="block h-8 w-8 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint shadow-[inset_0_0_12px_rgba(255,255,255,.7),0_2px_8px_rgba(74,61,46,.18)]"></span>
+      <span class="font-display tracking-[0.18em] text-[14px] text-ink-800 uppercase">Harmonic Beacon</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch text-[12px] tracking-[0.18em] uppercase text-ink-700" aria-label="Language / Idioma">
+        <span data-lang-tag="es" class="font-semibold">ES</span><span class="mx-1 opacity-40">/</span><span data-lang-tag="en" class="opacity-50">EN</span>
+      </button>
+      <a href="#agenda" class="cta-shell hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-medium">
+        <span lang="es">Ver agenda</span><span lang="en">See schedule</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="tour-hero relative min-h-[88svh] flex items-center justify-center overflow-hidden px-6">
+  <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('../assets/retreat-hero.jpg')" aria-hidden="true"></div>
+  <div class="tour-hero-veil absolute inset-0" aria-hidden="true"></div>
+  <div class="relative z-10 max-w-4xl mx-auto text-center py-32">
+    <h1 class="font-serif font-light text-ink-900 text-[11vw] md:text-[54px] lg:text-[64px] leading-[1.18] tracking-[-0.01em]">
+      <span lang="es">La experiencia<br><span class="italic">Harmonic Beacon</span><br>se muda a Costa Rica</span>
+      <span lang="en">The <span class="italic">Harmonic Beacon</span><br>experience moves<br>to Costa Rica</span>
+    </h1>
+    <p class="mt-8 max-w-2xl mx-auto font-serif italic text-[19px] md:text-[22px] leading-[1.5] text-ink-700" lang="es">
+      Del 10 de junio al retiro de fin de mes, el campo armónico viaja por el país —<br class="hidden md:block">
+      de San José a Playa Hermosa.
+    </p>
+    <p class="mt-8 max-w-2xl mx-auto font-serif italic text-[19px] md:text-[22px] leading-[1.5] text-ink-700" lang="en">
+      From June 10 to the end-of-month retreat, the harmonic field travels across the country —<br class="hidden md:block">
+      from San José to Playa Hermosa.
+    </p>
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#agenda" class="cta-primary group inline-flex items-center gap-3 rounded-full px-9 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
+        <span lang="es">Ver la agenda</span><span lang="en">See the schedule</span>
+        <svg class="h-4 w-4 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+      <a href="#hospedar" class="cta-shell inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.22em] uppercase font-medium">
+        <span lang="es">Llevá el Beacon a tu espacio</span><span lang="en">Bring the Beacon to your space</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA + MAPA -->
+<section id="agenda" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <header class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">La ruta</span><span lang="en">The route</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]"><span lang="es">Dónde estaremos</span><span lang="en">Where we'll be</span></h2>
+      <p class="mt-5 text-ink-700 leading-relaxed text-[16.5px]"><span lang="es">Tocá una parada para verla en el mapa. La ruta arranca en San José y baja hacia Playa Hermosa, donde cierra el retiro.</span><span lang="en">Tap a stop to see it on the map. The route starts in San José and moves toward Playa Hermosa, where the retreat closes it.</span></p>
+    </header>
+
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <!-- Mapa -->
+      <div class="reveal lg:sticky lg:top-24">
+        <div class="flex items-center gap-2 mb-4">
+          <button class="map-chip active" data-focus="all"><span lang="es">Todo</span><span lang="en">All</span></button>
+          <button class="map-chip" data-focus="sanjose">San José</button>
+          <button class="map-chip" data-focus="playahermosa">Playa Hermosa</button>
+        </div>
+        <div id="map"></div>
+        <p class="mt-3 text-[12px] text-ink-500 text-center"><span lang="es">Mapa OpenStreetMap · puntos referenciales</span><span lang="en">OpenStreetMap · indicative points</span></p>
+      </div>
+
+      <!-- Lista de paradas -->
+      <div id="stops" class="space-y-5"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOSPEDAR -->
+<section id="hospedar" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Una invitación</span><span lang="en">An invitation</span></p>
+    <h2 class="mt-4 font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.1]">
+      <span lang="es">¿Tenés un espacio para sostener la experiencia?</span>
+      <span lang="en">Do you have a space to hold the experience?</span>
+    </h2>
+    <p class="mt-7 text-[17.5px] leading-[1.75] text-ink-700">
+      <span lang="es">Si tenés un <strong class="font-medium text-ink-900">wellness center</strong>, un <strong class="font-medium text-ink-900">espacio de meditación</strong>, un estudio de yoga o un lugar pensado para el cuidado, y querés que llevemos la experiencia Harmonic Beacon a tu espacio durante el tour — escribinos. Sumamos tu lugar a la ruta.</span>
+      <span lang="en">If you run a <strong class="font-medium text-ink-900">wellness center</strong>, a <strong class="font-medium text-ink-900">meditation space</strong>, a yoga studio or a place devoted to care, and you'd like us to bring the Harmonic Beacon experience to your space during the tour — write to us. We'll add your place to the route.</span>
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://wa.me/3547469632?text=Hola!%20Tengo%20un%20espacio%20en%20Costa%20Rica%20y%20me%20gustaria%20sumar%20al%20tour%20Harmonic%20Beacon." target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center gap-3 rounded-full px-9 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+        <span lang="es">Sumá tu espacio</span><span lang="en">Add your space</span>
+      </a>
+      <a href="mailto:sairaasua@gmail.com?subject=Espacio%20para%20el%20tour%20Harmonic%20Beacon" class="cta-shell inline-flex items-center gap-3 rounded-full px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span lang="es">Escribinos por email</span><span lang="en">Write to us by email</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL DETALLE -->
+<div id="detail-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-5">
+  <div class="modal-backdrop absolute inset-0"></div>
+  <div class="modal-panel relative card-pearl rounded-3xl max-w-lg w-full p-8 md:p-10 max-h-[88vh] overflow-y-auto">
+    <button class="modal-close" aria-label="Cerrar / Close">✕</button>
+    <p class="stop-num" id="md-date"></p>
+    <h3 class="font-serif text-3xl text-ink-900 mt-1 leading-tight" id="md-venue"></h3>
+    <p class="text-ink-600 text-[14px] mt-1" id="md-meta"></p>
+    <p class="text-ink-700 leading-relaxed text-[15.5px] mt-5" id="md-desc"></p>
+    <div class="mt-6 rounded-2xl border border-pearl-300/70 bg-white/40 p-4">
+      <p class="font-display uppercase tracking-[0.22em] text-[10px] text-ink-600 mb-1" id="md-loclabel">Ubicación</p>
+      <p class="text-ink-800 text-[15px]" id="md-loc"></p>
+      <a id="md-maps" target="_blank" rel="noopener" class="inline-block mt-2 text-[12px] tracking-[0.12em] uppercase text-ink-600 hover:text-ink-900 transition"></a>
+    </div>
+    <div class="mt-7 flex flex-col sm:flex-row gap-3">
+      <a id="md-signup" target="_blank" rel="noopener" class="cta-primary flex-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-[13px] tracking-[0.2em] uppercase font-medium"></a>
+      <button id="md-onmap" class="cta-shell inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-[12px] tracking-[0.2em] uppercase font-medium"></button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="border-t border-pearl-300/60">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] tracking-[0.16em] uppercase text-ink-600">
+    <div class="flex items-center gap-3">
+      <span class="block h-6 w-6 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint"></span>
+      <span class="font-display tracking-[0.18em] text-ink-800">Harmonic Beacon · AlterMundi</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="../" class="hover:text-ink-900 transition"><span lang="es">Inicio</span><span lang="en">Home</span></a>
+      <a href="../retreat/" class="hover:text-ink-900 transition"><span lang="es">Retiro</span><span lang="en">Retreat</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  /* ---- i18n ---- */
+  const html = document.documentElement;
+  const stored = (() => { try { return localStorage.getItem('hb-lang'); } catch { return null; } })();
+  const setLang = (l) => {
+    html.dataset.activeLang = l; html.lang = l;
+    document.querySelectorAll('[data-lang-tag]').forEach(s => {
+      s.classList.toggle('font-semibold', s.dataset.langTag === l);
+      s.classList.toggle('opacity-50', s.dataset.langTag !== l);
+    });
+    try { localStorage.setItem('hb-lang', l); } catch {}
+    if (window._renderStops) window._renderStops();
+  };
+  setLang(stored === 'en' ? 'en' : 'es');
+  document.querySelectorAll('.lang-switch').forEach(b => b.addEventListener('click', () => setLang(html.dataset.activeLang === 'es' ? 'en' : 'es')));
+  const L10N = () => html.dataset.activeLang;
+
+  /* ====================================================
+     PARADAS DEL TOUR — fuente única (editar/agregar acá)
+     ==================================================== */
+  const STOPS = [
+    {
+      id:'sanjose-namaste', region:'sanjose',
+      venue:'Centro Namasté',
+      city:{ es:'San José', en:'San José' },
+      type:{ es:'Wellness center · sesión abierta', en:'Wellness center · open session' },
+      dateLabel:{ es:'Sábado 14 de junio', en:'Saturday, June 14' },
+      time:{ es:'18:00 – 20:30', en:'6:00 – 8:30 PM' },
+      status:'confirmed',
+      lat:9.9281, lng:-84.0907,
+      note:{ es:'Sesión Beacon en vivo abierta al público, con escucha guiada.', en:'Live Beacon session open to the public, with guided listening.' },
+      detail:{
+        es:'En el Centro Namasté abrimos el tour con una sesión Beacon en vivo, abierta a todo público. Vas a entrar al campo armónico sostenido, recostarte y dejar que el sonido reorganice tu atención. Incluye escucha guiada y un breve círculo de cierre. No hace falta experiencia previa: solo venir con ganas de habitar el sonido.',
+        en:'At Centro Namasté we open the tour with a live Beacon session, open to everyone. You step into the sustained harmonic field, lie down and let the sound reorganize your attention. It includes guided listening and a short closing circle. No prior experience needed — just come ready to inhabit the sound.'
+      }
+    },
+    {
+      id:'escazu-casazen', region:'sanjose',
+      venue:'Casa Zen Escazú',
+      city:{ es:'Escazú, San José', en:'Escazú, San José' },
+      type:{ es:'Espacio de meditación', en:'Meditation space' },
+      dateLabel:{ es:'Miércoles 18 de junio', en:'Wednesday, June 18' },
+      time:{ es:'19:00 – 21:00', en:'7:00 – 9:00 PM' },
+      status:'confirmed',
+      lat:9.9189, lng:-84.1397,
+      note:{ es:'Beacon + meditación sonora en círculo íntimo.', en:'Beacon + sound meditation in an intimate circle.' }
+    },
+    {
+      id:'playahermosa-bodhi', region:'playahermosa',
+      venue:'Bodhi Tree · Playa Hermosa',
+      city:{ es:'Playa Hermosa, Guanacaste', en:'Playa Hermosa, Guanacaste' },
+      type:{ es:'Beacon al atardecer', en:'Beacon at sunset' },
+      dateLabel:{ es:'Domingo 22 de junio', en:'Sunday, June 22' },
+      time:{ es:'17:30 – 19:30', en:'5:30 – 7:30 PM' },
+      status:'tentative',
+      lat:10.5772, lng:-85.6730,
+      note:{ es:'Sesión frente al mar, abierta, antes del retiro.', en:'Oceanfront open session, before the retreat.' }
+    },
+    {
+      id:'playahermosa-retiro', region:'playahermosa',
+      venue:'Retiro Harmonic Beacon',
+      city:{ es:'Playa Hermosa, Guanacaste', en:'Playa Hermosa, Guanacaste' },
+      type:{ es:'El retiro · cierre del tour', en:'The retreat · tour finale' },
+      dateLabel:{ es:'26 – 29 de junio', en:'June 26 – 29' },
+      time:{ es:'Experiencia completa', en:'Full experience' },
+      status:'featured',
+      lat:10.5700, lng:-85.6800,
+      note:{ es:'El destino del viaje: el retiro Harmonic Beacon.', en:'The journey’s destination: the Harmonic Beacon retreat.' },
+      link:'../retreat/'
+    },
+  ];
+
+  const STATUS = {
+    confirmed:{ cls:'pill-confirmed', es:'Confirmado', en:'Confirmed' },
+    tentative:{ cls:'pill-tentative', es:'Por confirmar', en:'To be confirmed' },
+    featured: { cls:'pill-featured',  es:'El retiro', en:'The retreat' },
+  };
+
+  /* ---- Mapa ---- */
+  const map = L.map('map', { scrollWheelZoom:false, zoomControl:true });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:19, subdomains:'abcd'
+  }).addTo(map);
+
+  const markers = {};
+  const group = [];
+  STOPS.forEach((s, i) => {
+    const icon = L.divIcon({ className:'hb-marker', html:`<div class="hb-dot ${s.status==='featured'?'featured':''}"></div>`, iconSize:[24,24], iconAnchor:[12,12] });
+    const m = L.marker([s.lat, s.lng], { icon }).addTo(map);
+    m.on('click', () => focusStop(s.id, false));
+    markers[s.id] = m;
+    group.push([s.lat, s.lng]);
+  });
+  const bounds = L.latLngBounds(group);
+  map.fitBounds(bounds, { padding:[50,50] });
+
+  const FOCI = {
+    all: () => map.fitBounds(bounds, { padding:[50,50] }),
+    sanjose: () => map.flyTo([9.9233, -84.114], 12, { duration:.8 }),
+    playahermosa: () => map.flyTo([10.5736, -85.676], 13, { duration:.8 }),
+  };
+  document.querySelectorAll('.map-chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.map-chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    (FOCI[c.dataset.focus] || FOCI.all)();
+  }));
+
+  function popupHtml(s){
+    const l = L10N();
+    return `<div style="font-family:'Cormorant Garamond',serif">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8C7F6C;font-family:Marcellus,serif">${s.dateLabel[l]}</div>
+      <div style="font-size:19px;color:#2A2118;margin-top:2px">${s.venue}</div>
+      <div style="font-size:13px;color:#6B5C49;font-family:Inter,sans-serif;margin-top:2px">${s.city[l]} · ${s.time[l]}</div>
+    </div>`;
+  }
+
+  function focusStop(id, fromCard){
+    const s = STOPS.find(x => x.id === id); if (!s) return;
+    map.flyTo([s.lat, s.lng], s.region==='playahermosa'?14:14, { duration:.8 });
+    markers[id].bindPopup(popupHtml(s)).openPopup();
+    document.querySelectorAll('[data-stop]').forEach(el => el.classList.toggle('is-active', el.dataset.stop === id));
+    if (fromCard) return;
+    const card = document.querySelector(`[data-stop="${id}"]`);
+    if (card) card.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+
+  /* ---- Modal de detalle (descripción + ubicación + inscripción) ---- */
+  const modal = document.getElementById('detail-modal');
+  let modalStopId = null;
+  function openDetail(id){
+    const s = STOPS.find(x => x.id === id); if (!s) return;
+    const l = L10N(); modalStopId = id;
+    document.getElementById('md-date').textContent  = s.dateLabel[l];
+    document.getElementById('md-venue').textContent = s.venue;
+    document.getElementById('md-meta').textContent  = `${s.type[l]} · ${s.time[l]}`;
+    document.getElementById('md-desc').textContent  = (s.detail ? s.detail[l] : s.note[l]);
+    document.getElementById('md-loclabel').textContent = (l==='es'?'Ubicación':'Location');
+    document.getElementById('md-loc').textContent   = s.city[l];
+    const maps = document.getElementById('md-maps');
+    maps.href = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`;
+    maps.textContent = (l==='es'?'Cómo llegar ↗':'Directions ↗');
+    const su = document.getElementById('md-signup');
+    su.href = 'https://wa.me/3547469632?text=' + encodeURIComponent(
+      l==='es' ? `Hola! Quiero inscribirme a la experiencia Harmonic Beacon en ${s.venue} (${s.dateLabel[l]}).`
+               : `Hi! I'd like to sign up for the Harmonic Beacon experience at ${s.venue} (${s.dateLabel[l]}).`);
+    su.textContent = (l==='es'?'Inscribirme a la experiencia':'Sign up for the experience');
+    document.getElementById('md-onmap').textContent = (l==='es'?'Ver en el mapa':'Show on map');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail(){ modal.classList.remove('open'); document.body.style.overflow = ''; }
+  modal.querySelector('.modal-backdrop').addEventListener('click', closeDetail);
+  modal.querySelector('.modal-close').addEventListener('click', closeDetail);
+  document.getElementById('md-onmap').addEventListener('click', () => { closeDetail(); focusStop(modalStopId, false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDetail(); });
+
+  /* ---- Render de la lista (agrupada por región) ---- */
+  const REGIONS = [
+    { key:'sanjose', es:'San José', en:'San José', sub:{ es:'Primera parte del tour', en:'First part of the tour' } },
+    { key:'playahermosa', es:'Playa Hermosa', en:'Playa Hermosa', sub:{ es:'Hacia el retiro', en:'Toward the retreat' } },
+  ];
+
+  function renderStops(){
+    const l = L10N();
+    const cont = document.getElementById('stops');
+    cont.innerHTML = '';
+    REGIONS.forEach(r => {
+      const items = STOPS.filter(s => s.region === r.key);
+      if (!items.length) return;
+      const head = document.createElement('div');
+      head.className = 'pt-2';
+      head.innerHTML = `<p class="font-display tracking-[0.28em] uppercase text-[11px] text-ink-600">${r[l]}</p>
+        <p class="text-[13px] text-ink-500 mt-1">${r.sub[l]}</p>`;
+      cont.appendChild(head);
+      items.forEach(s => {
+        const st = STATUS[s.status];
+        const a = document.createElement('article');
+        a.className = 'card-pearl rounded-2xl p-6 cursor-pointer' + (s.status==='featured'?' featured':'');
+        a.dataset.stop = s.id;
+        const maps = `https://www.google.com/maps/search/?api=1&query=${s.lat},${s.lng}`;
+        a.innerHTML = `
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="stop-num">${s.dateLabel[l]}</p>
+              <h3 class="font-serif text-2xl text-ink-900 mt-1 leading-tight">${s.venue}</h3>
+              <p class="text-[14px] text-ink-600 mt-1">${s.city[l]} · ${s.time[l]}</p>
+            </div>
+            <span class="pill ${st.cls} whitespace-nowrap">${st[l]}</span>
+          </div>
+          <p class="text-[15px] leading-relaxed text-ink-700 mt-4">${s.type[l]} — ${s.note[l]}</p>
+          <div class="flex items-center gap-4 mt-5 text-[12px] tracking-[0.12em] uppercase">
+            <span class="text-ink-700 inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>${l==='es'?'Ver en el mapa':'Show on map'}</span>
+            <a href="${maps}" target="_blank" rel="noopener" class="text-ink-500 hover:text-ink-900 transition" onclick="event.stopPropagation()">${l==='es'?'Cómo llegar ↗':'Directions ↗'}</a>
+            ${s.link?`<a href="${s.link}" class="text-ink-500 hover:text-ink-900 transition" onclick="event.stopPropagation()">${l==='es'?'Ver el retiro ↗':'See the retreat ↗'}</a>`:''}
+            ${s.detail?`<button class="ir-btn">${l==='es'?'Ir →':'Go →'}</button>`:''}
+          </div>`;
+        a.addEventListener('click', () => focusStop(s.id, true));
+        const ir = a.querySelector('.ir-btn');
+        if (ir) ir.addEventListener('click', (e) => { e.stopPropagation(); openDetail(s.id); });
+        cont.appendChild(a);
+      });
+    });
+  }
+  window._renderStops = renderStops;
+  renderStops();
+  setTimeout(() => map.invalidateSize(), 200);
+
+  /* ---- Reveal ---- */
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

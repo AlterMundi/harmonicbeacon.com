@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Invitación · Encuentro virtual — Harmonic Beacon</title>
-<meta name="description" content="Encuentro virtual con el Harmonic Beacon · Miércoles 20 de mayo." />
+<meta name="description" content="Encuentro virtual con el Harmonic Beacon · Miércoles 3 de junio · 20 hs." />
 <meta name="theme-color" content="#F5EFE4" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -240,6 +240,54 @@
     font-size: 14.5px;
     color: var(--ink-700);
   }
+  .prep-intro{
+    margin: 14px 0 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-700);
+  }
+  .prep-intro strong{
+    font-weight: 600;
+    color: var(--ink-900);
+  }
+  .prep-list{
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0;
+  }
+  .prep-list li{
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 16px 0;
+    border-top: 1px solid rgba(75,60,42,.10);
+  }
+  .prep-list li:first-child{ border-top: none; padding-top: 8px; }
+  .prep-bullet{
+    margin-top: 8px;
+    width: 10px; height: 10px; border-radius: 999px;
+    background: linear-gradient(135deg, #E9D4DC, #EFE0C9, #D6E5DD);
+    box-shadow: inset 0 0 4px rgba(255,255,255,.85), 0 1px 3px rgba(74,61,46,.18);
+  }
+  .prep-list .t{
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15.5px;
+    color: var(--ink-900);
+    margin-bottom: 4px;
+    letter-spacing: -.002em;
+  }
+  .prep-list .d{
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-700);
+    width: auto; height: auto; border-radius: 0; background: none; box-shadow: none;
+  }
   .btns{
     margin-top: 22px;
     display: grid;
@@ -347,7 +395,7 @@
   </a>
 
   <!-- HERO -->
-  <span class="chip"><span class="d"></span>Encuentro virtual · Miércoles 20 de mayo</span>
+  <span class="chip"><span class="d"></span>Encuentro virtual · Miércoles 3 de junio · 20 hs</span>
   <h1><em>Proyección</em><br>del Mito Personal</h1>
   <p class="lead">Una inmersión guiada con el Harmonic Beacon — gratuita y abierta.</p>
 
@@ -368,13 +416,17 @@
     <div class="time-row">
       <div>
         <select id="tz-select" aria-label="Elegí tu ubicación">
-          <option value="20:00" data-place="Argentina · Uruguay">Argentina · Uruguay</option>
-          <option value="19:00" data-place="Chile">Chile</option>
-          <option value="18:00" data-place="Colombia · Perú · Ecuador">Colombia · Perú · Ecuador</option>
-          <option value="17:00" data-place="México · Costa Rica · Panamá">México · Costa Rica · Panamá</option>
-          <option value="19:00" data-place="Miami · New York · East Coast">Miami · New York · East Coast</option>
-          <option value="16:00" data-place="California · West Coast">California · West Coast</option>
-          <option value="00:00" data-place="España (jueves 21)">España (jueves 21)</option>
+          <option value="20:00" data-place="Argentina · Uruguay (3 de junio)">Argentina · Uruguay</option>
+          <option value="19:00" data-place="Chile (3 de junio)">Chile</option>
+          <option value="18:00" data-place="Colombia · Perú · Ecuador (3 de junio)">Colombia · Perú · Ecuador</option>
+          <option value="17:00" data-place="México · Costa Rica · Panamá (3 de junio)">México · Costa Rica · Panamá</option>
+          <option value="19:00" data-place="Miami · Nueva York · Costa Este (3 de junio)">Miami · Nueva York · Costa Este</option>
+          <option value="18:00" data-place="Chicago · Centro (3 de junio)">Chicago · Centro</option>
+          <option value="17:00" data-place="Denver · Montaña (3 de junio)">Denver · Montaña</option>
+          <option value="16:00" data-place="California · Costa Oeste (3 de junio)">California · Costa Oeste</option>
+          <option value="00:00" data-place="Londres · Lisboa (jue 4 de junio)">Londres · Lisboa (jue 4 de junio)</option>
+          <option value="01:00" data-place="Madrid · Berlín · París (jue 4 de junio)">Madrid · Berlín · París (jue 4 de junio)</option>
+          <option value="09:00" data-place="Sídney (jue 4 de junio)">Sídney (jue 4 de junio)</option>
         </select>
       </div>
       <div>
@@ -382,6 +434,44 @@
         <div class="place" id="tz-place">Argentina · Uruguay</div>
       </div>
     </div>
+  </div>
+
+  <!-- PREPARATE -->
+  <div class="card">
+    <div class="label">Preparate para el viaje</div>
+    <h2 class="join-title" style="margin-top:10px;">Una experiencia <em>totalmente inmersiva</em>.</h2>
+    <p class="prep-intro">Esto <strong>no es música de fondo</strong>. No es algo para poner mientras hacés otra cosa — pide tu presencia completa. Para vivirla al 100%, te pedimos:</p>
+
+    <ul class="prep-list">
+      <li>
+        <span class="prep-bullet" aria-hidden="true"></span>
+        <div>
+          <span class="t">Usá sonido de alta fidelidad</span>
+          <span class="d">Buenos auriculares o un excelente sistema de sonido son esenciales. La magia de esta experiencia es sonora: la calidad del audio cambia todo el viaje.</span>
+        </div>
+      </li>
+      <li>
+        <span class="prep-bullet" aria-hidden="true"></span>
+        <div>
+          <span class="t">Buscá un espacio cómodo</span>
+          <span class="d">Un lugar tranquilo donde puedas recostarte o sentarte cómodo, sin interrupciones.</span>
+        </div>
+      </li>
+      <li>
+        <span class="prep-bullet" aria-hidden="true"></span>
+        <div>
+          <span class="t">Traé toda tu atención</span>
+          <span class="d">Dedicá este tiempo exclusivamente a seguir la meditación. Dejate llevar por el campo armónico.</span>
+        </div>
+      </li>
+      <li>
+        <span class="prep-bullet" aria-hidden="true"></span>
+        <div>
+          <span class="t">Reservá alrededor de 1 hora y 30 minutos</span>
+          <span class="d">Apartá el bloque completo para vos — esto no se apura.</span>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <!-- CÓMO ENTRAR -->
@@ -426,9 +516,9 @@
 </div>
 
 <script>
-  // Cuenta regresiva al miércoles 20 de mayo, 20:00 ART (UTC-3)
+  // Cuenta regresiva al miércoles 3 de junio, 20:00 ART (UTC-3)
   (function(){
-    const target = new Date('2026-05-20T20:00:00-03:00').getTime();
+    const target = new Date('2026-06-03T20:00:00-03:00').getTime();
     const elD = document.getElementById('cd-d');
     const elH = document.getElementById('cd-h');
     const elM = document.getElementById('cd-m');
@@ -470,18 +560,25 @@
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       const map = {
-        'America/Argentina':  'Argentina · Uruguay',
-        'America/Montevideo': 'Argentina · Uruguay',
-        'America/Santiago':   'Chile',
-        'America/Bogota':     'Colombia · Perú · Ecuador',
-        'America/Lima':       'Colombia · Perú · Ecuador',
-        'America/Guayaquil':  'Colombia · Perú · Ecuador',
-        'America/Mexico_City':'México · Costa Rica · Panamá',
-        'America/Costa_Rica': 'México · Costa Rica · Panamá',
-        'America/Panama':     'México · Costa Rica · Panamá',
-        'America/New_York':   'Miami · New York · East Coast',
-        'America/Los_Angeles':'California · West Coast',
-        'Europe/Madrid':      'España (jueves 21)',
+        'America/Argentina':  'Argentina · Uruguay (3 de junio)',
+        'America/Montevideo': 'Argentina · Uruguay (3 de junio)',
+        'America/Santiago':   'Chile (3 de junio)',
+        'America/Bogota':     'Colombia · Perú · Ecuador (3 de junio)',
+        'America/Lima':       'Colombia · Perú · Ecuador (3 de junio)',
+        'America/Guayaquil':  'Colombia · Perú · Ecuador (3 de junio)',
+        'America/Mexico_City':'México · Costa Rica · Panamá (3 de junio)',
+        'America/Costa_Rica': 'México · Costa Rica · Panamá (3 de junio)',
+        'America/Panama':     'México · Costa Rica · Panamá (3 de junio)',
+        'America/New_York':   'Miami · Nueva York · Costa Este (3 de junio)',
+        'America/Chicago':    'Chicago · Centro (3 de junio)',
+        'America/Denver':     'Denver · Montaña (3 de junio)',
+        'America/Los_Angeles':'California · Costa Oeste (3 de junio)',
+        'Europe/London':      'Londres · Lisboa (jue 4 de junio)',
+        'Europe/Lisbon':      'Londres · Lisboa (jue 4 de junio)',
+        'Europe/Madrid':      'Madrid · Berlín · París (jue 4 de junio)',
+        'Europe/Berlin':      'Madrid · Berlín · París (jue 4 de junio)',
+        'Europe/Paris':       'Madrid · Berlín · París (jue 4 de junio)',
+        'Australia/Sydney':   'Sídney (jue 4 de junio)',
       };
       let match = null;
       for (const k in map){ if (tz.indexOf(k) === 0){ match = map[k]; break; } }

@@ -89,6 +89,25 @@
       margin-top: 7px;
       box-shadow: 0 0 0 3px rgba(45,212,191,.15);
     }
+    .day-acc {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem;
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+      transition: border-color .3s ease, background .3s ease;
+    }
+    .day-acc[open] { border-color: rgba(94,234,212,.22); background: rgba(255,255,255,.05); }
+    .day-summary {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+    }
+    .day-summary::-webkit-details-marker { display: none; }
+    .day-chevron {
+      color: rgba(94,234,212,.7); font-size: 1.5rem; font-weight: 300; line-height: 1;
+      transition: transform .3s ease;
+    }
+    .day-acc[open] .day-chevron { transform: rotate(45deg); }
     .card-glass {
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.08);
@@ -185,7 +204,7 @@
 <!-- HERO -->
 <section class="relative min-h-[85vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img src="../assets/retreat-hero.jpg" alt="Playa Hermosa Costa Rica" class="w-full h-full object-cover object-center opacity-30" loading="eager" decoding="async">
+    <img src="../assets/playa-hermosa.jpg" alt="Playa Hermosa, Costa Rica" class="w-full h-full object-cover object-center opacity-30" loading="eager" decoding="async">
     <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-teal-950/60 to-slate-900/95"></div>
   </div>
 
@@ -295,7 +314,23 @@
         </p>
       </div>
       <div class="rounded-2xl overflow-hidden border border-white/10 reveal">
-        <img src="https://beacon.altermundi.net/retiro-assets/guitar.jpg" onerror="this.src='../assets/retreat-place.jpg'" alt="Harmonic Beacon" class="w-full h-80 md:h-[28rem] object-cover">
+        <img src="../assets/beacon-instrumento.jpg" alt="El instrumento Harmonic Beacon" class="w-full h-80 md:h-[28rem] object-cover object-center">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO · gente en la experiencia -->
+<section class="relative py-16 md:py-24">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="relative rounded-3xl overflow-hidden border border-white/10 reveal">
+      <video class="w-full h-[58vh] md:h-[68vh] object-cover" autoplay muted loop playsinline preload="metadata" poster="../assets/playa-hermosa.jpg">
+        <source src="../assets/beacon-gente.mp4" type="video/mp4">
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+        <p class="font-serif italic text-2xl md:text-3xl text-white/90 leading-snug" lang="es">Personas habitando el campo del Beacon.</p>
+        <p class="font-serif italic text-2xl md:text-3xl text-white/90 leading-snug" lang="en">People inhabiting the Beacon field.</p>
       </div>
     </div>
   </div>
@@ -524,18 +559,23 @@
 <section class="relative py-28 md:py-36">
   <div class="max-w-4xl mx-auto px-6">
     <div class="text-center mb-16 reveal">
-      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">Programa</p>
-      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">Schedule</p>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Programa de tres dias</h2>
-      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Three-day program</h2>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="es">Itinerario</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-teal-300/50 mb-5 font-sans" lang="en">Itinerary</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="es">Itinerario estimado</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-white leading-[1.05]" lang="en">Estimated itinerary</h2>
+      <p class="mt-5 text-white/40 text-[15px]" lang="es">Una referencia de los tres dias. Los horarios pueden ajustarse segun el grupo y el clima.</p>
+      <p class="mt-5 text-white/40 text-[15px]" lang="en">A reference for the three days. Times may shift with the group and the weather.</p>
     </div>
 
-    <div class="space-y-14">
+    <div class="space-y-4">
       <!-- Viernes -->
-      <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Viernes</h3>
-        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Friday</h3>
-        <div class="space-y-5">
+      <details class="day-acc reveal" open>
+        <summary class="day-summary">
+          <span class="font-serif text-2xl text-white" lang="es">Viernes</span>
+          <span class="font-serif text-2xl text-white" lang="en">Friday</span>
+          <span class="day-chevron">+</span>
+        </summary>
+        <div class="space-y-5 px-6 pb-7">
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">14:00</p><p class="text-[14px] text-white/30" lang="es">Bienvenida y check-in</p><p class="text-[14px] text-white/30" lang="en">Welcome and check-in</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">16:00</p><p class="text-[14px] text-white/30" lang="es">Circulo de apertura</p><p class="text-[14px] text-white/30" lang="en">Opening circle</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">17:30</p><p class="text-[14px] text-white/30" lang="es">Caminata de grounding</p><p class="text-[14px] text-white/30" lang="en">Grounding walk</p></div></div>
@@ -543,13 +583,16 @@
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">20:00</p><p class="text-[14px] text-white/30" lang="es">Cena comunitaria</p><p class="text-[14px] text-white/30" lang="en">Community dinner</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">21:30</p><p class="text-[14px] text-white/30" lang="es">Circulo de reflexion grupal</p><p class="text-[14px] text-white/30" lang="en">Group reflection circle</p></div></div>
         </div>
-      </div>
+      </details>
 
       <!-- Sabado -->
-      <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Sabado</h3>
-        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Saturday</h3>
-        <div class="space-y-5">
+      <details class="day-acc reveal">
+        <summary class="day-summary">
+          <span class="font-serif text-2xl text-white" lang="es">Sabado</span>
+          <span class="font-serif text-2xl text-white" lang="en">Saturday</span>
+          <span class="day-chevron">+</span>
+        </summary>
+        <div class="space-y-5 px-6 pb-7">
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">07:00</p><p class="text-[14px] text-white/30" lang="es">Yoga matutino</p><p class="text-[14px] text-white/30" lang="en">Morning yoga</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">08:30</p><p class="text-[14px] text-white/30" lang="es">Desayuno</p><p class="text-[14px] text-white/30" lang="en">Breakfast</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">10:00</p><p class="text-[14px] text-white/30" lang="es">Proyeccion del Mito Personal</p><p class="text-[14px] text-white/30" lang="en">Personal Myth Projection</p></div></div>
@@ -560,20 +603,23 @@
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">18:30</p><p class="text-[14px] text-white/30" lang="es">Segunda sesion Beacon</p><p class="text-[14px] text-white/30" lang="en">Second Beacon session</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">20:30</p><p class="text-[14px] text-white/30" lang="es">Cena y circulo de compartir</p><p class="text-[14px] text-white/30" lang="en">Dinner and sharing circle</p></div></div>
         </div>
-      </div>
+      </details>
 
       <!-- Domingo -->
-      <div class="reveal">
-        <h3 class="font-serif text-2xl text-white mb-6" lang="es">Domingo</h3>
-        <h3 class="font-serif text-2xl text-white mb-6" lang="en">Sunday</h3>
-        <div class="space-y-5">
+      <details class="day-acc reveal">
+        <summary class="day-summary">
+          <span class="font-serif text-2xl text-white" lang="es">Domingo</span>
+          <span class="font-serif text-2xl text-white" lang="en">Sunday</span>
+          <span class="day-chevron">+</span>
+        </summary>
+        <div class="space-y-5 px-6 pb-7">
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">07:00</p><p class="text-[14px] text-white/30" lang="es">Yoga de cierre</p><p class="text-[14px] text-white/30" lang="en">Closing yoga</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">08:30</p><p class="text-[14px] text-white/30" lang="es">Desayuno</p><p class="text-[14px] text-white/30" lang="en">Breakfast</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">10:00</p><p class="text-[14px] text-white/30" lang="es">Circulo de cierre</p><p class="text-[14px] text-white/30" lang="en">Closing circle</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">11:30</p><p class="text-[14px] text-white/30" lang="es">Caminata de despedida</p><p class="text-[14px] text-white/30" lang="en">Farewell walk</p></div></div>
           <div class="flex gap-5 schedule-line pl-5"><div class="schedule-dot flex-shrink-0"></div><div><p class="text-[15px] font-medium text-white/80">12:30</p><p class="text-[14px] text-white/30" lang="es">Check-out</p><p class="text-[14px] text-white/30" lang="en">Check-out</p></div></div>
         </div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -587,10 +633,10 @@
         <p class="text-[11px] tracking-[0.32em] uppercase text-cyan-300/50 mb-5 font-sans" lang="en">The place</p>
         <h2 class="font-serif font-light text-4xl md:text-5xl text-white leading-[1.05]">Playa Hermosa,<br>Costa Rica</h2>
         <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="es">
-          Un santuario natural donde la selva tropical se encuentra con el oceano Pacifico. El centro wellness ofrece un entorno seguro, tranquilo y lujoso para sumergirte completamente en la experiencia Harmonic Beacon.
+          Un santuario natural donde la selva tropical se encuentra con el oceano Pacifico. El centro wellness ofrece un entorno seguro, tranquilo y cuidado para sumergirte completamente en la experiencia Harmonic Beacon.
         </p>
         <p class="mt-6 text-white/45 leading-relaxed text-[17px]" lang="en">
-          A natural sanctuary where tropical jungle meets the Pacific Ocean. The wellness center offers a safe, tranquil and luxurious environment to fully immerse yourself in the Harmonic Beacon experience.
+          A natural sanctuary where tropical jungle meets the Pacific Ocean. The wellness center offers a safe, tranquil and cared-for environment to fully immerse yourself in the Harmonic Beacon experience.
         </p>
         <ul class="mt-6 space-y-3 text-[15px] text-white/35">
           <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-teal-400/50 mt-1.5 flex-shrink-0"></span><span lang="es">Entorno natural de extraordinaria belleza</span><span lang="en">Natural environment of extraordinary beauty</span></li>
@@ -601,7 +647,7 @@
         </ul>
       </div>
       <div class="rounded-2xl overflow-hidden border border-white/10 reveal">
-        <img src="../assets/retreat-place.jpg" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80'" alt="Playa Hermosa Costa Rica" class="w-full h-80 md:h-[28rem] object-cover">
+        <img src="../assets/playa-hermosa.jpg" alt="Playa Hermosa, Costa Rica" class="w-full h-80 md:h-[28rem] object-cover object-center">
       </div>
     </div>
   </div>
