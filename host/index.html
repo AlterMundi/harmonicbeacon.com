@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" data-active-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F5EFE4" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/assets/brand.css" />
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Harmonic Beacon" />
+  <meta property="og:url" content="https://harmonicbeacon.com/host/" />
+  <meta property="og:title" content="Host Preview · Harmonic Beacon + Personal Myth Projection (PMP)" />
+  <meta property="og:description" content="A private live preview for wellness-center hosts, retreat hosts and boutique hospitality partners in Costa Rica. A premium, substance-free, sound-symbolic wellness format." />
+  <meta property="og:image" content="https://harmonicbeacon.com/assets/og/retreat.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Host Preview · Harmonic Beacon + Personal Myth Projection (PMP)" />
+  <meta name="twitter:description" content="A private live preview for wellness-center hosts, retreat hosts and boutique hospitality partners in Costa Rica." />
+  <meta name="twitter:image" content="https://harmonicbeacon.com/assets/og/retreat.png" />
+  <title>Host Preview · Harmonic Beacon + Personal Myth Projection (PMP)</title>
+  <meta name="description" lang="en" content="A private live preview for wellness-center hosts, retreat hosts and boutique hospitality partners in Costa Rica. A premium, substance-free, sound-symbolic wellness format.">
+  <meta name="description" lang="es" content="Un preview privado en vivo para dueños de wellness centers, anfitriones de retiros y partners de hospitalidad boutique en Costa Rica. Un formato wellness premium, sin sustancias, sonoro-simbólico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            display: ['Marcellus', 'serif'],
+            sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            pearl: { 50:'#FBF8F2', 100:'#F5EFE4', 200:'#EDE3D2', 300:'#E0D2BA', 400:'#CFBC9B', 500:'#B8A07B' },
+            ink:   { 900:'#2A2118', 800:'#3A2E22', 700:'#4A3D2E', 600:'#6B5C49', 500:'#8C7F6C' },
+            glow:  { rose:'#E9D4DC', mint:'#D6E5DD', sand:'#EFE0C9', violet:'#D9D2E1', sky:'#D0DDE3' },
+            gold:  '#C8A24E',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+    html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+    body {
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      background-color: #F5EFE4;
+      background-image:
+        radial-gradient(1200px 600px at 18% -10%, #FBF6EB 0%, transparent 60%),
+        radial-gradient(1000px 520px at 110% 12%, #F2EADB 0%, transparent 58%),
+        radial-gradient(900px 700px at 80% 120%, #E9D4DC 0%, transparent 55%);
+      color: #4A3D2E;
+    }
+    .grain {
+      background-image: radial-gradient(rgba(60,46,32,.5) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: .05;
+      mix-blend-mode: multiply;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .5;
+      pointer-events: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #FFFAF0 0%, #F0E2C7 50%, #FFFAF0 100%);
+      color: #2A2118;
+      border: 1px solid rgba(75,60,42,.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -8px 18px rgba(207,188,155,.30), 0 6px 22px rgba(74,61,46,.08);
+      transition: all .35s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,1), inset 0 -10px 22px rgba(207,188,155,.45), 0 14px 34px rgba(74,61,46,.18);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.5);
+      border: 1px solid rgba(75,60,42,.18);
+      color: #3A2E22;
+      transition: all .35s ease;
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.82);
+      border-color: rgba(75,60,42,.32);
+      transform: translateY(-2px);
+    }
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      transition: all .35s ease;
+    }
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(37,211,102,.25);
+    }
+    .card-glass {
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(224,210,186,.7);
+      backdrop-filter: blur(12px);
+      transition: all .4s ease;
+    }
+    .card-glass:hover {
+      background: rgba(255,255,255,.78);
+      border-color: rgba(184,160,123,.85);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(74,61,46,.12);
+    }
+    .text-gradient {
+      background: linear-gradient(90deg, #8a6d2f, #B8A07B, #6B5C49);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #6B5C49;
+      background: rgba(255,250,240,.55);
+      border: 1px solid rgba(75,60,42,.18);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .lang-switch:hover {
+      background: rgba(255,250,240,.85);
+      border-color: rgba(75,60,42,.4);
+    }
+    .lang-switch [data-lang-tag] { transition: all .25s; opacity: .45; }
+    html[data-active-lang="es"] .lang-switch [data-lang-tag="es"],
+    html[data-active-lang="en"] .lang-switch [data-lang-tag="en"] {
+      color: #2A2118; opacity: 1; font-weight: 500;
+    }
+    .lang-switch .sep { opacity: .3; }
+
+    /* Countdown */
+    .cd-grid {
+      display: inline-flex;
+      align-items: stretch;
+      border-radius: 20px;
+      border: 1px solid rgba(75,60,42,.16);
+      background: linear-gradient(135deg, rgba(255,250,240,.92), rgba(240,226,199,.55));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.85), 0 10px 30px rgba(74,61,46,.08);
+      padding: 12px 4px;
+    }
+    .cd-cell { padding: 6px 18px; min-width: 70px; border-right: 1px dashed rgba(75,60,42,.18); }
+    .cd-cell:last-child { border-right: none; }
+    @media (max-width: 420px){ .cd-cell{ padding: 6px 12px; min-width: 58px; } }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+      font-size: clamp(38px, 8vw, 54px); line-height: 1; color: #2A2118;
+      font-variant-numeric: tabular-nums;
+    }
+    .cd-unit { margin-top: 8px; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: #6B5C49; }
+    .cd-live {
+      display: inline-flex; align-items:center; gap: 10px; padding: 14px 28px; border-radius: 999px;
+      font-weight: 600; font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: #fff;
+      background: linear-gradient(135deg, #B85C75, #8C5A75); box-shadow: 0 8px 24px rgba(140,90,117,.25);
+    }
+    .cd-live .pulse { width:8px; height:8px; border-radius:999px; background:#fff; box-shadow:0 0 0 4px rgba(255,255,255,.35); animation: cdPulse 1.6s ease-in-out infinite; }
+    @keyframes cdPulse { 0%,100%{ box-shadow:0 0 0 4px rgba(255,255,255,.35); transform:scale(1); } 50%{ box-shadow:0 0 0 9px rgba(255,255,255,.10); transform:scale(1.1); } }
+
+    .detail-line { border-bottom: 1px solid rgba(224,210,186,.6); }
+    .detail-line:last-child { border-bottom: none; }
+
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ opacity:1 !important; transform:none !important; }
+      .cd-live .pulse{ animation:none; }
+      html{ scroll-behavior:auto; }
+    }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen relative overflow-x-hidden">
+
+<div class="grain pointer-events-none fixed inset-0 z-[60]"></div>
+<div class="glow-orb w-[500px] h-[500px] bg-glow-sand top-[-100px] left-[-100px]"></div>
+<div class="glow-orb w-[400px] h-[400px] bg-glow-rose top-[40%] right-[-80px]"></div>
+<div class="glow-orb w-[350px] h-[350px] bg-glow-mint bottom-[-50px] left-[30%]"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="../" class="flex items-center gap-3 group">
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-8 w-8" />
+      <span class="font-display tracking-[0.18em] text-sm text-ink-900 uppercase">Harmonic Beacon</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch" aria-label="Language / Idioma" onclick="toggleLang()">
+        <span data-lang-tag="en">EN</span><span class="sep">/</span><span data-lang-tag="es">ES</span>
+      </button>
+      <a href="#rsvp" class="btn-ghost hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium">
+        <span lang="en">RSVP</span><span lang="es">Confirmar</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="../assets/playa-hermosa.jpg" alt="Costa Rica" class="w-full h-full object-cover object-center opacity-55" loading="eager" decoding="async">
+    <div class="absolute inset-0 bg-gradient-to-b from-pearl-50/85 via-pearl-100/55 to-pearl-100/95"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-24">
+    <!-- EVENT CHIP -->
+    <span class="inline-flex items-center gap-3 px-5 py-2 rounded-full text-[11px] tracking-[0.22em] uppercase text-ink-700"
+          style="background:linear-gradient(135deg,rgba(255,250,240,.9),rgba(240,226,199,.6));border:1px solid rgba(75,60,42,.18);">
+      <span class="dot-live"></span>
+      <span lang="en">Private host preview · Costa Rica</span>
+      <span lang="es">Preview privado para anfitriones · Costa Rica</span>
+    </span>
+
+    <p class="mt-8 text-[11px] tracking-[0.4em] uppercase text-ink-600 font-sans">Harmonic Beacon + Personal Myth Projection (PMP)</p>
+    <h1 class="font-serif font-light text-ink-900 text-[12vw] md:text-[78px] lg:text-[92px] leading-[0.98] mt-4">
+      <span lang="en">Experience it <span class="italic">live</span></span>
+      <span lang="es">Vívelo <span class="italic">en vivo</span></span>
+    </h1>
+
+    <p class="mt-8 max-w-2xl mx-auto font-serif text-lg md:text-2xl text-ink-700 italic leading-relaxed" lang="en">
+      A guided, substance-free wellness journey for hosts who want to offer guests something genuinely distinctive — not another generic sound bath.
+    </p>
+    <p class="mt-8 max-w-2xl mx-auto font-serif text-lg md:text-2xl text-ink-700 italic leading-relaxed" lang="es">
+      Un viaje wellness guiado y sin sustancias, para anfitriones que quieren ofrecer a sus huéspedes algo realmente distintivo — no otro sound bath genérico.
+    </p>
+
+    <p class="mt-6 text-[11px] tracking-[0.3em] uppercase text-ink-500 font-sans">
+      <!-- EDIT: event date/location -->
+      <span lang="en">Saturday, [DATE]</span><span lang="es">Sábado, [FECHA]</span>
+      &nbsp;|&nbsp; [LOCATION] · Costa Rica
+      &nbsp;|&nbsp; 75–90 min
+    </p>
+
+    <!-- COUNTDOWN -->
+    <div class="mt-10">
+      <div class="cd-grid" id="cd">
+        <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><div class="cd-unit"><span lang="en">days</span><span lang="es">días</span></div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-h">00</div><div class="cd-unit"><span lang="en">hours</span><span lang="es">horas</span></div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><div class="cd-unit">min</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><div class="cd-unit">seg</div></div>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#rsvp" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
+        <span lang="en">Reserve my place</span><span lang="es">Reservar mi lugar</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#format" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+        <span lang="en">What is it?</span><span lang="es">¿Qué es?</span>
+      </a>
+    </div>
+
+    <p class="mt-6 text-[12px] text-ink-500" lang="en">Limited places. A small group of hosts only.</p>
+    <p class="mt-6 text-[12px] text-ink-500" lang="es">Cupos limitados. Solo un grupo reducido de anfitriones.</p>
+  </div>
+</section>
+
+<!-- CORE MESSAGE -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-3xl mx-auto px-6 text-center reveal">
+    <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-6 font-sans"><span lang="en">The invitation</span><span lang="es">La invitación</span></p>
+    <p class="font-serif font-light text-2xl md:text-4xl text-ink-900 leading-[1.25]" lang="en">
+      Premium wellness guests are asking for deeper, more memorable experiences. This Saturday we are inviting a small group of wellness hosts in Costa Rica to live it directly — and to explore whether it could fit their retreat, center or hospitality program.
+    </p>
+    <p class="font-serif font-light text-2xl md:text-4xl text-ink-900 leading-[1.25]" lang="es">
+      Los huéspedes premium de wellness piden experiencias más profundas y memorables. Este sábado invitamos a un grupo reducido de anfitriones en Costa Rica a vivirlo directamente — y a explorar si encaja en su retiro, centro o programa de hospitalidad.
+    </p>
+  </div>
+</section>
+
+<!-- FORMAT FOR HOSTS -->
+<section id="format" class="relative py-20 md:py-28">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans"><span lang="en">A format built for hosts</span><span lang="es">Un formato hecho para anfitriones</span></p>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">A live wellness format, easy to host</h2>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Un formato wellness en vivo, fácil de hospedar</h2>
+        <p class="mt-6 text-ink-600 leading-relaxed text-[17px]" lang="en">
+          Harmonic Beacon + Personal Myth Projection (PMP) brings together a proprietary harmonic sound field and a structured symbolic process in a careful, non-clinical live experience — designed to become a signature moment inside a retreat, wellness center, spa or boutique hospitality program.
+        </p>
+        <p class="mt-6 text-ink-600 leading-relaxed text-[17px]" lang="es">
+          Harmonic Beacon + Personal Myth Projection (PMP) reúne un campo sonoro armónico propio y un proceso simbólico estructurado en una experiencia en vivo, cuidada y no clínica — diseñada para volverse un momento distintivo dentro de un retiro, centro de wellness, spa o programa de hospitalidad boutique.
+        </p>
+        <p class="mt-5 text-ink-500 leading-relaxed text-[15px]" lang="en">
+          The Saturday preview is not a lecture or a sales presentation. It is a live experience first: feel the format, understand the setting, meet the team, and decide whether a paid pilot could make sense for your space or audience.
+        </p>
+        <p class="mt-5 text-ink-500 leading-relaxed text-[15px]" lang="es">
+          El preview del sábado no es una charla ni una presentación de ventas. Es, ante todo, una experiencia en vivo: sentí el formato, conocé el entorno, conocé al equipo y decidí si un piloto pago tiene sentido para tu espacio o tu audiencia.
+        </p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-pearl-300/60 reveal">
+        <img src="../assets/beacon-instrumento.jpg" alt="Harmonic Beacon" class="w-full h-80 md:h-[26rem] object-cover object-center">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HOSTS HOST IT -->
+<section class="relative py-20 md:py-28">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans"><span lang="en">Why hosts host it</span><span lang="es">Por qué lo hospedan</span></p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="en">A signature moment, without building a method</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="es">Un momento distintivo, sin crear un método</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-pearl-200/70 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-ink-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 7l-8-4-8 4 8 4 8-4zM4 12l8 4 8-4M4 17l8 4 8-4"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="en">We bring the experience</h3>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="es">Llevamos la experiencia</h3>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="en">We bring the Beacon, the facilitation, setup and basic materials. You bring the room, the audience and the guest relationship.</p>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="es">Llevamos el Beacon, la facilitación, el setup y los materiales básicos. Vos ponés la sala, la audiencia y la relación con tus huéspedes.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-pearl-200/70 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-ink-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="en">More distinctive than a sound bath</h3>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="es">Más distintivo que un sound bath</h3>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="en">It gives a retreat, center, spa or boutique hotel a premium signature moment — something guests remember and talk about.</p>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="es">Le da a un retiro, centro, spa u hotel boutique un momento premium y propio — algo que los huéspedes recuerdan y comparten.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-pearl-200/70 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-ink-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="en">Fills a 75–90 min slot</h3>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="es">Ocupa un bloque de 75–90 min</h3>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="en">It fills a 75–90 minute programming slot without asking you to build a new method from scratch.</p>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="es">Llena un bloque de programación de 75–90 minutos sin pedirte que construyas un método nuevo desde cero.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-7 reveal">
+        <div class="w-10 h-10 rounded-xl bg-pearl-200/70 flex items-center justify-center mb-5">
+          <svg class="w-5 h-5 text-ink-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="en">Revenue-share pilots</h3>
+        <h3 class="font-serif text-xl text-ink-900 mb-2" lang="es">Pilotos con revenue-share</h3>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="en">When the host brings the audience, the pilot can be structured with a revenue-share model.</p>
+        <p class="text-[14.5px] text-ink-600 leading-relaxed" lang="es">Cuando el anfitrión aporta la audiencia, el piloto puede estructurarse con un modelo de revenue-share.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HOSTS CAN EXPLORE -->
+<section class="relative py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans"><span lang="en">After the preview</span><span lang="es">Después del preview</span></p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="en">What hosts can explore next</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="es">Qué pueden explorar después</h2>
+      <p class="mt-5 text-ink-600 leading-relaxed text-[16px]" lang="en">The current stage is direct and practical: we are placing the first paid pilots in Costa Rica with hosts who already have the right audience, space, trust and calendar.</p>
+      <p class="mt-5 text-ink-600 leading-relaxed text-[16px]" lang="es">La etapa actual es directa y práctica: estamos colocando los primeros pilotos pagos en Costa Rica con anfitriones que ya tienen la audiencia, el espacio, la confianza y el calendario adecuados.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
+      <div class="card-glass rounded-3xl p-9 reveal flex flex-col">
+        <span class="font-display text-ink-500 text-xs tracking-[0.45em] mb-6">01</span>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="en">Founder pop-up</h3>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="es">Pop-up fundacional</h3>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="en">A one-time Signature Journey for a small group of your guests.</p>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="es">Un Signature Journey único para un grupo reducido de tus huéspedes.</p>
+      </div>
+      <div class="card-glass rounded-3xl p-9 reveal flex flex-col md:-translate-y-3" style="border-color:rgba(184,160,123,.85);">
+        <span class="font-display text-ink-600 text-xs tracking-[0.45em] mb-6">02</span>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="en">60-day boutique pilot</h3>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="es">Piloto boutique de 60 días</h3>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="en">Several sessions over 60 days with basic operational support.</p>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="es">Varias sesiones a lo largo de 60 días con soporte operativo básico.</p>
+      </div>
+      <div class="card-glass rounded-3xl p-9 reveal flex flex-col">
+        <span class="font-display text-ink-500 text-xs tracking-[0.45em] mb-6">03</span>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="en">Facilitator path</h3>
+        <h3 class="font-serif font-light text-2xl text-ink-900 mb-3" lang="es">Camino de facilitador</h3>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="en">A future facilitator path for selected wellness professionals.</p>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="es">Un futuro camino de facilitador para profesionales del wellness seleccionados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT DETAILS + RSVP -->
+<section id="rsvp" class="relative py-24 md:py-32">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans"><span lang="en">The preview session</span><span lang="es">La sesión preview</span></p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="en">Join us this Saturday</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="es">Acompañanos este sábado</h2>
+    </div>
+
+    <!-- DETAILS CARD -->
+    <div class="card-glass rounded-3xl p-8 md:p-10 reveal">
+      <!-- EDIT THESE VALUES: replace [DATE] [TIME] [LOCATION] and the RSVP links below -->
+      <dl class="text-[15px]">
+        <div class="detail-line flex items-center justify-between py-4">
+          <dt class="text-[11px] tracking-[0.22em] uppercase text-ink-500"><span lang="en">For</span><span lang="es">Para</span></dt>
+          <dd class="text-ink-900 text-right" lang="en">Wellness centers · retreat hosts · boutique hotels · spa operators</dd>
+          <dd class="text-ink-900 text-right" lang="es">Wellness centers · anfitriones de retiros · hoteles boutique · spas</dd>
+        </div>
+        <div class="detail-line flex items-center justify-between py-4">
+          <dt class="text-[11px] tracking-[0.22em] uppercase text-ink-500"><span lang="en">Date</span><span lang="es">Fecha</span></dt>
+          <dd class="text-ink-900 text-right font-medium"><span lang="en">Saturday, [DATE]</span><span lang="es">Sábado, [FECHA]</span></dd>
+        </div>
+        <div class="detail-line flex items-center justify-between py-4">
+          <dt class="text-[11px] tracking-[0.22em] uppercase text-ink-500"><span lang="en">Time</span><span lang="es">Hora</span></dt>
+          <dd class="text-ink-900 text-right font-medium">[TIME]</dd>
+        </div>
+        <div class="detail-line flex items-center justify-between py-4">
+          <dt class="text-[11px] tracking-[0.22em] uppercase text-ink-500"><span lang="en">Location</span><span lang="es">Lugar</span></dt>
+          <dd class="text-ink-900 text-right font-medium">[LOCATION] · Costa Rica</dd>
+        </div>
+        <div class="detail-line flex items-center justify-between py-4">
+          <dt class="text-[11px] tracking-[0.22em] uppercase text-ink-500"><span lang="en">Duration</span><span lang="es">Duración</span></dt>
+          <dd class="text-ink-900 text-right font-medium">75–90 min</dd>
+        </div>
+      </dl>
+
+      <div class="mt-8 grid sm:grid-cols-2 gap-3">
+        <!-- EDIT: replace href with your RSVP form / link -->
+        <a href="#" class="btn-primary inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="en">Confirm attendance</span><span lang="es">Confirmar asistencia</span>
+        </a>
+        <!-- EDIT: replace with your WhatsApp link -->
+        <a href="#" target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zM18 14.488c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+          <span lang="en">Write on WhatsApp</span><span lang="es">Escribir por WhatsApp</span>
+        </a>
+      </div>
+      <p class="mt-5 text-center text-ink-500 text-[13px]" lang="en">Limited places. Please confirm attendance.</p>
+      <p class="mt-5 text-center text-ink-500 text-[13px]" lang="es">Cupos limitados. Por favor confirmá tu asistencia.</p>
+    </div>
+
+    <!-- ONE-SENTENCE -->
+    <p class="mt-12 text-center font-serif italic text-xl md:text-2xl text-ink-700 leading-relaxed max-w-2xl mx-auto reveal" lang="en">
+      A premium, substance-free, sound-symbolic wellness experience that a host can offer as a distinctive live journey for guests.
+    </p>
+    <p class="mt-12 text-center font-serif italic text-xl md:text-2xl text-ink-700 leading-relaxed max-w-2xl mx-auto reveal" lang="es">
+      Una experiencia wellness premium, sin sustancias y sonoro-simbólica, que un anfitrión puede ofrecer como un viaje en vivo distintivo para sus huéspedes.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative py-16 border-t border-pearl-300/50">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <p class="text-[12px] text-ink-500 leading-relaxed max-w-xl mx-auto" lang="en">
+      A live wellness experience — substance-free, with a guided symbolic process and a harmonic sound field. Not therapy, treatment, diagnosis or a clinical claim.
+    </p>
+    <p class="text-[12px] text-ink-500 leading-relaxed max-w-xl mx-auto" lang="es">
+      Una experiencia wellness en vivo — sin sustancias, con un proceso simbólico guiado y un campo sonoro armónico. No es terapia, tratamiento, diagnóstico ni una afirmación clínica.
+    </p>
+    <p class="mt-8 text-[11px] tracking-[0.2em] uppercase text-ink-600">
+      <a href="../" class="text-ink-700 border-b border-pearl-400/40 hover:border-pearl-500/60 transition pb-0.5">harmonicbeacon.com</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // ── Language toggle (persists, mirrors retreat page) ──
+  function toggleLang(){
+    const html = document.documentElement;
+    const next = html.getAttribute('data-active-lang') === 'en' ? 'es' : 'en';
+    html.setAttribute('data-active-lang', next);
+    try { localStorage.setItem('hb-lang', next); } catch(_){}
+  }
+  (function(){
+    try {
+      const saved = localStorage.getItem('hb-lang');
+      if (saved) { document.documentElement.setAttribute('data-active-lang', saved); }
+    } catch(_){}
+  })();
+
+  // ── Countdown ──
+  // EDIT: set the real event datetime here (Costa Rica is UTC-6, no DST).
+  // Example for Sat 20 June 2026, 17:00 Costa Rica time:  '2026-06-20T17:00:00-06:00'
+  (function(){
+    const target = new Date('2026-06-20T17:00:00-06:00').getTime();
+    const elD = document.getElementById('cd-d');
+    const elH = document.getElementById('cd-h');
+    const elM = document.getElementById('cd-m');
+    const elS = document.getElementById('cd-s');
+    const cd  = document.getElementById('cd');
+    if (!cd) return;
+    const pad = n => String(n).padStart(2,'0');
+    function tick(){
+      const diff = target - Date.now();
+      if (diff <= 0){
+        const lang = document.documentElement.getAttribute('data-active-lang');
+        const txt = lang === 'es' ? 'El encuentro está en vivo' : 'The gathering is live';
+        cd.innerHTML = '<span class="cd-live"><span class="pulse"></span>' + txt + '</span>';
+        return false;
+      }
+      elD.textContent = pad(Math.floor(diff/86400000));
+      elH.textContent = pad(Math.floor((diff/3600000) % 24));
+      elM.textContent = pad(Math.floor((diff/60000) % 60));
+      elS.textContent = pad(Math.floor((diff/1000) % 60));
+      return true;
+    }
+    if (tick()) setInterval(tick, 1000);
+  })();
+
+  // ── Reveal on scroll ──
+  (function(){
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('visible')); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(e => io.observe(e));
+  })();
+</script>
+</body>
+</html>
