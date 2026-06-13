@@ -48,8 +48,11 @@
   window.addEventListener('hashchange', syncFromHash);
 
   // Mobile select (one per language; both wired)
+  // Subpáginas reales (no son paneles SPA): navegar de verdad.
+  const SUBPAGES = { retreat: './retreat/', planes: './planesysubcripciones/' };
   document.querySelectorAll('.mobile-tabs').forEach(sel => {
     sel.addEventListener('change', (e) => {
+      if (SUBPAGES[e.target.value]) { window.location.href = SUBPAGES[e.target.value]; return; }
       location.hash = e.target.value === 'home' ? '' : '#' + e.target.value;
       if (e.target.value === 'home') syncFromHash();
     });

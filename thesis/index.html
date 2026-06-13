@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es" data-active-lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F5EFE4" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="/assets/brand.css" />
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:url" content="https://harmonicbeacon.com/thesis/" />
+<meta property="og:title" content="Beacon + PMP — Tesis breve / Short Thesis" />
+<meta property="og:description" content="Tesis breve de discusión para asesores, intermediarios y posibles aliados estratégicos: una experiencia de bienestar premium, sin sustancias, basada en el campo armónico del Beacon y la Proyección del Mito Personal (PMP)." />
+<meta property="og:image" content="https://harmonicbeacon.com/assets/og/default.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Beacon + PMP — Tesis breve / Short Thesis" />
+<meta name="twitter:description" content="Tesis breve de discusión para asesores, intermediarios y posibles aliados estratégicos." />
+<meta name="twitter:image" content="https://harmonicbeacon.com/assets/og/default.png" />
+  <title>Beacon + PMP — Tesis breve / Short Thesis</title>
+  <meta name="description" lang="es" content="Tesis breve de discusión para asesores, intermediarios y posibles aliados estratégicos: una experiencia de bienestar premium, sin sustancias, basada en el campo armónico del Beacon y la Proyección del Mito Personal (PMP).">
+  <meta name="description" lang="en" content="A concise discussion thesis for advisors, intermediaries and potential strategic backers: a premium, substance-free wellness experience built on the Beacon's harmonic field and Personal Myth Projection (PMP).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            display: ['Marcellus', 'serif'],
+            sans: ['"Inter Tight"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            pearl: { 50:'#FBF8F2', 100:'#F5EFE4', 200:'#EDE3D2', 300:'#E0D2BA', 400:'#CFBC9B', 500:'#B8A07B' },
+            ink:   { 900:'#2A2118', 800:'#3A2E22', 700:'#4A3D2E', 600:'#6B5C49', 500:'#8C7F6C' },
+            glow:  { rose:'#E9D4DC', mint:'#D6E5DD', sand:'#EFE0C9', violet:'#D9D2E1', sky:'#D0DDE3' },
+            gold:  '#C8A24E',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+    html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+    body {
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      background-color: #F5EFE4;
+      background-image:
+        radial-gradient(1200px 600px at 18% -10%, #FBF6EB 0%, transparent 60%),
+        radial-gradient(1000px 520px at 110% 12%, #F2EADB 0%, transparent 58%),
+        radial-gradient(900px 700px at 80% 120%, #E9D4DC 0%, transparent 55%);
+      color: #4A3D2E;
+    }
+    .grain {
+      background-image: radial-gradient(rgba(60,46,32,.5) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: .05;
+      mix-blend-mode: multiply;
+    }
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .5;
+      pointer-events: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(240,248,255,.85));
+      color: #0f172a;
+      transition: all .35s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(74,61,46,.18);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.5);
+      border: 1px solid rgba(75,60,42,.18);
+      color: #3A2E22;
+      transition: all .35s ease;
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.82);
+      border-color: rgba(75,60,42,.32);
+    }
+    .card-glass {
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(224,210,186,.7);
+      backdrop-filter: blur(12px);
+      transition: all .4s ease;
+    }
+    .card-glass:hover {
+      background: rgba(255,255,255,.78);
+      border-color: rgba(184,160,123,.85);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(74,61,46,.12);
+    }
+    .text-gradient {
+      background: linear-gradient(90deg, #8a6d2f, #B8A07B, #6B5C49);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #6B5C49;
+      background: rgba(255,250,240,.55);
+      border: 1px solid rgba(75,60,42,.18);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .lang-switch:hover {
+      background: rgba(255,250,240,.85);
+      border-color: rgba(75,60,42,.4);
+    }
+    .lang-switch [data-lang-tag] { transition: all .25s; opacity: .45; }
+    html[data-active-lang="es"] .lang-switch [data-lang-tag="es"],
+    html[data-active-lang="en"] .lang-switch [data-lang-tag="en"] {
+      color: #2A2118; opacity: 1; font-weight: 500;
+    }
+    .lang-switch .sep { opacity: .3; }
+    .pmp-tag {
+      background: linear-gradient(135deg, rgba(233,212,220,.45), rgba(239,224,201,.45));
+      border: 1px solid rgba(184,160,123,.55);
+    }
+    .num-line { border-left: 1px solid rgba(184,160,123,.45); }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen relative overflow-x-hidden">
+
+<div class="grain pointer-events-none fixed inset-0 z-[60]"></div>
+<div class="glow-orb w-[500px] h-[500px] bg-glow-sand top-[-100px] left-[-100px]"></div>
+<div class="glow-orb w-[400px] h-[400px] bg-glow-rose top-[40%] right-[-80px]"></div>
+<div class="glow-orb w-[350px] h-[350px] bg-glow-mint bottom-[-50px] left-[30%]"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <a href="../" class="flex items-center gap-3 group">
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-8 w-8" />
+      <span class="font-display tracking-[0.18em] text-sm text-ink-900 uppercase">Harmonic Beacon</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch" aria-label="Language / Idioma" onclick="toggleLang()">
+        <span data-lang-tag="es">ES</span><span class="sep">/</span><span data-lang-tag="en">EN</span>
+      </button>
+      <a href="../" class="btn-ghost inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-medium">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span lang="es">Volver</span><span lang="en">Back</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-28 pb-20">
+    <p class="text-[11px] tracking-[0.4em] uppercase text-ink-600 mb-7 font-sans">Beacon + PMP</p>
+    <h1 class="font-serif font-light text-ink-900 text-[12vw] md:text-[78px] leading-[0.95]">
+      <span class="block" lang="es">Tesis breve</span>
+      <span class="block" lang="en">Short Thesis</span>
+    </h1>
+
+    <!-- Aclaración PMP -->
+    <div class="mt-9 inline-flex flex-col sm:flex-row items-center gap-x-3 gap-y-1 pmp-tag rounded-full px-6 py-3">
+      <span class="font-display tracking-[0.28em] uppercase text-ink-900 text-sm">PMP</span>
+      <span class="hidden sm:inline text-pearl-500">—</span>
+      <span class="font-serif italic text-ink-700 text-lg" lang="es">Proyección del Mito Personal</span>
+      <span class="font-serif italic text-ink-700 text-lg" lang="en">Personal Myth Projection</span>
+    </div>
+
+    <p class="mt-9 max-w-2xl mx-auto font-serif text-xl md:text-2xl text-ink-700 italic leading-relaxed" lang="es">
+      Una experiencia de bienestar premium, sin sustancias, simbólico-sonora: sostenida por un campo armónico propietario y un proceso simbólico estructurado.
+    </p>
+    <p class="mt-9 max-w-2xl mx-auto font-serif text-xl md:text-2xl text-ink-700 italic leading-relaxed" lang="en">
+      A premium, substance-free, sound-symbolic wellness experience: supported by a proprietary harmonic sound field and a structured symbolic process.
+    </p>
+
+    <div class="mt-11 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#oportunidad" class="btn-primary inline-flex items-center gap-3 rounded-full px-10 py-4 text-[12px] tracking-[0.24em] uppercase font-medium">
+        <span lang="es">Leer la tesis</span><span lang="en">Read the thesis</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#acceso" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+        <span lang="es">El pedido actual</span><span lang="en">The current ask</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="relative pb-8">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="card-glass rounded-2xl px-7 py-5 reveal">
+      <p class="text-[13.5px] text-ink-500 leading-relaxed italic" lang="es">
+        Tesis breve de discusión para asesores, intermediarios y posibles aliados estratégicos. No es un plan de negocios final, un documento de captación de fondos, asesoría financiera o legal, ni una afirmación clínica.
+      </p>
+      <p class="text-[13.5px] text-ink-500 leading-relaxed italic" lang="en">
+        A concise discussion thesis for advisors, intermediaries, and potential strategic backers. It is not a final business plan, a fundraising document, financial or legal advice, or a clinical claim.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- OPORTUNIDAD / EL HUECO ESTRUCTURAL -->
+<section id="oportunidad" class="relative py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">La oportunidad</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The opportunity</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Un hueco estructural</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">A structural gap</h2>
+    </div>
+    <div class="mt-10 max-w-2xl mx-auto space-y-6 reveal">
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="es">
+        En pocos años, los viajes interiores profundos pasaron de nicho cultural a demanda premium internacional: la conversación sobre salud mental se volvió masiva, el renacimiento psicodélico legitimó culturalmente el trabajo interior y el turismo de bienestar aprendió a venderlo. La oferta no acompañó. Los formatos más profundos siguen atados a sustancias o a entornos clínicos, mientras que lo que la hospitalidad puede integrar suele quedar genérico.
+      </p>
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="en">
+        In just a few years, deep inner journeys moved from cultural niche to international premium demand: the mental-health conversation went mainstream, the psychedelic renaissance culturally legitimized inner work, and wellness tourism learned to sell it. Supply did not keep up. The deepest formats remain tied to substances or clinical settings, while what hospitality can actually integrate often stays generic.
+      </p>
+      <p class="font-serif italic text-2xl text-ink-800 leading-snug border-l-2 border-pearl-400/60 pl-6" lang="es">
+        Queda un hueco estructural: experiencias guiadas, sin sustancias, comercialmente legibles para operadores de bienestar premium y lo bastante cuidadas como para volverse una categoría propia.
+      </p>
+      <p class="font-serif italic text-2xl text-ink-800 leading-snug border-l-2 border-pearl-400/60 pl-6" lang="en">
+        That leaves a structural gap: guided, substance-free experiences that are commercially legible for premium wellness operators and careful enough to become a category of their own.
+      </p>
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="es">
+        <strong class="text-ink-800 font-medium">Beacon + PMP</strong> — donde <span class="font-medium text-ink-800">PMP</span> es la <em>Proyección del Mito Personal</em> — está construido para ese hueco: un campo armónico propietario que sostiene un proceso simbólico estructurado.
+      </p>
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="en">
+        <strong class="text-ink-800 font-medium">Beacon + PMP</strong> — where <span class="font-medium text-ink-800">PMP</span> stands for <em>Personal Myth Projection (Proyección del Mito Personal)</em> — is built for that gap: a proprietary harmonic field that holds a structured symbolic process.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ ES PMP · aclaración ampliada -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans">PMP</p>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Proyección del<br>Mito Personal</h2>
+        <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">Personal Myth<br>Projection</h2>
+        <p class="mt-6 text-ink-600 leading-relaxed text-[17px]" lang="es">
+          La <strong class="text-ink-800 font-medium">Proyección del Mito Personal (PMP)</strong> es una práctica simbólica y narrativa de autoconocimiento, de origen psicoterapéutico, con más de 15 años de práctica comercial y profesional. A través de la imaginación activa, sostenida por el campo del Beacon, emergen imágenes y relatos propios. Su curso de formación profesional ya fue vendido y validado como oferta independiente.
+        </p>
+        <p class="mt-6 text-ink-600 leading-relaxed text-[17px]" lang="en">
+          <strong class="text-ink-800 font-medium">Personal Myth Projection (PMP)</strong> is a symbolic and narrative practice of self-knowledge, psychotherapeutic in origin, with over 15 years of commercial and professional practice. Through active imagination, held by the Beacon's field, one's own images and stories emerge. A professional PMP training course has already been sold and validated as a standalone offering.
+        </p>
+        <p class="mt-4 text-ink-500 leading-relaxed text-[15px]" lang="es">
+          En los formatos de Costa Rica se enmarca como bienestar, no como terapia. Cuando se trabaja en el plano clínico, requiere encuadre profesional habilitado.
+        </p>
+        <p class="mt-4 text-ink-500 leading-relaxed text-[15px]" lang="en">
+          In the Costa Rica formats it is framed as wellness, not therapy. When worked at a clinical level, it requires a qualified professional frame.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="card-glass rounded-2xl p-8">
+          <h3 class="font-serif text-2xl text-ink-900 mb-2">Harmonic Beacon</h3>
+          <p class="text-[15px] text-ink-600 leading-relaxed" lang="es">
+            El Beacon existe como dispositivo y protocolo en funcionamiento, con casi un año de implementaciones exploratorias gratuitas en contextos diversos. Nació como sonda experimental de la Teoría de la Información Armónica (HIT): una forma de hacer perceptible la estructura armónica en la escucha encarnada.
+          </p>
+          <p class="text-[15px] text-ink-600 leading-relaxed" lang="en">
+            Beacon exists as a working device and protocol, with nearly a year of free exploratory implementations across diverse settings. It began as an experimental probe for Harmonic Information Theory (HIT): a way to make harmonic structure perceptible in embodied listening.
+          </p>
+          <div class="w-10 h-px bg-glow-sand/70 my-6"></div>
+          <p class="text-[14px] text-ink-500 leading-relaxed italic" lang="es">
+            En Edge City 2025 surgió un patrón inesperado: las personas volvían, hacían fila para repetir la experiencia y reportaban efectos subjetivos positivos. Son relatos experienciales, no evidencia clínica.
+          </p>
+          <p class="text-[14px] text-ink-500 leading-relaxed italic" lang="en">
+            At Edge City 2025 an unexpected pattern emerged: people returned, queued to experience the device again, and reported positive subjective effects. These are experiential accounts, not clinical evidence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÁCTICA ACUMULADA -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">El punto de partida</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The starting point</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Parte de una práctica acumulada</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">It begins from accumulated practice</h2>
+    </div>
+    <div class="mt-10 max-w-2xl mx-auto space-y-6 reveal">
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="es">
+        El equipo central de Beacon dentro de AlterMundi combina la autoría de la HIT, I+D armónico, el linaje PMP, software y protocolos de investigación, facilitación encarnada, producto y operaciones, e ingeniería de sonido. Completó la investigación de mercado, definió una secuencia comercial y se encuentra actualmente en Costa Rica.
+      </p>
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="en">
+        The core Beacon team within AlterMundi combines HIT authorship, harmonic R&amp;D, PMP lineage, software and research protocols, embodied facilitation, product and operations, and sound engineering. The team has completed market research, defined a commercial sequence, and is currently in Costa Rica.
+      </p>
+      <div class="card-glass rounded-2xl px-7 py-6">
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="es">
+          La etapa actual es deliberadamente conservadora: el equipo está en Costa Rica, antes del primer piloto pago, colocando ahora los primeros pilotos pagos. Beacon y el formato combinado Beacon + PMP todavía <strong class="text-ink-800 font-medium">no</strong> tienen pilotos pagos cerrados ni validación comercial como oferta empaquetada.
+        </p>
+        <p class="text-[15px] text-ink-600 leading-relaxed" lang="en">
+          The current stage is deliberately conservative: the team is in Costa Rica, pre-first-paid-pilot, placing the first paid pilots now. Beacon and the combined Beacon + PMP format do <strong class="text-ink-800 font-medium">not</strong> yet have closed paid pilots or commercial validation as a packaged offer.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LA CUÑA COMERCIAL -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">La cuña comercial</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The commercial wedge</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Un piloto pago liderado por el operador</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">A paid operator-led pilot</h2>
+      <p class="mt-5 text-ink-600 leading-relaxed text-[16px]" lang="es">Rangos de precio fundadores, no tarifas finales. Su propósito es testear disposición a pagar, encaje operativo y repetibilidad.</p>
+      <p class="mt-5 text-ink-600 leading-relaxed text-[16px]" lang="en">Founder pricing ranges, not final tariff sheets. Their purpose is to test willingness to pay, operational fit, and repeatability.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
+      <!-- Oferta principal -->
+      <div class="card-glass rounded-3xl p-8 reveal relative flex flex-col md:-translate-y-3 md:shadow-[0_24px_70px_rgba(74,61,46,.12)]">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-pearl-200/85 border border-pearl-400/70 text-ink-800 text-[10px] tracking-[0.22em] uppercase px-4 py-1 rounded-full whitespace-nowrap" lang="es">Oferta principal</div>
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-pearl-200/85 border border-pearl-400/70 text-ink-800 text-[10px] tracking-[0.22em] uppercase px-4 py-1 rounded-full whitespace-nowrap" lang="en">Primary offer</div>
+        <h3 class="font-serif text-2xl text-ink-900 mt-3 mb-1" lang="es">Pop-up Fundador / Signature Journey</h3>
+        <h3 class="font-serif text-2xl text-ink-900 mt-3 mb-1" lang="en">Founder Pop-up / Signature Journey</h3>
+        <p class="text-[12px] tracking-[0.22em] uppercase text-ink-500 mb-5">B2B2C</p>
+        <ul class="space-y-3 text-[14.5px] text-ink-600 mt-auto">
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-pearl-400/60 mt-1.5 flex-shrink-0"></span><span lang="es">75–90 minutos · 8–15 participantes</span><span lang="en">75–90 minutes · 8–15 participants</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-pearl-400/60 mt-1.5 flex-shrink-0"></span><span lang="es">USD 95 por persona</span><span lang="en">USD 95 per person</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-pearl-400/60 mt-1.5 flex-shrink-0"></span><span lang="es">Mínimo de USD 850</span><span lang="en">USD 850 minimum</span></li>
+          <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-pearl-400/60 mt-1.5 flex-shrink-0"></span><span lang="es">25–35 % de revenue share cuando el aliado trae la audiencia</span><span lang="en">25–35% revenue share when the partner brings the audience</span></li>
+        </ul>
+      </div>
+
+      <!-- Secundaria 1 -->
+      <div class="card-glass rounded-3xl p-8 reveal flex flex-col">
+        <p class="text-[12px] tracking-[0.22em] uppercase text-ink-500 mb-3 mt-3" lang="es">Oferta de apoyo</p>
+        <p class="text-[12px] tracking-[0.22em] uppercase text-ink-500 mb-3 mt-3" lang="en">Support offer</p>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4" lang="es">Piloto Boutique de 60 días</h3>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4" lang="en">60-day Boutique Pilot</h3>
+        <div class="mt-auto">
+          <span class="text-4xl font-serif font-light text-ink-900">$5,000</span>
+          <span class="block text-ink-500 text-[11px] tracking-[0.3em] uppercase mt-2" lang="es">USD · precio fundador</span>
+          <span class="block text-ink-500 text-[11px] tracking-[0.3em] uppercase mt-2" lang="en">USD · founder pricing</span>
+        </div>
+      </div>
+
+      <!-- Secundaria 2 -->
+      <div class="card-glass rounded-3xl p-8 reveal flex flex-col">
+        <p class="text-[12px] tracking-[0.22em] uppercase text-ink-500 mb-3 mt-3" lang="es">Oferta de apoyo</p>
+        <p class="text-[12px] tracking-[0.22em] uppercase text-ink-500 mb-3 mt-3" lang="en">Support offer</p>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4" lang="es">Facilitador Beacon Fundador</h3>
+        <h3 class="font-serif text-2xl text-ink-900 mb-4" lang="en">Founding Beacon Facilitator</h3>
+        <div class="mt-auto">
+          <span class="text-4xl font-serif font-light text-ink-900">$1,500</span>
+          <span class="block text-ink-500 text-[13px] mt-3 leading-relaxed" lang="es">Con una capa posterior de licencia de USD 149/mes y 10–15 % de participación.</span>
+          <span class="block text-ink-500 text-[13px] mt-3 leading-relaxed" lang="en">With a later USD 149/month license layer and 10–15% participation.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center text-ink-500 text-[14px] mt-12 max-w-2xl mx-auto reveal leading-relaxed" lang="es">
+      La hoja de ruta está secuenciada de forma intencional: continuidad en la app tras la experiencia en vivo (la app ya está avanzada, aún no lanzada comercialmente), la IA como futura capa de soporte mediada por el operador, escalamiento de facilitadores, kits de sitio, licenciamiento y lógica de marketplace — solo después de que la capa de pilotos pagos sea real.
+    </p>
+    <p class="text-center text-ink-500 text-[14px] mt-12 max-w-2xl mx-auto reveal leading-relaxed" lang="en">
+      The roadmap is intentionally sequenced: app continuity after the live experience (the app is already advanced, though not yet commercially launched), AI as a future operator-mediated support layer, facilitator scaling, site kits, licensing, and marketplace logic — only after the paid pilot layer is real.
+    </p>
+  </div>
+</section>
+
+<!-- COSTA RICA -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">El territorio</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The geography</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Costa Rica es un acelerador, no una validación</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">Costa Rica is an accelerator, not validation</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-12">
+      <div class="card-glass rounded-2xl p-6 text-center reveal">
+        <p class="text-3xl md:text-4xl font-serif font-light text-ink-900">2.92M</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="es">turistas en 2024</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="en">tourists in 2024</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 text-center reveal">
+        <p class="text-3xl md:text-4xl font-serif font-light text-ink-900">$5.4B</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="es">USD en ingresos por turismo</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="en">USD in tourism income</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 text-center reveal">
+        <p class="text-3xl md:text-4xl font-serif font-light text-ink-900">9–10%</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="es">crecimiento anual del mercado wellness</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="en">annual wellness-market growth</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 text-center reveal">
+        <p class="text-2xl md:text-3xl font-serif font-light text-ink-900" lang="es">Blue Zone</p>
+        <p class="text-2xl md:text-3xl font-serif font-light text-ink-900" lang="en">Blue Zone</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="es">posicionamiento Nicoya</p>
+        <p class="text-[12px] text-ink-500 mt-2 leading-snug" lang="en">Nicoya positioning</p>
+      </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto reveal">
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="es">
+        El mercado inmediato pasa por operadores de bienestar boutique, anfitriones de retiros y aliados de hospitalidad en Costa Rica que ya tienen la audiencia, el espacio, la confianza y la necesidad de diferenciarse. Esas cifras no prueban encaje producto-mercado: explican por qué Costa Rica es un lugar inusualmente bueno para testear los primeros pilotos pagos — la categoría ya está educada, el comprador existe y el huésped ya paga por formatos de bienestar premium.
+      </p>
+      <p class="text-ink-600 leading-relaxed text-[17px]" lang="en">
+        The immediate market runs through boutique wellness operators, retreat hosts, and hospitality partners in Costa Rica who already have the audience, the space, the trust, and the need to differentiate. Those figures do not prove product-market fit: they explain why Costa Rica is an unusually good place to test first paid pilots — the category context is already educated, the buyer exists, and the guest is already paying for premium wellness formats.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- RIESGO -->
+<section class="relative py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">El riesgo principal</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The main risk</p>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Confusión de categoría</h2>
+      <h2 class="font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">Category confusion</h2>
+      <p class="mt-6 text-ink-600 leading-relaxed text-[16px]" lang="es">Beacon + PMP puede leerse erróneamente como terapia, un baño de sonido genérico, tecnología médica, música, ceremonia adyacente a psicodélicos, compañero de IA o validación de investigación.</p>
+      <p class="mt-6 text-ink-600 leading-relaxed text-[16px]" lang="en">Beacon + PMP can be misread as therapy, a generic sound bath, medical technology, music, psychedelic-adjacent ceremony, AI companion, or research validation.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <h3 class="text-lg text-ink-900 mb-2" lang="es">El carril es bienestar no clínico</h3>
+        <h3 class="text-lg text-ink-900 mb-2" lang="en">The lane is non-clinical wellness</h3>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="es">Mantener el carril deliberadamente como bienestar no clínico y usar un protocolo orientado al cuidado.</p>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="en">Keep the lane deliberately non-clinical wellness and use a care-oriented protocol.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <h3 class="text-lg text-ink-900 mb-2" lang="es">Lenguaje disciplinado</h3>
+        <h3 class="text-lg text-ink-900 mb-2" lang="en">Disciplined language</h3>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="es">Separar con claridad Beacon, Beacon + PMP, app, investigación, datos e IA.</p>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="en">Clearly separate Beacon, Beacon + PMP, app, research, data, and AI.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <h3 class="text-lg text-ink-900 mb-2" lang="es">Niveles de facilitación</h3>
+        <h3 class="text-lg text-ink-900 mb-2" lang="en">Facilitation levels</h3>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="es">Definir los niveles de facilitación antes de escalar.</p>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="en">Define facilitation levels before scaling.</p>
+      </div>
+      <div class="card-glass rounded-2xl p-6 reveal">
+        <h3 class="text-lg text-ink-900 mb-2" lang="es">La disciplina es la condición</h3>
+        <h3 class="text-lg text-ink-900 mb-2" lang="en">Discipline is the condition</h3>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="es">No es una limitación del proyecto: es lo que lo vuelve legible para operadores, financiadores y aliados responsables.</p>
+        <p class="text-sm text-ink-600 leading-relaxed" lang="en">It is not a limitation of the project: it is the condition that makes it legible to operators, funders, and responsible partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EL PEDIDO ACTUAL -->
+<section id="acceso" class="relative py-28 md:py-36 overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-pearl-200/60 blur-3xl"></div>
+  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+    <div class="reveal">
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="es">El pedido actual</p>
+      <p class="text-[11px] tracking-[0.32em] uppercase text-ink-600 mb-5 font-sans" lang="en">The current ask</p>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="es">Acceso operativo</h2>
+      <h2 class="font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]" lang="en">Operational access</h2>
+      <p class="mt-7 text-ink-600 leading-relaxed text-[17px]" lang="es">
+        El capital pertenece a la próxima etapa, después de cerrar los primeros pilotos pagos y validar el formato. El pedido actual es acceso operativo: presentaciones calificadas a operadores de bienestar boutique, anfitriones de retiros y aliados de hospitalidad en Costa Rica que puedan ayudar a colocar los primeros pilotos pagos, más un <em>champion</em> local que pueda abrir, calificar y filtrar esas conversaciones.
+      </p>
+      <p class="mt-7 text-ink-600 leading-relaxed text-[17px]" lang="en">
+        Capital belongs to the next stage, after first paid pilots are closed and the format is validated. The current ask is operational access: qualified introductions to boutique wellness operators, retreat hosts, and hospitality partners in Costa Rica who can help place the first paid pilots, plus a local champion who can open, qualify, and filter those conversations.
+      </p>
+      <p class="mt-10 font-serif italic text-2xl md:text-3xl text-ink-800 leading-snug" lang="es">
+        ¿Puede Beacon + PMP convertir un cuerpo serio de práctica en formatos de bienestar premium pagos y repetibles en Costa Rica?
+      </p>
+      <p class="mt-10 font-serif italic text-2xl md:text-3xl text-ink-800 leading-snug" lang="en">
+        Can Beacon + PMP convert a serious body of practice into paid, repeatable, premium wellness formats in Costa Rica?
+      </p>
+    </div>
+
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+      <a href="mailto:contacto@harmonicbeacon.com?subject=Beacon%20%2B%20PMP%20—%20Acceso%20operativo%20Costa%20Rica" class="btn-primary inline-flex items-center gap-3 rounded-full px-9 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span lang="es">Conversar</span><span lang="en">Start a conversation</span>
+      </a>
+      <a href="../retreat/" class="btn-ghost inline-flex items-center gap-2 rounded-full px-8 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+        <span lang="es">Ver el retiro</span><span lang="en">See the retreat</span>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-pearl-300/55">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-7 w-7" />
+      <span class="font-display tracking-[0.18em] text-[13px] text-ink-800 uppercase">Harmonic Beacon</span>
+    </div>
+    <div class="flex items-center gap-6 text-[11px] tracking-[0.22em] uppercase text-ink-500">
+      <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="hover:text-ink-700 transition">Open the app</a>
+      <a href="https://hit.altermundi.net" target="_blank" rel="noopener" class="hover:text-ink-700 transition">HIT book</a>
+      <a href="https://altermundi.net" target="_blank" rel="noopener" class="hover:text-ink-700 transition">AlterMundi</a>
+    </div>
+  </div>
+  <div class="border-t border-pearl-300/55">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] tracking-[0.16em] uppercase text-ink-500">
+      <p>&copy; 2026 AlterMundi &middot; Harmonic Beacon</p>
+      <p>CC BY 4.0</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Language toggle
+  function toggleLang() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-active-lang') || 'es';
+    const next = current === 'es' ? 'en' : 'es';
+    html.setAttribute('data-active-lang', next);
+    html.setAttribute('lang', next);
+    localStorage.setItem('hb-lang', next);
+  }
+  // Restore saved language
+  (function() {
+    const saved = localStorage.getItem('hb-lang');
+    if (saved) {
+      document.documentElement.setAttribute('data-active-lang', saved);
+      document.documentElement.setAttribute('lang', saved);
+    }
+  })();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

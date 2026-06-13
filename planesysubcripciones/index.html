@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="/assets/brand.css" />
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:url" content="https://harmonicbeacon.com/planesysubcripciones/" />
+<meta property="og:title" content="La experiencia — Harmonic Beacon" />
+<meta property="og:description" content="Un viaje interior sonoro, sin sustancias, para presencia, descanso y sentido. Cómo sumarse a una sesión Harmonic Beacon —en vivo, presencial o en un retiro— y llevarlo a tu espacio." />
+<meta property="og:image" content="https://harmonicbeacon.com/assets/og/experiencia.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="La experiencia — Harmonic Beacon" />
+<meta name="twitter:description" content="Un viaje interior sonoro, sin sustancias, para presencia, descanso y sentido. Cómo sumarse a una sesión Harmonic Beacon —en vivo, presencial o en un retiro— y llevarlo a tu espacio." />
+<meta name="twitter:image" content="https://harmonicbeacon.com/assets/og/experiencia.png" />
+<title>La experiencia — Harmonic Beacon</title>
+<meta name="description" lang="es" content="Un viaje interior sonoro, sin sustancias, para presencia, descanso y sentido. Cómo sumarse a una sesión Harmonic Beacon —en vivo, presencial o en un retiro— y llevarlo a tu espacio." />
+<meta name="description" lang="en" content="An inner sound journey, substance-free, for presence, rest and meaning. How to join a Harmonic Beacon session —live, in person or at a retreat— and bring it to your space." />
+<meta name="theme-color" content="#F5EFE4" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+  html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+  html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'serif'],
+        display: ['Marcellus', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      colors: {
+        pearl: { 50:'#FBF8F2', 100:'#F5EFE4', 200:'#EDE3D2', 300:'#E0D2BA', 400:'#CFBC9B', 500:'#B8A07B' },
+        ink:   { 900:'#2A2118', 800:'#3A2E22', 700:'#4A3D2E', 600:'#6B5C49', 500:'#8C7F6C' },
+        glow:  { rose:'#E9D4DC', mint:'#D6E5DD', sand:'#EFE0C9', violet:'#D9D2E1', sky:'#D0DDE3' },
+      },
+    },
+  },
+};
+</script>
+<style>
+  body{
+    background:
+      radial-gradient(120% 80% at 50% -10%, #FBF8F2 0%, #F5EFE4 45%, #EDE3D2 100%);
+    color:#3A2E22; min-height:100svh;
+  }
+  .grain{
+    background-image: radial-gradient(rgba(74,61,46,.5) .5px, transparent .5px);
+    background-size: 3px 3px; opacity:.05; mix-blend-mode:multiply;
+  }
+  .font-feature{ font-feature-settings:"liga" 1,"kern" 1; }
+
+  .cta-primary{
+    position:relative; color:#2A2118;
+    background:linear-gradient(135deg,#FFFAF0 0%,#F0E2C7 50%,#FFFAF0 100%);
+    border:1px solid rgba(75,60,42,.22);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), inset 0 -8px 18px rgba(207,188,155,.35), 0 6px 22px rgba(74,61,46,.10);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+  }
+  .cta-primary:hover{ transform:translateY(-2px); box-shadow:inset 0 1px 0 rgba(255,255,255,1), inset 0 -10px 22px rgba(207,188,155,.45), 0 14px 34px rgba(74,61,46,.18); }
+  .cta-shell{
+    background:rgba(255,255,255,.5); border:1px solid rgba(75,60,42,.18); color:#3A2E22;
+    backdrop-filter:blur(8px); transition:all .35s ease;
+  }
+  .cta-shell:hover{ background:rgba(255,255,255,.8); border-color:rgba(75,60,42,.32); transform:translateY(-2px); }
+  .btn-whatsapp{ background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; transition:all .35s ease; }
+  .btn-whatsapp:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(37,211,102,.25); }
+
+  .card-pearl{
+    background:rgba(255,255,255,.55); border:1px solid rgba(224,210,186,.7);
+    backdrop-filter:blur(8px); transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card-pearl:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 40px rgba(74,61,46,.12);
+    border-color:rgba(184,160,123,.85);
+  }
+  .card-pearl.featured{
+    background:linear-gradient(135deg, rgba(255,250,240,.9), rgba(239,224,201,.55));
+    border-color:rgba(184,160,123,.95);
+  }
+
+  .pill{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; padding:.25rem .7rem; border-radius:999px; border:1px solid; display:inline-block; }
+  .pill-free{ color:#3f6f57; background:rgba(214,229,221,.5); border-color:rgba(120,170,140,.4); }
+  .pill-online{ color:#3d5a72; background:rgba(208,221,227,.5); border-color:rgba(110,150,180,.4); }
+  .pill-presencial{ color:#8a6d2f; background:rgba(239,224,201,.55); border-color:rgba(190,160,90,.4); }
+  .pill-featured{ color:#2A2118; background:rgba(255,250,240,.85); border-color:rgba(184,160,123,.75); }
+
+  /* Recorrido presencial — pasos */
+  .step-num{ font-family:'Marcellus',serif; font-size:13px; letter-spacing:.3em; color:#8C7F6C; }
+  .step-dot{
+    width:14px; height:14px; border-radius:999px;
+    background:radial-gradient(circle at 35% 35%, #fff, #B8A07B 78%);
+    box-shadow:0 0 0 4px rgba(184,160,123,.18), 0 2px 8px rgba(74,61,46,.22);
+  }
+  .step-line{ width:1px; background:linear-gradient(180deg, rgba(184,160,123,.65), rgba(184,160,123,.15)); }
+
+  .price-amt{ font-family:'Cormorant Garamond',serif; }
+
+  /* FAQ */
+  .faq{ border:1px solid rgba(224,210,186,.7); border-radius:1.25rem; background:rgba(255,255,255,.45); overflow:hidden; }
+  .faq summary{ cursor:pointer; list-style:none; padding:1.15rem 1.4rem; font-family:'Cormorant Garamond',serif; font-size:1.35rem; color:#2A2118; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary .chev{ transition:transform .3s ease; color:#8C7F6C; flex-shrink:0; }
+  .faq[open] summary .chev{ transform:rotate(45deg); }
+  .faq .faq-body{ padding:0 1.4rem 1.3rem; color:#4A3D2E; font-size:15.5px; line-height:1.7; }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  .dot-live{
+    width:8px; height:8px; border-radius:999px; background:#C8A24E; display:inline-block;
+    box-shadow:0 0 0 0 rgba(200,162,78,.5); animation:livepulse 2s infinite;
+  }
+  @keyframes livepulse{ 0%{ box-shadow:0 0 0 0 rgba(200,162,78,.5);} 70%{ box-shadow:0 0 0 8px rgba(200,162,78,0);} 100%{ box-shadow:0 0 0 0 rgba(200,162,78,0);} }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1 !important; transform:none !important; }
+    .dot-live{ animation:none; }
+    .faq summary .chev{ transition:none; }
+  }
+</style>
+</head>
+
+<body class="font-sans antialiased text-ink-800 font-feature selection:bg-pearl-300 selection:text-ink-900">
+
+<div class="grain pointer-events-none fixed inset-0 z-[60]" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="fixed inset-x-0 top-0 z-50">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 bg-pearl-100/70 backdrop-blur-md">
+    <a href="../" class="flex items-center gap-3 group">
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-8 w-8" />
+      <span class="font-display tracking-[0.18em] text-[14px] text-ink-800 uppercase">Harmonic Beacon</span>
+    </a>
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch text-[12px] tracking-[0.18em] uppercase text-ink-700" aria-label="Language / Idioma">
+        <span data-lang-tag="es" class="font-semibold">ES</span><span class="mx-1 opacity-40">/</span><span data-lang-tag="en" class="opacity-50">EN</span>
+      </button>
+      <a href="#sumarse" class="cta-shell hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[12px] tracking-[0.18em] uppercase font-medium">
+        <span class="dot-live"></span>
+        <span lang="es">Sumarme</span><span lang="en">Join</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="relative min-h-[90svh] flex items-center justify-center overflow-hidden px-6">
+  <div class="relative z-10 max-w-4xl mx-auto text-center py-32">
+    <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600 reveal in">
+      <span lang="es">La experiencia</span><span lang="en">The experience</span>
+    </p>
+    <h1 class="mt-6 font-serif font-light text-ink-900 text-[11vw] md:text-[58px] lg:text-[68px] leading-[1.08] tracking-[-0.01em] reveal in">
+      <span lang="es">Un viaje interior sonoro,<br>sin <span class="italic">sustancias</span></span>
+      <span lang="en">An inner sound journey,<br><span class="italic">substance-free</span></span>
+    </h1>
+    <p class="mt-8 max-w-2xl mx-auto font-serif italic text-[19px] md:text-[22px] leading-[1.55] text-ink-700 reveal in" lang="es">
+      Sostenido por un campo armónico propietario y una guía simbólica, para presencia, descanso y sentido. Un camino de exploración en busca de consonancia: una integración armónica con lo natural.
+    </p>
+    <p class="mt-8 max-w-2xl mx-auto font-serif italic text-[19px] md:text-[22px] leading-[1.55] text-ink-700 reveal in" lang="en">
+      Held by a proprietary harmonic field and a symbolic guidance, for presence, rest and meaning. A path of exploration toward consonance: a harmonic integration with the natural.
+    </p>
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 reveal in">
+      <a href="#sumarse" class="cta-primary group inline-flex items-center gap-3 rounded-full px-9 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
+        <span class="dot-live"></span>
+        <span lang="es">Sumate a una sesión</span><span lang="en">Join a session</span>
+      </a>
+      <a href="#espacios" class="cta-shell inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.22em] uppercase font-medium">
+        <span lang="es">Para retiros y espacios</span><span lang="en">For retreats &amp; spaces</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SUMARSE A UNA SESIÓN -->
+<section id="sumarse" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <header class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Sumarse</span><span lang="en">Join in</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]"><span lang="es">Cómo vivir una sesión</span><span lang="en">How to experience a session</span></h2>
+      <p class="mt-5 text-ink-700 leading-relaxed text-[16.5px]"><span lang="es">La forma más simple de empezar es entrar al campo en vivo. Desde ahí se abren la experiencia presencial y el retiro.</span><span lang="en">The simplest way to begin is to enter the field live. From there, the in-person experience and the retreat open up.</span></p>
+    </header>
+
+    <div class="grid md:grid-cols-3 gap-7">
+      <!-- Encuentro miércoles -->
+      <article class="card-pearl featured rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-free"><span class="dot-live mr-1.5"></span><span lang="es">En vivo · gratis</span><span lang="en">Live · free</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Encuentro de los miércoles</span><span lang="en">Wednesday gathering</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Una inmersión guiada en vivo con el Harmonic Beacon, abierta a todo público y sin costo. La forma más directa de conocer el campo.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">A live guided immersion with the Harmonic Beacon, open to everyone and free of charge. The most direct way to meet the field.</p>
+        <a href="../invitacion/" lang="es" class="cta-primary mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">Sumarme al encuentro</a>
+        <a href="../invitation/" lang="en" class="cta-primary mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">Join the gathering</a>
+      </article>
+
+      <!-- Sesión presencial -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-presencial"><span lang="es">Presencial</span><span lang="en">In person</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Sesión presencial</span><span lang="en">In-person session</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">El recorrido completo de cuatro momentos, en presencia del campo. En grupo o privada, con facilitación y encuadre cuidado.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">The full four-moment journey, in the presence of the field. Group or private, with facilitation and a careful frame.</p>
+        <a href="#recorrido" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Ver el recorrido</span><span lang="en">See the journey</span>
+        </a>
+      </article>
+
+      <!-- Retiro -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-presencial"><span lang="es">Inmersión</span><span lang="en">Immersion</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">El retiro</span><span lang="en">The retreat</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Días completos para habitar el campo: sesiones Beacon, Proyección del Mito, prácticas corporales y comunidad, en un entorno natural.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">Full days to inhabit the field: Beacon sessions, Myth Projection, body practices and community, in a natural setting.</p>
+        <a href="../retreat/" class="cta-shell mt-6 inline-flex items-center justify-center gap-3 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Ver el retiro</span><span lang="en">See the retreat</span>
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RECORRIDO PRESENCIAL -->
+<section id="recorrido" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-4xl mx-auto">
+    <header class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">El recorrido</span><span lang="en">The journey</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]"><span lang="es">Cuatro momentos</span><span lang="en">Four moments</span></h2>
+      <p class="mt-5 text-ink-700 leading-relaxed text-[16.5px]"><span lang="es">La experiencia tiene un arco: se inicia con una meditación y se despliega en una secuencia que cuida la apertura, la profundización y el cierre. No se exige producir una vivencia particular: cada quien transita su propio recorrido.</span><span lang="en">The experience has an arc: it begins with a meditation and unfolds in a sequence that cares for the opening, the deepening and the closing. No particular experience is required: each person walks their own path.</span></p>
+    </header>
+
+    <div class="space-y-2">
+      <!-- 1 -->
+      <div class="flex gap-6 reveal">
+        <div class="flex flex-col items-center pt-2"><span class="step-dot"></span><span class="step-line flex-1 my-1"></span></div>
+        <div class="pb-10">
+          <p class="step-num">01</p>
+          <h3 class="mt-1 font-serif text-2xl md:text-3xl text-ink-900"><span lang="es">Meditación</span><span lang="en">Meditation</span></h3>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="es">Una apertura que dispone el cuerpo y la atención. Prepara las condiciones de escucha antes de entrar en el campo.</p>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="en">An opening that settles the body and attention. It prepares the listening conditions before entering the field.</p>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="flex gap-6 reveal">
+        <div class="flex flex-col items-center pt-2"><span class="step-dot"></span><span class="step-line flex-1 my-1"></span></div>
+        <div class="pb-10">
+          <p class="step-num">02</p>
+          <h3 class="mt-1 font-serif text-2xl md:text-3xl text-ink-900"><span lang="es">Proyección del Mito</span><span lang="en">Myth Projection</span></h3>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="es">Sobre el campo armónico, una práctica simbólica y narrativa en la que emergen imágenes, símbolos y relatos propios. El Beacon sostiene la escucha y vuelve más legible lo que aparece.</p>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="en">Over the harmonic field, a symbolic and narrative practice in which one's own images, symbols and stories emerge. The Beacon holds the listening and makes more legible what arises.</p>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="flex gap-6 reveal">
+        <div class="flex flex-col items-center pt-2"><span class="step-dot"></span><span class="step-line flex-1 my-1"></span></div>
+        <div class="pb-10">
+          <p class="step-num">03</p>
+          <h3 class="mt-1 font-serif text-2xl md:text-3xl text-ink-900"><span lang="es">Baño de sonido</span><span lang="en">Sound bath</span></h3>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="es">Una inmersión sostenida en el campo del Beacon. El cuerpo reposa y se deja atravesar por los armónicos naturales; muchas personas refieren melodías que emergen del propio sistema escuchante.</p>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="en">A sustained immersion in the Beacon's field. The body rests and lets itself be crossed by natural harmonics; many report melodies that emerge from the listener's own system.</p>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="flex gap-6 reveal">
+        <div class="flex flex-col items-center pt-2"><span class="step-dot"></span></div>
+        <div>
+          <p class="step-num">04</p>
+          <h3 class="mt-1 font-serif text-2xl md:text-3xl text-ink-900"><span lang="es">Espacio de consonancia</span><span lang="en">Space of consonance</span></h3>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="es">Un cierre en comunidad para integrar lo vivido: un tiempo de reposo y de palabra compartida, y un retorno al mundo en una enarmonía más natural con el todo.</p>
+          <p class="mt-2 text-[16px] leading-[1.7] text-ink-700" lang="en">A closing in community to integrate the experience: a time of rest and shared words, and a return to the world in a more natural enharmony with the whole.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-14 text-center text-[14px] leading-[1.6] text-ink-600 italic font-serif max-w-2xl mx-auto reveal" lang="es">
+      Es una experiencia de bajo riesgo dentro de un encuadre de bienestar, pero no es obligatoria: no se fuerza, cabe pausar, y si aparece malestar se cuida la salida y se deriva cuando corresponde.
+    </p>
+    <p class="mt-14 text-center text-[14px] leading-[1.6] text-ink-600 italic font-serif max-w-2xl mx-auto reveal" lang="en">
+      It is a low-risk experience within a wellbeing frame, but it is not mandatory: nothing is forced, one may pause, and if discomfort arises the exit is cared for and referral is made when appropriate.
+    </p>
+  </div>
+</section>
+
+<!-- FORMAS DE ACCESO / PLANES -->
+<section id="planes" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <header class="text-center max-w-2xl mx-auto mb-6 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Formas de acceso</span><span lang="en">Ways of access</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]"><span lang="es">Sesiones y continuidad</span><span lang="en">Sessions &amp; continuity</span></h2>
+    </header>
+    <p class="text-center text-[13px] text-ink-500 italic max-w-xl mx-auto mb-14 reveal">
+      <span lang="es">Valores orientativos de referencia, en dólares estadounidenses. Los montos finales pueden ajustarse; conviene confirmar disponibilidad y precio antes de reservar.</span>
+      <span lang="en">Indicative reference values, in US dollars. Final amounts may vary; it is advisable to confirm availability and price before booking.</span>
+    </p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+      <!-- Sesión presencial -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-presencial"><span lang="es">Presencial · grupal</span><span lang="en">In person · group</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Sesión Beacon + Proyección del Mito</span><span lang="en">Beacon + Myth Projection session</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">El recorrido completo de cuatro momentos, con facilitación. En grupo boutique o en formato privado.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">The full four-moment journey, with facilitation. In a boutique group or private format.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Grupal desde</span><span lang="en">Group from</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 85</span><span class="text-[14px] text-ink-600"> <span lang="es">/ persona</span><span lang="en">/ person</span></span></p>
+        <p class="mt-1 text-[13px] text-ink-500"><span lang="es">Privada desde USD 200</span><span lang="en">Private from USD 200</span></p>
+        <a href="https://wa.me/3547469632?text=Hola!%20Quiero%20reservar%20una%20sesion%20presencial%20del%20Harmonic%20Beacon." target="_blank" rel="noopener" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Consultar</span><span lang="en">Enquire</span>
+        </a>
+      </article>
+
+      <!-- Sesión en línea -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-online"><span lang="es">En línea · grupal</span><span lang="en">Online · group</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Sesión en línea</span><span lang="en">Online session</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Sesión grupal remota con facilitación: escucha del campo y trabajo simbólico, en vivo, con encuadre cuidado.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">Remote group session with facilitation: field listening and symbolic work, live, with a careful frame.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Desde</span><span lang="en">From</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 85</span><span class="text-[14px] text-ink-600"> <span lang="es">/ persona</span><span lang="en">/ person</span></span></p>
+        <a href="https://wa.me/3547469632?text=Hola!%20Quiero%20reservar%20una%20sesion%20en%20linea%20del%20Harmonic%20Beacon." target="_blank" rel="noopener" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Reservar</span><span lang="en">Book</span>
+        </a>
+      </article>
+
+      <!-- App · continuidad -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-online"><span lang="es">App · continuidad</span><span lang="en">App · continuity</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">App Harmonic Beacon</span><span lang="en">Harmonic Beacon app</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Pensada como continuidad después de una experiencia: escucha en vivo del campo y sesiones guiadas para sostener la práctica.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">Designed as continuity after an experience: live field listening and guided sessions to sustain the practice.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Desde</span><span lang="en">From</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 9,99</span><span class="text-[14px] text-ink-600">/<span lang="es">mes</span><span lang="en">mo</span></span></p>
+        <p class="mt-1 text-[13px] text-ink-500"><span lang="es">o USD 99 al año</span><span lang="en">or USD 99 per year</span></p>
+        <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Abrir la app</span><span lang="en">Open the app</span>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PARA RETIROS Y ESPACIOS (B2B) -->
+<section id="espacios" class="relative py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <header class="text-center max-w-2xl mx-auto mb-6 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Para retiros, hoteles y facilitadores</span><span lang="en">For retreats, hotels &amp; facilitators</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-6xl text-ink-900 leading-[1.05]"><span lang="es">Llevá el Beacon a tu espacio</span><span lang="en">Bring the Beacon to your space</span></h2>
+      <p class="mt-5 text-ink-700 leading-relaxed text-[16.5px]"><span lang="es">Una amenity premium y diferenciadora: experiencia sonora-simbólica sin sustancias, con tecnología propia, protocolo cuidado y materiales co-brandeables. Los retiros ya ofrecen sound healing; esto es algo más estructurado, con guía simbólica y encuadre.</span><span lang="en">A premium, differentiating amenity: a substance-free sound-symbolic experience, with proprietary technology, a careful protocol and co-brandable materials. Retreats already offer sound healing; this is something more structured, with symbolic guidance and a frame.</span></p>
+    </header>
+    <p class="text-center text-[13px] text-ink-500 italic max-w-xl mx-auto mb-14 reveal">
+      <span lang="es">Valores orientativos de referencia, en dólares estadounidenses, a confirmar según alcance.</span>
+      <span lang="en">Indicative reference values, in US dollars, to be confirmed by scope.</span>
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-7">
+      <!-- Pop-up / Signature Journey -->
+      <article class="card-pearl featured rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-featured"><span lang="es">Signature Journey</span><span lang="en">Signature Journey</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Experiencia en tu retiro</span><span lang="en">Experience at your retreat</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Un módulo Beacon + Proyección del Mito dentro de tu retiro o evento. Llevamos facilitación, encuadre, materiales y cierre.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">A Beacon + Myth Projection module within your retreat or event. We bring facilitation, framing, materials and closing.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Al público</span><span lang="en">Public price</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 85–150</span><span class="text-[14px] text-ink-600"> <span lang="es">/ persona</span><span lang="en">/ person</span></span></p>
+        <a href="../tour/" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Ver el tour</span><span lang="en">See the tour</span>
+        </a>
+      </article>
+
+      <!-- Piloto B2B -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-presencial"><span lang="es">Centro ancla</span><span lang="en">Anchor venue</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Piloto en tu centro</span><span lang="en">Pilot at your venue</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Una implementación de prueba en tu hotel, spa o retreat center: sesiones, entrenamiento del staff, materiales y reporte de aprendizaje.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">A trial implementation at your hotel, spa or retreat center: sessions, staff training, materials and a learning report.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Desde</span><span lang="en">From</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 5.000</span></p>
+        <a href="mailto:info@altermundi.net?subject=Piloto%20Harmonic%20Beacon%20en%20mi%20centro" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Escribinos</span><span lang="en">Write to us</span>
+        </a>
+      </article>
+
+      <!-- Founding Facilitator -->
+      <article class="card-pearl rounded-3xl p-8 reveal flex flex-col">
+        <span class="pill pill-online"><span lang="es">Facilitadores</span><span lang="en">Facilitators</span></span>
+        <h3 class="mt-5 font-serif text-2xl text-ink-900"><span lang="es">Formación fundadora</span><span lang="en">Founding facilitator</span></h3>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="es">Un primer grupo de facilitadores embajadores con licencia fundadora, soporte y derecho limitado de uso comercial. Selección por perfil.</p>
+        <p class="mt-3 text-[15px] leading-[1.65] text-ink-700 flex-1" lang="en">A first cohort of ambassador facilitators with a founding license, support and limited commercial-use rights. Selection by profile.</p>
+        <p class="mt-5"><span class="text-[13px] text-ink-500 uppercase tracking-[0.12em]"><span lang="es">Desde</span><span lang="en">From</span></span><br>
+          <span class="price-amt text-4xl text-ink-900">USD 1.500</span></p>
+        <a href="mailto:info@altermundi.net?subject=Formaci%C3%B3n%20fundadora%20de%20facilitadores%20Harmonic%20Beacon" class="cta-shell mt-6 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[12px] tracking-[0.2em] uppercase font-medium">
+          <span lang="es">Postularme</span><span lang="en">Apply</span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="relative py-24 md:py-32 px-6">
+  <div class="max-w-3xl mx-auto">
+    <header class="text-center mb-14 reveal">
+      <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Preguntas honestas</span><span lang="en">Honest questions</span></p>
+      <h2 class="mt-4 font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.1]"><span lang="es">Lo que conviene aclarar</span><span lang="en">Worth clarifying</span></h2>
+    </header>
+
+    <div class="space-y-4">
+      <details class="faq reveal">
+        <summary><span><span lang="es">¿Es como un sound bath?</span><span lang="en">Is it like a sound bath?</span></span><span class="chev">+</span></summary>
+        <div class="faq-body">
+          <p lang="es">Comparte el territorio del sonido inmersivo, pero no es un sound bath genérico. El Beacon trabaja con un campo acústico armónico propietario y, junto a la Proyección del Mito, con una estructura simbólica guiada. La diferencia está en el diseño del campo, el encuadre y el viaje.</p>
+          <p lang="en">It shares the territory of immersive sound, but it is not a generic sound bath. The Beacon works with a proprietary harmonic acoustic field and, together with Myth Projection, with a guided symbolic structure. The difference is in the design of the field, the frame and the journey.</p>
+        </div>
+      </details>
+
+      <details class="faq reveal">
+        <summary><span><span lang="es">¿Es terapia?</span><span lang="en">Is it therapy?</span></span><span class="chev">+</span></summary>
+        <div class="faq-body">
+          <p lang="es">No lo presentamos como tratamiento médico ni clínico. Es bienestar y exploración. La Proyección del Mito tiene un origen psicoterapéutico y, cuando se trabaja en ese plano, requiere encuadre profesional habilitado.</p>
+          <p lang="en">We do not present it as medical or clinical treatment. It is wellbeing and exploration. Myth Projection is psychotherapeutic in origin and, when worked at that level, requires a qualified professional frame.</p>
+        </div>
+      </details>
+
+      <details class="faq reveal">
+        <summary><span><span lang="es">¿Qué evidencia tienen?</span><span lang="en">What evidence is there?</span></span><span class="chev">+</span></summary>
+        <div class="faq-body">
+          <p lang="es">Estamos en fase aplicada y exploratoria. Documentamos aceptabilidad, experiencia, condiciones de uso, límites y reportes subjetivos. No hacemos claims clínicos ni prometemos curas: diseñamos una experiencia cuidada y registramos responsablemente cómo funciona, para quién y bajo qué condiciones.</p>
+          <p lang="en">We are in an applied, exploratory phase. We document acceptability, experience, conditions of use, limits and subjective reports. We make no clinical claims and promise no cures: we design a careful experience and responsibly record how it works, for whom and under what conditions.</p>
+        </div>
+      </details>
+
+      <details class="faq reveal">
+        <summary><span><span lang="es">¿Puede integrarse a mi retiro?</span><span lang="en">Can it be integrated into my retreat?</span></span><span class="chev">+</span></summary>
+        <div class="faq-body">
+          <p lang="es">Sí, si se preservan condiciones mínimas de audio, espacio, preparación, pausa y acompañamiento. No se instala como música de fondo: es una experiencia cuidada, no solo sonido en una sala.</p>
+          <p lang="en">Yes, if minimum conditions of audio, space, preparation, pause and support are preserved. It is not installed as background music: it is a cared-for experience, not just sound in a room.</p>
+        </div>
+      </details>
+
+      <details class="faq reveal">
+        <summary><span><span lang="es">¿Lo puede operar mi staff?</span><span lang="en">Can my staff run it?</span></span><span class="chev">+</span></summary>
+        <div class="faq-body">
+          <p lang="es">Para Beacon solo o formatos básicos, sí, con formación. Beacon + Proyección del Mito requiere otro nivel de facilitación y límites claros.</p>
+          <p lang="en">For Beacon alone or basic formats, yes, with training. Beacon + Myth Projection requires another level of facilitation and clear limits.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACTO -->
+<section class="relative py-24 md:py-28 px-6">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">El primer paso</span><span lang="en">The first step</span></p>
+    <h2 class="mt-4 font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.1]">
+      <span lang="es">Una primera aproximación al campo</span><span lang="en">A first approach to the field</span>
+    </h2>
+    <p class="mt-6 text-[16.5px] leading-[1.7] text-ink-700">
+      <span lang="es">Quien no sepa por dónde empezar puede escribir y recibir orientación. El encuentro de los miércoles, en vivo y gratuito, es la forma más simple de sumarse.</span>
+      <span lang="en">Anyone unsure where to begin can write and receive guidance. The Wednesday gathering, live and free, is the simplest way to join.</span>
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://wa.me/3547469632?text=Hola!%20Quiero%20saber%20mas%20sobre%20las%20experiencias%20del%20Harmonic%20Beacon." target="_blank" rel="noopener" class="btn-whatsapp inline-flex items-center gap-3 rounded-full px-9 py-4 text-[13px] tracking-[0.2em] uppercase font-medium">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+        <span lang="es">Hablá con nosotros</span><span lang="en">Talk to us</span>
+      </a>
+      <a href="../" class="cta-shell inline-flex items-center gap-2 rounded-full px-8 py-4 text-[12px] tracking-[0.2em] uppercase font-medium">
+        <span lang="es">Volver al inicio</span><span lang="en">Back home</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-pearl-300/60">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] tracking-[0.16em] uppercase text-ink-600">
+    <div class="flex items-center gap-3">
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-6 w-6" />
+      <span class="font-display tracking-[0.18em] text-ink-800">Harmonic Beacon · AlterMundi</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="../" class="hover:text-ink-900 transition"><span lang="es">Inicio</span><span lang="en">Home</span></a>
+      <a href="../retreat/" class="hover:text-ink-900 transition"><span lang="es">Retiro</span><span lang="en">Retreat</span></a>
+      <a href="../politica/" class="hover:text-ink-900 transition"><span lang="es">Política</span><span lang="en">Policy</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const html = document.documentElement;
+  const stored = (() => { try { return localStorage.getItem('hb-lang'); } catch { return null; } })();
+  const setLang = (l) => {
+    html.dataset.activeLang = l; html.lang = l;
+    document.querySelectorAll('[data-lang-tag]').forEach(s => {
+      s.classList.toggle('font-semibold', s.dataset.langTag === l);
+      s.classList.toggle('opacity-50', s.dataset.langTag !== l);
+    });
+    try { localStorage.setItem('hb-lang', l); } catch {}
+  };
+  setLang(stored === 'en' ? 'en' : 'es');
+  document.querySelectorAll('.lang-switch').forEach(b => b.addEventListener('click', () => setLang(html.dataset.activeLang === 'es' ? 'en' : 'es')));
+
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

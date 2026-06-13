@@ -1,0 +1,155 @@
+/* ============================================================
+   HARMONIC BEACON · Sistema de marca (nácar premium)
+   Fuente única de design tokens + componentes compartidos.
+   Enlazar en TODAS las páginas, antes de los <style> de página.
+   ============================================================ */
+
+:root{
+  /* ---- Nácar / perla ---- */
+  --pearl-50:  #FBF8F2;
+  --pearl-100: #F5EFE4;
+  --pearl-200: #EDE3D2;
+  --pearl-300: #E0D2BA;
+  --pearl-400: #CFBC9B;
+  --pearl-500: #B8A07B;
+
+  /* ---- Tinta ---- */
+  --ink-900: #2A2118;
+  --ink-800: #3A2E22;
+  --ink-700: #4A3D2E;
+  --ink-600: #6B5C49;
+  --ink-500: #8C7F6C;
+
+  /* ---- Glow iridiscente ---- */
+  --glow-rose:   #E9D4DC;
+  --glow-mint:   #D6E5DD;
+  --glow-sand:   #EFE0C9;
+  --glow-violet: #D9D2E1;
+  --glow-sky:    #D0DDE3;
+
+  /* ---- Acento (oro perlado, para “vivo” y detalles) ---- */
+  --gold: #C8A24E;
+
+  /* ---- Tipografía ---- */
+  --font-display: 'Marcellus', serif;          /* eyebrows / wordmark */
+  --font-serif:   'Cormorant Garamond', serif; /* titulares */
+  --font-sans:    'Inter', system-ui, sans-serif;
+
+  /* ---- Radios / sombras ---- */
+  --r-pill: 999px;
+  --r-card: 1.5rem;
+  --shadow-card: 0 16px 40px rgba(74,61,46,.12);
+  --shadow-cta:  inset 0 1px 0 rgba(255,255,255,.95), inset 0 -8px 18px rgba(207,188,155,.35), 0 6px 22px rgba(74,61,46,.10);
+
+  /* ---- Tracking de marca ---- */
+  --track-eyebrow: 0.32em;
+  --track-wordmark: 0.18em;
+}
+
+/* ============================================================
+   i18n — toggle ES/EN (markup dual)
+   ============================================================ */
+html[data-active-lang="es"] [lang="en"]{ display: none !important; }
+html[data-active-lang="en"] [lang="es"]{ display: none !important; }
+
+/* ============================================================
+   Marca · símbolo (perla + Lissajous 3:2)
+   ============================================================ */
+.hb-mark{ display:block; flex-shrink:0; filter: drop-shadow(0 2px 8px rgba(74,61,46,.18)); }
+.hb-wordmark{
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--track-wordmark);
+  color: var(--ink-800);
+}
+
+/* ============================================================
+   Eyebrow (rótulo de sección)
+   ============================================================ */
+.hb-eyebrow{
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--track-eyebrow);
+  font-size: 11px;
+  color: var(--ink-600);
+}
+
+/* ============================================================
+   Botones — CTA canónicos
+   ============================================================ */
+.cta-primary{
+  position:relative; color:var(--ink-900);
+  background:linear-gradient(135deg,#FFFAF0 0%,#F0E2C7 50%,#FFFAF0 100%);
+  border:1px solid rgba(75,60,42,.22);
+  box-shadow:var(--shadow-cta);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+}
+.cta-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1), inset 0 -10px 22px rgba(207,188,155,.45), 0 14px 34px rgba(74,61,46,.18);
+}
+.cta-shell{
+  background:rgba(255,255,255,.5); border:1px solid rgba(75,60,42,.18); color:var(--ink-800);
+  backdrop-filter:blur(8px); transition:all .35s ease;
+}
+.cta-shell:hover{ background:rgba(255,255,255,.82); border-color:rgba(75,60,42,.32); transform:translateY(-2px); }
+
+/* WhatsApp (uso puntual) */
+.btn-whatsapp{ background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; transition:all .35s ease; }
+.btn-whatsapp:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(37,211,102,.25); }
+
+/* ============================================================
+   Pills (etiquetas)
+   ============================================================ */
+.pill{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; padding:.25rem .7rem; border-radius:var(--r-pill); border:1px solid; display:inline-block; }
+.pill-free{ color:#3f6f57; background:rgba(214,229,221,.5); border-color:rgba(120,170,140,.4); }
+.pill-online{ color:#3d5a72; background:rgba(208,221,227,.5); border-color:rgba(110,150,180,.4); }
+.pill-presencial{ color:#8a6d2f; background:rgba(239,224,201,.55); border-color:rgba(190,160,90,.4); }
+.pill-featured{ color:var(--ink-900); background:rgba(255,250,240,.85); border-color:rgba(184,160,123,.75); }
+
+/* ============================================================
+   Cards
+   ============================================================ */
+.card-pearl{
+  background:rgba(255,255,255,.55); border:1px solid rgba(224,210,186,.7);
+  backdrop-filter:blur(8px); transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.card-pearl:hover{ transform:translateY(-3px); box-shadow:var(--shadow-card); border-color:rgba(184,160,123,.85); }
+.card-pearl.featured{
+  background:linear-gradient(135deg, rgba(255,250,240,.9), rgba(239,224,201,.55));
+  border-color:rgba(184,160,123,.95);
+}
+
+/* ============================================================
+   Grano + textura nácar (overlay)
+   ============================================================ */
+.grain{
+  background-image:
+    radial-gradient(rgba(60,46,32,.5) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,.3) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1.5px 1.5px;
+  mix-blend-mode: multiply;
+  opacity:.05;
+}
+
+/* ============================================================
+   Punto “en vivo”
+   ============================================================ */
+.dot-live{
+  width:8px; height:8px; border-radius:999px; background:var(--gold); display:inline-block;
+  box-shadow:0 0 0 0 rgba(200,162,78,.5); animation:hb-livepulse 2s infinite;
+}
+@keyframes hb-livepulse{ 0%{ box-shadow:0 0 0 0 rgba(200,162,78,.5);} 70%{ box-shadow:0 0 0 8px rgba(200,162,78,0);} 100%{ box-shadow:0 0 0 0 rgba(200,162,78,0);} }
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1 !important; transform:none !important; }
+  .dot-live{ animation:none; }
+  html{ scroll-behavior:auto; }
+}

@@ -3,9 +3,25 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="/assets/brand.css" />
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:url" content="https://harmonicbeacon.com/" />
+<meta property="og:title" content="Harmonic Beacon — AlterMundi" />
+<meta property="og:description" content="Un viaje interior sonoro, sin sustancias, sostenido por un campo armónico propio y una guía simbólica — para presencia, descanso y sentido. Una experiencia de bienestar y exploración de AlterMundi." />
+<meta property="og:image" content="https://harmonicbeacon.com/assets/og/default.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Harmonic Beacon — AlterMundi" />
+<meta name="twitter:description" content="Un viaje interior sonoro, sin sustancias, sostenido por un campo armónico propio y una guía simbólica — para presencia, descanso y sentido. Una experiencia de bienestar y exploración de AlterMundi." />
+<meta name="twitter:image" content="https://harmonicbeacon.com/assets/og/default.png" />
 <title>Harmonic Beacon — AlterMundi</title>
-<meta name="description" content="Un campo armónico sostenido construido sobre los armónicos naturales. Una tecnología de bienestar e instrumento científico de AlterMundi." />
-<meta name="description" lang="en" content="A sustained harmonic field built on natural harmonics. A wellbeing technology and scientific instrument by AlterMundi." />
+<meta name="description" content="Un viaje interior sonoro, sin sustancias, sostenido por un campo armónico propio y una guía simbólica — para presencia, descanso y sentido. Una experiencia de bienestar y exploración de AlterMundi." />
+<meta name="description" lang="en" content="An inner sound journey, substance-free, held by a proprietary harmonic field and a symbolic guidance — for presence, rest and meaning. A wellbeing and exploration experience by AlterMundi." />
 <meta name="theme-color" content="#F5EFE4" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +84,7 @@ tailwind.config = {
 <header class="fixed inset-x-0 top-0 z-50">
   <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:py-6">
     <a href="#home" data-tab="home" class="flex items-center gap-3 group">
-      <span class="block h-9 w-9 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint shadow-[inset_0_0_12px_rgba(255,255,255,.7),0_2px_8px_rgba(74,61,46,.18)]"></span>
+      <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-9 w-9" />
       <span class="font-display tracking-[0.18em] text-sm md:text-[15px] text-ink-800 uppercase">Harmonic Beacon</span>
     </a>
 
@@ -137,19 +153,19 @@ tailwind.config = {
     </h1>
 
     <p class="hero-sub mt-8 max-w-xl font-serif text-[18px] md:text-[21px] leading-[1.5] text-ink-700 italic" lang="es">
-      Un campo armónico sostenido sobre los armónicos naturales. <br class="hidden md:block">
-      Una referencia para que tu sistema encuentre su propio orden.
+      Un viaje interior sonoro, sin sustancias. <br class="hidden md:block">
+      Sostenido por un campo armónico propio y una guía simbólica — para presencia, descanso y sentido.
     </p>
     <p class="hero-sub mt-8 max-w-xl font-serif text-[18px] md:text-[21px] leading-[1.5] text-ink-700 italic" lang="en">
-      A sustained harmonic field built on natural harmonics. <br class="hidden md:block">
-      A reference for your system to find its own order.
+      An inner sound journey, substance-free. <br class="hidden md:block">
+      Held by a proprietary harmonic field and a symbolic guidance — for presence, rest and meaning.
     </p>
 
     <div class="hero-ctas mt-12 flex flex-col items-center gap-4">
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="https://beacon.altermundi.net/" target="_blank" rel="noopener"
+        <a href="./planesysubcripciones/"
            class="cta-primary group inline-flex items-center gap-3 rounded-full px-10 py-5 text-[13px] tracking-[0.24em] uppercase font-medium">
-          <span lang="es">Entrá a la app</span><span lang="en">Enter the app</span>
+          <span lang="es">Viví la experiencia</span><span lang="en">Live the experience</span>
           <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="https://wa.me/3547469632?text=Hola!%20Quiero%20saber%20mas%20sobre%20el%20Harmonic%20Beacon." target="_blank" rel="noopener"
@@ -158,10 +174,17 @@ tailwind.config = {
           <span lang="es">Hablá con nosotros</span><span lang="en">Talk to us</span>
         </a>
       </div>
-      <a href="https://youtube.com/live/dL4CvU3XDvo" target="_blank" rel="noopener"
-         class="inline-flex items-center gap-2 mt-2 text-[11px] tracking-[0.22em] uppercase text-ink-600 hover:text-ink-900 transition">
-        <span class="dot-live"></span><span lang="es">Beacon en vivo</span><span lang="en">Beacon live</span>
-      </a>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-x-7 gap-y-2 mt-2">
+        <a href="https://youtube.com/live/dL4CvU3XDvo" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-ink-600 hover:text-ink-900 transition">
+          <span class="dot-live"></span><span lang="es">Beacon en vivo</span><span lang="en">Beacon live</span>
+        </a>
+        <a href="./planesysubcripciones/#espacios"
+           class="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase text-ink-600 hover:text-ink-900 transition">
+          <span lang="es">Para retiros y espacios</span><span lang="en">For retreats &amp; spaces</span>
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
 
   </div>
@@ -185,13 +208,13 @@ tailwind.config = {
   <div class="mx-auto max-w-3xl px-6 mt-12 md:mt-14 reveal">
     <div class="space-y-6 text-[17.5px] leading-[1.75] text-ink-700" lang="es">
       <p>El <strong class="font-medium text-ink-900">Harmonic Beacon</strong> es un dispositivo físico que genera y sostiene un campo acústico dentro de una sala. Una persona puede ingresar y permanecer en él.</p>
-      <p>No es un instrumento musical: sus fundamentos son los <em>armónicos naturales</em> derivados de los sistemas físicos, no la armonía temperada de la música. Por eso los campos que produce son <strong class="font-medium text-ink-900">medibles, repetibles y contrastables</strong> contra sí mismos y contra otros campos.</p>
-      <p>Lo desarrollamos como tecnología de bienestar y, al mismo tiempo, como instrumento científico para investigar de manera trazable y falsable lo que ese campo hace en el cuerpo y en la psique.</p>
+      <p>No es un instrumento musical: sus fundamentos son los <em>armónicos naturales</em> derivados de los sistemas físicos, no la armonía temperada de la música. Por eso los campos que produce son <strong class="font-medium text-ink-900">medibles y repetibles</strong>, contra sí mismos y contra otros campos.</p>
+      <p>Lo desarrollamos como una experiencia de bienestar y exploración. En paralelo, en una fase de investigación aplicada y exploratoria, documentamos con cuidado cómo funciona, para quién y bajo qué condiciones — sin claims clínicos ni promesas de cura.</p>
     </div>
     <div class="space-y-6 text-[17.5px] leading-[1.75] text-ink-700" lang="en">
       <p>The <strong class="font-medium text-ink-900">Harmonic Beacon</strong> is a physical device that generates and sustains an acoustic field inside a room. A person can step in and remain there.</p>
-      <p>It is not a musical instrument: its foundations are the <em>natural harmonics</em> derived from physical systems, not the tempered harmony of music. The fields it produces are therefore <strong class="font-medium text-ink-900">measurable, repeatable and comparable</strong> against themselves and against other fields.</p>
-      <p>We develop it both as a wellbeing technology and as a scientific instrument — to investigate, in a traceable and falsifiable way, what that field does to the body and to the psyche.</p>
+      <p>It is not a musical instrument: its foundations are the <em>natural harmonics</em> derived from physical systems, not the tempered harmony of music. The fields it produces are therefore <strong class="font-medium text-ink-900">measurable and repeatable</strong>, against themselves and against other fields.</p>
+      <p>We develop it as a wellbeing and exploration experience. In parallel, in an applied, exploratory research phase, we carefully document how it works, for whom and under what conditions — with no clinical claims and no promises of cure.</p>
     </div>
   </div>
 
@@ -215,13 +238,13 @@ tailwind.config = {
       </div>
       <div class="reveal">
         <h3 class="font-serif text-2xl text-ink-900"><span lang="es">Eficiencia</span><span lang="en">Efficiency</span></h3>
-        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="es">Cuando un sistema se acopla armónicamente, gasta menos energía en sostenerse. El universo favorece estas configuraciones.</p>
-        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="en">When a system couples harmonically, it spends less energy to hold itself together. The universe favors these configurations.</p>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="es">Cuando un sistema se acopla armónicamente, gasta menos energía en sostenerse: tiende hacia las configuraciones más estables.</p>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="en">When a system couples harmonically, it spends less energy to hold itself together: it tends toward the most stable configurations.</p>
       </div>
       <div class="reveal">
-        <h3 class="font-serif text-2xl text-ink-900"><span lang="es">Homeostasis</span><span lang="en">Homeostasis</span></h3>
-        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="es">Cuando el campo alrededor es matemáticamente coherente, el sistema nervioso encuentra más fácil su propia regulación interna.</p>
-        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="en">When the surrounding field is mathematically coherent, the nervous system finds it easier to regulate itself.</p>
+        <h3 class="font-serif text-2xl text-ink-900"><span lang="es">Reposo</span><span lang="en">Rest</span></h3>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="es">En presencia de un campo acústico coherente, muchas personas describen un estado de calma, foco y presencia corporal más accesible.</p>
+        <p class="mt-2 text-[15.5px] text-ink-700 leading-relaxed" lang="en">In the presence of a coherent acoustic field, many people describe a state of calm, focus and a more accessible bodily presence.</p>
       </div>
     </div>
   </div>
@@ -273,28 +296,78 @@ tailwind.config = {
     </div>
 
     <p class="mt-10 max-w-3xl mx-auto text-center text-[15px] leading-[1.65] text-ink-700 italic font-serif reveal" lang="es">
-      Estas observaciones repetidas, en personas y contextos distintos, son las que hoy guían el diseño de los protocolos clínicos y las mediciones fisiológicas (variabilidad cardíaca, respuesta cortical) del proyecto.
+      Estas observaciones repetidas, en personas y contextos distintos, son las que hoy guían el diseño de los protocolos de cuidado y las mediciones fisiológicas (variabilidad cardíaca, respuesta cortical) de una investigación en fase exploratoria y aplicada.
     </p>
     <p class="mt-10 max-w-3xl mx-auto text-center text-[15px] leading-[1.65] text-ink-700 italic font-serif reveal" lang="en">
-      These repeated observations, across different people and contexts, are what guide the design of the project's clinical protocols and physiological measurements (heart-rate variability, cortical response).
+      These repeated observations, across different people and contexts, are what guide the design of care protocols and physiological measurements (heart-rate variability, cortical response) in an applied, exploratory-phase research.
     </p>
+
+    <!-- Experiencia presencial · Cuatro momentos -->
+    <div class="mt-24 md:mt-32 pt-16 border-t border-pearl-300/60 reveal">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">La experiencia presencial</span><span lang="en">The in-person experience</span></p>
+        <h2 class="mt-5 font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="es">Un recorrido en cuatro momentos</h2>
+        <h2 class="mt-5 font-serif font-light text-4xl md:text-5xl text-ink-900 leading-[1.05]" lang="en">A journey in four moments</h2>
+        <p class="mt-5 text-[16px] leading-[1.7] text-ink-700" lang="es">En presencia del campo, la experiencia tiene un arco que cuida la apertura, la profundización y el cierre. No se exige producir una vivencia particular: cada quien transita su propio recorrido.</p>
+        <p class="mt-5 text-[16px] leading-[1.7] text-ink-700" lang="en">In the presence of the field, the experience has an arc that cares for the opening, the deepening and the closing. No particular experience is required: each person walks their own path.</p>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+        <div class="rounded-3xl border border-pearl-300/70 bg-white/40 backdrop-blur-sm p-7">
+          <p class="font-display tracking-[0.3em] text-[13px] text-pearl-500">01</p>
+          <h3 class="mt-2 font-serif text-2xl text-ink-900"><span lang="es">Meditación</span><span lang="en">Meditation</span></h3>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="es">Una apertura que dispone el cuerpo y la atención, y prepara las condiciones de escucha.</p>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="en">An opening that settles the body and attention, and prepares the listening conditions.</p>
+        </div>
+        <div class="rounded-3xl border border-pearl-300/70 bg-white/40 backdrop-blur-sm p-7">
+          <p class="font-display tracking-[0.3em] text-[13px] text-pearl-500">02</p>
+          <h3 class="mt-2 font-serif text-2xl text-ink-900"><span lang="es">Proyección del Mito</span><span lang="en">Myth Projection</span></h3>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="es">Sobre el campo armónico, una práctica simbólica donde emergen imágenes y relatos propios.</p>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="en">Over the harmonic field, a symbolic practice where one's own images and stories emerge.</p>
+        </div>
+        <div class="rounded-3xl border border-pearl-300/70 bg-white/40 backdrop-blur-sm p-7">
+          <p class="font-display tracking-[0.3em] text-[13px] text-pearl-500">03</p>
+          <h3 class="mt-2 font-serif text-2xl text-ink-900"><span lang="es">Baño de sonido</span><span lang="en">Sound bath</span></h3>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="es">Una inmersión sostenida en el campo. El cuerpo reposa y se deja atravesar por los armónicos naturales.</p>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="en">A sustained immersion in the field. The body rests and lets itself be crossed by natural harmonics.</p>
+        </div>
+        <div class="rounded-3xl border border-pearl-300/70 bg-white/40 backdrop-blur-sm p-7">
+          <p class="font-display tracking-[0.3em] text-[13px] text-pearl-500">04</p>
+          <h3 class="mt-2 font-serif text-2xl text-ink-900"><span lang="es">Espacio de consonancia</span><span lang="en">Space of consonance</span></h3>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="es">Un cierre en comunidad para integrar lo vivido: reposo y palabra compartida.</p>
+          <p class="mt-2 text-[14.5px] leading-[1.65] text-ink-700" lang="en">A closing in community to integrate the experience: rest and shared words.</p>
+        </div>
+      </div>
+      <p class="mt-10 text-center text-[14px] leading-[1.6] text-ink-600 italic font-serif max-w-2xl mx-auto" lang="es">
+        Es una experiencia de bajo riesgo dentro de un encuadre de bienestar, pero no es obligatoria: no se fuerza, cabe pausar, y si aparece malestar se cuida la salida y se deriva cuando corresponde.
+      </p>
+      <p class="mt-10 text-center text-[14px] leading-[1.6] text-ink-600 italic font-serif max-w-2xl mx-auto" lang="en">
+        It is a low-risk experience within a wellbeing frame, but it is not mandatory: nothing is forced, one may pause, and if discomfort arises the exit is cared for and referral is made when appropriate.
+      </p>
+      <div class="mt-10 text-center">
+        <a href="./planesysubcripciones/#recorrido"
+           class="cta-shell inline-flex items-center gap-3 rounded-full px-8 py-4 text-[12px] tracking-[0.22em] uppercase font-medium">
+          <span lang="es">Ver el recorrido completo</span><span lang="en">See the full journey</span>
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
 
     <!-- Consonancia · explorar y transformarte -->
     <div class="mt-24 md:mt-32 pt-16 border-t border-pearl-300/60 text-center reveal">
       <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">El camino</span><span lang="en">The path</span></p>
       <p class="mt-6 font-serif italic text-2xl md:text-[34px] leading-[1.28] text-ink-900 max-w-3xl mx-auto" lang="es">
-        Con el Harmonic Beacon <span class="not-italic font-medium">explorás y te transformás</span><br class="hidden md:block">
-        buscando consonancia — una integración armónica con lo natural.
+        El Harmonic Beacon abre un camino de <span class="not-italic font-medium">exploración y transformación</span><br class="hidden md:block">
+        en busca de consonancia — una integración armónica con lo natural.
       </p>
       <p class="mt-6 font-serif italic text-2xl md:text-[34px] leading-[1.28] text-ink-900 max-w-3xl mx-auto" lang="en">
-        With the Harmonic Beacon you <span class="not-italic font-medium">explore and transform</span><br class="hidden md:block">
-        seeking consonance — a harmonic integration with the natural.
+        The Harmonic Beacon opens a path of <span class="not-italic font-medium">exploration and transformation</span><br class="hidden md:block">
+        toward consonance — a harmonic integration with the natural.
       </p>
       <p class="mt-8 text-[16.5px] leading-[1.7] text-ink-700 max-w-xl mx-auto" lang="es">
-        En línea o en persona, cada modalidad es una forma de habitar esa búsqueda. Conocé las experiencias y sus planes.
+        En línea o en presencia del campo, cada modalidad es una forma de habitar esa búsqueda.
       </p>
       <p class="mt-8 text-[16.5px] leading-[1.7] text-ink-700 max-w-xl mx-auto" lang="en">
-        Online or in person, each modality is a way to inhabit that search. Discover the experiences and their plans.
+        Online or in the presence of the field, each modality is a way to inhabit that search.
       </p>
       <a href="./planesysubcripciones/"
          class="cta-primary mt-10 inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
@@ -307,18 +380,18 @@ tailwind.config = {
     <div class="mt-24 md:mt-32 pt-16 border-t border-pearl-300/60 text-center reveal">
       <p class="font-display tracking-[0.32em] uppercase text-[11px] text-ink-600"><span lang="es">Una invitación</span><span lang="en">An invitation</span></p>
       <p class="mt-6 font-serif italic text-2xl md:text-[34px] leading-[1.28] text-ink-900 max-w-3xl mx-auto" lang="es">
-        Trabajamos como un <span class="not-italic font-medium">campo del Beacon</span><br class="hidden md:block">
-        para las experiencias profundas de otros seres.
+        Sobre el <span class="not-italic font-medium">campo armónico sostenido</span>,<br class="hidden md:block">
+        el trabajo simbólico encuentra un terreno más fértil.
       </p>
       <p class="mt-6 font-serif italic text-2xl md:text-[34px] leading-[1.28] text-ink-900 max-w-3xl mx-auto" lang="en">
-        We work as a <span class="not-italic font-medium">Beacon field</span><br class="hidden md:block">
-        for the deep experiences of other beings.
+        Over the <span class="not-italic font-medium">sustained harmonic field</span>,<br class="hidden md:block">
+        symbolic work finds more fertile ground.
       </p>
       <p class="mt-8 text-[16.5px] leading-[1.7] text-ink-700 max-w-xl mx-auto" lang="es">
-        Te invitamos a conocer a <strong class="font-medium text-ink-900">Julián de la Reta</strong> y la <em>Proyección del Mito Personal</em> — la línea clínica del Beacon que integra Jung, Campbell y Psicodrama sobre el campo armónico sostenido.
+        Te invitamos a conocer a <strong class="font-medium text-ink-900">Julián de la Reta</strong> y la <em>Proyección del Mito Personal</em> — una práctica simbólica y narrativa que integra Jung, Campbell y Psicodrama sobre el campo armónico sostenido. De origen psicoterapéutico, cuando se trabaja en ese plano requiere encuadre profesional habilitado.
       </p>
       <p class="mt-8 text-[16.5px] leading-[1.7] text-ink-700 max-w-xl mx-auto" lang="en">
-        Meet <strong class="font-medium text-ink-900">Julián de la Reta</strong> and the <em>Personal Myth Projection</em> — the Beacon's clinical line, integrating Jung, Campbell and Psychodrama over the sustained harmonic field.
+        Meet <strong class="font-medium text-ink-900">Julián de la Reta</strong> and the <em>Personal Myth Projection</em> — a symbolic and narrative practice integrating Jung, Campbell and Psychodrama over the sustained harmonic field. Psychotherapeutic in origin, when worked at that level it requires a qualified professional frame.
       </p>
       <a href="https://proyecciondelmito.harmonicbeacon.com/" target="_blank" rel="noopener"
          class="cta-primary mt-10 inline-flex items-center gap-3 rounded-full px-8 py-4 text-[13px] tracking-[0.22em] uppercase font-medium">
@@ -386,8 +459,8 @@ tailwind.config = {
       <div class="hit-card reveal">
         <div class="hit-card-num">III</div>
         <h3 class="font-serif text-2xl text-ink-900 mt-4"><span lang="es">Triangulación</span><span lang="en">Triangulation</span></h3>
-        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700" lang="es">Mismo patrón observado en modelos computacionales (Phideus), sensores fisiológicos y sesiones psicológicas. Coincidencia que es señal.</p>
-        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700" lang="en">The same pattern observed in computational models (Phideus), physiological sensors and psychological sessions. A coincidence that becomes signal.</p>
+        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700" lang="es">Mismo patrón observado en modelos computacionales (Phideus), sensores fisiológicos y sesiones psicológicas. Una convergencia que vale la pena investigar.</p>
+        <p class="mt-3 text-[15.5px] leading-[1.65] text-ink-700" lang="en">The same pattern observed in computational models (Phideus), physiological sensors and psychological sessions. A convergence worth investigating.</p>
       </div>
     </div>
 
@@ -482,7 +555,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-6 py-12 grid md:grid-cols-4 gap-10">
     <div class="md:col-span-2">
       <div class="flex items-center gap-3">
-        <span class="block h-8 w-8 rounded-full bg-gradient-to-br from-glow-rose via-glow-sand to-glow-mint shadow-[inset_0_0_12px_rgba(255,255,255,.7),0_2px_8px_rgba(74,61,46,.18)]"></span>
+        <img src="/assets/mark.svg" alt="Harmonic Beacon" width="40" height="40" class="block h-8 w-8" />
         <span class="font-display tracking-[0.18em] text-[13px] text-ink-800 uppercase">Harmonic Beacon</span>
       </div>
       <p class="mt-4 max-w-md text-[14px] leading-[1.65] text-ink-600">
