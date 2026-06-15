@@ -59,16 +59,27 @@
   .split-media{ aspect-ratio:4/5; }
   @media(min-width:900px){ .split-media{ aspect-ratio:5/6; } }
 
-  /* ---------- Experience · journey line ---------- */
-  .journey{ list-style:none; margin:3rem 0 0; padding:0; max-width:760px; }
-  .j-step{ position:relative; padding:0 0 2.1rem 2.6rem; }
-  .j-step::after{ content:""; position:absolute; left:4px; top:.55rem; bottom:-.55rem; width:1px; background:linear-gradient(var(--gold),rgba(201,162,78,.28)); }
-  .j-step:last-child{ padding-bottom:0; }
-  .j-step:last-child::after{ display:none; }
-  .j-step::before{ content:""; position:absolute; left:0; top:.4rem; width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px var(--bg-0), 0 0 12px rgba(201,162,78,.5); }
-  .j-num{ font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:.92rem; letter-spacing:.14em; }
-  .j-step h3{ font-family:var(--font-sans); font-weight:500; color:var(--bone); font-size:1.14rem; letter-spacing:.01em; margin:.15rem 0 .45rem; }
-  .j-step p{ color:var(--ink-600); font-size:.98rem; line-height:1.65; max-width:58ch; }
+  /* ---------- Experience · journey stepper ---------- */
+  .journey-x{ margin-top:3rem; max-width:860px; }
+  .jx-dots{ display:flex; justify-content:space-between; align-items:center; position:relative; }
+  .jx-dots::before{ content:""; position:absolute; left:8px; right:8px; top:50%; height:1px; transform:translateY(-50%); background:linear-gradient(90deg,var(--gold),rgba(201,162,78,.28)); }
+  .jx-dot{ position:relative; z-index:1; width:34px; height:34px; border-radius:50%; border:1px solid var(--hair); background:var(--bg-0); color:var(--ink-500); font-family:var(--font-serif); font-style:italic; font-size:.85rem; cursor:pointer; transition:transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease); display:inline-flex; align-items:center; justify-content:center; }
+  .jx-dot:hover{ border-color:var(--gold); color:var(--bone); }
+  .jx-dot.done{ color:var(--gold); border-color:rgba(201,162,78,.5); }
+  .jx-dot.active{ background:var(--gold); color:#1a140c; border-color:var(--gold); box-shadow:0 0 16px rgba(201,162,78,.45); transform:scale(1.12); }
+  .jx-stage{ display:flex; align-items:flex-start; gap:1.2rem; margin-top:2.4rem; }
+  .jx-window{ position:relative; flex:1; min-height:170px; }
+  .jx-slide{ display:none; }
+  .jx-slide.active{ display:block; animation:jxfade .5s var(--ease); }
+  @keyframes jxfade{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  .jx-slide .j-num{ font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.1rem; letter-spacing:.14em; }
+  .jx-slide h3{ font-family:var(--font-sans); font-weight:500; color:var(--bone); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:.3rem 0 .6rem; }
+  .jx-slide p{ color:var(--ink-600); font-size:1.05rem; line-height:1.7; max-width:52ch; }
+  .jx-arrow{ flex-shrink:0; width:46px; height:46px; border-radius:50%; border:1px solid var(--hair); background:var(--surface); color:var(--gold); font-size:1.5rem; line-height:1; cursor:pointer; transition:transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease), opacity .3s ease; display:inline-flex; align-items:center; justify-content:center; margin-top:.1rem; }
+  .jx-arrow:hover:not(:disabled){ border-color:var(--gold); background:rgba(201,162,78,.12); transform:translateY(-2px); }
+  .jx-arrow:disabled{ opacity:.25; cursor:default; }
+  @media(max-width:620px){ .jx-stage{ gap:.55rem; } .jx-arrow{ width:40px; height:40px; font-size:1.3rem; } .jx-dot{ width:28px; height:28px; font-size:.72rem; } }
+  @media(prefers-reduced-motion:reduce){ .jx-slide.active{ animation:none; } .jx-dot{ transition:none; } }
 
   /* ---------- Host value list ---------- */
   .vlist{ list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:1px; }
@@ -149,8 +160,8 @@
   <div class="wrap whatis">
     <span class="eyebrow reveal"><span data-lang="en">What it is</span><span data-lang="es">Qué es</span></span>
     <p class="big reveal" data-d="1" style="margin-top:1.4rem;">
-      <span data-lang="en">Beacon creates a <em>proprietary harmonic field</em> through sound, designed from natural harmonic proportions. PMP adds a structured symbolic process. Together, they form a <em>live guided inner journey</em>.</span>
-      <span data-lang="es">Beacon crea un <em>campo armónico propio</em> a través del sonido, diseñado desde proporciones armónicas naturales. PMP suma un proceso simbólico estructurado. Juntos forman un <em>viaje interior guiado en vivo</em>.</span>
+      <span data-lang="en">Beacon creates a <em>proprietary harmonic field</em> through sound, designed from natural harmonic proportions. <a class="ulink" href="https://proyecciondelmito.harmonicbeacon.com" target="_blank" rel="noopener">Personal Myth Projection</a> adds a structured symbolic process. Together, they form a <em>live guided inner journey</em>.</span>
+      <span data-lang="es">Beacon crea un <em>campo armónico propio</em> a través del sonido, diseñado desde proporciones armónicas naturales. La <a class="ulink" href="https://proyecciondelmito.harmonicbeacon.com" target="_blank" rel="noopener">Proyección del Mito Personal</a> suma un proceso simbólico estructurado. Juntos forman un <em>viaje interior guiado en vivo</em>.</span>
     </p>
   </div>
 </section>
@@ -170,14 +181,28 @@
       <img class="img-cover duotone" src="/assets/img/experience-wide.jpg" alt="A Beacon + PMP group circle in the room" />
     </div>
 
-    <ol class="journey">
-      <li class="j-step reveal"><span class="j-num">i</span><h3><span data-lang="en">Orientation</span><span data-lang="es">Orientación</span></h3><p><span data-lang="en">A short orientation to the method and the Harmonic Beacon. No prior experience required.</span><span data-lang="es">Una breve orientación al método y al Harmonic Beacon. No se requiere experiencia previa.</span></p></li>
-      <li class="j-step reveal"><span class="j-num">ii</span><h3><span data-lang="en">Interoceptive & proprioceptive warm-up</span><span data-lang="es">Caldeamiento interoceptivo y propioceptivo</span></h3><p><span data-lang="en">An interoceptive and proprioceptive warm-up settles the group and opens attention before the journey.</span><span data-lang="es">Un caldeamiento interoceptivo y propioceptivo asienta al grupo y abre la atención antes del viaje.</span></p></li>
-      <li class="j-step reveal"><span class="j-num">iii</span><h3><span data-lang="en">Symbolic journey</span><span data-lang="es">Viaje simbólico</span></h3><p><span data-lang="en">A guided 50–60 minute inner journey: a symbolic visualization that, through PMP, invites each person to meet their own images and personal myth.</span><span data-lang="es">Un viaje interior guiado de 50–60 minutos: una visualización simbólica que, a través de PMP, invita a cada persona a encontrarse con sus propias imágenes y su mito personal.</span></p></li>
-      <li class="j-step reveal"><span class="j-num">iv</span><h3><span data-lang="en">Listening in the field</span><span data-lang="es">Escucha en el campo</span></h3><p><span data-lang="en">Situated listening within the Beacon's harmonic field — the relational reference that holds the journey.</span><span data-lang="es">Escucha situada dentro del campo armónico del Beacon — la referencia relacional que sostiene el viaje.</span></p></li>
-      <li class="j-step reveal"><span class="j-num">v</span><h3><span data-lang="en">Pause & exit</span><span data-lang="es">Pausa y salida</span></h3><p><span data-lang="en">A care-oriented frame keeps a clear possibility of pause or exit at any moment.</span><span data-lang="es">Un marco orientado al cuidado mantiene una posibilidad clara de pausa o salida en cualquier momento.</span></p></li>
-      <li class="j-step reveal"><span class="j-num">vi</span><h3><span data-lang="en">Integration</span><span data-lang="es">Integración</span></h3><p><span data-lang="en">A brief sharing circle for personal integration closes the experience.</span><span data-lang="es">Un breve círculo de palabra para la integración personal cierra la experiencia.</span></p></li>
-    </ol>
+    <div class="journey-x reveal" data-d="1" id="journeyX" tabindex="0" aria-label="Recorrido de la sesión / Session journey">
+      <div class="jx-dots">
+        <button type="button" class="jx-dot" data-i="0">i</button>
+        <button type="button" class="jx-dot" data-i="1">ii</button>
+        <button type="button" class="jx-dot" data-i="2">iii</button>
+        <button type="button" class="jx-dot" data-i="3">iv</button>
+        <button type="button" class="jx-dot" data-i="4">v</button>
+        <button type="button" class="jx-dot" data-i="5">vi</button>
+      </div>
+      <div class="jx-stage">
+        <button type="button" class="jx-arrow jx-prev" aria-label="Anterior / Previous">‹</button>
+        <div class="jx-window">
+          <article class="jx-slide" data-i="0"><span class="j-num">i</span><h3><span data-lang="en">Orientation</span><span data-lang="es">Orientación</span></h3><p><span data-lang="en">A short orientation to the method and the Harmonic Beacon. No prior experience required.</span><span data-lang="es">Una breve orientación al método y al Harmonic Beacon. No se requiere experiencia previa.</span></p></article>
+          <article class="jx-slide" data-i="1"><span class="j-num">ii</span><h3><span data-lang="en">Interoceptive & proprioceptive warm-up</span><span data-lang="es">Caldeamiento interoceptivo y propioceptivo</span></h3><p><span data-lang="en">An interoceptive and proprioceptive warm-up settles the group and opens attention before the journey.</span><span data-lang="es">Un caldeamiento interoceptivo y propioceptivo asienta al grupo y abre la atención antes del viaje.</span></p></article>
+          <article class="jx-slide" data-i="2"><span class="j-num">iii</span><h3><span data-lang="en">Symbolic journey</span><span data-lang="es">Viaje simbólico</span></h3><p><span data-lang="en">A guided 50–60 minute inner journey: a symbolic visualization that, through PMP, invites each person to meet their own images and personal myth.</span><span data-lang="es">Un viaje interior guiado de 50–60 minutos: una visualización simbólica que, a través de PMP, invita a cada persona a encontrarse con sus propias imágenes y su mito personal.</span></p></article>
+          <article class="jx-slide" data-i="3"><span class="j-num">iv</span><h3><span data-lang="en">Listening in the field</span><span data-lang="es">Escucha en el campo</span></h3><p><span data-lang="en">Situated listening within the Beacon's harmonic field — the relational reference that holds the journey.</span><span data-lang="es">Escucha situada dentro del campo armónico del Beacon — la referencia relacional que sostiene el viaje.</span></p></article>
+          <article class="jx-slide" data-i="4"><span class="j-num">v</span><h3><span data-lang="en">Pause & exit</span><span data-lang="es">Pausa y salida</span></h3><p><span data-lang="en">A care-oriented frame keeps a clear possibility of pause or exit at any moment.</span><span data-lang="es">Un marco orientado al cuidado mantiene una posibilidad clara de pausa o salida en cualquier momento.</span></p></article>
+          <article class="jx-slide" data-i="5"><span class="j-num">vi</span><h3><span data-lang="en">Integration</span><span data-lang="es">Integración</span></h3><p><span data-lang="en">A brief sharing circle for personal integration closes the experience.</span><span data-lang="es">Un breve círculo de palabra para la integración personal cierra la experiencia.</span></p></article>
+        </div>
+        <button type="button" class="jx-arrow jx-next" aria-label="Siguiente / Next">›</button>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -133,4 +133,33 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     reveals.forEach(function (el) { io.observe(el); });
   }
+
+  /* ---- Journey stepper (experiencia) ---- */
+  var jx = document.getElementById('journeyX');
+  if (jx) {
+    var slides = [].slice.call(jx.querySelectorAll('.jx-slide'));
+    var dots = [].slice.call(jx.querySelectorAll('.jx-dot'));
+    var prevB = jx.querySelector('.jx-prev');
+    var nextB = jx.querySelector('.jx-next');
+    var idx = 0;
+    function show(n) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+      dots.forEach(function (d, i) {
+        d.classList.toggle('active', i === idx);
+        d.classList.toggle('done', i < idx);
+        d.setAttribute('aria-current', i === idx ? 'step' : 'false');
+      });
+      if (prevB) prevB.disabled = idx === 0;
+      if (nextB) nextB.disabled = idx === slides.length - 1;
+    }
+    if (prevB) prevB.addEventListener('click', function () { show(idx - 1); });
+    if (nextB) nextB.addEventListener('click', function () { show(idx + 1); });
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); }); });
+    jx.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { show(idx - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { show(idx + 1); e.preventDefault(); }
+    });
+    show(0);
+  }
 })();
