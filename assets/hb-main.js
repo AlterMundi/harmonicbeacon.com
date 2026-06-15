@@ -51,8 +51,8 @@
       '<div><a href="/" class="brandlock">' + markSvg(28) +
         '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon + PMP</span></a>' +
         '<p class="boundary" style="margin-top:1.2rem;">' +
-          L('Beacon + PMP is framed as wellness, not therapy. Participant reports are experiential accounts, not clinical evidence. The harmonic field is proprietary know-how, not a patent claim.',
-            'Beacon + PMP se enmarca como bienestar, no como terapia. Los reportes de participantes son relatos experienciales, no evidencia clínica. El campo armónico es know-how propio, no un claim de patente.') +
+          L('A live, guided, substance-free wellness experience.',
+            'Una experiencia de bienestar en vivo, guiada y sin sustancias.') +
         '</p></div>' +
       '<div class="foot-contact">' +
         '<p class="eyebrow" style="color:var(--ink-600);">Asociación Civil AlterMundi</p>' +
