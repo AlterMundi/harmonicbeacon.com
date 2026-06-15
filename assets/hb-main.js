@@ -17,11 +17,11 @@
   /* ---- NAV ---- */
   var links = [
     { href: '#experience', en: 'Experience', es: 'Experiencia', key: 'experience' },
-    { href: '#hosts', en: 'For Hosts', es: 'Anfitriones', key: 'hosts' },
+    { href: '#opens', en: 'What it opens', es: 'Lo que abre', key: 'opens' },
     { href: '#different', en: 'Difference', es: 'Diferencia', key: 'different' },
     { href: '#team', en: 'Team', es: 'Equipo', key: 'team' },
     { href: '#foundation', en: 'HIT', es: 'HIT', key: 'foundation' },
-    { href: '#contact', en: 'Contact', es: 'Contacto', key: 'contact' }
+    { href: '#contact', en: 'Experience it', es: 'Vivirlo', key: 'contact' }
   ];
   function linkItems() {
     return links.map(function (l) {
@@ -37,12 +37,12 @@
       '<div class="nav-right">' +
         '<button class="lang" id="lang" type="button" aria-label="Language / Idioma">' +
           '<span data-lang-tag="en">EN</span><span class="sep">/</span><span data-lang-tag="es">ES</span></button>' +
-        '<a href="#contact" class="btn btn-primary nav-cta">' + L('Host a preview', 'Hostear una preview') + '</a>' +
+        '<a href="#contact" class="btn btn-primary nav-cta">' + L('Experience it', 'Vivir la experiencia') + '</a>' +
         '<button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '</div>' +
     '</div>' +
     '<div class="nav-mobile" id="navMobile"><ul>' + linkItems() +
-      '<li><a href="#contact" class="mob-cta">' + L('Host a preview', 'Hostear una preview') + '</a></li>' +
+      '<li><a href="#contact" class="mob-cta">' + L('Experience it', 'Vivir la experiencia') + '</a></li>' +
     '</ul></div></header>';
 
   /* ---- FOOTER ---- */
