@@ -19,6 +19,7 @@
     { href: '#experience', en: 'Experience', es: 'Experiencia', key: 'experience' },
     { href: '#opens', en: 'What it opens', es: 'Lo que abre', key: 'opens' },
     { href: '#different', en: 'Difference', es: 'Diferencia', key: 'different' },
+    { href: '#porque', en: 'Why it works', es: 'Por qué funciona', key: 'porque' },
     { href: '#team', en: 'Team', es: 'Equipo', key: 'team' },
     { href: '#foundation', en: 'HIT', es: 'HIT', key: 'foundation' },
     { href: '#contact', en: 'Experience it', es: 'Vivirlo', key: 'contact' }
