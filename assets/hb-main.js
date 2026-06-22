@@ -1,4 +1,4 @@
-/* Harmonic Beacon + PMP — chrome compartido + interacciones (multi-página) */
+/* Harmonic Beacon + HMP — chrome compartido + interacciones (multi-página) */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -16,12 +16,11 @@
 
   /* ---- NAV ---- */
   var links = [
-    { href: '#experience', en: 'Experience', es: 'Experiencia', key: 'experience' },
-    { href: '#opens', en: 'What it opens', es: 'Lo que abre', key: 'opens' },
-    { href: '#different', en: 'Difference', es: 'Diferencia', key: 'different' },
-    { href: '#team', en: 'Team', es: 'Equipo', key: 'team' },
-    { href: '#foundation', en: 'HIT', es: 'HIT', key: 'foundation' },
-    { href: '#contact', en: 'Experience it', es: 'Vivirlo', key: 'contact' }
+    { href: '/#porque', en: 'Why it works', es: 'Por qué funciona', key: 'porque' },
+    { href: '/#trabajo', en: 'Our work', es: 'Nuestro trabajo', key: 'trabajo' },
+    { href: '/#team', en: 'Team', es: 'Equipo', key: 'team' },
+    { href: '/#foundation', en: 'HIT', es: 'HIT', key: 'foundation' },
+    { href: '/#contact', en: 'Contact', es: 'Contacto', key: 'contact' }
   ];
   function linkItems() {
     return links.map(function (l) {
@@ -31,25 +30,25 @@
   }
   var navHtml =
     '<header class="nav" id="nav"><div class="nav-inner">' +
-      '<a href="/" class="brandlock" aria-label="Harmonic Beacon + PMP">' + markSvg(30) +
+      '<a href="/" class="brandlock" aria-label="Harmonic Beacon">' + markSvg(30) +
         '<span class="hb-wordmark" style="font-size:13px;">Harmonic Beacon</span></a>' +
       '<ul class="nav-links">' + linkItems() + '</ul>' +
       '<div class="nav-right">' +
         '<button class="lang" id="lang" type="button" aria-label="Language / Idioma">' +
           '<span data-lang-tag="en">EN</span><span class="sep">/</span><span data-lang-tag="es">ES</span></button>' +
-        '<a href="#contact" class="btn btn-primary nav-cta">' + L('Experience it', 'Vivir la experiencia') + '</a>' +
+        '<a href="/#contact" class="btn btn-primary nav-cta">' + L('Contact', 'Contacto') + '</a>' +
         '<button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '</div>' +
     '</div>' +
     '<div class="nav-mobile" id="navMobile"><ul>' + linkItems() +
-      '<li><a href="#contact" class="mob-cta">' + L('Experience it', 'Vivir la experiencia') + '</a></li>' +
+      '<li><a href="/#contact" class="mob-cta">' + L('Contact', 'Contacto') + '</a></li>' +
     '</ul></div></header>';
 
   /* ---- FOOTER ---- */
   var footHtml =
     '<footer><div class="wrap foot-grid">' +
       '<div><a href="/" class="brandlock">' + markSvg(28) +
-        '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon + PMP</span></a>' +
+        '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon</span></a>' +
         '<p class="boundary" style="margin-top:1.2rem;">' +
           L('A live, guided, substance-free wellness experience.',
             'Una experiencia de bienestar en vivo, guiada y sin sustancias.') +
