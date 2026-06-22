@@ -67,6 +67,18 @@
   a.work-card:hover .wk-link .arr{ transform:translateX(4px); }
   .work-card.soon{ border-style:dashed; border-color:var(--hair); }
   .work-card.soon::after{ content:none; }
+  .work-card .wk-login{ display:inline-flex; align-items:center; gap:.5rem; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#1a140c; font-weight:600; padding:.6rem 1.1rem; border-radius:999px; background:linear-gradient(135deg,var(--gold-2),var(--gold) 60%,var(--gold-deep)); transition:transform .35s var(--ease), box-shadow .35s var(--ease); }
+  .work-card .wk-login:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,162,78,.3); }
+  .work-card .wk-state{ display:block; margin-top:.7rem; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-500); }
+  /* status pills */
+  .pill.live{ color:#1a140c; background:linear-gradient(135deg,var(--gold-2),var(--gold) 60%,var(--gold-deep)); border-color:transparent; font-weight:600; }
+  .pill .dot-live{ margin-right:.15rem; }
+
+  /* available-now banner */
+  .avail-now{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.4rem; margin-top:2.2rem; padding:1.3rem 1.6rem; border:1px solid var(--hair); border-radius:var(--r-card); background:linear-gradient(135deg,rgba(201,162,78,.10),rgba(201,162,78,.02)); }
+  .avail-now .an-txt{ flex:1 1 320px; color:var(--ink-800); font-size:1rem; line-height:1.55; }
+  .avail-now .an-txt b{ color:var(--bone); font-weight:600; }
+  .avail-now .an-ey{ display:block; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.45rem; }
 
   /* ---------- Team ---------- */
   .team{ display:grid; gap:1px; background:var(--hair-soft); border:1px solid var(--hair-soft); border-radius:var(--r-card); overflow:hidden; margin-top:2.6rem; }
@@ -137,58 +149,83 @@
     <div class="head reveal" style="max-width:54ch;">
       <span class="eyebrow"><span data-lang="en">Our work</span><span data-lang="es">Nuestro trabajo</span></span>
       <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">Lines of work</span><span data-lang="es">Líneas de trabajo</span></h2>
-      <p class="lead"><span data-lang="en">Harmonic Beacon grows along several converging lines — from the device itself to the experiences, tools, and training built around it.</span><span data-lang="es">Harmonic Beacon crece en varias líneas que convergen — desde el dispositivo en sí hasta las experiencias, herramientas y formación que se construyen alrededor.</span></p>
+      <p class="lead"><span data-lang="en">Harmonic Beacon grows along several converging lines — from the device itself to the experiences, tools, and training built around it. Each one has its own space below.</span><span data-lang="es">Harmonic Beacon crece en varias líneas que convergen — desde el dispositivo en sí hasta las experiencias, herramientas y formación que se construyen alrededor. Cada una tiene su propio espacio acá abajo.</span></p>
+    </div>
+
+    <!-- Available now -->
+    <div class="avail-now reveal" data-d="1">
+      <div class="an-txt">
+        <span class="an-ey"><span class="dot-live"></span> <span data-lang="en">Available now</span><span data-lang="es">Disponible ahora</span></span>
+        <span data-lang="en">What we offer today are <b>in-person sessions at wellness centers</b>: the <b>Harmonic Myth Projection</b> experience, live and guided.</span>
+        <span data-lang="es">Lo que ofrecemos hoy son <b>sesiones presenciales en wellness centers</b>: la experiencia de <b>Proyección Armónica del Mito</b>, en vivo y guiada.</span>
+      </div>
+      <a class="btn btn-primary" href="/proyeccion-armonica-del-mito/"><span data-lang="en">See the experience</span><span data-lang="es">Ver la experiencia</span></a>
     </div>
 
     <div class="work-grid">
 
-      <!-- 1 · App (placeholder) -->
-      <article class="card work-card soon reveal">
+      <!-- 1 · App -->
+      <article class="card work-card reveal">
         <span class="wk-num">i</span>
         <h3><span data-lang="en">App</span><span data-lang="es">App</span></h3>
-        <p><span data-lang="en">A digital companion for the Beacon experience. Description coming soon.</span><span data-lang="es">Un compañero digital para la experiencia Beacon. Descripción próximamente.</span></p>
-        <div class="wk-foot"><span class="pill"><span data-lang="en">Coming soon · copy pending</span><span data-lang="es">Próximamente · falta descripción</span></span></div>
+        <p><span data-lang="en">Your gateway to the Beacon experience and your personal myth, from any device — log in to enter.</span><span data-lang="es">Tu puerta de entrada a la experiencia Beacon y a tu mito personal, desde cualquier dispositivo — entrá con tu login.</span></p>
+        <div class="wk-foot">
+          <a class="wk-login" href="https://harmonicbeacon.altermundi.net" target="_blank" rel="noopener"><span data-lang="en">Log in</span><span data-lang="es">Hacer login</span></a>
+          <span class="wk-state"><span data-lang="en">The app is under construction.</span><span data-lang="es">La app está en construcción.</span></span>
+        </div>
       </article>
 
       <!-- 2 · Proyección Armónica del Mito -->
       <a class="card work-card reveal" data-d="1" href="/proyeccion-armonica-del-mito/">
         <span class="wk-num">ii</span>
         <h3><span data-lang="en">Harmonic Myth Projection</span><span data-lang="es">Proyección Armónica del Mito</span></h3>
-        <p><span data-lang="en">The live, guided experience: a structured symbolic journey within the Beacon's harmonic field, closing with personal integration.</span><span data-lang="es">La experiencia guiada en vivo: un viaje simbólico estructurado dentro del campo armónico del Beacon, que cierra con una integración personal.</span></p>
+        <p><span data-lang="en">A group wellness experience for centers and retreats: a 75–120 min guided journey inside the Beacon's harmonic field, with the symbolic Personal Myth process. Substance-free, non-clinical.</span><span data-lang="es">Una experiencia grupal de bienestar para centros y retiros: un viaje guiado de 75–120 min dentro del campo armónico del Beacon, con el proceso simbólico del Mito Personal. Sin sustancias, no clínica.</span></p>
+        <div class="wk-foot">
+          <span class="pill live"><span class="dot-live"></span> <span data-lang="en">Available now · wellness centers</span><span data-lang="es">Disponible ahora · wellness centers</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <!-- 3 · El Beacon -->
+      <a class="card work-card reveal" data-d="2" href="/el-beacon/">
+        <span class="wk-num">iii</span>
+        <h3><span data-lang="en">The Beacon</span><span data-lang="es">El Beacon</span></h3>
+        <p><span data-lang="en">The device and protocol that sustains harmonic acoustic fields from the natural physics of harmony — for sessions, installations, and research. Proportions, not isolated frequencies.</span><span data-lang="es">El dispositivo y protocolo que sostiene campos acústicos armónicos desde la física natural de la armonía — para sesiones, instalaciones e investigación. Proporciones, no frecuencias aisladas.</span></p>
         <div class="wk-foot"><span class="wk-link"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span></div>
       </a>
 
-      <!-- 3 · El Beacon en sí mismo -->
-      <a class="card work-card reveal" data-d="2" href="#foundation">
-        <span class="wk-num">iii</span>
-        <h3><span data-lang="en">The Beacon itself</span><span data-lang="es">El Beacon en sí mismo</span></h3>
-        <p><span data-lang="en">The device as an acoustic field and a listening practice — built from harmonic proportions, not isolated frequencies. Studied on its own as a HIT instrument.</span><span data-lang="es">El dispositivo como campo acústico y práctica de escucha — construido desde proporciones armónicas, no frecuencias aisladas. Estudiado en sí mismo como instrumento HIT.</span></p>
-        <div class="wk-foot"><span class="wk-link"><span data-lang="en">The HIT foundation</span><span data-lang="es">El fundamento HIT</span> <span class="arr">→</span></span></div>
-      </a>
-
-      <!-- 4 · bonob.os (placeholder) -->
-      <article class="card work-card soon reveal" data-d="1">
+      <!-- 4 · bonob.os -->
+      <a class="card work-card reveal" data-d="1" href="/bonobos/">
         <span class="wk-num">iv</span>
         <h3>bonob.os</h3>
-        <p><span data-lang="en">Description coming soon.</span><span data-lang="es">Descripción próximamente.</span></p>
-        <div class="wk-foot"><span class="pill"><span data-lang="en">Coming soon · copy pending</span><span data-lang="es">Próximamente · falta descripción</span></span></div>
-      </article>
+        <p><span data-lang="en">An app for healing and reconnecting with one's sexual life through narrated experiences, with the Beacon sustaining bodily presence. Wellness and exploration — never medical treatment.</span><span data-lang="es">Una app para sanar y reconectar con la vida sexual a través de experiencias narradas, con el Beacon sosteniendo la presencia corporal. Bienestar y exploración — nunca tratamiento médico.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">Research · idea stage</span><span data-lang="es">Investigación · etapa de idea</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
 
       <!-- 5 · Licencia y formación integral de facilitadores -->
-      <article class="card work-card soon reveal" data-d="2">
+      <a class="card work-card reveal" data-d="2" href="/formacion/">
         <span class="wk-num">v</span>
         <h3><span data-lang="en">Licensing &amp; integral facilitator training</span><span data-lang="es">Licencia y formación integral de facilitadores</span></h3>
-        <p><span data-lang="en">A path to train and license facilitators to hold Beacon experiences — embodied facilitation, care framing, and the symbolic process — within AlterMundi's framework.</span><span data-lang="es">Un camino para formar y licenciar facilitadores que sostengan experiencias Beacon — facilitación encarnada, marco de cuidado y proceso simbólico — dentro del marco de AlterMundi.</span></p>
-        <div class="wk-foot"><span class="pill"><span data-lang="en">In development</span><span data-lang="es">En desarrollo</span></span></div>
-      </article>
+        <p><span data-lang="en">A path to train and license facilitators to hold Beacon + Harmonic Myth Projection experiences with care, within AlterMundi's framework.</span><span data-lang="es">Un camino para formar y licenciar facilitadores que sostengan experiencias Beacon + Proyección Armónica del Mito con cuidado, dentro del marco de AlterMundi.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">In development</span><span data-lang="es">En desarrollo</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
 
-      <!-- 6 · Psicopompo (placeholder) -->
-      <article class="card work-card soon reveal">
+      <!-- 6 · Psicopompo -->
+      <a class="card work-card reveal" href="/psicopompo/">
         <span class="wk-num">vi</span>
         <h3><span data-lang="en">Psychopomp</span><span data-lang="es">Psicopompo</span></h3>
-        <p><span data-lang="en">Description coming soon.</span><span data-lang="es">Descripción próximamente.</span></p>
-        <div class="wk-foot"><span class="pill"><span data-lang="en">Coming soon · copy pending</span><span data-lang="es">Próximamente · falta descripción</span></span></div>
-      </article>
+        <p><span data-lang="en">An AI copilot to accompany the Personal Myth process inside an active Beacon session — human-in-the-loop, with explicit clinical limits.</span><span data-lang="es">Un copiloto de IA para acompañar el proceso del Mito Personal dentro de una sesión Beacon activa — con humano en el circuito y límites clínicos explícitos.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">Research · R&amp;D</span><span data-lang="es">Investigación · R&amp;D</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
 
     </div>
   </div>
