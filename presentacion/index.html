@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Proyección Armónica del Mito — Harmonic Beacon</title>
+<meta name="description" lang="es" content="Una presentación para leer a tu ritmo: un viaje profundo, solo con sonido y símbolo. Proyección Armónica del Mito, de AlterMundi." />
+<meta name="description" lang="en" content="A presentation to read at your own pace: a deep journey, only sound and symbol. Harmonic Myth Projection, by AlterMundi." />
+<meta name="theme-color" content="#16120D" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon + HMP" />
+<meta property="og:title" content="Proyección Armónica del Mito — Harmonic Beacon" />
+<meta property="og:description" content="Un viaje profundo, solo con sonido y símbolo. Una presentación para leer a tu ritmo." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  html[data-active-lang="es"] [data-lang="en"]{ display:none !important; }
+  html[data-active-lang="en"] [data-lang="es"]{ display:none !important; }
+</style>
+<link rel="stylesheet" href="/assets/hb-brand.css" />
+
+<style>
+  /* Tokens de marca embebidos (autónomos: NO dependen de hb-brand.css) */
+  :root{
+    --bg-0:#16120D; --bg-1:#1E1812; --bg-2:#241D15; --bg-card:#1B150F;
+    --bone:#F4EEE2; --ink-800:#E9E0D0; --ink-600:#ADA089; --ink-500:#8A7F6B; --pearl-400:#6E5E44;
+    --gold:#C9A24E; --gold-2:#E3C77E; --gold-deep:#A07E33;
+    --hair:rgba(201,162,78,.22); --hair-soft:rgba(244,238,226,.10); --surface:rgba(244,238,226,.035);
+    --font-serif:'Cormorant Garamond',Georgia,serif; --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --track-eyebrow:.34em; --track-wordmark:.18em; --r-card:18px;
+    --shadow-card:0 24px 60px rgba(0,0,0,.45); --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{ box-sizing:border-box; }
+  html{ background:#16120D; }
+  /* Fondo OSCURO garantizado en toda la presentación (nunca blanco) */
+  body{
+    margin:0; overflow:hidden;
+    color:var(--ink-800);
+    font-family:var(--font-sans); font-weight:400; -webkit-font-smoothing:antialiased;
+    background:#16120D;
+    background-image:
+      radial-gradient(120% 80% at 12% -8%, rgba(201,162,78,.10), transparent 60%),
+      radial-gradient(120% 90% at 92% 108%, rgba(110,94,68,.16), transparent 60%),
+      linear-gradient(158deg, #16120D, #1E1812);
+    background-repeat:no-repeat;
+  }
+
+  /* ---------- Layout deck ---------- */
+  .deck{ position:fixed; inset:0; z-index:1; display:flex; flex-direction:column; background:#16120D;
+    background-image:
+      radial-gradient(120% 80% at 12% -8%, rgba(201,162,78,.10), transparent 60%),
+      radial-gradient(120% 90% at 92% 108%, rgba(110,94,68,.16), transparent 60%),
+      linear-gradient(158deg, #16120D, #1E1812);
+    background-repeat:no-repeat; }
+
+  /* barra de progreso */
+  .progress{ position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--gold-2),var(--gold)); width:0;
+    z-index:40; transition:width .6s var(--ease); box-shadow:0 0 12px rgba(201,162,78,.5); }
+
+  /* topbar */
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:30; display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(16px,4vw,40px); }
+  .brandmark{ display:flex; align-items:center; gap:12px; color:var(--gold); }
+  .brandmark svg{ width:30px; height:30px; }
+  .brandmark .word{ font-family:var(--font-sans); font-weight:600; text-transform:uppercase; letter-spacing:var(--track-wordmark);
+    font-size:12.5px; color:var(--bone); }
+  .topright{ display:flex; align-items:center; gap:18px; }
+  .langtoggle{ display:flex; gap:2px; font-size:11px; letter-spacing:.12em; }
+  .langtoggle button{ background:none; border:0; color:var(--ink-500); cursor:pointer; font-family:var(--font-sans);
+    font-weight:600; text-transform:uppercase; padding:4px 7px; border-radius:6px; transition:color .3s, background .3s; }
+  .langtoggle button.on{ color:var(--bg-0); background:var(--gold); }
+  .home{ font-size:11px; text-transform:uppercase; letter-spacing:.16em; color:var(--ink-600); transition:color .3s; }
+  .home:hover{ color:var(--gold-2); }
+
+  /* zona de slides */
+  .stage{ flex:1; position:relative; }
+  .slide{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:72px clamp(22px,5vw,40px) 120px; text-align:center;
+    opacity:0; visibility:hidden; transform:translateY(18px); pointer-events:none;
+    transition:opacity .7s var(--ease), transform .7s var(--ease), visibility .7s; }
+  .slide.active{ opacity:1; visibility:visible; transform:none; pointer-events:auto; }
+
+  .inner{ width:100%; max-width:780px; display:flex; flex-direction:column; align-items:center; }
+
+  /* fondo a sangre (título / cierre) */
+  .bgfull{ position:absolute; inset:0; z-index:-2; overflow:hidden; background:var(--bg-0); }
+  .bgfull img{ width:100%; height:100%; object-fit:cover; opacity:.30; filter:saturate(.8) contrast(1.02) brightness(.92); }
+  .bgfull::after{ content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(58% 46% at 50% 46%, rgba(12,9,5,.78), rgba(12,9,5,.30) 70%, transparent 100%),
+      linear-gradient(180deg, rgba(16,12,8,.78) 0%, rgba(16,12,8,.58) 38%, rgba(16,12,8,.94) 100%); }
+  .mark-liss{ margin-bottom:22px; }
+
+  /* imagen pintada enmarcada (atenuada para modo oscuro) */
+  .plate{ width:100%; max-width:680px; aspect-ratio:16/9; border-radius:var(--r-card); overflow:hidden; position:relative;
+    margin-bottom:34px; box-shadow:var(--shadow-card); background:var(--bg-0); }
+  .plate::after{ content:""; position:absolute; inset:0; border-radius:var(--r-card);
+    box-shadow:inset 0 0 0 1px var(--hair), inset 0 -70px 80px -30px rgba(22,18,13,.92);
+    background:
+      radial-gradient(70% 60% at 50% 42%, rgba(12,9,5,.34), transparent 78%),
+      linear-gradient(180deg, rgba(16,12,8,.42) 0%, rgba(16,12,8,.20) 45%, rgba(16,12,8,.72) 100%);
+    pointer-events:none; }
+  .plate img{ width:100%; height:100%; object-fit:cover; display:block;
+    opacity:.66; filter:saturate(.82) contrast(1.02) brightness(.74); }
+
+  .eyebrow{ text-transform:uppercase; letter-spacing:var(--track-eyebrow); font-size:11px; font-weight:500; color:var(--gold);
+    font-family:var(--font-sans); margin-bottom:18px; }
+  h1.title{ font-family:var(--font-serif); font-weight:500; color:var(--gold-2); line-height:1.06;
+    font-size:clamp(2rem,5.2vw,3.4rem); }
+  h2.title{ font-family:var(--font-serif); font-weight:500; color:var(--gold-2); line-height:1.08;
+    font-size:clamp(1.7rem,4.4vw,2.7rem); }
+  .title .it{ display:block; font-style:italic; color:var(--bone); font-weight:400; }
+  .lede{ font-family:var(--font-serif); font-style:italic; color:var(--ink-800);
+    font-size:clamp(1.15rem,2.6vw,1.55rem); line-height:1.5; margin-top:18px; max-width:42ch; }
+  hr.rule{ width:90px; height:1px; border:0; background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:26px auto; position:relative; }
+  hr.rule::after{ content:""; position:absolute; left:50%; top:50%; width:6px; height:6px; border-radius:50%;
+    background:var(--gold); transform:translate(-50%,-50%); }
+  .body{ color:var(--bone); font-weight:500; font-size:clamp(1.06rem,2.1vw,1.24rem); line-height:1.62; max-width:48ch;
+    text-shadow:0 1px 6px rgba(0,0,0,.45); }
+  .seq{ list-style:none; padding:0; margin:6px 0 0; display:flex; flex-direction:column; gap:18px; max-width:52ch; }
+  .seq li{ color:var(--bone); font-weight:500; font-size:clamp(1.02rem,2vw,1.2rem); line-height:1.5;
+    text-shadow:0 1px 6px rgba(0,0,0,.45); }
+  .seq.quotes li{ font-family:var(--font-serif); font-style:italic; color:var(--bone);
+    font-size:clamp(1.12rem,2.5vw,1.5rem); line-height:1.45; }
+  .seq .accent{ color:var(--gold-2); font-family:var(--font-serif); font-style:italic; }
+
+  /* contactos */
+  .contacts{ display:flex; flex-direction:column; gap:16px; margin-top:8px; }
+  .contacts .row{ display:flex; flex-direction:column; gap:3px; }
+  .contacts .lab{ text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--gold); font-weight:600; }
+  .contacts .val{ font-family:var(--font-serif); font-size:clamp(1.1rem,2.4vw,1.4rem); color:var(--bone); }
+  .contacts a{ color:inherit; }
+  .org{ margin-top:22px; text-transform:uppercase; letter-spacing:.2em; font-size:10px; color:var(--ink-500); }
+
+  /* anillos de interferencia del Beacon */
+  .rings{ position:absolute; inset:0; z-index:-1; overflow:hidden; opacity:.5; }
+  .rings svg{ position:absolute; top:22%; left:50%; transform:translate(-50%,-50%); width:140%; max-width:1100px; }
+  .rings circle{ fill:none; stroke:var(--gold); }
+
+  /* ---------- Controles ---------- */
+  .controls{ position:fixed; left:0; right:0; bottom:0; z-index:30; display:flex; align-items:center; justify-content:center;
+    gap:22px; padding:20px clamp(16px,4vw,40px) calc(20px + env(safe-area-inset-bottom)); }
+  .deck-nav{ width:54px; height:54px; border-radius:50%; border:1px solid var(--hair); background:var(--surface);
+    color:var(--gold-2); cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px);
+    transition:transform .35s var(--ease), border-color .35s, background .35s, opacity .35s; }
+  .deck-nav:hover{ transform:translateY(-2px); border-color:var(--gold); background:rgba(201,162,78,.12); }
+  .deck-nav:disabled{ opacity:.28; cursor:default; transform:none; }
+  .deck-nav svg{ width:20px; height:20px; }
+  .counter{ font-family:var(--font-sans); font-size:12px; letter-spacing:.18em; color:var(--ink-600); min-width:74px; text-align:center; }
+  .counter b{ color:var(--gold-2); font-weight:600; }
+
+  /* dots */
+  .dots{ position:fixed; left:50%; bottom:96px; transform:translateX(-50%); z-index:30; display:flex; gap:9px; }
+  .dots button{ width:7px; height:7px; border-radius:50%; border:0; background:var(--pearl-400); cursor:pointer; padding:0;
+    transition:background .35s, transform .35s, width .35s; }
+  .dots button.on{ background:var(--gold); width:20px; border-radius:4px; }
+
+  .hint{ position:fixed; right:clamp(16px,4vw,40px); bottom:96px; z-index:25; font-size:10px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ink-500); opacity:.8; }
+
+  @media (max-width:640px){
+    .slide{ padding:84px 22px 150px; }
+    .plate{ aspect-ratio:4/3; margin-bottom:26px; }
+    .dots{ bottom:104px; }
+    .hint{ display:none; }
+  }
+
+  /* Pantallas bajas / horizontales (laptops): evitar que el contenido tape los controles */
+  @media (max-height:880px){
+    .slide{ padding-top:70px; padding-bottom:150px; }
+    .plate{ height:32vh; max-height:300px; width:auto; max-width:min(680px,92vw); aspect-ratio:16/9; margin-bottom:18px; }
+    .mark-liss{ width:46px; height:46px; margin-bottom:14px; }
+    hr.rule{ margin:16px auto; }
+    .lede{ margin-top:12px; }
+    .seq{ gap:12px; }
+    .contacts{ gap:12px; }
+  }
+  @media (max-height:880px) and (min-width:641px){
+    h1.title{ font-size:clamp(1.9rem,4.4vw,2.9rem); }
+    h2.title{ font-size:clamp(1.5rem,3.6vw,2.2rem); }
+    .body, .seq li{ font-size:clamp(.98rem,1.7vw,1.12rem); line-height:1.5; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .slide{ transition:opacity .3s; transform:none; }
+    .progress{ transition:none; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<div class="progress" id="progress"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a href="/" class="brandmark" aria-label="Harmonic Beacon — inicio">
+    <svg id="mark-top" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <span class="word">Harmonic Beacon</span>
+  </a>
+  <div class="topright">
+    <div class="langtoggle" role="group" aria-label="Idioma / Language">
+      <button data-set-lang="es" class="on">ES</button>
+      <button data-set-lang="en">EN</button>
+    </div>
+    <a class="home" href="/" data-lang="es">← Inicio</a>
+    <a class="home" href="/" data-lang="en">← Home</a>
+  </div>
+</div>
+
+<!-- Deck -->
+<div class="deck">
+  <div class="stage" id="stage" aria-live="polite"></div>
+</div>
+
+<!-- Dots -->
+<div class="dots" id="dots" role="tablist" aria-label="Carteles / Slides"></div>
+
+<!-- Controls -->
+<div class="controls">
+  <button class="deck-nav" id="prev" aria-label="Anterior">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="counter"><b id="cur">01</b> / <span id="total">13</span></div>
+  <button class="deck-nav" id="next" aria-label="Siguiente">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+<div class="hint" data-lang="es">← → para pasar</div>
+<div class="hint" data-lang="en">← → to navigate</div>
+
+<script>
+/* ---------- Símbolo Lissajous 3:2 (perla / Beacon) ---------- */
+function lissajousPath(a, b, delta, R, cx, cy, n){
+  let d = "";
+  for(let i=0;i<=n;i++){
+    const t = (i/n) * 2*Math.PI;
+    const x = cx + R*Math.sin(a*t + delta);
+    const y = cy + R*Math.sin(b*t);
+    d += (i===0?"M":"L") + x.toFixed(2) + " " + y.toFixed(2) + " ";
+  }
+  return d.trim();
+}
+function renderMark(svg, stroke){
+  const d = lissajousPath(3, 2, Math.PI/2, 38, 50, 50, 240);
+  svg.innerHTML = '<path d="'+d+'" fill="none" stroke="'+stroke+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
+}
+renderMark(document.getElementById('mark-top'), 'var(--gold)');
+
+/* ---------- Anillos de interferencia (Beacon) ---------- */
+function ringsSVG(){
+  const c1=[360,300], c2=[640,300]; let html="";
+  for(const c of [c1,c2]){
+    for(let r=40;r<780;r+=46){
+      const op=Math.max(0,(1-r/800)*0.55).toFixed(3);
+      html+='<circle cx="'+c[0]+'" cy="'+c[1]+'" r="'+r+'" stroke-opacity="'+op+'" stroke-width="1.4"/>';
+    }
+  }
+  for(const c of [c1,c2]) html+='<circle cx="'+c[0]+'" cy="'+c[1]+'" r="5" fill="var(--gold-2)" stroke="none"/>';
+  return '<svg viewBox="0 0 1000 600">'+html+'</svg>';
+}
+
+/* ---------- Contenido (bilingüe) ---------- */
+const T = {
+  prev:{es:"Anterior",en:"Previous"}, next:{es:"Siguiente",en:"Next"}
+};
+const SLIDES = [
+  { type:"title", img:"traveler",
+    eyebrow:{es:"Harmonic Beacon",en:"Harmonic Beacon"},
+    title:{es:"Proyección Armónica del Mito",en:"Harmonic Myth Projection"},
+    lede:{es:"un viaje profundo — solo con sonido y símbolo",en:"a deep journey — only sound and symbol"},
+    mark:true },
+
+  { type:"editorial", img:"traveler",
+    eyebrow:{es:"El anhelo",en:"The longing"},
+    title:{es:"El viaje hacia adentro",en:"The journey inward"},
+    body:{es:"Cada vez más personas buscan algo difícil de nombrar: volver a casa, a sí mismas. Un viaje hacia adentro que sea real, y cuidado.",
+          en:"More and more people are looking for something hard to name: to come home, to themselves. A journey inward that is real, and held with care."} },
+
+  { type:"editorial", img:"bridge",
+    eyebrow:{es:"Qué es",en:"What it is"},
+    title:{es:"Sonido y símbolo,",en:"Sound and symbol,"},
+    titleIt:{es:"juntos",en:"together"},
+    body:{es:"Un viaje profundo — solo con sonido y símbolo. Sobre un campo armónico propio, un protocolo cuidado y una guía simbólica que da sentido a lo que aparece.",
+          en:"A deep journey — only sound and symbol. Resting on a proprietary harmonic field, a careful protocol, and symbolic guidance that gives meaning to whatever arises."} },
+
+  { type:"dark", mark:true,
+    eyebrow:{es:"Tres pilares",en:"Three pillars"},
+    title:{es:"Lo que sostiene el viaje",en:"What holds the journey"},
+    seq:[
+      {es:"<span class='accent'>Un campo armónico propio</span>, fruto de nuestra investigación sobre la armonía natural.",
+       en:"<span class='accent'>A proprietary harmonic field</span>, built from our own research into natural harmony."},
+      {es:"<span class='accent'>Un protocolo cuidado</span>, de escucha situada, con entrada y salida seguras.",
+       en:"<span class='accent'>A careful protocol</span> of situated listening, with safe entry and exit."},
+      {es:"<span class='accent'>Una guía simbólica</span> que le da sentido a lo que aparece.",
+       en:"<span class='accent'>Symbolic guidance</span> that gives meaning to whatever arises."}
+    ] },
+
+  { type:"dark", rings:true,
+    eyebrow:{es:"El Beacon",en:"The Beacon"},
+    title:{es:"Proporciones,",en:"Proportions,"},
+    titleIt:{es:"no frecuencias",en:"not frequencies"},
+    body:{es:"Afinado a la serie armónica natural — como suena el sonido en un bosque o junto al mar. Suena toda la serie a la vez, como la voz humana: un campo denso y vivo que nunca se repite igual. Importan las relaciones entre los tonos. Un campo, no una frecuencia, que te sostiene en el presente.",
+          en:"Tuned to the natural harmonic series — the way sound rings in a forest or beside the sea. The whole series sounds at once, like the human voice: a dense, living field that never repeats itself. What matters is the relationships between the tones. A field, not a frequency, that holds you in the present."} },
+
+  { type:"dark", mark:true,
+    eyebrow:{es:"La raíz simbólica",en:"The symbolic root"},
+    title:{es:"Proyección Armónica del Mito",en:"Harmonic Myth Projection"},
+    body:{es:"Más de quince años de práctica. De Jung, la imaginación activa: dialogar con las imágenes que surgen. Del psicodrama, el cuerpo y la escena. Del viaje del héroe de Campbell, el mapa: un umbral, un descenso, un encuentro.",
+          en:"Over fifteen years of practice. From Jung, active imagination: entering into dialogue with the images that arise. From psychodrama, the body and the scene. From Campbell's hero's journey, the map: a threshold, a descent, an encounter."} },
+
+  { type:"editorial", img:"traveler",
+    eyebrow:{es:"Dónde lo probamos",en:"Where we've tried it"},
+    title:{es:"De Edge City a los",en:"From Edge City to the"},
+    titleIt:{es:"encuentros semanales",en:"weekly gatherings"},
+    body:{es:"Edge City 2025 · hogar de día Yin Peumayén · enfermeras del Hospital CIMA. Y, sobre todo, nuestros encuentros semanales, donde la gente vuelve a profundizar en su propia experiencia.",
+          en:"Edge City 2025 · Yin Peumayén day program · nurses of CIMA hospital. And above all, our weekly gatherings, where people return to go deeper into their own experience."} },
+
+  { type:"editorial", img:"bridge",
+    eyebrow:{es:"Dentro de un encuentro",en:"Inside an encounter"},
+    title:{es:"Orientación · El Viaje",en:"Orientation · The Journey"},
+    titleIt:{es:"Círculo de cierre",en:"Sharing Circle"},
+    body:{es:"El cuerpo se relaja y empieza una ensoñación. Sostenidas por el sonido y por el símbolo, las personas se internan en sus propias imágenes. Unos 75 a 120 minutos.",
+          en:"The body relaxes and a reverie begins. Held by the sound and by the symbol, people move into their own images. About 75 to 120 minutes."} },
+
+  { type:"dark", mark:true,
+    eyebrow:{es:"Las voces",en:"The voices"},
+    quotes:[
+      {es:"“Es como una pintura fresca, como una partitura que se me presenta por primera vez.”",
+       en:"“It's like a fresh painting — like a score placed before me for the very first time.”"},
+      {es:"“Estaba dentro del sonido, en el universo… y amplificó todas mis percepciones. Me sentí enorme.”",
+       en:"“I was inside the sound, in the universe… and it amplified all my perceptions. I felt huge.”"}
+    ] },
+
+  { type:"dark",
+    eyebrow:{es:"Las voces",en:"The voices"},
+    quotes:[
+      {es:"“Sentía la concordancia entre lo que visualizaba y lo que sentía.”",
+       en:"“I felt the harmony between what I was seeing and what I was feeling.”"},
+      {es:"“Siento que logro armonizar lo que va apareciendo. Es muy revelador.”",
+       en:"“I feel I can harmonize whatever arises. It's deeply revealing.”"}
+    ] },
+
+  { type:"editorial", img:"traveler",
+    eyebrow:{es:"Cómo lo ofrecemos",en:"How we offer it"},
+    title:{es:"Una serie que madura",en:"A series that matures"},
+    titleIt:{es:"en el tiempo",en:"over time"},
+    body:{es:"No un encuentro suelto, sino una serie — al menos tres sesiones por persona. Sesiones individuales de integración con un psicólogo formado en HMP. Y, si se desea, parte de la vida del lugar, a tu ritmo.",
+          en:"Not a one-off, but a series — at least three sessions per person. Individual integration sessions with a psychologist trained in HMP. And, if wished, part of the life of the place, at your own rhythm."} },
+
+  { type:"dark", mark:true,
+    eyebrow:{es:"El equipo",en:"The team"},
+    title:{es:"Años de trabajo que convergen",en:"Years of work that converge"},
+    seq:[
+      {es:"Mariano Fernández Méndez · Nicolás Echániz",en:"Mariano Fernández Méndez · Nicolás Echániz"},
+      {es:"Julián De La Reta · Anabella Scigliano Mattiauda",en:"Julián De La Reta · Anabella Scigliano Mattiauda"},
+      {es:"Saira Asúa · Federico Bonino",en:"Saira Asúa · Federico Bonino"},
+      {es:"<span class='accent'>Asociación Civil AlterMundi</span>",en:"<span class='accent'>Asociación Civil AlterMundi</span>"}
+    ] },
+
+  { type:"outro", img:"bridge", mark:true,
+    title:{es:"Te invitamos a vivir la experiencia",en:"We invite you to experience it"},
+    contacts:[
+      {lab:"WhatsApp", val:"+54 9 3547 468918", href:"https://wa.me/5493547468918"},
+      {lab:"Web", val:"harmonicbeacon.com", href:"https://harmonicbeacon.com"},
+      {lab:"Instagram", val:"@harmonic.beacon", href:"https://instagram.com/harmonic.beacon"},
+      {lab:{es:"Mail",en:"Email"}, val:"info@altermundi.net", href:"mailto:info@altermundi.net"}
+    ],
+    org:"Asociación Civil AlterMundi" }
+];
+
+/* ---------- Render ---------- */
+const stage = document.getElementById('stage');
+const dotsBox = document.getElementById('dots');
+const L = (o)=> (typeof o === 'string') ? o
+  : '<span data-lang="es">'+(o.es||'')+'</span><span data-lang="en">'+(o.en||'')+'</span>';
+
+function buildSlide(s, i){
+  const el = document.createElement('section');
+  el.className = 'slide';
+  el.setAttribute('role','group');
+  el.setAttribute('aria-roledescription','slide');
+  el.dataset.index = i;
+  let h = '';
+  if(s.rings){ h += '<div class="rings">'+ringsSVG()+'</div>'; }
+  if((s.type==='title'||s.type==='outro') && s.img){
+    h += '<div class="bgfull"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
+  }
+  h += '<div class="inner">';
+  const bigMark = (s.type==='title'||s.type==='outro');
+  if(s.mark && (s.type==='dark'||bigMark)){
+    const sz = bigMark ? 64 : 56;
+    h += '<svg class="mark-liss" viewBox="0 0 100 100" width="'+sz+'" height="'+sz+'" aria-hidden="true"></svg>';
+  }
+  if(s.img && (s.type==='editorial')){
+    h += '<div class="plate"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
+  }
+  if(s.eyebrow){ h += '<p class="eyebrow">'+L(s.eyebrow)+'</p>'; }
+  if(s.title){
+    const tag = (s.type==='title')?'h1':'h2';
+    let t = '<'+tag+' class="title">'+L(s.title);
+    if(s.titleIt){ t += '<span class="it">'+L(s.titleIt)+'</span>'; }
+    t += '</'+tag+'>';
+    h += t;
+  }
+  if(s.lede){ h += '<p class="lede">'+L(s.lede)+'</p>'; }
+  if(s.title || s.eyebrow){ h += '<hr class="rule">'; }
+  if(s.body){ h += '<p class="body">'+L(s.body)+'</p>'; }
+  if(s.seq){
+    h += '<ul class="seq">'+ s.seq.map(it=>'<li>'+L(it)+'</li>').join('') +'</ul>';
+  }
+  if(s.quotes){
+    h += '<ul class="seq quotes">'+ s.quotes.map(q=>'<li>'+L(q)+'</li>').join('') +'</ul>';
+  }
+  if(s.contacts){
+    h += '<div class="contacts">';
+    for(const c of s.contacts){
+      const lab = (typeof c.lab==='object') ? L(c.lab) : c.lab;
+      h += '<div class="row"><span class="lab">'+lab+'</span>'+
+           '<span class="val"><a href="'+c.href+'"'+(c.href.startsWith('http')?' target="_blank" rel="noopener"':'')+'>'+c.val+'</a></span></div>';
+    }
+    h += '</div>';
+  }
+  if(s.org){ h += '<p class="org">'+s.org+'</p>'; }
+  h += '</div>';
+  el.innerHTML = h;
+  return el;
+}
+
+SLIDES.forEach((s,i)=>{
+  const el = buildSlide(s,i);
+  stage.appendChild(el);
+  el.querySelectorAll('.mark-liss').forEach(m=> renderMark(m, 'var(--gold)'));
+  const dot = document.createElement('button');
+  dot.setAttribute('role','tab');
+  dot.setAttribute('aria-label','Cartel '+(i+1));
+  dot.addEventListener('click',()=>go(i));
+  dotsBox.appendChild(dot);
+});
+
+const slides = [...stage.children];
+const dots = [...dotsBox.children];
+document.getElementById('total').textContent = String(slides.length).padStart(2,'0');
+
+let cur = 0;
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const progress = document.getElementById('progress');
+const curEl = document.getElementById('cur');
+
+function go(n, fromHash){
+  cur = Math.max(0, Math.min(slides.length-1, n));
+  slides.forEach((sl,i)=> sl.classList.toggle('active', i===cur));
+  dots.forEach((d,i)=> d.classList.toggle('on', i===cur));
+  curEl.textContent = String(cur+1).padStart(2,'0');
+  progress.style.width = ((cur)/(slides.length-1)*100)+'%';
+  prevBtn.disabled = cur===0;
+  nextBtn.disabled = cur===slides.length-1;
+  if(!fromHash){ history.replaceState(null,'','#'+(cur+1)); }
+}
+window.addEventListener('hashchange',()=>{
+  const n = parseInt(location.hash.replace('#',''),10);
+  if(!isNaN(n)) go(n-1, true);
+});
+prevBtn.addEventListener('click',()=>go(cur-1));
+nextBtn.addEventListener('click',()=>go(cur+1));
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); go(cur+1); }
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(cur-1); }
+  else if(e.key==='Home'){ go(0); } else if(e.key==='End'){ go(slides.length-1); }
+});
+
+/* swipe táctil */
+let tx=0, ty=0;
+stage.addEventListener('touchstart',(e)=>{ tx=e.touches[0].clientX; ty=e.touches[0].clientY; }, {passive:true});
+stage.addEventListener('touchend',(e)=>{
+  const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)){ go(dx<0?cur+1:cur-1); }
+}, {passive:true});
+
+/* rueda del mouse (con debounce suave) */
+let wheelLock=false;
+window.addEventListener('wheel',(e)=>{
+  if(wheelLock) return;
+  if(Math.abs(e.deltaY)<16 && Math.abs(e.deltaX)<16) return;
+  wheelLock=true; setTimeout(()=>wheelLock=false, 600);
+  go(cur + ((e.deltaY>0||e.deltaX>0)?1:-1));
+}, {passive:true});
+
+/* idioma */
+const html = document.documentElement;
+function setLang(lang){
+  if(lang!=='en') lang='es';
+  html.setAttribute('data-active-lang',lang);
+  html.setAttribute('lang',lang);
+  document.querySelectorAll('[data-set-lang]').forEach(x=>x.classList.toggle('on', x.dataset.setLang===lang));
+  prevBtn.setAttribute('aria-label', T.prev[lang]);
+  nextBtn.setAttribute('aria-label', T.next[lang]);
+}
+document.querySelectorAll('[data-set-lang]').forEach(b=>{
+  b.addEventListener('click',()=> setLang(b.dataset.setLang));
+});
+const qLang = new URLSearchParams(location.search).get('lang');
+if(qLang) setLang(qLang);
+
+const startN = parseInt((location.hash||'').replace('#',''),10);
+go((!isNaN(startN) && startN>=1) ? startN-1 : 0, true);
+</script>
+</body>
+</html>
