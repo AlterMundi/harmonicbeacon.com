@@ -172,6 +172,28 @@ a{ color:inherit; text-decoration:none; }
 .duotone{ filter:saturate(.78) contrast(1.02) brightness(.92); }
 
 /* ============================================================
+   Nav: jerarquía, desplegable y "estás acá"
+   ============================================================ */
+.nav-links .top-link{ position:relative; display:inline-flex; align-items:center; gap:.4rem; }
+.nav-links .top-link.active,
+.nav-links a[aria-current="page"]{ color:var(--gold); }
+.nav-links .top-link.active::after{ content:""; position:absolute; left:.7rem; right:.7rem; bottom:.04rem; height:1.5px; background:var(--gold); border-radius:2px; }
+.caret{ width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:translateY(-2px) rotate(45deg); opacity:.65; transition:transform .3s var(--ease), opacity .3s ease; }
+.has-sub{ position:relative; }
+.has-sub:hover .caret,
+.has-sub:focus-within .caret{ opacity:1; transform:translateY(0) rotate(45deg); }
+.subnav{ position:absolute; top:100%; left:0; min-width:252px; list-style:none; margin:.45rem 0 0; padding:.45rem; background:rgba(22,18,13,.97); backdrop-filter:blur(14px); border:1px solid var(--hair-soft); border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.5); opacity:0; visibility:hidden; transform:translateY(8px); transition:opacity .26s var(--ease), transform .26s var(--ease), visibility .26s; z-index:70; }
+.has-sub:hover .subnav,
+.has-sub:focus-within .subnav{ opacity:1; visibility:visible; transform:none; }
+.subnav a{ display:block; padding:.62rem .8rem; border-radius:9px; font-size:12.5px; letter-spacing:.02em; text-transform:none; color:var(--ink-600); transition:background .25s ease, color .25s ease; }
+.subnav a:hover{ background:var(--surface); color:var(--bone); }
+.subnav a.active{ color:var(--gold); background:rgba(201,162,78,.08); }
+.subnav a.active::before{ content:"\203A\00a0"; color:var(--gold); }
+.mob-sub{ list-style:none; margin:0; padding:0 0 0 1.1rem; }
+.mob-sub a{ display:block; padding:.7rem 0; border-top:1px solid var(--hair-soft); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-600); }
+.mob-sub a[aria-current="page"]{ color:var(--gold); }
+
+/* ============================================================
    Páginas de línea de trabajo (idea pages)
    ============================================================ */
 .idea-head{ padding-top:140px; }
