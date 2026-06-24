@@ -116,7 +116,18 @@ a{ color:inherit; text-decoration:none; }
   color:var(--ink-800); background:var(--surface);
   border-color:var(--hair); backdrop-filter:blur(6px);
 }
-.btn-ghost:hover{ transform:translateY(-2px); border-color:var(--gold); color:var(--bone); }
+.btn-ghost:hover{ transform:translateY(-2px); border-color:var(--gold); color:var(--bone); background:rgba(201,162,78,.06); }
+.btn:active{ transform:translateY(0) scale(.99); }
+.btn .arr{ transition:transform .3s var(--ease); }
+.btn:hover .arr{ transform:translateX(3px); }
+/* foco accesible — acceso rápido por teclado */
+.btn:focus-visible,
+.nav-links a:focus-visible,
+.subnav a:focus-visible,
+.foot-link:focus-visible,
+.crumbs a:focus-visible,
+.ulink:focus-visible,
+.brandlock:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:8px; }
 
 /* ---- Tags / pills ---- */
 .pill{
@@ -193,6 +204,14 @@ a{ color:inherit; text-decoration:none; }
 .mob-sub a{ display:block; padding:.7rem 0; border-top:1px solid var(--hair-soft); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-600); }
 .mob-sub a[aria-current="page"]{ color:var(--gold); }
 
+/* ---- Breadcrumbs (de dónde venís → dónde estás) ---- */
+.crumbs{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-500); margin-bottom:1.1rem; }
+.crumbs a{ color:var(--ink-500); transition:color .25s ease; }
+.crumbs a:hover{ color:var(--gold); }
+.crumbs .sep{ color:var(--pearl-400); }
+.crumbs .here{ color:var(--gold); }
+.bn-hero .crumbs{ justify-content:center; }
+
 /* ============================================================
    Páginas de línea de trabajo (idea pages)
    ============================================================ */
@@ -251,11 +270,16 @@ a{ color:inherit; text-decoration:none; }
   .nav-toggle{ display:none; }
 }
 
-footer{ border-top:1px solid var(--hair-soft); padding-block:48px; margin-top:24px; }
-.foot-grid{ display:flex; flex-wrap:wrap; gap:2rem 3rem; justify-content:space-between; align-items:flex-start; }
-.boundary{ max-width:52ch; color:var(--ink-500); font-size:.86rem; line-height:1.7; }
-.foot-contact{ text-align:right; }
-@media(max-width:640px){ .foot-contact{ text-align:left; } }
+footer{ border-top:1px solid var(--hair-soft); padding-block:56px 30px; margin-top:24px; }
+.foot-grid{ display:grid; gap:2.4rem 2rem; grid-template-columns:1fr; align-items:start; }
+@media(min-width:620px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+@media(min-width:920px){ .foot-grid{ grid-template-columns:1.7fr 1fr 1fr 1fr; } }
+.boundary{ max-width:34ch; color:var(--ink-500); font-size:.86rem; line-height:1.7; }
+.foot-h{ font-family:var(--font-sans); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin:0 0 1.05rem; }
+.foot-col ul{ list-style:none; margin:0; padding:0; display:grid; gap:.62rem; }
+.foot-link{ color:var(--ink-600); font-size:.92rem; transition:color .25s ease; }
+.foot-link:hover{ color:var(--bone); }
+.foot-base{ display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; justify-content:space-between; align-items:center; margin-top:2.8rem; padding-top:1.4rem; border-top:1px solid var(--hair-soft); font-size:.82rem; color:var(--ink-500); }
 .ulink{ color:var(--gold); border-bottom:1px solid var(--hair); transition:border-color .3s; }
 .ulink:hover{ border-color:var(--gold); }
 
