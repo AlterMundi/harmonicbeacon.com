@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Proyección Armónica del Mito — Harmonic Beacon</title>
-<meta name="description" lang="es" content="Una presentación para leer a tu ritmo: un viaje profundo, solo con sonido y símbolo. Proyección Armónica del Mito, de AlterMundi." />
-<meta name="description" lang="en" content="A presentation to read at your own pace: a deep journey, only sound and symbol. Harmonic Myth Projection, by AlterMundi." />
+<title>Proyección Armónica — Harmonic Projection</title>
+<meta name="description" lang="es" content="Una presentación para leer a tu ritmo: un viaje profundo, solo con sonido y símbolo. Proyección Armónica, de AlterMundi." />
+<meta name="description" lang="en" content="A presentation to read at your own pace: a deep journey, only sound and symbol. Harmonic Projection, by AlterMundi." />
 <meta name="theme-color" content="#16120D" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Harmonic Beacon + HMP" />
-<meta property="og:title" content="Proyección Armónica del Mito — Harmonic Beacon" />
+<meta property="og:site_name" content="Proyección Armónica" />
+<meta property="og:title" content="Proyección Armónica — Harmonic Projection" />
 <meta property="og:description" content="Un viaje profundo, solo con sonido y símbolo. Una presentación para leer a tu ritmo." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -78,8 +78,8 @@
 
   /* zona de slides */
   .stage{ flex:1; position:relative; }
-  .slide{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:72px clamp(22px,5vw,40px) 120px; text-align:center;
+  .slide{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:safe center;
+    padding:72px clamp(22px,5vw,40px) 120px; text-align:center; overflow-y:auto; -webkit-overflow-scrolling:touch;
     opacity:0; visibility:hidden; transform:translateY(18px); pointer-events:none;
     transition:opacity .7s var(--ease), transform .7s var(--ease), visibility .7s; }
   .slide.active{ opacity:1; visibility:visible; transform:none; pointer-events:auto; }
@@ -88,24 +88,22 @@
 
   /* fondo a sangre (título / cierre) */
   .bgfull{ position:absolute; inset:0; z-index:-2; overflow:hidden; background:var(--bg-0); }
-  .bgfull img{ width:100%; height:100%; object-fit:cover; opacity:.30; filter:saturate(.8) contrast(1.02) brightness(.92); }
+  .bgfull img{ width:100%; height:100%; object-fit:cover; opacity:.92; filter:saturate(1.04) contrast(1.01); }
+  /* velo SOLO para legibilidad del texto: centro algo oscuro, bordes con la pintura visible */
   .bgfull::after{ content:""; position:absolute; inset:0;
     background:
-      radial-gradient(58% 46% at 50% 46%, rgba(12,9,5,.78), rgba(12,9,5,.30) 70%, transparent 100%),
-      linear-gradient(180deg, rgba(16,12,8,.78) 0%, rgba(16,12,8,.58) 38%, rgba(16,12,8,.94) 100%); }
+      radial-gradient(46% 38% at 50% 47%, rgba(10,7,3,.62), rgba(10,7,3,.18) 66%, transparent 100%),
+      linear-gradient(180deg, rgba(14,10,6,.42) 0%, rgba(14,10,6,.12) 34%, rgba(14,10,6,.58) 100%); }
   .mark-liss{ margin-bottom:22px; }
 
-  /* imagen pintada enmarcada (atenuada para modo oscuro) */
+  /* imagen pintada enmarcada (brillante y natural) */
   .plate{ width:100%; max-width:680px; aspect-ratio:16/9; border-radius:var(--r-card); overflow:hidden; position:relative;
     margin-bottom:34px; box-shadow:var(--shadow-card); background:var(--bg-0); }
   .plate::after{ content:""; position:absolute; inset:0; border-radius:var(--r-card);
-    box-shadow:inset 0 0 0 1px var(--hair), inset 0 -70px 80px -30px rgba(22,18,13,.92);
-    background:
-      radial-gradient(70% 60% at 50% 42%, rgba(12,9,5,.34), transparent 78%),
-      linear-gradient(180deg, rgba(16,12,8,.42) 0%, rgba(16,12,8,.20) 45%, rgba(16,12,8,.72) 100%);
+    box-shadow:inset 0 0 0 1px var(--hair), inset 0 -54px 60px -34px rgba(22,18,13,.55);
     pointer-events:none; }
   .plate img{ width:100%; height:100%; object-fit:cover; display:block;
-    opacity:.66; filter:saturate(.82) contrast(1.02) brightness(.74); }
+    opacity:1; filter:saturate(1.04) contrast(1.01); }
 
   .eyebrow{ text-transform:uppercase; letter-spacing:var(--track-eyebrow); font-size:11px; font-weight:500; color:var(--gold);
     font-family:var(--font-sans); margin-bottom:18px; }
@@ -128,6 +126,17 @@
   .seq.quotes li{ font-family:var(--font-serif); font-style:italic; color:var(--bone);
     font-size:clamp(1.12rem,2.5vw,1.5rem); line-height:1.45; }
   .seq .accent{ color:var(--gold-2); font-family:var(--font-serif); font-style:italic; }
+
+  /* equipo con roles — grilla de 2 columnas */
+  .seq.team{ display:grid; grid-template-columns:1fr 1fr; gap:20px 36px; max-width:760px; text-align:left; }
+  .seq.team li{ text-shadow:none; }
+  .seq.team .member{ display:block; font-family:var(--font-serif); font-weight:500; color:var(--gold-2);
+    font-size:clamp(1.08rem,2.2vw,1.32rem); line-height:1.16; }
+  .seq.team .role{ display:block; color:var(--ink-600); font-weight:400;
+    font-size:clamp(.82rem,1.4vw,.95rem); line-height:1.35; margin-top:3px; }
+  @media (max-width:560px){
+    .seq.team{ grid-template-columns:1fr; gap:16px; text-align:center; max-width:42ch; }
+  }
 
   /* contactos */
   .contacts{ display:flex; flex-direction:column; gap:16px; margin-top:8px; }
@@ -269,10 +278,9 @@ const T = {
 };
 const SLIDES = [
   { type:"title", img:"traveler",
-    eyebrow:{es:"Harmonic Beacon",en:"Harmonic Beacon"},
-    title:{es:"Proyección Armónica del Mito",en:"Harmonic Myth Projection"},
-    lede:{es:"un viaje profundo — solo con sonido y símbolo",en:"a deep journey — only sound and symbol"},
-    mark:true },
+    eyebrow:{es:"Una experiencia de AlterMundi",en:"An AlterMundi experience"},
+    title:{es:"Proyección Armónica",en:"Harmonic Projection"},
+    lede:{es:"un viaje profundo — solo con sonido y símbolo",en:"a deep journey — only sound and symbol"} },
 
   { type:"editorial", img:"traveler",
     eyebrow:{es:"El anhelo",en:"The longing"},
@@ -351,15 +359,25 @@ const SLIDES = [
     body:{es:"No un encuentro suelto, sino una serie — al menos tres sesiones por persona. Sesiones individuales de integración con un psicólogo formado en HMP. Y, si se desea, parte de la vida del lugar, a tu ritmo.",
           en:"Not a one-off, but a series — at least three sessions per person. Individual integration sessions with a psychologist trained in HMP. And, if wished, part of the life of the place, at your own rhythm."} },
 
-  { type:"dark", mark:true,
+  { type:"dark",
     eyebrow:{es:"El equipo",en:"The team"},
     title:{es:"Años de trabajo que convergen",en:"Years of work that converge"},
+    team:true,
     seq:[
-      {es:"Mariano Fernández Méndez · Nicolás Echániz",en:"Mariano Fernández Méndez · Nicolás Echániz"},
-      {es:"Julián De La Reta · Anabella Scigliano Mattiauda",en:"Julián De La Reta · Anabella Scigliano Mattiauda"},
-      {es:"Saira Asúa · Federico Bonino",en:"Saira Asúa · Federico Bonino"},
-      {es:"<span class='accent'>Asociación Civil AlterMundi</span>",en:"<span class='accent'>Asociación Civil AlterMundi</span>"}
-    ] },
+      {es:"<span class='member'>Mariano Fernández Méndez</span><span class='role'>Coautor de HIT · investigación y sistemas</span>",
+       en:"<span class='member'>Mariano Fernández Méndez</span><span class='role'>HIT co-author · research &amp; systems</span>"},
+      {es:"<span class='member'>Nicolás Echániz</span><span class='role'>Presidente de AlterMundi · coautor de HIT · I+D armónica</span>",
+       en:"<span class='member'>Nicolás Echániz</span><span class='role'>AlterMundi President · HIT co-author · harmonic R&amp;D</span>"},
+      {es:"<span class='member'>Julián De La Reta</span><span class='role'>Creador de la Proyección del Mito Personal (PMP)</span>",
+       en:"<span class='member'>Julián De La Reta</span><span class='role'>Creator of Personal Myth Projection (PMP)</span>"},
+      {es:"<span class='member'>Anabella Scigliano Mattiauda</span><span class='role'>Investigación y software · app y protocolo Beacon</span>",
+       en:"<span class='member'>Anabella Scigliano Mattiauda</span><span class='role'>Research &amp; software · Beacon app &amp; protocol</span>"},
+      {es:"<span class='member'>Saira Asúa</span><span class='role'>Diseño de producto y operaciones</span>",
+       en:"<span class='member'>Saira Asúa</span><span class='role'>Product design &amp; operations</span>"},
+      {es:"<span class='member'>Federico Bonino</span><span class='role'>Ingeniería de sonido y calidad de señal</span>",
+       en:"<span class='member'>Federico Bonino</span><span class='role'>Sound engineering &amp; signal quality</span>"}
+    ],
+    org:"Asociación Civil AlterMundi" },
 
   { type:"outro", img:"bridge", mark:true,
     title:{es:"Te invitamos a vivir la experiencia",en:"We invite you to experience it"},
@@ -390,11 +408,6 @@ function buildSlide(s, i){
     h += '<div class="bgfull"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
   }
   h += '<div class="inner">';
-  const bigMark = (s.type==='title'||s.type==='outro');
-  if(s.mark && (s.type==='dark'||bigMark)){
-    const sz = bigMark ? 64 : 56;
-    h += '<svg class="mark-liss" viewBox="0 0 100 100" width="'+sz+'" height="'+sz+'" aria-hidden="true"></svg>';
-  }
   if(s.img && (s.type==='editorial')){
     h += '<div class="plate"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
   }
@@ -410,7 +423,7 @@ function buildSlide(s, i){
   if(s.title || s.eyebrow){ h += '<hr class="rule">'; }
   if(s.body){ h += '<p class="body">'+L(s.body)+'</p>'; }
   if(s.seq){
-    h += '<ul class="seq">'+ s.seq.map(it=>'<li>'+L(it)+'</li>').join('') +'</ul>';
+    h += '<ul class="seq'+(s.team?' team':'')+'">'+ s.seq.map(it=>'<li>'+L(it)+'</li>').join('') +'</ul>';
   }
   if(s.quotes){
     h += '<ul class="seq quotes">'+ s.quotes.map(q=>'<li>'+L(q)+'</li>').join('') +'</ul>';
