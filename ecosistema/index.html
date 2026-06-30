@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mapa del ecosistema · Harmonic Beacon</title>
+  <meta name="description" content="Mapa interactivo del ecosistema Harmonic Beacon: el Beacon como eje, iluminado por el principio HIT y construido sobre un conjunto de skills de networking. Productos núcleo, agentes de IA, proyectos aplicados (PhiDeus → SAI · WANDA · LibreAgro · Patent Recognition) y la estructura institucional." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#16120D" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Harmonic Beacon" />
+  <meta property="og:title" content="Mapa del ecosistema · Harmonic Beacon" />
+  <meta property="og:description" content="Un ecosistema vivo cuyo eje es el Harmonic Beacon, iluminado por el principio HIT." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* marca dorada-negro (hb-brand.css) */
+      --bg:    #16120D;
+      --bg2:   #1B150F;
+      --text:  #E9E0D0;
+      --bone:  #F4EEE2;
+      --mid:   #ADA089;
+      --dim:   #8A7F6B;
+      --gold:  #C9A24E;
+      --gold2: #E3C77E;
+      --hair:  rgba(201,162,78,.22);
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font:  'Inter', system-ui, -apple-system, sans-serif;
+
+      /* tipos de objeto */
+      --core:   #C9A24E;   /* producto núcleo, inversión activa — oro */
+      --agent:  #9b8cff;   /* producto / agente — violeta */
+      --tentat: #A89C84;   /* existe, sin inversión posible (tentativo) */
+      --inst:   #D58A57;   /* estructura institucional — cobre */
+      --skill:  #9C9078;   /* capacidad / skill (no se conecta) */
+      --hit:    #F1E1A8;   /* principio HIT — luz */
+
+      --sidebar-w: 286px;
+      --detail-w:  430px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: linear-gradient(158deg, var(--bg), #1E1812);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-weight: 300;
+    }
+    .grain{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.5;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E"); }
+
+    /* ── HEADER ─────────────────────────────────────── */
+    header {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 1.6rem;
+      background: rgba(22,18,13,0.86);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hair);
+      flex-shrink: 0;
+      z-index: 200;
+    }
+    .crumb {
+      font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--mid); text-decoration: none; white-space: nowrap; transition: color .2s;
+    }
+    .crumb:hover { color: var(--gold); }
+    .crumb .sep { opacity: .4; margin: 0 .4rem; }
+    .h-title { font-family: var(--font-serif); font-size: 1.25rem; color: var(--bone); letter-spacing: .01em; white-space: nowrap; }
+    .search-wrap { flex: 1; max-width: 300px; position: relative; margin-left: auto; }
+    .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; fill: none; stroke: var(--dim); stroke-width: 2; pointer-events: none; }
+    .search-wrap input {
+      width: 100%; padding: 7px 10px 7px 32px;
+      background: rgba(244,238,226,.035);
+      border: 1px solid var(--hair);
+      border-radius: 40px; color: var(--text);
+      font-size: .74rem; font-family: var(--font); letter-spacing: .02em;
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-wrap input::placeholder { color: var(--dim); }
+    .search-wrap input:focus { border-color: var(--gold); }
+
+    /* ── LAYOUT ──────────────────────────────────────── */
+    .layout { display: flex; flex: 1; overflow: hidden; }
+
+    /* ── SIDEBAR ─────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0;
+      background: rgba(27,21,15,0.6);
+      border-right: 1px solid rgba(201,162,78,.10);
+      overflow-y: auto; padding: 18px 0 30px;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--hair); border-radius: 2px; }
+
+    .s-title { font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); padding: 0 18px; margin-bottom: 8px; }
+    .s-section { margin-bottom: 20px; }
+
+    .type-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 18px; cursor: pointer; color: var(--mid); transition: all 0.15s; user-select: none; }
+    .type-row:hover { background: rgba(201,162,78,.05); color: var(--text); }
+    .type-row.active { background: rgba(201,162,78,.08); color: var(--text); }
+    .type-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+    .type-dot.ring { background: transparent !important; border: 1.5px dashed var(--tentat); }
+    .type-txt b { font-size: .78rem; font-weight: 500; display: block; }
+    .type-txt span { font-size: .62rem; color: var(--dim); line-height: 1.4; display: block; margin-top: 1px; }
+    .type-count { margin-left: auto; font-size: .6rem; color: var(--dim); margin-top: 3px; }
+
+    .s-divider { height: 1px; background: rgba(201,162,78,.10); margin: 8px 18px 16px; }
+
+    .princ-card {
+      margin: 0 14px 4px; padding: 14px 16px;
+      background: radial-gradient(120% 140% at 50% 0%, rgba(241,225,168,0.12), rgba(241,225,168,0.02) 70%);
+      border: 1px solid rgba(241,225,168,0.22); border-radius: 12px;
+      cursor: pointer; transition: box-shadow .25s;
+    }
+    .princ-card:hover { box-shadow: 0 0 36px rgba(241,225,168,0.12); }
+    .princ-card .pc-eyebrow { font-size: .54rem; letter-spacing: .26em; text-transform: uppercase; color: var(--hit); opacity: .8; }
+    .princ-card .pc-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--hit); margin: 2px 0; letter-spacing: .02em; }
+    .princ-card .pc-name { font-size: .68rem; color: var(--mid); }
+
+    .skill-list { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px; }
+    .skill-chip { font-size: .6rem; letter-spacing: .02em; color: var(--skill); padding: 4px 9px; border: 1px dashed rgba(156,144,120,0.4); border-radius: 20px; background: rgba(156,144,120,0.05); white-space: nowrap; }
+    .skill-note { font-size: .58rem; color: var(--dim); padding: 10px 18px 0; line-height: 1.5; }
+
+    .inst-note { font-size: .62rem; color: var(--mid); padding: 4px 18px 0; line-height: 1.6; }
+    .inst-note b { color: var(--inst); font-weight: 500; }
+
+    /* ── MAIN ────────────────────────────────────────── */
+    .main { flex: 1; position: relative; overflow: hidden; }
+    #pane-map { position:absolute; inset:0; overflow: hidden; cursor: grab; background: radial-gradient(120% 90% at 50% -10%, rgba(241,225,168,0.08), rgba(201,162,78,0.02) 38%, transparent 60%); }
+    #pane-map:active { cursor: grabbing; }
+    #pane-map svg { width: 100%; height: 100%; display:block; }
+
+    .g-link { stroke: rgba(201,162,78,0.20); stroke-width: 1.2; stroke-opacity: 0.7; transition: stroke 0.2s, stroke-opacity 0.2s; }
+    .g-link.hi { stroke: var(--gold); stroke-opacity: 1; stroke-width: 1.9; }
+
+    .g-node circle { cursor: pointer; transition: filter 0.2s, opacity 0.2s; }
+    .g-node circle:hover { filter: brightness(1.35); }
+    .g-node text { fill: var(--text); pointer-events: none; user-select: none; font-weight: 400; }
+    .g-node.tentat text { fill: var(--tentat); }
+    .g-node.dimmed circle { opacity: 0.12; }
+    .g-node.dimmed text { opacity: 0.12; }
+
+    .g-skill text { fill: var(--skill); pointer-events: none; user-select: none; font-size: 10px; letter-spacing: .02em; opacity:.82; }
+    .g-skill rect { fill: rgba(156,144,120,0.06); stroke: rgba(156,144,120,0.32); stroke-dasharray: 3 3; rx: 9; }
+    .g-skill.dimmed { opacity: .25; }
+
+    /* ── DETAIL PANEL ────────────────────────────────── */
+    .detail {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: var(--detail-w); background: var(--bg2);
+      border-left: 1px solid var(--hair);
+      transform: translateX(100%); transition: transform 0.26s ease;
+      overflow-y: auto; z-index: 100; display: flex; flex-direction: column;
+      box-shadow: -20px 0 80px rgba(0,0,0,.5);
+    }
+    .detail.open { transform: translateX(0); }
+    .detail::-webkit-scrollbar { width: 3px; }
+    .detail::-webkit-scrollbar-thumb { background: var(--hair); border-radius: 2px; }
+
+    .d-head { position: sticky; top: 0; background: var(--bg2); padding: 20px 22px 16px; border-bottom: 1px solid var(--hair); z-index: 1; }
+    .d-close {
+      position: absolute; top: 16px; right: 16px; width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(244,238,226,.04); border: 1px solid var(--hair);
+      border-radius: 6px; color: var(--mid); cursor: pointer; font-size: 14px; transition: all 0.15s;
+    }
+    .d-close:hover { background: rgba(201,162,78,.10); color: var(--bone); }
+    .d-cat { display: inline-block; font-size: .54rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 10px; }
+    .d-title { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 600; line-height: 1.15; margin-bottom: 4px; color: var(--bone); }
+    .d-sub { font-size: .78rem; color: var(--mid); letter-spacing: .02em; }
+
+    .d-body { padding: 20px 22px 32px; flex: 1; }
+    .d-body h2 { font-size: .58rem; font-weight: 600; color: var(--gold); letter-spacing: .26em; text-transform: uppercase; margin: 20px 0 8px; padding-top: 16px; border-top: 1px solid var(--hair); }
+    .d-body h2:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .d-body p { font-size: .88rem; line-height: 1.75; color: var(--mid); margin-bottom: 10px; }
+    .d-body p strong { color: var(--text); font-weight: 500; }
+    .d-badges { display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 4px; }
+    .d-badge { font-size:.58rem; padding:3px 9px; border-radius:6px; letter-spacing:.04em; }
+    .d-badge.ok  { color:var(--gold2); background:rgba(201,162,78,.12); border:1px solid rgba(201,162,78,.3); }
+    .d-badge.no  { color:var(--tentat); background:rgba(168,156,132,.08); border:1px dashed rgba(168,156,132,.4); }
+
+    .related { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--hair); }
+    .related-label { font-size: .54rem; font-weight: 700; color: var(--dim); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 9px; }
+    .related-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rel-link { display: inline-block; padding: 4px 11px; background: rgba(201,162,78,.07); color: var(--gold); border-radius: 20px; cursor: pointer; border: 1px solid var(--hair); font-size: .62rem; letter-spacing: .03em; transition: all 0.15s; }
+    .rel-link:hover { background: rgba(201,162,78,.14); }
+
+    /* ── HINT / MSG ─────────────────────────────────── */
+    .map-hint { position: absolute; bottom: 16px; right: 16px; font-size: .6rem; color: var(--dim); z-index: 10; letter-spacing: .04em; }
+    .map-msg  { position: absolute; bottom: 16px; left: 16px; font-size: .68rem; color: var(--mid); z-index: 10; max-width: 380px; line-height: 1.6; letter-spacing: .01em; font-family: var(--font-serif); font-style: italic; }
+    .map-msg b { color: var(--gold); font-weight: 500; font-style: normal; }
+
+    @media(prefers-reduced-motion:reduce){ .detail{transition:none} #hit-pulse{animation:none!important} }
+    @media (max-width: 820px){ .sidebar{display:none} .detail{width:100%} .h-title{display:none} }
+  </style>
+</head>
+<body data-page="ecosistema">
+<div class="grain" aria-hidden="true"></div>
+
+<header>
+  <a href="/" class="crumb">← Harmonic Beacon<span class="sep">·</span>Nuestro trabajo</a>
+  <span class="h-title">Mapa del ecosistema</span>
+  <div class="search-wrap">
+    <svg viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10" y1="10" x2="14" y2="14"/></svg>
+    <input type="text" id="search-input" placeholder="Buscar nodo o skill…" autocomplete="off">
+  </div>
+</header>
+
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="s-section">
+      <div class="s-title">Principio rector</div>
+      <div class="princ-card" id="princ-card">
+        <div class="pc-eyebrow">ilumina todo · no se conecta</div>
+        <div class="pc-title">HIT</div>
+        <div class="pc-name">Harmonic Information Theory</div>
+      </div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <div class="s-section">
+      <div class="s-title">Tipos de objeto</div>
+      <div id="type-list"></div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <div class="s-section">
+      <div class="s-title">Networking skillset</div>
+      <div class="skill-list" id="skill-list"></div>
+      <div class="skill-note">No son nodos: son las capacidades técnicas con las que se construye todo. Rodean a PhiDeus y sus proyectos como un halo de herramientas.</div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <div class="s-section">
+      <div class="s-title">Institucional</div>
+      <div class="inst-note"><b>Practice training &amp; licensing program</b> — formación y licenciamiento; sostiene el núcleo.<br><br><b>501(c)(3) tax-exempt</b> — estatus legal; es una credencial, no se conecta con nadie.</div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div id="pane-map">
+      <svg id="fg"></svg>
+      <div class="map-msg">Un ecosistema vivo cuyo eje es el <b>Harmonic Beacon</b>, iluminado por el principio <b>HIT</b> y construido sobre un conjunto de <b>skills de networking</b>.</div>
+      <div class="map-hint">Scroll = zoom · Arrastrá un nodo = mover · Clic en el fondo = cerrar</div>
+    </div>
+
+    <div class="detail" id="detail">
+      <div class="d-head">
+        <button class="d-close" id="d-close">✕</button>
+        <div class="d-cat" id="d-cat"></div>
+        <h2 class="d-title" id="d-title"></h2>
+        <p class="d-sub" id="d-sub"></p>
+      </div>
+      <div class="d-body" id="d-body"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ================================================================
+// TIPOS DE OBJETO
+// ================================================================
+const TYPE = {
+  core:   { label:'Núcleo · inversión activa', short:'Inversión activa', color:'#C9A24E' },
+  agent:  { label:'Producto / agente',          short:'Producto-agente',  color:'#9b8cff' },
+  tentat: { label:'Existe · sin inversión',     short:'No invertible',    color:'#A89C84' },
+  inst:   { label:'Estructura institucional',   short:'Institucional',    color:'#D58A57' },
+};
+
+// ================================================================
+// NODOS
+// ================================================================
+const NODES = [
+  { id:'HB',  label:'Harmonic Beacon',            type:'core',   sz:27, hub:true,
+    sub:'El instrumento armónico · eje del ecosistema',
+    role:'El instrumento armónico y eje del ecosistema: es el nodo más conectado, casi todo depende de él. Producto núcleo con inversión activa.' },
+  { id:'BEAC',label:'Beacon',                     type:'core',   sz:17, bubble:true,
+    sub:'Globo del Harmonic Beacon',
+    role:'Globo asociado al Harmonic Beacon.' },
+  { id:'HMP', label:'Harmonic Myth Projection',   type:'core',   sz:19,
+    sub:'Producto núcleo de proyección del mito',
+    role:'Producto núcleo de proyección del mito. Producto núcleo con inversión activa, densamente entretejido alrededor del Beacon.' },
+  { id:'PMP', label:'Personal Myth Projection',   type:'tentat', sz:14,
+    sub:'Proyección del mito personal',
+    role:'Proyección del mito personal. Está dentro del núcleo, pero no es invertible: existe y es real, por eso se dibuja en transparente / tentativo.' },
+  { id:'PSY', label:'PsychopoMP',                 type:'agent',  sz:15,
+    sub:'Agente / guía',
+    role:'Producto-agente: agente / guía operativo del ecosistema.' },
+  { id:'PROS',label:'Prosodia',                   type:'agent',  sz:15,
+    sub:'Sensor emocional de sonido',
+    role:'Producto-agente: sensor emocional de sonido.' },
+  { id:'BON', label:'BONOB.OS',                   type:'agent',  sz:15,
+    sub:'Plataforma / app',
+    role:'Producto-agente: plataforma / app del ecosistema.' },
+  { id:'DAIM',label:'DaimonCraft / DaimonMatrix', type:'agent',  sz:16,
+    sub:'Compañero / agente de IA',
+    role:'Producto-agente: compañero / agente de IA.' },
+  { id:'HAI', label:'HarmonicIA',                 type:'agent',  sz:9, noLabel:true,
+    sub:'Globo de agentes de IA armónica',
+    role:'Punto del que salen los productos-agente de IA del ecosistema — PsychopoMP, Prosodia, BONOB.OS y DaimonCraft — y que los conecta con el resto del ecosistema (Harmonic Beacon y PhiDeus).' },
+  { id:'PHI', label:'PhiDeus',                    type:'agent',  sz:21, bridge:true,
+    sub:'Puente al brazo de proyectos aplicados',
+    role:'Núcleo que articula la rama de proyectos aplicados: se conecta tanto al centro (HB, PsychopoMP, Prosodia, DaimonCraft) como a los cuatro proyectos aplicados. Actúa de puente entre el núcleo y SAI · WANDA · LibreAgro · Patent Recognition.' },
+  { id:'SAI', label:'SAI',                        type:'tentat', sz:13,
+    sub:'Proyecto aplicado · depende de PhiDeus',
+    role:'Proyecto aplicado que depende de PhiDeus. Existe y es real, pero no es invertible (transparente / tentativo).' },
+  { id:'WAN', label:'WANDA',                      type:'tentat', sz:13,
+    sub:'Proyecto aplicado · depende de PhiDeus',
+    role:'Proyecto aplicado que depende de PhiDeus. No invertible. Usa blockchain — por eso esa skill se ubica cerca suyo en el halo.' },
+  { id:'LIB', label:'LibreAgro',                  type:'tentat', sz:13,
+    sub:'Proyecto aplicado · depende de PhiDeus',
+    role:'Proyecto aplicado que depende de PhiDeus. No invertible. Se relaciona con monitoring & control — esa skill se ubica cerca suyo en el halo.' },
+  { id:'PAT', label:'Patent Recognition',         type:'tentat', sz:13,
+    sub:'Proyecto aplicado · depende de PhiDeus',
+    role:'Proyecto aplicado que depende de PhiDeus. Existe y es real, pero no es invertible (transparente / tentativo).' },
+  { id:'PROG',label:'Practice training & licensing program', type:'inst', sz:14,
+    sub:'Formación y licenciamiento',
+    role:'Estructura de formación y licenciamiento del ecosistema. Elemento institucional: cuelga de Harmonic Myth Projection y le da sostén.' },
+  { id:'501', label:'501(c)(3) tax-exempt',       type:'inst',   sz:12, connected:false,
+    sub:'Estatus legal de la organización',
+    role:'El estatus legal de la organización: exención impositiva. Es una credencial, no se conecta con nadie. Junto a la formación, aporta legitimidad y sostén.' },
+];
+
+// ================================================================
+// CONEXIONES
+// ================================================================
+const LINKS = [
+  // núcleo
+  ['HB','HMP'],['HB','PHI'],['HB','BEAC'],
+  // PMP y Practice training salen solo de Harmonic Myth Projection
+  ['HMP','PMP'],['HMP','PROG'],
+  // HarmonicIA: globo del que salen los 4 agentes de IA (solo cuelgan de él)
+  ['HAI','PSY'],['HAI','PROS'],['HAI','BON'],['HAI','DAIM'],
+  // HarmonicIA conecta con lo que conectaban esos agentes
+  ['HAI','HB'],['HAI','PHI'],
+  // brazo aplicado de PhiDeus
+  ['PHI','SAI'],['PHI','WAN'],['PHI','LIB'],['PHI','PAT'],
+];
+
+// ================================================================
+// NETWORKING SKILLSET (halo · no se conecta)
+// ================================================================
+const SKILLS = [
+  { t:'mesh networks' },
+  { t:'distributed networks' },
+  { t:'P2P' },
+  { t:'routing · IPv4 · IPv6' },
+  { t:'blockchain', adj:'WAN' },
+  { t:'autonomous systems' },
+  { t:'monitoring & control', adj:'LIB' },
+  { t:'OS & hardware' },
+];
+
+// ================================================================
+// SIDEBAR
+// ================================================================
+const typeCounts = {};
+NODES.forEach(n => typeCounts[n.type] = (typeCounts[n.type]||0)+1);
+
+const typeList = document.getElementById('type-list');
+const allRow = document.createElement('div');
+allRow.className = 'type-row active';
+allRow.dataset.type = 'all';
+allRow.innerHTML = `<span class="type-dot" style="background:var(--dim)"></span><span class="type-txt"><b>Todos</b></span><span class="type-count">${NODES.length}</span>`;
+typeList.appendChild(allRow);
+Object.entries(TYPE).forEach(([k,v]) => {
+  const row = document.createElement('div');
+  row.className = 'type-row';
+  row.dataset.type = k;
+  const dotCls = k === 'tentat' ? 'type-dot ring' : 'type-dot';
+  row.innerHTML = `<span class="${dotCls}" style="background:${v.color}"></span><span class="type-txt"><b>${v.short}</b><span>${v.label}</span></span><span class="type-count">${typeCounts[k]||0}</span>`;
+  typeList.appendChild(row);
+});
+
+const skillListEl = document.getElementById('skill-list');
+SKILLS.forEach(s => {
+  const c = document.createElement('div');
+  c.className = 'skill-chip';
+  c.textContent = s.t;
+  if (s.adj) c.title = 'cercanía intencional → ' + (NODES.find(n=>n.id===s.adj)?.label||s.adj);
+  skillListEl.appendChild(c);
+});
+
+// ================================================================
+// TYPE FILTER
+// ================================================================
+let activeType = 'all';
+document.querySelectorAll('.type-row').forEach(row => {
+  row.addEventListener('click', () => {
+    document.querySelectorAll('.type-row').forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+    activeType = row.dataset.type;
+    dimGraph();
+  });
+});
+
+// ================================================================
+// DETAIL PANEL
+// ================================================================
+const detail = document.getElementById('detail');
+document.getElementById('d-close').addEventListener('click', closeDetail);
+function closeDetail(){ detail.classList.remove('open'); resetGraphHighlight(); }
+
+document.getElementById('princ-card').addEventListener('click', openPrinciple);
+
+function openPrinciple(){
+  const col = getCSS('--hit');
+  setHead('Principio rector', 'HIT', 'Harmonic Information Theory', col);
+  document.getElementById('d-body').innerHTML = `
+    <div class="d-badges"><span class="d-badge no">no se conecta</span><span class="d-badge no">fuente de luz</span></div>
+    <h2>El principio que ilumina todo</h2>
+    <p><strong>HIT (Harmonic Information Theory)</strong> es el marco teórico de base. No es un producto ni se conecta con nada: <strong>irradia sobre todo el ecosistema</strong> como un principio rector.</p>
+    <p>Por eso en el mapa se lee como fuente de luz / fundamento — un orbe luminoso por encima del grafo, separado de las conexiones.</p>`;
+  detail.classList.add('open');
+  resetGraphHighlight();
+}
+
+function getCSS(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+function setHead(catLabel, title, sub, color){
+  const dCat = document.getElementById('d-cat');
+  dCat.textContent = catLabel;
+  dCat.style.background = color + '22';
+  dCat.style.color = color;
+  document.getElementById('d-title').textContent = title;
+  document.getElementById('d-sub').textContent = sub;
+}
+
+function openNode(n){
+  const col = TYPE[n.type].color;
+  setHead(TYPE[n.type].label, n.label, n.sub, col);
+
+  let badges = '';
+  if (n.type === 'core')   badges += '<span class="d-badge ok">inversión activa</span>';
+  if (n.type === 'tentat') badges += '<span class="d-badge no">sin inversión posible</span>';
+  if (n.hub)               badges += '<span class="d-badge ok">nodo más conectado</span>';
+  if (n.bridge)            badges += '<span class="d-badge ok">puente al brazo aplicado</span>';
+  if (n.bubble)            badges += '<span class="d-badge ok">globo de agentes de IA</span>';
+  if (n.connected === false) badges += '<span class="d-badge no">no se conecta</span>';
+
+  const rel = new Set();
+  LINKS.forEach(([s,t]) => { if(s===n.id) rel.add(t); if(t===n.id) rel.add(s); });
+  let related = '';
+  if (rel.size){
+    const btns = [...rel].map(id => {
+      const c = NODES.find(x => x.id === id);
+      return `<button class="rel-link" data-id="${id}">${c ? c.label : id}</button>`;
+    }).join('');
+    related = `<div class="related"><div class="related-label">Conexiones (${rel.size})</div><div class="related-links">${btns}</div></div>`;
+  }
+
+  document.getElementById('d-body').innerHTML =
+    (badges ? `<div class="d-badges">${badges}</div>` : '') +
+    `<h2>Rol funcional</h2><p>${n.role}</p>` + related;
+
+  document.querySelectorAll('.rel-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const c = NODES.find(x => x.id === btn.dataset.id);
+      if (c){ openNode(c); highlightGraph(c); }
+    });
+  });
+
+  detail.classList.add('open');
+}
+
+// ================================================================
+// SEARCH
+// ================================================================
+document.getElementById('search-input').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  if (!q){ resetGraphHighlight(); return; }
+  const hit = NODES.filter(n => n.label.toLowerCase().includes(q) || n.role.toLowerCase().includes(q));
+  const ids = new Set(hit.map(n=>n.id));
+  gNode.classed('dimmed', n => !ids.has(n.id));
+  gSkill.classed('dimmed', s => !s.t.toLowerCase().includes(q));
+  gLink.classed('hi', false);
+  if (hit.length === 1){ openNode(hit[0]); highlightGraph(hit[0]); }
+});
+
+// ================================================================
+// FORCE GRAPH
+// ================================================================
+let gNode, gLink, gSkill, sim, byId = {};
+
+function buildGraph(){
+  const el = document.getElementById('pane-map');
+  const W = el.clientWidth, H = el.clientHeight;
+  const svg = d3.select('#fg').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.selectAll('*').remove();
+
+  const defs = svg.append('defs');
+  const f = defs.append('filter').attr('id','glow').attr('x','-80%').attr('y','-80%').attr('width','260%').attr('height','260%');
+  f.append('feGaussianBlur').attr('stdDeviation','9').attr('result','b');
+  const fm = f.append('feMerge'); fm.append('feMergeNode').attr('in','b'); fm.append('feMergeNode').attr('in','SourceGraphic');
+  const rg = defs.append('radialGradient').attr('id','hitgrad');
+  rg.append('stop').attr('offset','0%').attr('stop-color','#FFF6DA');
+  rg.append('stop').attr('offset','55%').attr('stop-color','#F1E1A8');
+  rg.append('stop').attr('offset','100%').attr('stop-color','rgba(241,225,168,0.0)');
+
+  const g = svg.append('g');
+  const zoom = d3.zoom().scaleExtent([0.3, 4]).on('zoom', ev => g.attr('transform', ev.transform));
+  svg.call(zoom);
+
+  // ── HIT light (fixed, not connected) ──
+  const hitX = W/2, hitY = Math.max(70, H*0.11);
+  const hit = g.append('g').attr('transform', `translate(${hitX},${hitY})`).style('cursor','pointer')
+    .on('click', ev => { ev.stopPropagation(); openPrinciple(); });
+  hit.append('circle').attr('r', 78).attr('fill','url(#hitgrad)').attr('opacity',0.6);
+  hit.append('circle').attr('id','hit-pulse').attr('r', 30).attr('fill','none').attr('stroke','rgba(241,225,168,0.55)').attr('stroke-width',1);
+  hit.append('circle').attr('r', 20).attr('fill','url(#hitgrad)').attr('filter','url(#glow)');
+  hit.append('circle').attr('r', 9).attr('fill','#FFF6DA');
+  hit.append('text').attr('text-anchor','middle').attr('dy', -34).attr('font-size', 16).attr('font-weight',600).attr('letter-spacing','.18em').attr('fill','#F1E1A8').attr('font-family','Cormorant Garamond, serif').text('HIT');
+  hit.append('text').attr('text-anchor','middle').attr('dy', 48).attr('font-size', 9.5).attr('fill','rgba(241,225,168,0.6)').attr('letter-spacing','.04em').text('Harmonic Information Theory');
+  const pulse = hit.select('#hit-pulse');
+  function animate(){ pulse.attr('r',30).attr('opacity',0.5).transition().duration(2600).ease(d3.easeSinOut).attr('r',74).attr('opacity',0).on('end',animate); }
+  if (!window.matchMedia('(prefers-reduced-motion:reduce)').matches) animate();
+
+  // ── simulation ──
+  const nodes = NODES.map(c => ({ ...c }));
+  const skillNodes = SKILLS.map((s,i) => ({ ...s, isSkill:true, id:'sk_'+i, x:W/2+(i-4)*8, y:H*0.65 }));
+  const allSim = nodes.concat(skillNodes);
+  byId = {}; allSim.forEach(n => byId[n.id] = n);
+  const links = LINKS.map(([s,t]) => ({ source:s, target:t }));
+
+  const clusterIds = ['PHI','SAI','WAN','LIB','PAT'];
+  function skillHalo(alpha){
+    let cx=0, cy=0, k=0;
+    clusterIds.forEach(id => { const a=byId[id]; if(a){ cx+=a.x; cy+=a.y; k++; } });
+    if(!k) return; cx/=k; cy/=k;
+    const R = 215;
+    skillNodes.forEach((s,i) => {
+      let tx, ty;
+      if (s.adj && byId[s.adj]){
+        const a = byId[s.adj];
+        const ang = Math.atan2(a.y - cy, a.x - cx);
+        tx = a.x + Math.cos(ang)*62; ty = a.y + Math.sin(ang)*62;
+      } else {
+        const ang = (i / skillNodes.length) * 2*Math.PI - Math.PI/2;
+        tx = cx + Math.cos(ang)*R; ty = cy + Math.sin(ang)*R;
+      }
+      s.vx += (tx - s.x) * alpha * 0.35;
+      s.vy += (ty - s.y) * alpha * 0.35;
+    });
+  }
+
+  sim = d3.forceSimulation(allSim)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
+      const sn = byId[d.source.id||d.source], tn = byId[d.target.id||d.target];
+      return 50 + ((sn?.sz||10)+(tn?.sz||10))*2.0;
+    }).strength(0.45))
+    .force('charge', d3.forceManyBody().strength(d => d.isSkill ? 0 : -d.sz*26).distanceMax(380))
+    .force('center', d3.forceCenter(W/2, H*0.58).strength(0.05))
+    .force('collision', d3.forceCollide(d => d.isSkill ? 46 : d.sz + 12))
+    .force('x', d3.forceX(W/2).strength(d => d.isSkill ? 0 : 0.03))
+    .force('y', d3.forceY(H*0.58).strength(d => d.isSkill ? 0 : 0.04))
+    .force('skillHalo', skillHalo);
+
+  const inst501 = byId['501'];
+  sim.force('park501', a => { if(inst501){ inst501.vx += (W*0.16 - inst501.x)*a*0.05; inst501.vy += (H*0.85 - inst501.y)*a*0.05; } });
+
+  gLink = g.append('g').selectAll('line').data(links).join('line').attr('class','g-link');
+
+  const gSkillG = g.append('g');
+  gSkill = gSkillG.selectAll('g').data(skillNodes).join('g').attr('class','g-skill');
+  gSkill.append('rect');
+  gSkill.append('text').attr('text-anchor','middle').attr('dy','0.32em').text(d => d.t);
+  gSkill.each(function(){
+    const t = d3.select(this).select('text').node();
+    const bb = t.getBBox();
+    d3.select(this).select('rect').attr('x', bb.x-8).attr('y', bb.y-4).attr('width', bb.width+16).attr('height', bb.height+8);
+  });
+
+  gNode = g.append('g').selectAll('g').data(nodes).join('g')
+    .attr('class', d => 'g-node ' + (d.type==='tentat'?'tentat':''))
+    .call(d3.drag()
+      .on('start', (ev,d) => { if(!ev.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag',  (ev,d) => { d.fx=ev.x; d.fy=ev.y; })
+      .on('end',   (ev,d) => { if(!ev.active) sim.alphaTarget(0); d.fx=null; d.fy=null; }));
+
+  gNode.append('circle')
+    .attr('r', d => d.sz)
+    .attr('fill', d => d.type==='tentat' ? 'rgba(168,156,132,0.06)' : (d.bubble ? TYPE[d.type].color + '3a' : TYPE[d.type].color + '24'))
+    .attr('stroke', d => TYPE[d.type].color)
+    .attr('stroke-width', d => d.hub ? 2.4 : 1.8)
+    .attr('stroke-dasharray', d => d.type==='tentat' ? '4 3' : null)
+    .attr('stroke-opacity', d => d.type==='tentat' ? 0.7 : 1)
+    .style('filter', d => d.hub ? 'drop-shadow(0 0 14px rgba(201,162,78,0.5))' : (d.bubble ? 'drop-shadow(0 0 12px rgba(201,162,78,0.45))' : null))
+    .on('click', (ev,d) => { ev.stopPropagation(); openNode(d); highlightGraph(d); });
+
+  gNode.append('text')
+    .attr('text-anchor','middle')
+    .attr('dy', d => d.sz + 14)
+    .attr('font-size', d => Math.max(9.5, Math.min(13, d.sz*0.62)))
+    .attr('font-weight', d => d.hub ? 600 : 400)
+    .text(d => d.noLabel ? '' : d.label);
+
+  svg.on('click', closeDetail);
+
+  sim.on('tick', () => {
+    gLink.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    gNode.attr('transform', d => `translate(${d.x},${d.y})`);
+    gSkill.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+
+function highlightGraph(d){
+  if(!gNode) return;
+  const conn = new Set([d.id]);
+  LINKS.forEach(([s,t]) => { if(s===d.id) conn.add(t); if(t===d.id) conn.add(s); });
+  gNode.classed('dimmed', n => !conn.has(n.id));
+  gSkill.classed('dimmed', true);
+  gLink.classed('hi', l => (l.source.id||l.source)===d.id || (l.target.id||l.target)===d.id);
+}
+function resetGraphHighlight(){
+  if(!gNode) return;
+  gNode.classed('dimmed', false);
+  gSkill.classed('dimmed', false);
+  gLink.classed('hi', false);
+  document.getElementById('search-input').value = '';
+}
+function dimGraph(){
+  if(!gNode) return;
+  if(activeType === 'all'){ resetGraphHighlight(); return; }
+  gNode.classed('dimmed', n => n.type !== activeType);
+  gSkill.classed('dimmed', true);
+  gLink.classed('hi', false);
+}
+
+buildGraph();
+let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(buildGraph, 250); });
+</script>
+</body>
+</html>
