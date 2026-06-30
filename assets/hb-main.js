@@ -1,4 +1,4 @@
-/* Harmonic Beacon + PMP — chrome compartido + interacciones (multi-página) */
+/* Harmonic Beacon + HMP — chrome compartido + interacciones (multi-página) */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -14,53 +14,113 @@
 
   function L(en, es) { return '<span data-lang="en">' + en + '</span><span data-lang="es">' + es + '</span>'; }
 
-  /* ---- NAV ---- */
-  var links = [
-    { href: '#experience', en: 'Experience', es: 'Experiencia', key: 'experience' },
-    { href: '#opens', en: 'What it opens', es: 'Lo que abre', key: 'opens' },
-    { href: '#different', en: 'Difference', es: 'Diferencia', key: 'different' },
-    { href: '#porque', en: 'Why it works', es: 'Por qué funciona', key: 'porque' },
-    { href: '#team', en: 'Team', es: 'Equipo', key: 'team' },
-    { href: '#foundation', en: 'HIT', es: 'HIT', key: 'foundation' },
-    { href: '#contact', en: 'Experience it', es: 'Vivirlo', key: 'contact' }
+  /* ---- NAV (con jerarquía + estado activo) ---- */
+  var sections = [
+    { key: 'porque',     href: '/#porque',     en: 'Why it works', es: 'Por qué funciona' },
+    { key: 'trabajo',    href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo', sub: [
+        { page: 'proyeccion', href: '/proyeccion-armonica-del-mito/',        en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' },
+        { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
+        { page: 'bonobos',    href: '/bonobos/',                             en: 'bonob.os',                 es: 'bonob.os' },
+        { page: 'formacion',  href: '/formacion/',                           en: 'Licensing &amp; training', es: 'Licencia y formación' },
+        { page: 'psicopompo', href: '/psicopompo/',                          en: 'Psychopomp',               es: 'Psicopompo' },
+        { page: 'app',        href: 'https://harmonicbeacon.altermundi.net', en: 'App — log in',             es: 'App — login', ext: true }
+    ] },
+    { key: 'team',       href: '/#team',       en: 'Team',         es: 'Equipo' },
+    { key: 'foundation', href: '/#foundation', en: 'HIT',          es: 'HIT' },
+    { key: 'contact',    href: '/#contact',    en: 'Contact',      es: 'Contacto' }
   ];
-  function linkItems() {
-    return links.map(function (l) {
-      var active = (l.key === page) ? ' aria-current="page"' : '';
-      return '<li><a href="' + l.href + '"' + active + '>' + L(l.en, l.es) + '</a></li>';
+  var workPages = { proyeccion: 1, beacon: 1, bonobos: 1, formacion: 1, psicopompo: 1 };
+  var pageSection = workPages[page] ? 'trabajo' : (page === 'porque' ? 'porque' : null);
+
+  function subLink(it) {
+    var cur = (it.page && it.page === page) ? ' active' : '';
+    var aria = cur ? ' aria-current="page"' : '';
+    var ext = it.ext ? ' target="_blank" rel="noopener"' : '';
+    return '<li><a class="sub-link' + cur + '" href="' + it.href + '"' + ext + aria + '>' + L(it.en, it.es) + '</a></li>';
+  }
+  function navItems() {
+    return sections.map(function (s) {
+      var active = (s.key && s.key === pageSection) ? ' active' : '';
+      var aria = active ? ' aria-current="page"' : '';
+      if (s.sub) {
+        return '<li class="has-sub"><a class="top-link' + active + '" data-key="' + s.key + '" href="' + s.href + '"' + aria +
+          '>' + L(s.en, s.es) + '<span class="caret" aria-hidden="true"></span></a>' +
+          '<ul class="subnav">' + s.sub.map(subLink).join('') + '</ul></li>';
+      }
+      return '<li><a class="top-link' + active + '" data-key="' + s.key + '" href="' + s.href + '"' + aria + '>' + L(s.en, s.es) + '</a></li>';
+    }).join('');
+  }
+  function mobileItems() {
+    return sections.map(function (s) {
+      var active = (s.key && s.key === pageSection) ? ' aria-current="page"' : '';
+      var html = '<li><a href="' + s.href + '"' + active + '>' + L(s.en, s.es) + '</a>';
+      if (s.sub) {
+        html += '<ul class="mob-sub">' + s.sub.map(function (it) {
+          var cur = (it.page && it.page === page) ? ' aria-current="page"' : '';
+          var ext = it.ext ? ' target="_blank" rel="noopener"' : '';
+          return '<li><a href="' + it.href + '"' + ext + cur + '>' + L(it.en, it.es) + '</a></li>';
+        }).join('') + '</ul>';
+      }
+      return html + '</li>';
     }).join('');
   }
   var navHtml =
     '<header class="nav" id="nav"><div class="nav-inner">' +
-      '<a href="/" class="brandlock" aria-label="Harmonic Beacon + PMP">' + markSvg(30) +
+      '<a href="/" class="brandlock" aria-label="Harmonic Beacon">' + markSvg(30) +
         '<span class="hb-wordmark" style="font-size:13px;">Harmonic Beacon</span></a>' +
-      '<ul class="nav-links">' + linkItems() + '</ul>' +
+      '<ul class="nav-links">' + navItems() + '</ul>' +
       '<div class="nav-right">' +
         '<button class="lang" id="lang" type="button" aria-label="Language / Idioma">' +
           '<span data-lang-tag="en">EN</span><span class="sep">/</span><span data-lang-tag="es">ES</span></button>' +
-        '<a href="#contact" class="btn btn-primary nav-cta">' + L('Experience it', 'Vivir la experiencia') + '</a>' +
+        '<a href="/#contact" class="btn btn-primary nav-cta">' + L('Contact', 'Contacto') + '</a>' +
         '<button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '</div>' +
     '</div>' +
-    '<div class="nav-mobile" id="navMobile"><ul>' + linkItems() +
-      '<li><a href="#contact" class="mob-cta">' + L('Experience it', 'Vivir la experiencia') + '</a></li>' +
+    '<div class="nav-mobile" id="navMobile"><ul>' + mobileItems() +
+      '<li><a href="/#contact" class="mob-cta">' + L('Contact', 'Contacto') + '</a></li>' +
     '</ul></div></header>';
 
-  /* ---- FOOTER ---- */
+  /* ---- FOOTER (sitemap) ---- */
+  var workSub = (function () { for (var i = 0; i < sections.length; i++) { if (sections[i].sub) return sections[i].sub; } return []; })();
+  var footProject = [
+    { href: '/#porque',     en: 'Why it works', es: 'Por qué funciona' },
+    { href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo' },
+    { href: '/#team',       en: 'Team',         es: 'Equipo' },
+    { href: '/#foundation', en: 'HIT',          es: 'HIT' },
+    { href: '/#contact',    en: 'Contact',      es: 'Contacto' }
+  ];
+  var footMore = [
+    { href: '/proyecciones/', en: 'Myth Projections (gallery)', es: 'Proyecciones del Mito (galería)' },
+    { href: '/retreat/',      en: 'Retreat · Costa Rica',      es: 'Retreat · Costa Rica' },
+    { href: '/tour/',         en: 'Tour · Costa Rica',         es: 'Tour · Costa Rica' },
+    { href: 'https://hit.altermundi.net/', en: 'HIT book', es: 'Libro HIT', ext: true },
+    { href: '/politica/',     en: 'Privacy policy',            es: 'Política de privacidad' }
+  ];
+  function footList(arr) {
+    return arr.map(function (l) {
+      var ext = l.ext ? ' target="_blank" rel="noopener"' : '';
+      return '<li><a class="foot-link" href="' + l.href + '"' + ext + '>' + L(l.en, l.es) + '</a></li>';
+    }).join('');
+  }
   var footHtml =
     '<footer><div class="wrap foot-grid">' +
-      '<div><a href="/" class="brandlock">' + markSvg(28) +
-        '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon + PMP</span></a>' +
-        '<p class="boundary" style="margin-top:1.2rem;">' +
-          L('A live, guided, substance-free wellness experience.',
-            'Una experiencia de bienestar en vivo, guiada y sin sustancias.') +
-        '</p></div>' +
-      '<div class="foot-contact">' +
-        '<p class="eyebrow" style="color:var(--ink-600);">Asociación Civil AlterMundi</p>' +
-        '<p style="margin-top:.9rem;font-size:.92rem;"><a class="ulink" href="mailto:info@altermundi.net">info@altermundi.net</a></p>' +
-        '<p style="margin-top:.4rem;font-size:.92rem;"><a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>' +
-        '<p style="margin-top:.9rem;font-size:.82rem;color:var(--ink-500);">© 2026 AlterMundi · Costa Rica</p>' +
+      '<div class="foot-brand">' +
+        '<a href="/" class="brandlock">' + markSvg(28) + '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon</span></a>' +
+        '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided, substance-free wellness experience.', 'Una experiencia de bienestar en vivo, guiada y sin sustancias.') + '</p>' +
+        '<p class="eyebrow" style="color:var(--ink-600);margin-top:1.4rem;">Asociación Civil AlterMundi</p>' +
+        '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@altermundi.net">info@altermundi.net</a></p>' +
+        '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>' +
       '</div>' +
+      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'El proyecto' : 'The project') + '">' +
+        '<h4 class="foot-h">' + L('The project', 'El proyecto') + '</h4><ul>' + footList(footProject) + '</ul></nav>' +
+      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Líneas de trabajo' : 'Lines of work') + '">' +
+        '<h4 class="foot-h">' + L('Lines of work', 'Líneas de trabajo') + '</h4><ul>' + footList(workSub) + '</ul></nav>' +
+      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Más' : 'More') + '">' +
+        '<h4 class="foot-h">' + L('More', 'Más') + '</h4><ul>' + footList(footMore) + '</ul></nav>' +
+    '</div>' +
+    '<div class="wrap foot-base">' +
+      '<span>© 2026 Asociación Civil AlterMundi · Costa Rica</span>' +
+      '<a class="foot-link" href="/#top">' + L('Back to top ↑', 'Volver arriba ↑') + '</a>' +
     '</div></footer>';
 
   /* ---- Inyectar chrome ---- */
@@ -115,6 +175,46 @@
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Nav: sección activa en el home (scroll-spy) ---- */
+  if (page === 'home' && nav && 'IntersectionObserver' in window) {
+    var spyKeys = ['porque', 'trabajo', 'team', 'foundation', 'contact'];
+    var topLinks = {};
+    spyKeys.forEach(function (k) { topLinks[k] = nav.querySelector('.top-link[data-key="' + k + '"]'); });
+    var spyTargets = spyKeys.map(function (k) { return document.getElementById(k); }).filter(Boolean);
+    var spySet = function (k) {
+      spyKeys.forEach(function (key) { if (topLinks[key]) topLinks[key].classList.toggle('active', key === k); });
+    };
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) spySet(e.target.id); });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    spyTargets.forEach(function (t) { spy.observe(t); });
+  }
+
+  /* ---- Breadcrumbs en subpáginas (de dónde venís → dónde estás) ---- */
+  (function () {
+    var trail = null;
+    if (page === 'porque') {
+      trail = [{ en: 'Why it works', es: 'Por qué funciona' }];
+    } else if (workPages[page]) {
+      var item = null;
+      for (var i = 0; i < workSub.length; i++) { if (workSub[i].page === page) { item = workSub[i]; break; } }
+      trail = [{ href: '/#trabajo', en: 'Our work', es: 'Nuestro trabajo' }];
+      if (item) trail.push({ en: item.en, es: item.es });
+    }
+    if (!trail) return;
+    var host = document.querySelector('.idea-head .wrap, .article-head .wrap, .bn-hero .wrap, .hero .wrap');
+    if (!host) return;
+    var oldEy = host.querySelector(':scope > .eyebrow');
+    if (oldEy && oldEy.querySelector('a[href="/"], a.crumb')) oldEy.remove();
+    var parts = ['<a href="/">' + L('Home', 'Inicio') + '</a>'];
+    trail.forEach(function (c, i) {
+      parts.push('<span class="sep" aria-hidden="true">›</span>');
+      if (c.href && i < trail.length - 1) parts.push('<a href="' + c.href + '">' + L(c.en, c.es) + '</a>');
+      else parts.push('<span class="here" aria-current="page">' + L(c.en, c.es) + '</span>');
+    });
+    host.insertAdjacentHTML('afterbegin', '<nav class="crumbs" aria-label="Breadcrumb">' + parts.join('') + '</nav>');
+  })();
 
   /* ---- Reveal on scroll ---- */
   var reveals = document.querySelectorAll('.reveal');

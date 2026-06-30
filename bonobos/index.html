@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en" data-active-lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>bonob.os · Harmonic Beacon</title>
+<meta name="description" content="bonob.os — an app to heal and reconnect with your sexual life through narrated experiences, with the Harmonic Beacon keeping you in a continuous journey of bodily presence. Wellness and exploration, never medical treatment." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:title" content="bonob.os · Harmonic Beacon" />
+<meta property="og:description" content="An embodied, resonant journey to reconnect with desire, imagination, and presence." />
+<meta name="theme-color" content="#16120D" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html[data-active-lang="es"] [data-lang="en"]{ display:none !important; }
+  html[data-active-lang="en"] [data-lang="es"]{ display:none !important; }
+</style>
+<link rel="stylesheet" href="/assets/hb-brand.css" />
+
+<style>
+  /* ---- soft warm accent, only for this page ---- */
+  body[data-page="bonobos"]{
+    background:
+      radial-gradient(120% 80% at 18% -6%, rgba(201,162,78,.12), transparent 58%),
+      radial-gradient(120% 90% at 88% 4%, rgba(176,108,92,.16), transparent 55%),
+      radial-gradient(130% 100% at 50% 112%, rgba(110,94,68,.18), transparent 60%),
+      linear-gradient(160deg, var(--bg-0), var(--bg-1));
+    background-repeat:no-repeat;
+  }
+
+  /* ---- HERO ---- */
+  .bn-hero{ position:relative; min-height:88svh; display:flex; align-items:center; text-align:center; overflow:hidden; }
+  .bn-hero .glow{ position:absolute; z-index:0; border-radius:50%; filter:blur(80px); opacity:.5; pointer-events:none; }
+  .bn-hero .glow.a{ width:46vw; height:46vw; top:-8%; left:-6%; background:radial-gradient(circle, rgba(201,162,78,.30), transparent 70%); }
+  .bn-hero .glow.b{ width:52vw; height:52vw; bottom:-14%; right:-10%; background:radial-gradient(circle, rgba(176,108,92,.26), transparent 70%); }
+  .bn-hero-inner{ position:relative; z-index:2; padding-top:120px; padding-bottom:72px; margin-inline:auto; }
+  .bn-logo{ margin:1.6rem auto 0; display:flex; justify-content:center; opacity:.95; }
+  .bn-logo svg{ max-width:46vw; height:auto; }
+  .bn-hero h1{ font-family:var(--font-serif); font-weight:500; font-size:clamp(3rem,9vw,6.4rem); line-height:1; letter-spacing:.01em; margin-top:1.2rem; }
+  .bn-hero h1 .dot{ color:var(--gold); }
+  .bn-kicker{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.3rem,2.8vw,2rem); color:var(--ink-800); line-height:1.5; max-width:30ch; margin:1.8rem auto 0; }
+  .bn-sub{ color:var(--ink-600); max-width:52ch; margin:1.5rem auto 0; font-size:1.04rem; line-height:1.7; }
+  .bn-hero-cta{ display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center; margin-top:2.6rem; }
+
+  /* ---- pull quote ---- */
+  .bn-quote{ text-align:center; padding-block:clamp(48px,9vw,110px); }
+  .bn-quote p{ font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--bone); font-size:clamp(1.7rem,4.4vw,3rem); line-height:1.32; max-width:20ch; margin-inline:auto; }
+  .bn-quote em{ color:var(--gold); font-style:italic; }
+
+  /* ---- sections ---- */
+  .bn-sec{ padding-block:clamp(40px,7vw,82px); }
+  .bn-sec h2{ font-size:clamp(1.9rem,4vw,2.8rem); line-height:1.1; }
+  .bn-sec .body{ color:var(--ink-600); font-size:1.08rem; line-height:1.82; max-width:60ch; margin-top:1.2rem; }
+  .bn-sec .body p{ margin-top:1.2rem; }
+  .bn-sec .body p:first-child{ margin-top:0; }
+  .bn-sec .body b{ color:var(--bone); font-weight:500; }
+  .bn-sec.center{ text-align:center; }
+  .bn-sec.center .body{ margin-inline:auto; }
+
+  /* ---- the three layers ---- */
+  .bn-layers{ display:grid; gap:1.1rem; margin-top:2.8rem; }
+  @media(min-width:820px){ .bn-layers{ grid-template-columns:repeat(3,1fr); } }
+  .bn-layer{ padding:2rem 1.7rem; position:relative; overflow:hidden; }
+  .bn-layer .n{ font-family:var(--font-serif); font-style:italic; font-size:2.4rem; line-height:1; color:var(--gold); opacity:.9; }
+  .bn-layer h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:1.45rem; margin:.9rem 0 .6rem; }
+  .bn-layer p{ color:var(--ink-600); font-size:.97rem; line-height:1.62; }
+  .bn-layer .tag{ display:inline-block; margin-top:1rem; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-500); }
+
+  /* ---- closing ---- */
+  .bn-close{ text-align:center; position:relative; overflow:hidden; }
+  .bn-close .glow{ position:absolute; z-index:0; width:60vw; height:40vw; left:50%; top:30%; transform:translateX(-50%); border-radius:50%; filter:blur(90px); opacity:.4; background:radial-gradient(circle, rgba(201,162,78,.26), transparent 70%); pointer-events:none; }
+  .bn-close > *{ position:relative; z-index:1; }
+  .bn-close h2{ font-size:clamp(2rem,5vw,3.4rem); max-width:20ch; margin-inline:auto; }
+  .bn-note{ margin-top:1.8rem; font-size:.9rem; color:var(--ink-500); max-width:54ch; margin-inline:auto; font-style:italic; font-family:var(--font-serif); }
+</style>
+</head>
+
+<body data-page="bonobos">
+<div class="grain" style="position:fixed; inset:0; z-index:60; pointer-events:none;" aria-hidden="true"></div>
+
+<!-- ================= HERO ================= -->
+<section class="bn-hero">
+  <span class="glow a" aria-hidden="true"></span>
+  <span class="glow b" aria-hidden="true"></span>
+  <div class="wrap bn-hero-inner">
+    <h1 class="reveal" data-d="1">bonob<span class="dot">.</span>os</h1>
+    <p class="bn-kicker reveal" data-d="2">
+      <span data-lang="en">To inhabit pleasure.</span>
+      <span data-lang="es">Habitar el placer.</span>
+    </p>
+    <p class="bn-sub reveal" data-d="2">
+      <span data-lang="en">An app to heal and reconnect with your sexual life through narrated experiences — with the Harmonic Beacon keeping you in a continuous journey of bodily exploration and presence.</span>
+      <span data-lang="es">Una app para sanar y reconectar con tu vida sexual a través de experiencias narradas — con el Harmonic Beacon sosteniéndote en un viaje continuo de exploración corporal y presencia.</span>
+    </p>
+    <div class="bn-hero-cta reveal" data-d="3">
+      <a href="#propuesta" class="btn btn-primary"><span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span></a>
+      <a href="/" class="btn btn-ghost"><span data-lang="en">Back to Harmonic Beacon</span><span data-lang="es">Volver a Harmonic Beacon</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PULL QUOTE ================= -->
+<section class="bn-quote">
+  <div class="wrap">
+    <p class="reveal"><span data-lang="en">Not <em>more</em> stimulation. A way back to <em>presence</em>.</span><span data-lang="es">No <em>más</em> estímulo. Un camino de vuelta a la <em>presencia</em>.</span></p>
+  </div>
+</section>
+
+<!-- ================= THE PROBLEM ================= -->
+<section class="section bn-sec">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow reveal"><span data-lang="en">Why it matters</span><span data-lang="es">Por qué importa</span></span>
+    <h2 class="reveal" data-d="1" style="margin-top:.7rem;"><span data-lang="en">When the radar for sensuality goes quiet</span><span data-lang="es">Cuando el radar de la sensualidad se apaga</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">It's a growing, increasingly documented experience: arousal that needs progressively more explicit, more direct content. Along the way, eroticism, seduction, and the slow <i>buildup</i> get lost — so when the real, ambiguous, sensorial encounter arrives, a nervous system tuned to direct stimulus simply doesn't answer.</span><span data-lang="es">Es una experiencia creciente y cada vez más documentada: una excitación que necesita contenido progresivamente más explícito y directo. En el camino se pierden el erotismo, la seducción y el <i>buildup</i> lento — así, cuando llega el encuentro real, ambiguo y sensorial, un sistema nervioso afinado al estímulo directo no responde.</span></p>
+      <p><span data-lang="en">bonob.os is for anyone who wants to heal, reconnect with, and explore their sexuality — recovering imagination, presence, and embodied desire.</span><span data-lang="es">bonob.os es para cualquier persona que quiera sanar, reconectar y explorar su sexualidad — recuperando la imaginación, la presencia y el deseo encarnado.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT WE OFFER ================= -->
+<section class="section bn-sec center" id="propuesta" style="background:linear-gradient(180deg,transparent,rgba(244,238,226,.025),transparent);">
+  <div class="wrap">
+    <span class="eyebrow reveal"><span data-lang="en">What we offer</span><span data-lang="es">Qué ofrecemos</span></span>
+    <h2 class="reveal" data-d="1" style="margin-top:.7rem;"><span data-lang="en">A resonant journey, entirely in-app</span><span data-lang="es">Un viaje resonante, todo dentro de la app</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">A curated corpus of erotic literature shapes the narrative tone; an expressive voice gives it rhythm and intention; and the <b>Beacon becomes the guardian of the experience</b> — sustaining the sound field and keeping the body in presence.</span><span data-lang="es">Un corpus curado de literatura erótica da forma al tono narrativo; una voz expresiva le da ritmo e intención; y el <b>Beacon se vuelve el guardián de la experiencia</b> — sosteniendo el campo sonoro y manteniendo al cuerpo en presencia.</span></p>
+    </div>
+
+    <div class="bn-layers">
+      <article class="card bn-layer reveal">
+        <span class="n">i</span>
+        <h3><span data-lang="en">Audio &amp; Beacon core</span><span data-lang="es">Núcleo audio &amp; Beacon</span></h3>
+        <p><span data-lang="en">The resonant, embodied foundation: sound and harmonic field that keep you in your body.</span><span data-lang="es">La base resonante y encarnada: sonido y campo armónico que te mantienen en tu cuerpo.</span></p>
+      </article>
+      <article class="card bn-layer reveal" data-d="1">
+        <span class="n">ii</span>
+        <h3><span data-lang="en">Guided narration</span><span data-lang="es">Narración guiada</span></h3>
+        <p><span data-lang="en">In-app accompaniment and induction — an expressive voice that opens imagination and the slow buildup.</span><span data-lang="es">Acompañamiento e inducción dentro de la app — una voz expresiva que abre la imaginación y el buildup lento.</span></p>
+      </article>
+      <article class="card bn-layer reveal" data-d="2">
+        <span class="n">iii</span>
+        <h3><span data-lang="en">Shared presence</span><span data-lang="es">Presencia compartida</span></h3>
+        <p><span data-lang="en">A future connected layer with synchronized biometrics for two — sequenced last, with care.</span><span data-lang="es">Una futura capa conectada con biometría sincronizada para dos — lo último de la secuencia, con cuidado.</span></p>
+        <span class="tag"><span data-lang="en">On the horizon</span><span data-lang="es">En el horizonte</span></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT MAKES IT DIFFERENT ================= -->
+<section class="section bn-sec">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow reveal"><span data-lang="en">What makes it different</span><span data-lang="es">Qué lo hace diferente</span></span>
+    <h2 class="reveal" data-d="1" style="margin-top:.7rem;"><span data-lang="en">Another category, not more audios</span><span data-lang="es">Otra categoría, no más audios</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">No one is combining narrative, resonant sound modulation, and a frame of presence and exploration in a single app. bonob.os doesn't compete on "more audios" — it opens <b>another category</b>: an embodied, resonant journey that keeps you in your body. The Beacon-driven modulation is what makes it unrepeatable; plain erotic audio is everywhere.</span><span data-lang="es">Nadie está combinando narrativa, modulación sonora resonante y un encuadre de presencia y exploración en una sola app. bonob.os no compite por "más audios" — abre <b>otra categoría</b>: un viaje encarnado y resonante que te mantiene en tu cuerpo. La modulación que da el Beacon es lo que la vuelve irrepetible; el audio erótico simple está en todas partes.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSING ================= -->
+<section class="section bn-close">
+  <span class="glow" aria-hidden="true"></span>
+  <div class="reveal" style="margin-inline:auto;width:max-content;" aria-hidden="true">
+    <svg viewBox="0 0 100 112" width="48" height="54" fill="none" stroke="var(--gold)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="22" cy="40" r="12"/><circle cx="22" cy="40" r="5"/>
+      <circle cx="78" cy="40" r="12"/><circle cx="78" cy="40" r="5"/>
+      <circle cx="50" cy="48" r="29"/>
+      <path d="M50 35 C37 35 31 47 33 58 C35 71 43 79 50 79 C57 79 65 71 67 58 C69 47 63 35 50 35 Z"/>
+      <circle cx="42" cy="46" r="2.4" fill="var(--gold)" stroke="none"/>
+      <circle cx="58" cy="46" r="2.4" fill="var(--gold)" stroke="none"/>
+      <path d="M46 61 q4 3 8 0"/><path d="M43 69 q7 5 14 0"/>
+    </svg>
+  </div>
+  <div class="wrap" style="margin-top:1.4rem;">
+    <h2 class="reveal" data-d="1"><span data-lang="en">Desire, a way of feeling to inhabit the present</span><span data-lang="es">El deseo, como un sentir para habitar el presente</span></h2>
+    <div class="bn-hero-cta reveal" data-d="2" style="justify-content:center;margin-top:2.2rem;">
+      <a href="/#contact" class="btn btn-primary"><span data-lang="en">Stay in the loop</span><span data-lang="es">Quiero saber más</span></a>
+    </div>
+    <p class="bn-note reveal" data-d="2"><span data-lang="en">bonob.os is wellness and exploration — never medical treatment. For adults.</span><span data-lang="es">bonob.os es bienestar y exploración — nunca tratamiento médico. Para personas adultas.</span></p>
+  </div>
+</section>
+
+<script src="/assets/hb-main.js" defer></script>
+</body>
+</html>

@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Harmonic Beacon + Personal Myth Projection (PMP)</title>
-<meta name="description" content="A symbolic journey experience, sustained by a harmonic field built from harmonic proportions, opening space for presence, rest, and the integration of personal meaning. A live, guided wellness format by AlterMundi." />
+<title>Harmonic Beacon — a harmonic wellness research program by AlterMundi</title>
+<meta name="description" content="Harmonic Beacon is a harmonic wellness research program by AlterMundi: a living field of work where harmonic physics, embodied listening, and personal meaning meet. Explore why it works and our lines of work." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Harmonic Beacon + PMP" />
-<meta property="og:title" content="Harmonic Beacon + Personal Myth Projection (PMP)" />
-<meta property="og:description" content="A symbolic journey experience, sustained by a harmonic field built from harmonic proportions. A live, guided wellness format for boutique retreats and hosts." />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:title" content="Harmonic Beacon — a harmonic wellness research program" />
+<meta property="og:description" content="A living field of work where harmonic physics, embodied listening, and personal meaning meet. A program by AlterMundi." />
 <meta name="theme-color" content="#16120D" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,9 +33,8 @@
       radial-gradient(80% 60% at 50% 40%, rgba(22,18,13,.28), transparent 70%),
       linear-gradient(180deg, rgba(22,18,13,.7) 0%, rgba(22,18,13,.45) 38%, rgba(22,18,13,.86) 100%); }
   .hero-inner{ position:relative; z-index:2; padding-top:120px; padding-bottom:64px; }
-  .hero h1{ font-size:clamp(2.6rem,6.4vw,5.4rem); margin-top:1.6rem; }
-  .hero .plus{ display:block; font-size:clamp(1rem,2vw,1.5rem); letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-family:var(--font-sans); font-weight:500; margin-top:1rem; }
-  .hero .formula{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.25rem,2.6vw,1.9rem); color:var(--ink-800); line-height:1.5; max-width:42ch; margin-top:1.8rem; }
+  .hero h1{ font-size:clamp(2.8rem,7vw,5.8rem); margin-top:1.6rem; }
+  .hero .formula{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.25rem,2.6vw,1.9rem); color:var(--ink-800); line-height:1.5; max-width:46ch; margin-top:1.8rem; }
   .hero .support{ color:var(--ink-600); max-width:54ch; margin-top:1.3rem; font-size:1.02rem; }
   .hero-cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.4rem; }
   .scroll-hint{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:.5rem; color:var(--ink-500); font-size:10px; letter-spacing:.28em; text-transform:uppercase; }
@@ -43,59 +42,43 @@
   @keyframes hintmove{ 0%,100%{ opacity:.3; transform:scaleY(.6); transform-origin:top; } 50%{ opacity:1; transform:scaleY(1); } }
 
   /* ---------- Generic section heads ---------- */
-  .head{ max-width:46ch; }
+  .head{ max-width:48ch; }
   .head h2{ font-size:clamp(2rem,4.4vw,3.4rem); margin-top:1rem; }
   .lead{ font-size:1.12rem; color:var(--ink-600); margin-top:1.3rem; line-height:1.75; }
 
-  /* ---------- WHAT IT IS ---------- */
-  .whatis{ text-align:center; }
-  .whatis .big{ font-family:var(--font-serif); font-weight:400; font-size:clamp(1.15rem,1.7vw + .45rem,1.62rem); line-height:1.62; color:var(--ink-800); max-width:60ch; margin-inline:auto; }
-  .whatis .big em{ color:var(--gold); font-style:italic; }
-  .guard{ display:flex; flex-wrap:wrap; justify-content:center; gap:.7rem; margin-top:2.4rem; }
+  /* ---------- WHY IT WORKS (short) ---------- */
+  .why{ text-align:center; }
+  .why .big{ font-family:var(--font-serif); font-weight:400; font-size:clamp(1.2rem,1.7vw + .5rem,1.7rem); line-height:1.6; color:var(--ink-800); max-width:62ch; margin-inline:auto; }
+  .why .big em{ color:var(--gold); font-style:italic; }
+  .why .formula-line{ border-left:2px solid var(--gold); padding:.2rem 0 .2rem 1.4rem; text-align:left; color:var(--ink-600); font-style:italic; font-family:var(--font-serif); font-size:1.18rem; line-height:1.5; max-width:60ch; margin:2.4rem auto 0; }
+  .why .more{ margin-top:2.4rem; }
 
-  /* ---------- Split (img + text) ---------- */
-  .split{ display:grid; gap:clamp(2rem,5vw,4.5rem); align-items:center; }
-  @media(min-width:900px){ .split{ grid-template-columns:1fr 1fr; } .split.rev .split-media{ order:2; } }
-  .split-media{ aspect-ratio:4/5; }
-  @media(min-width:900px){ .split-media{ aspect-ratio:5/6; } }
+  /* ---------- OUR WORK (cards) ---------- */
+  .work-grid{ display:grid; gap:1.2rem; margin-top:3rem; }
+  @media(min-width:640px){ .work-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media(min-width:1000px){ .work-grid{ grid-template-columns:repeat(3,1fr); } }
+  .work-card{ display:flex; flex-direction:column; padding:1.7rem 1.7rem 1.5rem; min-height:230px; position:relative; }
+  .work-card .wk-num{ font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.05rem; letter-spacing:.1em; }
+  .work-card h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:clamp(1.4rem,2.4vw,1.75rem); margin:.5rem 0 .7rem; line-height:1.12; }
+  .work-card p{ color:var(--ink-600); font-size:.98rem; line-height:1.62; }
+  .work-card .wk-foot{ margin-top:auto; padding-top:1.2rem; }
+  .work-card .wk-link{ display:inline-flex; align-items:center; gap:.45rem; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:500; transition:gap .3s var(--ease); }
+  .work-card .wk-link .arr{ transition:transform .3s var(--ease); }
+  a.work-card:hover .wk-link .arr{ transform:translateX(4px); }
+  .work-card.soon{ border-style:dashed; border-color:var(--hair); }
+  .work-card.soon::after{ content:none; }
+  .work-card .wk-login{ display:inline-flex; align-items:center; gap:.5rem; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#1a140c; font-weight:600; padding:.6rem 1.1rem; border-radius:999px; background:linear-gradient(135deg,var(--gold-2),var(--gold) 60%,var(--gold-deep)); transition:transform .35s var(--ease), box-shadow .35s var(--ease); }
+  .work-card .wk-login:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,162,78,.3); }
+  .work-card .wk-state{ display:block; margin-top:.7rem; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-500); }
+  /* status pills */
+  .pill.live{ color:#1a140c; background:linear-gradient(135deg,var(--gold-2),var(--gold) 60%,var(--gold-deep)); border-color:transparent; font-weight:600; }
+  .pill .dot-live{ margin-right:.15rem; }
 
-  /* ---------- Experience · journey stepper ---------- */
-  .journey-x{ margin-top:3rem; max-width:860px; }
-  .jx-dots{ display:flex; justify-content:space-between; align-items:center; position:relative; }
-  .jx-dots::before{ content:""; position:absolute; left:8px; right:8px; top:50%; height:1px; transform:translateY(-50%); background:linear-gradient(90deg,var(--gold),rgba(201,162,78,.28)); }
-  .jx-dot{ position:relative; z-index:1; width:34px; height:34px; border-radius:50%; border:1px solid var(--hair); background:var(--bg-0); color:var(--ink-500); font-family:var(--font-serif); font-style:italic; font-size:.85rem; cursor:pointer; transition:transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease); display:inline-flex; align-items:center; justify-content:center; }
-  .jx-dot:hover{ border-color:var(--gold); color:var(--bone); }
-  .jx-dot.done{ color:var(--gold); border-color:rgba(201,162,78,.5); }
-  .jx-dot.active{ background:var(--gold); color:#1a140c; border-color:var(--gold); box-shadow:0 0 16px rgba(201,162,78,.45); transform:scale(1.12); }
-  .jx-stage{ display:flex; align-items:flex-start; gap:1.2rem; margin-top:2.4rem; }
-  .jx-window{ position:relative; flex:1; min-height:170px; }
-  .jx-slide{ display:none; }
-  .jx-slide.active{ display:block; animation:jxfade .5s var(--ease); }
-  @keyframes jxfade{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
-  .jx-slide .j-num{ font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.1rem; letter-spacing:.14em; }
-  .jx-slide h3{ font-family:var(--font-sans); font-weight:500; color:var(--bone); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:.3rem 0 .6rem; }
-  .jx-slide p{ color:var(--ink-600); font-size:1.05rem; line-height:1.7; max-width:52ch; }
-  .jx-arrow{ flex-shrink:0; width:46px; height:46px; border-radius:50%; border:1px solid var(--hair); background:var(--surface); color:var(--gold); font-size:1.5rem; line-height:1; cursor:pointer; transition:transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease), opacity .3s ease; display:inline-flex; align-items:center; justify-content:center; margin-top:.1rem; }
-  .jx-arrow:hover:not(:disabled){ border-color:var(--gold); background:rgba(201,162,78,.12); transform:translateY(-2px); }
-  .jx-arrow:disabled{ opacity:.25; cursor:default; }
-  @media(max-width:620px){ .jx-stage{ gap:.55rem; } .jx-arrow{ width:40px; height:40px; font-size:1.3rem; } .jx-dot{ width:28px; height:28px; font-size:.72rem; } }
-  @media(prefers-reduced-motion:reduce){ .jx-slide.active{ animation:none; } .jx-dot{ transition:none; } }
-
-  /* ---------- Host value list ---------- */
-  .vlist{ list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:1px; }
-  .vlist li{ display:flex; gap:1rem; padding:1.1rem 0; border-top:1px solid var(--hair-soft); color:var(--ink-800); }
-  .vlist li:last-child{ border-bottom:1px solid var(--hair-soft); }
-  .vlist .mk{ color:var(--gold); flex-shrink:0; font-family:var(--font-serif); font-style:italic; }
-
-  /* ---------- Offer note ---------- */
-  .note{ border-left:2px solid var(--gold); padding:.4rem 0 .4rem 1.4rem; color:var(--ink-600); font-style:italic; font-family:var(--font-serif); font-size:1.2rem; line-height:1.5; }
-
-  /* ---------- Stage facts ---------- */
-  .facts{ display:grid; gap:1.5rem; margin-top:2.4rem; }
-  @media(min-width:680px){ .facts{ grid-template-columns:repeat(2,1fr); } }
-  .fact{ padding:1.5rem 1.6rem; }
-  .fact .big{ font-family:var(--font-serif); color:var(--gold); font-size:2.2rem; line-height:1; }
-  .fact p{ color:var(--ink-600); margin-top:.7rem; font-size:.98rem; }
+  /* available-now banner */
+  .avail-now{ display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.4rem; margin-top:2.2rem; padding:1.3rem 1.6rem; border:1px solid var(--hair); border-radius:var(--r-card); background:linear-gradient(135deg,rgba(201,162,78,.10),rgba(201,162,78,.02)); }
+  .avail-now .an-txt{ flex:1 1 320px; color:var(--ink-800); font-size:1rem; line-height:1.55; }
+  .avail-now .an-txt b{ color:var(--bone); font-weight:600; }
+  .avail-now .an-ey{ display:block; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:.45rem; }
 
   /* ---------- Team ---------- */
   .team{ display:grid; gap:1px; background:var(--hair-soft); border:1px solid var(--hair-soft); border-radius:var(--r-card); overflow:hidden; margin-top:2.6rem; }
@@ -106,19 +89,9 @@
   .member .role{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:.3rem; }
   .member p{ color:var(--ink-600); font-size:.92rem; margin-top:.7rem; line-height:1.6; }
 
-  /* ---------- What it opens ---------- */
-  .opens-grid{ display:grid; gap:1.5rem; margin-top:2.6rem; }
-  @media(min-width:760px){ .opens-grid{ grid-template-columns:repeat(3,1fr); } }
-  .open-card{ margin:0; }
-  .open-card .img-frame{ aspect-ratio:4/5; }
-  .open-card figcaption{ display:block; margin-top:1.1rem; }
-  .open-card .ttl{ display:block; font-family:var(--font-serif); font-size:1.5rem; color:var(--bone); }
-  .open-card .dsc{ display:block; color:var(--ink-600); font-size:.95rem; margin-top:.5rem; line-height:1.6; }
-
   /* ---------- CTA band ---------- */
   .cta-band{ text-align:center; position:relative; }
   .cta-band h2{ font-size:clamp(2rem,5vw,3.6rem); max-width:18ch; margin-inline:auto; }
-
 </style>
 </head>
 
@@ -132,20 +105,18 @@
   </div>
   <div class="wrap hero-inner">
     <span class="hb-mark reveal" style="width:54px;height:54px;"><svg viewBox="0 0 200 200" width="54" height="54" fill="none" aria-hidden="true"><use href="#hbmark"/></svg></span>
-    <h1 class="reveal" data-d="1" style="margin-top:1.8rem;">
-      Harmonic Beacon
-      <span class="plus">+ Personal Myth Projection (PMP)</span>
-    </h1>
+    <span class="eyebrow reveal" data-d="1" style="display:block;margin-top:1.6rem;"><span data-lang="en">A program by Asociación Civil AlterMundi</span><span data-lang="es">Un programa de la Asociación Civil AlterMundi</span></span>
+    <h1 class="reveal" data-d="1" style="margin-top:.9rem;">Harmonic Beacon</h1>
     <p class="formula reveal" data-d="2">
-      <span data-lang="en">A symbolic journey experience, sustained by a harmonic field built from harmonic proportions, opening space for presence, rest, and the integration of personal meaning.</span>
-      <span data-lang="es">Una experiencia de viaje simbólico, sostenida por un campo armónico construido desde proporciones armónicas, que abre un espacio de presencia, descanso e integración de sentido personal.</span>
+      <span data-lang="en">A harmonic wellness research program — a living field of work where harmonic physics, embodied listening, and personal meaning meet.</span>
+      <span data-lang="es">Un programa de investigación en bienestar armónico — un campo de trabajo vivo donde la física armónica, la escucha encarnada y el sentido personal se encuentran.</span>
     </p>
     <div class="hero-cta reveal" data-d="3">
-      <a href="#experience" class="btn btn-primary">
-        <span data-lang="en">What happens in a session</span><span data-lang="es">Qué pasa en una sesión</span>
+      <a href="#trabajo" class="btn btn-primary">
+        <span data-lang="en">Our work</span><span data-lang="es">Nuestro trabajo</span>
       </a>
-      <a href="#contact" class="btn btn-ghost">
-        <span data-lang="en">Experience it</span><span data-lang="es">Vivir la experiencia</span>
+      <a href="#porque" class="btn btn-ghost">
+        <span data-lang="en">Why it works</span><span data-lang="es">Por qué funciona</span>
       </a>
     </div>
   </div>
@@ -154,153 +125,108 @@
   </div>
 </section>
 
-<!-- ================= WHAT IT IS ================= -->
-<section class="section" id="whatis">
-  <div class="wrap whatis">
-    <span class="eyebrow reveal"><span data-lang="en">What it is</span><span data-lang="es">Qué es</span></span>
-    <p class="big reveal" data-d="1" style="margin-top:1.4rem;">
-      <span data-lang="en">Beacon creates a <em>harmonic field</em> through sound, designed from natural harmonic proportions. <a class="ulink" href="https://proyecciondelmito.harmonicbeacon.com" target="_blank" rel="noopener">Personal Myth Projection</a> adds a structured symbolic process. Together, they form a <em>live guided inner journey</em>.</span>
-      <span data-lang="es">Beacon crea un <em>campo armónico</em> a través del sonido, diseñado desde proporciones armónicas naturales. La <a class="ulink" href="https://proyecciondelmito.harmonicbeacon.com" target="_blank" rel="noopener">Proyección del Mito Personal</a> suma un proceso simbólico estructurado. Juntos forman un <em>viaje interior guiado en vivo</em>.</span>
-    </p>
-  </div>
-</section>
-
-<!-- ================= EXPERIENCE ================= -->
-<section class="section" id="experience" style="background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
-  <div class="wrap">
-    <div class="split" style="align-items:flex-start;">
-      <div class="img-frame split-media reveal">
-        <img class="img-cover duotone" src="/assets/img/experience-portrait.jpg" alt="A Beacon + PMP group circle in the room" />
-      </div>
-      <div>
-        <span class="eyebrow reveal"><span data-lang="en">The experience</span><span data-lang="es">La experiencia</span></span>
-        <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">What happens in a session</span><span data-lang="es">Qué pasa en una sesión</span></h2>
-        <p class="lead reveal" data-d="1">
-          <span data-lang="en">A <i>Beacon + PMP</i> session is a live guided experience. Participants enter a defined frame, listen within the Beacon harmonic field, follow a structured symbolic process, and close with a brief integration.</span>
-          <span data-lang="es">Una sesión de <i>Beacon + PMP</i> es una experiencia guiada en vivo. Los participantes entran en un marco definido, escuchan dentro del campo armónico del Beacon, recorren un proceso simbólico estructurado y cierran con una breve integración.</span>
-        </p>
-
-        <div class="journey-x reveal" data-d="1" id="journeyX" tabindex="0" aria-label="Recorrido de la sesión / Session journey">
-      <div class="jx-dots">
-        <button type="button" class="jx-dot" data-i="0">i</button>
-        <button type="button" class="jx-dot" data-i="1">ii</button>
-        <button type="button" class="jx-dot" data-i="2">iii</button>
-        <button type="button" class="jx-dot" data-i="3">iv</button>
-        <button type="button" class="jx-dot" data-i="4">v</button>
-        <button type="button" class="jx-dot" data-i="5">vi</button>
-      </div>
-      <div class="jx-stage">
-        <button type="button" class="jx-arrow jx-prev" aria-label="Anterior / Previous">‹</button>
-        <div class="jx-window">
-          <article class="jx-slide" data-i="0"><span class="j-num">i</span><h3><span data-lang="en">Orientation</span><span data-lang="es">Orientación</span></h3><p><span data-lang="en">A short orientation to the method and the Harmonic Beacon. No prior experience required.</span><span data-lang="es">Una breve orientación al método y al Harmonic Beacon. No se requiere experiencia previa.</span></p></article>
-          <article class="jx-slide" data-i="1"><span class="j-num">ii</span><h3><span data-lang="en">Interoceptive & proprioceptive warm-up</span><span data-lang="es">Caldeamiento interoceptivo y propioceptivo</span></h3><p><span data-lang="en">Breath and a sensing of inner and bodily cues settle the group and open attention before the journey.</span><span data-lang="es">Respiración y registro de las sensaciones internas y del cuerpo en el espacio asientan al grupo y abren la atención antes del viaje.</span></p></article>
-          <article class="jx-slide" data-i="2"><span class="j-num">iii</span><h3><span data-lang="en">Symbolic journey</span><span data-lang="es">Viaje simbólico</span></h3><p><span data-lang="en">A guided 50–60 minute inner journey: a symbolic visualization that, through PMP, invites each person to meet their own images and personal myth.</span><span data-lang="es">Un viaje interior guiado de 50–60 minutos: una visualización simbólica que, a través de PMP, invita a cada persona a encontrarse con sus propias imágenes y su mito personal.</span></p></article>
-          <article class="jx-slide" data-i="3"><span class="j-num">iv</span><h3><span data-lang="en">Listening in the field</span><span data-lang="es">Escucha en el campo</span></h3><p><span data-lang="en">Situated listening within the Beacon's harmonic field — the relational reference that holds the journey.</span><span data-lang="es">Escucha situada dentro del campo armónico del Beacon — la referencia relacional que sostiene el viaje.</span></p></article>
-          <article class="jx-slide" data-i="4"><span class="j-num">v</span><h3><span data-lang="en">Pause & exit</span><span data-lang="es">Pausa y salida</span></h3><p><span data-lang="en">A care-oriented frame keeps a clear possibility of pause or exit at any moment.</span><span data-lang="es">Un marco orientado al cuidado mantiene una posibilidad clara de pausa o salida en cualquier momento.</span></p></article>
-          <article class="jx-slide" data-i="5"><span class="j-num">vi</span><h3><span data-lang="en">Integration</span><span data-lang="es">Integración</span></h3><p><span data-lang="en">A brief sharing circle for personal integration closes the experience.</span><span data-lang="es">Un breve círculo de palabra para la integración personal cierra la experiencia.</span></p></article>
-        </div>
-        <button type="button" class="jx-arrow jx-next" aria-label="Siguiente / Next">›</button>
-      </div>
-    </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WHAT IT OPENS ================= -->
-<section class="section" id="opens">
-  <div class="wrap">
-    <div class="head reveal" style="max-width:50ch;">
-      <span class="eyebrow"><span data-lang="en">What it opens</span><span data-lang="es">Lo que abre</span></span>
-      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">A space for presence, rest, and meaning</span><span data-lang="es">Un espacio de presencia, descanso y sentido</span></h2>
-    </div>
-    <div class="opens-grid reveal" data-d="1">
-      <figure class="open-card">
-        <div class="img-frame"><img class="img-cover duotone" src="/assets/img/experience-heart.jpg" alt="Hands resting on the heart during a session" /></div>
-        <figcaption><span class="ttl"><span data-lang="en">Presence</span><span data-lang="es">Presencia</span></span><span class="dsc"><span data-lang="en">People describe attention settling into the body and the present moment, held by the harmonic field.</span><span data-lang="es">Las personas describen una atención que se asienta en el cuerpo y el presente, sostenida por el campo armónico.</span></span></figcaption>
-      </figure>
-      <figure class="open-card">
-        <div class="img-frame"><img class="img-cover duotone" src="/assets/img/origin-edgecity-2.jpg" alt="A group resting during a Beacon session" /></div>
-        <figcaption><span class="ttl"><span data-lang="en">Rest</span><span data-lang="es">Descanso</span></span><span class="dsc"><span data-lang="en">People report a sense of deep, waking rest — listening, without effort, inside a structured harmonic environment.</span><span data-lang="es">Las personas manifiestan una sensación de descanso profundo y despierto — escuchar, sin esfuerzo, dentro de un entorno armónico estructurado.</span></span></figcaption>
-      </figure>
-      <figure class="open-card">
-        <div class="img-frame"><img class="img-cover duotone" src="/assets/img/opens-sentido.jpg" alt="A person resting, the Beacon on a guitar behind" /></div>
-        <figcaption><span class="ttl"><span data-lang="en">Meaning</span><span data-lang="es">Sentido</span></span><span class="dsc"><span data-lang="en">Many speak of integrating their own meaning through the symbolic process, closed by a sharing circle.</span><span data-lang="es">Muchas personas relatan integrar un sentido propio a través del proceso simbólico, que cierra con un círculo de palabra.</span></span></figcaption>
-      </figure>
-    </div>
-    <p class="reveal" style="color:var(--ink-500);font-size:.86rem;margin-top:2rem;max-width:62ch;">
-      <span data-lang="en">These are the qualities participants describe — experiential accounts of a wellness experience, not clinical claims.</span>
-      <span data-lang="es">Son las cualidades que describen los participantes — relatos experienciales de una experiencia de bienestar, no claims clínicos.</span>
-    </p>
-  </div>
-</section>
-
-<!-- ================= WHAT MAKES IT DIFFERENT ================= -->
-<section class="section" id="different" style="background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
-  <div class="wrap">
-    <div class="split">
-      <div class="img-frame split-media reveal">
-        <img class="img-cover" src="/assets/img/beacon-device.jpg" alt="The Harmonic Beacon device, tuned to harmonic proportions" />
-      </div>
-      <div>
-        <span class="eyebrow reveal"><span data-lang="en">What makes it different</span><span data-lang="es">Qué lo hace diferente</span></span>
-        <h2 class="reveal" data-d="1" style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">Proportions, not frequencies</span><span data-lang="es">Proporciones, no frecuencias</span></h2>
-        <p class="lead reveal" data-d="1">
-          <span data-lang="en">What sets Beacon apart is the proportions and the relationships between tones, not isolated frequencies. Sound is only the medium; from that web of relationships emerges a structured harmonic environment for situated listening.</span>
-          <span data-lang="es">Lo que distingue a Beacon son las proporciones y las relaciones entre los tonos, no las frecuencias aisladas. El sonido es apenas el medio; de ese tejido de relaciones emerge un entorno armónico estructurado para una escucha situada.</span>
-        </p>
-        <p class="reveal" data-d="2" style="color:var(--ink-500);margin-top:1.4rem;font-size:.95rem;">
-          <span data-lang="en">Most sound-based wellness products frame themselves around a frequency, a vibration, or relaxation audio. Beacon works one level deeper — in how the tones relate to one another. That is the relational basis of its field, not a magic frequency.</span>
-          <span data-lang="es">La mayoría de los productos de bienestar sonoro se enmarcan en una frecuencia, una vibración o audio de relajación. Beacon trabaja un nivel más adentro — en cómo se relacionan los tonos entre sí. Esa es la base relacional de su campo, no una frecuencia mágica.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WHY IT WORKS ================= -->
+<!-- ================= WHY IT WORKS (short) ================= -->
 <section class="section" id="porque">
-  <div class="wrap whatis">
+  <div class="wrap why">
     <span class="eyebrow reveal"><span data-lang="en">Why it works</span><span data-lang="es">Por qué funciona</span></span>
     <p class="big reveal" data-d="1" style="margin-top:1.4rem;">
-      <span data-lang="en">Beacon promotes health because it creates a harmonic field, built from the natural physics of harmony, that the body can inhabit with less friction. In HIT, consonance isn't just <em>"sounding pleasant"</em> — it is a dynamic relationship where a system finds stability without becoming rigid. By lowering the corrective load, the field makes room for rest, presence, and integration.</span>
-      <span data-lang="es">El Beacon promueve salud porque crea un campo armónico basado en la física natural de la armonía que el cuerpo puede habitar con menor fricción. En HIT, la consonancia no es solo <em>"sonar agradable"</em>: es una relación dinámica donde un sistema encuentra estabilidad sin volverse rígido. Al reducir la carga correctiva, el campo abre lugar para el descanso, la presencia y la integración.</span>
+      <span data-lang="en">Beacon promotes health because it creates a <em>harmonic field</em>, built from the natural physics of harmony, that the body can inhabit with less friction. In HIT, consonance isn't just "sounding pleasant" — it is a <em>dynamic relationship</em> where a system finds stability without becoming rigid. By lowering the corrective load, the field makes room for rest, presence, and integration.</span>
+      <span data-lang="es">El Beacon promueve salud porque crea un <em>campo armónico</em> basado en la física natural de la armonía que el cuerpo puede habitar con menor fricción. En HIT, la consonancia no es solo "sonar agradable": es una <em>relación dinámica</em> donde un sistema encuentra estabilidad sin volverse rígido. Al reducir la carga correctiva, el campo abre lugar para el descanso, la presencia y la integración.</span>
     </p>
-    <p class="note reveal" data-d="2" style="max-width:62ch;margin:2.6rem auto 0;text-align:left;">
+    <p class="formula-line reveal" data-d="2">
       <span data-lang="en">Beacon promotes health because it offers an acoustic ecology of dynamic consonance: order without rigidity, variation without chaos, and a harmonic reference that helps the body recover coherence.</span>
       <span data-lang="es">Beacon promueve salud porque ofrece una ecología acústica de consonancia dinámica: orden sin rigidez, variación sin caos, y una referencia armónica que ayuda al cuerpo a recuperar coherencia.</span>
     </p>
-    <p class="reveal" data-d="2" style="margin-top:2.4rem;">
+    <p class="more reveal" data-d="2">
       <a class="btn btn-ghost" href="/porque-funciona/"><span data-lang="en">Read the full explanation</span><span data-lang="es">Leer la explicación completa</span></a>
     </p>
   </div>
 </section>
 
-<!-- ================= ORIGIN ================= -->
-<section class="section" id="origin">
+<!-- ================= OUR WORK ================= -->
+<section class="section" id="trabajo" style="background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
   <div class="wrap">
     <div class="head reveal" style="max-width:54ch;">
-      <span class="eyebrow"><span data-lang="en">Origin & discovery</span><span data-lang="es">Origen y descubrimiento</span></span>
-      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">Born from research, revealed by people</span><span data-lang="es">Nació de la investigación, lo reveló la gente</span></h2>
+      <span class="eyebrow"><span data-lang="en">Our work</span><span data-lang="es">Nuestro trabajo</span></span>
+      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">Lines of work</span><span data-lang="es">Líneas de trabajo</span></h2>
+      <p class="lead"><span data-lang="en">Harmonic Beacon grows along several converging lines — from the device itself to the experiences, tools, and training built around it. Each one has its own space below.</span><span data-lang="es">Harmonic Beacon crece en varias líneas que convergen — desde el dispositivo en sí hasta las experiencias, herramientas y formación que se construyen alrededor. Cada una tiene su propio espacio acá abajo.</span></p>
     </div>
-    <div class="split" style="margin-top:2.6rem;align-items:stretch;">
-      <div>
-        <p class="lead reveal" data-d="1" style="margin-top:0;">
-          <span data-lang="en">Beacon was born in research — an experimental probe for Harmonic Information Theory, made to render perceptible, in the body, the same harmonic structure that organizes nature. It set out not to produce a wellness effect, but to let embodied listening reveal that harmony.</span>
-          <span data-lang="es">Beacon nació en la investigación — un instrumento experimental de la Teoría de la Información Armónica, hecha para volver perceptible en el cuerpo la misma estructura armónica que organiza la naturaleza. Su búsqueda no era un efecto de bienestar, sino dejar que la escucha encarnada revelara esa armonía.</span>
-        </p>
-        <p class="reveal" data-d="1" style="margin-top:1.3rem;">
-          <span data-lang="en">Then something unexpected emerged. In exploratory sessions — most visibly at Edge City 2025 — people came back, queued to repeat the experience, and spoke of a range of positive subjective effects. Theory, sound, and body were meeting in one whole, lived experience.</span>
-          <span data-lang="es">Y entonces emergió algo inesperado. En sesiones exploratorias — sobre todo en Edge City 2025 — las personas volvían, hacían fila para repetir la experiencia y hablaban de una variedad de efectos subjetivos positivos. La teoría, el sonido y el cuerpo se encontraban en una misma experiencia integral.</span>
-        </p>
-        <p class="reveal" data-d="2" style="color:var(--ink-500);margin-top:1.3rem;">
-          <span data-lang="en">Those are experiential accounts, not clinical evidence — but they are the path that led the team to care for and structure Beacon as a disciplined, non-clinical wellness experience. Repeated voluntary interest, not proof of efficacy or commercial validation.</span>
-          <span data-lang="es">Son relatos experienciales, no evidencia clínica — pero son el camino que llevó al equipo a cuidar y estructurar Beacon como una experiencia de bienestar disciplinada y no clínica. Interés voluntario repetido, no prueba de eficacia ni validación comercial.</span>
-        </p>
+
+    <!-- Available now -->
+    <div class="avail-now reveal" data-d="1">
+      <div class="an-txt">
+        <span class="an-ey"><span class="dot-live"></span> <span data-lang="en">Available now</span><span data-lang="es">Disponible ahora</span></span>
+        <span data-lang="en">What we offer today are <b>in-person sessions</b>: the <b>Harmonic Myth Projection</b> experience, Beacon sessions, and more — live and guided.</span>
+        <span data-lang="es">Lo que ofrecemos hoy son <b>sesiones presenciales</b>: la experiencia de <b>Proyección Armónica del Mito</b>, sesiones del Beacon y más — en vivo y guiadas.</span>
       </div>
-      <div class="img-frame split-media reveal" data-d="1">
-        <img class="img-cover duotone" src="/assets/img/origin-edgecity.jpg" alt="Edge City 2025 — a group resting in a Beacon session" />
-      </div>
+      <a class="btn btn-primary" href="/proyeccion-armonica-del-mito/"><span data-lang="en">See the experience</span><span data-lang="es">Ver la experiencia</span></a>
+    </div>
+
+    <div class="work-grid">
+
+      <!-- 1 · App -->
+      <article class="card work-card reveal">
+        <span class="wk-num">i</span>
+        <h3><span data-lang="en">App</span><span data-lang="es">App</span></h3>
+        <p><span data-lang="en">Your gateway to the Beacon experience and your personal myth, from any device — log in to enter.</span><span data-lang="es">Tu puerta de entrada a la experiencia Beacon y a tu mito personal, desde cualquier dispositivo — entrá con tu login.</span></p>
+        <div class="wk-foot">
+          <a class="wk-login" href="https://harmonicbeacon.altermundi.net" target="_blank" rel="noopener"><span data-lang="en">Log in</span><span data-lang="es">Hacer login</span></a>
+          <span class="wk-state"><span data-lang="en">The app is under construction.</span><span data-lang="es">La app está en construcción.</span></span>
+        </div>
+      </article>
+
+      <!-- 2 · Proyección Armónica del Mito -->
+      <a class="card work-card reveal" data-d="1" href="/proyeccion-armonica-del-mito/">
+        <span class="wk-num">ii</span>
+        <h3><span data-lang="en">Harmonic Myth Projection</span><span data-lang="es">Proyección Armónica del Mito</span></h3>
+        <p><span data-lang="en">A group wellness experience for centers and retreats: a 75–120 min guided journey inside the Beacon's harmonic field, with the symbolic Personal Myth process. Substance-free, non-clinical.</span><span data-lang="es">Una experiencia grupal de bienestar para centros y retiros: un viaje guiado de 75–120 min dentro del campo armónico del Beacon, con el proceso simbólico del Mito Personal. Sin sustancias, no clínica.</span></p>
+        <div class="wk-foot">
+          <span class="pill live"><span class="dot-live"></span> <span data-lang="en">Available now · in person</span><span data-lang="es">Disponible ahora · presencial</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <!-- 3 · El Beacon -->
+      <a class="card work-card reveal" data-d="2" href="/el-beacon/">
+        <span class="wk-num">iii</span>
+        <h3><span data-lang="en">The Beacon</span><span data-lang="es">El Beacon</span></h3>
+        <p><span data-lang="en">The device and protocol that sustains harmonic acoustic fields from the natural physics of harmony — for sessions, installations, and research. Proportions, not isolated frequencies.</span><span data-lang="es">El dispositivo y protocolo que sostiene campos acústicos armónicos desde la física natural de la armonía — para sesiones, instalaciones e investigación. Proporciones, no frecuencias aisladas.</span></p>
+        <div class="wk-foot"><span class="wk-link"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span></div>
+      </a>
+
+      <!-- 4 · bonob.os -->
+      <a class="card work-card reveal" data-d="1" href="/bonobos/">
+        <span class="wk-num">iv</span>
+        <h3>bonob.os</h3>
+        <p><span data-lang="en">An app for healing and reconnecting with one's sexual life through narrated experiences, with the Beacon sustaining bodily presence. Wellness and exploration — never medical treatment.</span><span data-lang="es">Una app para sanar y reconectar con la vida sexual a través de experiencias narradas, con el Beacon sosteniendo la presencia corporal. Bienestar y exploración — nunca tratamiento médico.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">Research · idea stage</span><span data-lang="es">Investigación · etapa de idea</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <!-- 5 · Licencia y formación integral de facilitadores -->
+      <a class="card work-card reveal" data-d="2" href="/formacion/">
+        <span class="wk-num">v</span>
+        <h3><span data-lang="en">Licensing &amp; integral facilitator training</span><span data-lang="es">Licencia y formación integral de facilitadores</span></h3>
+        <p><span data-lang="en">A path to train and license facilitators to hold Beacon + Harmonic Myth Projection experiences with care, within AlterMundi's framework.</span><span data-lang="es">Un camino para formar y licenciar facilitadores que sostengan experiencias Beacon + Proyección Armónica del Mito con cuidado, dentro del marco de AlterMundi.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">In development</span><span data-lang="es">En desarrollo</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
+
+      <!-- 6 · Psicopompo -->
+      <a class="card work-card reveal" href="/psicopompo/">
+        <span class="wk-num">vi</span>
+        <h3><span data-lang="en">Psychopomp</span><span data-lang="es">Psicopompo</span></h3>
+        <p><span data-lang="en">An AI copilot to accompany the Personal Myth process inside an active Beacon session — human-in-the-loop, with explicit clinical limits.</span><span data-lang="es">Un copiloto de IA para acompañar el proceso del Mito Personal dentro de una sesión Beacon activa — con humano en el circuito y límites clínicos explícitos.</span></p>
+        <div class="wk-foot">
+          <span class="pill"><span data-lang="en">Research · R&amp;D</span><span data-lang="es">Investigación · R&amp;D</span></span>
+          <span class="wk-link" style="margin-top:.7rem;"><span data-lang="en">Explore</span><span data-lang="es">Conocer</span> <span class="arr">→</span></span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -310,21 +236,21 @@
   <div class="wrap">
     <div class="head reveal" style="max-width:54ch;">
       <span class="eyebrow"><span data-lang="en">Team</span><span data-lang="es">Equipo</span></span>
-      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">One format, years of converging work</span><span data-lang="es">Un formato, años de trabajo que convergen</span></h2>
+      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem);margin-top:1rem;"><span data-lang="en">One program, years of converging work</span><span data-lang="es">Un programa, años de trabajo que convergen</span></h2>
       <p class="lead">
-        <span data-lang="en">The core Beacon team works within Asociación Civil AlterMundi, bringing together Harmonic Information Theory, harmonic R&D, Personal Myth Projection, software and research, embodied facilitation, product and operations, and acoustic engineering.</span>
-        <span data-lang="es">El equipo central de Beacon trabaja dentro de la Asociación Civil AlterMundi, reuniendo Teoría de la Información Armónica, I+D armónica, Proyección del Mito Personal, software e investigación, facilitación encarnada, producto y operaciones, e ingeniería acústica.</span>
+        <span data-lang="en">The core Beacon team works within Asociación Civil AlterMundi, bringing together Harmonic Information Theory, harmonic R&D, Harmonic Myth Projection, software and research, embodied facilitation, product and operations, and acoustic engineering.</span>
+        <span data-lang="es">El equipo central de Beacon trabaja dentro de la Asociación Civil AlterMundi, reuniendo Teoría de la Información Armónica, I+D armónica, Proyección Armónica del Mito, software e investigación, facilitación encarnada, producto y operaciones, e ingeniería acústica.</span>
       </p>
     </div>
     <div class="team">
       <div class="member reveal"><div class="name">Nicolás Echániz</div><div class="role"><span data-lang="en">President · Harmonic R&amp;D</span><span data-lang="es">Presidente · I+D armónica</span></div><p><span data-lang="en">President of AlterMundi and HIT co-author; musician and programmer leading the harmonic R&amp;D behind the Beacon.</span><span data-lang="es">Presidente de AlterMundi y co-autor de HIT; músico y programador que lidera la I+D armónica detrás del Beacon.</span></p></div>
       <div class="member reveal" data-d="1"><div class="name">Mariano Fernández Méndez</div><div class="role"><span data-lang="en">HIT co-author · AI/ML</span><span data-lang="es">Co-autor HIT · IA/ML</span></div><p><span data-lang="en">Co-author of Harmonic Information Theory and AlterMundi's AI &amp; machine-learning specialist; research, writing, and systems lead.</span><span data-lang="es">Co-autor de la Teoría de la Información Armónica y especialista en IA y machine learning de AlterMundi; lidera investigación, escritura y sistemas.</span></p></div>
-      <div class="member reveal" data-d="2"><div class="name">Julián De La Reta</div><div class="role"><span data-lang="en">Creator of PMP</span><span data-lang="es">Creador de PMP</span></div><p><span data-lang="en">Creator of Personal Myth Projection; psychologist with Jungian and psychodrama training, and over 15 years developing and practicing PMP.</span><span data-lang="es">Creador de la Proyección del Mito Personal; psicólogo con formación junguiana y en psicodrama, y más de 15 años desarrollando y practicando PMP.</span></p></div>
+      <div class="member reveal" data-d="2"><div class="name">Julián De La Reta</div><div class="role"><span data-lang="en">Creator of HMP</span><span data-lang="es">Creador de la Proyección Armónica del Mito</span></div><p><span data-lang="en">Creator of Harmonic Myth Projection; psychologist with Jungian and psychodrama training, and over 15 years developing and practicing it.</span><span data-lang="es">Creador de la Proyección Armónica del Mito; psicólogo con formación junguiana y en psicodrama, y más de 15 años desarrollándola y practicándola.</span></p></div>
       <div class="member reveal"><div class="name">Anabella Scigliano Mattiauda</div><div class="role"><span data-lang="en">Research · Software</span><span data-lang="es">Investigación · Software</span></div><p><span data-lang="en">Researcher and software developer; biomedical engineering student; built the app and designs the research protocols.</span><span data-lang="es">Investigadora y desarrolladora de software; estudiante de ingeniería biomédica; construyó la app y diseña los protocolos de investigación.</span></p></div>
       <div class="member reveal" data-d="1"><div class="name">Saira Asúa</div><div class="role"><span data-lang="en">Product design · Vibe Coder · Ops</span><span data-lang="es">Diseño de producto · Vibe Coder · Ops</span></div><p><span data-lang="en">Co-creator, Product Designer &amp; Ops. Works across UX, brand, web, and hardware, with a background in public and community health.</span><span data-lang="es">Co-creadora, Product Designer &amp; Ops. Trabaja en UX, marca, web y hardware, con experiencia en salud pública y comunitaria.</span></p></div>
       <div class="member reveal" data-d="2"><div class="name">Federico Bonino</div><div class="role"><span data-lang="en">Sound engineering</span><span data-lang="es">Ingeniería de sonido</span></div><p><span data-lang="en">Researcher and sound engineer; lead programmer, with a central Beacon role in sound equipment and production — he guarantees the signal quality the experience depends on.</span><span data-lang="es">Investigador e ingeniero de sonido; programador principal, con un rol central en el equipamiento y la producción de sonido del Beacon — garantiza la calidad de señal de la que depende la experiencia.</span></p></div>
-      <div class="member reveal"><div class="name">Aline Ferreyra Lemoine</div><div class="role"><span data-lang="en">Wellness · Embodiment</span><span data-lang="es">Bienestar · Embodiment</span></div><p><span data-lang="en">Integral wellness practitioner and embodiment facilitator; leads body warm-ups and dynamics, delivering <i>Beacon + PMP</i> sessions in Costa Rica.</span><span data-lang="es">Practicante de bienestar integral y facilitadora de embodiment; lidera el calentamiento corporal y las dinámicas, dando sesiones <i>Beacon + PMP</i> en Costa Rica.</span></p></div>
-      <div class="member reveal" data-d="2"><div class="name">John Sanborn</div><div class="role"><span data-lang="en">Partnerships &amp; Relationships</span><span data-lang="es">Alianzas y Relaciones</span></div><p><span data-lang="en">Relationship manager; leads partnerships and development, opening the doors and the conversations that bring <i>Beacon + PMP</i> to new spaces and audiences.</span><span data-lang="es">Gestor de relaciones; lleva adelante las alianzas y el desarrollo, abriendo las puertas y las conversaciones que acercan <i>Beacon + PMP</i> a nuevos espacios y públicos.</span></p></div>
+      <div class="member reveal"><div class="name">Aline Ferreyra Lemoine</div><div class="role"><span data-lang="en">Wellness · Embodiment</span><span data-lang="es">Bienestar · Embodiment</span></div><p><span data-lang="en">Integral wellness practitioner and embodiment facilitator; leads body warm-ups and dynamics, delivering sessions in Costa Rica.</span><span data-lang="es">Practicante de bienestar integral y facilitadora de embodiment; lidera el calentamiento corporal y las dinámicas, dando sesiones en Costa Rica.</span></p></div>
+      <div class="member reveal" data-d="2"><div class="name">John Sanborn</div><div class="role"><span data-lang="en">Partnerships &amp; Relationships</span><span data-lang="es">Alianzas y Relaciones</span></div><p><span data-lang="en">Relationship manager; leads partnerships and development, opening the doors and the conversations that bring the experience to new spaces and audiences.</span><span data-lang="es">Gestor de relaciones; lleva adelante las alianzas y el desarrollo, abriendo las puertas y las conversaciones que acercan la experiencia a nuevos espacios y públicos.</span></p></div>
       <div class="member reveal" data-d="1" style="display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(201,162,78,.08),transparent);"><div class="name gold" style="font-style:italic;"><span data-lang="en">+ the wider AlterMundi community</span><span data-lang="es">+ la comunidad AlterMundi</span></div><p><span data-lang="en">A research and development community providing institutional depth behind the core Beacon team.</span><span data-lang="es">Una comunidad de investigación y desarrollo que aporta profundidad institucional detrás del equipo central del Beacon.</span></p></div>
     </div>
   </div>
@@ -349,17 +275,17 @@
 <section class="section cta-band" id="contact">
   <div class="hb-mark reveal" style="width:46px;height:46px;margin-inline:auto;"><svg viewBox="0 0 200 200" width="46" height="46" fill="none" aria-hidden="true"><use href="#hbmark"/></svg></div>
   <div class="wrap" style="margin-top:1.6rem;">
-    <span class="eyebrow reveal"><span data-lang="en">Experience it</span><span data-lang="es">Vivirlo</span></span>
+    <span class="eyebrow reveal"><span data-lang="en">Get in touch</span><span data-lang="es">Contacto</span></span>
     <h2 class="reveal" data-d="1" style="margin-top:1.2rem;"><span data-lang="en">Come and live the experience</span><span data-lang="es">Vení a vivir la experiencia</span></h2>
     <p class="lead reveal" data-d="1" style="max-width:58ch;margin-inline:auto;">
-      <span data-lang="en">Join a session, or invite <i>Beacon + PMP</i> into your space. Write to us — we'll be glad to tell you when and where the next experiences happen.</span>
-      <span data-lang="es">Sumate a una sesión, o invitá a <i>Beacon + PMP</i> a tu espacio. Escribinos — con gusto te contamos cuándo y dónde son las próximas experiencias.</span>
+      <span data-lang="en">Join a session, invite the experience into your space, or write to us about the program. We'll be glad to tell you when and where the next experiences happen.</span>
+      <span data-lang="es">Sumate a una sesión, invitá la experiencia a tu espacio, o escribinos sobre el programa. Con gusto te contamos cuándo y dónde son las próximas experiencias.</span>
     </p>
     <div class="hero-cta reveal" data-d="2" style="justify-content:center;margin-top:2.2rem;">
-      <a href="https://wa.me/5493547469632?text=Hola%2C%20quiero%20vivir%20la%20experiencia%20Harmonic%20Beacon%20%2B%20PMP" class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/5493547469632?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20Harmonic%20Beacon" class="btn btn-primary" target="_blank" rel="noopener">
         <span data-lang="en">Write on WhatsApp</span><span data-lang="es">Escribir por WhatsApp</span>
       </a>
-      <a href="mailto:info@altermundi.net?subject=Harmonic%20Beacon%20%2B%20PMP" class="btn btn-ghost">
+      <a href="mailto:info@altermundi.net?subject=Harmonic%20Beacon" class="btn btn-ghost">
         <span data-lang="en">Send an email</span><span data-lang="es">Escribir un mail</span>
       </a>
     </div>
