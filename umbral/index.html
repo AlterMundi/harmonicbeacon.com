@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Formación de facilitadores · Harmonic Beacon</title>
+<meta name="description" content="La academia de Harmonic Beacon: tres formaciones independientes — Deep Dive presencial y formación online para facilitar Proyección de Mito, y un módulo tecnológico standalone. Programa, contenidos, certificación, bibliografía e inscripción." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:title" content="Formación de facilitadores · Harmonic Beacon" />
+<meta property="og:description" content="Tres formaciones independientes para facilitar Proyección de Mito e integrar la tecnología Beacon. Programa, certificación e inscripción." />
+<meta name="theme-color" content="#16120D" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html[data-active-lang="es"] [data-lang="en"]{ display:none !important; }
+  html[data-active-lang="en"] [data-lang="es"]{ display:none !important; }
+
+  /* ---------- Hero académico ---------- */
+  .hero-u{ position:relative; overflow:hidden; padding:150px 0 clamp(54px,8vw,96px); }
+  .hero-u::before{ content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(58% 48% at 12% -6%, rgba(201,162,78,.13), transparent 60%),
+      radial-gradient(48% 44% at 96% 108%, rgba(110,94,68,.16), transparent 60%); }
+  .hero-u .hero-inner{ position:relative; z-index:2; }
+  .hero-mark{ color:var(--gold); display:inline-flex; }
+  .hero-mark svg{ width:52px; height:52px; }
+  .hero-u h1{ font-family:var(--font-serif); font-weight:500; color:var(--bone);
+              font-size:clamp(2.6rem,7vw,5rem); line-height:1.02; margin:1rem 0 0; }
+  .hero-meta{ display:flex; gap:.55rem; flex-wrap:wrap; margin:1.6rem 0 .2rem; }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.2rem; }
+  .hair{ height:1px; background:var(--hair-soft); border:0; margin:0; }
+
+  .sec-title{ font-family:var(--font-serif); font-weight:500; color:var(--bone);
+              font-size:clamp(2rem,4.4vw,3.2rem); line-height:1.06; margin:.8rem 0 0; }
+  .sub-lead{ font-family:var(--font-serif); font-style:italic; color:var(--gold);
+             font-size:1.08rem; letter-spacing:.02em; }
+
+  /* ---------- Tres ofertas ---------- */
+  .offers{ display:grid; gap:1.1rem; margin-top:2.6rem; }
+  @media(min-width:820px){ .offers{ grid-template-columns:repeat(3,1fr); } }
+  .offer{ background:var(--bg-card); border:1px solid var(--hair-soft); border-radius:var(--r-card);
+          padding:2rem 1.7rem; display:flex; flex-direction:column; gap:.7rem;
+          transition:transform .5s var(--ease), border-color .5s var(--ease), box-shadow .5s var(--ease); }
+  .offer:hover{ transform:translateY(-4px); border-color:var(--hair); box-shadow:var(--shadow-card); }
+  .offer .ico{ color:var(--gold); display:inline-flex; }
+  .offer .ico svg{ width:42px; height:52px; }
+  .offer .k{ font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-500); }
+  .offer h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:1.55rem; line-height:1.08; margin:.1rem 0 0; }
+  .offer .meta{ display:flex; gap:.45rem; flex-wrap:wrap; margin:.2rem 0 .3rem; }
+  .offer p{ color:var(--ink-600); font-size:.94rem; line-height:1.66; margin:0; }
+  .offer .certline{ margin-top:auto; border-top:1px solid var(--hair-soft); padding-top:.8rem; font-size:.9rem; color:var(--gold); line-height:1.4; }
+  .offer .certline b{ display:block; color:var(--ink-500); font-weight:500; text-transform:uppercase; font-size:10px; letter-spacing:.18em; margin-bottom:.2rem; }
+  .offer .go{ padding-top:.7rem; }
+
+  /* tabla comparativa */
+  .ctable-wrap{ overflow-x:auto; margin-top:2.4rem; border:1px solid var(--hair-soft); border-radius:var(--r-card); -webkit-overflow-scrolling:touch; }
+  .ctable{ width:100%; border-collapse:collapse; min-width:680px; }
+  .ctable th, .ctable td{ text-align:left; padding:1rem 1.15rem; border-bottom:1px solid var(--hair-soft); vertical-align:top; font-size:.92rem; line-height:1.5; }
+  .ctable thead th{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:1.2rem; background:var(--bg-card); }
+  .ctable thead th:first-child{ font-family:var(--font-sans); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-500); font-weight:500; }
+  .ctable tbody th{ font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-500); font-weight:500; white-space:nowrap; background:var(--bg-card); }
+  .ctable td{ color:var(--ink-600); }
+  .ctable td.out{ color:var(--gold); }
+  .ctable tr:last-child th, .ctable tr:last-child td{ border-bottom:none; }
+
+  /* ---------- Programa / módulos ---------- */
+  .mods{ display:grid; gap:1.2rem; margin-top:2.4rem; }
+  .mod-card{ background:var(--bg-card); border:1px solid var(--hair-soft); border-radius:var(--r-card);
+             padding:1.9rem 1.8rem; transition:border-color .5s var(--ease), box-shadow .5s var(--ease); }
+  .mod-card:hover{ border-color:var(--hair); box-shadow:var(--shadow-card); }
+  .mod-top{ display:flex; align-items:baseline; gap:1rem; }
+  .mod-top .rn{ font-family:var(--font-serif); font-style:italic; font-size:2.3rem; color:var(--gold); line-height:.85; }
+  .mod-k{ font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-500); }
+  .mod-card h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone);
+                font-size:1.5rem; line-height:1.1; margin:.15rem 0 0; }
+  .mod-desc{ color:var(--ink-600); margin:1rem 0 0; line-height:1.72; font-size:1rem; }
+  .mod-sub{ font-family:var(--font-sans); font-weight:500; font-size:10.5px; letter-spacing:.2em;
+            text-transform:uppercase; color:var(--gold); margin:1.4rem 0 .2rem; }
+  .mod-list, .bib-list{ list-style:none; padding:0; margin:.6rem 0 0; display:grid; gap:.55rem; }
+  .mod-list li, .bib-list li{ display:flex; gap:.75rem; color:var(--ink-600); font-size:.96rem; line-height:1.55; }
+  .mod-list .mk, .bib-list .mk{ color:var(--gold); flex:none; }
+
+  .ways{ display:flex; gap:.55rem; flex-wrap:wrap; margin-top:1.6rem; }
+
+  /* ---------- Certificación ---------- */
+  .cert{ display:grid; gap:1.1rem; margin-top:2.4rem; }
+  @media(min-width:760px){ .cert{ grid-template-columns:1fr 1fr; } }
+  .cert-card{ border:1px solid var(--hair); border-radius:var(--r-card); padding:1.9rem 1.8rem;
+              background:linear-gradient(180deg,rgba(201,162,78,.05),var(--bg-card) 60%); }
+  .cert-card .mod-k{ color:var(--gold); }
+  .cert-card h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:1.5rem; margin:.35rem 0 .2rem; }
+  .cert-card .out{ color:var(--ink-600); line-height:1.7; margin:.5rem 0 0; }
+  .cert-card .out b{ color:var(--bone); font-weight:500; }
+
+  /* ---------- Bibliografía ---------- */
+  .biblio{ display:grid; gap:1px; background:var(--hair-soft); border:1px solid var(--hair-soft);
+           border-radius:var(--r-card); overflow:hidden; margin-top:2.4rem; }
+  @media(min-width:760px){ .biblio{ grid-template-columns:1fr 1fr; } }
+  .bib{ background:var(--bg-card); padding:1.7rem 1.7rem; }
+  .bib .bk{ font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); }
+  .bib h3{ font-family:var(--font-serif); font-weight:500; color:var(--bone); font-size:1.4rem; line-height:1.1; margin:.35rem 0 .3rem; }
+  .bib p{ color:var(--ink-600); font-size:.94rem; line-height:1.66; margin:0; }
+  .bib .works{ color:var(--ink-500); font-size:.86rem; font-style:italic; margin-top:.55rem; }
+
+  /* ---------- Formulario ---------- */
+  .form{ display:grid; gap:1.3rem; margin-top:2.6rem; max-width:660px; }
+  .field{ display:grid; gap:.5rem; }
+  .field label.flabel{ font-family:var(--font-sans); font-weight:500; font-size:11.5px;
+                letter-spacing:.16em; text-transform:uppercase; color:var(--gold); }
+  .field .req{ color:var(--ink-500); }
+  .field .hint{ text-transform:none; letter-spacing:0; font-size:.86rem; color:var(--ink-500); font-weight:400; }
+  .field input[type=text], .field input[type=email], .field textarea{
+    width:100%; background:var(--surface); border:1px solid var(--hair); border-radius:12px;
+    padding:.85rem 1rem; color:var(--ink-800); font:400 1rem/1.55 var(--font-sans); }
+  .field textarea{ min-height:118px; resize:vertical; }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,162,78,.15); }
+  .field input::placeholder, .field textarea::placeholder{ color:var(--ink-500); }
+  .choices{ display:grid; gap:.55rem; }
+  .choice{ display:flex; gap:.65rem; align-items:flex-start; color:var(--ink-800); font-size:.96rem; line-height:1.5; cursor:pointer; }
+  .choice input{ width:auto; margin:.15rem 0 0; accent-color:var(--gold); flex:none; }
+  .form-actions{ display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-top:.4rem; }
+  .form-note{ font-size:.85rem; color:var(--ink-500); max-width:60ch; }
+  button.btn{ border:none; cursor:pointer; font-family:var(--font-sans); }
+</style>
+<link rel="stylesheet" href="/assets/hb-brand.css" />
+</head>
+
+<body data-page="formacion">
+<div class="grain" style="position:fixed; inset:0; z-index:60; pointer-events:none;" aria-hidden="true"></div>
+
+<!-- ============ HERO ============ -->
+<header class="hero-u">
+  <div class="wrap wrap-narrow hero-inner">
+    <span class="eyebrow reveal"><a href="/" class="crumb">Inicio</a> <span style="opacity:.5;">·</span> <span data-lang="en">Facilitator training</span><span data-lang="es">Formación de facilitadores</span></span>
+    <span class="hero-mark reveal" data-d="1" style="display:block;margin-top:1.4rem;" aria-hidden="true"><svg viewBox="0 0 200 200" width="52" height="52" fill="none"><use href="#hbmark" /></svg></span>
+    <h1 class="reveal" data-d="1"><span data-lang="en">Facilitator training</span><span data-lang="es">Formación de facilitadores</span></h1>
+    <div class="hero-meta reveal" data-d="1">
+      <span class="pill"><span class="dot-live"></span><span data-lang="en">First generation · applications open</span><span data-lang="es">Primera generación · inscripción abierta</span></span>
+    </div>
+    <p class="standfirst reveal" data-d="2">
+      <span data-lang="en">When you graduate, you are a facilitator of Harmonic Myth Projection.</span>
+      <span data-lang="es">Cuando te recibís, sos facilitador/a de Proyección Armónica del Mito.</span>
+    </p>
+    <div class="hero-cta reveal" data-d="3">
+      <a class="btn btn-primary" href="#inscripcion"><span data-lang="en">Apply</span><span data-lang="es">Inscribirme</span></a>
+      <a class="btn btn-ghost" href="#ofertas"><span data-lang="en">See the trainings</span><span data-lang="es">Ver las formaciones</span></a>
+    </div>
+  </div>
+</header>
+<hr class="hair" />
+
+<!-- ============ POR QUÉ / BASE ============ -->
+<section class="section idea-sec">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Why this training</span><span data-lang="es">Por qué esta formación</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">An education built on sharing knowledge</span><span data-lang="es">Una educación basada en el compartir de saberes</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">A Beacon experience is a situated, guided practice — its quality lives in the framing, the listening, the body, the symbolic process and the care given to each person. We don't hand you a closed technique: we want to learn <b>with</b> you, and understand how your own practice — psychology, psychodrama, yoga, permaculture, bodywork — is built in consonance with the harmonic field.</span><span data-lang="es">Una experiencia Beacon es una práctica situada y guiada — su calidad vive en el encuadre, la escucha, el cuerpo, el proceso simbólico y el cuidado de cada persona. No te entregamos una técnica cerrada: queremos aprender <b>con</b> vos, y entender cómo tu propia práctica — psicología, psicodrama, yoga, permacultura, trabajo corporal — se construye en consonancia con el campo armónico.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LAS TRES FORMACIONES (independientes) ============ -->
+<section class="section idea-sec" id="ofertas" style="padding-top:0;background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Three independent trainings</span><span data-lang="es">Tres formaciones independientes</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">Choose the one that fits you</span><span data-lang="es">Elegí la que va con vos</span></h2>
+    <p class="sub-lead reveal" data-d="1" style="margin-top:.8rem;"><span data-lang="en">Each stands on its own — take the one you need, in any order. There is no obligation to do them all.</span><span data-lang="es">Cada una se toma por separado — la que necesites, en el orden que quieras. No hace falta hacer todas.</span></p>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">Two paths lead to the same <b>Myth Projection facilitator</b> certification — in person (the Deep Dive) or online. The <b>technology module</b> is independent: any professional can take just that part.</span><span data-lang="es">Dos caminos llevan a la misma certificación de <b>facilitador/a de Proyección de Mito</b> — presencial (el Deep Dive) u online. El <b>módulo tecnológico</b> es independiente: cualquier profesional puede tomar solo esa parte.</span></p>
+    </div>
+
+    <div class="offers reveal" data-d="1">
+      <!-- Deep Dive presencial -->
+      <article class="offer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 61 V22 a15 15 0 0 1 30 0 V61" /><line x1="4" y1="61" x2="44" y2="61" /><circle cx="32" cy="40" r="1.5" fill="currentColor" stroke="none" /></svg>
+        </span>
+        <span class="k"><span data-lang="en">In person</span><span data-lang="es">Presencial</span></span>
+        <h3><span data-lang="en">Deep Dive</span><span data-lang="es">Deep Dive</span></h3>
+        <div class="meta"><span class="pill"><span data-lang="en">3-day immersion</span><span data-lang="es">Inmersión de 3 días</span></span></div>
+        <p><span data-lang="en">An intensive to train as a facilitator of Myth Projection: theory, psychodrama, active imagination and group practice.</span><span data-lang="es">Un intensivo para formarte como facilitador/a de Proyección de Mito: teoría, psicodrama, imaginación activa y práctica en grupo.</span></p>
+        <p class="certline"><b><span data-lang="en">Certifies</span><span data-lang="es">Certifica</span></b><span data-lang="en">Myth Projection facilitator</span><span data-lang="es">Facilitador/a de Proyección de Mito</span></p>
+        <span class="go"><a class="ulink" href="#facilitacion"><span data-lang="en">See the program →</span><span data-lang="es">Ver el programa →</span></a></span>
+      </article>
+
+      <!-- Formación online -->
+      <article class="offer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#hbmark" /></svg>
+        </span>
+        <span class="k"><span data-lang="en">Online</span><span data-lang="es">Online</span></span>
+        <h3><span data-lang="en">Facilitator training</span><span data-lang="es">Formación online</span></h3>
+        <div class="meta"><span class="pill"><span data-lang="en">Remote · across sessions</span><span data-lang="es">Remota · por encuentros</span></span></div>
+        <p><span data-lang="en">The same facilitator training as a remote path — for those who can't attend in person. Same certification.</span><span data-lang="es">La misma formación de facilitadores en modalidad remota — para quienes no pueden viajar. Misma certificación.</span></p>
+        <p class="certline"><b><span data-lang="en">Certifies</span><span data-lang="es">Certifica</span></b><span data-lang="en">Myth Projection facilitator</span><span data-lang="es">Facilitador/a de Proyección de Mito</span></p>
+        <span class="go"><a class="ulink" href="#facilitacion"><span data-lang="en">See the program →</span><span data-lang="es">Ver el programa →</span></a></span>
+      </article>
+
+      <!-- Módulo tecnológico -->
+      <article class="offer">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 61 L20 28 H28 L31 61 Z" /><rect x="18.5" y="19" width="11" height="9" rx="1" /><path d="M22 19 L24 11 L26 19" /><line x1="11" y1="61" x2="37" y2="61" /><path d="M31 16 L40 12 M31 24 L40 27" /></svg>
+        </span>
+        <span class="k"><span data-lang="en">Standalone</span><span data-lang="es">Independiente</span></span>
+        <h3><span data-lang="en">Technology module</span><span data-lang="es">Módulo tecnológico</span></h3>
+        <div class="meta"><span class="pill"><span data-lang="en">On its own</span><span data-lang="es">Por separado</span></span></div>
+        <p><span data-lang="en">Learn the Beacon app — for any professional (yoga, breathwork, therapy) to bring the technology into their own discipline.</span><span data-lang="es">Aprendé a usar la app Beacon — para que cualquier profesional (yoga, respiración, terapia) integre la tecnología a su propia disciplina.</span></p>
+        <p class="certline"><b><span data-lang="en">Certifies</span><span data-lang="es">Certifica</span></b><span data-lang="en">Beacon technology qualification</span><span data-lang="es">Habilitación en tecnología Beacon</span></p>
+        <span class="go"><a class="ulink" href="#tecnologia"><span data-lang="en">See the module →</span><span data-lang="es">Ver el módulo →</span></a></span>
+      </article>
+    </div>
+
+    <div class="ctable-wrap reveal" data-d="1">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th><span data-lang="en">At a glance</span><span data-lang="es">De un vistazo</span></th>
+            <th>Deep Dive</th>
+            <th><span data-lang="en">Online</span><span data-lang="es">Online</span></th>
+            <th><span data-lang="en">Tech module</span><span data-lang="es">Módulo tecnológico</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span data-lang="en">Format</span><span data-lang="es">Modalidad</span></th>
+            <td><span data-lang="en">In person · 3-day immersion</span><span data-lang="es">Presencial · inmersión 3 días</span></td>
+            <td><span data-lang="en">Online · across sessions</span><span data-lang="es">Online · por encuentros</span></td>
+            <td><span data-lang="en">Independent module</span><span data-lang="es">Módulo independiente</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span data-lang="en">Focus</span><span data-lang="es">Enfoque</span></th>
+            <td><span data-lang="en">Train as a Myth Projection facilitator</span><span data-lang="es">Formar facilitador/a de Proyección de Mito</span></td>
+            <td><span data-lang="en">Train as a Myth Projection facilitator</span><span data-lang="es">Formar facilitador/a de Proyección de Mito</span></td>
+            <td><span data-lang="en">Integrate the technology into your practice</span><span data-lang="es">Integrar la tecnología a tu práctica</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span data-lang="en">Who for</span><span data-lang="es">Para quién</span></th>
+            <td><span data-lang="en">Those who want to facilitate Myth Projection</span><span data-lang="es">Quienes quieran facilitar Proyección de Mito</span></td>
+            <td><span data-lang="en">The same, from a distance</span><span data-lang="es">Lo mismo, a distancia</span></td>
+            <td><span data-lang="en">Any professional (yoga, breathwork, therapy)</span><span data-lang="es">Cualquier profesional (yoga, respiración, terapia)</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span data-lang="en">Certification</span><span data-lang="es">Certificación</span></th>
+            <td class="out"><span data-lang="en">Myth Projection facilitator</span><span data-lang="es">Facilitador/a de Proyección de Mito</span></td>
+            <td class="out"><span data-lang="en">Myth Projection facilitator</span><span data-lang="es">Facilitador/a de Proyección de Mito</span></td>
+            <td class="out"><span data-lang="en">Beacon technology qualification</span><span data-lang="es">Habilitación en tecnología Beacon</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMACIÓN DE FACILITADORES (Deep Dive / online) ============ -->
+<section class="section idea-sec" id="facilitacion" style="padding-top:0;">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Facilitator training</span><span data-lang="es">Formación de facilitadores</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">Become a facilitator of Myth Projection</span><span data-lang="es">Volvete facilitador/a de Proyección de Mito</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">The core training. In person it runs as a <b>3-day Deep Dive</b>; online, across a series of remote sessions. Both go deep into the method — theory, psychodrama, the use of imagination and practical group integration — and lead to the same certification.</span><span data-lang="es">La formación central. En modalidad presencial es un <b>Deep Dive de 3 días</b>; online, a lo largo de una serie de encuentros remotos. Ambas profundizan fuerte en el método — teoría, psicodrama, uso de la imaginación e integración práctica en grupo — y llevan a la misma certificación.</span></p>
+    </div>
+    <div class="ways reveal" data-d="1">
+      <span class="pill"><span data-lang="en">Deep Dive · in person · 3 days</span><span data-lang="es">Deep Dive · presencial · 3 días</span></span>
+      <span class="pill"><span data-lang="en">Online · remote</span><span data-lang="es">Online · remota</span></span>
+    </div>
+    <p class="reveal" data-d="1" style="margin-top:1.6rem;">
+      <a class="btn btn-ghost" href="/umbral/programa-nivel-1-es.pdf" target="_blank" rel="noopener" data-lang="es">Descargar el programa · Nivel 1 (PDF)</a>
+      <a class="btn btn-ghost" href="/umbral/programa-nivel-1-en.pdf" target="_blank" rel="noopener" data-lang="en">Download the program · Level 1 (PDF)</a>
+    </p>
+
+    <div class="mods reveal" data-d="1">
+      <article class="mod-card">
+        <div class="mod-top">
+          <span class="rn">i</span>
+          <div>
+            <span class="mod-k"><span data-lang="en">Module one · Foundations</span><span data-lang="es">Módulo uno · Fundamentos</span></span>
+            <h3><span data-lang="en">The full panorama</span><span data-lang="es">El panorama completo</span></h3>
+          </div>
+        </div>
+        <p class="mod-desc"><span data-lang="en">Where the experience comes from and the ground you'll be standing on.</span><span data-lang="es">De dónde viene la experiencia y el terreno sobre el que vas a trabajar.</span></p>
+        <p class="mod-sub"><span data-lang="en">Contents</span><span data-lang="es">Contenidos</span></p>
+        <ul class="mod-list">
+          <li><span class="mk">·</span><span data-lang="en">What Harmonic Beacon is and where it comes from — the HIT framework.</span><span data-lang="es">Qué es Harmonic Beacon y de dónde viene — el marco HIT.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">The Beacon device and the harmonic field: what it is and how it sounds.</span><span data-lang="es">El dispositivo Beacon y el campo armónico: qué es y cómo suena.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Harmonic Myth Projection: the general framing.</span><span data-lang="es">La Proyección Armónica del Mito: el encuadre general.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Ethics and care: non-obligation, set &amp; setting, pause, exit, referral.</span><span data-lang="es">Ética y cuidado: no obligatoriedad, set &amp; setting, pausa, salida, derivación.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">The arc of a session from beginning to end.</span><span data-lang="es">El arco de una sesión, de principio a fin.</span></li>
+        </ul>
+      </article>
+
+      <article class="mod-card">
+        <div class="mod-top">
+          <span class="rn">ii</span>
+          <div>
+            <span class="mod-k"><span data-lang="en">Module two · Method</span><span data-lang="es">Módulo dos · Método</span></span>
+            <h3><span data-lang="en">Theory, psychodrama &amp; imagination</span><span data-lang="es">Teoría, psicodrama e imaginación</span></h3>
+          </div>
+        </div>
+        <p class="mod-desc"><span data-lang="en">The heart of the Deep Dive — the method understood and lived in the field.</span><span data-lang="es">El corazón del Deep Dive — el método entendido y vivido dentro del campo.</span></p>
+        <p class="mod-sub"><span data-lang="en">Contents</span><span data-lang="es">Contenidos</span></p>
+        <ul class="mod-list">
+          <li><span class="mk">·</span><span data-lang="en">The symbolic journey of the Personal Myth (the hero's journey).</span><span data-lang="es">El viaje simbólico del Mito Personal (el viaje del héroe).</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Active imagination: dialoguing with the images that arise.</span><span data-lang="es">Imaginación activa: dialogar con las imágenes que surgen.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Psychodrama: the body and the scene.</span><span data-lang="es">Psicodrama: el cuerpo y la escena.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Interoceptive warm-up and leading the guided visualization.</span><span data-lang="es">Caldeamiento interoceptivo y conducción de la visualización guiada.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Volume, duration and situated listening.</span><span data-lang="es">Volumen, duración y escucha situada.</span></li>
+        </ul>
+      </article>
+
+      <article class="mod-card">
+        <div class="mod-top">
+          <span class="rn">iii</span>
+          <div>
+            <span class="mod-k"><span data-lang="en">Module three · Practice</span><span data-lang="es">Módulo tres · Práctica</span></span>
+            <h3><span data-lang="en">Group practice &amp; integration</span><span data-lang="es">Práctica grupal e integración</span></h3>
+          </div>
+        </div>
+        <p class="mod-desc"><span data-lang="en">Supervised practice of a complete Myth Projection.</span><span data-lang="es">Práctica supervisada de una Proyección de Mito completa.</span></p>
+        <p class="mod-sub"><span data-lang="en">Contents</span><span data-lang="es">Contenidos</span></p>
+        <ul class="mod-list">
+          <li><span class="mk">·</span><span data-lang="en">Leading a full Myth Projection from opening to close.</span><span data-lang="es">Conducir una Proyección de Mito completa, de la apertura al cierre.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Practical integration in a group.</span><span data-lang="es">Integración práctica en grupo.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Care signals: when to pause, when to refer.</span><span data-lang="es">Señales de cuidado: cuándo pausar, cuándo derivar.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Framing and record of the experience.</span><span data-lang="es">Encuadre y registro de la experiencia.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Assessment and certification as a facilitator.</span><span data-lang="es">Evaluación y certificación como facilitador/a.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÓDULO TECNOLÓGICO (standalone) ============ -->
+<section class="section idea-sec" id="tecnologia" style="padding-top:0;background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Technology module · standalone</span><span data-lang="es">Módulo tecnológico · independiente</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">Bring the technology into your own practice</span><span data-lang="es">Integrá la tecnología a tu propia práctica</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">A separate, self-contained module. You don't need to be a Myth Projection facilitator to take it: any professional — yoga, breathwork, therapy — can learn to use the technology and integrate it into their own discipline for virtual sessions.</span><span data-lang="es">Un módulo aparte y autónomo. No hace falta ser facilitador/a de Proyección de Mito para tomarlo: cualquier profesional — yoga, respiración, terapia — puede aprender a usar la tecnología e integrarla a su propia disciplina para sesiones virtuales.</span></p>
+    </div>
+    <div class="mods reveal" data-d="1">
+      <article class="mod-card">
+        <p class="mod-sub" style="margin-top:0;"><span data-lang="en">Contents</span><span data-lang="es">Contenidos</span></p>
+        <ul class="mod-list">
+          <li><span class="mk">·</span><span data-lang="en">The Beacon app: how to run and hold a virtual session.</span><span data-lang="es">La app Beacon: cómo montar y sostener una sesión virtual.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">Set-up, sound and remote listening.</span><span data-lang="es">Puesta a punto, sonido y escucha remota.</span></li>
+          <li><span class="mk">·</span><span data-lang="en">How to weave the technology into your own discipline and setting.</span><span data-lang="es">Cómo integrar la tecnología a tu propia disciplina y encuadre.</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICACIÓN ============ -->
+<section class="section idea-sec" style="padding-top:0;">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Certification</span><span data-lang="es">Certificación</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">What you obtain from each</span><span data-lang="es">Qué obtenés en cada una</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">Each training is certified on its own, with a clear and distinct outcome. You choose according to what you're looking for.</span><span data-lang="es">Cada formación se certifica por separado, con un resultado claro y distinto. Elegís según lo que buscás.</span></p>
+    </div>
+    <div class="cert reveal" data-d="1">
+      <article class="cert-card">
+        <span class="mod-k"><span data-lang="en">Deep Dive · in person, or online</span><span data-lang="es">Deep Dive · presencial, u online</span></span>
+        <h3><span data-lang="en">Myth Projection facilitator</span><span data-lang="es">Facilitador/a de Proyección de Mito</span></h3>
+        <p class="out"><span data-lang="en">Completing the facilitator training — either the 3-day Deep Dive or the online path — certifies you as a <b>facilitator of Myth Projection</b>: you can give and hold the full experience, with its care and its arc.</span><span data-lang="es">Completar la formación de facilitadores — el Deep Dive de 3 días o la vía online — te certifica como <b>facilitador/a de Proyección de Mito</b>: podés dar y sostener la experiencia completa, con su cuidado y su arco.</span></p>
+      </article>
+      <article class="cert-card">
+        <span class="mod-k"><span data-lang="en">Technology module · standalone</span><span data-lang="es">Módulo tecnológico · independiente</span></span>
+        <h3><span data-lang="en">Beacon technology qualification</span><span data-lang="es">Habilitación en tecnología Beacon</span></h3>
+        <p class="out"><span data-lang="en">The technology module certifies you to <b>use the Beacon app</b> for virtual sessions and integrate it into your own discipline. It does not, on its own, certify you as a Myth Projection facilitator.</span><span data-lang="es">El módulo tecnológico te habilita a <b>usar la app Beacon</b> para sesiones virtuales e integrarla a tu propia disciplina. Por sí solo no te certifica como facilitador/a de Proyección de Mito.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIBLIOGRAFÍA DEL MITO ============ -->
+<section class="section idea-sec" style="padding-top:0;background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Complementary bibliography</span><span data-lang="es">Bibliografía complementaria</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">The Myth stands on a serious lineage</span><span data-lang="es">El Mito se apoya en un linaje serio</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">Personal Myth Projection is a method with 15+ years of practice, and it does not stand alone: it rests on an important complementary bibliography. In the training we read and deepen these traditions together — this is what it includes.</span><span data-lang="es">La Proyección del Mito Personal es un método con más de 15 años de práctica, y no está sola: se apoya en una bibliografía complementaria importante. En la formación leemos y profundizamos estas tradiciones juntos — esto es lo que incluye.</span></p>
+    </div>
+
+    <div class="biblio reveal" data-d="1">
+      <article class="bib">
+        <span class="bk"><span data-lang="en">The framework</span><span data-lang="es">El marco</span></span>
+        <h3>Harmonic Information Theory (HIT)</h3>
+        <p><span data-lang="en">The theoretical framework Harmonic Beacon is born from: consonance as relation, proportion, and the harmonic field as a reference that holds you in the present.</span><span data-lang="es">El marco teórico del que nace Harmonic Beacon: la consonancia como relación, la proporción y el campo armónico como referencia que te sostiene en el presente.</span></p>
+        <p class="works"><span data-lang="en">The HIT book · hit.altermundi.net (Mariano Fernández Méndez)</span><span data-lang="es">El libro HIT · hit.altermundi.net (Mariano Fernández Méndez)</span></p>
+      </article>
+
+      <article class="bib">
+        <span class="bk"><span data-lang="en">The method</span><span data-lang="es">El método</span></span>
+        <h3><span data-lang="en">Personal Myth Projection</span><span data-lang="es">Proyección del Mito Personal</span></h3>
+        <p><span data-lang="en">Julián De La Reta's symbolic method — 15+ years of practice that weaves the lineages below into a single guided journey. Its full corpus is shared and expanded in the training.</span><span data-lang="es">El método simbólico de Julián De La Reta — más de 15 años de práctica que tejen los linajes de abajo en un solo viaje guiado. Su corpus completo se comparte y amplía en la formación.</span></p>
+        <p class="works"><span data-lang="en">Julián De La Reta</span><span data-lang="es">Julián De La Reta</span></p>
+      </article>
+
+      <article class="bib">
+        <span class="bk"><span data-lang="en">Analytical psychology</span><span data-lang="es">Psicología analítica</span></span>
+        <h3>C. G. Jung</h3>
+        <p><span data-lang="en">Active imagination: dialoguing with the images that arise, rather than only watching them. Archetypes, symbol and the personal encounter with the unconscious.</span><span data-lang="es">La imaginación activa: dialogar con las imágenes que surgen, en vez de solo mirarlas. Arquetipos, símbolo y el encuentro personal con lo inconsciente.</span></p>
+        <p class="works"><span data-lang="en">e.g. The Man and His Symbols · Memories, Dreams, Reflections</span><span data-lang="es">p. ej. El hombre y sus símbolos · Recuerdos, sueños, pensamientos</span></p>
+      </article>
+
+      <article class="bib">
+        <span class="bk"><span data-lang="en">The hero's journey</span><span data-lang="es">El viaje del héroe</span></span>
+        <h3>Joseph Campbell</h3>
+        <p><span data-lang="en">The map of the monomyth: a threshold, a descent, an encounter, a return. The narrative structure that gives the Myth its shape.</span><span data-lang="es">El mapa del monomito: un umbral, un descenso, un encuentro, un regreso. La estructura narrativa que le da forma al Mito.</span></p>
+        <p class="works"><span data-lang="en">e.g. The Hero with a Thousand Faces · The Power of Myth</span><span data-lang="es">p. ej. El héroe de las mil caras · El poder del mito</span></p>
+      </article>
+
+      <article class="bib">
+        <span class="bk"><span data-lang="en">Psychodrama</span><span data-lang="es">Psicodrama</span></span>
+        <h3>J. L. Moreno · Mónica Zuretti</h3>
+        <p><span data-lang="en">The body and the scene: bringing inner material into action and space. Mónica Zuretti — our inspiration — extends Moreno's psychodrama into work with the group and the community.</span><span data-lang="es">El cuerpo y la escena: llevar el material interno a la acción y al espacio. Mónica Zuretti — nuestra inspiración — extiende el psicodrama de Moreno hacia el trabajo con el grupo y la comunidad.</span></p>
+        <p class="works"><span data-lang="en">J. L. Moreno · Mónica Zuretti</span><span data-lang="es">J. L. Moreno · Mónica Zuretti</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ A QUIÉN BUSCAMOS ============ -->
+<section class="section idea-sec" style="padding-top:0;">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Who we're looking for</span><span data-lang="es">A quién buscamos</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">People who already know how to guide</span><span data-lang="es">Personas que ya saben guiar</span></h2>
+    <ul class="mod-list reveal" data-d="1" style="margin-top:1.6rem;max-width:64ch;">
+      <li><span class="mk">·</span><span data-lang="en">Practitioners with previous experience in psychology, psychodrama, yoga, permaculture, contemplative, body or expressive practices.</span><span data-lang="es">Practicantes con experiencia previa en psicología, psicodrama, yoga, permacultura, prácticas contemplativas, corporales o expresivas.</span></li>
+      <li><span class="mk">·</span><span data-lang="en">People already in a process of learning to guide groups and accompany others.</span><span data-lang="es">Personas que ya están en un proceso de saber guiar grupos y acompañar personas.</span></li>
+      <li><span class="mk">·</span><span data-lang="en">Therapists and facilitators who want to bring the experience — or just its technology — into their own frame.</span><span data-lang="es">Terapeutas y facilitadores que quieran incorporar la experiencia — o solo su tecnología — dentro de su propio marco.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ INSCRIPCIÓN ============ -->
+<section class="section idea-sec" id="inscripcion" style="padding-top:0;background:linear-gradient(180deg,transparent,rgba(244,238,226,.02),transparent);">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow"><span data-lang="en">Apply</span><span data-lang="es">Inscripción</span></span>
+    <h2 class="sec-title reveal"><span data-lang="en">Apply to the first generation</span><span data-lang="es">Postulate a la primera generación</span></h2>
+    <div class="body reveal" data-d="1">
+      <p><span data-lang="en">Tell us which training you're interested in and a bit about you. The first generation is small and curated; this opens a WhatsApp message with your answers, you send it, and we take it from there.</span><span data-lang="es">Contanos qué formación te interesa y un poco de vos. La primera generación es chica y curada; esto abre un mensaje de WhatsApp con tus respuestas, lo enviás y seguimos desde ahí.</span></p>
+    </div>
+
+    <form class="form reveal" data-d="1" id="umbralForm" novalidate>
+      <div class="field">
+        <span class="flabel"><span data-lang="en">Which training interests you?</span><span data-lang="es">¿Qué formación te interesa?</span></span>
+        <div class="choices">
+          <label class="choice"><input type="checkbox" name="oferta" value="Deep Dive presencial (3 días)" /><span data-lang="en">Deep Dive · in person (3 days)</span><span data-lang="es">Deep Dive · presencial (3 días)</span></label>
+          <label class="choice"><input type="checkbox" name="oferta" value="Formación online" /><span data-lang="en">Facilitator training · online</span><span data-lang="es">Formación de facilitadores · online</span></label>
+          <label class="choice"><input type="checkbox" name="oferta" value="Módulo tecnológico" /><span data-lang="en">Technology module · standalone</span><span data-lang="es">Módulo tecnológico · independiente</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-nombre"><span data-lang="en">Your name</span><span data-lang="es">Tu nombre</span> <span class="req">*</span></label>
+        <input id="f-nombre" name="nombre" type="text" autocomplete="name" required placeholder="Nombre y apellido" />
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-lugar"><span data-lang="en">Where are you based?</span><span data-lang="es">¿Dónde vivís?</span></label>
+        <input id="f-lugar" name="lugar" type="text" placeholder="Ciudad, país" />
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-practica"><span data-lang="en">Your practice &amp; experience</span><span data-lang="es">Tu práctica y experiencia</span> <span class="req">*</span></label>
+        <span class="hint"><span data-lang="en">Psychology, psychodrama, yoga, permaculture, bodywork, group facilitation… what do you already do?</span><span data-lang="es">Psicología, psicodrama, yoga, permacultura, trabajo corporal, facilitación de grupos… ¿qué venís haciendo?</span></span>
+        <textarea id="f-practica" name="practica" required placeholder="Contanos tu recorrido y con quiénes trabajás."></textarea>
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-porque"><span data-lang="en">Why did this training interest you?</span><span data-lang="es">¿Por qué te interesó esta formación?</span> <span class="req">*</span></label>
+        <textarea id="f-porque" name="porque" required placeholder="Qué te movilizó, qué buscás, qué te gustaría que pase."></textarea>
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-profundizar"><span data-lang="en">What would you like to deepen?</span><span data-lang="es">¿Qué te gustaría profundizar?</span></label>
+        <span class="hint"><span data-lang="en">A topic, a practice or a question you'd like to work on.</span><span data-lang="es">Un tema, una práctica o una pregunta que quieras trabajar.</span></span>
+        <textarea id="f-profundizar" name="profundizar" placeholder="Opcional."></textarea>
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-biblio"><span data-lang="en">Bibliography &amp; readings</span><span data-lang="es">Bibliografía y lecturas</span></label>
+        <span class="hint"><span data-lang="en">Authors, books or references that shape your practice and that you'd like to share.</span><span data-lang="es">Autores, libros o referencias que forman tu práctica y que te gustaría compartir.</span></span>
+        <textarea id="f-biblio" name="biblio" placeholder="Opcional — lo que leés y te forma."></textarea>
+      </div>
+      <div class="field">
+        <label class="flabel" for="f-contacto"><span data-lang="en">Email (optional)</span><span data-lang="es">Email (opcional)</span></label>
+        <input id="f-contacto" name="contacto" type="email" autocomplete="email" placeholder="por si preferís que te escribamos por mail" />
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">
+          <span data-lang="en">Send by WhatsApp</span><span data-lang="es">Enviar por WhatsApp</span>
+        </button>
+        <span class="form-note">
+          <span data-lang="en">Opens WhatsApp with your answers ready to send.</span>
+          <span data-lang="es">Abre WhatsApp con tus respuestas listas para enviar.</span>
+        </span>
+      </div>
+    </form>
+
+    <p class="note reveal" data-d="2" style="margin-top:2rem;max-width:62ch;">
+      <span data-lang="en">Prices are shared privately. The date and place of the in-person Deep Dive are confirmed according to enrollments — we are currently based on the Pacific coast of Costa Rica, in Uvita.</span>
+      <span data-lang="es">Los precios se envían por privado. La fecha y el lugar del Deep Dive presencial se confirman según las inscripciones — actualmente estamos en la zona del Pacífico de Costa Rica, en Uvita.</span>
+    </p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('umbralForm');
+    if (!form) return;
+    var PHONE = '5493547469632'; // WhatsApp de inscripción (editable)
+    function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var es = document.documentElement.getAttribute('data-active-lang') !== 'en';
+      var req = ['f-nombre', 'f-practica', 'f-porque'];
+      for (var i = 0; i < req.length; i++) {
+        var el = document.getElementById(req[i]);
+        if (el && !el.value.trim()) { el.focus(); el.style.borderColor = '#C9A24E'; return; }
+      }
+      var ofertas = [];
+      form.querySelectorAll('input[name="oferta"]:checked').forEach(function (c) { ofertas.push(c.value); });
+      var L = {
+        intro: es ? 'Hola, quiero postularme a la formación de facilitadores (Harmonic Beacon).' : 'Hi, I want to apply to the facilitator training (Harmonic Beacon).',
+        oferta: es ? 'Formación que me interesa' : 'Training I am interested in',
+        nombre: es ? 'Nombre' : 'Name',
+        lugar: es ? 'Dónde vivo' : 'Based in',
+        practica: es ? 'Mi práctica y experiencia' : 'My practice & experience',
+        porque: es ? 'Por qué me interesó' : 'Why it interested me',
+        profundizar: es ? 'Lo que me gustaría profundizar' : 'What I would like to deepen',
+        biblio: es ? 'Bibliografía y lecturas' : 'Bibliography & readings',
+        contacto: es ? 'Email' : 'Email'
+      };
+      var lines = [L.intro, ''];
+      if (ofertas.length) lines.push(L.oferta + ': ' + ofertas.join(' · '));
+      lines.push(L.nombre + ': ' + val('f-nombre'));
+      if (val('f-lugar')) lines.push(L.lugar + ': ' + val('f-lugar'));
+      lines.push(L.practica + ': ' + val('f-practica'));
+      lines.push(L.porque + ': ' + val('f-porque'));
+      if (val('f-profundizar')) lines.push(L.profundizar + ': ' + val('f-profundizar'));
+      if (val('f-biblio')) lines.push(L.biblio + ': ' + val('f-biblio'));
+      if (val('f-contacto')) lines.push(L.contacto + ': ' + val('f-contacto'));
+      var url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(lines.join('\n'));
+      window.open(url, '_blank', 'noopener');
+    });
+  })();
+</script>
+<script src="/assets/hb-main.js" defer></script>
+</body>
+</html>
