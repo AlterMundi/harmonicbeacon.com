@@ -1,17 +1,32 @@
 [
  {
-  "id": "20260618-194034-8c3b78",
-  "file": "20260618-194034-8c3b78.jpg",
-  "ts": "2026-06-18T19:40:34"
+  "id": "ejemplo-01",
+  "file": "ejemplo-01.jpg",
+  "ts": "2026-07-02",
+  "ejemplo": true
  },
  {
-  "id": "20260618-194812-68e483",
-  "file": "20260618-194812-68e483.jpg",
-  "ts": "2026-06-18T19:50:03"
+  "id": "ejemplo-02",
+  "file": "ejemplo-02.jpg",
+  "ts": "2026-07-02",
+  "ejemplo": true
  },
  {
-  "id": "20260702-182101-c93b2a",
-  "file": "20260702-182101-c93b2a.jpg",
-  "ts": "2026-07-02T18:21:11"
+  "id": "ejemplo-03",
+  "file": "ejemplo-03.jpg",
+  "ts": "2026-07-02",
+  "ejemplo": true
+ },
+ {
+  "id": "ejemplo-04",
+  "file": "ejemplo-04.jpg",
+  "ts": "2026-07-02",
+  "ejemplo": true
+ },
+ {
+  "id": "ejemplo-05",
+  "file": "ejemplo-05.jpg",
+  "ts": "2026-07-02",
+  "ejemplo": true
  }
 ]
