@@ -21,7 +21,7 @@
         { page: 'proyeccion', href: '/proyeccion-armonica-del-mito/',        en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' },
         { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
         { page: 'bonobos',    href: '/bonobos/',                             en: 'bonob.os',                 es: 'bonob.os' },
-        { page: 'formacion',  href: '/umbral/',                              en: 'Facilitator training', es: 'Formación de facilitadores' },
+        { page: 'formacion',  href: '/umbral/',                              en: 'Facilitator Training', es: 'Formación de facilitadores' },
         { page: 'psicopompo', href: '/psicopompo/',                          en: 'Psychopomp',               es: 'Psicopompo' },
         { page: 'app',        href: 'https://harmonicbeacon.altermundi.net', en: 'App — log in',             es: 'App — login', ext: true }
     ] },
