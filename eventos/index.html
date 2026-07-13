@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Eventos · Harmonic Beacon Costa Rica</title>
+<meta name="description" lang="es" content="Agenda de eventos de Harmonic Beacon en Costa Rica: encuentros del campo armónico, statik dance, sunsets y experiencias. Próximas fechas y cómo sumarte." />
+<meta name="description" lang="en" content="Harmonic Beacon events agenda in Costa Rica: harmonic field gatherings, statik dance, sunsets and experiences. Upcoming dates and how to join." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:title" content="Eventos · Harmonic Beacon Costa Rica" />
+<meta property="og:description" content="La agenda de encuentros del campo armónico en Costa Rica." />
+<meta name="theme-color" content="#16120D" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html[data-active-lang="es"] [data-lang="en"]{ display:none !important; }
+  html[data-active-lang="en"] [data-lang="es"]{ display:none !important; }
+</style>
+<link rel="stylesheet" href="/assets/hb-brand.css" />
+<style>
+  /* ---- Agenda de eventos ---- */
+  .agenda{ max-width:800px; margin:2.2rem auto 0; }
+
+  /* Evento destacado */
+  .ev-feat{
+    position:relative; overflow:hidden;
+    border:1px solid var(--hair); border-radius:var(--r-card);
+    background:
+      radial-gradient(90% 120% at 90% -10%, rgba(127,179,213,.14), transparent 60%),
+      var(--bg-card);
+    padding:clamp(1.5rem,3vw,2.2rem); margin-bottom:2.4rem;
+    box-shadow:var(--shadow-card);
+  }
+  .ev-feat .tags{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
+  .ev-feat h2{ font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.05; }
+  .ev-feat .when{ font-family:var(--font-serif); font-style:italic; color:var(--gold-2); font-size:1.2rem; margin-top:.5rem; }
+  .ev-feat .where{ color:var(--ink-600); margin-top:.9rem; font-size:1rem; line-height:1.6; max-width:56ch; }
+  .ev-feat .where b{ color:var(--ink-800); font-weight:600; }
+  .ev-feat .cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.6rem; }
+  .pill-sky{ border-color:var(--hair); color:var(--ink-800); }
+  .pill-sky .d{ width:6px; height:6px; border-radius:999px; background:#7FB3D5; display:inline-block; }
+
+  /* Lista de eventos */
+  .ev-h{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin:.5rem 0 .3rem; }
+  .ev-h .eyebrow{ display:block; }
+  .ev{
+    display:grid; grid-template-columns:auto 1fr; gap:1.3rem; align-items:start;
+    padding:1.5rem 0; border-top:1px solid var(--hair-soft);
+  }
+  .ev:last-child{ border-bottom:1px solid var(--hair-soft); }
+  .ev-date{
+    text-align:center; min-width:76px;
+    border:1px solid var(--hair); border-radius:14px; padding:.7rem .55rem;
+    background:var(--surface);
+  }
+  .ev-date .d{ font-family:var(--font-serif); font-size:2rem; color:var(--bone); line-height:.95; }
+  .ev-date .m{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-top:.35rem; }
+  .ev-main h3{ font-family:var(--font-serif); font-size:1.45rem; color:var(--bone); line-height:1.1; }
+  .ev-main .meta{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-top:.4rem; }
+  .ev-main .desc{ color:var(--ink-600); font-size:.97rem; margin-top:.6rem; line-height:1.6; max-width:56ch; }
+  .ev-main .ilink{ display:inline-flex; align-items:center; gap:.4rem; margin-top:.8rem; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--hair); padding-bottom:2px; }
+  .ev-main .ilink:hover{ color:var(--bone); border-color:var(--gold); }
+
+  .agenda-note{ color:var(--ink-500); font-size:.9rem; margin-top:2rem; line-height:1.6; text-align:center; }
+</style>
+</head>
+
+<body data-page="eventos">
+<div class="grain" style="position:fixed; inset:0; z-index:60; pointer-events:none;" aria-hidden="true"></div>
+
+<header class="section idea-head">
+  <div class="wrap wrap-narrow">
+    <span class="eyebrow reveal"><a href="/" class="crumb">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="es">Costa Rica</span><span data-lang="en">Costa Rica</span></span>
+    <h1 class="reveal" data-d="1"><span data-lang="es">Agenda de eventos</span><span data-lang="en">Events agenda</span></h1>
+    <p class="standfirst reveal" data-d="2">
+      <span data-lang="es">Encuentros del campo armónico en Costa Rica — experiencias en vivo, statik dance, sunsets y celebraciones. Arrancamos este domingo con un evento muy especial.</span>
+      <span data-lang="en">Harmonic field gatherings across Costa Rica — live experiences, statik dance, sunsets and celebrations. We kick off this Sunday with a very special one.</span>
+    </p>
+  </div>
+</header>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="agenda">
+
+      <!-- ============ DESTACADO ============ -->
+      <article class="ev-feat reveal">
+        <div class="tags">
+          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Próximo</span><span data-lang="en">Next up</span></span>
+          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Especial · Mundial 🇦🇷</span><span data-lang="en">Special · World Cup 🇦🇷</span></span>
+        </div>
+        <h2><span data-lang="es">Muchachos · La Final en Awake</span><span data-lang="en">Muchachos · The Final at Awake</span></h2>
+        <p class="when"><span data-lang="es">Domingo 11:11 hs · Awake, Uvita</span><span data-lang="en">Sunday 11:11 · Awake, Uvita</span></p>
+        <p class="where">
+          <span data-lang="es"><b>Statik dance</b> con el Harmonic Beacon en la música, la <b>final del Mundial</b> en pantalla grande y <b>peña argentina</b> hasta tarde. Con la cocina de Awake.</span>
+          <span data-lang="en"><b>Statik dance</b> with the Harmonic Beacon woven into the music, the <b>World Cup final</b> on the big screen and an <b>Argentine peña</b> into the night. With Awake's kitchen.</span>
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="/Messi"><span data-lang="es">Ver el evento</span><span data-lang="en">See the event</span> <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20de%20la%20pe%C3%B1a%20del%20Mundial%20en%20Awake%20%F0%9F%87%A6%F0%9F%87%B7" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </article>
+
+      <!-- ============ AGENDA ============ -->
+      <div class="ev-h">
+        <span class="eyebrow"><span data-lang="es">Más fechas</span><span data-lang="en">More dates</span></span>
+      </div>
+
+      <div class="ev-list">
+        <article class="ev reveal">
+          <div class="ev-date"><div class="d">10</div><div class="m">Jun</div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Beacon en Escazú</span><span data-lang="en">Beacon in Escazú</span></h3>
+            <div class="meta">Escazú · <span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></div>
+            <p class="desc"><span data-lang="es">Un encuentro del campo armónico en Escazú.</span><span data-lang="en">A harmonic field gathering in Escazú.</span></p>
+            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20evento%20Beacon%20en%20Escaz%C3%BA" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+          </div>
+        </article>
+
+        <article class="ev reveal">
+          <div class="ev-date"><div class="d">22</div><div class="m">Jun</div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Encuentro privado en la montaña</span><span data-lang="en">Private gathering in the mountains</span></h3>
+            <div class="meta"><span data-lang="es">Montaña · Privado</span><span data-lang="en">Mountains · Private</span></div>
+            <p class="desc"><span data-lang="es">Evento privado del campo armónico en la montaña.</span><span data-lang="en">A private harmonic field event in the mountains.</span></p>
+            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20evento%20privado%20en%20la%20monta%C3%B1a" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+          </div>
+        </article>
+
+        <article class="ev reveal">
+          <div class="ev-date"><div class="d">24</div><div class="m">Jun</div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Sunset + Beacon en Amora</span><span data-lang="en">Sunset + Beacon at Amora</span></h3>
+            <div class="meta">Amora · Sunset</div>
+            <p class="desc"><span data-lang="es">Atardecer y campo armónico en Amora — sunset y Beacon.</span><span data-lang="en">Sunset and harmonic field at Amora — sunset and Beacon.</span></p>
+            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20Sunset%20%2B%20Beacon%20en%20Amora" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="agenda-note"><span data-lang="es">¿Querés que llevemos el Beacon a tu espacio o sumar una fecha? Escribinos por <a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp</a>.</span><span data-lang="en">Want the Beacon at your space or to add a date? Message us on <a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp</a>.</span></p>
+
+    </div>
+  </div>
+</section>
+
+<script src="/assets/hb-main.js" defer></script>
+</body>
+</html>

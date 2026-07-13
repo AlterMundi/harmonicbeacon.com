@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Muchachos · La Final en Awake — Statik Dance + Mundial + Peña</title>
+<meta name="description" content="Domingo en Awake, Costa Rica: statik dance con el Harmonic Beacon en la música, la final del Mundial en pantalla grande y peña argentina hasta tarde. Cocina de Awake. Info y entradas por WhatsApp." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Harmonic Beacon" />
+<meta property="og:title" content="Muchachos · La Final en Awake" />
+<meta property="og:description" content="Statik dance, la final del Mundial en pantalla grande y peña argentina. Domingo en Awake, Costa Rica." />
+<meta name="theme-color" content="#6CACE4" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Yellowtail&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   MUCHACHOS · La Final en Awake
+   Estética: filete porteño + camiseta de la selección
+   ============================================================ */
+:root{
+  --celeste:   #6CACE4;
+  --celeste-2: #8FC1EB;
+  --celeste-dp:#3F7CBE;
+  --white:     #ffffff;
+  --cream:     #FBF6EA;
+  --cream-2:   #F3EAD6;
+  --navy:      #10243F;
+  --navy-2:    #0A1A30;
+  --gold:      #F5B301;
+  --gold-2:    #FFD24A;
+  --gold-dp:   #C98A00;
+  --red:       #C8102E;
+  --green:     #1E7A47;
+  --hair:      rgba(16,36,63,.14);
+
+  --serif:  'Alfa Slab One', Georgia, serif;
+  --script: 'Yellowtail', cursive;
+  --cond:   'Bebas Neue', Impact, sans-serif;
+  --sans:   'Inter', system-ui, -apple-system, sans-serif;
+
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; overflow-x:hidden;
+  background:var(--cream); color:var(--navy);
+  font-family:var(--sans); font-weight:400; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{ margin:0; }
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+img,svg{ display:block; }
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+/* ---- Fileteado: relleno + contorno oscuro + sombra + reflejo ---- */
+.filete{
+  font-family:var(--serif); color:var(--gold-2); line-height:.94;
+  text-transform:uppercase; letter-spacing:.01em;
+  text-shadow:
+    2px 0 var(--navy), -2px 0 var(--navy), 0 2px var(--navy), 0 -2px var(--navy),
+    2px 2px var(--navy), -2px 2px var(--navy), 2px -2px var(--navy), -2px -2px var(--navy),
+    3px 0 var(--navy), 0 3px var(--navy),
+    8px 10px 0 rgba(10,26,48,.22);
+}
+.filete.on-dark{
+  color:var(--gold-2);
+  text-shadow:
+    2px 0 #06101f, -2px 0 #06101f, 0 2px #06101f, 0 -2px #06101f,
+    2px 2px #06101f, -2px 2px #06101f, 2px -2px #06101f, -2px -2px #06101f,
+    3px 0 #06101f, 0 3px #06101f,
+    9px 11px 0 rgba(0,0,0,.35);
+}
+
+/* ---- Botones ---- */
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family:var(--cond); font-size:20px; letter-spacing:.06em;
+  padding:.75rem 1.7rem; border-radius:999px; cursor:pointer;
+  border:2px solid var(--navy); transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn .arr{ transition:transform .3s var(--ease); }
+.btn:hover{ transform:translateY(-2px); }
+.btn:hover .arr{ transform:translateX(3px); }
+.btn-wa{
+  background:linear-gradient(135deg,#4ee083,#25D366 55%,#128C7E);
+  color:#06251a; border-color:#0d3b28;
+  box-shadow:0 8px 0 #0d3b28, 0 14px 26px rgba(18,140,126,.28);
+}
+.btn-wa:hover{ box-shadow:0 10px 0 #0d3b28, 0 20px 34px rgba(18,140,126,.34); }
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-2),var(--gold) 55%,var(--gold-dp));
+  color:var(--navy-2); border-color:var(--navy);
+  box-shadow:0 8px 0 var(--navy), 0 14px 26px rgba(245,179,1,.28);
+}
+.btn-gold:hover{ box-shadow:0 10px 0 var(--navy), 0 20px 34px rgba(245,179,1,.34); }
+.btn-ghost{
+  background:transparent; color:var(--navy); border-color:var(--navy);
+}
+.btn-ghost.light{ color:var(--white); border-color:var(--white); }
+.btn:focus-visible{ outline:3px solid var(--gold); outline-offset:3px; }
+
+/* ---- Layout ---- */
+.wrap{ width:100%; max-width:1120px; margin-inline:auto; padding-inline:22px; }
+.narrow{ max-width:820px; }
+.section{ padding-block:clamp(56px,9vw,110px); position:relative; }
+.kicker{
+  font-family:var(--cond); font-size:clamp(16px,2.4vw,22px);
+  letter-spacing:.22em; text-transform:uppercase; color:var(--celeste-dp);
+}
+.kicker.gold{ color:var(--gold-dp); }
+.script{ font-family:var(--script); line-height:1.1; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:var(--navy); color:var(--white);
+  border-bottom:3px solid var(--gold);
+}
+.topbar .inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:12px 22px; max-width:1120px; margin-inline:auto; }
+.brand{ display:flex; align-items:center; gap:.6rem; }
+.brand .sun-sm{ width:30px; height:30px; }
+.brand b{ font-family:var(--cond); font-size:19px; letter-spacing:.18em; text-transform:uppercase; }
+.topbar .btn{ padding:.5rem 1.15rem; font-size:16px; box-shadow:0 5px 0 #0d3b28; }
+.topbar .btn:hover{ box-shadow:0 7px 0 #0d3b28; }
+.topnav{ display:flex; align-items:center; gap:1.1rem; }
+.topnav-link{ font-family:var(--cond); font-size:18px; letter-spacing:.12em; text-transform:uppercase; color:var(--white); padding:.3rem .2rem; border-bottom:2px solid transparent; transition:border-color .25s ease, color .25s ease; }
+.topnav-link:hover{ color:var(--gold-2); border-color:var(--gold-2); }
+@media(max-width:460px){ .topnav{ gap:.7rem; } .topnav-link{ font-size:16px; } }
+
+/* ============================================================
+   HERO — camiseta de la selección
+   ============================================================ */
+.hero{
+  position:relative; overflow:hidden; text-align:center;
+  padding:clamp(48px,8vw,92px) 22px clamp(60px,9vw,110px);
+  /* Bandera de Argentina: celeste / blanco / celeste */
+  background:
+    linear-gradient(180deg, rgba(251,246,234,0) 88%, var(--cream) 100%),
+    linear-gradient(180deg,
+      #74ACDF 0%, #74ACDF 33.33%,
+      #ffffff 33.33%, #ffffff 66.66%,
+      #74ACDF 66.66%, #74ACDF 100%);
+}
+.hero .sun-bg{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:min(500px,86vw); height:min(500px,86vw); opacity:.9; z-index:0;
+  color:var(--gold); animation:spinc 120s linear infinite;
+  filter:drop-shadow(0 6px 26px rgba(201,138,0,.28));
+}
+@keyframes spinc{ to{ transform:translate(-50%,-50%) rotate(360deg); } }
+@keyframes spin{ to{ transform:translateX(-50%) rotate(360deg); } }
+.hero-inner{ position:relative; z-index:2; max-width:900px; margin-inline:auto; }
+.hero .corner{ position:absolute; top:10px; width:150px; color:var(--gold-dp); opacity:.9; z-index:1; }
+.hero .corner.l{ left:8px; }
+.hero .corner.r{ right:8px; transform:scaleX(-1); }
+@media(max-width:720px){ .hero .corner{ width:90px; opacity:.75; } }
+
+.hero .stars{ display:flex; gap:.5rem; justify-content:center; margin-bottom:.9rem; color:var(--gold); }
+.hero .stars svg{ width:26px; height:26px; filter:drop-shadow(0 2px 0 rgba(16,36,63,.35)); }
+.hero .pre{ font-size:clamp(26px,5vw,46px); color:var(--navy); transform:rotate(-3deg); }
+.hero h1{ font-size:clamp(2.6rem,12.2vw,7.6rem); letter-spacing:-.012em; margin:.1rem 0 .2rem; }
+.ribbon{
+  display:inline-block; position:relative; margin:.4rem 0 1.4rem;
+  font-family:var(--script); font-size:clamp(20px,3.4vw,32px); color:var(--white);
+  background:var(--red); padding:.5rem 2.2rem; border-radius:8px;
+  box-shadow:0 6px 0 rgba(120,8,24,.6); transform:rotate(-1.4deg);
+}
+.ribbon::before,.ribbon::after{
+  content:""; position:absolute; top:50%; width:26px; height:26px;
+  background:var(--red); transform:translateY(-50%) rotate(45deg);
+}
+.ribbon::before{ left:-8px; } .ribbon::after{ right:-8px; }
+.hero-card{
+  max-width:620px; margin:0 auto 1.9rem;
+  background:rgba(255,255,255,.82); backdrop-filter:blur(4px);
+  border:2px solid var(--navy); border-radius:20px;
+  box-shadow:0 10px 0 rgba(16,36,63,.16);
+  padding:1.15rem 1.5rem;
+}
+.hero-card p{ font-size:clamp(1.02rem,2.1vw,1.22rem); color:var(--navy); font-weight:500; line-height:1.55; }
+.hero-card b{ color:var(--celeste-dp); }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center; }
+.hero .swallows{ position:absolute; bottom:8%; z-index:1; color:var(--navy); opacity:.7; }
+.hero .swallows.l{ left:6%; width:70px; } .hero .swallows.r{ right:6%; width:70px; transform:scaleX(-1); }
+@media(max-width:720px){ .hero .swallows{ display:none; } }
+
+/* ---- Divisor filete ---- */
+.divider{ display:flex; align-items:center; justify-content:center; gap:1rem; color:var(--gold-dp); }
+.divider svg{ width:min(320px,72vw); }
+
+/* ============================================================
+   EL PLAN — 3 cartas
+   ============================================================ */
+.head{ text-align:center; max-width:660px; margin-inline:auto; }
+.head h2{ font-family:var(--serif); font-size:clamp(2.1rem,6vw,3.6rem); color:var(--navy); line-height:1; margin-top:.5rem;
+  text-shadow:3px 4px 0 rgba(16,36,63,.10); }
+.head .lead{ font-size:clamp(1.02rem,2vw,1.16rem); color:#3a4d66; margin-top:1rem; line-height:1.6; }
+
+.plan{ display:grid; gap:1.4rem; margin-top:2.6rem; grid-template-columns:1fr; }
+@media(min-width:820px){ .plan{ grid-template-columns:repeat(3,1fr); } }
+.card{
+  position:relative; background:var(--white);
+  border:2.5px solid var(--navy); border-radius:20px;
+  padding:2rem 1.6rem 1.8rem; overflow:hidden;
+  box-shadow:0 10px 0 rgba(16,36,63,.12);
+}
+.card .num{ font-family:var(--serif); font-size:2.2rem; color:var(--celeste);
+  -webkit-text-stroke:0; text-shadow:2px 2px 0 var(--navy); line-height:1; }
+.card h3{ font-family:var(--cond); font-size:clamp(1.7rem,3vw,2.1rem); letter-spacing:.03em; color:var(--navy); margin-top:.4rem; line-height:1; }
+.card .tag{ font-family:var(--script); color:var(--red); font-size:1.15rem; margin-top:.15rem; }
+.card p{ color:#3a4d66; font-size:1rem; margin-top:.9rem; line-height:1.6; }
+.card .ico{ position:absolute; top:1.3rem; right:1.3rem; width:34px; color:var(--gold); }
+.card::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:7px;
+  background:repeating-linear-gradient(90deg,var(--celeste) 0 22px,var(--white) 22px 44px); }
+
+/* ============================================================
+   BEACON EN LA MÚSICA — banda oscura (filete clásico)
+   ============================================================ */
+.dark{ background:
+    radial-gradient(80% 60% at 50% 0%, rgba(108,172,228,.14), transparent 60%),
+    var(--navy); color:var(--cream); text-align:center; position:relative; overflow:hidden; }
+.dark .sun-bg{ position:absolute; top:-30%; left:50%; transform:translateX(-50%); width:min(560px,100vw); color:var(--gold); opacity:.10; }
+.dark .head h2{ color:var(--white); text-shadow:none; }
+.dark .lead{ color:#c9d6e6; }
+.dark .beacon-txt{ max-width:640px; margin:1.4rem auto 0; font-size:clamp(1.05rem,2.1vw,1.24rem); color:#e7eef6; line-height:1.7; }
+.dark .beacon-txt b{ color:var(--gold-2); }
+.dark .divider{ color:var(--gold); margin-bottom:1.4rem; }
+
+/* ============================================================
+   INFO PRÁCTICA
+   ============================================================ */
+.facts{ display:grid; gap:1.1rem; margin-top:2.4rem; grid-template-columns:1fr 1fr; }
+@media(min-width:760px){ .facts{ grid-template-columns:repeat(4,1fr); } }
+.fact{ background:var(--white); border:2px solid var(--navy); border-radius:16px; padding:1.3rem 1.2rem; text-align:center;
+  box-shadow:0 7px 0 rgba(16,36,63,.10); }
+.fact .k{ font-family:var(--cond); font-size:18px; letter-spacing:.14em; color:var(--celeste-dp); }
+.fact .v{ font-family:var(--serif); font-size:1.15rem; color:var(--navy); margin-top:.4rem; line-height:1.05; }
+.fact .n{ color:#5a6b80; font-size:.85rem; margin-top:.5rem; }
+.maplink{ color:var(--celeste-dp); font-weight:700; border-bottom:2px solid rgba(63,124,190,.35); }
+.maplink:hover{ border-color:var(--celeste-dp); }
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.final{ text-align:center; background:
+    linear-gradient(180deg, #DCEBF8 0%, var(--cream) 78%); position:relative; overflow:hidden; }
+.final::before{ content:""; position:absolute; inset:0; background:radial-gradient(60% 70% at 50% 22%, rgba(255,255,255,.55), transparent 70%); }
+.final .inner{ position:relative; z-index:2; }
+.final h2{ font-family:var(--serif); font-size:clamp(2rem,6vw,3.4rem); color:var(--navy); text-shadow:3px 4px 0 rgba(16,36,63,.14); }
+.final .script{ font-family:var(--script); color:var(--red); font-size:clamp(1.4rem,3.4vw,2.1rem); margin-bottom:.3rem; }
+.final .hero-cta{ margin-top:1.8rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{ background:var(--navy-2); color:#aebfd2; text-align:center; padding:2.6rem 22px 2rem; }
+footer .brand{ justify-content:center; color:var(--white); margin-bottom:.9rem; }
+footer a.ul{ color:var(--gold-2); border-bottom:1px solid rgba(255,210,74,.4); }
+footer .fnote{ font-size:.82rem; margin-top:.8rem; }
+
+/* ---- Reveal ---- */
+.reveal{ opacity:0; transform:translateY(22px); }
+.reveal.in{ opacity:1; transform:none; transition:opacity .8s var(--ease), transform .8s var(--ease); }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero .sun-bg{ animation:none; }
+  .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG SYMBOLS ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Sol de Mayo -->
+    <g id="sun">
+      <g fill="currentColor">
+        <path id="rs" d="M100 3 L108 48 L92 48 Z"/>
+        <use href="#rs" transform="rotate(22.5 100 100)"/><use href="#rs" transform="rotate(45 100 100)"/>
+        <use href="#rs" transform="rotate(67.5 100 100)"/><use href="#rs" transform="rotate(90 100 100)"/>
+        <use href="#rs" transform="rotate(112.5 100 100)"/><use href="#rs" transform="rotate(135 100 100)"/>
+        <use href="#rs" transform="rotate(157.5 100 100)"/><use href="#rs" transform="rotate(180 100 100)"/>
+        <use href="#rs" transform="rotate(202.5 100 100)"/><use href="#rs" transform="rotate(225 100 100)"/>
+        <use href="#rs" transform="rotate(247.5 100 100)"/><use href="#rs" transform="rotate(270 100 100)"/>
+        <use href="#rs" transform="rotate(292.5 100 100)"/><use href="#rs" transform="rotate(315 100 100)"/>
+        <use href="#rs" transform="rotate(337.5 100 100)"/>
+        <path id="rw" d="M100 16 C111 33 96 40 100 54 C104 40 89 33 100 16 Z"/>
+        <use href="#rw" transform="rotate(11.25 100 100)"/><use href="#rw" transform="rotate(33.75 100 100)"/>
+        <use href="#rw" transform="rotate(56.25 100 100)"/><use href="#rw" transform="rotate(78.75 100 100)"/>
+        <use href="#rw" transform="rotate(101.25 100 100)"/><use href="#rw" transform="rotate(123.75 100 100)"/>
+        <use href="#rw" transform="rotate(146.25 100 100)"/><use href="#rw" transform="rotate(168.75 100 100)"/>
+        <use href="#rw" transform="rotate(191.25 100 100)"/><use href="#rw" transform="rotate(213.75 100 100)"/>
+        <use href="#rw" transform="rotate(236.25 100 100)"/><use href="#rw" transform="rotate(258.75 100 100)"/>
+        <use href="#rw" transform="rotate(281.25 100 100)"/><use href="#rw" transform="rotate(303.75 100 100)"/>
+        <use href="#rw" transform="rotate(326.25 100 100)"/><use href="#rw" transform="rotate(348.75 100 100)"/>
+      </g>
+      <circle cx="100" cy="100" r="43" fill="currentColor" stroke="#0A1A30" stroke-width="3"/>
+      <g fill="none" stroke="#0A1A30" stroke-width="3.4" stroke-linecap="round">
+        <path d="M83 92 q6 -8 13 0"/><path d="M104 92 q6 -8 13 0"/>            <!-- cejas -->
+        <circle cx="89" cy="99" r="3.6" fill="#0A1A30" stroke="none"/>
+        <circle cx="111" cy="99" r="3.6" fill="#0A1A30" stroke="none"/>          <!-- ojos -->
+        <path d="M100 101 q3 8 -2 12"/>                                         <!-- nariz -->
+        <path d="M88 116 q12 12 24 0"/>                                         <!-- boca -->
+      </g>
+    </g>
+
+    <!-- Golondrina -->
+    <path id="swallow" d="M2 14 C22 -2 44 -2 64 14 C46 8 40 12 34 24 C30 15 24 15 20 22 C16 14 10 12 2 14 Z"/>
+
+    <!-- Flourish filete (divisor simétrico) -->
+    <g id="flourish" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+      <path d="M150 20 C120 20 120 -6 96 8 C78 18 96 34 104 22 C110 12 96 8 92 20"/>
+      <path d="M150 20 C180 20 180 -6 204 8 C222 18 204 34 196 22 C190 12 204 8 208 20"/>
+      <circle cx="150" cy="20" r="6" fill="currentColor" stroke="none"/>
+      <path d="M150 12 C146 4 154 4 150 -4 M150 28 C146 36 154 36 150 44" stroke-width="4"/>
+      <path d="M60 20 H120 M180 20 H240" stroke-width="3" opacity=".8"/>
+      <circle cx="52" cy="20" r="4" fill="currentColor" stroke="none"/>
+      <circle cx="248" cy="20" r="4" fill="currentColor" stroke="none"/>
+    </g>
+
+    <!-- Ornamento de esquina filete -->
+    <g id="corner" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round">
+      <path d="M10 10 C10 70 40 90 96 92 C60 98 40 120 40 150"/>
+      <path d="M14 14 C60 22 80 42 88 84 C92 60 112 44 150 40"/>
+      <circle cx="96" cy="92" r="7" fill="currentColor" stroke="none"/>
+      <path d="M96 92 C112 88 118 100 108 110 C100 118 88 108 96 92 Z" stroke-width="4"/>
+    </g>
+
+    <!-- Estrella -->
+    <path id="star" d="M12 1 L15 9 L23 9 L16.5 14 L19 22 L12 17 L5 22 L7.5 14 L1 9 L9 9 Z"/>
+
+    <!-- Icono pelota -->
+    <g id="ball" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="17" cy="17" r="15"/>
+      <path d="M17 8 l7 5 -3 8 -8 0 -3 -8 z" fill="currentColor" stroke="none"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<div class="topbar">
+  <div class="inner">
+    <a href="/" class="brand" aria-label="Harmonic Beacon — inicio">
+      <svg class="sun-sm" viewBox="0 0 200 200"><use href="#sun"/></svg>
+      <b>Harmonic Beacon</b>
+    </a>
+    <div class="topnav">
+      <a href="/eventos/" class="topnav-link">Eventos</a>
+      <a class="btn btn-wa" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20de%20la%20pe%C3%B1a%20del%20Mundial%20en%20Awake%20%F0%9F%87%A6%F0%9F%87%B7" target="_blank" rel="noopener">WhatsApp <span class="arr">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="sun-bg" viewBox="0 0 200 200" aria-hidden="true"><use href="#sun"/></svg>
+  <svg class="corner l" viewBox="0 0 160 160" aria-hidden="true"><use href="#corner"/></svg>
+  <svg class="corner r" viewBox="0 0 160 160" aria-hidden="true"><use href="#corner"/></svg>
+  <svg class="swallows l" viewBox="0 0 66 26" aria-hidden="true"><use href="#swallow"/></svg>
+  <svg class="swallows r" viewBox="0 0 66 26" aria-hidden="true"><use href="#swallow"/></svg>
+
+  <div class="hero-inner">
+    <div class="stars" aria-label="Tres estrellas">
+      <svg viewBox="0 0 24 24"><use href="#star"/></svg>
+      <svg viewBox="0 0 24 24"><use href="#star"/></svg>
+      <svg viewBox="0 0 24 24"><use href="#star"/></svg>
+    </div>
+    <p class="script pre">Domingo 11:11 · Awake, Uvita 🇨🇷</p>
+    <h1 class="filete">Muchachos</h1>
+    <span class="ribbon">ahora nos volvimos a ilusionar</span>
+
+    <div class="hero-card">
+      <p>Una tarde de <b>statik dance</b> con el Harmonic Beacon sonando en la música, la <b>final del Mundial</b> en pantalla grande y <b>peña argentina</b> hasta tarde. Con la cocina de Awake.</p>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-wa" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20de%20precios%20y%20ubicaci%C3%B3n%20de%20la%20pe%C3%B1a%20del%20Mundial%20en%20Awake%20%F0%9F%87%A6%F0%9F%87%B7" target="_blank" rel="noopener">Precios y ubicación <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#plan">Ver el plan del día</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ EL PLAN ============ -->
+<section id="plan" class="section wrap">
+  <div class="divider reveal"><svg viewBox="0 0 300 44"><use href="#flourish"/></svg></div>
+  <div class="head" style="margin-top:1.2rem;">
+    <p class="kicker">El plan del día</p>
+    <h2 class="reveal">Bailamos, miramos la final y hacemos peña</h2>
+    <p class="lead reveal">Tres momentos, un solo clima. Llegás, te movés, gritás los goles y te quedás a festejar. Pase lo que pase en la cancha.</p>
+  </div>
+
+  <div class="plan">
+    <article class="card reveal">
+      <svg class="ico" viewBox="0 0 200 200" aria-hidden="true"><use href="#sun"/></svg>
+      <div class="num">1</div>
+      <h3>Statik Dance</h3>
+      <p class="tag">con el Beacon en la música</p>
+      <p>Una pista de danza para soltar el cuerpo. En algunos momentos sumamos el <b>Harmonic Beacon</b> dentro de la música — para sentir qué le aporta su presencia al sonido y al movimiento. No hace falta experiencia.</p>
+    </article>
+
+    <article class="card reveal">
+      <svg class="ico" viewBox="0 0 34 34" aria-hidden="true" style="color:var(--navy);"><use href="#ball"/></svg>
+      <div class="num">2</div>
+      <h3>La Final del Mundial</h3>
+      <p class="tag">pantalla grande, todos juntos</p>
+      <p>Armamos la tribuna en Awake y vivimos el partido en comunidad, con ese clima de hinchada que solo los argentinos sabemos hacer. El pico de la tarde.</p>
+    </article>
+
+    <article class="card reveal">
+      <svg class="ico" viewBox="0 0 66 26" aria-hidden="true" style="color:var(--red);width:40px;"><use href="#swallow"/></svg>
+      <div class="num">3</div>
+      <h3>Peña &amp; Fiesta</h3>
+      <p class="tag">folclore y guitarreada</p>
+      <p>Después del pitazo final seguimos con peña: música, baile y celebración hasta tarde. Comida y bebida de la <b>cocina de Awake</b> toda la jornada.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ BEACON EN LA MÚSICA ============ -->
+<section class="section dark">
+  <svg class="sun-bg" viewBox="0 0 200 200" aria-hidden="true"><use href="#sun"/></svg>
+  <div class="wrap narrow" style="position:relative;z-index:2;">
+    <div class="divider reveal"><svg viewBox="0 0 300 44"><use href="#flourish"/></svg></div>
+    <div class="head">
+      <p class="kicker gold">¿Qué hace el Beacon acá?</p>
+      <h2 class="reveal">Presencia adentro de la música</h2>
+    </div>
+    <p class="beacon-txt reveal">
+      El <b>Harmonic Beacon</b> es el instrumento de Harmonic Beacon: en vez de una nota que suena y se apaga, sostiene un sonido vivo y lleno de armónicos. Acá no reemplaza al DJ ni a la música — <b>se suma por momentos</b> a lo que suena, para que sientas en el cuerpo qué le aporta esa presencia a la modulación del sonido mientras bailás.
+    </p>
+    <p class="beacon-txt reveal" style="margin-top:1rem;color:#c9d6e6;">Sin misticismos: es escuchar y bailar algo distinto, y quedarte con la sensación.</p>
+  </div>
+</section>
+
+<!-- ============ INFO PRÁCTICA ============ -->
+<section class="section wrap">
+  <div class="head">
+    <p class="kicker">Info práctica</p>
+    <h2 class="reveal">Lo que necesitás saber</h2>
+  </div>
+  <div class="facts">
+    <div class="fact reveal">
+      <div class="k">Cuándo</div>
+      <div class="v">Domingo<br>11:11 hs</div>
+      <div class="n">Arrancamos puntuales</div>
+    </div>
+    <div class="fact reveal">
+      <div class="k">Dónde</div>
+      <div class="v">Awake<br>Uvita</div>
+      <div class="n"><a class="maplink" href="https://www.google.com/maps/search/?api=1&amp;query=Awake%20Uvita%20Costa%20Rica" target="_blank" rel="noopener">Ver en el mapa →</a></div>
+    </div>
+    <div class="fact reveal">
+      <div class="k">Entrada</div>
+      <div class="v">Cupos<br>limitados</div>
+      <div class="n">Precios por WhatsApp</div>
+    </div>
+    <div class="fact reveal">
+      <div class="k">Comida</div>
+      <div class="v">Cocina<br>de Awake</div>
+      <div class="n">Durante todo el evento</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="section final">
+  <div class="inner wrap narrow">
+    <p class="script reveal">¿Venís?</p>
+    <h2 class="reveal">Guardá tu lugar</h2>
+    <div class="divider reveal" style="margin:1.2rem 0;color:var(--gold-dp);"><svg viewBox="0 0 300 44"><use href="#flourish"/></svg></div>
+    <p class="lead reveal" style="max-width:540px;margin-inline:auto;color:var(--navy);">
+      Domingo <b>11:11 hs</b> en <b>Awake, Uvita</b>. Escribinos por WhatsApp para precios y para reservar tu lugar — los cupos son limitados.
+    </p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-wa" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20guardar%20mi%20lugar%20en%20la%20pe%C3%B1a%20del%20Mundial%20en%20Awake%20%F0%9F%87%A6%F0%9F%87%B7" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632 <span class="arr">→</span></a>
+      <a class="btn btn-gold" href="https://www.google.com/maps/search/?api=1&amp;query=Awake%20Uvita%20Costa%20Rica" target="_blank" rel="noopener">Cómo llegar <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <a href="/" class="brand" aria-label="Harmonic Beacon">
+    <svg class="sun-sm" viewBox="0 0 200 200" style="color:var(--gold);"><use href="#sun"/></svg>
+    <b>Harmonic Beacon</b>
+  </a>
+  <p>Domingo 11:11 hs · <a class="ul" href="https://www.google.com/maps/search/?api=1&amp;query=Awake%20Uvita%20Costa%20Rica" target="_blank" rel="noopener">Awake, Uvita — Costa Rica</a> · <a class="ul" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>
+  <p class="fnote">Un encuentro de <a class="ul" href="/">harmonicbeacon.com</a> 🇦🇷</p>
+</footer>
+
+<script>
+  // Reveal on scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>

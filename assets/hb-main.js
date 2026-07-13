@@ -16,8 +16,9 @@
 
   /* ---- NAV (con jerarquía + estado activo) ---- */
   var sections = [
+    { key: 'eventos',    href: '/eventos/',    en: 'Events',       es: 'Eventos' },
     { key: 'porque',     href: '/#porque',     en: 'Why it works', es: 'Por qué funciona' },
-    { key: 'trabajo',    href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo', sub: [
+    { key: 'trabajo',    href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo', navHide: true, sub: [
         { page: 'proyeccion', href: '/proyeccion-armonica-del-mito/',        en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' },
         { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
         { page: 'bonobos',    href: '/bonobos/',                             en: 'bonob.os',                 es: 'bonob.os' },
@@ -30,7 +31,7 @@
     { key: 'contact',    href: '/#contact',    en: 'Contact',      es: 'Contacto' }
   ];
   var workPages = { proyeccion: 1, beacon: 1, bonobos: 1, formacion: 1, psicopompo: 1 };
-  var pageSection = workPages[page] ? 'trabajo' : (page === 'porque' ? 'porque' : null);
+  var pageSection = workPages[page] ? 'trabajo' : (page === 'porque' ? 'porque' : (page === 'eventos' ? 'eventos' : null));
 
   function subLink(it) {
     var cur = (it.page && it.page === page) ? ' active' : '';
@@ -39,7 +40,7 @@
     return '<li><a class="sub-link' + cur + '" href="' + it.href + '"' + ext + aria + '>' + L(it.en, it.es) + '</a></li>';
   }
   function navItems() {
-    return sections.map(function (s) {
+    return sections.filter(function (s) { return !s.navHide; }).map(function (s) {
       var active = (s.key && s.key === pageSection) ? ' active' : '';
       var aria = active ? ' aria-current="page"' : '';
       if (s.sub) {
@@ -51,7 +52,7 @@
     }).join('');
   }
   function mobileItems() {
-    return sections.map(function (s) {
+    return sections.filter(function (s) { return !s.navHide; }).map(function (s) {
       var active = (s.key && s.key === pageSection) ? ' aria-current="page"' : '';
       var html = '<li><a href="' + s.href + '"' + active + '>' + L(s.en, s.es) + '</a>';
       if (s.sub) {
@@ -92,7 +93,6 @@
   var footMore = [
     { href: '/proyecciones/', en: 'Myth Projections (gallery)', es: 'Proyecciones del Mito (galería)' },
     { href: '/retreat/',      en: 'Retreat · Costa Rica',      es: 'Retreat · Costa Rica' },
-    { href: '/tour/',         en: 'Tour · Costa Rica',         es: 'Tour · Costa Rica' },
     { href: 'https://hit.altermundi.net/', en: 'HIT book', es: 'Libro HIT', ext: true },
     { href: '/politica/',     en: 'Privacy policy',            es: 'Política de privacidad' }
   ];
