@@ -34,6 +34,15 @@
   .layout{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
   @media(max-width:900px){.layout{grid-template-columns:1fr;gap:0}}
 
+  /* ---------- Language toggle ---------- */
+  .langtoggle{position:fixed;top:14px;right:14px;z-index:60;display:flex;gap:2px;
+    padding:3px;border-radius:999px;border:1px solid var(--line-strong);
+    background:rgba(11,11,13,.72);backdrop-filter:blur(8px)}
+  .langtoggle button{border:0;background:none;color:var(--muted);font:inherit;font-size:12px;
+    font-weight:700;letter-spacing:.08em;padding:5px 11px;border-radius:999px;cursor:pointer;transition:.15s}
+  .langtoggle button:hover{color:var(--ink)}
+  .langtoggle button.on{background:var(--gold);color:#1a1400}
+
   /* ---------- Hero ---------- */
   header.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
   .hero-inner{max-width:1200px;margin:0 auto;padding:clamp(48px,9vw,110px) clamp(16px,4vw,40px) clamp(40px,6vw,72px)}
@@ -96,19 +105,11 @@
   li::marker{color:var(--gold-deep)}
   .rule{height:1px;background:linear-gradient(90deg,var(--line-strong),transparent);border:0;margin:6px 0 0}
 
-  /* cards / callouts */
   .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);
     border-radius:14px;padding:22px 24px;margin:18px 0;box-shadow:var(--shadow)}
-  .callout{border-left:3px solid var(--gold);background:rgba(212,175,55,.055);
-    border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
-  .callout.warn{border-left-color:var(--warn);background:rgba(224,137,75,.07)}
-  .callout .ct{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--gold);font-weight:700;margin-bottom:4px}
-  .callout.warn .ct{color:var(--warn)}
 
-  /* tables */
   .tw{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
-  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  table{border-collapse:collapse;width:100%;min-width:600px;font-size:14px}
   th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
   thead th{background:rgba(212,175,55,.07);color:var(--gold-soft);font-weight:600;
     font-size:12px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
@@ -117,14 +118,12 @@
   td b{color:var(--ink)}
   .ok{color:var(--ok)} .no{color:var(--warn)}
 
-  /* badges */
   .badge{display:inline-block;font-size:11px;letter-spacing:.04em;padding:3px 10px;border-radius:999px;
     border:1px solid var(--line-strong);color:var(--gold-soft);background:rgba(212,175,55,.05);
     white-space:nowrap;vertical-align:middle}
   .badge.pend{color:var(--warn);border-color:rgba(224,137,75,.45);background:rgba(224,137,75,.08)}
   .badge.done{color:var(--ok);border-color:rgba(155,207,126,.4);background:rgba(155,207,126,.07)}
 
-  /* encounter blocks */
   .enc{margin:22px 0}
   .enc-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:2px}
   .enc-date{font-family:var(--serif);font-size:22px;color:#fff}
@@ -132,14 +131,24 @@
   .setup{font-size:13px;color:var(--muted);margin:6px 0 0}
   .setup b{color:var(--gold-soft)}
 
-  /* testimonios index */
+  .iglink{display:flex;align-items:center;gap:16px;margin:18px 0 8px;padding:16px 20px;border-radius:14px;
+    border:1px solid var(--line-strong);text-decoration:none;
+    background:linear-gradient(180deg,rgba(212,175,55,.07),var(--bg2));transition:.2s}
+  .iglink:hover{transform:translateY(-2px);border-color:var(--gold);background:linear-gradient(180deg,rgba(212,175,55,.12),var(--bg2))}
+  .igico{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;color:#fff;
+    background:linear-gradient(135deg,#f9ce34,#ee2a7b 55%,#6228d7)}
+  .igtxt{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .igt{color:var(--ink);font-weight:700;font-size:15.5px}
+  .igs{color:var(--muted);font-size:12.5px}
+  .igarrow{margin-left:auto;color:var(--gold);font-size:20px}
+
   .tindex{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:18px 0 8px}
   .tindex a{display:block;border:1px solid var(--line);border-radius:11px;padding:12px 14px;
     background:linear-gradient(180deg,var(--panel),var(--bg2));transition:.18s}
   .tindex a:hover{border-color:var(--line-strong);background:rgba(212,175,55,.06);transform:translateY(-2px)}
-  .tindex .who{color:var(--ink);font-weight:600;font-size:14.5px}
-  .tindex .whn{color:var(--gold-deep);font-size:11.5px;letter-spacing:.06em;margin-top:2px}
-  .tindex .wht{color:var(--muted);font-size:12.5px;margin-top:6px;line-height:1.45}
+  .tindex .who{color:var(--ink);font-weight:600;font-size:14.5px;display:block}
+  .tindex .whn{color:var(--gold-deep);font-size:11.5px;letter-spacing:.06em;margin-top:2px;display:block}
+  .tindex .wht{color:var(--muted);font-size:12.5px;margin-top:6px;line-height:1.45;display:block}
 
   .tcat{font-family:var(--serif);color:var(--gold-soft);font-size:16px;letter-spacing:.04em;
     margin:30px 0 4px;padding-top:14px;border-top:1px dashed var(--line)}
@@ -153,11 +162,9 @@
     margin-top:12px;padding-top:10px}
   .backtop{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
 
-  /* pendientes checklist */
   .checks{list-style:none;padding:0;margin:14px 0}
   .checks li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line)}
   .checks li::before{content:"○";position:absolute;left:6px;color:var(--gold-deep);font-size:16px;top:8px}
-  .checks li.dn::before{content:"◉";color:var(--ok)}
 
   footer{border-top:1px solid var(--line);padding:34px 0 60px;color:var(--muted);font-size:13px}
   footer .wrap{max-width:1200px}
@@ -168,23 +175,27 @@
 </head>
 <body>
 
+<div class="langtoggle" role="group" aria-label="Language">
+  <button data-l="es" class="on" onclick="applyLang('es')">ES</button>
+  <button data-l="en" onclick="applyLang('en')">EN</button>
+</div>
+
 <header class="hero">
   <svg class="liss" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M200 40 C 120 40 60 110 60 150 C 60 210 140 260 200 260 C 300 260 340 190 340 150 C 340 90 280 40 200 40 Z"
-      stroke="#d4af37" stroke-width="1"/>
+    <path d="M200 40 C 120 40 60 110 60 150 C 60 210 140 260 200 260 C 300 260 340 190 340 150 C 340 90 280 40 200 40 Z" stroke="#d4af37" stroke-width="1"/>
     <path d="M80 150 C 140 60 260 60 320 150 C 260 240 140 240 80 150 Z" stroke="#d4af37" stroke-width="1"/>
     <circle cx="200" cy="150" r="120" stroke="#d4af37" stroke-width=".6"/>
     <circle cx="200" cy="150" r="8" fill="#d4af37" opacity=".7"/>
   </svg>
   <div class="hero-inner">
-    <p class="kicker">Informe interno · AlterMundi 2026</p>
-    <h1>Encuentros Virtuales<br><em>Proyección del Mito</em> + Harmonic Beacon</h1>
-    <p class="sub">Cinco encuentros semanales de <em>Harmonic Myth Projection</em>: qué ocurrió en cada uno, los testimonios de las personas, la voz del guía y el hallazgo sobre la consonancia del sonido.</p>
+    <p class="kicker" data-en="Internal report · AlterMundi 2026">Informe interno · AlterMundi 2026</p>
+    <h1 data-en="Virtual Gatherings<br><em>Myth Projection</em> + Harmonic Beacon">Encuentros Virtuales<br><em>Proyección del Mito</em> + Harmonic Beacon</h1>
+    <p class="sub" data-en="Five weekly gatherings of <em>Harmonic Myth Projection</em>: what happened in each one, the participants' testimonies and the guide's voice.">Cinco encuentros semanales de <em>Harmonic Myth Projection</em>: qué ocurrió en cada uno, los testimonios de las personas y la voz del guía.</p>
     <div class="meta">
-      <span class="chip">Guía: <b>Julián de la Reta</b></span>
-      <span class="chip">Sonido: <b>Nico · Harmonic Beacon</b></span>
-      <span class="chip">Período: <b>13 may – 10 jun 2026</b></span>
-      <span class="chip"><b>5</b> encuentros · <b>4</b> desgrabados</span>
+      <span class="chip" data-en="Guide: <b>Julián de la Reta</b>">Guía: <b>Julián de la Reta</b></span>
+      <span class="chip" data-en="Sound: <b>Nico · Harmonic Beacon</b>">Sonido: <b>Nico · Harmonic Beacon</b></span>
+      <span class="chip" data-en="Period: <b>May 13 – Jun 10, 2026</b>">Período: <b>13 may – 10 jun 2026</b></span>
+      <span class="chip" data-en="<b>5</b> gatherings · <b>4</b> transcribed"><b>5</b> encuentros · <b>4</b> desgrabados</span>
     </div>
   </div>
 </header>
@@ -194,18 +205,17 @@
 
   <!-- ============ ÍNDICE ============ -->
   <nav class="toc" id="toc">
-    <button id="navtoggle" aria-expanded="false">Índice</button>
+    <button id="navtoggle" aria-expanded="false" data-en="Index">Índice</button>
     <div class="toc-list">
-      <p class="tlabel">Índice general</p>
+      <p class="tlabel" data-en="Contents">Índice general</p>
       <ol>
-        <li><a href="#resumen">Resumen ejecutivo</a></li>
-        <li><a href="#setup">Setup técnico del sonido</a></li>
-        <li><a href="#encuentros">Los encuentros</a></li>
-        <li><a href="#consonancia">Hallazgo: el caso del 10 de junio</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#voz">La voz del guía</a></li>
-        <li><a href="#observaciones">Observaciones del equipo</a></li>
-        <li><a href="#pendientes">Pendientes</a></li>
+        <li><a href="#resumen" data-en="Executive summary">Resumen ejecutivo</a></li>
+        <li><a href="#setup" data-en="Sound technical setup">Setup técnico del sonido</a></li>
+        <li><a href="#encuentros" data-en="The gatherings">Los encuentros</a></li>
+        <li><a href="#testimonios" data-en="Testimonies">Testimonios</a></li>
+        <li><a href="#voz" data-en="The guide's voice">La voz del guía</a></li>
+        <li><a href="#observaciones" data-en="Team observations">Observaciones del equipo</a></li>
+        <li><a href="#pendientes" data-en="To do">Pendientes</a></li>
       </ol>
     </div>
   </nav>
@@ -214,28 +224,30 @@
     <!-- ============ RESUMEN ============ -->
     <section id="resumen">
       <div class="snum">01</div>
-      <h2>Resumen ejecutivo</h2>
-      <p class="lead">Se realizaron cinco encuentros virtuales semanales (miércoles). Contamos con desgrabación de cuatro — 20/5, 27/5, 3/6 y 10/6 (esta última parcial). Solo el <strong>13/5 queda pendiente</strong>.</p>
+      <h2 data-en="Executive summary">Resumen ejecutivo</h2>
+      <p class="lead" data-en="Five weekly gatherings were held (Wednesdays). We have transcripts of four — May 20, 27, Jun 3 and Jun 10 (this last one partial). Only <strong>May 13 is pending</strong>.">Se realizaron cinco encuentros virtuales semanales (miércoles). Contamos con desgrabación de cuatro — 20/5, 27/5, 3/6 y 10/6 (esta última parcial). Solo el <strong>13/5 queda pendiente</strong>.</p>
       <div class="tw">
         <table>
-          <thead><tr><th>Fecha</th><th>Estado</th><th>Idioma</th><th>Duración</th><th>Participantes</th></tr></thead>
+          <thead><tr>
+            <th data-en="Date">Fecha</th><th data-en="Status">Estado</th><th data-en="Language">Idioma</th><th data-en="Duration">Duración</th><th data-en="Participants">Participantes</th>
+          </tr></thead>
           <tbody>
-            <tr><td><b>13 may</b></td><td><span class="badge pend">Pendiente</span></td><td>—</td><td>—</td><td>Primer encuentro (confirmado)</td></tr>
-            <tr><td><b>20 may</b></td><td><span class="badge done">Desgrabado</span></td><td>Español</td><td>1 h 58 min</td><td><b>~45 conectados</b></td></tr>
-            <tr><td><b>27 may</b></td><td><span class="badge done">Desgrabado</span></td><td>Bilingüe EN/ES</td><td>1 h 36 min</td><td>Reducido (≈5 compartieron)</td></tr>
-            <tr><td><b>3 jun</b></td><td><span class="badge done">Desgrabado</span></td><td>Español</td><td>1 h 43 min</td><td>Grupo chico</td></tr>
-            <tr><td><b>10 jun</b></td><td><span class="badge done">Parcial</span></td><td>Español</td><td>~33 min</td><td>~20 · desde Costa Rica</td></tr>
+            <tr><td><b>13 may</b></td><td><span class="badge pend" data-en="Pending">Pendiente</span></td><td>—</td><td>—</td><td data-en="First gathering (confirmed)">Primer encuentro (confirmado)</td></tr>
+            <tr><td><b>20 may</b></td><td><span class="badge done" data-en="Transcribed">Desgrabado</span></td><td data-en="Spanish">Español</td><td>1 h 58 min</td><td data-en="<b>~45 connected</b>"><b>~45 conectados</b></td></tr>
+            <tr><td><b>27 may</b></td><td><span class="badge done" data-en="Transcribed">Desgrabado</span></td><td data-en="Bilingual EN/ES">Bilingüe EN/ES</td><td>1 h 36 min</td><td data-en="Small (≈5 shared)">Reducido (≈5 compartieron)</td></tr>
+            <tr><td><b>3 jun</b></td><td><span class="badge done" data-en="Transcribed">Desgrabado</span></td><td data-en="Spanish">Español</td><td>1 h 43 min</td><td data-en="Small group">Grupo chico</td></tr>
+            <tr><td><b>10 jun</b></td><td><span class="badge done" data-en="Partial">Parcial</span></td><td data-en="Spanish">Español</td><td>~33 min</td><td data-en="~20 · from Costa Rica">~20 · desde Costa Rica</td></tr>
           </tbody>
         </table>
       </div>
       <div class="card">
-        <h4 style="margin-top:0">Estructura común de cada encuentro</h4>
+        <h4 style="margin-top:0" data-en="Common structure of each gathering">Estructura común de cada encuentro</h4>
         <ul style="margin-bottom:0">
-          <li>Bienvenida y explicación (imaginación activa vs. fantasía pasiva; los 3 resultados: dormirse / encontrar una resistencia / atravesarla y llegar al insight).</li>
-          <li>Caldeamiento senso-perceptivo y propioceptivo con el campo sonoro.</li>
-          <li>Consignas de la Proyección del Mito (primera fase del <em>camino del héroe</em> de Campbell: la separación) → puerta → escalera en espiral de 12 escalones → figura/guardián del umbral.</li>
-          <li>Imaginación activa libre (cada uno su viaje, 40–60 min).</li>
-          <li>Retorno y <strong>compartir grupal</strong>.</li>
+          <li data-en="Welcome and explanation (active imagination vs. passive fantasy; the 3 outcomes: falling asleep / hitting a resistance / crossing it into insight).">Bienvenida y explicación (imaginación activa vs. fantasía pasiva; los 3 resultados: dormirse / encontrar una resistencia / atravesarla y llegar al insight).</li>
+          <li data-en="Sensory-perceptive and proprioceptive warm-up with the sound field.">Caldeamiento senso-perceptivo y propioceptivo con el campo sonoro.</li>
+          <li data-en="Myth Projection prompts (first phase of Campbell's <em>hero's journey</em>: separation) → door → 12-step spiral staircase → figure/threshold guardian.">Consignas de la Proyección del Mito (primera fase del <em>camino del héroe</em> de Campbell: la separación) → puerta → escalera en espiral de 12 escalones → figura/guardián del umbral.</li>
+          <li data-en="Free active imagination (each person their own journey, 40–60 min).">Imaginación activa libre (cada uno su viaje, 40–60 min).</li>
+          <li data-en="Return and <strong>group sharing</strong>.">Retorno y <strong>compartir grupal</strong>.</li>
         </ul>
       </div>
     </section>
@@ -243,266 +255,243 @@
     <!-- ============ SETUP ============ -->
     <section id="setup">
       <div class="snum">02</div>
-      <h2>Setup técnico del sonido por encuentro</h2>
-      <p>El campo del Harmonic Beacon no fue idéntico en cada encuentro: variaron el <strong>instrumento resonante</strong> (la guitarra), la <strong>afinación de la fundamental</strong> y el <strong>sistema de espacialización HRTF</strong> (procesamiento binaural que distribuye espacialmente cada frecuencia; se incorpora recién a partir del 27/5). Registrar estos parámetros es clave para correlacionar <em>setup ↔ experiencia reportada</em>.</p>
+      <h2 data-en="Sound technical setup per gathering">Setup técnico del sonido por encuentro</h2>
+      <p data-en="The Harmonic Beacon field was not identical in each gathering: the <strong>resonant instrument</strong> (the guitar), the <strong>tuning of the fundamental</strong> and the <strong>HRTF spatialization system</strong> (binaural processing that places each frequency in space; added only from May 27) all varied. Recording these parameters is key to correlate <em>setup ↔ reported experience</em>.">El campo del Harmonic Beacon no fue idéntico en cada encuentro: variaron el <strong>instrumento resonante</strong> (la guitarra), la <strong>afinación de la fundamental</strong> y el <strong>sistema de espacialización HRTF</strong> (procesamiento binaural que distribuye espacialmente cada frecuencia; se incorpora recién a partir del 27/5). Registrar estos parámetros es clave para correlacionar <em>setup ↔ experiencia reportada</em>.</p>
       <div class="tw">
         <table>
-          <thead><tr><th>Fecha</th><th>Guitarra (hardware)</th><th>Afinación</th><th>HRTF</th><th>Consonancia</th><th>Setup</th></tr></thead>
+          <thead><tr>
+            <th data-en="Date">Fecha</th><th data-en="Guitar (hardware)">Guitarra (hardware)</th><th data-en="Tuning">Afinación</th><th>HRTF</th><th data-en="Consonance">Consonancia</th><th>Setup</th>
+          </tr></thead>
           <tbody>
-            <tr><td><b>13 may</b></td><td>Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>64 Hz</b></td><td>—</td><td class="ok">✓ Congruente</td><td><em>Cimiento</em></td></tr>
-            <tr><td><b>20 may</b></td><td>Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>64 Hz</b></td><td>—</td><td class="ok">✓ Congruente</td><td><em>Coral</em></td></tr>
-            <tr><td><b>27 may</b></td><td>Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>40 Hz</b></td><td>✓ Perfil A</td><td class="ok">✓ Congruente</td><td><em>Esfera</em></td></tr>
-            <tr><td><b>3 jun</b></td><td>Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>40 Hz</b></td><td>✓ Perfil B</td><td class="ok">✓ Congruente</td><td><em>Cocoon</em></td></tr>
-            <tr><td><b>10 jun</b></td><td>Ibanez V44MINIE-OPN (mini dreadnought 3/4)</td><td><b>40 Hz</b></td><td>✓ (+ "otros Z")</td><td class="no">⚠ No congruente</td><td><em>Descenso</em></td></tr>
+            <tr><td><b>13 may</b></td><td data-en="Red electric (hollow body, AG 335 type)">Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>64 Hz</b></td><td>—</td><td class="ok" data-en="✓ Congruent">✓ Congruente</td><td><em>Cimiento</em></td></tr>
+            <tr><td><b>20 may</b></td><td data-en="Red electric (hollow body, AG 335 type)">Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>64 Hz</b></td><td>—</td><td class="ok" data-en="✓ Congruent">✓ Congruente</td><td><em>Coral</em></td></tr>
+            <tr><td><b>27 may</b></td><td data-en="Red electric (hollow body, AG 335 type)">Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>40 Hz</b></td><td data-en="✓ Profile A">✓ Perfil A</td><td class="ok" data-en="✓ Congruent">✓ Congruente</td><td><em>Esfera</em></td></tr>
+            <tr><td><b>3 jun</b></td><td data-en="Red electric (hollow body, AG 335 type)">Eléctrica roja (cuerpo hueco tipo AG 335)</td><td><b>40 Hz</b></td><td data-en="✓ Profile B">✓ Perfil B</td><td class="ok" data-en="✓ Congruent">✓ Congruente</td><td><em>Cocoon</em></td></tr>
+            <tr><td><b>10 jun</b></td><td data-en="Ibanez V44MINIE-OPN (mini dreadnought 3/4)">Ibanez V44MINIE-OPN (mini dreadnought 3/4)</td><td><b>40 Hz</b></td><td data-en="✓ (+ &quot;other Z&quot;)">✓ (+ "otros Z")</td><td class="no" data-en="⚠ Not congruent">⚠ No congruente</td><td><em>Descenso</em></td></tr>
           </tbody>
         </table>
       </div>
-      <h3>Nombres de setup</h3>
-      <p>Cada configuración recibe un nombre según lo que ocurrió en ese encuentro, para referirnos a ellas con precisión en la investigación.</p>
+      <h3 data-en="Setup names">Nombres de setup</h3>
+      <p data-en="Each configuration gets a name after what happened in that gathering, so we can refer to them precisely.">Cada configuración recibe un nombre según lo que ocurrió en ese encuentro, para referirnos a ellas con precisión.</p>
       <ul>
-        <li><strong>Cimiento</strong> (13/5) — el primer encuentro; la fundamental grave de 64 Hz que asienta la serie. <span class="badge pend">tentativo</span></li>
-        <li><strong>Coral</strong> (20/5) — ~45 voces, muchas familias y padres/madres apareciendo; el más coral y emotivo.</li>
-        <li><strong>Esfera</strong> (27/5) — debut del HRTF; varios describen una "esfera en movimiento", el universo, sentirse enormes dentro del sonido.</li>
-        <li><strong>Cocoon</strong> (3/6) — el propio Julián lo nombró: el Beacon como "abrazo armónico". El punto alto de consonancia.</li>
-        <li><strong>Descenso</strong> (10/6) — con el hardware no consonante, predominan los descensos oscuros e intensos, el miedo y las figuras menos definidas: la contracara del <em>Cocoon</em>.</li>
+        <li data-en="<strong>Cimiento</strong> (May 13) — the first gathering; 64 Hz fundamental. <span class=&quot;badge pend&quot;>tentative</span>"><strong>Cimiento</strong> (13/5) — el primer encuentro; fundamental de 64 Hz. <span class="badge pend">tentativo</span></li>
+        <li data-en="<strong>Coral</strong> (May 20) — ~45 people; many families and parents appearing."><strong>Coral</strong> (20/5) — ~45 personas; muchas familias y padres/madres apareciendo.</li>
+        <li data-en="<strong>Esfera</strong> (May 27) — HRTF debut; several describe a &quot;moving sphere&quot;."><strong>Esfera</strong> (27/5) — debut del HRTF; varios describen una "esfera en movimiento".</li>
+        <li data-en="<strong>Cocoon</strong> (Jun 3) — Julián named it: the Beacon as a &quot;harmonic embrace&quot;."><strong>Cocoon</strong> (3/6) — Julián lo nombró: el Beacon como "abrazo armónico".</li>
+        <li data-en="<strong>Descenso</strong> (Jun 10) — from Costa Rica, with the portable guitar. <span class=&quot;badge pend&quot;>tentative</span>"><strong>Descenso</strong> (10/6) — desde Costa Rica, con la guitarra transportable. <span class="badge pend">tentativo</span></li>
       </ul>
     </section>
 
     <!-- ============ ENCUENTROS ============ -->
     <section id="encuentros">
       <div class="snum">03</div>
-      <h2>Los encuentros</h2>
+      <h2 data-en="The gatherings">Los encuentros</h2>
 
       <div class="enc">
-        <div class="enc-head"><span class="enc-date">13 mayo</span><span class="badge pend">Pendiente de desgrabar</span></div>
-        <p class="setup">Setup <b>Cimiento</b> · eléctrica roja · 64 Hz · sin HRTF</p>
-        <p><strong>Confirmado como el primer encuentro de la serie</strong> (Yanina, el 10/6: <em>"es la quinta experiencia desde el 13 de mayo"</em>). Ya generó movilizaciones fuertes en la semana intermedia. Es el único que resta desgrabar.</p>
-      </div>
-
-      <div class="enc">
-        <div class="enc-head"><span class="enc-date">20 mayo</span><span class="enc-title">Encuentro en español · ~45 personas</span></div>
-        <p class="setup">Setup <b>Coral</b> · eléctrica roja · 64 Hz · sin HRTF</p>
-        <p>Encuentro numeroso y muy emotivo. Se decidió no usar salas separadas y trabajar todos juntos. Aparecieron con fuerza los ejes de toda la serie: el vínculo con la madre/el padre, las resistencias, la figura-guardián como sombra a integrar, y las movilizaciones que siguen durante la semana (sueños, sincronicidades). En el cierre se reveló que <strong>Fernando, Nico (creador del Beacon), Paula y Ramiro son hermanos</strong>, y que su madre <strong>Mónica</strong> —psicodramatista— fue clave para que este dispositivo exista (linaje Zerka Moreno / J. L. Moreno).</p>
-        <p class="backtop">Testimonios → <a href="#t-laura">ver en la sección Testimonios</a></p>
+        <div class="enc-head"><span class="enc-date" data-en="May 13">13 mayo</span><span class="badge pend" data-en="Pending transcription">Pendiente de desgrabar</span></div>
+        <p class="setup" data-en="Setup <b>Cimiento</b> · red electric · 64 Hz · no HRTF">Setup <b>Cimiento</b> · eléctrica roja · 64 Hz · sin HRTF</p>
+        <p data-en="<strong>Confirmed as the first gathering of the series</strong> (Yanina, on Jun 10: <em>&quot;it's the fifth experience since May 13&quot;</em>). It already triggered strong stirrings during the intervening week. It's the only one left to transcribe."><strong>Confirmado como el primer encuentro de la serie</strong> (Yanina, el 10/6: <em>"es la quinta experiencia desde el 13 de mayo"</em>). Ya generó movilizaciones fuertes en la semana intermedia. Es el único que resta desgrabar.</p>
       </div>
 
       <div class="enc">
-        <div class="enc-head"><span class="enc-date">27 mayo</span><span class="enc-title">Encuentro bilingüe EN/ES</span></div>
-        <p class="setup">Setup <b>Esfera</b> · eléctrica roja · 40 Hz · HRTF perfil A</p>
-        <p>Primera apertura en <strong>inglés</strong> para recibir invitadas de habla inglesa (visualización íntegra en inglés; compartir mixto). Foco técnico en el sonido: Nico dio al Beacon mayor <strong>distribución espacial</strong> de las frecuencias, y varias participantes lo notaron sin aviso previo — evidencia de la pareidolia armónica y de la teoría de campos. Fuerte presencia de la <strong>inversión de roles</strong> (Ailen integró una figura masculina que la resistía).</p>
-        <p class="backtop">Testimonios → <a href="#t-doris">ver en la sección Testimonios</a></p>
+        <div class="enc-head"><span class="enc-date" data-en="May 20">20 mayo</span><span class="enc-title" data-en="Gathering in Spanish · ~45 people">Encuentro en español · ~45 personas</span></div>
+        <p class="setup" data-en="Setup <b>Coral</b> · red electric · 64 Hz · no HRTF">Setup <b>Coral</b> · eléctrica roja · 64 Hz · sin HRTF</p>
+        <p data-en="A large, deeply moving gathering. It was decided not to use breakout rooms and to work all together. The threads of the whole series appeared strongly: the bond with mother/father, resistances, the guardian figure as shadow to integrate, and the stirrings that continue through the week (dreams, synchronicities). At the close it was revealed that <strong>Fernando, Nico (Beacon's creator), Paula and Ramiro are siblings</strong>, and that their mother <strong>Mónica</strong> —a psychodramatist— was key to this device existing (Zerka Moreno / J. L. Moreno lineage).">Encuentro numeroso y muy emotivo. Se decidió no usar salas separadas y trabajar todos juntos. Aparecieron con fuerza los ejes de toda la serie: el vínculo con la madre/el padre, las resistencias, la figura-guardián como sombra a integrar, y las movilizaciones que siguen durante la semana (sueños, sincronicidades). En el cierre se reveló que <strong>Fernando, Nico (creador del Beacon), Paula y Ramiro son hermanos</strong>, y que su madre <strong>Mónica</strong> —psicodramatista— fue clave para que este dispositivo exista (linaje Zerka Moreno / J. L. Moreno).</p>
+        <p class="backtop" data-en="Testimonies → <a href=&quot;#t-laura&quot;>see the Testimonies section</a>">Testimonios → <a href="#t-laura">ver en la sección Testimonios</a></p>
       </div>
 
       <div class="enc">
-        <div class="enc-head"><span class="enc-date">3 junio</span><span class="enc-title">Encuentro en español · grupo consolidado</span></div>
-        <p class="setup">Setup <b>Cocoon</b> · eléctrica roja · 40 Hz · HRTF perfil B · <span class="ok">consonante</span></p>
-        <p>Grupo chico ("no hicimos mucha difusión"). Julián dedicó tiempo a <strong>enseñar herramientas del psicodrama</strong> (sobre todo la inversión de roles) para atravesar resistencias en soledad. Se vio con claridad el progreso del entrenamiento (Karina, Yanel, Yanina). Se marcó una distinción central: <strong>no se trata de interpretar las imágenes, sino de integrarlas</strong>. Nico cerró con la imagen del <strong>"abrazo armónico" / cocoon</strong>. Se anunció el marco de <strong>investigación / consentimientos</strong>.</p>
-        <p class="backtop">Testimonios → <a href="#t-marta">ver en la sección Testimonios</a></p>
+        <div class="enc-head"><span class="enc-date" data-en="May 27">27 mayo</span><span class="enc-title" data-en="Bilingual gathering EN/ES">Encuentro bilingüe EN/ES</span></div>
+        <p class="setup" data-en="Setup <b>Esfera</b> · red electric · 40 Hz · HRTF profile A">Setup <b>Esfera</b> · eléctrica roja · 40 Hz · HRTF perfil A</p>
+        <p data-en="First opening in <strong>English</strong> to welcome English-speaking guests (visualization fully in English; sharing mixed). Technical focus on sound: Nico gave the Beacon greater <strong>spatial distribution</strong> of frequencies, and several participants noticed it without prior notice — evidence of harmonic pareidolia and of the field theory. Strong presence of <strong>role reversal</strong> (Ailen integrated a male figure that resisted her).">Primera apertura en <strong>inglés</strong> para recibir invitadas de habla inglesa (visualización íntegra en inglés; compartir mixto). Foco técnico en el sonido: Nico dio al Beacon mayor <strong>distribución espacial</strong> de las frecuencias, y varias participantes lo notaron sin aviso previo — evidencia de la pareidolia armónica y de la teoría de campos. Fuerte presencia de la <strong>inversión de roles</strong> (Ailen integró una figura masculina que la resistía).</p>
+        <p class="backtop" data-en="Testimonies → <a href=&quot;#t-doris&quot;>see the Testimonies section</a>">Testimonios → <a href="#t-doris">ver en la sección Testimonios</a></p>
       </div>
 
       <div class="enc">
-        <div class="enc-head"><span class="enc-date">10 junio</span><span class="enc-title">Desde Costa Rica · guiado por Julián (Saira da la bienvenida)</span></div>
-        <p class="setup">Setup <b>Descenso</b> · Ibanez mini 3/4 · 40 Hz · HRTF · <span class="no">no consonante</span></p>
-        <p><span class="badge warn" style="border-color:rgba(224,137,75,.45);color:var(--warn)">Grabación parcial (~33 min)</span> Arranca en el compartir grupal; no quedó registrada la meditación. Con la misma meditación de siempre pero setup y hardware distintos → primera <strong>prueba de campo de la hipótesis de consonancia</strong>. El tono fue notoriamente más intenso, oscuro y atemorizante, y el sonido mismo se vivió como amenazante para al menos una participante. Aun así se sostuvo el trabajo de integración: Julián insistió en el <strong>acompañamiento terapéutico</strong> ante material muy fuerte. Se anunció aumentar la frecuencia (más de un encuentro por semana).</p>
-        <p class="backtop">Testimonios → <a href="#t-merli-jun">ver en la sección Testimonios</a></p>
+        <div class="enc-head"><span class="enc-date" data-en="Jun 3">3 junio</span><span class="enc-title" data-en="Gathering in Spanish · consolidated group">Encuentro en español · grupo consolidado</span></div>
+        <p class="setup" data-en="Setup <b>Cocoon</b> · red electric · 40 Hz · HRTF profile B">Setup <b>Cocoon</b> · eléctrica roja · 40 Hz · HRTF perfil B</p>
+        <p data-en="Small group (&quot;we didn't do much outreach&quot;). Julián spent time <strong>teaching psychodrama tools</strong> (especially role reversal) to cross resistances alone. The training progress was clearly visible (Karina, Yanel, Yanina). A central distinction was drawn: <strong>it's not about interpreting the images, but integrating them</strong>. Nico closed with the image of the <strong>&quot;harmonic embrace&quot; / cocoon</strong>. The <strong>research / consent</strong> framing was announced.">Grupo chico ("no hicimos mucha difusión"). Julián dedicó tiempo a <strong>enseñar herramientas del psicodrama</strong> (sobre todo la inversión de roles) para atravesar resistencias en soledad. Se vio con claridad el progreso del entrenamiento (Karina, Yanel, Yanina). Se marcó una distinción central: <strong>no se trata de interpretar las imágenes, sino de integrarlas</strong>. Nico cerró con la imagen del <strong>"abrazo armónico" / cocoon</strong>. Se anunció el marco de <strong>investigación / consentimientos</strong>.</p>
+        <p class="backtop" data-en="Testimonies → <a href=&quot;#t-marta&quot;>see the Testimonies section</a>">Testimonios → <a href="#t-marta">ver en la sección Testimonios</a></p>
       </div>
-    </section>
 
-    <!-- ============ CONSONANCIA (HALLAZGO) ============ -->
-    <section id="consonancia">
-      <div class="snum">04</div>
-      <h2>Hallazgo: el caso del 10 de junio — consonancia hardware ↔ afinación</h2>
-      <p class="lead">Hasta acá, todo lo que salió bien. Este es el hallazgo técnico más delicado de la serie, y quizás el más valioso: un experimento natural. Respecto del 3/6 se mantuvieron constantes la <strong>afinación (40 Hz)</strong>, el <strong>HRTF</strong> y hasta la <strong>misma meditación guiada por Julián</strong>. Lo único que cambió fue el <strong>hardware resonante</strong>: se pasó de la guitarra eléctrica roja (cuerpo hueco amplio) a la Ibanez mini 3/4, de cuerpo mucho más chico.</p>
-      <div class="callout">
-        <div class="ct">El hallazgo</div>
-        <p style="margin:0">Aunque ambas guitarras compartan el mismo <em>Z</em> y la misma afinación e HRTF, <strong>una era congruente con su hardware y la otra no</strong>. El cuerpo amplio y hueco de la eléctrica roja acompaña espectralmente una fundamental de 40 Hz; el cuerpo reducido de la mini 3/4 tiene sus modos resonantes mucho más arriba, así que la misma afinación se realiza con una <em>constitución espectral distinta — y menos consonante</em>. <strong>Vos, como fuente, emitís armónicos — pero lo determinante es cómo esos armónicos resuenan con el cuerpo que los encarna.</strong> La misma proporción suena distinta según el cuerpo que la realiza; si esa relación no es consonante, el campo se degrada aunque los números sean correctos. La consonancia es <em>compatibilidad estructural</em> (acoplamiento), no una cualidad estética.</p>
+      <div class="enc">
+        <div class="enc-head"><span class="enc-date" data-en="Jun 10">10 junio</span><span class="enc-title" data-en="From Costa Rica · guided by Julián (Saira welcomes)">Desde Costa Rica · guiado por Julián (Saira da la bienvenida)</span></div>
+        <p class="setup" data-en="Setup <b>Descenso</b> · Ibanez mini 3/4 (portable) · 40 Hz · HRTF (+ &quot;other Z&quot;) · <span class=&quot;no&quot;>not consonant</span>">Setup <b>Descenso</b> · Ibanez mini 3/4 (transportable) · 40 Hz · HRTF (+ "otros Z") · <span class="no">no consonante</span></p>
+        <p data-en="<span class=&quot;badge&quot; style=&quot;border-color:rgba(224,137,75,.45);color:var(--warn)&quot;>Partial recording (~33 min)</span> It starts at the group sharing; the meditation was not recorded. Gathering from Costa Rica, with the portable guitar. Three people shared (Merli, Karina, Yanina). Julián recommended <strong>therapeutic support</strong> when very strong material appears. Increasing the frequency was announced (more than one gathering per week)."><span class="badge" style="border-color:rgba(224,137,75,.45);color:var(--warn)">Grabación parcial (~33 min)</span> Arranca en el compartir grupal; no quedó registrada la meditación. Encuentro desde Costa Rica, con la guitarra transportable. Compartieron 3 personas (Merli, Karina, Yanina). Julián recomendó <strong>acompañamiento terapéutico</strong> ante material muy fuerte. Se anunció aumentar la frecuencia (más de un encuentro por semana).</p>
+        <p class="backtop" data-en="Testimonies → <a href=&quot;#t-merli-jun&quot;>see the Testimonies section</a>">Testimonios → <a href="#t-merli-jun">ver en la sección Testimonios</a></p>
       </div>
-      <div class="callout" style="border-left-color:var(--gold-soft)">
-        <div class="ct">Lectura de Claude con el HIT de contexto</div>
-        <p style="margin:0 0 8px;color:var(--muted);font-style:italic">Lo que sigue es lo que dice Claude (una IA) tomando el libro HIT como marco — no es una afirmación cerrada del libro ni una conclusión del equipo; queda a verificación de ustedes.</p>
-        <p style="margin:0">Con ese contexto: la consonancia no vive en el número solo — HIT la formula como una <em>función relacional</em>: <strong>Consonancia = F(proporción, constitución modal/espectral, medio, régimen de acoplamiento, receptor, contexto)</strong> (Cap. 4). "La misma proporción numérica puede comportarse distinto bajo condiciones tímbricas distintas… lo que importa es el alineamiento o conflicto de los parciales" (Sethares). Y "cada sistema físico tiene su propia armonía natural" — el libro menciona expresamente <em>un instrumento de madera</em> entre esos sistemas (§4.4). Sobre el propio dispositivo, el libro es literal: el Beacon "<em>no es un aparato que transmite armonía al cuerpo, sino un campo de perturbación controlado al que cuerpos con distinta estructura se acoplan de manera distinta</em>" (Cap. 9.5). Si el instrumento no es consonante con su afinación, el campo se vuelve menos <em>legible</em>, y todos los cuerpos que se acoplan a él lo sienten.</p>
-      </div>
-      <h3>Observaciones de campo (grabación del 10/6) — consistentes, no concluyentes</h3>
-      <ul>
-        <li><strong>La fuente sonora se percibió como amenazante desde el inicio.</strong> Merli: <em>"me dio mucho miedo desde el principio de la música… sentí algo muy fuerte"</em>; escuchó <em>"golpes, muebles arrastrándose, alertas"</em>. La pareidolia siguió, pero con signo negativo.</li>
-        <li><strong>Menor legibilidad del campo.</strong> Yanina: las figuras <em>"más etéreas, no eran figuras definidas ni personas ni personajes"</em> — coherente con un campo menos consonante y por lo tanto menos legible (en HIT, consonancia = legibilidad).</li>
-        <li><strong>Experiencias más oscuras e intensas.</strong> Predominaron descensos difíciles (Merli: criatura-sapo, corazón con gusanos, ser devorada; Karina: chamán que abusa del poder, rabia), aunque hubo momentos de integración (la ballena maternal de Karina).</li>
-        <li>Se sondeó explícitamente el efecto desde la conducción: <em>"¿qué diferencias encontraron en el sonido hoy? Porque hoy estuvimos con otros Zetas…"</em></li>
-      </ul>
-      <div class="callout warn">
-        <div class="ct">Conexión con el Hospital CIMA</div>
-        <p style="margin:0">Allí, una <strong>descalibración armónica del objeto resonante físico</strong> produjo efectos desestabilizantes en el grupo. Es el mismo fenómeno que el 10/6: cuando el objeto resonante no está en consonancia, el campo sigue generando pareidolia, pero <strong>la experiencia grupal empeora</strong>. De ahí la conclusión del CIMA de preferir, en contexto hospitalario, la <strong>versión digital calibrada en estudio</strong>, que no depende de la consonancia física del objeto en vivo.</p>
-      </div>
-      <div class="callout warn">
-        <div class="ct">No estamos concluyendo nada</div>
-        <p style="margin:0">Es <strong>un solo encuentro parcial, con muy pocas personas</strong> y varios confusores (el material emocional del grupo ya venía intenso; además del cambio de guitarra se probaron "otros Z"; no tenemos la meditación grabada). Lo que hay es un <strong>indicio preliminar</strong> compatible con la hipótesis — <strong>no una prueba ni una confirmación</strong>. Para afirmar algo haría falta repetir la comparación (misma consigna y afinación, cambiando solo el instrumento) en varias sesiones y con más gente. Tomarlo como una <em>pregunta bien planteada</em>, no como un resultado.</p>
-      </div>
-      <p style="font-size:13.5px;color:var(--muted)"><strong>Implicancia práctica (provisoria):</strong> afinación y HRTF parecen necesarios pero no suficientes — conviene chequear antes de cada sesión que el instrumento concreto sostenga consonantemente la fundamental elegida; para instrumentos chicos/transportables, subir la fundamental o usar la versión digital calibrada.</p>
     </section>
 
     <!-- ============ TESTIMONIOS ============ -->
     <section id="testimonios">
-      <div class="snum">05</div>
-      <h2>Testimonios</h2>
-      <p class="lead">Las voces de las personas, al final de cada experiencia. Transcripciones automáticas limpiadas para lectura, conservando el sentido. <em>Para publicación conviene anonimizar y pedir consentimiento.</em></p>
+      <div class="snum">04</div>
+      <h2 data-en="Testimonies">Testimonios</h2>
+      <p class="lead" data-en="The participants' voices, at the end of each experience. Auto-transcriptions cleaned up for reading, keeping the meaning. <em>For publication it's advisable to anonymize and ask for consent.</em>">Las voces de las personas, al final de cada experiencia. Transcripciones automáticas limpiadas para lectura, conservando el sentido. <em>Para publicación conviene anonimizar y pedir consentimiento.</em></p>
 
-      <h3>Índice de testimonios</h3>
+      <a class="iglink" href="https://www.instagram.com/p/DYTQ1putSXT/" target="_blank" rel="noopener">
+        <span class="igico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </span>
+        <span class="igtxt">
+          <span class="igt" data-en="Positive comments about the Beacon on Instagram">Comentarios positivos sobre el Beacon en Instagram</span>
+          <span class="igs" data-en="More public testimonies in the post → open on Instagram">Más testimonios públicos en el posteo → abrir en Instagram</span>
+        </span>
+        <span class="igarrow" aria-hidden="true">↗</span>
+      </a>
+
+      <h3 data-en="Testimony index">Índice de testimonios</h3>
       <div class="tindex">
-        <a href="#t-laura"><span class="who">Laura Henao</span><span class="whn">20 may · Colombia</span><span class="wht">Cierre de duelo con la madre</span></a>
-        <a href="#t-susy"><span class="who">Susy</span><span class="whn">20 may</span><span class="wht">El padre fallecido la toma de las manos</span></a>
-        <a href="#t-merli"><span class="who">Merli Tharn</span><span class="whn">20 may · México</span><span class="wht">Abrazar al monstruo</span></a>
-        <a href="#t-blanca"><span class="who">Blanca</span><span class="whn">20 may</span><span class="wht">El ser que se vitaliza con regalos</span></a>
-        <a href="#t-yanel1"><span class="who">Yanel</span><span class="whn">20 may</span><span class="wht">La bruja que era ella; una vida pasada</span></a>
-        <a href="#t-fernando1"><span class="who">Fernando</span><span class="whn">20 may</span><span class="wht">El padre y el poema de los ojos</span></a>
-        <a href="#t-patricia"><span class="who">Patricia</span><span class="whn">20 may</span><span class="wht">El fantasma elusivo</span></a>
-        <a href="#t-yanina1"><span class="who">Yanina</span><span class="whn">20 may</span><span class="wht">"Está todo bien, hija"</span></a>
-        <a href="#t-nico"><span class="who">Nico</span><span class="whn">20 may · cierre</span><span class="wht">El creador del Beacon agradece</span></a>
-        <a href="#t-doris"><span class="who">Doris</span><span class="whn">27 may</span><span class="wht">Calles coloniales, figuras antiguas</span></a>
-        <a href="#t-ailen"><span class="who">Ailen</span><span class="whn">27 may · Argentina</span><span class="wht">Inversión de roles → luz blanca</span></a>
-        <a href="#t-joya"><span class="who">Gioia "Joya" Mosca</span><span class="whn">27 may · EN</span><span class="wht">Sola en el universo, dentro del sonido</span></a>
-        <a href="#t-andrea"><span class="who">Andrea</span><span class="whn">27 may</span><span class="wht">El mago y el sentido de protección</span></a>
-        <a href="#t-yanina2"><span class="who">Yanina</span><span class="whn">27 may</span><span class="wht">El inglés como resistencia</span></a>
-        <a href="#t-marta"><span class="who">Marta</span><span class="whn">3 jun</span><span class="wht">De la oscuridad a la pura dulzura</span></a>
-        <a href="#t-yanel2"><span class="who">Yanel</span><span class="whn">3 jun</span><span class="wht">Sacerdotisa de luz; energía maternal</span></a>
-        <a href="#t-karina"><span class="who">Karina Donantueno</span><span class="whn">3 jun · México</span><span class="wht">"No abortes tus proyectos"</span></a>
-        <a href="#t-yanina3"><span class="who">Yanina</span><span class="whn">3 jun</span><span class="wht">El padre y el estado contemplativo</span></a>
-        <a href="#t-analigia"><span class="who">Ana Ligia Monge</span><span class="whn">3 jun · Costa Rica</span><span class="wht">Caminar con el padre, muy sanador</span></a>
-        <a href="#t-fernando2"><span class="who">Fernando</span><span class="whn">3 jun</span><span class="wht">Descansar; el colibrí en Costa Rica</span></a>
-        <a href="#t-merli-jun"><span class="who">Merli Tharn</span><span class="whn">10 jun · México</span><span class="wht">La criatura-sapo; muerte y renacer</span></a>
-        <a href="#t-karina-jun"><span class="who">Karina Donantueno</span><span class="whn">10 jun · México</span><span class="wht">"Yo soy el otro"; la ballena</span></a>
-        <a href="#t-yanina-jun"><span class="who">Yanina</span><span class="whn">10 jun</span><span class="wht">Sonido más profundo; "tenés que trascender"</span></a>
+        <a href="#t-laura"><span class="who">Laura Henao</span><span class="whn">20 may · Colombia</span><span class="wht" data-en="Closing grief with the mother">Cierre de duelo con la madre</span></a>
+        <a href="#t-susy"><span class="who">Susy</span><span class="whn">20 may</span><span class="wht" data-en="The late father takes her hands">El padre fallecido la toma de las manos</span></a>
+        <a href="#t-merli"><span class="who">Merli Tharn</span><span class="whn">20 may · México</span><span class="wht" data-en="Embracing the monster">Abrazar al monstruo</span></a>
+        <a href="#t-blanca"><span class="who">Blanca</span><span class="whn">20 may</span><span class="wht" data-en="The being that revives with gifts">El ser que se vitaliza con regalos</span></a>
+        <a href="#t-yanel1"><span class="who">Yanel</span><span class="whn">20 may</span><span class="wht" data-en="The witch who was her; a past life">La bruja que era ella; una vida pasada</span></a>
+        <a href="#t-fernando1"><span class="who">Fernando</span><span class="whn">20 may</span><span class="wht" data-en="The father and the poem of the eyes">El padre y el poema de los ojos</span></a>
+        <a href="#t-patricia"><span class="who">Patricia</span><span class="whn">20 may</span><span class="wht" data-en="The elusive ghost">El fantasma elusivo</span></a>
+        <a href="#t-yanina1"><span class="who">Yanina</span><span class="whn">20 may</span><span class="wht" data-en="&quot;Everything is fine, daughter&quot;">"Está todo bien, hija"</span></a>
+        <a href="#t-nico"><span class="who">Nico</span><span class="whn" data-en="20 may · closing">20 may · cierre</span><span class="wht" data-en="The Beacon's creator gives thanks">El creador del Beacon agradece</span></a>
+        <a href="#t-doris"><span class="who">Doris</span><span class="whn">27 may</span><span class="wht" data-en="Colonial streets, ancient figures">Calles coloniales, figuras antiguas</span></a>
+        <a href="#t-ailen"><span class="who">Ailen</span><span class="whn">27 may · Argentina</span><span class="wht" data-en="Role reversal → white light">Inversión de roles → luz blanca</span></a>
+        <a href="#t-joya"><span class="who">Gioia "Joya" Mosca</span><span class="whn">27 may · EN</span><span class="wht" data-en="Alone in the universe, inside the sound">Sola en el universo, dentro del sonido</span></a>
+        <a href="#t-andrea"><span class="who">Andrea</span><span class="whn">27 may</span><span class="wht" data-en="The wizard and the sense of protection">El mago y el sentido de protección</span></a>
+        <a href="#t-yanina2"><span class="who">Yanina</span><span class="whn">27 may</span><span class="wht" data-en="English as resistance">El inglés como resistencia</span></a>
+        <a href="#t-marta"><span class="who">Marta</span><span class="whn">3 jun</span><span class="wht" data-en="From darkness to pure sweetness">De la oscuridad a la pura dulzura</span></a>
+        <a href="#t-yanel2"><span class="who">Yanel</span><span class="whn">3 jun</span><span class="wht" data-en="Priestess of light; maternal energy">Sacerdotisa de luz; energía maternal</span></a>
+        <a href="#t-karina"><span class="who">Karina Donantueno</span><span class="whn">3 jun · México</span><span class="wht" data-en="&quot;Don't abort your projects&quot;">"No abortes tus proyectos"</span></a>
+        <a href="#t-yanina3"><span class="who">Yanina</span><span class="whn">3 jun</span><span class="wht" data-en="The father and the contemplative state">El padre y el estado contemplativo</span></a>
+        <a href="#t-analigia"><span class="who">Ana Ligia Monge</span><span class="whn">3 jun · Costa Rica</span><span class="wht" data-en="Walking with the father, deeply healing">Caminar con el padre, muy sanador</span></a>
+        <a href="#t-fernando2"><span class="who">Fernando</span><span class="whn">3 jun</span><span class="wht" data-en="Resting; the hummingbird in Costa Rica">Descansar; el colibrí en Costa Rica</span></a>
+        <a href="#t-merli-jun"><span class="who">Merli Tharn</span><span class="whn">10 jun · México</span><span class="wht" data-en="The toad-creature; death and rebirth">La criatura-sapo; muerte y renacer</span></a>
+        <a href="#t-karina-jun"><span class="who">Karina Donantueno</span><span class="whn">10 jun · México</span><span class="wht" data-en="&quot;I am the other&quot;; the whale">"Yo soy el otro"; la ballena</span></a>
+        <a href="#t-yanina-jun"><span class="who">Yanina</span><span class="whn">10 jun</span><span class="wht" data-en="Deeper sound; &quot;you must transcend&quot;">Sonido más profundo; "tenés que trascender"</span></a>
       </div>
 
       <!-- 20 MAYO -->
-      <div class="tcat">20 de mayo</div>
+      <div class="tcat" data-en="May 20">20 de mayo</div>
       <div class="quote" id="t-laura"><div class="qh"><span class="qn">Laura Henao</span><span class="qm">Colombia</span></div>
-        <p>"En el encuentro anterior me conecté con mi madre —siempre tuve conflictos con ella— y sentí que me decía 'no puedo' y se puso todo negro. Toda la semana pensé por qué no podía hacer el viaje… hasta que entendí: ese ciclo se cerró. Esta vez dije: es a mí a quien quiero cuidar. Fui a buscar a mi niña, recordé a mi abuela que me crió. Bajé, abrí una puerta enorme, del otro lado una playa. Apareció el avatar, se fusionó con la niña y conmigo, y empezó a crecer, como el Buda. Ahí entendí: ya crecí, ya no necesito que mi mamá sea la que yo quería. Fue hermoso."</p>
-        <p class="note">Julián: la resistencia de la primera vez tuvo sentido; el guardián apareció como "vos más grande", la parte que pedía integración.</p></div>
-      <div class="quote" id="t-susy"><div class="qh"><span class="qn">Susy</span><span class="qm">Primera vez</span></div>
-        <p>"Fue muy vívido: pude flotar, salir, ver la puerta, bajar los escalones. Apareció una figura blanca que me sostuvo de las dos manos… y todo me trasladó a mi viejo, que ya no está. No quería soltarle las manos. Soy una persona a la que le cuesta muchísimo expresar sus emociones, y sin embargo hoy, aunque esté llorando delante de desconocidos, me siento en paz. Descargué la espalda y la nuca. Lo voy a extrañar siempre, pero sé que está bien."</p></div>
-      <div class="quote" id="t-merli"><div class="qh"><span class="qn">Merli Tharn</span><span class="qm">México · primera vez</span></div>
-        <p>"Me cuesta muchísimo meditar, siempre tengo mucho ruido mental, y esta vez sí lo conseguí. Lo primero: una luz debajo de la cama; me metía como un monstruo —mi mamá me decía 'monstruo'—. Abajo, un monstruo peludo y ciego. En vez de terror, una necesidad enorme de abrazarlo. Me saqué un ojo y se lo puse, para poder vernos. Empecé a llorar sin darme cuenta. Se le caía el pelo y se volvía persona. Caminamos de la mano. Yo pinto, y vine para tomar de ese imaginario y crear obras."</p></div>
+        <p data-en="&quot;In the previous gathering I connected with my mother —I always had conflicts with her— and I felt her say 'I can't' and everything went black. All week I wondered why I couldn't make the journey… until I understood: that cycle is closed. This time I said: I'm the one I want to care for. I went to find my little girl, remembered my grandmother who raised me. I went down, opened a huge door, and beyond it a beach. The avatar appeared, merged with the girl and with me, and started to grow, like the Buddha. There I understood: I already grew up, I no longer need my mom to be the one I wanted. It was beautiful.&quot;">"En el encuentro anterior me conecté con mi madre —siempre tuve conflictos con ella— y sentí que me decía 'no puedo' y se puso todo negro. Toda la semana pensé por qué no podía hacer el viaje… hasta que entendí: ese ciclo se cerró. Esta vez dije: es a mí a quien quiero cuidar. Fui a buscar a mi niña, recordé a mi abuela que me crió. Bajé, abrí una puerta enorme, del otro lado una playa. Apareció el avatar, se fusionó con la niña y conmigo, y empezó a crecer, como el Buda. Ahí entendí: ya crecí, ya no necesito que mi mamá sea la que yo quería. Fue hermoso."</p>
+        <p class="note" data-en="Julián: the first-time resistance had meaning; the guardian appeared as &quot;a bigger you&quot;, the part asking to be integrated.">Julián: la resistencia de la primera vez tuvo sentido; el guardián apareció como "vos más grande", la parte que pedía integración.</p></div>
+      <div class="quote" id="t-susy"><div class="qh"><span class="qn">Susy</span><span class="qm" data-en="First time">Primera vez</span></div>
+        <p data-en="&quot;It was very vivid: I could float, leave, see the door, go down the steps. A white figure appeared and held me by both hands… and it all took me to my old man, who's no longer here. I didn't want to let go of his hands. I'm someone who finds it very hard to express emotions, and yet today, even crying in front of strangers, I feel at peace. I unloaded my back and neck. I'll always miss him, but I know he's fine.&quot;">"Fue muy vívido: pude flotar, salir, ver la puerta, bajar los escalones. Apareció una figura blanca que me sostuvo de las dos manos… y todo me trasladó a mi viejo, que ya no está. No quería soltarle las manos. Soy una persona a la que le cuesta muchísimo expresar sus emociones, y sin embargo hoy, aunque esté llorando delante de desconocidos, me siento en paz. Descargué la espalda y la nuca. Lo voy a extrañar siempre, pero sé que está bien."</p></div>
+      <div class="quote" id="t-merli"><div class="qh"><span class="qn">Merli Tharn</span><span class="qm" data-en="México · first time">México · primera vez</span></div>
+        <p data-en="&quot;I find it very hard to meditate, I always have a lot of mental noise, and this time I did it. First: a light under the bed; I crawled under like a monster —my mom used to call me 'monster'—. Below, a hairy, blind monster. Instead of terror, a huge need to embrace it. I took out one of my eyes and gave it to him, so we could see each other. I started crying without noticing. His fur fell off and he turned into a person. We walked hand in hand. I paint, and I came to draw from that imagery to make artworks.&quot;">"Me cuesta muchísimo meditar, siempre tengo mucho ruido mental, y esta vez sí lo conseguí. Lo primero: una luz debajo de la cama; me metía como un monstruo —mi mamá me decía 'monstruo'—. Abajo, un monstruo peludo y ciego. En vez de terror, una necesidad enorme de abrazarlo. Me saqué un ojo y se lo puse, para poder vernos. Empecé a llorar sin darme cuenta. Se le caía el pelo y se volvía persona. Caminamos de la mano. Yo pinto, y vine para tomar de ese imaginario y crear obras."</p></div>
       <div class="quote" id="t-blanca"><div class="qh"><span class="qn">Blanca</span></div>
-        <p>"Estoy sorprendida con esta armonía. Hoy me dejé armonizar más; me dolía la espalda y se me fue del todo. La semana pasada, con el ser que apareció, lloré mucho. Esta semana tuve muchos sueños ligados a ese clima. Y hoy ese ser me esperaba con regalos: le di lentejas, perfumes, flores. Se empezó a vitalizar, a ponerse luminoso, abrió una ventana y vio que afuera había vida. Sentí que su energía se está transformando."</p></div>
+        <p data-en="&quot;I'm amazed by this harmony. Today I let myself be harmonized more; my back hurt and it went away completely. Last week, with the being that appeared, I cried a lot. This week I had many dreams tied to that mood. And today that being was waiting for me with gifts: I gave it lentils, perfumes, flowers. It began to revive, to glow, opened a window and saw there was life outside. I felt its energy is transforming.&quot;">"Estoy sorprendida con esta armonía. Hoy me dejé armonizar más; me dolía la espalda y se me fue del todo. La semana pasada, con el ser que apareció, lloré mucho. Esta semana tuve muchos sueños ligados a ese clima. Y hoy ese ser me esperaba con regalos: le di lentejas, perfumes, flores. Se empezó a vitalizar, a ponerse luminoso, abrió una ventana y vio que afuera había vida. Sentí que su energía se está transformando."</p></div>
       <div class="quote" id="t-yanel1"><div class="qh"><span class="qn">Yanel</span></div>
-        <p>"Me subí a un tren de los años 50, salí de un túnel a un paisaje de campo. Bajé por la escalera y empecé a sentirme mal —es la resistencia, no pasa nada—. Entré a una cueva y me recibió una bruja de negro: era yo. Después mujeres descalzas a las que iba sanando; hombres príncipe que se volvían lobos. Al final una vida pasada: yo era un hombre preso, con hambre, castigado por expresar cosas de la espiritualidad. Sentí: esta es la vida que no puedo sanar, la de la escasez."</p></div>
+        <p data-en="&quot;I got on a 1950s train, came out of a tunnel into a countryside landscape. I went down the staircase and started to feel unwell —it's the resistance, it's okay—. I entered a cave and a witch in black received me: it was me. Then barefoot women I was healing; prince-men who turned into wolves. In the end, a past life: I was a man in prison, hungry, punished for expressing spiritual things. I felt: this is the life I can't heal, the one of scarcity.&quot;">"Me subí a un tren de los años 50, salí de un túnel a un paisaje de campo. Bajé por la escalera y empecé a sentirme mal —es la resistencia, no pasa nada—. Entré a una cueva y me recibió una bruja de negro: era yo. Después mujeres descalzas a las que iba sanando; hombres príncipe que se volvían lobos. Al final una vida pasada: yo era un hombre preso, con hambre, castigado por expresar cosas de la espiritualidad. Sentí: esta es la vida que no puedo sanar, la de la escasez."</p></div>
       <div class="quote" id="t-fernando1"><div class="qh"><span class="qn">Fernando</span><span class="qm">"Centro Zerka Moreno"</span></div>
-        <p>"Nico es mi hermano, Paula y Ramiro también, y estamos los cuatro acá. En la meditación oí una flauta que no estaba. Se me cayó una lágrima del ojo izquierdo justo cuando dijiste de dejar el cuerpo, y después otra del otro ojo. Al bajar, la silueta de abajo era mi papá, con una luz detrás. Me extendió la mano izquierda, la tomé con la derecha, dimos dos pasos hacia la luz. Quiero decirle a Merli que lo de los ojos me llamó: hay un poema de Moreno que dice 'arrancaré mis ojos y los pondré en el lugar de los tuyos, y así nos miraremos como verdaderamente somos'."</p></div>
+        <p data-en="&quot;Nico is my brother, Paula and Ramiro too, and the four of us are here. In the meditation I heard a flute that wasn't there. A tear fell from my left eye right when you said to leave the body, then another from the other eye. Going down, the silhouette below was my dad, with a light behind him. He held out his left hand, I took it with my right, we took two steps toward the light. I want to tell Merli that the eyes thing struck me: there's a poem by Moreno that says 'I'll tear out my eyes and put them in place of yours, and so we'll see each other as we truly are.'&quot;">"Nico es mi hermano, Paula y Ramiro también, y estamos los cuatro acá. En la meditación oí una flauta que no estaba. Se me cayó una lágrima del ojo izquierdo justo cuando dijiste de dejar el cuerpo, y después otra del otro ojo. Al bajar, la silueta de abajo era mi papá, con una luz detrás. Me extendió la mano izquierda, la tomé con la derecha, dimos dos pasos hacia la luz. Quiero decirle a Merli que lo de los ojos me llamó: hay un poema de Moreno que dice 'arrancaré mis ojos y los pondré en el lugar de los tuyos, y así nos miraremos como verdaderamente somos'."</p></div>
       <div class="quote" id="t-patricia"><div class="qh"><span class="qn">Patricia</span></div>
-        <p>"Hoy el armónico me llamó muchísimo la atención. Fui a la casa de mi papá, bajé como por un aljibe seco donde aparecían plantas verdes. Abajo, mucho bosque, y un fantasma que me generaba confusión. Cuando le preguntaba quién era, se transformaba y se escondía detrás de los árboles, me echaba. Decidí subir. La semana pasada me había encontrado con mis padres y al otro día lloré todo el día."</p>
-        <p class="note">Julián: la vegetación frondosa indica material que crece y quiere verse; lo elusivo es parte de la resistencia. Vale volver la próxima vez.</p></div>
+        <p data-en="&quot;Today the Beacon really caught my attention. I went to my dad's house, went down as through a dry well where green plants appeared. Below, lots of forest, and a ghost that confused me. When I asked who it was, it transformed and hid behind the trees, sending me away. I decided to go back up. Last week I had met my parents and the next day I cried all day.&quot;">"Hoy el armónico me llamó muchísimo la atención. Fui a la casa de mi papá, bajé como por un aljibe seco donde aparecían plantas verdes. Abajo, mucho bosque, y un fantasma que me generaba confusión. Cuando le preguntaba quién era, se transformaba y se escondía detrás de los árboles, me echaba. Decidí subir. La semana pasada me había encontrado con mis padres y al otro día lloré todo el día."</p>
+        <p class="note" data-en="Julián: lush vegetation signals material that grows and wants to be seen; the elusive is part of the resistance. Worth coming back next time.">Julián: la vegetación frondosa indica material que crece y quiere verse; lo elusivo es parte de la resistencia. Vale volver la próxima vez.</p></div>
       <div class="quote" id="t-yanina1"><div class="qh"><span class="qn">Yanina</span></div>
-        <p>"Es la segunda experiencia. La vez pasada dije 'no me entrego'; esta vez me entregué. La semana pasada la bajada era de cemento, ahora de colores, un caracol, música. La figura era celeste, me fui con ella confiada. Llegamos al frente de la casa de mamá: 'está todo bien, hija'. Papá falleció, va a hacer un año el Día del Padre. Muy movilizada. Gracias por llevarnos de la mano."</p></div>
-      <div class="quote" id="t-nico"><div class="qh"><span class="qn">Nico</span><span class="qm">Creador del Harmonic Beacon · cierre</span></div>
-        <p>"Es increíble verlos a todos, ver acá a todos mis hermanos, sentir esta mezcla mágica que se dio. Les agradezco la confianza de meterse en un viaje que quién sabe a dónde los lleva, con un loco que da la cara y un loco que está escondido atrás de esas cuerditas de guitarra: ese soy yo. Este viaje recién empieza."</p></div>
+        <p data-en="&quot;It's my second experience. Last time I said 'I don't surrender'; this time I surrendered. Last week the descent was made of cement, now of colors, a snail shell, music. The figure was pale blue, I went with her confidently. We reached the front of mom's house: 'everything is fine, daughter'. Dad passed away, it'll be a year on Father's Day. Deeply moved. Thank you for taking us by the hand.&quot;">"Es la segunda experiencia. La vez pasada dije 'no me entrego'; esta vez me entregué. La semana pasada la bajada era de cemento, ahora de colores, un caracol, música. La figura era celeste, me fui con ella confiada. Llegamos al frente de la casa de mamá: 'está todo bien, hija'. Papá falleció, va a hacer un año el Día del Padre. Muy movilizada. Gracias por llevarnos de la mano."</p></div>
+      <div class="quote" id="t-nico"><div class="qh"><span class="qn">Nico</span><span class="qm" data-en="Harmonic Beacon's creator · closing">Creador del Harmonic Beacon · cierre</span></div>
+        <p data-en="&quot;It's incredible to see you all, to see all my siblings here, to feel this magical mix that happened. I thank you for the trust of stepping into a journey that who knows where it takes you, with one madman who shows his face and one madman who's hidden behind those little guitar strings: that's me. This journey is just beginning.&quot;">"Es increíble verlos a todos, ver acá a todos mis hermanos, sentir esta mezcla mágica que se dio. Les agradezco la confianza de meterse en un viaje que quién sabe a dónde los lleva, con un loco que da la cara y un loco que está escondido atrás de esas cuerditas de guitarra: ese soy yo. Este viaje recién empieza."</p></div>
 
       <!-- 27 MAYO -->
-      <div class="tcat">27 de mayo (bilingüe)</div>
+      <div class="tcat" data-en="May 27 (bilingual)">27 de mayo (bilingüe)</div>
       <div class="quote" id="t-doris"><div class="qh"><span class="qn">Doris</span></div>
-        <p>"Esta vez fue vívido. Apareció un personaje que se movilizaba por calles muy antiguas, coloniales, muy real. Empezaron a aparecer figuras antiguas, militares de la época de la independencia. Pensé: quizá son energías que necesitan liberarse. Me quedé preguntándome para qué se me presentan estas imágenes." <em>Más tarde: el sonido de ese día la ayudó a "fluir mejor" e integrarlo.</em></p></div>
-      <div class="quote" id="t-ailen"><div class="qh"><span class="qn">Ailen</span><span class="qm">Argentina · tercera sesión</span></div>
-        <p>"Al bajar encuentro siempre el mismo lugar oscuro y frío, y un hombre grande, horrible, que es una resistencia. Esta vez hice inversión de roles: entré en su cuerpo, dejé que sus pensamientos vinieran a mi mente, y él decidió irse. Todo se volvió luz blanca. Ayer se lo conté a mi terapeuta, me dijo que quizá se relaciona con un abuso, y que era una oportunidad de recuperar mi cuerpo y mi territorio. Me quedo con la palabra integrar: quizá no podemos cambiar el pasado, pero sí integrar las emociones que quedaron congeladas."</p></div>
-      <div class="quote" id="t-joya"><div class="qh"><span class="qn">Gioia "Joya" Mosca</span><span class="qm">Invitada EN</span></div>
-        <p>"No escuché bien las consignas, estaba muy concentrada en el sonido. Me di cuenta de que no era siempre el mismo. Cuando bajamos las escaleras no estaba con mi cuerpo, estaba con mi consciencia, sola en el universo, y me sentí enorme. El sonido amplificaba todas mis percepciones. No me gusta la meditación, y esto no fue exactamente meditación, pero fue muy consciente. Al final, un solo sonido, todo muy lineal, y de golpe paró."</p></div>
-      <div class="quote" id="t-andrea"><div class="qh"><span class="qn">Andrea</span><span class="qm">Pareja de Joya</span></div>
-        <p>"Cuando Joya preguntó si el sonido era siempre el mismo, empecé a escucharlo de otra manera: parecía cambiar. En las escaleras, abajo, un mago con luz que buscaba el camino. Lo que sentí fue un profundo sentido de protección. Me gustó mucho, porque en este período con mi mujer estamos trabajando mucho sobre la fuerza, en psicodrama."</p></div>
+        <p data-en="&quot;This time it was vivid. A character appeared moving through very old, colonial streets, very real. Ancient figures started to appear, military ones from the independence era. I thought: maybe they're energies that need to be released. I was left wondering why these images present themselves to me.&quot; <em>Later: that day's sound helped her &quot;flow better&quot; and integrate it.</em>">"Esta vez fue vívido. Apareció un personaje que se movilizaba por calles muy antiguas, coloniales, muy real. Empezaron a aparecer figuras antiguas, militares de la época de la independencia. Pensé: quizá son energías que necesitan liberarse. Me quedé preguntándome para qué se me presentan estas imágenes." <em>Más tarde: el sonido de ese día la ayudó a "fluir mejor" e integrarlo.</em></p></div>
+      <div class="quote" id="t-ailen"><div class="qh"><span class="qn">Ailen</span><span class="qm" data-en="Argentina · third session">Argentina · tercera sesión</span></div>
+        <p data-en="&quot;Going down I always find the same dark, cold place, and a big, horrible man who is a resistance. This time it was different: I did role reversal, entered his body, let his thoughts come to my mind, and he decided to leave. Everything turned to white light. Yesterday I told my therapist, she said it might relate to abuse, and that it was a chance to reclaim my body and my territory. I keep the word integrate: maybe we can't change the past, but we can integrate the emotions that stayed frozen.&quot;">"Al bajar encuentro siempre el mismo lugar oscuro y frío, y un hombre grande, horrible, que es una resistencia. Esta vez fue distinto: hice inversión de roles, entré en su cuerpo, dejé que sus pensamientos vinieran a mi mente, y él decidió irse. Todo se volvió luz blanca. Ayer se lo conté a mi terapeuta, me dijo que quizá se relaciona con un abuso, y que era una oportunidad de recuperar mi cuerpo y mi territorio. Me quedo con la palabra integrar: quizá no podemos cambiar el pasado, pero sí integrar las emociones que quedaron congeladas."</p></div>
+      <div class="quote" id="t-joya"><div class="qh"><span class="qn">Gioia "Joya" Mosca</span><span class="qm" data-en="EN guest">Invitada EN</span></div>
+        <p data-en="&quot;I didn't hear the prompts well, I was very focused on the sound. I realized it wasn't always the same. When we went down the stairs I wasn't with my body, I was with my consciousness, alone in the universe, and I felt enormous. The sound amplified all my perceptions. I don't like meditation, and this wasn't exactly meditation, but it was very conscious. In the end, a single sound, all very linear, and suddenly it stopped.&quot;">"No escuché bien las consignas, estaba muy concentrada en el sonido. Me di cuenta de que no era siempre el mismo. Cuando bajamos las escaleras no estaba con mi cuerpo, estaba con mi consciencia, sola en el universo, y me sentí enorme. El sonido amplificaba todas mis percepciones. No me gusta la meditación, y esto no fue exactamente meditación, pero fue muy consciente. Al final, un solo sonido, todo muy lineal, y de golpe paró."</p></div>
+      <div class="quote" id="t-andrea"><div class="qh"><span class="qn">Andrea</span><span class="qm" data-en="Joya's partner">Pareja de Joya</span></div>
+        <p data-en="&quot;When Joya asked if the sound was always the same, I started to hear it differently: it seemed to change. On the stairs, below, a wizard with light who searched for the path. What I felt was a deep sense of protection. I liked it a lot, because in this period with my wife we're working hard on strength, in psychodrama.&quot;">"Cuando Joya preguntó si el sonido era siempre el mismo, empecé a escucharlo de otra manera: parecía cambiar. En las escaleras, abajo, un mago con luz que buscaba el camino. Lo que sentí fue un profundo sentido de protección. Me gustó mucho, porque en este período con mi mujer estamos trabajando mucho sobre la fuerza, en psicodrama."</p></div>
       <div class="quote" id="t-yanina2"><div class="qh"><span class="qn">Yanina</span></div>
-        <p>"Fue un doble desafío por el inglés. Predominó el sonido del Harmonic sobre tu voz, cobró otra intensidad. Al bajar, una caja rígida que se convirtió en una esfera en movimiento. Sentí una presencia, un acompañamiento, una bendición. Para mí hablar en inglés es una resistencia."</p>
-        <p class="note">Nico contó que ese día trabajaron la distribución espacial del sonido, separando de dónde viene cada frecuencia — por eso muchos lo percibieron distinto: "no estaba cambiando nada en el momento, pero el setup de hoy era especial".</p></div>
+        <p data-en="&quot;It was a double challenge because of the English. The Harmonic's sound prevailed over your voice, it took on another intensity. Going down, a rigid box that turned into a moving sphere. I felt a presence, a companionship, a blessing. For me speaking in English is a resistance.&quot;">"Fue un doble desafío por el inglés. Predominó el sonido del Harmonic sobre tu voz, cobró otra intensidad. Al bajar, una caja rígida que se convirtió en una esfera en movimiento. Sentí una presencia, un acompañamiento, una bendición. Para mí hablar en inglés es una resistencia."</p>
+        <p class="note" data-en="Nico said that day they worked on the spatial distribution of the sound, separating where each frequency comes from — that's why many perceived it differently: &quot;I wasn't changing anything in the moment, but today's setup was special.&quot;">Nico contó que ese día trabajaron la distribución espacial del sonido, separando de dónde viene cada frecuencia — por eso muchos lo percibieron distinto: "no estaba cambiando nada en el momento, pero el setup de hoy era especial".</p></div>
 
       <!-- 3 JUNIO -->
-      <div class="tcat">3 de junio</div>
+      <div class="tcat" data-en="June 3">3 de junio</div>
       <div class="quote" id="t-marta"><div class="qh"><span class="qn">Marta</span></div>
-        <p>"Completamente diferente a las otras dos: todo dulzura, todo amor. En las anteriores la música me molestaba muchísimo, solo veía oscuridad. Ahora vi una mariposa, una puerta de cedro lustrada, un ser con túnica naranja bondadoso. Bajando, primero verde y después amarillo. Todo era armonía, grupal, sin competencia. Al final sentí como una explosión y algo similar a campanas."</p>
-        <p class="note">Se remarcó: la calidad del sonido importa — las primeras veces no había usado auriculares.</p></div>
+        <p data-en="&quot;Completely different from the other two: all sweetness, all love. In the previous ones the music bothered me a lot, I only saw darkness. Now I saw a butterfly, a polished cedar door, a kind being in an orange tunic. Going down, first green then yellow. It was all harmony, collective, no competition. In the end I felt something like an explosion and something similar to bells.&quot;">"Completamente diferente a las otras dos: todo dulzura, todo amor. En las anteriores la música me molestaba muchísimo, solo veía oscuridad. Ahora vi una mariposa, una puerta de cedro lustrada, un ser con túnica naranja bondadoso. Bajando, primero verde y después amarillo. Todo era armonía, grupal, sin competencia. Al final sentí como una explosión y algo similar a campanas."</p>
+        <p class="note" data-en="It was noted: sound quality matters — the first times she hadn't used headphones.">Se remarcó: la calidad del sonido importa — las primeras veces no había usado auriculares.</p></div>
       <div class="quote" id="t-yanel2"><div class="qh"><span class="qn">Yanel</span></div>
-        <p>"Al sincronizar la música de Nico entré en equilibrio. Un monumento egipcio con dos leones guardianes; un monstruito negro que primero quise matar y luego se hizo mi amigo. Abajo, una sacerdotisa toda de luz que me dio un libro y una lapicera de cristal. Me senté a escribir en otro idioma, a través de todas mis edades, hasta desvanecerme y volver a nacer. Cuando apareció el ser de luz sentí una energía profundamente maternal que me abrazaba —la misma intención con que se diseñó el sonido—."</p></div>
+        <p data-en="&quot;When I synced Nico's music I entered balance. An Egyptian monument with two lion guardians; a little black monster I first wanted to kill and then became my friend. Below, a priestess all of light who gave me a book and a crystal pen. I sat to write in another language, through all my ages, until I faded away and was reborn. When the being of light appeared I felt a deeply maternal energy embracing me —the same intention the sound was designed with—.&quot;">"Al sincronizar la música de Nico entré en equilibrio. Un monumento egipcio con dos leones guardianes; un monstruito negro que primero quise matar y luego se hizo mi amigo. Abajo, una sacerdotisa toda de luz que me dio un libro y una lapicera de cristal. Me senté a escribir en otro idioma, a través de todas mis edades, hasta desvanecerme y volver a nacer. Cuando apareció el ser de luz sentí una energía profundamente maternal que me abrazaba —la misma intención con que se diseñó el sonido—."</p></div>
       <div class="quote" id="t-karina"><div class="qh"><span class="qn">Karina Donantueno</span><span class="qm">México</span></div>
-        <p>"En el umbral, la imagen de una vela derretida como pétalos, con un pedazo como un útero. Entré y había un bebé: 'acá está lindo, calentito'. Después un lago estrellado; aparecieron extraterrestres y no tuve miedo —muchas veces me siento un extraterrestre—. Me metí al mar y me encontré con una ballena embarazada que me dijo: 'no solo nos embarazamos de hijos, también de proyectos; no abortes tus proyectos'. Me traje esa frase, el 'sos libre', y una tabla de surf para surfear las olas."</p>
-        <p class="note">Julián usó su relato para explicar hacia dónde va el proyecto: un dispositivo grupal donde cada uno accede por sí mismo a su autorregulación e integración, "esencialmente un psicodrama de muchas escenas".</p></div>
+        <p data-en="&quot;At the threshold, the image of a candle melted like petals, with a piece like a womb. I entered and there was a baby: 'it's nice and warm here'. Then a starry lake; aliens appeared and I wasn't afraid —I often feel like an alien—. I went into the sea and met a pregnant whale that told me: 'we don't only get pregnant with children, also with projects; don't abort your projects'. I brought back that phrase, the 'you are free', and a surfboard to surf the waves.&quot;">"En el umbral, la imagen de una vela derretida como pétalos, con un pedazo como un útero. Entré y había un bebé: 'acá está lindo, calentito'. Después un lago estrellado; aparecieron extraterrestres y no tuve miedo —muchas veces me siento un extraterrestre—. Me metí al mar y me encontré con una ballena embarazada que me dijo: 'no solo nos embarazamos de hijos, también de proyectos; no abortes tus proyectos'. Me traje esa frase, el 'sos libre', y una tabla de surf para surfear las olas."</p>
+        <p class="note" data-en="Julián used her account to explain where the project is heading: a group device where each person reaches their own self-regulation and integration, &quot;essentially a psychodrama of many scenes.&quot;">Julián usó su relato para explicar hacia dónde va el proyecto: un dispositivo grupal donde cada uno accede por sí mismo a su autorregulación e integración, "esencialmente un psicodrama de muchas escenas".</p></div>
       <div class="quote" id="t-yanina3"><div class="qh"><span class="qn">Yanina</span></div>
-        <p>"Se me fue el Zoom y seguí sola con el Harmonic, bellísimo. Percibí una nota casi celestial que me llevó al Ave María. Apareció otra vez mi papá —el 15 de junio hará un año que falleció—: el mensaje era la contemplación, el estado contemplativo que él me enseñaba. Cada experiencia se enriquece más en imágenes, diálogos y profundidad."</p></div>
+        <p data-en="&quot;Zoom dropped and I continued alone with the Harmonic, beautiful. I perceived an almost celestial note that took me to the Ave Maria. My dad appeared again —on June 15 it'll be a year since he passed—: the message was contemplation, the contemplative state he taught me. Each experience gets richer in images, dialogues and depth.&quot;">"Se me fue el Zoom y seguí sola con el Harmonic, bellísimo. Percibí una nota casi celestial que me llevó al Ave María. Apareció otra vez mi papá —el 15 de junio hará un año que falleció—: el mensaje era la contemplación, el estado contemplativo que él me enseñaba. Cada experiencia se enriquece más en imágenes, diálogos y profundidad."</p></div>
       <div class="quote" id="t-analigia"><div class="qh"><span class="qn">Ana Ligia Monge</span><span class="qm">Costa Rica</span></div>
-        <p>"Realmente fue una catarsis de integración. Al bajar se abrió un camino de tierra con flores de colores. La figura que apareció fue mi papá, que murió hace tres años. Me invitó a caminar. Le pregunté por qué dejó tantas incógnitas sin responder, y él guardaba silencio, muy triste. El camino terminaba en una cabaña con chimenea; le dije 'ya pasó, tuvimos momentos bonitos, esos quiero guardar'. La escena se desvaneció, pero quedó mucha paz. Fue muy sanador. Sentí muy real."</p>
-        <p class="note">Julián: "es real, es profundamente real lo que nos sucede… en muchos sentidos son nuestros padres reales los que se nos aparecen. No estamos inventando nada."</p></div>
+        <p data-en="&quot;It really was a catharsis of integration. Going down, a dirt path opened with colorful flowers. The figure that appeared was my dad, who died three years ago. He invited me to walk. I asked why he left so many unknowns unanswered, and he stayed silent, very sad. The path ended in a cabin with a fireplace; I told him 'it's over, we had beautiful moments, those I want to keep'. The scene faded, but much peace remained. It was very healing. It felt very real.&quot;">"Realmente fue una catarsis de integración. Al bajar se abrió un camino de tierra con flores de colores. La figura que apareció fue mi papá, que murió hace tres años. Me invitó a caminar. Le pregunté por qué dejó tantas incógnitas sin responder, y él guardaba silencio, muy triste. El camino terminaba en una cabaña con chimenea; le dije 'ya pasó, tuvimos momentos bonitos, esos quiero guardar'. La escena se desvaneció, pero quedó mucha paz. Fue muy sanador. Sentí muy real."</p>
+        <p class="note" data-en="Julián: &quot;it's real, it's profoundly real what happens to us… in many senses it's our real parents who appear to us. We're not inventing anything.&quot;">Julián: "es real, es profundamente real lo que nos sucede… en muchos sentidos son nuestros padres reales los que se nos aparecen. No estamos inventando nada."</p></div>
       <div class="quote" id="t-fernando2"><div class="qh"><span class="qn">Fernando</span><span class="qm">"Centro Zerka Moreno"</span></div>
-        <p>"Llegué tarde y casi no oía el Harmonic, pero venía muy cansado. Me quedé relajado, medio dormido, y me hizo bien. Cuando murió mi papá yo estaba en la casa de Ana Ligia, en Costa Rica, y ella me cuidó con muchísimo cariño; quiero agradecerle. Se metió un colibrí en la casa, lo agarré con las manos para sacarlo, y al día siguiente murió papá."</p></div>
+        <p data-en="&quot;I arrived late and could barely hear the Harmonic, but I was very tired. I stayed relaxed, half asleep, and it did me good. When my dad died I was at Ana Ligia's house, in Costa Rica, and she cared for me with great affection; I want to thank her. A hummingbird got into the house, I caught it with my hands to take it out, and the next day dad died.&quot;">"Llegué tarde y casi no oía el Harmonic, pero venía muy cansado. Me quedé relajado, medio dormido, y me hizo bien. Cuando murió mi papá yo estaba en la casa de Ana Ligia, en Costa Rica, y ella me cuidó con muchísimo cariño; quiero agradecerle. Se metió un colibrí en la casa, lo agarré con las manos para sacarlo, y al día siguiente murió papá."</p></div>
 
       <!-- 10 JUNIO -->
-      <div class="tcat">10 de junio · setup <em>Descenso</em> (hardware no consonante)</div>
+      <div class="tcat" data-en="June 10 · from Costa Rica · setup <em>Descenso</em>">10 de junio · desde Costa Rica · setup <em>Descenso</em></div>
       <div class="quote" id="t-merli-jun"><div class="qh"><span class="qn">Merli Tharn</span><span class="qm">México</span></div>
-        <p>"Esta experiencia fue muy distinta. Estoy temblando. La música me dio mucho miedo desde el principio, sentí algo muy fuerte; escuchaba golpes, muebles arrastrándose, alertas. Al bajar resbalé en el octavo escalón. Abajo, una criatura tipo sapo, enorme; le salieron cuernos, abrió su pecho y sacó su corazón lleno de gusanos, y me daba de comer ese corazón. Yo me volvía un gusano blanco, y el sapo me devoraba; me regurgitaba y al salir yo era un bebé. Me quedé sola en la oscuridad, con desamparo, orfandad, vulnerabilidad. Lo que hago con esto es pintarlo."</p>
-        <p class="note">Julián remarcó el proceso de muerte y resurrección, que el miedo es una forma de resistencia, y le recomendó retomar un acompañamiento terapéutico y hacer arte con las imágenes para integrarlas.</p></div>
+        <p data-en="&quot;This experience was very different. I'm shaking. The music scared me a lot from the start, I felt something very strong; I heard knocks, furniture dragging, alerts. Going down I slipped on the eighth step. Below, a huge toad-like creature; it grew horns, opened its chest and pulled out its heart full of worms, and fed me that heart. I turned into a white worm, and the toad devoured me; it regurgitated me and coming out I was a baby. I was left alone in the dark, with helplessness, orphanhood, vulnerability. What I do with this is paint it.&quot;">"Esta experiencia fue muy distinta. Estoy temblando. La música me dio mucho miedo desde el principio, sentí algo muy fuerte; escuchaba golpes, muebles arrastrándose, alertas. Al bajar resbalé en el octavo escalón. Abajo, una criatura tipo sapo, enorme; le salieron cuernos, abrió su pecho y sacó su corazón lleno de gusanos, y me daba de comer ese corazón. Yo me volvía un gusano blanco, y el sapo me devoraba; me regurgitaba y al salir yo era un bebé. Me quedé sola en la oscuridad, con desamparo, orfandad, vulnerabilidad. Lo que hago con esto es pintarlo."</p>
+        <p class="note" data-en="Julián highlighted the death-and-resurrection process, that fear is a form of resistance, and recommended she resume therapeutic support and make art with the images to integrate them.">Julián remarcó el proceso de muerte y resurrección, que el miedo es una forma de resistencia, y le recomendó retomar un acompañamiento terapéutico y hacer arte con las imágenes para integrarlas.</p></div>
       <div class="quote" id="t-karina-jun"><div class="qh"><span class="qn">Karina Donantueno</span><span class="qm">México</span></div>
-        <p>"Fue como un ensueño. La carta de La Estrella; un teatro donde daba una conferencia. Pinturas de un pintor argentino con el que estudié —él decía 'yo soy el otro'—, y sentí eso: soy yo pero también soy otros. Un bote de pintura espesa que me atrapaba; un volcán, yo roja y ardiendo. Apareció la ballena, algo amoroso y maternal, y me pude entregar. Después un chamán que abusa del poder: mucha rabia… pero él también era yo, algo feo mío. Un útero rojo me ayudaba a regularme."</p></div>
+        <p data-en="&quot;It was like a reverie. The Star tarot card; a theater where I gave a talk. Paintings by an Argentine painter I studied with —he said 'I am the other'—, and I felt that: I'm me but also others. A tub of thick paint that trapped me; a volcano, me red and burning. The whale appeared, something loving and maternal, and I could surrender. Then a shaman who abuses power: a lot of rage… but he was also me, something ugly of mine. A red womb helped me regulate.&quot;">"Fue como un ensueño. La carta de La Estrella; un teatro donde daba una conferencia. Pinturas de un pintor argentino con el que estudié —él decía 'yo soy el otro'—, y sentí eso: soy yo pero también soy otros. Un bote de pintura espesa que me atrapaba; un volcán, yo roja y ardiendo. Apareció la ballena, algo amoroso y maternal, y me pude entregar. Después un chamán que abusa del poder: mucha rabia… pero él también era yo, algo feo mío. Un útero rojo me ayudaba a regularme."</p></div>
       <div class="quote" id="t-yanina-jun"><div class="qh"><span class="qn">Yanina</span></div>
-        <p>"Perdí los auriculares. Sobre el sonido: lo sentí con mayor profundidad y vibración —tengo un atrapasueños colgado y su centro empezó a girar al compás del Harmonic—. Perdí registro del tiempo. Es mi quinta experiencia desde el 13 de mayo; todo fue más profundo, la escalera más que caracol era un tubo hacia lo hondo. Lo sentí más etéreo: no eran figuras definidas, sino energía muy sutil. Era mi padre: 'tenés que trascender'. El 15 se cumple un año de su fallecimiento."</p></div>
+        <p data-en="&quot;I lost my headphones. About the sound: I felt it with greater depth and vibration —I have a dreamcatcher hanging and its center began to spin to the beat of the Harmonic—. I lost track of time. It's my fifth experience since May 13; everything was deeper, the staircase more than a spiral was a tube going down into the depths. I felt it more ethereal: not defined figures, but very subtle energy. It was my father: 'you must transcend'. On the 15th it's a year since his passing.&quot;">"Perdí los auriculares. Sobre el sonido: lo sentí con mayor profundidad y vibración —tengo un atrapasueños colgado y su centro empezó a girar al compás del Harmonic—. Perdí registro del tiempo. Es mi quinta experiencia desde el 13 de mayo; todo fue más profundo, la escalera más que caracol era un tubo hacia lo hondo. Lo sentí más etéreo: no eran figuras definidas, sino energía muy sutil. Era mi padre: 'tenés que trascender'. El 15 se cumple un año de su fallecimiento."</p></div>
     </section>
 
     <!-- ============ VOZ DEL GUÍA ============ -->
     <section id="voz">
-      <div class="snum">06</div>
-      <h2>La voz del guía</h2>
-      <p>Los pasajes más luminosos de Julián de la Reta a lo largo de la serie.</p>
+      <div class="snum">05</div>
+      <h2 data-en="The guide's voice">La voz del guía</h2>
+      <p data-en="The most luminous passages from Julián de la Reta across the series.">Los pasajes más luminosos de Julián de la Reta a lo largo de la serie.</p>
       <div class="card">
-        <p style="font-family:var(--serif);font-size:19px;color:var(--gold-soft);margin-top:0">"De tu piel hacia afuera está el resto del universo. Pero de tu piel hacia adentro, están ustedes. Ese espacio es aquel en el que vos existís."</p>
+        <p style="font-family:var(--serif);font-size:19px;color:var(--gold-soft);margin-top:0" data-en="&quot;From your skin outward is the rest of the universe. But from your skin inward, that's you. That space is where you exist.&quot;">"De tu piel hacia afuera está el resto del universo. Pero de tu piel hacia adentro, están ustedes. Ese espacio es aquel en el que vos existís."</p>
         <hr class="rule">
-        <p><em>Sobre el método —</em> "No estamos buscando interpretar las imágenes. La interpretación más válida va a ser la que ustedes hagan de lo que les pasa. Al fin y al cabo, las claves siempre están adentro de uno."</p>
-        <p><em>Sobre dormirse —</em> "El que se duerme, es una excelente forma también de transitar esta experiencia. Si se duermen, también es que lo necesitaban."</p>
-        <p><em>Sobre las resistencias —</em> "Las resistencias tienen infinitas formas y colores. El trabajo es ir superándolas y hacer el viaje del héroe."</p>
-        <p><em>Sobre la sombra —</em> "La sombra es aquello que no estamos integrando — no aquello malo. De golpe viene algo que estaba llamando a la puerta."</p>
-        <p><em>Sobre lo real —</em> "Es profundamente real lo que nos sucede, por más que estemos en una situación imaginada. En muchos sentidos son nuestros padres reales los que se nos aparecen. No estamos inventando nada."</p>
-        <p><em>El cierre / el abrazo —</em> "El Beacon genera ese abrazo: un abrazo armónico. El patrón de tu papá está en todo. No importa que ahora no esté su materia: el patrón está. El abrazo estaba siempre."</p>
+        <p data-en="<em>On the method —</em> &quot;We're not trying to interpret the images. The most valid interpretation will be the one you make of what happens to you. In the end, the keys are always inside you.&quot;"><em>Sobre el método —</em> "No estamos buscando interpretar las imágenes. La interpretación más válida va a ser la que ustedes hagan de lo que les pasa. Al fin y al cabo, las claves siempre están adentro de uno."</p>
+        <p data-en="<em>On falling asleep —</em> &quot;Falling asleep is also an excellent way to go through this experience. If you fall asleep, it's because you needed it.&quot;"><em>Sobre dormirse —</em> "El que se duerme, es una excelente forma también de transitar esta experiencia. Si se duermen, también es que lo necesitaban."</p>
+        <p data-en="<em>On resistances —</em> &quot;Resistances have infinite forms and colors. The work is to keep crossing them and make the hero's journey.&quot;"><em>Sobre las resistencias —</em> "Las resistencias tienen infinitas formas y colores. El trabajo es ir superándolas y hacer el viaje del héroe."</p>
+        <p data-en="<em>On the shadow —</em> &quot;The shadow is what we're not integrating — not what's bad. Suddenly something comes that was knocking at the door.&quot;"><em>Sobre la sombra —</em> "La sombra es aquello que no estamos integrando — no aquello malo. De golpe viene algo que estaba llamando a la puerta."</p>
+        <p data-en="<em>On the real —</em> &quot;What happens to us is profoundly real, even if we're in an imagined situation. In many senses it's our real parents who appear to us. We're not inventing anything.&quot;"><em>Sobre lo real —</em> "Es profundamente real lo que nos sucede, por más que estemos en una situación imaginada. En muchos sentidos son nuestros padres reales los que se nos aparecen. No estamos inventando nada."</p>
+        <p data-en="<em>The closing / the embrace —</em> &quot;The Beacon generates that embrace: a harmonic embrace. Your dad's pattern is in everything. It doesn't matter that his matter isn't here now: the pattern is. The embrace was always there.&quot;"><em>El cierre / el abrazo —</em> "El Beacon genera ese abrazo: un abrazo armónico. El patrón de tu papá está en todo. No importa que ahora no esté su materia: el patrón está. El abrazo estaba siempre."</p>
       </div>
-      <h3>El compartir del 10 de junio</h3>
-      <p style="font-size:13.5px;color:var(--muted);font-style:italic">El 10/6 Julián guió la meditación y el compartir (Saira da la bienvenida). Ante el viaje muy intenso de Merli:</p>
+      <h3 data-en="The June 10 sharing">El compartir del 10 de junio</h3>
+      <p style="font-size:13.5px;color:var(--muted);font-style:italic" data-en="On Jun 10 Julián guided the meditation and the sharing (Saira welcomes). Facing Merli's very intense journey:">El 10/6 Julián guió la meditación y el compartir (Saira da la bienvenida). Ante el viaje muy intenso de Merli:</p>
       <div class="card">
-        <p style="margin-top:0">"El miedo también es una forma de resistencia, algo que impide la integración. Por eso es importante superar esa resistencia integrando eso que te da miedo — dibujarlo, hacer arte, ponerlo afuera para poder verlo y entenderlo."</p>
-        <p style="margin-bottom:0">"Cuando llegamos a lugares tan fuertes, es importante tener un acompañamiento terapéutico. Estás llegando a un lugar muy profundo."</p>
+        <p style="margin-top:0" data-en="&quot;Fear is also a form of resistance, something that blocks integration. That's why it's important to overcome that resistance by integrating what scares you — drawing it, making art, putting it outside so you can see it and understand it.&quot;">"El miedo también es una forma de resistencia, algo que impide la integración. Por eso es importante superar esa resistencia integrando eso que te da miedo — dibujarlo, hacer arte, ponerlo afuera para poder verlo y entenderlo."</p>
+        <p style="margin-bottom:0" data-en="&quot;When we reach such strong places, it's important to have therapeutic support. You're reaching a very deep place.&quot;">"Cuando llegamos a lugares tan fuertes, es importante tener un acompañamiento terapéutico. Estás llegando a un lugar muy profundo."</p>
       </div>
     </section>
 
     <!-- ============ OBSERVACIONES ============ -->
     <section id="observaciones">
-      <div class="snum">07</div>
-      <h2>Observaciones del equipo</h2>
-      <div class="card"><h4 style="margin-top:0">1 · El entrenamiento es real y observable</h4>
-        <p style="margin-bottom:0">Quienes repiten van más profundo. La primera vez suele aparecer una resistencia; en la segunda o tercera, con reflexión intermedia, se atraviesa y aparece el insight (Laura, Ailen, Blanca, Karina, Yanina). <strong>Valida el formato semanal recurrente.</strong></p></div>
-      <div class="card"><h4 style="margin-top:0">2 · La semana entre encuentros es parte del dispositivo</h4>
-        <p style="margin-bottom:0">Sueños, sincronicidades y movilizaciones continúan entre sesiones. El valor no está solo en la sesión sino en el proceso que abre.</p></div>
-      <div class="card"><h4 style="margin-top:0">3 · El sonido no es fondo: es co-protagonista y variable de diseño</h4>
-        <p style="margin-bottom:0">Los parámetros variaron (afinación 64→40 Hz, HRTF desde el 27/5, cambio de guitarra el 10/6). Aparece de forma recurrente la <strong>pareidolia armónica</strong>. <em>Recomendación:</em> documentar afinación + HRTF + instrumento en cada sesión.</p></div>
-      <div class="card"><h4 style="margin-top:0">3b · La consonancia hardware↔afinación aparece como variable crítica <span class="badge">indicio 10/6 · sin concluir</span></h4>
-        <p style="margin-bottom:0">Afinación y HRTF correctos podrían no bastar: cambiar a una guitarra de cuerpo chico parece haber roto la consonancia. La grabación es compatible con esto (música amenazante, figuras menos legibles, tono más oscuro), pero no lo prueba — es una sola sesión con poca gente. <em>Recomendación:</em> chequear consonancia del instrumento antes de cada sesión, o usar la versión digital calibrada, y repetir la comparación para poder afirmar algo.</p></div>
-      <div class="card"><h4 style="margin-top:0">4 · Calidad de audio = calidad de experiencia</h4>
-        <p style="margin-bottom:0">Con celular sin auriculares la experiencia empeora; con buenos auriculares el campo "se integra". <strong>Reforzar la indicación en la invitación</strong> con un checklist técnico.</p></div>
-      <div class="card"><h4 style="margin-top:0">5 · Fricción técnica del doble stream (Zoom + YouTube)</h4>
-        <p style="margin-bottom:0">Principal obstáculo operativo, sobre todo desde celular. <em>Recomendación:</em> evaluar un solo canal (voz + Beacon mezclados) o un mini-tutorial visual.</p></div>
-      <div class="card"><h4 style="margin-top:0">6 · El eje padre/madre es central y sensible</h4>
-        <p style="margin-bottom:0">Muy ligado a duelos (Susy, Fernando, Yanina, Ana Ligia). El 10/6, ante el viaje muy intenso de Merli, la facilitación recomendó comenzar un trabajo terapéutico. <em>Volverlo protocolo</em> ante material de esa intensidad.</p></div>
-      <div class="card"><h4 style="margin-top:0">6b · Roles y frecuencia</h4>
-        <p style="margin-bottom:0">Por ahora <strong>Julián sostiene la facilitación</strong> (meditación y compartir) y <strong>Saira se ocupa de la bienvenida</strong>. Se anunció aumentar la frecuencia (más de un encuentro por semana). <em>Cuidar</em> que el crecimiento no diluya el encuadre de cuidado ni el registro técnico, e ir formando facilitación de respaldo con tiempo.</p></div>
-      <div class="card"><h4 style="margin-top:0">7 · Marco ético / investigación</h4>
-        <p style="margin-bottom:0">Bien el paso del 3/6 de formalizar consentimientos. <strong>Prioridad:</strong> cerrar consentimiento informado y definir anonimización de testimonios (varios aparecen con nombre completo).</p></div>
-      <div class="card"><h4 style="margin-top:0">8 · Alcance e internacionalización</h4>
-        <p style="margin-bottom:0">Ya es internacional (Colombia, México, Costa Rica, Argentina, invitadas EN/IT). El 27/5 se probó el formato bilingüe con buen resultado. <em>Oportunidad:</em> franja en inglés estable y mejor difusión.</p></div>
+      <div class="snum">06</div>
+      <h2 data-en="Team observations">Observaciones del equipo</h2>
+      <div class="card"><h4 style="margin-top:0" data-en="1 · The training is real and observable">1 · El entrenamiento es real y observable</h4>
+        <p style="margin-bottom:0" data-en="Those who repeat go deeper. The first time a resistance usually appears; the second or third, with reflection in between, it's crossed and insight appears (Laura, Ailen, Blanca, Karina, Yanina). <strong>It validates the weekly recurring format.</strong>">Quienes repiten van más profundo. La primera vez suele aparecer una resistencia; en la segunda o tercera, con reflexión intermedia, se atraviesa y aparece el insight (Laura, Ailen, Blanca, Karina, Yanina). <strong>Valida el formato semanal recurrente.</strong></p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="2 · The week between gatherings is part of the device">2 · La semana entre encuentros es parte del dispositivo</h4>
+        <p style="margin-bottom:0" data-en="Dreams, synchronicities and stirrings continue between sessions. The value isn't only in the session but in the process it opens.">Sueños, sincronicidades y movilizaciones continúan entre sesiones. El valor no está solo en la sesión sino en el proceso que abre.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="3 · The sound is not background: it's a co-protagonist and a design variable">3 · El sonido no es fondo: es co-protagonista y variable de diseño</h4>
+        <p style="margin-bottom:0" data-en="The parameters varied (tuning 64→40 Hz, HRTF from May 27, guitar change on Jun 10). <strong>Harmonic pareidolia</strong> appears recurrently. <em>Recommendation:</em> document tuning + HRTF + instrument in each session.">Los parámetros variaron (afinación 64→40 Hz, HRTF desde el 27/5, cambio de guitarra el 10/6). Aparece de forma recurrente la <strong>pareidolia armónica</strong>. <em>Recomendación:</em> documentar afinación + HRTF + instrumento en cada sesión.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="4 · Audio quality = experience quality">4 · Calidad de audio = calidad de experiencia</h4>
+        <p style="margin-bottom:0" data-en="On a phone without headphones the experience worsens; with good headphones the field &quot;integrates&quot;. <strong>Reinforce this in the invitation</strong> with a technical checklist.">Con celular sin auriculares la experiencia empeora; con buenos auriculares el campo "se integra". <strong>Reforzar la indicación en la invitación</strong> con un checklist técnico.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="5 · Technical friction of the double stream (Zoom + YouTube)">5 · Fricción técnica del doble stream (Zoom + YouTube)</h4>
+        <p style="margin-bottom:0" data-en="Main operational obstacle, especially from a phone. <em>Recommendation:</em> consider a single channel (voice + Beacon mixed) or a mini visual tutorial.">Principal obstáculo operativo, sobre todo desde celular. <em>Recomendación:</em> evaluar un solo canal (voz + Beacon mezclados) o un mini-tutorial visual.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="6 · The father/mother axis is central and sensitive">6 · El eje padre/madre es central y sensible</h4>
+        <p style="margin-bottom:0" data-en="Closely tied to grief (Susy, Fernando, Yanina, Ana Ligia). On Jun 10, facing Merli's very intense journey, the facilitation recommended beginning therapeutic work. <em>Make it protocol</em> for material of that intensity.">Muy ligado a duelos (Susy, Fernando, Yanina, Ana Ligia). El 10/6, ante el viaje muy intenso de Merli, la facilitación recomendó comenzar un trabajo terapéutico. <em>Volverlo protocolo</em> ante material de esa intensidad.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="6b · Roles and frequency">6b · Roles y frecuencia</h4>
+        <p style="margin-bottom:0" data-en="For now <strong>Julián holds the facilitation</strong> (meditation and sharing) and <strong>Saira handles the welcome</strong>. Increasing the frequency was announced (more than one gathering per week). <em>Take care</em> that growth doesn't dilute the framing of care or the technical record, and gradually train backup facilitation.">Por ahora <strong>Julián sostiene la facilitación</strong> (meditación y compartir) y <strong>Saira se ocupa de la bienvenida</strong>. Se anunció aumentar la frecuencia (más de un encuentro por semana). <em>Cuidar</em> que el crecimiento no diluya el encuadre de cuidado ni el registro técnico, e ir formando facilitación de respaldo con tiempo.</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="7 · Ethical / research framing">7 · Marco ético / investigación</h4>
+        <p style="margin-bottom:0" data-en="Good move on Jun 3 to formalize consent. <strong>Priority:</strong> close informed consent and define anonymization of testimonies (several appear with full names).">Bien el paso del 3/6 de formalizar consentimientos. <strong>Prioridad:</strong> cerrar consentimiento informado y definir anonimización de testimonios (varios aparecen con nombre completo).</p></div>
+      <div class="card"><h4 style="margin-top:0" data-en="8 · Reach and internationalization">8 · Alcance e internacionalización</h4>
+        <p style="margin-bottom:0" data-en="It's already international (Colombia, México, Costa Rica, Argentina, EN/IT guests). On May 27 the bilingual format was tested with good results. <em>Opportunity:</em> a stable English slot and better outreach.">Ya es internacional (Colombia, México, Costa Rica, Argentina, invitadas EN/IT). El 27/5 se probó el formato bilingüe con buen resultado. <em>Oportunidad:</em> franja en inglés estable y mejor difusión.</p></div>
     </section>
 
     <!-- ============ PENDIENTES ============ -->
     <section id="pendientes">
-      <div class="snum">08</div>
-      <h2>Pendientes</h2>
+      <div class="snum">07</div>
+      <h2 data-en="To do">Pendientes</h2>
       <ul class="checks">
-        <li>Desgrabar <strong>13 de mayo</strong> (primer encuentro — el único que falta).</li>
-        <li>Conseguir la <strong>grabación completa del 10/6</strong> (la actual es parcial: falta explicación + meditación).</li>
-        <li>Cerrar consentimientos informados / marco de anonimización de testimonios.</li>
-        <li>Registrar parámetros de sonido por sesión (guitarra / afinación / HRTF / Z / consonancia).</li>
-        <li>Validar la hipótesis de <strong>consonancia hardware↔afinación</strong> — el 10/6 dio solo un <strong>indicio preliminar</strong> (una sesión, pocas personas); falta repetir la comparación controlada antes de afirmar nada.</li>
-        <li>Definir protocolo de chequeo de consonancia del instrumento antes de cada sesión.</li>
-        <li>Confirmar y estabilizar los nombres de setup (<em>Cimiento, Coral, Esfera, Cocoon, Descenso</em>).</li>
-        <li>Definir solución al doble stream Zoom + YouTube.</li>
-        <li>Decidir continuidad de la franja bilingüe y plan de difusión.</li>
-        <li>Definir encuadre de cuidado ante viajes de alta intensidad (protocolo de derivación terapéutica).</li>
+        <li data-en="Transcribe <strong>May 13</strong> (first gathering — the only one missing).">Desgrabar <strong>13 de mayo</strong> (primer encuentro — el único que falta).</li>
+        <li data-en="Get the <strong>complete recording of Jun 10</strong> (the current one is partial: missing explanation + meditation).">Conseguir la <strong>grabación completa del 10/6</strong> (la actual es parcial: falta explicación + meditación).</li>
+        <li data-en="Close informed consent / anonymization framework for testimonies.">Cerrar consentimientos informados / marco de anonimización de testimonios.</li>
+        <li data-en="Record sound parameters per session (guitar / tuning / HRTF).">Registrar parámetros de sonido por sesión (guitarra / afinación / HRTF).</li>
+        <li data-en="Confirm and stabilize the setup names (<em>Cimiento, Coral, Esfera, Cocoon, Descenso</em>).">Confirmar y estabilizar los nombres de setup (<em>Cimiento, Coral, Esfera, Cocoon, Descenso</em>).</li>
+        <li data-en="Define a solution for the Zoom + YouTube double stream.">Definir solución al doble stream Zoom + YouTube.</li>
+        <li data-en="Decide on continuing the bilingual slot and an outreach plan.">Decidir continuidad de la franja bilingüe y plan de difusión.</li>
+        <li data-en="Define a care framing for high-intensity journeys (therapeutic referral protocol).">Definir encuadre de cuidado ante viajes de alta intensidad (protocolo de derivación terapéutica).</li>
       </ul>
     </section>
   </main>
@@ -512,27 +501,42 @@
 <footer>
   <div class="wrap">
     <div class="seal"><span class="dot"></span> Harmonic Beacon · Proyección del Mito Personal</div>
-    <p>Elaborado a partir de las desgrabaciones (20/5, 27/5, 3/6 y 10/6 —parcial—) y del informe del Hospital CIMA. Transcripciones automáticas (Zoom) limpiadas para lectura. Falta desgrabar el 13/5. Documento interno — para publicación, anonimizar y pedir consentimiento.</p>
+    <p data-en="Compiled from the transcripts (May 20, 27, Jun 3 and Jun 10 —partial—). Auto-transcriptions (Zoom) cleaned up for reading. May 13 still to be transcribed. Internal document — for publication, anonymize and ask for consent.">Elaborado a partir de las desgrabaciones (20/5, 27/5, 3/6 y 10/6 —parcial—). Transcripciones automáticas (Zoom) limpiadas para lectura. Falta desgrabar el 13/5. Documento interno — para publicación, anonimizar y pedir consentimiento.</p>
   </div>
 </footer>
 
 <script>
-  // scrollspy
-  const links=[...document.querySelectorAll('.toc a')];
-  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
+  // ---- i18n ----
+  function applyLang(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      if(el.getAttribute('data-es')===null) el.setAttribute('data-es', el.innerHTML);
+      el.innerHTML = (l==='en') ? el.getAttribute('data-en') : el.getAttribute('data-es');
+    });
+    document.querySelectorAll('.langtoggle button').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-l')===l);
+    });
+    try{ localStorage.setItem('hb_lang', l); }catch(e){}
+  }
+  (function(){ var saved='es'; try{ saved=localStorage.getItem('hb_lang')||'es'; }catch(e){} if(saved==='en') applyLang('en'); })();
+
+  // ---- scrollspy ----
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var map=new Map(links.map(function(a){return [a.getAttribute('href').slice(1),a];}));
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
       if(e.isIntersecting){
-        links.forEach(l=>l.classList.remove('active'));
-        const a=map.get(e.target.id); if(a)a.classList.add('active');
+        links.forEach(function(l){l.classList.remove('active');});
+        var a=map.get(e.target.id); if(a)a.classList.add('active');
       }
     });
   },{rootMargin:'-20% 0px -70% 0px'});
-  document.querySelectorAll('main section').forEach(s=>io.observe(s));
-  // mobile nav
-  const toc=document.getElementById('toc'), btn=document.getElementById('navtoggle');
-  btn.addEventListener('click',()=>{const o=toc.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
-  toc.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toc.classList.remove('open')));
+  document.querySelectorAll('main section').forEach(function(s){io.observe(s);});
+
+  // ---- mobile nav ----
+  var toc=document.getElementById('toc'), btn=document.getElementById('navtoggle');
+  btn.addEventListener('click',function(){var o=toc.classList.toggle('open');btn.setAttribute('aria-expanded',o);});
+  toc.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toc.classList.remove('open');});});
 </script>
 </body>
 </html>
