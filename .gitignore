@@ -3,6 +3,7 @@
 *.md
 !README.md
 *.txt
+!seccionesvirtuales/copys-difusion.txt
 *.png
 
 # Image library no usada actualmente por el sitio
