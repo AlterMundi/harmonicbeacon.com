@@ -2,6 +2,7 @@
 *.pdf
 *.md
 !README.md
+!marketing/copys-instagram-proyecto.md
 *.txt
 !seccionesvirtuales/copys-difusion.txt
 *.png
