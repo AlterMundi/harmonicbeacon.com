@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Proyección Armónica · Documento de difusión para Logos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#16120D; --bg-1:#1E1812; --bg-2:#241D15; --bg-card:#1B150F;
+  --bone:#F4EEE2; --ink-800:#E9E0D0; --ink-600:#ADA089; --ink-500:#8A7F6B; --pearl-400:#6E5E44;
+  --gold:#C9A24E; --gold-2:#E3C77E; --gold-deep:#A07E33;
+  --hair:rgba(201,162,78,.22); --hair-soft:rgba(244,238,226,.10); --surface:rgba(244,238,226,.035);
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --r-card:18px; --shadow-card:0 24px 60px rgba(0,0,0,.45);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --wrap:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans); color:var(--ink-800); background:var(--bg-0);
+  line-height:1.75; -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(120% 80% at 12% -8%, rgba(201,162,78,.10), transparent 60%),
+    radial-gradient(120% 90% at 92% 108%, rgba(110,94,68,.16), transparent 60%),
+    linear-gradient(158deg, #16120D, #1E1812);
+  background-repeat:no-repeat; background-attachment:fixed;
+}
+/* film grain */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:.04; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 clamp(20px,5vw,40px)}
+.narrow{max-width:760px}
+section{padding:clamp(56px,9vw,120px) 0}
+h1,h2,h3{font-family:var(--font-serif); font-weight:500; color:var(--bone); line-height:1.06; letter-spacing:.005em}
+h1{font-size:clamp(2.8rem,7vw,5.4rem)}
+h2{font-size:clamp(2rem,4.4vw,3.2rem); margin-bottom:.4em}
+h3{font-size:clamp(1.3rem,2.4vw,1.7rem); color:var(--bone)}
+p{max-width:64ch; color:var(--ink-600)}
+strong{color:var(--ink-800); font-weight:500}
+em{font-style:italic}
+.gold{color:var(--gold)}
+.serif-em{font-family:var(--font-serif); font-style:italic; color:var(--bone)}
+.eyebrow{font-family:var(--font-sans); text-transform:uppercase; font-size:11px; letter-spacing:.34em; color:var(--gold); font-weight:500; margin-bottom:1.2em; display:block}
+.lead{font-size:clamp(1.15rem,2vw,1.4rem); color:var(--ink-800); font-family:var(--font-serif); font-style:italic; line-height:1.5}
+hr.rule{border:0; border-top:1px solid var(--hair-soft); margin:clamp(40px,6vw,72px) 0}
+a{color:var(--gold); text-decoration:none}
+
+/* HERO */
+.hero{min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:clamp(56px,9vw,120px)}
+.hero .mark{width:76px; height:76px; margin-bottom:2rem}
+.hero .kicker{text-transform:uppercase; letter-spacing:.4em; font-size:12px; color:var(--gold); font-weight:500}
+.hero h1{margin:.5rem 0 .3rem}
+.hero .en{font-family:var(--font-serif); font-style:italic; color:var(--ink-600); font-size:clamp(1.1rem,2vw,1.5rem)}
+.hero .doc-tag{margin-top:2.4rem; display:inline-block; border:1px solid var(--hair); border-radius:999px; padding:.6rem 1.4rem; font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-800); background:var(--surface); backdrop-filter:blur(6px)}
+.hero .meta{margin-top:1.6rem; color:var(--ink-500); font-size:13px; letter-spacing:.06em}
+.divider{width:40px; height:1px; background:var(--gold); opacity:.5; margin:2rem auto}
+
+/* TOC */
+.toc{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:2rem}
+.toc a{display:flex; gap:14px; align-items:baseline; padding:16px 18px; border:1px solid var(--hair-soft); border-radius:14px; background:var(--surface); transition:.4s var(--ease); color:var(--ink-800)}
+.toc a:hover{border-color:var(--hair); transform:translateY(-3px)}
+.toc a .n{font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.1rem}
+
+/* cards */
+.grid{display:grid; gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--bg-card); border:1px solid var(--hair-soft); border-radius:var(--r-card); padding:clamp(22px,3vw,32px); transition:.5s var(--ease)}
+.card:hover{transform:translateY(-4px); border-color:var(--hair); box-shadow:var(--shadow-card)}
+.card h3{margin-bottom:.4em}
+.card p{font-size:.96rem}
+.roman{font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.3rem; display:block; margin-bottom:.3em}
+
+/* phase steps */
+.phase{display:flex; gap:24px; padding:26px 0; border-top:1px solid var(--hair-soft)}
+.phase .num{font-family:var(--font-serif); font-style:italic; font-size:2.4rem; color:var(--gold); line-height:1; flex:0 0 auto; width:60px}
+.phase h3{margin-bottom:.25em}
+
+/* images */
+figure{margin:0; border-radius:var(--r-card); overflow:hidden; border:1px solid var(--hair-soft); box-shadow:inset 0 0 80px rgba(0,0,0,.4)}
+figure img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.78) contrast(1.02) brightness(.9)}
+.moodgrid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:180px; gap:14px; margin-top:2rem}
+.moodgrid .tall{grid-row:span 2}
+.moodgrid .wide{grid-column:span 2}
+@media(max-width:720px){ .moodgrid{grid-template-columns:repeat(2,1fr)} .moodgrid .wide{grid-column:span 2} }
+
+/* quote */
+blockquote{border-left:2px solid var(--gold); padding:.2em 0 .2em 1.4em; margin:1.4em 0; font-family:var(--font-serif); font-style:italic; font-size:1.25rem; color:var(--bone); max-width:60ch}
+blockquote cite{display:block; font-family:var(--font-sans); font-style:normal; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-500); margin-top:.6em}
+
+/* callout / questions block */
+.callout{background:linear-gradient(158deg, rgba(201,162,78,.07), rgba(110,94,68,.05)); border:1px solid var(--hair); border-radius:var(--r-card); padding:clamp(26px,4vw,40px); margin-top:2rem}
+.qlist{list-style:none; counter-reset:q; margin-top:1.4rem}
+.qlist li{counter-increment:q; position:relative; padding:16px 0 16px 52px; border-top:1px solid var(--hair-soft); color:var(--ink-800)}
+.qlist li:first-child{border-top:0}
+.qlist li::before{content:counter(q,decimal-leading-zero); position:absolute; left:0; top:15px; font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.2rem}
+.qlist li b{color:var(--bone); font-weight:500}
+
+/* number cards */
+.nums{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin:2rem 0}
+.stat{text-align:center; padding:26px 16px; border:1px solid var(--hair-soft); border-radius:14px; background:var(--surface)}
+.stat .big{font-family:var(--font-serif); font-size:clamp(2rem,5vw,3rem); color:var(--gold); line-height:1}
+.stat .lbl{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-500); margin-top:.6em}
+
+/* checklist */
+.check{list-style:none; margin-top:1.4rem}
+.check li{padding:14px 0 14px 34px; position:relative; border-top:1px solid var(--hair-soft); color:var(--ink-800)}
+.check li::before{content:"◇"; position:absolute; left:0; color:var(--gold); top:14px}
+.check li .owner{display:inline-block; margin-left:.5em; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-500); border:1px solid var(--hair-soft); border-radius:999px; padding:.1em .7em}
+
+/* pill row / schedule */
+.pill{display:inline-block; border:1px solid var(--hair); border-radius:999px; padding:.4em 1em; font-size:12px; letter-spacing:.1em; color:var(--ink-800); margin:.2em .3em .2em 0; background:var(--surface)}
+.pill.solid{background:linear-gradient(135deg,#E3C77E,#C9A24E 52%,#A07E33); color:#1a140c; border:0; font-weight:500}
+
+table{width:100%; border-collapse:collapse; margin-top:1.4rem; font-size:.92rem}
+th,td{text-align:left; padding:13px 14px; border-bottom:1px solid var(--hair-soft); vertical-align:top}
+th{font-family:var(--font-sans); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:500}
+td{color:var(--ink-600)}
+td b{color:var(--ink-800)}
+
+.footer{text-align:center; padding:clamp(60px,10vw,120px) 0 60px; color:var(--ink-500)}
+.footer .mark{width:44px; height:44px; margin:0 auto 1.4rem; opacity:.7}
+
+.tag-list{display:flex; flex-wrap:wrap; gap:8px; margin-top:1.2rem}
+.tag-list span{font-size:12px; color:var(--ink-600); border:1px solid var(--hair-soft); border-radius:999px; padding:.35em .9em}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important; scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap">
+  <svg class="mark" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+    <path d="M 192 100 L 191.79 104.13 L 191.17 108.25 L 190.13 112.35 L 188.68 116.43 L 186.84 120.47 L 184.6 124.48 L 181.97 128.43 L 178.98 132.33 L 175.62 136.16 L 171.93 139.92 L 167.91 143.6 L 163.58 147.19 L 158.96 150.68 L 154.08 154.08 L 148.95 157.36 L 143.6 160.53 L 138.05 163.58 L 132.33 166.5 L 126.46 169.28 L 120.47 171.93 L 114.39 174.43 L 108.25 176.78 L 102.06 178.98 L 95.87 181.01 L 89.7 182.89 L 83.57 184.6 L 77.52 186.13 L 71.57 187.5 L 65.75 188.68 L 60.08 189.69 L 54.6 190.52 L 49.32 191.17 L 44.27 191.63 L 39.47 191.91 L 34.95 192 L 30.72 191.91 L 26.8 191.63 L 23.22 191.17 L 19.98 190.52 L 17.11 189.69 L 14.61 188.68 L 12.5 187.5 L 10.79 186.13 L 9.48 184.6 L 8.58 182.89 L 8.09 181.01 L 8.02 178.98 L 8.37 176.78 L 9.13 174.43 L 10.31 171.93 L 11.89 169.28 L 13.87 166.5 L 16.24 163.58 L 18.99 160.53 L 22.1 157.36 L 25.57 154.08 L 29.38 150.68 L 33.5 147.19 L 37.93 143.6 L 42.64 139.92 L 47.61 136.16 L 52.81 132.33 L 58.23 128.43 L 63.84 124.48 L 69.61 120.47 L 75.52 116.43 L 81.55 112.35 L 87.65 108.25 L 93.81 104.13 L 100 100 L 106.19 95.87 L 112.35 91.75 L 118.45 87.65 L 124.48 83.57 L 130.39 79.53 L 136.16 75.52 L 141.77 71.57 L 147.19 67.67 L 152.39 63.84 L 157.36 60.08 L 162.07 56.4 L 166.5 52.81 L 170.62 49.32 L 174.43 45.92 L 177.9 42.64 L 181.01 39.47 L 183.76 36.42 L 186.13 33.5 L 188.11 30.72 L 189.69 28.07 L 190.87 25.57 L 191.63 23.22 L 191.98 21.02 L 191.91 18.99 L 191.42 17.11 L 190.52 15.4 L 189.21 13.87 L 187.5 12.5 L 185.39 11.32 L 182.89 10.31 L 180.02 9.48 L 176.78 8.83 L 173.2 8.37 L 169.28 8.09 L 165.05 8 L 160.53 8.09 L 155.73 8.37 L 150.68 8.83 L 145.4 9.48 L 139.92 10.31 L 134.25 11.32 L 128.43 12.5 L 122.48 13.87 L 116.43 15.4 L 110.3 17.11 L 104.13 18.99 L 97.94 21.02 L 91.75 23.22 L 85.61 25.57 L 79.53 28.07 L 73.54 30.72 L 67.67 33.5 L 61.95 36.42 L 56.4 39.47 L 51.05 42.64 L 45.92 45.92 L 41.04 49.32 L 36.42 52.81 L 32.09 56.4 L 28.07 60.08 L 24.38 63.84 L 21.02 67.67 L 18.03 71.57 L 15.4 75.52 L 13.16 79.53 L 11.32 83.57 L 9.87 87.65 L 8.83 91.75 L 8.21 95.87 L 8 100 L 8.21 104.13 L 8.83 108.25 L 9.87 112.35 L 11.32 116.43 L 13.16 120.47 L 15.4 124.48 L 18.03 128.43 L 21.02 132.33 L 24.38 136.16 L 28.07 139.92 L 32.09 143.6 L 36.42 147.19 L 41.04 150.68 L 45.92 154.08 L 51.05 157.36 L 56.4 160.53 L 61.95 163.58 L 67.67 166.5 L 73.54 169.28 L 79.53 171.93 L 85.61 174.43 L 91.75 176.78 L 97.94 178.98 L 104.13 181.01 L 110.3 182.89 L 116.43 184.6 L 122.48 186.13 L 128.43 187.5 L 134.25 188.68 L 139.92 189.69 L 145.4 190.52 L 150.68 191.17 L 155.73 191.63 L 160.53 191.91 L 165.05 192 L 169.28 191.91 L 173.2 191.63 L 176.78 191.17 L 180.02 190.52 L 182.89 189.69 L 185.39 188.68 L 187.5 187.5 L 189.21 186.13 L 190.52 184.6 L 191.42 182.89 L 191.91 181.01 L 191.98 178.98 L 191.63 176.78 L 190.87 174.43 L 189.69 171.93 L 188.11 169.28 L 186.13 166.5 L 183.76 163.58 L 181.01 160.53 L 177.9 157.36 L 174.43 154.08 L 170.62 150.68 L 166.5 147.19 L 162.07 143.6 L 157.36 139.92 L 152.39 136.16 L 147.19 132.33 L 141.77 128.43 L 136.16 124.48 L 130.39 120.47 L 124.48 116.43 L 118.45 112.35 L 112.35 108.25 L 106.19 104.13 L 100 100 L 93.81 95.87 L 87.65 91.75 L 81.55 87.65 L 75.52 83.57 L 69.61 79.53 L 63.84 75.52 L 58.23 71.57 L 52.81 67.67 L 47.61 63.84 L 42.64 60.08 L 37.93 56.4 L 33.5 52.81 L 29.38 49.32 L 25.57 45.92 L 22.1 42.64 L 18.99 39.47 L 16.24 36.42 L 13.87 33.5 L 11.89 30.72 L 10.31 28.07 L 9.13 25.57 L 8.37 23.22 L 8.02 21.02 L 8.09 18.99 L 8.58 17.11 L 9.48 15.4 L 10.79 13.87 L 12.5 12.5 L 14.61 11.32 L 17.11 10.31 L 19.98 9.48 L 23.22 8.83 L 26.8 8.37 L 30.72 8.09 L 34.95 8 L 39.47 8.09 L 44.27 8.37 L 49.32 8.83 L 54.6 9.48 L 60.08 10.31 L 65.75 11.32 L 71.57 12.5 L 77.52 13.87 L 83.57 15.4 L 89.7 17.11 L 95.87 18.99 L 102.06 21.02 L 108.25 23.22 L 114.39 25.57 L 120.47 28.07 L 126.46 30.72 L 132.33 33.5 L 138.05 36.42 L 143.6 39.47 L 148.95 42.64 L 154.08 45.92 L 158.96 49.32 L 163.58 52.81 L 167.91 56.4 L 171.93 60.08 L 175.62 63.84 L 178.98 67.67 L 181.97 71.57 L 184.6 75.52 L 186.84 79.53 L 188.68 83.57 L 190.13 87.65 L 191.17 91.75 L 191.79 95.87 L 192 100 Z"
+      fill="none" stroke="#C9A24E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="kicker">Altermundi · Harmonic Beacon</span>
+  <h1>Proyección Armónica</h1>
+  <span class="en">Harmonic Myth Projection</span>
+  <div class="divider"></div>
+  <p class="lead" style="text-align:center; margin:0 auto">Documento de difusión, marca y lanzamiento.<br>Un rito inmersivo que abre cada fin de semana.</p>
+  <span class="doc-tag">Brief para el equipo de Logos</span>
+  <p class="meta">Lanzamiento · Sábado 1 de Agosto de 2026 · Inmersión online en vivo</p>
+</header>
+
+<!-- ============ ÍNDICE ============ -->
+<section class="wrap">
+  <span class="eyebrow">Qué contiene este documento</span>
+  <h2>Todo lo que Logos necesita para acompañarnos</h2>
+  <p>Reunimos en un solo lugar el concepto del evento, la propuesta de marca, la estética, el público al que hablamos, el plan de publicaciones y —lo más importante para trabajar juntos— las preguntas abiertas sobre <strong>cómo resolvemos los pagos</strong> para el día del lanzamiento.</p>
+  <nav class="toc">
+    <a href="#evento"><span class="n">i</span><span>El evento en una página</span></a>
+    <a href="#concepto"><span class="n">ii</span><span>Concepto y posicionamiento</span></a>
+    <a href="#rito"><span class="n">iii</span><span>La estructura del rito</span></a>
+    <a href="#branding"><span class="n">iv</span><span>Propuesta de branding</span></a>
+    <a href="#estetica"><span class="n">v</span><span>Estética y mood</span></a>
+    <a href="#publico"><span class="n">vi</span><span>Público objetivo</span></a>
+    <a href="#difusion"><span class="n">vii</span><span>Plan de difusión</span></a>
+    <a href="#copys"><span class="n">viii</span><span>Los copys listos</span></a>
+    <a href="#pagos"><span class="n">ix</span><span>Modelo económico + pagos</span></a>
+    <a href="#equipo"><span class="n">x</span><span>Equipo y testimonios</span></a>
+  </nav>
+</section>
+
+<hr class="rule wrap" style="border:0">
+
+<!-- ============ EL EVENTO ============ -->
+<section class="wrap" id="evento">
+  <span class="eyebrow">i · El evento en una página</span>
+  <h2>Qué vamos a ofrecer</h2>
+  <p class="lead">La <span class="gold">Proyección Armónica</span> es una inmersión online en vivo de 3 a 4 horas: un rito para soltar el ruido de la semana y descender hacia el propio mito personal, sostenidos por el campo armónico del Harmonic Beacon.</p>
+  <div class="nums">
+    <div class="stat"><div class="big">1 Ago</div><div class="lbl">Primer encuentro · sábado</div></div>
+    <div class="stat"><div class="big">3–4 h</div><div class="lbl">Con recreo intermedio</div></div>
+    <div class="stat"><div class="big">US$20</div><div class="lbl">Valor por persona / sesión</div></div>
+    <div class="stat"><div class="big">Online</div><div class="lbl">Encuentro en vivo</div></div>
+  </div>
+  <div class="grid g2" style="margin-top:1rem">
+    <div class="card">
+      <h3>Edición LATAM / Europa <span style="font-size:.7em; color:var(--ink-500)">(español)</span></h3>
+      <p><span class="pill">8:30 Costa Rica</span> <span class="pill">11:30 Arg/Chile</span> <span class="pill">16:30 Europa Central</span></p>
+    </div>
+    <div class="card">
+      <h3>Edición EE.UU. <span style="font-size:.7em; color:var(--ink-500)">(inglés)</span></h3>
+      <p><span class="pill">2:00 PM Costa Rica</span> <span class="pill">4:00 PM EST NY/Miami</span> <span class="pill">1:00 PM PST LA</span></p>
+    </div>
+  </div>
+  <p style="margin-top:1.6rem; font-size:.92rem; color:var(--ink-500)">Valor de la experiencia: <strong>US$20 por persona</strong> (con packs para quienes continúan — ver modelo económico).</p>
+</section>
+
+<!-- ============ CONCEPTO ============ -->
+<section class="wrap" id="concepto">
+  <span class="eyebrow">ii · Concepto y posicionamiento</span>
+  <h2>El cruce entre física acústica<br>y psicología profunda</h2>
+  <p>Un viaje hacia el inconsciente que no se apoya en sustancias químicas ni en pantallas, sino en el <strong>sonido</strong> y el <strong>símbolo</strong>. Abre el camino a estados de profunda expansión usando únicamente un campo armónico y la propia psique. Es el contenedor ideal para la <em>expansión endógena</em> y para integrar trabajos previos de autoconocimiento.</p>
+  <p style="font-size:.95rem">Es un rito contemporáneo que hereda el gesto humano más antiguo: el de retirarse a escuchar hacia adentro. En la estirpe de la <em>búsqueda de visión</em> y el viaje del héroe, actualizado con investigación acústica seria y un método psicológico con linaje.</p>
+  <div class="grid g2" style="margin-top:2rem">
+    <div class="card">
+      <span class="roman">A</span>
+      <h3>El Sonido · Harmonic Beacon</h3>
+      <p>Un dispositivo acústico experimental que condensa la firma de la <strong>serie armónica natural</strong> en un campo sonoro continuo y envolvente. No reproduce frecuencias aisladas, sino <em>las relaciones entre ellas</em> —las proporciones de la serie armónica— que el cuerpo reconoce como orden natural. Se apoya en la <em>Harmonic Information Theory</em> (HIT), programa de investigación de AlterMundi.</p>
+    </div>
+    <div class="card">
+      <span class="roman">B</span>
+      <h3>El Símbolo · Proyección del Mito Personal</h3>
+      <p>Práctica de imaginación activa creada por Julián De La Reta tras 15+ años de clínica. Tres raíces: la <strong>psicología analítica de Jung</strong>, el <strong>monomito de Joseph Campbell</strong> (el viaje del héroe) y el <strong>psicodrama</strong>. El facilitador no interpreta: guía con preguntas que invitan al propio inconsciente a revelar sus respuestas.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2.6rem">Por qué funciona</h3>
+  <p>La música que escuchamos habitualmente usa la <strong>escala temperada</strong>: avanza por <em>tensión y reposo</em>, disonancias que empujan hacia su resolución. El Beacon no trabaja así. Afinado a la serie armónica natural, ofrece una <strong>referencia estable de máxima consonancia</strong> — un "colchón armónico" que sostiene, sin pedir resolución.</p>
+  <p>En el marco de la Harmonic Information Theory, esa consonancia es la <strong>configuración más eficiente</strong> del sistema. El cuerpo deja de gastar energía "corrigiendo" y queda libre para el viaje interior.</p>
+  <blockquote>No porque una frecuencia cure, sino porque el campo reduce la carga correctiva y deja lugar a lo que ya está adentro.<cite>Encuadre de marca · bienestar y exploración no clínica</cite></blockquote>
+  <p style="font-size:.88rem; color:var(--ink-500)"><strong>Importante para todos los copys:</strong> la experiencia grupal se enmarca como <em>bienestar y exploración</em> — <strong>no es terapia</strong>. Nunca "tratamiento", "cura" ni promesas clínicas. Las sesiones individuales de integración sí son psicoterapia (con un psicólogo formado en PMP) y existen aparte, como marco de seguridad. "Propio / propietario" = know-how interno derivado de HIT, <strong>nunca una patente</strong>.</p>
+</section>
+
+<!-- ============ RITO ============ -->
+<section class="wrap narrow" id="rito">
+  <span class="eyebrow">iii · La estructura del rito</span>
+  <h2>Tres fases, un descenso</h2>
+  <div class="phase"><div class="num">1</div><div><h3>El Cuerpo — Caldeamiento somático</h3><p>Movimiento libre guiado por el Harmonic Beacon para soltar el "personaje" y la rigidez de la semana. Aquí cada persona formula su <em>pregunta interior</em>.</p></div></div>
+  <div class="phase"><div class="num">2</div><div><h3>El Descenso — Viaje guiado</h3><p>Recostados y sostenidos por el campo acústico, descendemos 22 escalones hacia el propio inconsciente. Allí aparecen figuras —guardianes, sombras, guías— con las que dialogar para encontrar respuestas.</p></div></div>
+  <div class="phase"><div class="num">3</div><div><h3>La Integración — Psicodrama grupal</h3><p>Tras el recreo, el grupo comparte sus imágenes. El facilitador elige escenas clave y las dramatiza en vivo con el grupo, para materializar y comprender colectivamente lo descubierto.</p></div></div>
+</section>
+
+<!-- ============ BRANDING ============ -->
+<section class="wrap" id="branding">
+  <span class="eyebrow">iv · Propuesta de branding</span>
+  <h2>Una sola marca, aplicada al evento</h2>
+  <p>La Proyección Armónica vive <strong>dentro del sistema visual de Harmonic Beacon</strong>. No creamos una marca nueva: extendemos la existente. La sensación es la de un <em>templo cálido a media luz</em> — oro viejo, papel, resonancia. Lujo silencioso. Místico pero sobrio, <strong>nunca esotérico barato</strong>.</p>
+
+  <div class="grid g3" style="margin-top:2rem">
+    <div class="card">
+      <h3>El símbolo</h3>
+      <p>Curva de <strong>Lissajous 3:2</strong> (la quinta justa — el vínculo directo con la armonía). Línea continua dorada, sin relleno. Nunca se rota, deforma ni se llena de color.</p>
+    </div>
+    <div class="card">
+      <h3>Tipografía</h3>
+      <p><strong>Cormorant Garamond</strong> para títulos, números y citas en itálica (el alma elegante). <strong>Inter</strong> para cuerpo, etiquetas y botones.</p>
+    </div>
+    <div class="card">
+      <h3>Motivos</h3>
+      <p>Glows dorados difusos, grano de película sutil, hairlines finas, fotos en <strong>duotono cálido</strong>, numeración romana dorada. Mucho aire.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2.6rem">Paleta</h3>
+  <div class="tag-list">
+    <span style="border-color:#16120D"><b style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#16120D;border:1px solid #333;margin-right:6px"></b>Negro cálido #16120D</span>
+    <span><b style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#F4EEE2;margin-right:6px"></b>Hueso #F4EEE2</span>
+    <span><b style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#C9A24E;margin-right:6px"></b>Oro #C9A24E</span>
+    <span><b style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ADA089;margin-right:6px"></b>Tinta suave #ADA089</span>
+  </div>
+
+  <div class="grid g2" style="margin-top:2.6rem">
+    <div class="card" style="border-color:var(--hair)">
+      <h3 class="gold">Sí</h3>
+      <p>Fondo oscuro cálido · oro con moderación · serif elegante para títulos · Lissajous como sello · fotos en duotono cálido · itálicas para la emoción · bilingüe ES/EN en paralelo.</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--ink-600)">No</h3>
+      <p>Azul-acero corporativo · multicolor o neón · degradés arcoíris · íconos genéricos de stock · emojis en piezas formales · claims médicos · saturar de oro · "frecuencias mágicas".</p>
+    </div>
+  </div>
+  <p style="margin-top:1.6rem; font-size:.9rem; color:var(--ink-500)">Fuente de verdad en código: <a href="assets/hb-brand.css">assets/hb-brand.css</a> (tokens + componentes) y la guía completa en <code style="color:var(--ink-600)">BRANDING.md</code>. Los flyers oficiales del lanzamiento ya siguen este sistema.</p>
+</section>
+
+<!-- ============ ESTÉTICA ============ -->
+<section class="wrap" id="estetica">
+  <span class="eyebrow">v · Estética y mood</span>
+  <h2>Cómo se ve y se siente</h2>
+  <p>Fotos reales de las sesiones de prueba, tratadas en duotono cálido. Nada de stock, nada frío. Estas son las piezas base que usamos para la web y que reutilizaremos en redes.</p>
+  <div class="moodgrid">
+    <figure class="wide tall"><img src="assets/img/experience-circle.jpg" alt="La ronda"></figure>
+    <figure class="tall"><img src="assets/img/opens-sentido.jpg" alt="El descenso"></figure>
+    <figure><img src="assets/img/beacon-device.jpg" alt="El dispositivo Beacon"></figure>
+    <figure><img src="assets/img/experience-heart.jpg" alt="Experiencia"></figure>
+    <figure class="wide"><img src="assets/img/hosts-circle.jpg" alt="Facilitación"></figure>
+    <figure><img src="assets/img/hero-session.jpg" alt="Sesión"></figure>
+    <figure><img src="assets/img/experience-portrait.jpg" alt="Retrato"></figure>
+  </div>
+</section>
+
+<!-- ============ PÚBLICO ============ -->
+<section class="wrap" id="publico">
+  <span class="eyebrow">vi · Público objetivo</span>
+  <h2>A quién le hablamos</h2>
+  <p>Personas que ya hicieron —o buscan hacer— trabajo interior, y que valoran una experiencia seria y estética por encima del wellness genérico. No prometemos magia: ofrecemos un método con linaje.</p>
+  <div class="grid g3" style="margin-top:2rem">
+    <div class="card"><span class="roman">i</span><h3>Buscadores del mundo interior</h3><p>30–60 años, sensibilidad por Jung, arquetipos, psicodrama, mitología, imaginación activa. Ya leyeron, ya hicieron terapia o retiros.</p></div>
+    <div class="card"><span class="roman">ii</span><h3>Expansión sin sustancias</h3><p>Quienes buscan estados profundos de conciencia de forma <em>endógena</em>, lúcida y segura — o quieren integrar experiencias previas.</p></div>
+    <div class="card"><span class="roman">iii</span><h3>Comunidad wellness consciente</h3><p>Sound healing, meditación, somática, círculos. Gente que ya paga por experiencias de bienestar de calidad.</p></div>
+  </div>
+  <h3 style="margin-top:2.6rem">Dónde están</h3>
+  <table>
+    <tr><th>Región</th><th>Edición</th><th>Canal principal</th></tr>
+    <tr><td><b>Costa Rica</b> (base)</td><td>Español · 8:30 AM</td><td>Comunidad local, boca a boca, círculos de bienestar</td></tr>
+    <tr><td><b>Argentina / Chile</b></td><td>Español · 11:30 AM</td><td>Instagram, WhatsApp, redes de Julián</td></tr>
+    <tr><td><b>Europa Central</b></td><td>Español · 16:30</td><td>Instagram, mail</td></tr>
+    <tr><td><b>EE.UU.</b> (NY/Miami/LA)</td><td>Inglés · tarde</td><td>Instagram EN, comunidad expat/latina</td></tr>
+  </table>
+  <p style="margin-top:1.4rem; font-size:.9rem; color:var(--ink-500)"><strong>Insight de conversión:</strong> US$20 es un precio de entrada accesible que hace fácil animarse a vivirlo la primera vez. La decisión de continuar (packs, anual) llega <em>después</em> de la experiencia. Todo el funnel debe empujar a <b>reservar el lugar del sábado</b>.</p>
+</section>
+
+<!-- ============ DIFUSIÓN ============ -->
+<section class="wrap" id="difusion">
+  <span class="eyebrow">vii · Plan de difusión</span>
+  <h2>La semana del lanzamiento</h2>
+  <p>Objetivo único de esta primera semana: <strong>llenar el primer encuentro del sábado 1 de agosto</strong>. Contenido diario, bilingüe, con un solo llamado a la acción: reservar el lugar.</p>
+  <table>
+    <tr><th>Día</th><th>Pieza</th><th>Formato · canal</th></tr>
+    <tr><td><b>Lun</b></td><td>Anuncio del umbral — "abrimos las puertas"</td><td>Feed + Historia · IG/FB</td></tr>
+    <tr><td><b>Mar</b></td><td>Carrusel educativo: qué es el Beacon + las 3 fases</td><td>Carrusel 1:1 · IG</td></tr>
+    <tr><td><b>Mié</b></td><td>Testimonio real (social proof)</td><td>Reel / placa cita · IG</td></tr>
+    <tr><td><b>Jue</b></td><td>El equipo detrás — linaje y seriedad</td><td>Carrusel · IG + mail</td></tr>
+    <tr><td><b>Vie</b></td><td>Recordatorio "mañana cruzamos el umbral" + horarios</td><td>Historia + mensajes directos WhatsApp</td></tr>
+    <tr><td><b>Sáb</b></td><td>Cuenta regresiva + link de acceso en bio</td><td>Historias del día · IG</td></tr>
+  </table>
+  <div class="grid g3" style="margin-top:2rem">
+    <div class="card"><h3>Instagram / Facebook</h3><p>Motor visual. Feed para lo evergreen, historias para el día a día, reels para alcance. Link de acceso / reserva siempre en la bio.</p></div>
+    <div class="card"><h3>WhatsApp</h3><p>El canal de conversión real: invitación personal ES/EN (ya redactada) + difusión a listas y grupos afines.</p></div>
+    <div class="card"><h3>Mail</h3><p>Al listado propio: la versión larga del anuncio, con las 3 fases y horarios. Un envío el jueves, recordatorio el viernes.</p></div>
+  </div>
+</section>
+
+<!-- ============ COPYS ============ -->
+<section class="wrap narrow" id="copys">
+  <span class="eyebrow">viii · Los copys listos</span>
+  <h2>Textos aprobados para pegar</h2>
+  <p>Ya están escritos y listos en ES/EN: los mensajes directos de WhatsApp y los textos de redes/mail. Los dejamos en un archivo aparte para copiar y pegar sin tocar el diseño.</p>
+  <div class="callout">
+    <h3 class="gold">📄 copys-difusion.md</h3>
+    <p style="margin-top:.6rem">Contiene: mensaje de WhatsApp (ES + EN), post de redes/mail (ES + EN), variaciones cortas para historias, hashtags sugeridos y el lugar para el link de acceso por edición.</p>
+    <p style="margin-top:1rem"><a href="copys-difusion.md">→ Abrir copys-difusion.md</a></p>
+  </div>
+  <blockquote style="margin-top:2.4rem">Hay un umbral entre el ruido del día a día y tu propio silencio. Nuestra invitación es a cruzarlo.<cite>Frase madre · usar como gancho principal</cite></blockquote>
+</section>
+
+<!-- ============ PAGOS ============ -->
+<section class="wrap" id="pagos">
+  <span class="eyebrow">ix · Modelo económico + pagos</span>
+  <h2>Los números — y lo que aún<br>no entendemos de los pagos</h2>
+  <p>Julián nos pasó las metas. Las dejamos claras acá para que, con Logos, definamos <strong>cómo se cobran</strong> concretamente. Esta es la parte donde más ayuda necesitamos.</p>
+
+  <div class="nums">
+    <div class="stat"><div class="big">US$4.000</div><div class="lbl">Meta mensual (sostener el proyecto)</div></div>
+    <div class="stat"><div class="big">US$1.000</div><div class="lbl">Por semana</div></div>
+    <div class="stat"><div class="big">2 × US$500</div><div class="lbl">Dos eventos semanales</div></div>
+    <div class="stat"><div class="big">~30 × US$20</div><div class="lbl">Personas × precio por evento</div></div>
+  </div>
+
+  <h3 style="margin-top:1.4rem">Estructura de precios propuesta</h3>
+  <table>
+    <tr><th>Producto</th><th>Precio</th><th>Nota</th></tr>
+    <tr><td><b>Evento de lanzamiento (1 Ago)</b></td><td>US$20</td><td>Mismo valor que una sesión suelta</td></tr>
+    <tr><td><b>Sesión suelta</b></td><td>US$20</td><td>Precio base por encuentro</td></tr>
+    <tr><td><b>Pack de 3</b></td><td>US$60</td><td>Se usan cuando querés — sin vencimiento fijo</td></tr>
+    <tr><td><b>Pack anual</b></td><td>A definir</td><td>Acceso extendido / membresía</td></tr>
+  </table>
+  <p style="margin-top:1.2rem; font-size:.9rem; color:var(--ink-500)">La gracia de los packs: son <strong>créditos de sesión</strong> que la persona va gastando a su ritmo. Eso implica que alguien tiene que llevar la cuenta de cuántas sesiones le quedan a cada quien.</p>
+
+  <div class="callout">
+    <h3 class="gold">Preguntas para Logos sobre la operatoria de pagos</h3>
+    <p style="margin-top:.6rem">No terminamos de entender cómo se implementa esto en la práctica. Necesitamos que nos ayuden con:</p>
+    <ol class="qlist">
+      <li><b>¿Con qué plataforma cobramos?</b> ¿Pasarela propia, Stripe, PayPal, MercadoPago, transferencia, otra? ¿La maneja Logos o la ponemos nosotros?</li>
+      <li><b>¿Cómo cobramos en varios países a la vez?</b> Tenemos gente en Costa Rica, Argentina, Chile, Europa y EE.UU. ¿Se cobra todo en USD? ¿Cómo hacen quienes no pueden pagar en dólares (ej. Argentina)?</li>
+      <li><b>¿Cómo funcionan los packs / créditos técnicamente?</b> Si alguien compra 3 sesiones, ¿quién y cómo registra las que va usando? ¿Lo hace la app, una planilla, la plataforma de pago?</li>
+      <li><b>¿Cómo reserva y paga la persona su lugar?</b> ¿Se paga antes para confirmar el cupo o después? ¿Cómo confirmamos el pago para dar el acceso al encuentro?</li>
+      <li><b>¿Quién recibe la plata y cuándo?</b> Comisiones de la plataforma, tiempos de acreditación, a qué cuenta llega, quién administra el reparto del equipo.</li>
+      <li><b>¿Necesitamos facturar?</b> ¿Emitimos comprobante/recibo? ¿Bajo qué figura (AlterMundi, persona, etc.)?</li>
+      <li><b>¿Reembolsos y cancelaciones?</b> Si alguien paga y no puede asistir, ¿qué política aplicamos?</li>
+      <li><b>¿El checkout vive dentro de la app o es un link externo?</b> Esto define qué tenemos que dejar listo antes del 1 de agosto.</li>
+    </ol>
+    <p style="margin-top:1.4rem; font-size:.92rem; color:var(--ink-800)"><strong>Lo que sí sabemos:</strong> las metas económicas (arriba). <strong>Lo que necesitamos de Logos:</strong> el <em>cómo</em> — la plumbing de cobro que haga que esos números se puedan concretar sin fricción para el participante.</p>
+  </div>
+</section>
+
+<!-- ============ EQUIPO ============ -->
+<section class="wrap" id="equipo">
+  <span class="eyebrow">x · Equipo y testimonios</span>
+  <h2>Quiénes lo sostienen</h2>
+  <p>Un equipo multidisciplinario de AlterMundi que combina I+D armónico, linaje psicológico e ingeniería.</p>
+  <table>
+    <tr><td><b>Julián De La Reta</b></td><td>Creador de PMP · Lic. en Psicología, formación Junguiana/Psicodrama, 15+ años de clínica</td></tr>
+    <tr><td><b>Nicolás Echániz</b></td><td>Presidente de AlterMundi · coautor de HIT · líder de I+D armónico</td></tr>
+    <tr><td><b>Mariano Fernández Méndez</b></td><td>Coautor de HIT · IA / Machine Learning e investigación</td></tr>
+    <tr><td><b>Federico Bonino</b></td><td>Ingeniero de sonido · análisis acústico y programación</td></tr>
+    <tr><td><b>Anabella Scigliano Mattiauda</b></td><td>Investigadora · desarrollo de la app/web Beacon</td></tr>
+    <tr><td><b>Saira Asúa</b></td><td>Diseño de producto y experiencia (UX / cuidado grupal)</td></tr>
+    <tr><td><b>Aline Ferreyra Lemoine</b></td><td>Facilitación de bienestar integral y dinámicas corporales grupales</td></tr>
+  </table>
+
+  <h3 style="margin-top:3rem">Testimonios reales <span style="font-size:.7em; color:var(--ink-500)">(social proof)</span></h3>
+  <div class="grid g2" style="margin-top:1.4rem">
+    <blockquote>Siento que me rejuvenecí diez años… se sintió muy genuino, no desde una consigna externa, sino que salió desde adentro mío, sin juicio.<cite>Ailén</cite></blockquote>
+    <blockquote>Fue muy potente. Me llamó muchísimo la atención que las imágenes se fuesen tan claras, vívidamente… era fácil, el mundo estaba hecho ahí.<cite>Nelson</cite></blockquote>
+    <blockquote>Me siento reconfortado… mucho más tranquilo, con mayor claridad para ver las cosas.<cite>Emiliano</cite></blockquote>
+    <blockquote>Pude darme cuenta de mi lugar de poder… tener las riendas de mi vivir de una manera como un rey.<cite>Karina</cite></blockquote>
+  </div>
+</section>
+
+<footer class="footer wrap">
+  <div class="divider" style="margin-bottom:2rem"></div>
+  <p class="serif-em" style="font-size:1.4rem; color:var(--bone)">"Te esperamos del otro lado de la pantalla, del otro lado del umbral."</p>
+  <p style="margin:1.4rem auto 0; font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-500)">Altermundi · Harmonic Beacon · 2026</p>
+</footer>
+
+</body>
+</html>
