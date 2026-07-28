@@ -33,4 +33,10 @@ if (fs.existsSync('assets')) {
   console.log('✓ Copiado: assets/');
 }
 
+// Copiar la landing de inscripción y conservar la ruta /inscripcion/
+if (fs.existsSync('inscripcion')) {
+  copyRecursiveSync('inscripcion', path.join('dist', 'inscripcion'));
+  console.log('✓ Copiado: inscripcion/');
+}
+
 console.log('\n✅ Build completado en dist/');
