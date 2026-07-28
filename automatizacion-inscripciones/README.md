@@ -8,6 +8,7 @@ Sheets, avisa a `info@harmonicbeacon.com` y envía una confirmación al particip
 1. Crear una hoja llamada **Inscripciones Harmonic Myth Projection**.
 2. En la hoja, abrir **Extensiones > Apps Script**.
 3. Borrar el ejemplo que aparece, pegar el contenido de `Code.gs` y guardar.
+   El identificador de la hoja ya está configurado en el archivo.
 4. Elegir la función `setup` en la barra superior y presionar **Ejecutar**. Google
    solicitará autorización y el script creará la pestaña y los encabezados.
 5. Presionar **Implementar > Nueva implementación > Aplicación web**.

@@ -6,6 +6,7 @@
  */
 
 const CONFIG = {
+  spreadsheetId: '1t9Rg5zJdnj80b-AwIOkJbpLOdmijovkmEBVxi59P7Ks',
   sheetName: 'Inscripciones',
   notificationEmail: 'info@harmonicbeacon.com',
   confirmationUrl: 'https://harmonicbeacon.com/inscripcion/confirmacion/',
@@ -14,10 +15,7 @@ const CONFIG = {
 
 /** Ejecutar una sola vez antes de publicar la aplicación web. */
 function setup() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  if (!spreadsheet) {
-    throw new Error('Abrí el script desde una hoja de Google Sheets para ejecutar setup().');
-  }
+  const spreadsheet = SpreadsheetApp.openById(CONFIG.spreadsheetId);
 
   PropertiesService.getScriptProperties().setProperty('SPREADSHEET_ID', spreadsheet.getId());
 
