@@ -15,9 +15,14 @@ Sheets, avisa a `info@harmonicbeacon.com` y envía una confirmación al particip
 6. Configurar **Ejecutar como: Yo** y **Quién tiene acceso: Cualquier persona**.
 7. Presionar **Implementar** y copiar la URL terminada en `/exec`.
 
-La URL `/exec` debe colocarse como `action` del formulario en
-`inscripcion/index.html`. Hasta realizar ese último cambio, el formulario público
-continúa enviando inscripciones por FormSubmit y no se interrumpe.
+La implementación activa es:
+
+```text
+https://script.google.com/macros/s/AKfycbwsx8viLWkvAGNHfseK3gKW0ojoQG-jkvk82FYx7eND7PMrOR5GxCAznwlS0gHoXlrj/exec
+```
+
+Esa URL ya está configurada como `action` de `inscripcion/index.html`; el formulario no depende
+de FormSubmit.
 
 Después de modificar `Code.gs`, crear una nueva versión de la implementación web; guardar el
 editor no actualiza una implementación versionada. Ejecutar nuevamente `setup()` antes de probar
