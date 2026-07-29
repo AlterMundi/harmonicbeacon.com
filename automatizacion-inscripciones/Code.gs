@@ -10,8 +10,16 @@ const CONFIG = {
   sheetName: 'Inscripciones',
   notificationEmail: 'info@harmonicbeacon.com',
   confirmationUrl: 'https://harmonicbeacon.com/inscripcion/confirmacion/',
-  eventName: 'Harmonic Myth Projection'
+  eventName: 'Harmonic Myth Projection',
+  eventCode: 'hmp-2026-08-01',
+  termsVersion: 'registration-v1-provisional'
 };
+
+const HEADERS = [
+  'Fecha', 'Nombre', 'Apellido', 'Email', 'Sesión', 'Estado del pago', 'Origen',
+  'Registration ID', 'Event Code', 'Session Code', 'Locale',
+  'Versión términos inscripción', 'Aceptado términos inscripción', 'Actualizado'
+];
 
 /** Ejecutar una sola vez antes de publicar la aplicación web. */
 function setup() {
@@ -22,20 +30,11 @@ function setup() {
   let sheet = spreadsheet.getSheetByName(CONFIG.sheetName);
   if (!sheet) sheet = spreadsheet.insertSheet(CONFIG.sheetName);
 
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow([
-      'Fecha',
-      'Nombre',
-      'Apellido',
-      'Email',
-      'Sesión',
-      'Estado del pago',
-      'Origen'
-    ]);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 7).setFontWeight('bold');
-    sheet.autoResizeColumns(1, 7);
-  }
+  if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  sheet.setFrozenRows(1);
+  sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+  sheet.autoResizeColumns(1, HEADERS.length);
 }
 
 /** Recibe cada inscripción enviada por la landing. */
@@ -49,8 +48,17 @@ function doPost(event) {
   const lastName = clean(data.lastName);
   const email = clean(data.email).toLowerCase();
   const session = clean(data.session);
+  const eventCode = clean(data.eventCode);
+  const sessionCode = clean(data.sessionCode);
+  const locale = clean(data.locale);
+  const termsVersion = clean(data.registrationTermsVersion);
+  const termsAccepted = clean(data.registrationTermsAccepted);
 
-  if (!firstName || !lastName || !isEmail(email) || !session) {
+  if (
+    !firstName || !lastName || !isEmail(email) || !session ||
+    eventCode !== CONFIG.eventCode || !sessionCode || !['es', 'en'].includes(locale) ||
+    termsVersion !== CONFIG.termsVersion || termsAccepted !== 'ACEPTO'
+  ) {
     return HtmlService.createHtmlOutput(
       '<h1>No pudimos guardar la inscripción</h1>' +
       '<p>Volvé al formulario y revisá los datos ingresados.</p>'
@@ -65,14 +73,22 @@ function doPost(event) {
   try {
     const spreadsheet = SpreadsheetApp.openById(spreadsheetId);
     const sheet = spreadsheet.getSheetByName(CONFIG.sheetName);
+    const now = new Date().toISOString();
     sheet.appendRow([
-      new Date(),
+      now,
       safeCell(firstName),
       safeCell(lastName),
       safeCell(email),
       safeCell(session),
       'Pendiente',
-      'harmonicbeacon.com/inscripcion'
+      'harmonicbeacon.com/inscripcion',
+      Utilities.getUuid(),
+      safeCell(eventCode),
+      safeCell(sessionCode),
+      safeCell(locale),
+      safeCell(termsVersion),
+      now,
+      now
     ]);
   } finally {
     lock.releaseLock();
