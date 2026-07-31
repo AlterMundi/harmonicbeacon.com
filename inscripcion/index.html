@@ -83,7 +83,7 @@
   <main id="top">
     <section class="hero wrap">
       <div class="hero-copy">
-        <p class="eyebrow"><span data-copy="es">sesión virtual · sábado 01.08.26</span><span data-copy="en">virtual session · Saturday 08.01.26</span></p>
+        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 1 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 1</span></span></p>
         <h1 data-copy="es">El mito<br><em>está vivo.</em></h1><h1 data-copy="en">The myth<br><em>is alive.</em></h1>
         <p class="lead" data-copy="es">Una experiencia online en vivo para entrar en tu paisaje interior a través del cuerpo, el sonido y las imágenes que ya viven dentro tuyo.</p><p class="lead" data-copy="en">A live online experience to enter your inner landscape through body, sound and the images already living inside you.</p>
         <div class="hero-meta"><span><b>3—4 H</b> <span data-copy="es">inmersión</span><span data-copy="en">immersion</span></span><span><b>100%</b> ONLINE</span><span><b>HMP / 001</b></span></div>
@@ -120,7 +120,7 @@
           <p class="form-intro" data-copy="es">Dejanos los datos que necesitamos para preparar tu entrada.</p><p class="form-intro" data-copy="en">Leave the details we need to prepare your entrance.</p>
           <form id="registrationForm" action="https://script.google.com/macros/s/AKfycbzCchU5B5qKltdo0j8XKq8U24cbltLLrCeqb1gMPK8gOvBx8e18AyJ0Kd7weRox0fMB/exec" method="POST">
             <input type="hidden" name="session" id="sessionInput" value="">
-            <input type="hidden" name="eventCode" value="hmp-2026-08-01">
+            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-01">
             <input type="hidden" name="sessionCode" id="sessionCodeInput" value="">
             <input type="hidden" name="locale" id="localeInput" value="es">
             <input type="hidden" name="registrationTermsVersion" value="registration-v2">
@@ -142,7 +142,12 @@
 
   <script>
     const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es',session=null;
+    /* Fecha e idioma por URL: /inscripcion/?fecha=2026-08-08&idioma=en */
+    const fechas={'2026-08-01':{es:'sábado 1 de agosto',en:'Saturday, August 1'},'2026-08-08':{es:'sábado 8 de agosto',en:'Saturday, August 8'},'2026-08-15':{es:'sábado 15 de agosto',en:'Saturday, August 15'}};
+    const params=new URLSearchParams(location.search),fecha=params.get('fecha');
+    if(fechas[fecha]){one('#eventCodeInput').value='hmp-'+fecha;one('#dateEs').textContent=fechas[fecha].es;one('#dateEn').textContent=fechas[fecha].en}
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;all('[data-lang-button]').forEach(b=>b.classList.toggle('active',b.dataset.langButton===next))}
+    if((params.get('idioma')||params.get('lang'))==='en')setLang('en');
     const ticketUrls={es:'https://buytickets.at/harmonicbeacon/2334890',en:'https://www.tickettailor.com/events/harmonicbeacon/2334909'};
     function setSession(next){session=next;all('[data-session]').forEach(b=>b.classList.toggle('selected',b.dataset.session===next));one('#sessionInput').value=next==='es'?'Español · 08:30 Costa Rica · US$20':'English · 14:00 Costa Rica · US$50';one('#sessionCodeInput').value=next==='es'?'es-0830-cr':'en-1400-cr';one('#paymentButtonLabel').textContent=next==='es'?'continuar al pago · US$20':'continue to payment · US$50';one('#paymentButton').hidden=false}
     for(let i=1;i<=12;i++){const step=document.createElement('div');step.className='stair';step.style.setProperty('--i',i);step.innerHTML=`<span>${String(i).padStart(2,'0')}</span>`;one('#stairs').append(step)}

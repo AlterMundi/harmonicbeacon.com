@@ -65,6 +65,25 @@
   .ev-main .ilink:hover{ color:var(--bone); border-color:var(--gold); }
 
   .agenda-note{ color:var(--ink-500); font-size:.9rem; margin-top:2rem; line-height:1.6; text-align:center; }
+
+  /* Menú de horarios (conversión de zona) */
+  .tz{ display:flex; flex-wrap:wrap; align-items:center; gap:.6rem .9rem; margin-top:1.4rem;
+       padding:.9rem 1rem; border:1px solid var(--hair-soft); border-radius:14px; background:var(--surface); }
+  .tz-lb{ font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+  .tz select{ font-family:var(--font-sans); font-size:.95rem; color:var(--bone); background:var(--bg-0);
+              border:1px solid var(--hair); border-radius:10px; padding:.45rem .6rem; }
+  .tz-out{ font-family:var(--font-serif); font-style:italic; font-size:1.15rem; color:var(--gold-2); }
+  .tz-out b{ font-style:normal; font-family:var(--font-sans); font-weight:600; color:var(--bone); }
+
+  /* Fechas con inscripción */
+  .dates{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.4rem; }
+  .date-chip{ display:inline-flex; flex-direction:column; gap:.15rem; min-width:104px;
+              padding:.7rem .9rem; border:1px solid var(--hair); border-radius:14px; background:var(--surface);
+              transition:border-color .3s var(--ease), transform .3s var(--ease); }
+  .date-chip:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .date-chip .dc-d{ font-family:var(--font-serif); font-size:1.25rem; color:var(--bone); line-height:1; }
+  .date-chip .dc-a{ font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
+  @media(prefers-reduced-motion:reduce){ .date-chip{ transition:none; } }
 </style>
   <script src="/assets/meta-pixel.js" defer></script>
 </head>
@@ -77,8 +96,8 @@
     <span class="eyebrow reveal"><a href="/" class="crumb">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="es">Costa Rica</span><span data-lang="en">Costa Rica</span></span>
     <h1 class="reveal" data-d="1"><span data-lang="es">Agenda de eventos</span><span data-lang="en">Events agenda</span></h1>
     <p class="standfirst reveal" data-d="2">
-      <span data-lang="es">Encuentros del campo armónico en Costa Rica — experiencias en vivo, statik dance, sunsets y celebraciones. Arrancamos este domingo con un evento muy especial.</span>
-      <span data-lang="en">Harmonic field gatherings across Costa Rica — live experiences, statik dance, sunsets and celebrations. We kick off this Sunday with a very special one.</span>
+      <span data-lang="es">Encuentros del campo armónico — la Proyección Armónica online todos los sábados, encuentros presenciales en Costa Rica y las fechas que ya vivimos.</span>
+      <span data-lang="en">Harmonic field gatherings — the Harmonic Projection online every Saturday, in-person gatherings in Costa Rica, and the dates we have already lived.</span>
     </p>
   </div>
 </header>
@@ -87,47 +106,124 @@
   <div class="wrap">
     <div class="agenda">
 
-      <!-- ============ DESTACADO ============ -->
-      <article class="ev-feat reveal">
+      <!-- ============ PRÓXIMOS EVENTOS ============ -->
+      <div class="ev-h">
+        <span class="eyebrow"><span data-lang="es">Próximos eventos</span><span data-lang="en">Upcoming events</span></span>
+      </div>
+
+      <!-- Virtuales · español -->
+      <article class="ev-feat reveal" id="virtuales">
         <div class="tags">
-          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Próximo</span><span data-lang="en">Next up</span></span>
-          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Especial · Mundial 🇦🇷</span><span data-lang="en">Special · World Cup 🇦🇷</span></span>
+          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
+          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en español</span><span data-lang="en">Online · in Spanish</span></span>
         </div>
-        <h2><span data-lang="es">Muchachos · La Final en Awake</span><span data-lang="en">Muchachos · The Final at Awake</span></h2>
-        <p class="when"><span data-lang="es">Domingo 11:11 hs · Awake, Uvita</span><span data-lang="en">Sunday 11:11 · Awake, Uvita</span></p>
+        <h2><span data-lang="es">Encuentros virtuales · Proyección Armónica</span><span data-lang="en">Virtual gatherings · Harmonic Projection</span></h2>
+        <p class="when"><span data-lang="es">Todos los sábados · 8:30 hs (hora Costa Rica)</span><span data-lang="en">Every Saturday · 8:30 (Costa Rica time)</span></p>
         <p class="where">
-          <span data-lang="es"><b>Statik dance</b> con el Harmonic Beacon en la música, la <b>final del Mundial</b> en pantalla grande y <b>peña argentina</b> hasta tarde. Con la cocina de Awake.</span>
-          <span data-lang="en"><b>Statik dance</b> with the Harmonic Beacon woven into the music, the <b>World Cup final</b> on the big screen and an <b>Argentine peña</b> into the night. With Awake's kitchen.</span>
+          <span data-lang="es">Un encuentro <b>en vivo y online</b>: cuerpo, campo armónico y símbolo, con el mismo encuadre de la experiencia presencial. Elegí tu fecha e inscribite.</span>
+          <span data-lang="en">A <b>live online</b> gathering: body, harmonic field and symbol, with the same frame as the in-person experience. Choose your date and register.</span>
         </p>
-        <div class="cta">
-          <a class="btn btn-primary" href="/Messi"><span data-lang="es">Ver el evento</span><span data-lang="en">See the event</span> <span class="arr">→</span></a>
-          <a class="btn btn-ghost" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20de%20la%20pe%C3%B1a%20del%20Mundial%20en%20Awake%20%F0%9F%87%A6%F0%9F%87%B7" target="_blank" rel="noopener">WhatsApp</a>
+        <div class="tz" data-utc="2026-08-01T14:30:00Z">
+          <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
+          <select id="tz1" aria-label="Zona horaria / Time zone">
+            <option value="America/Costa_Rica" selected>Costa Rica</option>
+            <option value="America/Mexico_City">México (CDMX)</option>
+            <option value="America/Bogota">Colombia / Perú / Ecuador</option>
+            <option value="America/Santiago">Chile</option>
+            <option value="America/Argentina/Buenos_Aires">Argentina / Uruguay</option>
+            <option value="America/Sao_Paulo">Brasil (São Paulo)</option>
+            <option value="America/New_York">New York</option>
+            <option value="America/Los_Angeles">Los Angeles</option>
+            <option value="Europe/Madrid">España</option>
+          </select>
+          <span class="tz-out"><b class="tz-time">08:30</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
+        </div>
+        <div class="dates">
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-01"><span class="dc-d"><span data-lang="es">1 ago</span><span data-lang="en">Aug 1</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-08"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-15"><span class="dc-d"><span data-lang="es">15 ago</span><span data-lang="en">Aug 15</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
         </div>
       </article>
 
-      <!-- ============ AGENDA ============ -->
-      <div class="ev-h">
-        <span class="eyebrow"><span data-lang="es">Más fechas</span><span data-lang="en">More dates</span></span>
+      <!-- Virtuales · inglés -->
+      <article class="ev-feat reveal" id="virtual-en">
+        <div class="tags">
+          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
+          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en inglés</span><span data-lang="en">Online · in English</span></span>
+        </div>
+        <h2><span data-lang="es">Virtual gatherings · in English</span><span data-lang="en">Virtual gatherings · in English</span></h2>
+        <p class="when"><span data-lang="es">Todos los sábados · 14:00 hs (hora Costa Rica)</span><span data-lang="en">Every Saturday · 14:00 (Costa Rica time)</span></p>
+        <p class="where">
+          <span data-lang="es">La misma experiencia, guiada <b>en inglés</b>, en vivo y online. Mismas fechas de agosto.</span>
+          <span data-lang="en">The same experience, guided <b>in English</b>, live and online. Same August dates.</span>
+        </p>
+        <div class="tz" data-utc="2026-08-01T20:00:00Z">
+          <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
+          <select id="tz2" aria-label="Zona horaria / Time zone">
+            <option value="America/Costa_Rica" selected>Costa Rica</option>
+            <option value="America/Mexico_City">México (CDMX)</option>
+            <option value="America/Bogota">Colombia / Perú / Ecuador</option>
+            <option value="America/Santiago">Chile</option>
+            <option value="America/Argentina/Buenos_Aires">Argentina / Uruguay</option>
+            <option value="America/Sao_Paulo">Brasil (São Paulo)</option>
+            <option value="America/New_York">New York</option>
+            <option value="America/Los_Angeles">Los Angeles</option>
+            <option value="Europe/Madrid">España</option>
+          </select>
+          <span class="tz-out"><b class="tz-time">08:30</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
+        </div>
+        <div class="dates">
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-01&idioma=en"><span class="dc-d"><span data-lang="es">1 ago</span><span data-lang="en">Aug 1</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-08&idioma=en"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <a class="date-chip" href="/inscripcion/?fecha=2026-08-15&idioma=en"><span class="dc-d"><span data-lang="es">15 ago</span><span data-lang="en">Aug 15</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+        </div>
+      </article>
+
+      <!-- Presencial · Escazú -->
+      <article class="ev-feat reveal" id="escazu">
+        <div class="tags">
+          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Presencial · Costa Rica</span><span data-lang="en">In person · Costa Rica</span></span>
+        </div>
+        <h2><span data-lang="es">Gran encuentro presencial · Casa de Piedra, Escazú</span><span data-lang="en">Great in-person gathering · Casa de Piedra, Escazú</span></h2>
+        <p class="when"><span data-lang="es">Sábado 15 de agosto · mismos horarios que los encuentros virtuales</span><span data-lang="en">Saturday, August 15 · same times as the virtual gatherings</span></p>
+        <p class="where">
+          <span data-lang="es">Un encuentro presencial de <b>Proyección Armónica</b> en Casa de Piedra, Escazú, con el Harmonic Beacon en la sala.</span>
+          <span data-lang="en">An in-person <b>Harmonic Projection</b> gathering at Casa de Piedra, Escazú, with the Harmonic Beacon in the room.</span>
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20encuentro%20presencial%20del%2015%20de%20agosto%20en%20Casa%20de%20Piedra%2C%20Escaz%C3%BA" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <!-- ============ ENCUENTROS REALIZADOS ============ -->
+      <div class="ev-h" style="margin-top:2.8rem;">
+        <span class="eyebrow"><span data-lang="es">Encuentros realizados</span><span data-lang="en">Past gatherings</span></span>
       </div>
 
       <div class="ev-list">
         <article class="ev reveal">
-          <div class="ev-date"><div class="d">10</div><div class="m">Jun</div></div>
+          <div class="ev-date"><div class="d">25</div><div class="m">Jul</div></div>
           <div class="ev-main">
-            <h3><span data-lang="es">Beacon en Escazú</span><span data-lang="en">Beacon in Escazú</span></h3>
-            <div class="meta">Escazú · <span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></div>
-            <p class="desc"><span data-lang="es">Un encuentro del campo armónico en Escazú.</span><span data-lang="en">A harmonic field gathering in Escazú.</span></p>
-            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20evento%20Beacon%20en%20Escaz%C3%BA" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+            <h3><span data-lang="es">Day Out of Time · Place Garden, Uvita</span><span data-lang="en">Day Out of Time · Place Garden, Uvita</span></h3>
+            <div class="meta">Place Garden, Uvita · <span data-lang="es">Proyección Armónica</span><span data-lang="en">Harmonic Projection</span></div>
+            <p class="desc"><span data-lang="es">El sábado 25 de julio realizamos un encuentro de Harmonic Myth Projection dentro del Day Out of Time. Queremos agradecer a Gaia por recibirnos y por el hermoso encuentro.</span><span data-lang="en">On Saturday, July 25 we held a Harmonic Myth Projection gathering inside the Day Out of Time. We want to thank Gaia for hosting us and for the beautiful gathering.</span></p>
           </div>
         </article>
 
         <article class="ev reveal">
-          <div class="ev-date"><div class="d">22</div><div class="m">Jun</div></div>
+          <div class="ev-date"><div class="d">26</div><div class="m">Jul</div></div>
           <div class="ev-main">
-            <h3><span data-lang="es">Encuentro privado en la montaña</span><span data-lang="en">Private gathering in the mountains</span></h3>
-            <div class="meta"><span data-lang="es">Montaña · Privado</span><span data-lang="en">Mountains · Private</span></div>
-            <p class="desc"><span data-lang="es">Evento privado del campo armónico en la montaña.</span><span data-lang="en">A private harmonic field event in the mountains.</span></p>
-            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20evento%20privado%20en%20la%20monta%C3%B1a" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+            <h3><span data-lang="es">Encuentro propio en Place Garden</span><span data-lang="en">Our own gathering at Place Garden</span></h3>
+            <div class="meta">Place Garden, Uvita · <span data-lang="es">Encuentro propio</span><span data-lang="en">Own gathering</span></div>
+            <p class="desc"><span data-lang="es">El domingo 26 de julio estuvimos con un evento propio en el espacio. Agradecemos a Merli y a todo el equipo por recibirnos.</span><span data-lang="en">On Sunday, July 26 we held our own event in the space. We thank Merli and the whole team for hosting us.</span></p>
+          </div>
+        </article>
+
+        <article class="ev reveal">
+          <div class="ev-main" style="grid-column:1 / -1;">
+            <h3><span data-lang="es">Participación en la Statik Dance · Awake, Uvita</span><span data-lang="en">Taking part in the Statik Dance · Awake, Uvita</span></h3>
+            <div class="meta">Awake, Uvita · Statik dance</div>
+            <p class="desc"><span data-lang="es">Participamos de la Statik Dance en Awake, Uvita, con el Harmonic Beacon en la música.</span><span data-lang="en">We took part in the Statik Dance at Awake, Uvita, with the Harmonic Beacon woven into the music.</span></p>
           </div>
         </article>
 
@@ -137,7 +233,24 @@
             <h3><span data-lang="es">Sunset + Beacon en Amora</span><span data-lang="en">Sunset + Beacon at Amora</span></h3>
             <div class="meta">Amora · Sunset</div>
             <p class="desc"><span data-lang="es">Atardecer y campo armónico en Amora — sunset y Beacon.</span><span data-lang="en">Sunset and harmonic field at Amora — sunset and Beacon.</span></p>
-            <a class="ilink" href="https://wa.me/5493547469632?text=%C2%A1Hola!%20Quiero%20info%20del%20Sunset%20%2B%20Beacon%20en%20Amora" target="_blank" rel="noopener"><span data-lang="es">Info por WhatsApp</span><span data-lang="en">Info on WhatsApp</span> →</a>
+          </div>
+        </article>
+
+        <article class="ev reveal">
+          <div class="ev-date"><div class="d">22</div><div class="m">Jun</div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Encuentro privado en la montaña</span><span data-lang="en">Private gathering in the mountains</span></h3>
+            <div class="meta"><span data-lang="es">Montaña · Privado</span><span data-lang="en">Mountains · Private</span></div>
+            <p class="desc"><span data-lang="es">Evento privado del campo armónico en la montaña.</span><span data-lang="en">A private harmonic field event in the mountains.</span></p>
+          </div>
+        </article>
+
+        <article class="ev reveal">
+          <div class="ev-date"><div class="d">10</div><div class="m">Jun</div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Beacon en Escazú</span><span data-lang="en">Beacon in Escazú</span></h3>
+            <div class="meta">Escazú · <span data-lang="es">Experiencia</span><span data-lang="en">Experience</span></div>
+            <p class="desc"><span data-lang="es">Un encuentro del campo armónico en Escazú.</span><span data-lang="en">A harmonic field gathering in Escazú.</span></p>
           </div>
         </article>
       </div>
@@ -148,6 +261,23 @@
   </div>
 </section>
 
+<script>
+  /* Menú de horarios: convierte la hora del encuentro a la zona elegida. */
+  document.querySelectorAll('.tz').forEach(function (box) {
+    var when = new Date(box.getAttribute('data-utc'));
+    var select = box.querySelector('select');
+    var out = box.querySelector('.tz-time');
+    function paint() {
+      try {
+        out.textContent = new Intl.DateTimeFormat('es-AR', {
+          timeZone: select.value, hour: '2-digit', minute: '2-digit', hour12: false
+        }).format(when);
+      } catch (e) {}
+    }
+    select.addEventListener('change', paint);
+    paint();
+  });
+</script>
 <script src="/assets/hb-main.js" defer></script>
 </body>
 </html>
