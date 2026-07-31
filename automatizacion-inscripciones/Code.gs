@@ -12,7 +12,7 @@ const CONFIG = {
   confirmationUrl: 'https://harmonicbeacon.com/inscripcion/confirmacion/',
   eventName: 'Harmonic Myth Projection',
   eventCode: 'hmp-2026-08-01',
-  termsVersion: 'registration-v1'
+  termsVersion: 'registration-v2'
 };
 
 const HEADERS = [
