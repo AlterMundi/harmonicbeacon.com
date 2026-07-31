@@ -432,6 +432,88 @@
     html[data-lang="es"] .session-es,
     html[data-lang="en"] .session-en { display: block; }
 
+    .amplification {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, .58fr) minmax(0, 1.42fr);
+      gap: clamp(28px, 6vw, 72px);
+      align-items: center;
+      margin-top: 20px;
+      padding: clamp(32px, 6vw, 64px);
+      border: 1px solid rgba(255, 143, 200, .38);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 12% 50%, rgba(255, 143, 200, .14), transparent 30%),
+        linear-gradient(120deg, rgba(24, 25, 48, .94), rgba(12, 39, 31, .94));
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .22);
+      overflow: hidden;
+    }
+
+    .voice-orbit {
+      position: relative;
+      display: grid;
+      width: min(220px, 100%);
+      aspect-ratio: 1;
+      place-items: center;
+      justify-self: center;
+      border: 1px solid rgba(255, 216, 117, .5);
+      border-radius: 50%;
+      box-shadow: 0 0 50px rgba(255, 143, 200, .1);
+    }
+
+    .voice-orbit::before,
+    .voice-orbit::after {
+      position: absolute;
+      border: 1px solid rgba(124, 234, 255, .36);
+      border-radius: 50%;
+      content: '';
+    }
+
+    .voice-orbit::before { inset: 17%; }
+    .voice-orbit::after { inset: 34%; border-color: rgba(255, 143, 200, .48); }
+
+    .voice-wave {
+      position: relative;
+      z-index: 1;
+      color: var(--paper);
+      font: 400 2rem var(--display);
+      letter-spacing: .08em;
+    }
+
+    .amplification h2 {
+      max-width: 700px;
+      font-size: clamp(2rem, 4.4vw, 3.2rem);
+    }
+
+    .amplification-copy {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .amplification-copy strong { color: var(--paper); }
+
+    .voice-note {
+      margin: 18px 0 0;
+      padding: 14px 16px;
+      border-left: 3px solid var(--cyan);
+      color: var(--text);
+      background: rgba(124, 234, 255, .07);
+    }
+
+    .amplification .button {
+      margin-top: 24px;
+      border-color: #8cffb4;
+      background: linear-gradient(110deg, #8cffb4, var(--lime));
+    }
+
+    .amplification .button.session-es,
+    .amplification .button.session-en { display: none; }
+
+    html[data-lang="es"] .amplification .button.session-es,
+    html[data-lang="en"] .amplification .button.session-en { display: inline-flex; }
+
     .support {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -482,6 +564,8 @@
       .portal { width: 220px; }
       .content { grid-template-columns: 1fr; }
       .details { order: -1; }
+      .amplification { grid-template-columns: 1fr; }
+      .voice-orbit { width: 180px; }
     }
 
     @media (max-width: 560px) {
@@ -491,11 +575,13 @@
       .hero { gap: 36px; padding: 32px 22px; border-radius: 20px; }
       h1 { font-size: clamp(3.4rem, 16vw, 4.25rem); }
       .portal { width: 180px; }
-      .card, .support { border-radius: 18px; }
+      .card, .support, .amplification { border-radius: 18px; }
       .next-steps, .details { padding: 24px 20px; }
       .step { grid-template-columns: 44px 1fr; gap: 12px; }
       .step-number { width: 38px; height: 38px; }
       .support { grid-template-columns: 1fr; }
+      .amplification { padding: 30px 22px; }
+      .voice-orbit { width: 150px; }
       .button { width: 100%; }
       footer { flex-direction: column; align-items: center; text-align: center; }
     }
@@ -637,6 +723,25 @@
           </dl>
         </aside>
       </div>
+
+      <section class="amplification" id="amplification" aria-labelledby="amplification-title">
+        <div class="voice-orbit" aria-hidden="true"><span class="voice-wave">╱╲╱</span></div>
+        <div>
+          <p class="eyebrow" data-copy="es">Después de la sesión</p>
+          <p class="eyebrow" data-copy="en">After the session</p>
+          <h2 id="amplification-title"><span data-copy="es">Contanos tu mito<br>con tu propia voz.</span><span data-copy="en">Tell us your myth<br>in your own voice.</span></h2>
+          <p class="amplification-copy" data-copy="es">Al finalizar la experiencia, entrá a WhatsApp y envianos un audio contando el mito que apareció: imágenes, escenas, sensaciones, personajes o palabras que recuerdes. <strong>No hace falta ordenarlo ni explicarlo perfectamente.</strong> Ese relato será el punto de partida para recibir tu Amplificación del Mito.</p>
+          <p class="amplification-copy" data-copy="en">After the experience, open WhatsApp and send us a voice note telling the myth that appeared: any images, scenes, sensations, characters or words you remember. <strong>It does not need to be ordered or perfectly explained.</strong> Your story will be the starting point for receiving your Myth Amplification.</p>
+          <p class="voice-note" data-copy="es">Te sugerimos el audio porque conserva el ritmo y la emoción de lo vivido. Si preferís escribir, también podés hacerlo. En WhatsApp, antes de que envíes el relato, te presentaremos la autorización específica.</p>
+          <p class="voice-note" data-copy="en">We suggest a voice note because it preserves the rhythm and emotion of the experience. You may also write if you prefer. In WhatsApp, before you send your story, we will present the specific authorization.</p>
+          <a class="button session-es" href="https://wa.me/5493547469632?text=Hola%2C%20termin%C3%A9%20mi%20sesi%C3%B3n%20de%20Harmonic%20Myth%20Projection%20y%20quiero%20recibir%20la%20autorizaci%C3%B3n%20para%20luego%20enviar%20mi%20audio%20y%20obtener%20mi%20Amplificaci%C3%B3n%20del%20Mito." target="_blank" rel="noopener">
+            Abrir WhatsApp y comenzar ↗
+          </a>
+          <a class="button session-en" href="https://wa.me/5493547469632?text=Hi%2C%20I%20finished%20my%20Harmonic%20Myth%20Projection%20session%20and%20would%20like%20to%20receive%20the%20authorization%20before%20sending%20my%20voice%20note%20and%20receiving%20my%20Myth%20Amplification." target="_blank" rel="noopener">
+            Open WhatsApp and begin ↗
+          </a>
+        </div>
+      </section>
 
       <section class="support" aria-labelledby="support-title">
         <div>
