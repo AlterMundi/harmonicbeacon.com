@@ -18,7 +18,7 @@ Sheets, avisa a `info@harmonicbeacon.com` y envía una confirmación al particip
 La implementación activa es:
 
 ```text
-https://script.google.com/macros/s/AKfycbwsx8viLWkvAGNHfseK3gKW0ojoQG-jkvk82FYx7eND7PMrOR5GxCAznwlS0gHoXlrj/exec
+https://script.google.com/macros/s/AKfycbzCchU5B5qKltdo0j8XKq8U24cbltLLrCeqb1gMPK8gOvBx8e18AyJ0Kd7weRox0fMB/exec
 ```
 
 Esa URL ya está configurada como `action` de `inscripcion/index.html`; el formulario no depende
