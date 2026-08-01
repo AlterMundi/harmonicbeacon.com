@@ -41,21 +41,47 @@
     return Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
   }
 
+  function validWidgetPath(pathname, eventId) {
+    const parts = pathname.split('/').filter(Boolean);
+    return Boolean(
+      parts.length === 6 &&
+      parts[0] === 'checkout' &&
+      (parts[1] === 'view-event' || parts[1] === 'new-session') &&
+      parts[2] === 'id' &&
+      parts[3] === eventId &&
+      parts[4] === 'chk' &&
+      /^[A-Za-z0-9_-]{2,128}$/.test(parts[5]) &&
+      parts[5] !== 'REPLACE_WITH_EVENT_WIDGET_TOKEN'
+    );
+  }
+
+  function validWidgetQuery(url) {
+    const query = [...url.searchParams.entries()];
+    const keys = new Set(query.map(([key]) => key));
+    if (keys.size !== query.length) return false;
+    if ([...keys].some(key => !['preset_data', 'widget', 'modal_widget', 'ref'].includes(key))) {
+      return false;
+    }
+    if (url.searchParams.get('preset_data') !== '1') return false;
+    for (const name of ['widget', 'modal_widget']) {
+      if (url.searchParams.has(name) && url.searchParams.get(name) !== 'true') return false;
+    }
+    const ref = url.searchParams.get('ref');
+    return ref === null || /^[A-Za-z0-9._-]{1,128}$/.test(ref);
+  }
+
   function validCheckoutUrl(value, payload, checkout) {
     try {
       const url = new URL(value);
       const eventId = CHECKOUTS[payload?.event_code]?.sessions[payload?.session_code];
       const context = checkout?.metadata_value;
-      const query = [...url.searchParams.entries()];
       return Boolean(
         eventId &&
         url.origin === 'https://tickets.harmonicbeacon.com' &&
         !url.username &&
         !url.password &&
-        url.pathname === `/checkout/view-event/id/${eventId}/` &&
-        query.length === 1 &&
-        query[0][0] === 'preset_data' &&
-        query[0][1] === '1' &&
+        validWidgetPath(url.pathname, eventId) &&
+        validWidgetQuery(url) &&
         checkout?.metadata_name === 'registration_context' &&
         typeof context === 'string' &&
         /^ctx_v1_[A-Za-z0-9_-]{40,64}$/.test(context) &&
@@ -169,6 +195,8 @@
     registrationEvent,
     register,
     supportedRegistration,
-    validCheckoutUrl
+    validCheckoutUrl,
+    validWidgetPath,
+    validWidgetQuery
   };
 })();

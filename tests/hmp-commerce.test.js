@@ -44,19 +44,31 @@ const statusToken = `st_v1_${'S'.repeat(43)}`;
 const checkout = {
   metadata_name: 'registration_context',
   metadata_value: checkoutContext,
-  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/2334890/?preset_data=1#p[meta_registration_context]=${checkoutContext}`
+  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/2334890/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
 
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('2334890', '2334909'), payload, checkout), false);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/2334890/', '/checkout/x/'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/2334890/chk/widget-fixture/', '/checkout/x/'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/chk/widget-fixture', ''), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('widget-fixture', 'REPLACE_WITH_EVENT_WIDGET_TOKEN'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com:8443'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com.attacker.test'), payload, checkout), false);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('?preset_data=1', '?preset_data=1&redirect=evil'), payload, checkout), false);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('?preset_data=1', '?preset_data=1&preset_data=0'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('preset_data=1', 'preset_data=1&redirect=evil'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('preset_data=1', 'preset_data=1&preset_data=0'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('widget=true', 'widget=false'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, {...checkout, metadata_value: `${checkoutContext}x`}), false);
+});
+
+test('accepts both official event-specific widget path variants', () => {
+  const {api} = runtime(async () => {});
+  const newSession = {
+    ...checkout,
+    widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/2334890/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+  };
+  assert.equal(api.validCheckoutUrl(newSession.widget_url, payload, newSession), true);
 });
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {

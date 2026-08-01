@@ -24,6 +24,10 @@ Antes de publicar este flujo deben estar operativos `https://bot.harmonicbeacon.
 específico bajo `https://tickets.harmonicbeacon.com` y el webhook de Ticket Tailor. La página de
 confirmación no interpreta parámetros de retorno como prueba de pago.
 
+El checkout debe ser el URL exacto generado por el embed de un widget específico de evento y
+contener `/chk/<widget-token>/`. Un enlace directo `/checkout/view-event/id/<id>/` no puede
+transportar la metadata opaca que vincula pago e inscripción y se rechaza antes de navegar.
+
 La allowlist coordinada vive en `assets/hmp-commerce.js`. Actualmente sólo admite el evento
 `hmp-2026-08-01` y sus dos widgets conocidos. Una fecha nueva debe agregarse junto con su
 `event_code`, sesiones e IDs de widget después de que exista la misma entrada habilitada en el
