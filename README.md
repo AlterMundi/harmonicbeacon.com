@@ -13,6 +13,22 @@ python3 -m http.server 8768
 
 Después abrir <http://localhost:8768>.
 
+## Inscripción y pago
+
+`/inscripcion/` usa el contrato `registration-v3` de PMP Myth Bot. El navegador conserva una
+clave idempotente hasta recibir una respuesta válida, abre únicamente el checkout específico que
+devuelve la API y consulta después un estado canónico con un token separado. Apps Script queda
+como importador legacy `registration-v2`; no recibe el formulario actual ni envía emails.
+
+Antes de publicar este flujo deben estar operativos `https://bot.harmonicbeacon.com`, el widget
+específico bajo `https://tickets.harmonicbeacon.com` y el webhook de Ticket Tailor. La página de
+confirmación no interpreta parámetros de retorno como prueba de pago.
+
+```bash
+npm test
+npm run build
+```
+
 ## Deploy
 
 GitHub Pages desde `main` / root.

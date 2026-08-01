@@ -8,9 +8,7 @@
 const CONFIG = {
   spreadsheetId: '1t9Rg5zJdnj80b-AwIOkJbpLOdmijovkmEBVxi59P7Ks',
   sheetName: 'Inscripciones',
-  notificationEmail: 'info@harmonicbeacon.com',
   confirmationUrl: 'https://harmonicbeacon.com/inscripcion/confirmacion/',
-  eventName: 'Harmonic Myth Projection',
   eventCode: 'hmp-2026-08-01',
   termsVersion: 'registration-v2'
 };
@@ -94,35 +92,7 @@ function doPost(event) {
     lock.releaseLock();
   }
 
-  sendEmails({ firstName, lastName, email, session });
   return confirmationPage();
-}
-
-function sendEmails(registration) {
-  const fullName = `${registration.firstName} ${registration.lastName}`;
-
-  MailApp.sendEmail({
-    to: CONFIG.notificationEmail,
-    subject: `Nueva inscripción · ${CONFIG.eventName}`,
-    body: `${fullName} se inscribió. Email: ${registration.email}. Sesión: ${registration.session}.`,
-    htmlBody:
-      `<p><strong>${escapeHtml(fullName)}</strong> se inscribió.</p>` +
-      `<p>Email: ${escapeHtml(registration.email)}<br>` +
-      `Sesión: ${escapeHtml(registration.session)}</p>` +
-      '<p>La inscripción también quedó guardada en Google Sheets.</p>'
-  });
-
-  MailApp.sendEmail({
-    to: registration.email,
-    subject: `Recibimos tu inscripción · ${CONFIG.eventName}`,
-    body: `Hola ${registration.firstName}. Recibimos tu inscripción a ${CONFIG.eventName}. Sesión elegida: ${registration.session}. En breve te enviaremos las instrucciones de pago y acceso.`,
-    htmlBody:
-      `<p>Hola ${escapeHtml(registration.firstName)},</p>` +
-      `<p>Recibimos tu inscripción a <strong>${CONFIG.eventName}</strong>.</p>` +
-      `<p>Sesión elegida: ${escapeHtml(registration.session)}.</p>` +
-      '<p>En breve te enviaremos por correo las instrucciones de pago y el acceso a la sesión.</p>' +
-      '<p>Gracias por cruzar el umbral con nosotros.</p>'
-  });
 }
 
 function confirmationPage() {
@@ -145,16 +115,4 @@ function isEmail(value) {
 
 function safeCell(value) {
   return /^[=+\-@]/.test(value) ? `'${value}` : value;
-}
-
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, function (character) {
-    return {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    }[character];
-  });
 }
