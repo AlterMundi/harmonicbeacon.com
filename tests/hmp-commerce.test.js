@@ -40,6 +40,7 @@ const payload = {
   terms_accepted: true
 };
 const checkoutContext = `ctx_v1_${'A'.repeat(43)}`;
+const statusToken = `st_v1_${'S'.repeat(43)}`;
 const checkout = {
   metadata_name: 'registration_context',
   metadata_value: checkoutContext,
@@ -53,6 +54,8 @@ test('only accepts the exact configured Ticket Tailor widget for the selected se
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/2334890/', '/checkout/x/'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com:8443'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com.attacker.test'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('?preset_data=1', '?preset_data=1&redirect=evil'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('?preset_data=1', '?preset_data=1&preset_data=0'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, {...checkout, metadata_value: `${checkoutContext}x`}), false);
 });
 
@@ -83,7 +86,7 @@ test('stores a separate status token only after a valid registration response', 
       json: async () => ({
         schema_version: 'registration.response.v1',
         registration_id: '20000000-0000-4000-8000-000000000001',
-        commerce_status_token: 'st_v1_fixture',
+        commerce_status_token: statusToken,
         checkout
       })
     };
@@ -94,8 +97,35 @@ test('stores a separate status token only after a valid registration response', 
   assert.equal(observed.options.mode, 'cors');
   assert.equal(observed.options.headers['Idempotency-Key'], '10000000-0000-4000-8000-000000000001');
   assert.equal(values.has('hb-registration-v3-idempotency-key'), false);
-  assert.equal(api.readStatusContext().commerce_status_token, 'st_v1_fixture');
+  assert.equal(api.readStatusContext().commerce_status_token, statusToken);
   assert.match(result.checkout.widget_url, /^https:\/\/tickets\.harmonicbeacon\.com\//);
+});
+
+test('rejects malformed registration ids and status tokens before storing context', async () => {
+  const malformed = async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_id: '------------------------------------',
+      commerce_status_token: 'not-a-status-token',
+      checkout
+    })
+  });
+  const {api, values} = runtime(malformed);
+
+  await assert.rejects(api.register(payload), /invalid_registration_response/);
+  assert.equal(values.has(api.STATUS_CONTEXT_KEY), false);
+});
+
+test('ignores malformed status context from session storage', () => {
+  const {api, values} = runtime(async () => {});
+  values.set(api.STATUS_CONTEXT_KEY, JSON.stringify({
+    schema_version: 'registration-status-context.v1',
+    registration_id: '------------------------------------',
+    commerce_status_token: 'not-a-status-token'
+  }));
+
+  assert.equal(api.readStatusContext(), null);
 });
 
 test('aborts a stalled registration and keeps its idempotency key for a safe retry', async () => {
@@ -129,12 +159,12 @@ test('commerce status uses the private token and no credentials', async () => {
   });
   const result = await api.commerceStatus({
     registration_id: '20000000-0000-4000-8000-000000000001',
-    commerce_status_token: 'st_v1_fixture'
+    commerce_status_token: statusToken
   });
 
   assert.equal(result.state, 'PAYMENT_CONFIRMED');
   assert.equal(observed.options.credentials, 'omit');
-  assert.equal(observed.options.headers['X-Registration-Status-Token'], 'st_v1_fixture');
+  assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
 });
 
 test('aborts a stalled commerce status request with a distinct error code', async () => {
@@ -149,6 +179,6 @@ test('aborts a stalled commerce status request with a distinct error code', asyn
 
   await assert.rejects(api.commerceStatus({
     registration_id: '20000000-0000-4000-8000-000000000001',
-    commerce_status_token: 'st_v1_fixture'
+    commerce_status_token: statusToken
   }), error => error.code === 'commerce_status_timeout');
 });

@@ -6,6 +6,8 @@
   const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
   const REGISTRATION_TIMEOUT_MS = 15000;
   const STATUS_TIMEOUT_MS = 8000;
+  const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
   const CHECKOUTS = Object.freeze({
     'hmp-2026-08-01': Object.freeze({
       date: '2026-08-01',
@@ -44,13 +46,16 @@
       const url = new URL(value);
       const eventId = CHECKOUTS[payload?.event_code]?.sessions[payload?.session_code];
       const context = checkout?.metadata_value;
+      const query = [...url.searchParams.entries()];
       return Boolean(
         eventId &&
         url.origin === 'https://tickets.harmonicbeacon.com' &&
         !url.username &&
         !url.password &&
         url.pathname === `/checkout/view-event/id/${eventId}/` &&
-        url.searchParams.get('preset_data') === '1' &&
+        query.length === 1 &&
+        query[0][0] === 'preset_data' &&
+        query[0][1] === '1' &&
         checkout?.metadata_name === 'registration_context' &&
         typeof context === 'string' &&
         /^ctx_v1_[A-Za-z0-9_-]{40,64}$/.test(context) &&
@@ -99,8 +104,8 @@
     const result = await response.json();
     if (
       result.schema_version !== 'registration.response.v1' ||
-      !/^[0-9a-f-]{36}$/i.test(result.registration_id || '') ||
-      !result.commerce_status_token ||
+      !REGISTRATION_ID_PATTERN.test(result.registration_id || '') ||
+      !STATUS_TOKEN_PATTERN.test(result.commerce_status_token || '') ||
       !validCheckoutUrl(result.checkout && result.checkout.widget_url, payload, result.checkout)
     ) {
       throw new Error('invalid_registration_response');
@@ -119,7 +124,12 @@
   function readStatusContext() {
     try {
       const value = JSON.parse(storage().getItem(STATUS_CONTEXT_KEY) || 'null');
-      return value && value.schema_version === 'registration-status-context.v1' ? value : null;
+      return value &&
+        value.schema_version === 'registration-status-context.v1' &&
+        REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
+        STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '')
+        ? value
+        : null;
     } catch (_) {
       return null;
     }
