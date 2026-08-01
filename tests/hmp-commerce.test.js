@@ -4,7 +4,7 @@ const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-function runtime(fetchImpl) {
+function runtime(fetchImpl, overrides = {}) {
   const values = new Map();
   const sessionStorage = {
     getItem: key => values.has(key) ? values.get(key) : null,
@@ -12,9 +12,13 @@ function runtime(fetchImpl) {
     removeItem: key => values.delete(key)
   };
   const window = {
+    AbortController,
+    clearTimeout,
     crypto: {randomUUID: () => '10000000-0000-4000-8000-000000000001'},
     fetch: fetchImpl,
-    sessionStorage
+    sessionStorage,
+    setTimeout,
+    ...overrides
   };
   const context = vm.createContext({URL, window});
   const source = fs.readFileSync(
@@ -35,12 +39,30 @@ const payload = {
   terms_version: 'registration-v3',
   terms_accepted: true
 };
+const checkoutContext = `ctx_v1_${'A'.repeat(43)}`;
+const checkout = {
+  metadata_name: 'registration_context',
+  metadata_value: checkoutContext,
+  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/2334890/?preset_data=1#p[meta_registration_context]=${checkoutContext}`
+};
 
-test('only accepts the configured HTTPS Ticket Tailor host', () => {
+test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
-  assert.equal(api.validCheckoutUrl('https://tickets.harmonicbeacon.com/checkout/x'), true);
-  assert.equal(api.validCheckoutUrl('https://tickets.harmonicbeacon.com.attacker.test/x'), false);
-  assert.equal(api.validCheckoutUrl('http://tickets.harmonicbeacon.com/x'), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('2334890', '2334909'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/2334890/', '/checkout/x/'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com:8443'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com.attacker.test'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, {...checkout, metadata_value: `${checkoutContext}x`}), false);
+});
+
+test('supports only registration dates and sessions in the coordinated catalog', () => {
+  const {api} = runtime(async () => {});
+  assert.equal(api.registrationEvent('2026-08-01').date, '2026-08-01');
+  assert.equal(api.registrationEvent('2026-08-08'), null);
+  assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), true);
+  assert.equal(api.supportedRegistration('hmp-2026-08-01', 'unknown'), false);
+  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), false);
 });
 
 test('keeps the idempotency key when registration outcome is unknown', async () => {
@@ -62,9 +84,7 @@ test('stores a separate status token only after a valid registration response', 
         schema_version: 'registration.response.v1',
         registration_id: '20000000-0000-4000-8000-000000000001',
         commerce_status_token: 'st_v1_fixture',
-        checkout: {
-          widget_url: 'https://tickets.harmonicbeacon.com/checkout/x#p[meta_registration_context]=ctx_v1_fixture'
-        }
+        checkout
       })
     };
   });
@@ -76,6 +96,23 @@ test('stores a separate status token only after a valid registration response', 
   assert.equal(values.has('hb-registration-v3-idempotency-key'), false);
   assert.equal(api.readStatusContext().commerce_status_token, 'st_v1_fixture');
   assert.match(result.checkout.widget_url, /^https:\/\/tickets\.harmonicbeacon\.com\//);
+});
+
+test('aborts a stalled registration and keeps its idempotency key for a safe retry', async () => {
+  const stalledFetch = (_url, options) => new Promise((_resolve, reject) => {
+    if (options.signal.aborted) return reject(new Error('aborted'));
+    options.signal.addEventListener('abort', () => reject(new Error('aborted')), {once: true});
+  });
+  const {api, values} = runtime(stalledFetch, {
+    setTimeout: callback => { callback(); return 1; },
+    clearTimeout: () => {}
+  });
+
+  await assert.rejects(api.register(payload), error => error.code === 'registration_timeout');
+  assert.equal(
+    values.get('hb-registration-v3-idempotency-key'),
+    '10000000-0000-4000-8000-000000000001'
+  );
 });
 
 test('commerce status uses the private token and no credentials', async () => {
@@ -98,4 +135,20 @@ test('commerce status uses the private token and no credentials', async () => {
   assert.equal(result.state, 'PAYMENT_CONFIRMED');
   assert.equal(observed.options.credentials, 'omit');
   assert.equal(observed.options.headers['X-Registration-Status-Token'], 'st_v1_fixture');
+});
+
+test('aborts a stalled commerce status request with a distinct error code', async () => {
+  const stalledFetch = (_url, options) => new Promise((_resolve, reject) => {
+    if (options.signal.aborted) return reject(new Error('aborted'));
+    options.signal.addEventListener('abort', () => reject(new Error('aborted')), {once: true});
+  });
+  const {api} = runtime(stalledFetch, {
+    setTimeout: callback => { callback(); return 1; },
+    clearTimeout: () => {}
+  });
+
+  await assert.rejects(api.commerceStatus({
+    registration_id: '20000000-0000-4000-8000-000000000001',
+    commerce_status_token: 'st_v1_fixture'
+  }), error => error.code === 'commerce_status_timeout');
 });

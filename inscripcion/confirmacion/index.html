@@ -630,6 +630,10 @@
           <h1 id="page-title">Un momento.</h1>
           <p class="hero-lead" id="pageLead">Estamos consultando el estado real de tu compra.</p>
           <p class="order-reference" id="orderReference"></p>
+          <button class="button" id="retryStatus" type="button" hidden>
+            <span data-copy="es">Reintentar verificación</span>
+            <span data-copy="en">Retry verification</span>
+          </button>
         </div>
 
         <div class="portal" aria-hidden="true">
@@ -774,8 +778,10 @@
     const portalStatus = document.querySelector('#portalStatus');
     const confirmedContent = document.querySelector('#confirmedContent');
     const amplification = document.querySelector('#amplification');
+    const retryStatus = document.querySelector('#retryStatus');
     let currentState = context ? 'VERIFYING' : 'CONTEXT_MISSING';
     let purchaseAnnounced = false;
+    let verificationRunning = false;
 
     const messages = {
       es: {
@@ -786,6 +792,7 @@
         NOT_PAID: ['Pago no confirmado', 'Todavía no.', 'No encontramos un pago confirmado. Si pagaste, escribinos y lo revisamos.', 'sin confirmar'],
         REVOKED: ['Acceso revocado', 'Estado actualizado.', 'La entrada fue anulada o reembolsada. Escribinos si necesitás ayuda.', 'revocado'],
         CONTEXT_MISSING: ['No pudimos verificar', 'Revisá tu correo.', 'Esta pestaña no conserva la referencia privada necesaria. No vuelvas a pagar; revisá Ticket Tailor o escribinos.', 'sin referencia'],
+        STATUS_TIMEOUT: ['La verificación tardó demasiado', 'Podés reintentar.', 'Tu referencia privada sigue segura en esta pestaña. Reintentar no inicia otro pago.', 'demorado'],
         UNAVAILABLE: ['Verificación demorada', 'Seguimos procesando.', 'No pudimos consultar el estado ahora. Revisá tu correo de Ticket Tailor o escribinos.', 'demorado']
       },
       en: {
@@ -796,6 +803,7 @@
         NOT_PAID: ['Payment not confirmed', 'Not yet.', 'We did not find a confirmed payment. If you paid, contact us and we will review it.', 'not confirmed'],
         REVOKED: ['Access revoked', 'Status updated.', 'The ticket was cancelled or refunded. Contact us if you need help.', 'revoked'],
         CONTEXT_MISSING: ['Unable to verify', 'Check your email.', 'This tab no longer has the private reference required for verification. Do not pay again; check Ticket Tailor or contact us.', 'no reference'],
+        STATUS_TIMEOUT: ['Verification took too long', 'You can retry.', 'Your private reference is still safe in this tab. Retrying will not start another payment.', 'delayed'],
         UNAVAILABLE: ['Verification delayed', 'Still processing.', 'We could not check the status now. Check your Ticket Tailor email or contact us.', 'delayed']
       }
     };
@@ -810,6 +818,7 @@
       const confirmed = state === 'PAYMENT_CONFIRMED' || state === 'ACCESS_READY';
       confirmedContent.hidden = !confirmed;
       amplification.hidden = !confirmed;
+      retryStatus.hidden = !context || !['STATUS_TIMEOUT', 'UNAVAILABLE'].includes(state);
       if (confirmed && context && !purchaseAnnounced) {
         purchaseAnnounced = true;
         const confirmation = {
@@ -846,23 +855,35 @@
     setLanguage(initialLanguage);
 
     async function verifyCommerce() {
-      if (!context) return;
-      for (let attempt = 0; attempt < 30; attempt += 1) {
-        try {
-          const result = await window.HMPCommerce.commerceStatus(context);
-          renderState(result.state);
-          if (result.state !== 'VERIFYING') return;
-        } catch (_) {
-          if (attempt >= 2) {
-            renderState('UNAVAILABLE');
-            return;
+      if (!context || verificationRunning) return;
+      verificationRunning = true;
+      retryStatus.disabled = true;
+      retryStatus.hidden = true;
+      try {
+        for (let attempt = 0; attempt < 30; attempt += 1) {
+          try {
+            const result = await window.HMPCommerce.commerceStatus(context);
+            renderState(result.state);
+            if (result.state !== 'VERIFYING') return;
+          } catch (error) {
+            if (attempt >= 2) {
+              renderState(error?.code === 'commerce_status_timeout' ? 'STATUS_TIMEOUT' : 'UNAVAILABLE');
+              return;
+            }
           }
+          await new Promise(resolve => window.setTimeout(resolve, 3000));
         }
-        await new Promise(resolve => window.setTimeout(resolve, 3000));
+        renderState('UNAVAILABLE');
+      } finally {
+        verificationRunning = false;
+        retryStatus.disabled = false;
       }
-      renderState('UNAVAILABLE');
     }
 
+    retryStatus.addEventListener('click', () => {
+      renderState('VERIFYING');
+      verifyCommerce();
+    });
     verifyCommerce();
   </script>
 </body>

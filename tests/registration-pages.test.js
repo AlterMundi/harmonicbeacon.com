@@ -15,6 +15,11 @@ test('registration form requires v3 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /mode:\s*['"]no-cors/);
   assert.doesNotMatch(page, /script\.google\.com\/macros/);
   assert.doesNotMatch(page, /buytickets\.at\/harmonicbeacon/);
+  assert.match(page, /registrationEvent\(fecha\)/);
+  assert.match(page, /if\(!eventAvailable\)/);
+  assert.doesNotMatch(page, /'2026-08-08':/);
+  assert.doesNotMatch(page, /'2026-08-15':/);
+  assert.match(page, /error\?\.code==='registration_timeout'/);
 });
 
 test('confirmation starts neutral and unlocks content from canonical status', () => {
@@ -23,6 +28,9 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   assert.match(page, /id="confirmedContent" hidden/);
   assert.match(page, /window\.HMPCommerce\.commerceStatus\(context\)/);
   assert.match(page, /state === 'PAYMENT_CONFIRMED' \|\| state === 'ACCESS_READY'/);
+  assert.match(page, /id="retryStatus"/);
+  assert.match(page, /commerce_status_timeout/);
+  assert.match(page, /STATUS_TIMEOUT/);
 });
 
 test('Meta Purchase is gated by the canonical commerce event', () => {
