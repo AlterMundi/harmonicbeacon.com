@@ -92,6 +92,11 @@
                      transition:border-color .3s var(--ease), transform .3s var(--ease); }
   .gal-strip button:hover{ border-color:var(--gold); transform:translateY(-2px); }
   .gal-strip img{ width:88px; height:64px; object-fit:cover; display:block; }
+  .gal-strip .gal-video{ position:relative; }
+  .gal-strip .gal-video::after{ content:'\25B6'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+                                width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+                                padding-left:2px; border:1px solid rgba(255,255,255,.72); border-radius:50%;
+                                background:rgba(14,11,8,.68); color:#fff; font-size:10px; line-height:1; }
   .gal-strip .gal-more{ display:inline-flex; align-items:center; justify-content:center; text-align:center;
                         min-width:104px; height:64px; padding:0 .9rem; line-height:1.35;
                         border:1px solid var(--hair); border-radius:10px;
@@ -285,12 +290,18 @@
           </div>
         </article>
 
-        <article class="ev reveal">
+        <article class="ev reveal" id="amora">
           <div class="ev-date"><div class="d">24</div><div class="m">Jun</div></div>
           <div class="ev-main">
             <h3><span data-lang="es">Sunset + Beacon en Amora</span><span data-lang="en">Sunset + Beacon at Amora</span></h3>
             <div class="meta">Amora · Sunset</div>
             <p class="desc"><span data-lang="es">Atardecer y campo armónico en Amora — sunset y Beacon.</span><span data-lang="en">Sunset and harmonic field at Amora — sunset and Beacon.</span></p>
+            <div class="gal-strip">
+              <button type="button" data-gal="amora" data-i="0" aria-label="Ver foto del espacio en Amora"><img src="/assets/img/eventos/amora/amora-01-t.jpg" alt="Espacio preparado para el encuentro Sunset + Beacon en Amora" loading="lazy" /></button>
+              <button type="button" data-gal="amora" data-i="1" aria-label="Ver foto del equipo en Amora"><img src="/assets/img/eventos/amora/amora-02-t.jpg" alt="Equipo del encuentro Sunset + Beacon en Amora" loading="lazy" /></button>
+              <button type="button" class="gal-video" data-gal="amora" data-i="2" aria-label="Ver video del sunset en Amora"><img src="/assets/img/eventos/amora/amora-video-t.jpg" alt="Música durante el sunset en Amora" loading="lazy" /></button>
+              <button type="button" class="gal-more" data-gal="amora" data-i="0"><span data-lang="es">Ver galería · 3</span><span data-lang="en">See gallery · 3</span></button>
+            </div>
           </div>
         </article>
 
@@ -361,6 +372,14 @@
       items: [1,2,3].map(function (n) {
         return { type: 'image', src: '/assets/img/eventos/cima/cima-0' + n + '.jpg' };
       })
+    },
+    amora: {
+      cap: { es: 'Sunset + Beacon en Amora — 24 de junio', en: 'Sunset + Beacon at Amora — June 24' },
+      items: [
+        { type: 'image', src: '/assets/img/eventos/amora/amora-01.jpg' },
+        { type: 'image', src: '/assets/img/eventos/amora/amora-02.jpg' },
+        { type: 'video', src: '/assets/img/eventos/amora/amora-video.mp4' }
+      ]
     },
     merli: {
       cap: { es: 'Encuentro propio en Fuente Semilla — 26 de julio', en: 'Our own gathering at Fuente Semilla — July 26' },
