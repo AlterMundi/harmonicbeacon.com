@@ -337,6 +337,37 @@
 
     .terms-card a:not(.primary-button) { color: var(--gold-bright); text-underline-offset: 3px; }
 
+    .identity-fields {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .identity-field {
+      display: grid;
+      gap: 7px;
+      color: var(--cream);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .identity-field input {
+      width: 100%;
+      min-height: 50px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 228, 160, .28);
+      border-radius: 12px;
+      color: var(--cream);
+      background: rgba(3, 2, 1, .45);
+      font: 500 1rem/1.2 var(--sans);
+    }
+
+    .identity-field input:focus {
+      border-color: var(--gold-bright);
+      outline: 3px solid rgba(255, 228, 160, .12);
+    }
+
     .acceptance {
       display: grid;
       grid-template-columns: 20px 1fr;
@@ -385,7 +416,8 @@
 
     .primary-button:hover { transform: translateY(-2px); filter: brightness(1.05); }
 
-    .primary-button[aria-disabled="true"] {
+    .primary-button[aria-disabled="true"],
+    .primary-button:disabled {
       color: #8f846e;
       background: #332919;
       box-shadow: none;
@@ -535,7 +567,7 @@
         <div>
           <p class="eyebrow">Acceso al encuentro</p>
           <h2 id="access-title">11:00 · Costa Rica</h2>
-          <p class="section-intro">El enlace estará disponible diez minutos antes del inicio. Entrarás desde la app del Beacon; iniciá sesión con tu cuenta y abrí el evento de hoy.</p>
+          <p class="section-intro">El ingreso estará habilitado diez minutos antes del inicio.<br><span lang="en">Entry will be enabled ten minutes before the start.</span></p>
           <p class="opening"><strong>Inicio:</strong> 11:00, hora local de Costa Rica.<br><strong>Apertura del acceso:</strong> 10:50, hora local de Costa Rica.</p>
           <div class="countdown" id="countdown" aria-label="Cuenta regresiva para la apertura">
             <div class="countdown-cell"><strong id="countHours">00</strong><span>horas</span></div>
@@ -544,17 +576,28 @@
           </div>
         </div>
 
-        <div class="terms-card">
+        <form class="terms-card" id="invitationForm" method="post" action="https://live.harmonicbeacon.com/api/auth/ticket">
           <span class="lock" aria-hidden="true">◇</span>
           <h3>Antes de entrar</h3>
-          <p>Para habilitar los enlaces necesitás leer y aceptar los términos de inscripción, participación, grabación y privacidad.</p>
+          <p>Decinos cómo querés aparecer en la sala y aceptá los términos de inscripción, participación, grabación y privacidad.</p>
+          <div class="identity-fields">
+            <label class="identity-field" for="participantName">
+              <span>Nombre</span>
+              <input id="participantName" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required placeholder="Tu nombre">
+            </label>
+            <label class="identity-field" for="participantEmail">
+              <span>Correo electrónico</span>
+              <input id="participantEmail" name="email" type="email" autocomplete="email" inputmode="email" maxlength="320" required placeholder="vos@ejemplo.com">
+            </label>
+          </div>
+          <input type="hidden" name="code" value="NICO100">
           <label class="acceptance">
-            <input type="checkbox" id="termsAccepted">
+            <input type="checkbox" id="termsAccepted" name="termsAccepted" value="accepted" required>
             <span>Leí y acepto los <a href="/politica/" target="_blank" rel="noopener">términos y condiciones de la experiencia</a>.</span>
           </label>
-          <p class="status" id="accessStatus" role="status" aria-live="polite">Aceptá los términos para continuar.</p>
-          <a class="primary-button" id="eventButton" aria-disabled="true">Entrar al evento en la app</a>
-        </div>
+          <p class="status" id="accessStatus" role="status" aria-live="polite">Completá tu nombre, correo y aceptación para entrar.</p>
+          <button class="primary-button" id="eventButton" type="submit" disabled>Entrar a la sala</button>
+        </form>
       </section>
 
       <section class="section" aria-labelledby="prepare-title">
@@ -608,17 +651,20 @@
   </div>
 
   <script>
-    const EVENT_URL = 'https://beacon.altermundi.net/';
     const BOT_URL = 'https://wa.me/50663551803';
     const TERMS_KEY = 'hb-personal-invitation-terms-v2';
     const ACCESS_OPENS_AT = Date.UTC(2026, 7, 2, 16, 50, 0);
     const EVENT_STARTS_AT = Date.UTC(2026, 7, 2, 17, 0, 0);
 
     const termsCheckbox = document.querySelector('#termsAccepted');
+    const invitationForm = document.querySelector('#invitationForm');
+    const participantName = document.querySelector('#participantName');
+    const participantEmail = document.querySelector('#participantEmail');
     const eventButton = document.querySelector('#eventButton');
     const botButton = document.querySelector('#botButton');
     const status = document.querySelector('#accessStatus');
     const countdown = document.querySelector('#countdown');
+    let entryError = new URLSearchParams(window.location.search).get('entry_error');
 
     try { termsCheckbox.checked = localStorage.getItem(TERMS_KEY) === 'accepted'; } catch (_) {}
 
@@ -641,6 +687,7 @@
     function updateAccess() {
       const now = Date.now();
       const termsAccepted = termsCheckbox.checked;
+      const identityComplete = participantName.value.trim().length >= 2 && participantEmail.validity.valid;
       const accessIsOpen = now >= ACCESS_OPENS_AT;
       const remaining = Math.max(0, ACCESS_OPENS_AT - now);
 
@@ -649,21 +696,29 @@
       document.querySelector('#countSeconds').textContent = formatPart(Math.floor((remaining % 60000) / 1000));
       countdown.hidden = accessIsOpen;
 
-      setLinkState(eventButton, termsAccepted && accessIsOpen, EVENT_URL);
+      eventButton.disabled = !(termsAccepted && identityComplete && accessIsOpen);
+      eventButton.setAttribute('aria-disabled', String(eventButton.disabled));
       setLinkState(botButton, termsAccepted, BOT_URL);
 
-      if (!termsAccepted) {
-        status.textContent = 'Aceptá los términos para habilitar los enlaces.';
+      if (entryError) {
+        status.textContent = entryError === 'limited'
+          ? 'Hubo demasiados intentos. Esperá un momento y volvé a probar.'
+          : 'No pudimos habilitar el acceso. Revisá tus datos o pedinos ayuda por WhatsApp.';
+      } else if (!identityComplete) {
+        status.textContent = 'Completá tu nombre y un correo electrónico válido.';
+      } else if (!termsAccepted) {
+        status.textContent = 'Aceptá los términos para entrar.';
       } else if (!accessIsOpen) {
-        status.textContent = 'Términos aceptados. El acceso se habilita hoy a las 10:50 de Costa Rica.';
+        status.textContent = 'Todo listo. El ingreso se habilita a las 10:50 de Costa Rica.';
       } else if (now < EVENT_STARTS_AT) {
-        status.textContent = 'La puerta está abierta. Ya podés entrar a la app.';
+        status.textContent = 'La puerta está abierta. Ya podés entrar a la sala.';
       } else {
         status.textContent = 'El encuentro comenzó. Podés entrar ahora.';
       }
     }
 
     termsCheckbox.addEventListener('change', () => {
+      clearEntryError();
       try {
         if (termsCheckbox.checked) localStorage.setItem(TERMS_KEY, 'accepted');
         else localStorage.removeItem(TERMS_KEY);
@@ -671,7 +726,27 @@
       updateAccess();
     });
 
-    [eventButton, botButton].forEach((link) => {
+    function clearEntryError() {
+      if (!entryError) return;
+      entryError = null;
+      history.replaceState({}, '', window.location.pathname);
+    }
+
+    [participantName, participantEmail].forEach((field) => field.addEventListener('input', () => {
+      clearEntryError();
+      updateAccess();
+    }));
+
+    invitationForm.addEventListener('submit', (event) => {
+      updateAccess();
+      if (eventButton.disabled) {
+        event.preventDefault();
+        const firstInvalid = invitationForm.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+      }
+    });
+
+    [botButton].forEach((link) => {
       link.addEventListener('click', (event) => {
         if (link.getAttribute('aria-disabled') === 'true') {
           event.preventDefault();
