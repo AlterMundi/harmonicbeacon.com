@@ -499,10 +499,21 @@
 
     .bot .primary-button { width: fit-content; min-width: 280px; }
 
+    .bot-actions {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .bot-actions .primary-button { margin-top: 0; }
+
     .bot-terms {
-      margin: 13px 0 0;
+      max-width: 190px;
+      margin: 0;
       color: var(--muted);
       font-size: .78rem;
+      line-height: 1.45;
     }
 
     .bot-terms a { color: var(--gold-bright); }
@@ -550,6 +561,8 @@
       .instructions-grid { grid-template-columns: 1fr; }
       .instruction { min-height: auto; }
       .bot .primary-button { width: 100%; min-width: 0; }
+      .bot-actions { display: grid; gap: 12px; }
+      .bot-terms { max-width: none; }
       .help { display: grid; padding: 24px 20px; }
       footer { flex-direction: column; align-items: center; text-align: center; }
     }
@@ -644,8 +657,10 @@
           <p class="eyebrow">Al finalizar</p>
           <h2 id="bot-title">Tu voz abre<br>la amplificación.</h2>
           <p class="bot-copy">Después del encuentro, entrá al bot por WhatsApp y envianos un audio contando tu mito: imágenes, escenas, sensaciones, personajes o palabras que recuerdes. <strong>No hace falta ordenarlo ni explicarlo perfectamente.</strong></p>
-          <a class="primary-button" id="botButton" aria-disabled="true">Abrir el bot y enviar mi audio</a>
-          <p class="bot-terms">Podés consultar los <a href="/legal/terms/bot-v6.pdf" target="_blank" rel="noopener">términos específicos de uso del bot</a>.</p>
+          <div class="bot-actions">
+            <a class="primary-button" id="botButton" aria-disabled="true">Abrir el bot y enviar mi audio</a>
+            <p class="bot-terms"><a href="/legal/terms/bot-v6.pdf" target="_blank" rel="noopener">Términos y condiciones del bot</a></p>
+          </div>
         </div>
       </section>
 
