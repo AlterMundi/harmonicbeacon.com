@@ -109,8 +109,16 @@
     </section>
 
     <section class="booking wrap reveal" id="inscripcion">
-      <div class="booking-head"><div><span class="section-tag">REGISTRATION / 001</span><h2 data-copy="es">Inscripciones<br><em>próximamente.</em></h2><h2 data-copy="en">Registrations<br><em>opening soon.</em></h2></div></div>
-      <div class="booking-panel">
+      <div class="booking-head"><div><span class="section-tag">REGISTRATION / 001</span><h2 data-copy="es">Inscripción<br><em>Harmonic Myth.</em></h2><h2 data-copy="en">Harmonic Myth<br><em>registration.</em></h2></div></div>
+      <div class="booking-panel" id="registrationClosed">
+        <div class="session-zone" style="grid-column:1/-1">
+          <h3 data-copy="es">Inscripciones próximamente</h3><h3 data-copy="en">Registrations opening soon</h3>
+          <p class="form-intro" data-copy="es">El formulario y la venta de entradas todavía no están habilitados. Publicaremos aquí el acceso cuando las inscripciones estén abiertas.</p>
+          <p class="form-intro" data-copy="en">The registration form and ticket sales are not available yet. Access will be published here when registrations open.</p>
+          <p class="timezone"><span data-copy="es">SIN FORMULARIO · SIN PAGO</span><span data-copy="en">NO FORM · NO PAYMENT</span></p>
+        </div>
+      </div>
+      <div class="booking-panel" id="registrationFlow" hidden>
         <div class="session-zone">
           <div id="registrationIntro"><h3 data-copy="es">Primer paso</h3><h3 data-copy="en">First step</h3><p class="form-intro" data-copy="es">Dejanos tu nombre y correo. Después vas a elegir el idioma, ver el horario y el precio antes de pagar.</p><p class="form-intro" data-copy="en">Leave your name and email. Then choose the language and review the time and price before paying.</p><p class="timezone">01 · DATOS &nbsp;→&nbsp; 02 · SESIÓN &nbsp;→&nbsp; 03 · PAGO</p></div>
           <div id="sessionStep" hidden><h3 data-copy="es">Elegí tu sesión</h3><h3 data-copy="en">Choose your session</h3><div class="session-list"><button class="session" type="button" data-session="es"><span class="radio"></span><span class="session-copy"><b>ESPAÑOL</b><small><span data-copy="es">sábado · hora Costa Rica</span><span data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>08:30</b><small>US$20</small></span></button><button class="session" type="button" data-session="en"><span class="radio"></span><span class="session-copy"><b>ENGLISH</b><small><span data-copy="es">sábado · hora Costa Rica</span><span data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>14:00</b><small>US$50</small></span></button></div><p class="timezone">◷ COSTA RICA · UTC−6</p></div>
@@ -144,7 +152,9 @@
   <script>
     const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es',session=null;
     /* Sólo fechas presentes en el catálogo coordinado pueden abrir checkout. */
-    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-08',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=Boolean(eventConfig);
+    const registrationOpen=window.HMPCommerce.REGISTRATION_OPEN;
+    one('#registrationClosed').hidden=registrationOpen;one('#registrationFlow').hidden=!registrationOpen;
+    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-08',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
     if(eventConfig){one('#eventCodeInput').value='hmp-'+eventConfig.date;one('#dateEs').textContent=eventConfig.label_es;one('#dateEn').textContent=eventConfig.label_en}else{one('#eventCodeInput').value='';one('#dateEs').textContent='fecha aún no disponible';one('#dateEn').textContent='date not available yet';all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')})}
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;all('[data-lang-button]').forEach(b=>b.classList.toggle('active',b.dataset.langButton===next))}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');

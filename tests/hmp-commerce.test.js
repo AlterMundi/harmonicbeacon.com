@@ -4,7 +4,7 @@ const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-function runtime(fetchImpl, overrides = {}) {
+function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
   const values = new Map();
   const sessionStorage = {
     getItem: key => values.has(key) ? values.get(key) : null,
@@ -25,7 +25,10 @@ function runtime(fetchImpl, overrides = {}) {
     path.join(__dirname, '..', 'assets', 'hmp-commerce.js'),
     'utf8'
   );
-  vm.runInContext(source, context);
+  const evaluatedSource = registrationOpen
+    ? source.replace('const REGISTRATION_OPEN = false;', 'const REGISTRATION_OPEN = true;')
+    : source;
+  vm.runInContext(evaluatedSource, context);
   return {api: window.HMPCommerce, values};
 }
 
@@ -46,6 +49,16 @@ const checkout = {
   metadata_value: checkoutContext,
   widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/2334890/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
+
+test('production flag rejects registration before any network request', async () => {
+  let requested = false;
+  const {api} = runtime(async () => { requested = true; }, {}, false);
+
+  assert.equal(api.REGISTRATION_OPEN, false);
+  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), false);
+  await assert.rejects(api.register(payload), error => error.code === 'registration_unavailable');
+  assert.equal(requested, false);
+});
 
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});

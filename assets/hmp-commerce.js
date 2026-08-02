@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  const REGISTRATION_OPEN = false;
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
   const IDEMPOTENCY_KEY = 'hb-registration-v3-idempotency-key';
   const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
@@ -38,7 +39,7 @@
   }
 
   function supportedRegistration(eventCode, sessionCode) {
-    return Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
+    return REGISTRATION_OPEN && Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
   }
 
   function validWidgetPath(pathname, eventId) {
@@ -185,6 +186,7 @@
   window.HMPCommerce = {
     API_ORIGIN,
     CHECKOUTS,
+    REGISTRATION_OPEN,
     REGISTRATION_TIMEOUT_MS,
     STATUS_TIMEOUT_MS,
     STATUS_CONTEXT_KEY,

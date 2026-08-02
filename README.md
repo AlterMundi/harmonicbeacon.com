@@ -20,6 +20,10 @@ clave idempotente hasta recibir una respuesta válida, abre únicamente el check
 devuelve la API y consulta después un estado canónico con un token separado. Apps Script queda
 como importador legacy `registration-v2`; no recibe el formulario actual ni envía emails.
 
+`REGISTRATION_OPEN=false` mantiene oculto el formulario, bloquea toda solicitud de registro antes
+de la red y muestra el aviso bilingüe de próxima apertura. El cutover posterior cambia únicamente
+ese valor a `true`, después del GO de Dirección y de habilitar el catálogo del Bot.
+
 Antes de publicar este flujo deben estar operativos `https://bot.harmonicbeacon.com`, el widget
 específico bajo `https://tickets.harmonicbeacon.com` y el webhook de Ticket Tailor. La página de
 confirmación no interpreta parámetros de retorno como prueba de pago.
@@ -48,4 +52,5 @@ GitHub Pages desde `main` / root.
 
 Los documentos consumidos por sistemas externos se publican con nombres versionados e inmutables.
 La autorización vigente del bot de Harmonic Myth Projection está en
-`legal/terms/bot-v7.pdf`; una nueva versión debe usar otro nombre y no sobrescribir ese archivo.
+`legal/terms/bot-v8.pdf`; `bot-v6.pdf` y `bot-v7.pdf` permanecen como evidencia histórica y no se
+sobrescriben.

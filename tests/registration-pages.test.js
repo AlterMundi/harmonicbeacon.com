@@ -9,6 +9,11 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 
 test('registration form requires v3 terms and never bypasses its backend', () => {
   const page = read('inscripcion/index.html');
+  const commerce = read('assets/hmp-commerce.js');
+  assert.match(commerce, /const REGISTRATION_OPEN = false;/);
+  assert.match(page, /id="registrationClosed"/);
+  assert.match(page, /id="registrationFlow" hidden/);
+  assert.match(page, /registrationOpen&&Boolean\(eventConfig\)/);
   assert.match(page, /registrationTermsVersion" value="registration-v3"/);
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
