@@ -17,6 +17,7 @@ test('invitation collects identity and posts directly to the secure Beacon admis
 test('invitation no longer sends guests to the obsolete app or asks for an account', () => {
   assert.doesNotMatch(invitation, /beacon\.altermundi\.net/);
   assert.doesNotMatch(invitation, /iniciá sesión con tu cuenta/i);
+  assert.doesNotMatch(invitation, /cuenta de la app/i);
   assert.match(invitation, /El ingreso estará habilitado diez minutos antes del inicio/);
   assert.match(invitation, /Entry will be enabled ten minutes before the start/);
 });
