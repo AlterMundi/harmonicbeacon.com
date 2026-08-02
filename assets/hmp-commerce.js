@@ -9,10 +9,10 @@
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
   const CHECKOUTS = Object.freeze({
-    'hmp-2026-08-01': Object.freeze({
-      date: '2026-08-01',
-      label_es: 'sábado 1 de agosto',
-      label_en: 'Saturday, August 1',
+    'hmp-2026-08-08': Object.freeze({
+      date: '2026-08-08',
+      label_es: 'sábado 8 de agosto',
+      label_en: 'Saturday, August 8',
       sessions: Object.freeze({
         'es-0830-cr': '2334890',
         'en-1400-cr': '2334909'

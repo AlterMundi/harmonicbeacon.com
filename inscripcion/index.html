@@ -83,7 +83,7 @@
   <main id="top">
     <section class="hero wrap">
       <div class="hero-copy">
-        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 1 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 1</span></span></p>
+        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 8 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 8</span></span></p>
         <h1 data-copy="es">El mito<br><em>está vivo.</em></h1><h1 data-copy="en">The myth<br><em>is alive.</em></h1>
         <p class="lead" data-copy="es">Una experiencia online en vivo para entrar en tu paisaje interior a través del cuerpo, el sonido y las imágenes que ya viven dentro tuyo.</p><p class="lead" data-copy="en">A live online experience to enter your inner landscape through body, sound and the images already living inside you.</p>
         <div class="hero-meta"><span><b>3—4 H</b> <span data-copy="es">inmersión</span><span data-copy="en">immersion</span></span><span><b>100%</b> ONLINE</span><span><b>HMP / 001</b></span></div>
@@ -120,7 +120,7 @@
           <p class="form-intro" data-copy="es">Dejanos los datos que necesitamos para preparar tu entrada.</p><p class="form-intro" data-copy="en">Leave the details we need to prepare your entrance.</p>
           <form id="registrationForm">
             <input type="hidden" name="session" id="sessionInput" value="">
-            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-01">
+            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-08">
             <input type="hidden" name="sessionCode" id="sessionCodeInput" value="">
             <input type="hidden" name="locale" id="localeInput" value="es">
             <input type="hidden" name="registrationTermsVersion" value="registration-v3">
@@ -144,7 +144,7 @@
   <script>
     const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es',session=null;
     /* Sólo fechas presentes en el catálogo coordinado pueden abrir checkout. */
-    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-01',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=Boolean(eventConfig);
+    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-08',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=Boolean(eventConfig);
     if(eventConfig){one('#eventCodeInput').value='hmp-'+eventConfig.date;one('#dateEs').textContent=eventConfig.label_es;one('#dateEn').textContent=eventConfig.label_en}else{one('#eventCodeInput').value='';one('#dateEs').textContent='fecha aún no disponible';one('#dateEn').textContent='date not available yet';all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')})}
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;all('[data-lang-button]').forEach(b=>b.classList.toggle('active',b.dataset.langButton===next))}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');

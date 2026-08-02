@@ -29,7 +29,7 @@ contener `/chk/<widget-token>/`. Un enlace directo `/checkout/view-event/id/<id>
 transportar la metadata opaca que vincula pago e inscripción y se rechaza antes de navegar.
 
 La allowlist coordinada vive en `assets/hmp-commerce.js`. Actualmente sólo admite el evento
-`hmp-2026-08-01` y sus dos widgets conocidos. Una fecha nueva debe agregarse junto con su
+`hmp-2026-08-08` y sus dos widgets conocidos. Una fecha nueva debe agregarse junto con su
 `event_code`, sesiones e IDs de widget después de que exista la misma entrada habilitada en el
 catálogo del Bot; un parámetro `fecha` desconocido queda cerrado y nunca abre otro checkout por
 defecto. Los requests de inscripción y estado tienen timeouts acotados. Un timeout de inscripción
@@ -48,4 +48,4 @@ GitHub Pages desde `main` / root.
 
 Los documentos consumidos por sistemas externos se publican con nombres versionados e inmutables.
 La autorización vigente del bot de Harmonic Myth Projection está en
-`legal/terms/bot-v6.pdf`; una nueva versión debe usar otro nombre y no sobrescribir ese archivo.
+`legal/terms/bot-v7.pdf`; una nueva versión debe usar otro nombre y no sobrescribir ese archivo.

@@ -33,7 +33,7 @@ const payload = {
   first_name: 'Alma',
   last_name: 'Pérez',
   email: 'alma@example.test',
-  event_code: 'hmp-2026-08-01',
+  event_code: 'hmp-2026-08-08',
   session_code: 'es-0830-cr',
   locale: 'es',
   terms_version: 'registration-v3',
@@ -73,11 +73,11 @@ test('accepts both official event-specific widget path variants', () => {
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {
   const {api} = runtime(async () => {});
-  assert.equal(api.registrationEvent('2026-08-01').date, '2026-08-01');
-  assert.equal(api.registrationEvent('2026-08-08'), null);
-  assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), true);
-  assert.equal(api.supportedRegistration('hmp-2026-08-01', 'unknown'), false);
-  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), false);
+  assert.equal(api.registrationEvent('2026-08-08').date, '2026-08-08');
+  assert.equal(api.registrationEvent('2026-08-01'), null);
+  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), true);
+  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'unknown'), false);
+  assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), false);
 });
 
 test('keeps the idempotency key when registration outcome is unknown', async () => {
