@@ -15,8 +15,8 @@
       label_es: 'sábado 8 de agosto',
       label_en: 'Saturday, August 8',
       sessions: Object.freeze({
-        'es-0830-cr': '2334890',
-        'en-1400-cr': '2334909'
+        'es-0830-cr': '8804105',
+        'en-1400-cr': '8804106'
       })
     })
   });
