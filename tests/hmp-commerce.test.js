@@ -3,6 +3,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
+const contract = JSON.parse(fs.readFileSync(
+  path.join(__dirname, '..', 'contracts', 'registration-catalog', 'v1', 'catalog.fixture.json'),
+  'utf8'
+));
 
 function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
   const values = new Map();
@@ -47,7 +51,7 @@ const statusToken = `st_v1_${'S'.repeat(43)}`;
 const checkout = {
   metadata_name: 'registration_context',
   metadata_value: checkoutContext,
-  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/2334890/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8804105/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
 
 test('production flag rejects registration before any network request', async () => {
@@ -63,8 +67,8 @@ test('production flag rejects registration before any network request', async ()
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('2334890', '2334909'), payload, checkout), false);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/2334890/chk/widget-fixture/', '/checkout/x/'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '8804106'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/8804105/chk/widget-fixture/', '/checkout/x/'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/chk/widget-fixture', ''), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('widget-fixture', 'REPLACE_WITH_EVENT_WIDGET_TOKEN'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com:8443'), payload, checkout), false);
@@ -79,9 +83,18 @@ test('accepts both official event-specific widget path variants', () => {
   const {api} = runtime(async () => {});
   const newSession = {
     ...checkout,
-    widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/2334890/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+    widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/8804105/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
   };
   assert.equal(api.validCheckoutUrl(newSession.widget_url, payload, newSession), true);
+});
+
+test('matches the stable registration catalog contract and rejects series ids', () => {
+  const {api} = runtime(async () => {});
+  const sessions = contract.events['hmp-2026-08-08'].sessions;
+
+  assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['es-0830-cr'], sessions['es-0830-cr'].ticket_tailor_checkout_event_id);
+  assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['en-1400-cr'], sessions['en-1400-cr'].ticket_tailor_checkout_event_id);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '2334890'), payload, checkout), false);
 });
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {

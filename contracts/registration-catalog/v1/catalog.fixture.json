@@ -1,0 +1,20 @@
+{
+  "schema_version": "registration-catalog.fixture.v1",
+  "events": {
+    "hmp-2026-08-08": {
+      "sessions": {
+        "es-0830-cr": {
+          "ticket_tailor_event_id": "ev_8804105",
+          "ticket_tailor_checkout_event_id": "8804105",
+          "scheduled_session_id": "10000000-0000-4000-8000-000000000001"
+        },
+        "en-1400-cr": {
+          "ticket_tailor_event_id": "ev_8804106",
+          "ticket_tailor_checkout_event_id": "8804106",
+          "scheduled_session_id": "10000000-0000-4000-8000-000000000002"
+        }
+      }
+    }
+  }
+}
+
