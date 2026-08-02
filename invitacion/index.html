@@ -425,17 +425,6 @@
       transform: none;
     }
 
-    .bot .primary-button[aria-disabled="true"] {
-      border: 1px solid var(--gold);
-      color: var(--gold-bright);
-      background: rgba(231, 189, 97, .08);
-      cursor: pointer;
-    }
-
-    .bot .primary-button[aria-disabled="true"]:hover {
-      background: rgba(231, 189, 97, .14);
-    }
-
     .instructions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -499,25 +488,6 @@
 
     .bot .primary-button { width: fit-content; min-width: 280px; }
 
-    .bot-actions {
-      display: flex;
-      gap: 18px;
-      align-items: center;
-      margin-top: 18px;
-    }
-
-    .bot-actions .primary-button { margin-top: 0; }
-
-    .bot-terms {
-      max-width: 190px;
-      margin: 0;
-      color: var(--muted);
-      font-size: .78rem;
-      line-height: 1.45;
-    }
-
-    .bot-terms a { color: var(--gold-bright); }
-
     .help {
       display: flex;
       align-items: center;
@@ -561,8 +531,6 @@
       .instructions-grid { grid-template-columns: 1fr; }
       .instruction { min-height: auto; }
       .bot .primary-button { width: 100%; min-width: 0; }
-      .bot-actions { display: grid; gap: 12px; }
-      .bot-terms { max-width: none; }
       .help { display: grid; padding: 24px 20px; }
       footer { flex-direction: column; align-items: center; text-align: center; }
     }
@@ -657,10 +625,7 @@
           <p class="eyebrow">Al finalizar</p>
           <h2 id="bot-title">Tu voz abre<br>la amplificación.</h2>
           <p class="bot-copy">Después del encuentro, entrá al bot por WhatsApp y envianos un audio contando tu mito: imágenes, escenas, sensaciones, personajes o palabras que recuerdes. <strong>No hace falta ordenarlo ni explicarlo perfectamente.</strong></p>
-          <div class="bot-actions">
-            <a class="primary-button" id="botButton" aria-disabled="true">Abrir el bot y enviar mi audio</a>
-            <p class="bot-terms"><a href="/legal/terms/bot-v6.pdf" target="_blank" rel="noopener">Términos y condiciones del bot</a></p>
-          </div>
+          <a class="primary-button" href="https://wa.me/50663551803" target="_blank" rel="noopener">Abrir el bot de Harmonic Myth Projection</a>
         </div>
       </section>
 
@@ -677,7 +642,6 @@
   </div>
 
   <script>
-    const BOT_URL = 'https://wa.me/50663551803';
     const TERMS_KEY = 'hb-personal-invitation-terms-v2';
     const ACCESS_OPENS_AT = Date.UTC(2026, 7, 2, 16, 50, 0);
     const EVENT_STARTS_AT = Date.UTC(2026, 7, 2, 17, 0, 0);
@@ -687,34 +651,11 @@
     const participantName = document.querySelector('#participantName');
     const participantEmail = document.querySelector('#participantEmail');
     const eventButton = document.querySelector('#eventButton');
-    const botButton = document.querySelector('#botButton');
     const status = document.querySelector('#accessStatus');
     const countdown = document.querySelector('#countdown');
     let entryError = new URLSearchParams(window.location.search).get('entry_error');
 
     try { termsCheckbox.checked = localStorage.getItem(TERMS_KEY) === 'accepted'; } catch (_) {}
-
-    function setLinkState(link, enabled, href, interactiveWhenDisabled = false) {
-      link.setAttribute('aria-disabled', String(!enabled));
-      if (enabled) {
-        link.href = href;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.removeAttribute('tabindex');
-        link.removeAttribute('role');
-      } else {
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-        if (interactiveWhenDisabled) {
-          link.href = '#acceso';
-          link.setAttribute('role', 'button');
-          link.removeAttribute('tabindex');
-        } else {
-          link.removeAttribute('href');
-          link.setAttribute('tabindex', '-1');
-        }
-      }
-    }
 
     function formatPart(value) { return String(Math.max(0, value)).padStart(2, '0'); }
 
@@ -732,10 +673,6 @@
 
       eventButton.disabled = !(termsAccepted && identityComplete && accessIsOpen);
       eventButton.setAttribute('aria-disabled', String(eventButton.disabled));
-      setLinkState(botButton, termsAccepted, BOT_URL, true);
-      botButton.textContent = termsAccepted
-        ? 'Abrir el bot de Harmonic Myth Projection'
-        : 'Aceptar términos para abrir el bot';
 
       if (entryError) {
         status.textContent = entryError === 'limited'
@@ -781,18 +718,6 @@
         const firstInvalid = invitationForm.querySelector(':invalid');
         if (firstInvalid) firstInvalid.focus();
       }
-    });
-
-    [botButton].forEach((link) => {
-      link.addEventListener('click', (event) => {
-        if (link.getAttribute('aria-disabled') === 'true') {
-          event.preventDefault();
-          termsCheckbox.focus();
-          status.textContent = termsCheckbox.checked
-            ? 'El acceso al evento todavía no está abierto.'
-            : 'Primero necesitás aceptar los términos.';
-        }
-      });
     });
 
     updateAccess();
