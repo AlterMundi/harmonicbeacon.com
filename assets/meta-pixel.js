@@ -64,24 +64,18 @@
     window.fbq('consent', 'grant');
     window.fbq('init', PIXEL_ID);
     window.fbq('track', 'PageView');
-    trackConfirmedPurchase();
+    if (window.__hbConfirmedCommerce) trackConfirmedPurchase(window.__hbConfirmedCommerce);
   }
 
-  function trackConfirmedPurchase() {
-    if (location.pathname !== '/inscripcion/confirmacion/' &&
-        location.pathname !== '/inscripcion/confirmacion/index.html') return;
-
-    const params = new URLSearchParams(location.search);
-    const orderId = params.get('tt_order_id');
-    if (!orderId || !/^[a-zA-Z0-9_-]{1,80}$/.test(orderId)) return;
-
-    const purchaseKey = `hb-meta-purchase-${orderId}`;
+  function trackConfirmedPurchase(detail) {
+    if (!detail || !/^[0-9a-f-]{36}$/i.test(detail.registrationId || '')) return;
+    const purchaseKey = `hb-meta-purchase-${detail.registrationId}`;
     try {
       if (sessionStorage.getItem(purchaseKey)) return;
       sessionStorage.setItem(purchaseKey, 'sent');
     } catch (_) {}
 
-    const englishSession = params.get('lang') === 'en';
+    const englishSession = detail.sessionCode === 'en-1400-cr';
     window.fbq('track', 'Purchase', {
       value: englishSession ? 50 : 20,
       currency: 'USD',
@@ -90,6 +84,11 @@
       content_type: 'product'
     });
   }
+
+  window.addEventListener('hb:commerce-confirmed', (event) => {
+    window.__hbConfirmedCommerce = event.detail;
+    if (pixelLoaded) trackConfirmedPurchase(event.detail);
+  });
 
   function revokePixel() {
     if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');

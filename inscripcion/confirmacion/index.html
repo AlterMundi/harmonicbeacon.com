@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07120f">
   <meta name="description" content="Confirmación de pago para Harmonic Myth Projection.">
-  <title>Gracias · Pago confirmado · Harmonic Beacon</title>
+  <title>Verificando pago · Harmonic Beacon</title>
   <style>
     :root {
       --night: #07120f;
@@ -56,6 +56,7 @@
     }
 
     [data-copy] { display: none; }
+    [hidden] { display: none !important; }
     html[data-lang="es"] [data-copy="es"],
     html[data-lang="en"] [data-copy="en"] { display: revert; }
 
@@ -623,29 +624,30 @@
       <section class="hero" aria-labelledby="page-title">
         <div>
           <p class="kicker">
-            <span class="check" aria-hidden="true">✓</span>
-            <span data-copy="es">Pago confirmado</span>
-            <span data-copy="en">Payment confirmed</span>
+            <span class="check" aria-hidden="true">⌛</span>
+            <span id="commerceStatusLabel">Verificando pago</span>
           </p>
-          <h1 id="page-title"><span data-copy="es">Gracias.</span><span data-copy="en">Thank you.</span></h1>
-          <p class="hero-lead" data-copy="es">Recibimos tu pago. <strong>Tu lugar en Harmonic Myth Projection está reservado.</strong></p>
-          <p class="hero-lead" data-copy="en">We received your payment. <strong>Your place in Harmonic Myth Projection is reserved.</strong></p>
+          <h1 id="page-title">Un momento.</h1>
+          <p class="hero-lead" id="pageLead">Estamos consultando el estado real de tu compra.</p>
           <p class="order-reference" id="orderReference"></p>
+          <button class="button" id="retryStatus" type="button" hidden>
+            <span data-copy="es">Reintentar verificación</span>
+            <span data-copy="en">Retry verification</span>
+          </button>
         </div>
 
         <div class="portal" aria-hidden="true">
           <span class="portal-ring"></span>
           <span class="portal-ring"></span>
           <span class="portal-ring"></span>
-          <span class="portal-word">
-            <span data-copy="es">ya estás adentro</span>
-            <span data-copy="en">you are in</span>
-            <small>PAYMENT → PRESENCE</small>
+          <span class="portal-word" id="portalStatus">
+            verificando
+            <small>PAYMENT → ACCESS</small>
           </span>
         </div>
       </section>
 
-      <div class="content">
+      <div class="content" id="confirmedContent" hidden>
         <section class="card next-steps" aria-labelledby="next-title">
           <p class="eyebrow" data-copy="es">Qué sucede ahora</p>
           <p class="eyebrow" data-copy="en">What happens now</p>
@@ -666,8 +668,8 @@
               <div>
                 <h3 data-copy="es">El acceso llega el viernes</h3>
                 <h3 data-copy="en">Your access link arrives Friday</h3>
-                <p data-copy="es">El viernes 31 de julio te enviaremos por correo el enlace para entrar a la experiencia online.</p>
-                <p data-copy="en">On Friday, July 31, we will email you the link to enter the online experience.</p>
+                <p data-copy="es">El viernes 7 de agosto te enviaremos por correo el enlace para entrar a la experiencia online.</p>
+                <p data-copy="en">On Friday, August 7, we will email you the link to enter the online experience.</p>
               </div>
             </li>
             <li class="step">
@@ -698,8 +700,8 @@
             <div class="fact">
               <dt data-copy="es">Fecha</dt>
               <dt data-copy="en">Date</dt>
-              <dd data-copy="es">Sábado 1 de agosto de 2026</dd>
-              <dd data-copy="en">Saturday, August 1, 2026</dd>
+              <dd data-copy="es">Sábado 8 de agosto de 2026</dd>
+              <dd data-copy="en">Saturday, August 8, 2026</dd>
             </div>
             <div class="fact session-es">
               <dt>Sesión</dt>
@@ -724,7 +726,7 @@
         </aside>
       </div>
 
-      <section class="amplification" id="amplification" aria-labelledby="amplification-title">
+      <section class="amplification" id="amplification" aria-labelledby="amplification-title" hidden>
         <div class="voice-orbit" aria-hidden="true"><span class="voice-wave">╱╲╱</span></div>
         <div>
           <p class="eyebrow" data-copy="es">Después de la sesión</p>
@@ -762,19 +764,78 @@
     </footer>
   </div>
 
+  <script src="/assets/hmp-commerce.js"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const initialLanguage = params.get('lang') === 'en' ? 'en' : 'es';
+    const context = window.HMPCommerce.readStatusContext();
+    const initialLanguage = params.get('lang') === 'en' || (!params.get('lang') && context?.locale === 'en') ? 'en' : 'es';
     const rawOrderId = params.get('tt_order_id');
     const orderId = rawOrderId && /^[a-zA-Z0-9_-]{1,80}$/.test(rawOrderId) ? rawOrderId : null;
     const orderReference = document.querySelector('#orderReference');
+    const statusLabel = document.querySelector('#commerceStatusLabel');
+    const pageTitle = document.querySelector('#page-title');
+    const pageLead = document.querySelector('#pageLead');
+    const portalStatus = document.querySelector('#portalStatus');
+    const confirmedContent = document.querySelector('#confirmedContent');
+    const amplification = document.querySelector('#amplification');
+    const retryStatus = document.querySelector('#retryStatus');
+    let currentState = context ? 'VERIFYING' : 'CONTEXT_MISSING';
+    let purchaseAnnounced = false;
+    let verificationRunning = false;
+
+    const messages = {
+      es: {
+        VERIFYING: ['Verificando pago', 'Un momento.', 'Estamos consultando el estado real de tu compra.', 'verificando'],
+        PAYMENT_CONFIRMED: ['Pago confirmado', 'Gracias.', 'Recibimos tu pago. Tu lugar está reservado mientras preparamos el acceso.', 'pago confirmado'],
+        ACCESS_READY: ['Acceso preparado', 'Gracias.', 'Tu pago y tu acceso están confirmados.', 'ya estás adentro'],
+        REVIEW_REQUIRED: ['Revisión necesaria', 'Te ayudamos.', 'Encontramos una diferencia en la compra. No vuelvas a pagar: escribinos para revisarla.', 'en revisión'],
+        NOT_PAID: ['Pago no confirmado', 'Todavía no.', 'No encontramos un pago confirmado. Si pagaste, escribinos y lo revisamos.', 'sin confirmar'],
+        REVOKED: ['Acceso revocado', 'Estado actualizado.', 'La entrada fue anulada o reembolsada. Escribinos si necesitás ayuda.', 'revocado'],
+        CONTEXT_MISSING: ['No pudimos verificar', 'Revisá tu correo.', 'Esta pestaña no conserva la referencia privada necesaria. No vuelvas a pagar; revisá Ticket Tailor o escribinos.', 'sin referencia'],
+        STATUS_TIMEOUT: ['La verificación tardó demasiado', 'Podés reintentar.', 'Tu referencia privada sigue segura en esta pestaña. Reintentar no inicia otro pago.', 'demorado'],
+        UNAVAILABLE: ['Verificación demorada', 'Seguimos procesando.', 'No pudimos consultar el estado ahora. Revisá tu correo de Ticket Tailor o escribinos.', 'demorado']
+      },
+      en: {
+        VERIFYING: ['Verifying payment', 'One moment.', 'We are checking the canonical status of your purchase.', 'verifying'],
+        PAYMENT_CONFIRMED: ['Payment confirmed', 'Thank you.', 'We received your payment. Your place is reserved while access is prepared.', 'payment confirmed'],
+        ACCESS_READY: ['Access ready', 'Thank you.', 'Your payment and access are confirmed.', 'you are in'],
+        REVIEW_REQUIRED: ['Review required', 'We can help.', 'We found a mismatch in the purchase. Do not pay again; contact us so we can review it.', 'under review'],
+        NOT_PAID: ['Payment not confirmed', 'Not yet.', 'We did not find a confirmed payment. If you paid, contact us and we will review it.', 'not confirmed'],
+        REVOKED: ['Access revoked', 'Status updated.', 'The ticket was cancelled or refunded. Contact us if you need help.', 'revoked'],
+        CONTEXT_MISSING: ['Unable to verify', 'Check your email.', 'This tab no longer has the private reference required for verification. Do not pay again; check Ticket Tailor or contact us.', 'no reference'],
+        STATUS_TIMEOUT: ['Verification took too long', 'You can retry.', 'Your private reference is still safe in this tab. Retrying will not start another payment.', 'delayed'],
+        UNAVAILABLE: ['Verification delayed', 'Still processing.', 'We could not check the status now. Check your Ticket Tailor email or contact us.', 'delayed']
+      }
+    };
+
+    function renderState(state) {
+      currentState = state;
+      const text = messages[document.documentElement.dataset.lang][state] || messages.es.UNAVAILABLE;
+      statusLabel.textContent = text[0];
+      pageTitle.textContent = text[1];
+      pageLead.textContent = text[2];
+      portalStatus.firstChild.textContent = text[3];
+      const confirmed = state === 'PAYMENT_CONFIRMED' || state === 'ACCESS_READY';
+      confirmedContent.hidden = !confirmed;
+      amplification.hidden = !confirmed;
+      retryStatus.hidden = !context || !['STATUS_TIMEOUT', 'UNAVAILABLE'].includes(state);
+      if (confirmed && context && !purchaseAnnounced) {
+        purchaseAnnounced = true;
+        const confirmation = {
+          registrationId: context.registration_id,
+          sessionCode: context.session_code
+        };
+        window.__hbConfirmedCommerce = confirmation;
+        window.dispatchEvent(new CustomEvent('hb:commerce-confirmed', {detail: confirmation}));
+      }
+    }
 
     function setLanguage(language) {
       document.documentElement.dataset.lang = language;
       document.documentElement.lang = language;
       document.title = language === 'en'
-        ? 'Thank you · Payment confirmed · Harmonic Beacon'
-        : 'Gracias · Pago confirmado · Harmonic Beacon';
+        ? 'Purchase status · Harmonic Beacon'
+        : 'Estado de compra · Harmonic Beacon';
 
       document.querySelectorAll('[data-lang-button]').forEach((button) => {
         button.setAttribute('aria-pressed', String(button.dataset.langButton === language));
@@ -783,6 +844,7 @@
       if (orderId) {
         orderReference.textContent = `${language === 'en' ? 'Order' : 'Orden'} · ${orderId}`;
       }
+      renderState(currentState);
     }
 
     document.querySelectorAll('[data-lang-button]').forEach((button) => {
@@ -791,6 +853,38 @@
 
     if (orderId) orderReference.style.display = 'block';
     setLanguage(initialLanguage);
+
+    async function verifyCommerce() {
+      if (!context || verificationRunning) return;
+      verificationRunning = true;
+      retryStatus.disabled = true;
+      retryStatus.hidden = true;
+      try {
+        for (let attempt = 0; attempt < 30; attempt += 1) {
+          try {
+            const result = await window.HMPCommerce.commerceStatus(context);
+            renderState(result.state);
+            if (result.state !== 'VERIFYING') return;
+          } catch (error) {
+            if (attempt >= 2) {
+              renderState(error?.code === 'commerce_status_timeout' ? 'STATUS_TIMEOUT' : 'UNAVAILABLE');
+              return;
+            }
+          }
+          await new Promise(resolve => window.setTimeout(resolve, 3000));
+        }
+        renderState('UNAVAILABLE');
+      } finally {
+        verificationRunning = false;
+        retryStatus.disabled = false;
+      }
+    }
+
+    retryStatus.addEventListener('click', () => {
+      renderState('VERIFYING');
+      verifyCommerce();
+    });
+    verifyCommerce();
   </script>
 </body>
 </html>

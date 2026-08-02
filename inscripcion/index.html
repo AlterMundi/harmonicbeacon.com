@@ -83,7 +83,7 @@
   <main id="top">
     <section class="hero wrap">
       <div class="hero-copy">
-        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 1 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 1</span></span></p>
+        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 8 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 8</span></span></p>
         <h1 data-copy="es">El mito<br><em>está vivo.</em></h1><h1 data-copy="en">The myth<br><em>is alive.</em></h1>
         <p class="lead" data-copy="es">Una experiencia online en vivo para entrar en tu paisaje interior a través del cuerpo, el sonido y las imágenes que ya viven dentro tuyo.</p><p class="lead" data-copy="en">A live online experience to enter your inner landscape through body, sound and the images already living inside you.</p>
         <div class="hero-meta"><span><b>3—4 H</b> <span data-copy="es">inmersión</span><span data-copy="en">immersion</span></span><span><b>100%</b> ONLINE</span><span><b>HMP / 001</b></span></div>
@@ -109,13 +109,38 @@
     </section>
 
     <section class="booking wrap reveal" id="inscripcion">
-      <div class="booking-head"><div><span class="section-tag">REGISTRATION / 001</span><h2 data-copy="es">Inscripciones<br><em>próximamente.</em></h2><h2 data-copy="en">Registrations<br><em>opening soon.</em></h2></div></div>
-      <div class="booking-panel">
+      <div class="booking-head"><div><span class="section-tag">REGISTRATION / 001</span><h2 data-copy="es">Inscripción<br><em>Harmonic Myth.</em></h2><h2 data-copy="en">Harmonic Myth<br><em>registration.</em></h2></div></div>
+      <div class="booking-panel" id="registrationClosed">
         <div class="session-zone" style="grid-column:1/-1">
-          <h3 data-copy="es">Estamos preparando la próxima apertura</h3><h3 data-copy="en">We are preparing the next opening</h3>
+          <h3 data-copy="es">Inscripciones próximamente</h3><h3 data-copy="en">Registrations opening soon</h3>
           <p class="form-intro" data-copy="es">El formulario y la venta de entradas todavía no están habilitados. Publicaremos aquí el acceso cuando las inscripciones estén abiertas.</p>
           <p class="form-intro" data-copy="en">The registration form and ticket sales are not available yet. Access will be published here when registrations open.</p>
           <p class="timezone"><span data-copy="es">SIN FORMULARIO · SIN PAGO</span><span data-copy="en">NO FORM · NO PAYMENT</span></p>
+        </div>
+      </div>
+      <div class="booking-panel" id="registrationFlow" hidden>
+        <div class="session-zone">
+          <div id="registrationIntro"><h3 data-copy="es">Primer paso</h3><h3 data-copy="en">First step</h3><p class="form-intro" data-copy="es">Dejanos tu nombre y correo. Después vas a elegir el idioma, ver el horario y el precio antes de pagar.</p><p class="form-intro" data-copy="en">Leave your name and email. Then choose the language and review the time and price before paying.</p><p class="timezone">01 · DATOS &nbsp;→&nbsp; 02 · SESIÓN &nbsp;→&nbsp; 03 · PAGO</p></div>
+          <div id="sessionStep" hidden><h3 data-copy="es">Elegí tu sesión</h3><h3 data-copy="en">Choose your session</h3><div class="session-list"><button class="session" type="button" data-session="es"><span class="radio"></span><span class="session-copy"><b>ESPAÑOL</b><small><span data-copy="es">sábado · hora Costa Rica</span><span data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>08:30</b><small>US$20</small></span></button><button class="session" type="button" data-session="en"><span class="radio"></span><span class="session-copy"><b>ENGLISH</b><small><span data-copy="es">sábado · hora Costa Rica</span><span data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>14:00</b><small>US$50</small></span></button></div><p class="timezone">◷ COSTA RICA · UTC−6</p></div>
+        </div>
+        <div class="form-zone">
+          <h3 data-copy="es">Tu nombre en este viaje</h3><h3 data-copy="en">Your name in this journey</h3>
+          <p class="form-intro" data-copy="es">Dejanos los datos que necesitamos para preparar tu entrada.</p><p class="form-intro" data-copy="en">Leave the details we need to prepare your entrance.</p>
+          <form id="registrationForm">
+            <input type="hidden" name="session" id="sessionInput" value="">
+            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-08">
+            <input type="hidden" name="sessionCode" id="sessionCodeInput" value="">
+            <input type="hidden" name="locale" id="localeInput" value="es">
+            <input type="hidden" name="registrationTermsVersion" value="registration-v3">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
+            <div class="form-row"><label><span data-copy="es">nombre</span><span data-copy="en">first name</span><input name="firstName" autocomplete="given-name" required></label><label><span data-copy="es">apellido</span><span data-copy="en">last name</span><input name="lastName" autocomplete="family-name" required></label></div>
+            <label><span data-copy="es">correo electrónico</span><span data-copy="en">email address</span><input type="email" name="email" autocomplete="email" required></label>
+            <p class="form-note"><span data-copy="es">Ahí llegará la confirmación, el pago y el acceso. Revisá también spam y promociones.</span><span data-copy="en">Confirmation, payment details and access will arrive there. Check spam and promotions too.</span></p>
+            <label class="consent"><input type="checkbox" name="registrationTermsAccepted" value="ACEPTO" required><span data-copy="es">Acepto los <a href="/politica/" target="_blank" rel="noopener">términos y la política de esta inscripción</a>.</span><span data-copy="en">I accept the <a href="/politica/" target="_blank" rel="noopener">terms and policy for this registration</a>.</span></label>
+            <button class="cta submit" id="continueButton" type="button"><span data-copy="es">continuar</span><span data-copy="en">continue</span><i>↗</i></button>
+            <button class="cta submit" id="paymentButton" type="submit" hidden><span id="paymentButtonLabel">continuar al pago</span><i>↗</i></button>
+            <p class="legal"><span data-copy="es">Usamos tu email únicamente para esta experiencia.</span><span data-copy="en">We use your email only for this experience.</span></p>
+          </form>
         </div>
       </div>
     </section>
@@ -123,17 +148,25 @@
   <footer class="wrap"><span>HARMONIC MYTH PROJECTION · 2026</span><a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a><span>ALTERMUNDI / HARMONIC BEACON</span></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="/assets/hmp-commerce.js"></script>
   <script>
-    const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es';
-    /* Fecha e idioma por URL: /inscripcion/?fecha=2026-08-08&idioma=en */
-    const fechas={'2026-08-01':{es:'sábado 1 de agosto',en:'Saturday, August 1'},'2026-08-08':{es:'sábado 8 de agosto',en:'Saturday, August 8'},'2026-08-15':{es:'sábado 15 de agosto',en:'Saturday, August 15'}};
-    const params=new URLSearchParams(location.search),fecha=params.get('fecha');
-    if(fechas[fecha]){one('#dateEs').textContent=fechas[fecha].es;one('#dateEn').textContent=fechas[fecha].en}
-    function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;all('[data-lang-button]').forEach(b=>b.classList.toggle('active',b.dataset.langButton===next))}
+    const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es',session=null;
+    /* Sólo fechas presentes en el catálogo coordinado pueden abrir checkout. */
+    const registrationOpen=window.HMPCommerce.REGISTRATION_OPEN;
+    one('#registrationClosed').hidden=registrationOpen;one('#registrationFlow').hidden=!registrationOpen;
+    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-08',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
+    if(eventConfig){one('#eventCodeInput').value='hmp-'+eventConfig.date;one('#dateEs').textContent=eventConfig.label_es;one('#dateEn').textContent=eventConfig.label_en}else{one('#eventCodeInput').value='';one('#dateEs').textContent='fecha aún no disponible';one('#dateEn').textContent='date not available yet';all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')})}
+    function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;all('[data-lang-button]').forEach(b=>b.classList.toggle('active',b.dataset.langButton===next))}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');
+    function setSession(next){if(!eventAvailable){notify(lang==='en'?'This date is not open for registration yet. No checkout will be opened.':'Esta fecha todavía no está habilitada. No abriremos ningún checkout.');return}session=next;all('[data-session]').forEach(b=>b.classList.toggle('selected',b.dataset.session===next));one('#sessionInput').value=next==='es'?'Español · 08:30 Costa Rica · US$20':'English · 14:00 Costa Rica · US$50';one('#sessionCodeInput').value=next==='es'?'es-0830-cr':'en-1400-cr';one('#paymentButtonLabel').textContent=next==='es'?'continuar al pago · US$20':'continue to payment · US$50';one('#paymentButton').hidden=false}
     for(let i=1;i<=12;i++){const step=document.createElement('div');step.className='stair';step.style.setProperty('--i',i);step.innerHTML=`<span>${String(i).padStart(2,'0')}</span>`;one('#stairs').append(step)}
     one('#enterButton').addEventListener('click',()=>{document.body.classList.add('entered');setTimeout(()=>one('#experiencia').scrollIntoView({behavior:'smooth'}),650)});
-    all('[data-lang-button]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.langButton)));
+    all('[data-lang-button]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.langButton)));all('[data-session]').forEach(b=>b.addEventListener('click',()=>setSession(b.dataset.session)));
+    const registrationForm=one('#registrationForm'),toast=one('#toast');let toastTimer;
+    function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),4500)}
+    function registrationIsValid(){const invalid=registrationForm.querySelector(':invalid');if(!invalid)return true;registrationForm.reportValidity();notify(lang==='en'?'Please complete your name, email and accept the terms to continue.':'Completá tu nombre, correo y aceptá los términos para continuar.');invalid.closest('label')?.scrollIntoView({behavior:'smooth',block:'center'});return false}
+    one('#continueButton').addEventListener('click',()=>{if(!eventAvailable){notify(lang==='en'?'This date is not open for registration yet. No checkout will be opened.':'Esta fecha todavía no está habilitada. No abriremos ningún checkout.');return}if(!registrationIsValid())return;one('#registrationIntro').hidden=true;one('#sessionStep').hidden=false;one('#continueButton').hidden=true;one('#sessionStep').scrollIntoView({behavior:'smooth',block:'center'})});
+    registrationForm.addEventListener('submit',async event=>{event.preventDefault();if(!eventAvailable){notify(lang==='en'?'This date is not open for registration yet. No checkout will be opened.':'Esta fecha todavía no está habilitada. No abriremos ningún checkout.');return}if(!session){notify(lang==='en'?'Choose a session before continuing to payment.':'Elegí una sesión antes de continuar al pago.');return}if(!registrationIsValid())return;const button=one('#paymentButton');button.disabled=true;one('#paymentButtonLabel').textContent=lang==='en'?'saving registration…':'guardando inscripción…';const form=new FormData(registrationForm);const payload={first_name:String(form.get('firstName')||''),last_name:String(form.get('lastName')||''),email:String(form.get('email')||''),event_code:String(form.get('eventCode')||''),session_code:String(form.get('sessionCode')||''),locale:String(form.get('locale')||''),terms_version:String(form.get('registrationTermsVersion')||''),terms_accepted:form.get('registrationTermsAccepted')==='ACEPTO'};try{const result=await window.HMPCommerce.register(payload);location.assign(result.checkout.widget_url)}catch(error){button.disabled=false;one('#paymentButtonLabel').textContent=lang==='en'?'try again':'intentar nuevamente';const timedOut=error?.code==='registration_timeout';const unavailable=error?.code==='registration_unavailable';notify(lang==='en'?(timedOut?'The connection took too long. Retry safely: we kept the same registration request and no checkout was opened.':unavailable?'This date is not open for registration yet. No checkout was opened.':'We could not confirm your registration. No checkout was opened. Please try again.'):(timedOut?'La conexión tardó demasiado. Reintentá con tranquilidad: conservamos la misma solicitud y no abrimos ningún checkout.':unavailable?'Esta fecha todavía no está habilitada. No abrimos ningún checkout.':'No pudimos confirmar tu inscripción. No abrimos ningún checkout. Intentá nuevamente.'))}});
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('visible',entry.isIntersecting)),{threshold:.15});all('.reveal').forEach(el=>observer.observe(el));
     addEventListener('pointermove',event=>{const x=event.clientX/innerWidth-.5,y=event.clientY/innerHeight-.5;document.documentElement.style.setProperty('--rx',`${-y*3}deg`);document.documentElement.style.setProperty('--ry',`${x*4.4}deg`);one('.cursor-light').style.left=`${event.clientX}px`;one('.cursor-light').style.top=`${event.clientY}px`},{passive:true});
     const canvas=one('#cosmos'),ctx=canvas.getContext('2d'),stars=Array.from({length:110},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.25,s:Math.random()*.00025+.00004,c:Math.random()}));
