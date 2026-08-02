@@ -535,8 +535,8 @@
         <div>
           <p class="eyebrow">Acceso al encuentro</p>
           <h2 id="access-title">11:00 · Costa Rica</h2>
-          <p class="section-intro">El enlace estará disponible media hora antes del inicio. Entrarás desde la app del Beacon; iniciá sesión con tu cuenta y abrí el evento de hoy.</p>
-          <p class="opening"><strong>Inicio:</strong> 11:00, hora local de Costa Rica.<br><strong>Apertura del acceso:</strong> 10:30, hora local de Costa Rica.</p>
+          <p class="section-intro">El enlace estará disponible diez minutos antes del inicio. Entrarás desde la app del Beacon; iniciá sesión con tu cuenta y abrí el evento de hoy.</p>
+          <p class="opening"><strong>Inicio:</strong> 11:00, hora local de Costa Rica.<br><strong>Apertura del acceso:</strong> 10:50, hora local de Costa Rica.</p>
           <div class="countdown" id="countdown" aria-label="Cuenta regresiva para la apertura">
             <div class="countdown-cell"><strong id="countHours">00</strong><span>horas</span></div>
             <div class="countdown-cell"><strong id="countMinutes">00</strong><span>minutos</span></div>
@@ -579,7 +579,7 @@
           <article class="instruction">
             <span class="instruction-number">04 · LLEGADA</span>
             <h3>Entrá con tiempo</h3>
-            <p>La puerta abre a las 10:30 para que puedas resolver el ingreso sin apuro. El encuentro comienza a las 11:00.</p>
+            <p>La puerta abre a las 10:50 para que puedas resolver el ingreso sin apuro. El encuentro comienza a las 11:00.</p>
           </article>
         </div>
       </section>
@@ -611,7 +611,7 @@
     const EVENT_URL = 'https://beacon.altermundi.net/';
     const BOT_URL = 'https://wa.me/5493547469632?text=Hola%2C%20termin%C3%A9%20el%20encuentro%20de%20Harmonic%20Beacon%20y%20quiero%20enviar%20un%20audio%20contando%20mi%20mito%20para%20recibir%20mi%20amplificaci%C3%B3n.';
     const TERMS_KEY = 'hb-personal-invitation-terms-v2';
-    const ACCESS_OPENS_AT = Date.UTC(2026, 7, 2, 16, 30, 0);
+    const ACCESS_OPENS_AT = Date.UTC(2026, 7, 2, 16, 50, 0);
     const EVENT_STARTS_AT = Date.UTC(2026, 7, 2, 17, 0, 0);
 
     const termsCheckbox = document.querySelector('#termsAccepted');
@@ -655,7 +655,7 @@
       if (!termsAccepted) {
         status.textContent = 'Aceptá los términos para habilitar los enlaces.';
       } else if (!accessIsOpen) {
-        status.textContent = 'Términos aceptados. El acceso se habilita hoy a las 10:30 de Costa Rica.';
+        status.textContent = 'Términos aceptados. El acceso se habilita hoy a las 10:50 de Costa Rica.';
       } else if (now < EVENT_STARTS_AT) {
         status.textContent = 'La puerta está abierta. Ya podés entrar a la app.';
       } else {
