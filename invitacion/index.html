@@ -425,6 +425,17 @@
       transform: none;
     }
 
+    .bot .primary-button[aria-disabled="true"] {
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      background: rgba(231, 189, 97, .08);
+      cursor: pointer;
+    }
+
+    .bot .primary-button[aria-disabled="true"]:hover {
+      background: rgba(231, 189, 97, .14);
+    }
+
     .instructions-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -668,17 +679,25 @@
 
     try { termsCheckbox.checked = localStorage.getItem(TERMS_KEY) === 'accepted'; } catch (_) {}
 
-    function setLinkState(link, enabled, href) {
+    function setLinkState(link, enabled, href, interactiveWhenDisabled = false) {
       link.setAttribute('aria-disabled', String(!enabled));
       if (enabled) {
         link.href = href;
         link.target = '_blank';
         link.rel = 'noopener';
         link.removeAttribute('tabindex');
+        link.removeAttribute('role');
       } else {
-        link.removeAttribute('href');
         link.removeAttribute('target');
-        link.setAttribute('tabindex', '-1');
+        link.removeAttribute('rel');
+        if (interactiveWhenDisabled) {
+          link.href = '#acceso';
+          link.setAttribute('role', 'button');
+          link.removeAttribute('tabindex');
+        } else {
+          link.removeAttribute('href');
+          link.setAttribute('tabindex', '-1');
+        }
       }
     }
 
@@ -698,7 +717,10 @@
 
       eventButton.disabled = !(termsAccepted && identityComplete && accessIsOpen);
       eventButton.setAttribute('aria-disabled', String(eventButton.disabled));
-      setLinkState(botButton, termsAccepted, BOT_URL);
+      setLinkState(botButton, termsAccepted, BOT_URL, true);
+      botButton.textContent = termsAccepted
+        ? 'Abrir el bot de Harmonic Myth Projection'
+        : 'Aceptar términos para abrir el bot';
 
       if (entryError) {
         status.textContent = entryError === 'limited'
