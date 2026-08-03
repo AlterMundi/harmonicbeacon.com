@@ -7,6 +7,19 @@ const test = require('node:test');
 const root = path.join(__dirname, '..');
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 
+test('events page announces only the August 8 virtual sessions while registration is closed', () => {
+  const page = read('eventos/index.html');
+  assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 2);
+  assert.match(page, /2026-08-08T14:30:00Z/);
+  assert.match(page, /2026-08-08T20:00:00Z/);
+  assert.match(page, /Inscripciones cerradas/);
+  assert.match(page, /Registration closed/);
+  assert.doesNotMatch(page, /Inscripción abierta/);
+  assert.doesNotMatch(page, /Registration open/);
+  assert.doesNotMatch(page, /href="\/inscripcion\//);
+  assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
+});
+
 test('registration form requires v3 terms and never bypasses its backend', () => {
   const page = read('inscripcion/index.html');
   const commerce = read('assets/hmp-commerce.js');
