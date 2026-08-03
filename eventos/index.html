@@ -75,12 +75,14 @@
   .tz-out{ font-family:var(--font-serif); font-style:italic; font-size:1.15rem; color:var(--gold-2); }
   .tz-out b{ font-style:normal; font-family:var(--font-sans); font-weight:600; color:var(--bone); }
 
-  /* Fechas con inscripción */
+  /* Fechas anunciadas */
   .dates{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.4rem; }
   .date-chip{ display:inline-flex; flex-direction:column; gap:.15rem; min-width:104px;
               padding:.7rem .9rem; border:1px solid var(--hair); border-radius:14px; background:var(--surface);
               transition:border-color .3s var(--ease), transform .3s var(--ease); }
   .date-chip:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .date-chip-closed{ cursor:default; opacity:.82; }
+  .date-chip-closed:hover{ border-color:var(--hair); transform:none; }
   .date-chip .dc-d{ font-family:var(--font-serif); font-size:1.25rem; color:var(--bone); line-height:1; }
   .date-chip .dc-a{ font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
   @media(prefers-reduced-motion:reduce){ .date-chip{ transition:none; } }
@@ -151,14 +153,14 @@
       <!-- Virtuales · español -->
       <article class="ev-feat reveal" id="virtuales">
         <div class="tags">
-          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
+          <span class="pill"><span data-lang="es">Inscripciones cerradas</span><span data-lang="en">Registration closed</span></span>
           <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en español</span><span data-lang="en">Online · in Spanish</span></span>
         </div>
         <h2><span data-lang="es">Encuentros virtuales · Proyección Armónica</span><span data-lang="en">Virtual gatherings · Harmonic Projection</span></h2>
-        <p class="when"><span data-lang="es">Todos los sábados · 8:30 hs (hora Costa Rica)</span><span data-lang="en">Every Saturday · 8:30 (Costa Rica time)</span></p>
+        <p class="when"><span data-lang="es">Sábado 8 de agosto · 8:30 hs (hora Costa Rica)</span><span data-lang="en">Saturday, August 8 · 8:30 (Costa Rica time)</span></p>
         <p class="where">
-          <span data-lang="es">Un encuentro <b>en vivo y online</b>: cuerpo, campo armónico y símbolo, con el mismo encuadre de la experiencia presencial. Elegí tu fecha e inscribite.</span>
-          <span data-lang="en">A <b>live online</b> gathering: body, harmonic field and symbol, with the same frame as the in-person experience. Choose your date and register.</span>
+          <span data-lang="es">Un encuentro <b>en vivo y online</b>: cuerpo, campo armónico y símbolo, con el mismo encuadre de la experiencia presencial. La fecha está anunciada; las inscripciones todavía no están habilitadas.</span>
+          <span data-lang="en">A <b>live online</b> gathering: body, harmonic field and symbol, with the same frame as the in-person experience. The date is announced; registration is not open yet.</span>
         </p>
         <div class="tz" data-utc="2026-08-08T14:30:00Z">
           <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
@@ -176,22 +178,21 @@
           <span class="tz-out"><b class="tz-time">08:30</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
         </div>
         <div class="dates">
-          <a class="date-chip" href="/inscripcion/?fecha=2026-08-08"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
-          <a class="date-chip" href="/inscripcion/?fecha=2026-08-15"><span class="dc-d"><span data-lang="es">15 ago</span><span data-lang="en">Aug 15</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <div class="date-chip date-chip-closed" data-event-date="2026-08-08"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscripciones cerradas</span><span data-lang="en">Registration closed</span></span></div>
         </div>
       </article>
 
       <!-- Virtuales · inglés -->
       <article class="ev-feat reveal" id="virtual-en">
         <div class="tags">
-          <span class="pill"><span class="dot-live" style="width:7px;height:7px;"></span> <span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
+          <span class="pill"><span data-lang="es">Inscripciones cerradas</span><span data-lang="en">Registration closed</span></span>
           <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en inglés</span><span data-lang="en">Online · in English</span></span>
         </div>
         <h2><span data-lang="es">Virtual gatherings · in English</span><span data-lang="en">Virtual gatherings · in English</span></h2>
-        <p class="when"><span data-lang="es">Todos los sábados · 14:00 hs (hora Costa Rica)</span><span data-lang="en">Every Saturday · 14:00 (Costa Rica time)</span></p>
+        <p class="when"><span data-lang="es">Sábado 8 de agosto · 14:00 hs (hora Costa Rica)</span><span data-lang="en">Saturday, August 8 · 14:00 (Costa Rica time)</span></p>
         <p class="where">
-          <span data-lang="es">La misma experiencia, guiada <b>en inglés</b>, en vivo y online. Mismas fechas de agosto.</span>
-          <span data-lang="en">The same experience, guided <b>in English</b>, live and online. Same August dates.</span>
+          <span data-lang="es">La misma experiencia, guiada <b>en inglés</b>, en vivo y online. La fecha está anunciada; las inscripciones todavía no están habilitadas.</span>
+          <span data-lang="en">The same experience, guided <b>in English</b>, live and online. The date is announced; registration is not open yet.</span>
         </p>
         <div class="tz" data-utc="2026-08-08T20:00:00Z">
           <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
@@ -209,8 +210,7 @@
           <span class="tz-out"><b class="tz-time">08:30</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
         </div>
         <div class="dates">
-          <a class="date-chip" href="/inscripcion/?fecha=2026-08-08&idioma=en"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
-          <a class="date-chip" href="/inscripcion/?fecha=2026-08-15&idioma=en"><span class="dc-d"><span data-lang="es">15 ago</span><span data-lang="en">Aug 15</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
+          <div class="date-chip date-chip-closed" data-event-date="2026-08-08"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscripciones cerradas</span><span data-lang="en">Registration closed</span></span></div>
         </div>
       </article>
 
