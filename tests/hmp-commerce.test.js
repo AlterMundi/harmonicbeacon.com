@@ -89,6 +89,38 @@ test('closed override rejects registration before any network request', async ()
   assert.equal(requested, false);
 });
 
+test('rejects common email domain typos before creating a registration', async () => {
+  let requested = false;
+  const {api} = runtime(async () => { requested = true; });
+
+  assert.equal(api.suggestedEmailCorrection('AsuaSaira@Gmial.com'), 'asuasaira@gmail.com');
+  assert.equal(api.suggestedEmailCorrection('alma@example.com'), null);
+  await assert.rejects(
+    api.register({...payload, email: 'asuasaira@gmial.com'}),
+    error => error.code === 'email_domain_typo' &&
+      error.suggestedEmail === 'asuasaira@gmail.com'
+  );
+  assert.equal(requested, false);
+});
+
+test('surfaces the backend email correction when server validation catches it', async () => {
+  const {api} = runtime(async () => ({
+    ok: false,
+    status: 422,
+    json: async () => ({
+      detail: {
+        code: 'email_domain_typo',
+        suggested_email: 'alma@gmail.com'
+      }
+    })
+  }));
+
+  await assert.rejects(
+    api.register({...payload, email: 'alma@gnail.com'}),
+    error => error.code === 'email_domain_typo' && error.suggestedEmail === 'alma@gmail.com'
+  );
+});
+
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
