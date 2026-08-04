@@ -10,8 +10,8 @@ const registration = {
   sessionCode: 'es-0830-cr'
 };
 
-function pixelRuntime(initialConsent = null, sessionValues = new Map()) {
-  const localValues = new Map(initialConsent ? [['hb-meta-consent', initialConsent]] : []);
+function pixelRuntime(initialConsent = null, sessionValues = new Map(), localValues = new Map()) {
+  if (initialConsent) localValues.set('hb-meta-consent', initialConsent);
   const listeners = new Map();
   const controls = new Map();
   const insertedScripts = [];
@@ -119,6 +119,20 @@ test('refresh does not resend a completed registration in the same browser tab',
   const refreshedEvents = refreshedPage.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(firstEvents.length, 1);
   assert.equal(refreshedEvents.length, 0);
+});
+
+test('an idempotent response in another browser tab does not resend CompleteRegistration', () => {
+  const localValues = new Map();
+  const firstTab = pixelRuntime('granted', new Map(), localValues);
+  firstTab.triggerRegistration(registration);
+
+  const secondTab = pixelRuntime('granted', new Map(), localValues);
+  secondTab.triggerRegistration(registration);
+
+  const firstEvents = firstTab.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  const secondEvents = secondTab.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(firstEvents.length, 1);
+  assert.equal(secondEvents.length, 0);
 });
 
 test('declined consent never loads Meta or tracks the registration', () => {

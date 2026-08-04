@@ -85,10 +85,16 @@
     ) return;
     const registrationKey = `hb-meta-registration-${detail.registrationId}`;
     if (sentRegistrationIds.has(detail.registrationId)) return;
-    try {
-      if (sessionStorage.getItem(registrationKey)) return;
-      sessionStorage.setItem(registrationKey, 'sent');
-    } catch (_) {}
+    for (const browserStorage of [sessionStorage, localStorage]) {
+      try {
+        if (browserStorage.getItem(registrationKey)) return;
+      } catch (_) {}
+    }
+    for (const browserStorage of [sessionStorage, localStorage]) {
+      try {
+        browserStorage.setItem(registrationKey, 'sent');
+      } catch (_) {}
+    }
     sentRegistrationIds.add(detail.registrationId);
 
     window.fbq('track', 'CompleteRegistration', {
