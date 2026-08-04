@@ -1,7 +1,7 @@
 # Inscripciones en Google Sheets
 
 Esta automatización se conserva únicamente para la transición de registros `registration-v2`.
-Guarda inscripciones legacy en Google Sheets y no envía emails. La landing `registration-v3`
+Guarda inscripciones legacy en Google Sheets y no envía emails. La landing `registration-v4`
 usa la API canónica de PMP Myth Bot; Ticket Tailor envía su comprobante y el bot envía el acceso.
 
 ## Activación desde info@harmonicbeacon.com

@@ -15,7 +15,7 @@ Después abrir <http://localhost:8768>.
 
 ## Inscripción y pago
 
-`/inscripcion/` usa el contrato `registration-v3` de PMP Myth Bot. El navegador conserva una
+`/inscripcion/` usa el contrato legal `registration-v4` con PMP Myth Bot. El navegador conserva una
 clave idempotente hasta recibir una respuesta válida, abre únicamente el checkout específico que
 devuelve la API y consulta después un estado canónico con un token separado. Apps Script queda
 como importador legacy `registration-v2`; no recibe el formulario actual ni envía emails.
@@ -51,6 +51,9 @@ GitHub Pages desde `main` / root.
 ## Documentos legales públicos
 
 Los documentos consumidos por sistemas externos se publican con nombres versionados e inmutables.
+Las evidencias HTML exactas de inscripción permanecen en `legal/terms/registration-v3.html` y
+`legal/terms/registration-v4.html`; `/politica/` refleja la versión vigente y cada URL/hash
+inmutable se coordina con el Bot antes del cutover.
 La autorización vigente del bot de Harmonic Myth Projection está en
 `legal/terms/bot-v8.pdf`; `bot-v6.pdf` y `bot-v7.pdf` permanecen como evidencia histórica y no se
 sobrescriben.
