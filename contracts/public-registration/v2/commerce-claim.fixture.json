@@ -1,0 +1,11 @@
+{
+  "request": {
+    "external_order_id": "80659999",
+    "checkout_context": "ctx_v1_fixture-checkout-context-do-not-use"
+  },
+  "response": {
+    "schema_version": "commerce-claim.response.v1",
+    "registration_id": "10000000-0000-4000-8000-000000000001",
+    "outcome": "LINKED"
+  }
+}

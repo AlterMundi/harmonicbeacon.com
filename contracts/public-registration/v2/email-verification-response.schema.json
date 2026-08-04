@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harmonicbeacon.com/contracts/public-registration/v2/email-verification-response.schema.json",
+  "title": "Registration email verification response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "registration_id",
+    "registration_status",
+    "email_verification",
+    "commerce_status_token"
+  ],
+  "properties": {
+    "schema_version": { "const": "registration.email-verification.v1" },
+    "registration_id": { "type": "string", "format": "uuid" },
+    "registration_status": { "const": "EMAIL_VERIFICATION_REQUIRED" },
+    "email_verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["challenge_id", "expires_at", "masked_destination"],
+      "properties": {
+        "challenge_id": { "type": "string", "format": "uuid" },
+        "expires_at": { "type": "string", "format": "date-time" },
+        "masked_destination": { "type": "string", "minLength": 5, "maxLength": 320 }
+      }
+    },
+    "commerce_status_token": {
+      "type": "string",
+      "pattern": "^st_v1_[A-Za-z0-9_-]{20,128}$"
+    }
+  }
+}

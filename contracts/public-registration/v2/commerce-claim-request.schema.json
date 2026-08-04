@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harmonicbeacon.com/contracts/public-registration/v2/commerce-claim-request.schema.json",
+  "title": "Commerce claim request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["external_order_id", "checkout_context"],
+  "properties": {
+    "external_order_id": {
+      "type": "string",
+      "pattern": "^(or_)?[0-9]{1,32}$"
+    },
+    "checkout_context": {
+      "type": "string",
+      "pattern": "^ctx_v1_[A-Za-z0-9_-]{20,128}$"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harmonicbeacon.com/contracts/public-registration/v2/commerce-claim-response.schema.json",
+  "title": "Commerce claim response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registration_id", "outcome"],
+  "properties": {
+    "schema_version": { "const": "commerce-claim.response.v1" },
+    "registration_id": { "type": "string", "format": "uuid" },
+    "outcome": { "enum": ["LINKED", "REPLAYED"] }
+  }
+}

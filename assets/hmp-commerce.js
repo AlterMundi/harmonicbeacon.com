@@ -7,9 +7,12 @@
   const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
   const REGISTRATION_TIMEOUT_MS = 15000;
   const STATUS_TIMEOUT_MS = 8000;
+  const EMAIL_VERIFICATION_TIMEOUT_MS = 10000;
   const TICKET_TAILOR_WIDGET_SCRIPT = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
+  const CHECKOUT_CONTEXT_PATTERN = /^ctx_v1_[A-Za-z0-9_-]{40,64}$/;
+  const VERIFICATION_CODE_PATTERN = /^[0-9]{6}$/;
   const EMAIL_DOMAIN_CORRECTIONS = Object.freeze({
     'gmai.com': 'gmail.com',
     'gmail.co': 'gmail.com',
@@ -76,6 +79,47 @@
     return error;
   }
 
+  function storeStatusContext(payload, result) {
+    const emailVerification = result.email_verification || null;
+    const checkoutContext = result.checkout?.metadata_value || null;
+    storage().setItem(STATUS_CONTEXT_KEY, JSON.stringify({
+      schema_version: 'registration-status-context.v2',
+      registration_id: result.registration_id,
+      commerce_status_token: result.commerce_status_token,
+      locale: payload.locale,
+      event_code: payload.event_code,
+      session_code: payload.session_code,
+      checkout_context: checkoutContext,
+      email_verification: emailVerification,
+      registration_payload: emailVerification ? payload : null
+    }));
+  }
+
+  function validEmailVerificationResult(result) {
+    const verification = result?.email_verification;
+    return Boolean(
+      result?.schema_version === 'registration.email-verification.v1' &&
+      result?.registration_status === 'EMAIL_VERIFICATION_REQUIRED' &&
+      REGISTRATION_ID_PATTERN.test(result.registration_id || '') &&
+      STATUS_TOKEN_PATTERN.test(result.commerce_status_token || '') &&
+      REGISTRATION_ID_PATTERN.test(verification?.challenge_id || '') &&
+      typeof verification?.expires_at === 'string' &&
+      !Number.isNaN(Date.parse(verification.expires_at)) &&
+      typeof verification?.masked_destination === 'string' &&
+      verification.masked_destination.length >= 5
+    );
+  }
+
+  function validCompletedRegistration(result, payload) {
+    return Boolean(
+      result?.schema_version === 'registration.response.v1' &&
+      result?.registration_status === 'REGISTERED' &&
+      REGISTRATION_ID_PATTERN.test(result.registration_id || '') &&
+      STATUS_TOKEN_PATTERN.test(result.commerce_status_token || '') &&
+      validCheckoutUrl(result.checkout?.widget_url, payload, result.checkout)
+    );
+  }
+
   function validWidgetPath(pathname, eventId) {
     const parts = pathname.split('/').filter(Boolean);
     return Boolean(
@@ -119,7 +163,7 @@
         validWidgetQuery(url) &&
         checkout?.metadata_name === 'registration_context' &&
         typeof context === 'string' &&
-        /^ctx_v1_[A-Za-z0-9_-]{40,64}$/.test(context) &&
+        CHECKOUT_CONTEXT_PATTERN.test(context) &&
         url.hash === `#p[meta_registration_context]=${context}`
       );
     } catch (_) {
@@ -238,37 +282,161 @@
       throw new Error(`registration_${response.status}`);
     }
     const result = await response.json();
-    if (
-      result.schema_version !== 'registration.response.v1' ||
-      !REGISTRATION_ID_PATTERN.test(result.registration_id || '') ||
-      !STATUS_TOKEN_PATTERN.test(result.commerce_status_token || '') ||
-      !validCheckoutUrl(result.checkout && result.checkout.widget_url, payload, result.checkout)
-    ) {
+    if (!validEmailVerificationResult(result) && !validCompletedRegistration(result, payload)) {
       throw new Error('invalid_registration_response');
     }
-    storage().setItem(STATUS_CONTEXT_KEY, JSON.stringify({
-      schema_version: 'registration-status-context.v1',
-      registration_id: result.registration_id,
-      commerce_status_token: result.commerce_status_token,
-      locale: payload.locale,
-      session_code: payload.session_code
-    }));
+    storeStatusContext(payload, result);
     storage().removeItem(IDEMPOTENCY_KEY);
     return result;
+  }
+
+  async function verifyEmail(result, code, payload) {
+    if (!validEmailVerificationResult(result) || !VERIFICATION_CODE_PATTERN.test(code || '')) {
+      throw registrationError('email_verification_input_invalid');
+    }
+    const response = await fetchWithTimeout(
+      `${API_ORIGIN}/v1/registrations/${encodeURIComponent(result.registration_id)}/email-verification`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Registration-Status-Token': result.commerce_status_token
+        },
+        body: JSON.stringify({
+          challenge_id: result.email_verification.challenge_id,
+          code
+        })
+      },
+      EMAIL_VERIFICATION_TIMEOUT_MS,
+      'email_verification_timeout'
+    );
+    if (!response.ok) {
+      let detail = null;
+      try {
+        detail = (await response.json())?.detail;
+      } catch (_) {
+        // Keep the generic verification error when the server did not return JSON.
+      }
+      const error = registrationError(detail?.code || `email_verification_${response.status}`);
+      if (Number.isInteger(detail?.attempts_remaining)) {
+        error.attemptsRemaining = detail.attempts_remaining;
+      }
+      throw error;
+    }
+    const completed = await response.json();
+    if (!validCompletedRegistration(completed, payload)) {
+      throw registrationError('invalid_email_verification_response');
+    }
+    storeStatusContext(payload, completed);
+    return completed;
+  }
+
+  async function resendEmailVerification(result, payload) {
+    if (!validEmailVerificationResult(result)) {
+      throw registrationError('email_verification_input_invalid');
+    }
+    const response = await fetchWithTimeout(
+      `${API_ORIGIN}/v1/registrations/${encodeURIComponent(result.registration_id)}/email-verification/resend`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: {'X-Registration-Status-Token': result.commerce_status_token}
+      },
+      EMAIL_VERIFICATION_TIMEOUT_MS,
+      'email_verification_timeout'
+    );
+    if (!response.ok) {
+      let detail = null;
+      try {
+        detail = (await response.json())?.detail;
+      } catch (_) {
+        // Keep the generic resend error when the server did not return JSON.
+      }
+      const error = registrationError(detail?.code || `email_verification_${response.status}`);
+      if (Number.isInteger(detail?.retry_after_seconds)) {
+        error.retryAfterSeconds = detail.retry_after_seconds;
+      }
+      throw error;
+    }
+    const resent = await response.json();
+    if (!validEmailVerificationResult(resent)) {
+      throw registrationError('invalid_email_verification_response');
+    }
+    storeStatusContext(payload, resent);
+    return resent;
   }
 
   function readStatusContext() {
     try {
       const value = JSON.parse(storage().getItem(STATUS_CONTEXT_KEY) || 'null');
       return value &&
-        value.schema_version === 'registration-status-context.v1' &&
+        ['registration-status-context.v1', 'registration-status-context.v2'].includes(value.schema_version) &&
         REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
-        STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '')
+        STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '') &&
+        (!value.checkout_context || CHECKOUT_CONTEXT_PATTERN.test(value.checkout_context))
         ? value
         : null;
     } catch (_) {
       return null;
     }
+  }
+
+  function clearStatusContext() {
+    storage().removeItem(STATUS_CONTEXT_KEY);
+  }
+
+  async function commerceClaim(context, externalOrderId) {
+    if (
+      !context ||
+      !REGISTRATION_ID_PATTERN.test(context.registration_id || '') ||
+      !STATUS_TOKEN_PATTERN.test(context.commerce_status_token || '') ||
+      !CHECKOUT_CONTEXT_PATTERN.test(context.checkout_context || '') ||
+      !/^(or_)?[0-9]{1,32}$/.test(externalOrderId || '')
+    ) {
+      throw registrationError('commerce_claim_input_invalid');
+    }
+    const response = await fetchWithTimeout(
+      `${API_ORIGIN}/v1/registrations/${encodeURIComponent(context.registration_id)}/commerce-claim`,
+      {
+        method: 'PUT',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Registration-Status-Token': context.commerce_status_token
+        },
+        body: JSON.stringify({
+          external_order_id: externalOrderId,
+          checkout_context: context.checkout_context
+        })
+      },
+      STATUS_TIMEOUT_MS,
+      'commerce_claim_timeout'
+    );
+    if (!response.ok) {
+      let detail = null;
+      try {
+        detail = (await response.json())?.detail;
+      } catch (_) {
+        // Keep the generic claim error when the server did not return JSON.
+      }
+      throw registrationError(detail?.code || `commerce_claim_${response.status}`);
+    }
+    const result = await response.json();
+    if (
+      result?.schema_version !== 'commerce-claim.response.v1' ||
+      result?.registration_id !== context.registration_id ||
+      !['LINKED', 'REPLAYED'].includes(result?.outcome)
+    ) {
+      throw registrationError('invalid_commerce_claim_response');
+    }
+    return result;
   }
 
   async function commerceStatus(context) {
@@ -299,6 +467,8 @@
     REGISTRATION_TIMEOUT_MS,
     STATUS_TIMEOUT_MS,
     STATUS_CONTEXT_KEY,
+    clearStatusContext,
+    commerceClaim,
     commerceStatus,
     fetchWithTimeout,
     getOrCreateIdempotencyKey,
@@ -306,8 +476,10 @@
     readStatusContext,
     registrationEvent,
     register,
+    resendEmailVerification,
     suggestedEmailCorrection,
     supportedRegistration,
+    verifyEmail,
     validCheckoutUrl,
     validWidgetPath,
     validWidgetQuery
