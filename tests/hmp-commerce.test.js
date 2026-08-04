@@ -121,11 +121,17 @@ test('mounts the validated checkout URL through the official inline widget', () 
   assert.equal(dom.container.children.length, 1);
   assert.equal(dom.container.children[0].className, 'tt-widget');
   assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
-  assert.equal(script.attributes.get('data-url'), checkout.widget_url);
+  const mountedUrl = new URL(script.attributes.get('data-url'));
+  assert.equal(mountedUrl.searchParams.get('preset_data'), '1');
+  assert.equal(mountedUrl.searchParams.has('widget'), false);
+  assert.equal(mountedUrl.searchParams.has('modal_widget'), false);
   assert.equal(script.attributes.get('data-type'), 'inline');
   assert.equal(script.attributes.get('data-inline-minimal'), 'true');
   assert.equal(script.attributes.get('data-inline-ref'), 'website_widget');
-  assert.match(script.attributes.get('data-url'), /#p\[meta_registration_context\]=ctx_v1_/);
+  assert.equal(
+    mountedUrl.hash,
+    `#p[meta_registration_context]=${checkoutContext}`
+  );
   assert.equal(dom.created.some(element => element.tagName === 'a'), false);
 });
 
