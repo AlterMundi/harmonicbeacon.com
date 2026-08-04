@@ -94,6 +94,19 @@ test('consent granted tracks CompleteRegistration once without PII', () => {
   assert.equal(JSON.stringify(events[0]).includes('Alma'), false);
 });
 
+test('PageView fires once per page load and is not repeated by consent re-grant', () => {
+  const runtime = pixelRuntime('granted');
+
+  let pageViews = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'PageView');
+  assert.equal(pageViews.length, 1);
+
+  runtime.controls.get('deny:click')();
+  runtime.controls.get('grant:click')();
+
+  pageViews = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'PageView');
+  assert.equal(pageViews.length, 1);
+});
+
 test('refresh does not resend a completed registration in the same browser tab', () => {
   const sessionValues = new Map();
   const firstPage = pixelRuntime('granted', sessionValues);
