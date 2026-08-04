@@ -310,6 +310,26 @@ test('announces CompleteRegistration only after a canonical REGISTERED response'
   assert.equal(window.__hbCompletedRegistration.registrationId, events[0].detail.registrationId);
 });
 
+test('an analytics listener failure never rejects a valid registration response', async () => {
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+
+  assert.equal(result.registration_status, 'REGISTERED');
+  assert.equal(result.checkout.widget_url, checkout.widget_url);
+});
+
 test('rejects a response without canonical REGISTERED status and emits no event', async () => {
   const events = [];
   const {api} = runtime(async () => ({
