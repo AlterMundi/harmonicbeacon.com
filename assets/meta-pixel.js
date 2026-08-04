@@ -51,7 +51,12 @@
   };
 
   function loadPixel() {
-    if (pixelLoaded || readConsent() !== GRANTED) return;
+    if (readConsent() !== GRANTED) return;
+    if (pixelLoaded) {
+      if (typeof window.fbq === 'function') window.fbq('consent', 'grant');
+      if (window.__hbCompletedRegistration) trackCompletedRegistration(window.__hbCompletedRegistration);
+      return;
+    }
     pixelLoaded = true;
 
     /* Meta Pixel base code */
@@ -72,6 +77,8 @@
 
   function trackCompletedRegistration(detail) {
     if (
+      readConsent() !== GRANTED ||
+      typeof window.fbq !== 'function' ||
       !detail ||
       !REGISTRATION_ID_PATTERN.test(detail.registrationId || '') ||
       !SESSION_CODE_PATTERN.test(detail.sessionCode || '')

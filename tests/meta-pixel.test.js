@@ -116,6 +116,32 @@ test('registration completed before consent is sent once after explicit grant', 
   assert.equal(events.length, 1);
 });
 
+test('consent can be revoked and granted again without reloading the page', () => {
+  const runtime = pixelRuntime('granted');
+  runtime.triggerRegistration(registration);
+
+  runtime.controls.get('deny:click')();
+  runtime.controls.get('grant:click')();
+
+  const consentCalls = runtime.calls().filter(call => call[0] === 'consent');
+  const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.deepEqual(Array.from(consentCalls, call => call[1]), ['grant', 'revoke', 'grant']);
+  assert.equal(events.length, 1);
+});
+
+test('a registration completed while consent is revoked is sent after a later grant', () => {
+  const runtime = pixelRuntime('granted');
+  runtime.controls.get('deny:click')();
+  runtime.triggerRegistration(registration);
+
+  let events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(events.length, 0);
+
+  runtime.controls.get('grant:click')();
+  events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(events.length, 1);
+});
+
 test('malformed identifiers never produce CompleteRegistration', () => {
   const runtime = pixelRuntime('granted');
 
