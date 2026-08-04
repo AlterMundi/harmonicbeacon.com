@@ -24,13 +24,14 @@
         { page: 'bonobos',    href: '/bonobos/',                             en: 'bonob.os',                 es: 'bonob.os' },
         { page: 'formacion',  href: '/umbral/',                              en: 'Facilitator Training', es: 'Formación de facilitadores' },
         { page: 'psicopompo', href: '/psicopompo/',                          en: 'Psychopomp',               es: 'Psicopompo' },
-        { page: 'app',        href: 'https://harmonicbeacon.altermundi.net', en: 'App — log in',             es: 'App — login', ext: true }
+        { page: 'mythbot',    href: '/mythbot/',                              en: 'MythBot',                  es: 'MythBot' },
+        { page: 'app',        href: '/app-beacon/',                           en: 'Beacon App',               es: 'App del Beacon' }
     ] },
     { key: 'team',       href: '/#team',       en: 'Team',         es: 'Equipo' },
     { key: 'foundation', href: '/#foundation', en: 'HIT',          es: 'HIT' },
     { key: 'contact',    href: '/#contact',    en: 'Contact',      es: 'Contacto' }
   ];
-  var workPages = { proyeccion: 1, beacon: 1, bonobos: 1, formacion: 1, psicopompo: 1 };
+  var workPages = { proyeccion: 1, beacon: 1, bonobos: 1, formacion: 1, psicopompo: 1, mythbot: 1, app: 1 };
   var pageSection = workPages[page] ? 'trabajo' : (page === 'porque' ? 'porque' : (page === 'eventos' ? 'eventos' : null));
 
   function subLink(it) {
@@ -108,7 +109,7 @@
         '<a href="/" class="brandlock">' + markSvg(28) + '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon</span></a>' +
         '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided, substance-free wellness experience.', 'Una experiencia de bienestar en vivo, guiada y sin sustancias.') + '</p>' +
         '<p class="eyebrow" style="color:var(--ink-600);margin-top:1.4rem;">Asociación Civil AlterMundi</p>' +
-        '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@altermundi.net">info@altermundi.net</a></p>' +
+        '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a></p>' +
         '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>' +
       '</div>' +
       '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'El proyecto' : 'The project') + '">' +
