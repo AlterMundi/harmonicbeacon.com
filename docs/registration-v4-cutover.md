@@ -7,7 +7,7 @@ Status: prepared, not authorized for production cutover.
 | Version | Public artifact | SHA-256 |
 | --- | --- | --- |
 | `registration-v3` | `/legal/terms/registration-v3.html` | `0d65e0c03acd635f08c3e04628a19ef0e674e08612e2ac2446502f3b10b6b54e` |
-| `registration-v4` | `/legal/terms/registration-v4.html` | `3566b7a597d10c75ad6e898879502740bc2b3ff67dfbb373dafff6973313a806` |
+| `registration-v4` | `/legal/terms/registration-v4.html` | `c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773` |
 
 The v3 artifact is byte-identical to the policy accepted since August 1, 2026. It must remain
 immutable. Existing registration rows already retain their accepted `terms_version` and
@@ -20,7 +20,7 @@ never sent to Meta. It does not authorize additional standard events.
 ## Backend contract Mariano must incorporate
 
 The browser sends `terms_version=registration-v4`. PMP Myth Bot must associate that exact version
-with SHA-256 `3566b7a597d10c75ad6e898879502740bc2b3ff67dfbb373dafff6973313a806` and the canonical immutable
+with SHA-256 `c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773` and the canonical immutable
 URL `https://harmonicbeacon.com/legal/terms/registration-v4.html`. `/politica/` serves the same bytes
 as the human-facing current policy at cutover time.
 
@@ -28,7 +28,7 @@ The current Bot accepts only one configured terms version. A no-downtime rollout
 small compatibility window in which both immutable pairs are accepted:
 
 - `registration-v3` → `0d65e0c03acd635f08c3e04628a19ef0e674e08612e2ac2446502f3b10b6b54e`
-- `registration-v4` → `3566b7a597d10c75ad6e898879502740bc2b3ff67dfbb373dafff6973313a806`
+- `registration-v4` → `c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773`
 
 The server must choose the hash from the submitted, allowlisted version; it must never accept a hash
 from the browser. It must store the selected version/hash on the registration exactly as it does
