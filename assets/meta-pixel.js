@@ -5,6 +5,9 @@
   const CONSENT_KEY = 'hb-meta-consent';
   const GRANTED = 'granted';
   const DENIED = 'denied';
+  const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  const SESSION_CODE_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
+  const sentRegistrationIds = new Set();
   let pixelLoaded = false;
 
   const readConsent = () => {
@@ -48,7 +51,12 @@
   };
 
   function loadPixel() {
-    if (pixelLoaded || readConsent() !== GRANTED) return;
+    if (readConsent() !== GRANTED) return;
+    if (pixelLoaded) {
+      if (typeof window.fbq === 'function') window.fbq('consent', 'grant');
+      if (window.__hbCompletedRegistration) trackCompletedRegistration(window.__hbCompletedRegistration);
+      return;
+    }
     pixelLoaded = true;
 
     /* Meta Pixel base code */
@@ -64,11 +72,52 @@
     window.fbq('consent', 'grant');
     window.fbq('init', PIXEL_ID);
     window.fbq('track', 'PageView');
+    if (window.__hbCompletedRegistration) trackCompletedRegistration(window.__hbCompletedRegistration);
+  }
+
+  function trackCompletedRegistration(detail) {
+    if (
+      readConsent() !== GRANTED ||
+      typeof window.fbq !== 'function' ||
+      !detail ||
+      !REGISTRATION_ID_PATTERN.test(detail.registrationId || '') ||
+      !SESSION_CODE_PATTERN.test(detail.sessionCode || '')
+    ) return;
+    const registrationKey = `hb-meta-registration-${detail.registrationId}`;
+    if (sentRegistrationIds.has(detail.registrationId)) return;
+    let sentInCurrentTab = false;
+    try {
+      sentInCurrentTab = Boolean(sessionStorage.getItem(registrationKey));
+    } catch (_) {}
+    try {
+      if (localStorage.getItem(registrationKey)) return;
+      if (sentInCurrentTab) localStorage.setItem(registrationKey, 'sent');
+    } catch (_) {}
+    if (sentInCurrentTab) {
+      return;
+    }
+    for (const browserStorage of [sessionStorage, localStorage]) {
+      try {
+        browserStorage.setItem(registrationKey, 'sent');
+      } catch (_) {}
+    }
+    sentRegistrationIds.add(detail.registrationId);
+
+    window.fbq('track', 'CompleteRegistration', {
+      content_name: 'Harmonic Myth Projection',
+      content_ids: [detail.sessionCode],
+      content_type: 'product'
+    });
   }
 
   // Purchase intentionally fails closed until commerce-status exposes an
   // authoritative paid conversion, real amount/currency and stable opaque ID.
   // registrationId + ACCESS_READY alone can also represent a zero-value access.
+
+  window.addEventListener('hb:registration-completed', (event) => {
+    window.__hbCompletedRegistration = event.detail;
+    if (pixelLoaded) trackCompletedRegistration(event.detail);
+  });
 
   function revokePixel() {
     if (typeof window.fbq === 'function') window.fbq('consent', 'revoke');

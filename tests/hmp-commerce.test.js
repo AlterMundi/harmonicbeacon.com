@@ -22,6 +22,12 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
     fetch: fetchImpl,
     sessionStorage,
     setTimeout,
+    CustomEvent: class CustomEvent {
+      constructor(type, options = {}) {
+        this.type = type;
+        this.detail = options.detail;
+      }
+    },
     ...overrides
   };
   const context = vm.createContext({URL, window});
@@ -33,7 +39,7 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
     ? source
     : source.replace('const REGISTRATION_OPEN = true;', 'const REGISTRATION_OPEN = false;');
   vm.runInContext(evaluatedSource, context);
-  return {api: window.HMPCommerce, values};
+  return {api: window.HMPCommerce, values, window};
 }
 
 function widgetDom() {
@@ -258,6 +264,7 @@ test('stores a separate status token only after a valid registration response', 
       ok: true,
       json: async () => ({
         schema_version: 'registration.response.v1',
+        registration_status: 'REGISTERED',
         registration_id: '20000000-0000-4000-8000-000000000001',
         commerce_status_token: statusToken,
         checkout
@@ -272,6 +279,103 @@ test('stores a separate status token only after a valid registration response', 
   assert.equal(values.has('hb-registration-v4-idempotency-key'), false);
   assert.equal(api.readStatusContext().commerce_status_token, statusToken);
   assert.match(result.checkout.widget_url, /^https:\/\/tickets\.harmonicbeacon\.com\//);
+});
+
+test('announces CompleteRegistration only after a canonical REGISTERED response', async () => {
+  const events = [];
+  const {api, window} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: event => { events.push(event); return true; }
+  });
+
+  await api.register(payload);
+
+  assert.equal(events.length, 1);
+  assert.equal(events[0].type, 'hb:registration-completed');
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(events[0].detail)),
+    {
+      registrationId: '20000000-0000-4000-8000-000000000001',
+      sessionCode: 'es-0830-cr'
+    }
+  );
+  assert.equal(window.__hbCompletedRegistration.registrationId, events[0].detail.registrationId);
+});
+
+test('an analytics listener failure never rejects a valid registration response', async () => {
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+
+  assert.equal(result.registration_status, 'REGISTERED');
+  assert.equal(result.checkout.widget_url, checkout.widget_url);
+});
+
+test('an analytics listener failure never blocks the validated checkout widget', async () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    document: dom.document,
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+  const script = api.mountCheckoutWidget(dom.container, payload, result.checkout);
+  const mountedUrl = new URL(script.attributes.get('data-url'));
+  const mountedHash = new URLSearchParams(mountedUrl.hash.slice(1));
+
+  assert.equal(dom.container.children.length, 1);
+  assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
+  assert.equal(mountedHash.get('p[meta_registration_context]'), checkoutContext);
+  assert.equal(mountedHash.get('p[first_name]'), payload.first_name);
+  assert.equal(mountedHash.get('p[last_name]'), payload.last_name);
+  assert.equal(mountedHash.get('p[email]'), payload.email);
+});
+
+test('rejects a response without canonical REGISTERED status and emits no event', async () => {
+  const events = [];
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'VERIFYING',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: event => { events.push(event); return true; }
+  });
+
+  await assert.rejects(api.register(payload), /invalid_registration_response/);
+  assert.equal(events.length, 0);
 });
 
 test('rejects malformed registration ids and status tokens before storing context', async () => {

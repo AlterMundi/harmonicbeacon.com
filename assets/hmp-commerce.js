@@ -241,6 +241,7 @@
     const result = await response.json();
     if (
       result.schema_version !== 'registration.response.v1' ||
+      result.registration_status !== 'REGISTERED' ||
       !REGISTRATION_ID_PATTERN.test(result.registration_id || '') ||
       !STATUS_TOKEN_PATTERN.test(result.commerce_status_token || '') ||
       !validCheckoutUrl(result.checkout && result.checkout.widget_url, payload, result.checkout)
@@ -255,6 +256,18 @@
       session_code: payload.session_code
     }));
     storage().removeItem(IDEMPOTENCY_KEY);
+    const completedRegistration = Object.freeze({
+      registrationId: result.registration_id,
+      sessionCode: payload.session_code
+    });
+    window.__hbCompletedRegistration = completedRegistration;
+    if (typeof window.CustomEvent === 'function' && typeof window.dispatchEvent === 'function') {
+      try {
+        window.dispatchEvent(new window.CustomEvent('hb:registration-completed', {
+          detail: completedRegistration
+        }));
+      } catch (_) {}
+    }
     return result;
   }
 
