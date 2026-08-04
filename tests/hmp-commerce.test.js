@@ -330,6 +330,33 @@ test('an analytics listener failure never rejects a valid registration response'
   assert.equal(result.checkout.widget_url, checkout.widget_url);
 });
 
+test('an analytics listener failure never blocks the validated checkout widget', async () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    document: dom.document,
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+  const script = api.mountCheckoutWidget(dom.container, payload, result.checkout);
+
+  assert.equal(dom.container.children.length, 1);
+  assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
+  assert.equal(
+    new URL(script.attributes.get('data-url')).hash,
+    `#p[meta_registration_context]=${checkoutContext}`
+  );
+});
+
 test('rejects a response without canonical REGISTERED status and emits no event', async () => {
   const events = [];
   const {api} = runtime(async () => ({
