@@ -108,7 +108,15 @@
     const script = window.document.createElement('script');
     script.src = TICKET_TAILOR_WIDGET_SCRIPT;
     script.async = true;
-    script.setAttribute('data-url', checkout.widget_url);
+    // The provider script adds its own `widget=true`. The canonical URL returned
+    // by the API is also valid as a modal fallback and already contains that
+    // flag, so handing it through unchanged creates duplicate widget modes in
+    // the iframe query. Keep the signed path and metadata fragment, but let the
+    // inline widget own its transport flags.
+    const inlineUrl = new URL(checkout.widget_url);
+    inlineUrl.searchParams.delete('widget');
+    inlineUrl.searchParams.delete('modal_widget');
+    script.setAttribute('data-url', inlineUrl.toString());
     script.setAttribute('data-type', 'inline');
     script.setAttribute('data-inline-minimal', 'true');
     script.setAttribute('data-inline-show-logo', 'false');
