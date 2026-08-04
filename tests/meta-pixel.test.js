@@ -10,9 +10,8 @@ const registration = {
   sessionCode: 'es-0830-cr'
 };
 
-function pixelRuntime(initialConsent = null) {
+function pixelRuntime(initialConsent = null, sessionValues = new Map()) {
   const localValues = new Map(initialConsent ? [['hb-meta-consent', initialConsent]] : []);
-  const sessionValues = new Map();
   const listeners = new Map();
   const controls = new Map();
   const insertedScripts = [];
@@ -93,6 +92,20 @@ test('consent granted tracks CompleteRegistration once without PII', () => {
   assert.equal(events[0].length, 3);
   assert.equal(JSON.stringify(events[0]).includes('email'), false);
   assert.equal(JSON.stringify(events[0]).includes('Alma'), false);
+});
+
+test('refresh does not resend a completed registration in the same browser tab', () => {
+  const sessionValues = new Map();
+  const firstPage = pixelRuntime('granted', sessionValues);
+  firstPage.triggerRegistration(registration);
+
+  const refreshedPage = pixelRuntime('granted', sessionValues);
+  refreshedPage.triggerRegistration(registration);
+
+  const firstEvents = firstPage.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  const refreshedEvents = refreshedPage.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(firstEvents.length, 1);
+  assert.equal(refreshedEvents.length, 0);
 });
 
 test('declined consent never loads Meta or tracks the registration', () => {
