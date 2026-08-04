@@ -78,6 +78,19 @@ const checkout = {
   metadata_value: checkoutContext,
   widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8804105/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
+const registrationId = '20000000-0000-4000-8000-000000000001';
+const challengeId = '30000000-0000-4000-8000-000000000002';
+const verification = {
+  schema_version: 'registration.email-verification.v1',
+  registration_id: registrationId,
+  registration_status: 'EMAIL_VERIFICATION_REQUIRED',
+  commerce_status_token: statusToken,
+  email_verification: {
+    challenge_id: challengeId,
+    expires_at: '2026-08-04T23:00:00Z',
+    masked_destination: 'a***@example.test'
+  }
+};
 
 test('closed override rejects registration before any network request', async () => {
   let requested = false;
@@ -258,7 +271,8 @@ test('stores a separate status token only after a valid registration response', 
       ok: true,
       json: async () => ({
         schema_version: 'registration.response.v1',
-        registration_id: '20000000-0000-4000-8000-000000000001',
+        registration_id: registrationId,
+        registration_status: 'REGISTERED',
         commerce_status_token: statusToken,
         checkout
       })
@@ -280,6 +294,7 @@ test('rejects malformed registration ids and status tokens before storing contex
     json: async () => ({
       schema_version: 'registration.response.v1',
       registration_id: '------------------------------------',
+      registration_status: 'REGISTERED',
       commerce_status_token: 'not-a-status-token',
       checkout
     })
@@ -316,6 +331,125 @@ test('aborts a stalled registration and keeps its idempotency key for a safe ret
     values.get('hb-registration-v3-idempotency-key'),
     '10000000-0000-4000-8000-000000000001'
   );
+});
+
+test('stores a pending email verification without exposing checkout', async () => {
+  const {api, values} = runtime(async () => ({ok: true, json: async () => verification}));
+
+  const result = await api.register(payload);
+  const stored = JSON.parse(values.get(api.STATUS_CONTEXT_KEY));
+
+  assert.equal(result.registration_status, 'EMAIL_VERIFICATION_REQUIRED');
+  assert.equal(result.checkout, undefined);
+  assert.equal(stored.schema_version, 'registration-status-context.v2');
+  assert.equal(stored.registration_id, registrationId);
+  assert.deepEqual(stored.email_verification, verification.email_verification);
+  assert.equal(stored.registration_payload.email, payload.email);
+});
+
+test('verifies the code and stores the checkout context', async () => {
+  let observed;
+  const completed = {
+    schema_version: 'registration.response.v1',
+    registration_id: registrationId,
+    registration_status: 'REGISTERED',
+    commerce_status_token: statusToken,
+    checkout
+  };
+  const {api} = runtime(async (url, options) => {
+    observed = {url, options};
+    return {ok: true, json: async () => completed};
+  });
+
+  const result = await api.verifyEmail(verification, '123456', payload);
+  const stored = api.readStatusContext();
+
+  assert.equal(observed.url, `https://bot.harmonicbeacon.com/v1/registrations/${registrationId}/email-verification`);
+  assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
+  assert.deepEqual(JSON.parse(observed.options.body), {challenge_id: challengeId, code: '123456'});
+  assert.equal(result.registration_status, 'REGISTERED');
+  assert.equal(stored.checkout_context, checkoutContext);
+  assert.equal(stored.email_verification, null);
+  assert.equal(stored.registration_payload, null);
+});
+
+test('surfaces invalid verification code with remaining attempts', async () => {
+  const {api} = runtime(async () => ({
+    ok: false,
+    status: 422,
+    json: async () => ({
+      detail: {code: 'email_verification_code_invalid', attempts_remaining: 3}
+    })
+  }));
+
+  await assert.rejects(
+    api.verifyEmail(verification, '999999', payload),
+    error => error.code === 'email_verification_code_invalid' && error.attemptsRemaining === 3
+  );
+});
+
+test('resends email verification with status token and replaces challenge', async () => {
+  let observed;
+  const resent = {
+    ...verification,
+    email_verification: {
+      ...verification.email_verification,
+      challenge_id: '40000000-0000-4000-8000-000000000004'
+    }
+  };
+  const {api} = runtime(async (url, options) => {
+    observed = {url, options};
+    return {ok: true, json: async () => resent};
+  });
+
+  const result = await api.resendEmailVerification(verification, payload);
+
+  assert.equal(observed.url, `https://bot.harmonicbeacon.com/v1/registrations/${registrationId}/email-verification/resend`);
+  assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
+  assert.equal(result.email_verification.challenge_id, resent.email_verification.challenge_id);
+  assert.equal(api.readStatusContext().email_verification.challenge_id, resent.email_verification.challenge_id);
+});
+
+test('claims a returned order with the opaque checkout context', async () => {
+  let observed;
+  const context = {
+    registration_id: registrationId,
+    commerce_status_token: statusToken,
+    checkout_context: checkoutContext
+  };
+  const {api} = runtime(async (url, options) => {
+    observed = {url, options};
+    return {
+      ok: true,
+      json: async () => ({
+        schema_version: 'commerce-claim.response.v1',
+        registration_id: registrationId,
+        outcome: 'LINKED'
+      })
+    };
+  });
+
+  const result = await api.commerceClaim(context, '80659999');
+
+  assert.equal(observed.url, `https://bot.harmonicbeacon.com/v1/registrations/${registrationId}/commerce-claim`);
+  assert.equal(observed.options.method, 'PUT');
+  assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
+  assert.deepEqual(JSON.parse(observed.options.body), {
+    external_order_id: '80659999',
+    checkout_context: checkoutContext
+  });
+  assert.equal(result.outcome, 'LINKED');
+});
+
+test('refuses a browser claim without the checkout context', async () => {
+  let requested = false;
+  const {api} = runtime(async () => { requested = true; });
+
+  await assert.rejects(
+    api.commerceClaim({registration_id: registrationId, commerce_status_token: statusToken}, '80659999'),
+    error => error.code === 'commerce_claim_input_invalid'
+  );
+  assert.equal(requested, false);
 });
 
 test('commerce status uses the private token and no credentials', async () => {

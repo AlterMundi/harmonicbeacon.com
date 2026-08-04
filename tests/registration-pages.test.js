@@ -31,6 +31,11 @@ test('registration form requires v3 terms and never bypasses its backend', () =>
   assert.match(page, /registrationTermsVersion" value="registration-v3"/);
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
+  assert.match(page, /id="emailVerificationStep"/);
+  assert.match(page, /autocomplete="one-time-code"/);
+  assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
+  assert.match(page, /window\.HMPCommerce\.resendEmailVerification\(pendingVerification,pendingPayload\)/);
+  assert.match(page, /window\.HMPCommerce\.clearStatusContext\(\)/);
   assert.match(page, /window\.HMPCommerce\.mountCheckoutWidget\(widget,payload,result\.checkout/);
   assert.match(page, /id="ticketTailorWidget"/);
   assert.doesNotMatch(page, /location\.assign\(result\.checkout\.widget_url\)/);
@@ -54,7 +59,12 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   const page = read('inscripcion/confirmacion/index.html');
   assert.match(page, /<title>Verificando pago · Harmonic Beacon<\/title>/);
   assert.match(page, /id="confirmedContent" hidden/);
+  assert.match(page, /window\.HMPCommerce\.commerceClaim\(context, orderId\)/);
   assert.match(page, /window\.HMPCommerce\.commerceStatus\(context\)/);
+  assert.ok(
+    page.indexOf('window.HMPCommerce.commerceClaim(context, orderId)') <
+      page.indexOf('window.HMPCommerce.commerceStatus(context)')
+  );
   assert.match(page, /state === 'PAYMENT_CONFIRMED' \|\| state === 'ACCESS_READY'/);
   assert.match(page, /id="retryStatus"/);
   assert.match(page, /commerce_status_timeout/);

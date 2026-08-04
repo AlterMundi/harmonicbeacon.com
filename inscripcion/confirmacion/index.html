@@ -783,13 +783,13 @@
     </footer>
   </div>
 
-  <script src="/assets/hmp-commerce.js?v=20260804-email-mx-validation-1"></script>
+  <script src="/assets/hmp-commerce.js?v=20260804-email-verification-1"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const context = window.HMPCommerce.readStatusContext();
     const initialLanguage = params.get('lang') === 'en' || (!params.get('lang') && context?.locale === 'en') ? 'en' : 'es';
     const rawOrderId = params.get('tt_order_id');
-    const orderId = rawOrderId && /^[a-zA-Z0-9_-]{1,80}$/.test(rawOrderId) ? rawOrderId : null;
+    const orderId = rawOrderId && /^(or_)?[0-9]{1,32}$/.test(rawOrderId) ? rawOrderId : null;
     const orderReference = document.querySelector('#orderReference');
     const statusLabel = document.querySelector('#commerceStatusLabel');
     const pageTitle = document.querySelector('#page-title');
@@ -801,6 +801,7 @@
     let currentState = context ? 'VERIFYING' : 'CONTEXT_MISSING';
     let purchaseAnnounced = false;
     let verificationRunning = false;
+    let claimCompleted = false;
 
     const messages = {
       es: {
@@ -879,6 +880,15 @@
       retryStatus.disabled = true;
       retryStatus.hidden = true;
       try {
+        if (orderId && context.checkout_context && !claimCompleted) {
+          try {
+            await window.HMPCommerce.commerceClaim(context, orderId);
+            claimCompleted = true;
+          } catch (_) {
+            // The webhook may still be arriving. Canonical status polling remains authoritative,
+            // and a manual retry will attempt the claim again if it is still needed.
+          }
+        }
         for (let attempt = 0; attempt < 30; attempt += 1) {
           try {
             const result = await window.HMPCommerce.commerceStatus(context);

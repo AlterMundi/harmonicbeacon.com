@@ -1,0 +1,11 @@
+{
+  "schema_version": "registration.email-verification.v1",
+  "registration_id": "10000000-0000-4000-8000-000000000001",
+  "registration_status": "EMAIL_VERIFICATION_REQUIRED",
+  "email_verification": {
+    "challenge_id": "20000000-0000-4000-8000-000000000002",
+    "expires_at": "2026-08-04T19:15:00Z",
+    "masked_destination": "a***@example.test"
+  },
+  "commerce_status_token": "st_v1_fixture-status-token-do-not-use"
+}
