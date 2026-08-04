@@ -3,9 +3,24 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const vm = require('node:vm');
 
 const root = path.join(__dirname, '..');
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
+
+test('registration inline scripts compile before publication', () => {
+  for (const relative of ['inscripcion/index.html', 'inscripcion/confirmacion/index.html']) {
+    const page = read(relative);
+    const scripts = [...page.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+    assert.ok(scripts.length > 0, `${relative} must include an inline controller`);
+    scripts.forEach((match, index) => {
+      assert.doesNotThrow(
+        () => new vm.Script(match[1], {filename: `${relative}#inline-${index + 1}`}),
+        `${relative} inline script ${index + 1} must compile`
+      );
+    });
+  }
+});
 
 test('events page opens only the August 8 virtual sessions', () => {
   const page = read('eventos/index.html');
@@ -32,6 +47,14 @@ test('registration form requires v3 terms and never bypasses its backend', () =>
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
   assert.match(page, /id="emailVerificationStep"/);
+  assert.match(page, /id="registrationProgress"/);
+  assert.equal((page.match(/data-flow-step="[1-4]"/g) || []).length, 4);
+  assert.match(page, /Datos y sesión/);
+  assert.match(page, /Confirmá tu email/);
+  assert.match(page, /Entrada y pago/);
+  assert.match(page, /function setFlowStage\(step\)/);
+  assert.match(page, /function showVerification\(payload,result\).*setFlowStage\(2\)/);
+  assert.match(page, /function showCheckout\(payload,result\).*setFlowStage\(3\)/);
   assert.match(page, /autocomplete="one-time-code"/);
   assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
   assert.match(page, /window\.HMPCommerce\.resendEmailVerification\(pendingVerification,pendingPayload\)/);
@@ -59,6 +82,8 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   const page = read('inscripcion/confirmacion/index.html');
   assert.match(page, /<title>Verificando pago · Harmonic Beacon<\/title>/);
   assert.match(page, /id="confirmedContent" hidden/);
+  assert.match(page, /id="confirmationProgress"/);
+  assert.match(page, /<li aria-current="step">.*<span class="confirmation-progress-number">04<\/span>/);
   assert.match(page, /window\.HMPCommerce\.commerceClaim\(context, orderId\)/);
   assert.match(page, /window\.HMPCommerce\.commerceStatus\(context\)/);
   assert.ok(

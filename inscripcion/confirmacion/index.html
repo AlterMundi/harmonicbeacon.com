@@ -164,6 +164,34 @@
       background: var(--gold);
     }
 
+    .confirmation-progress {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 0 0 20px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(23, 16, 11, .82);
+      list-style: none;
+      overflow: hidden;
+    }
+
+    .confirmation-progress li {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 66px;
+      padding: 14px 16px;
+      color: var(--gold);
+    }
+
+    .confirmation-progress li:not(:last-child) { border-right: 1px solid var(--line); }
+    .confirmation-progress li[aria-current="step"] { color: var(--paper); background: rgba(201, 162, 78, .1); }
+    .confirmation-progress-number { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; color: var(--night); background: var(--gold); font: 700 .68rem var(--mono); }
+    .confirmation-progress li[aria-current="step"] .confirmation-progress-number { background: var(--lime); box-shadow: 0 0 20px rgba(201, 162, 78, .22); }
+    .confirmation-progress strong { font-size: .8rem; line-height: 1.25; }
+
     .hero {
       position: relative;
       display: grid;
@@ -591,6 +619,10 @@
     @media (max-width: 560px) {
       .page { width: min(100% - 24px, 1120px); padding-top: 12px; }
       .topbar { margin-bottom: 18px; }
+      .confirmation-progress { grid-template-columns: 1fr 1fr; }
+      .confirmation-progress li { min-height: 60px; padding: 12px; }
+      .confirmation-progress li:nth-child(2) { border-right: 0; }
+      .confirmation-progress li:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
       .brand { font-size: .68rem; letter-spacing: .1em; }
       .hero { gap: 36px; padding: 32px 22px; border-radius: 20px; }
       h1 { font-size: clamp(2.7rem, 13vw, 3.5rem); }
@@ -638,6 +670,13 @@
         <button type="button" data-lang-button="en" aria-pressed="false">EN</button>
       </div>
     </header>
+
+    <ol class="confirmation-progress" id="confirmationProgress" aria-label="Progreso de inscripción">
+      <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Datos y sesión</span><span data-copy="en">Details and session</span></strong></li>
+      <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Email confirmado</span><span data-copy="en">Email confirmed</span></strong></li>
+      <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Entrada y pago</span><span data-copy="en">Ticket and payment</span></strong></li>
+      <li aria-current="step"><span class="confirmation-progress-number">04</span><strong><span data-copy="es">Confirmación</span><span data-copy="en">Confirmation</span></strong></li>
+    </ol>
 
     <main id="confirmation">
       <section class="hero" aria-labelledby="page-title">
@@ -853,6 +892,7 @@
     function setLanguage(language) {
       document.documentElement.dataset.lang = language;
       document.documentElement.lang = language;
+      document.querySelector('#confirmationProgress').setAttribute('aria-label', language === 'en' ? 'Registration progress' : 'Progreso de inscripción');
       document.title = language === 'en'
         ? 'Purchase status · Harmonic Beacon'
         : 'Estado de compra · Harmonic Beacon';
