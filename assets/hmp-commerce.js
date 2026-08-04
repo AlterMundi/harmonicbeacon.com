@@ -116,6 +116,16 @@
     const inlineUrl = new URL(checkout.widget_url);
     inlineUrl.searchParams.delete('widget');
     inlineUrl.searchParams.delete('modal_widget');
+    const prefill = [
+      ['p[first_name]', payload.first_name],
+      ['p[last_name]', payload.last_name],
+      ['p[email]', payload.email]
+    ];
+    const hashParts = inlineUrl.hash.slice(1).split('&').filter(Boolean);
+    for (const [name, value] of prefill) {
+      hashParts.push(`${name}=${encodeURIComponent(String(value || ''))}`);
+    }
+    inlineUrl.hash = hashParts.join('&');
     script.setAttribute('data-url', inlineUrl.toString());
     script.setAttribute('data-type', 'inline');
     script.setAttribute('data-inline-minimal', 'true');

@@ -128,10 +128,11 @@ test('mounts the validated checkout URL through the official inline widget', () 
   assert.equal(script.attributes.get('data-type'), 'inline');
   assert.equal(script.attributes.get('data-inline-minimal'), 'true');
   assert.equal(script.attributes.get('data-inline-ref'), 'website_widget');
-  assert.equal(
-    mountedUrl.hash,
-    `#p[meta_registration_context]=${checkoutContext}`
-  );
+  const mountedHash = new URLSearchParams(mountedUrl.hash.slice(1));
+  assert.equal(mountedHash.get('p[meta_registration_context]'), checkoutContext);
+  assert.equal(mountedHash.get('p[first_name]'), payload.first_name);
+  assert.equal(mountedHash.get('p[last_name]'), payload.last_name);
+  assert.equal(mountedHash.get('p[email]'), payload.email);
   assert.equal(dom.created.some(element => element.tagName === 'a'), false);
 });
 
