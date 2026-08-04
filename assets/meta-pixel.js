@@ -30,7 +30,7 @@
     es: {
       label: 'Preferencias de privacidad',
       title: 'Medición y publicidad',
-      text: 'Usamos el píxel de Meta para medir visitas y compras, y mejorar nuestras campañas. Meta puede usar cookies y datos del dispositivo. Podés aceptar o continuar sin esta medición.',
+      text: 'Usamos el píxel de Meta para medir visitas, inscripciones completadas y compras pagas, y mejorar nuestras campañas. Meta puede usar cookies y datos del dispositivo. Podés aceptar o continuar sin esta medición.',
       policy: 'Ver política de privacidad',
       reject: 'No aceptar',
       accept: 'Aceptar',
@@ -39,7 +39,7 @@
     en: {
       label: 'Privacy preferences',
       title: 'Measurement and advertising',
-      text: 'We use the Meta pixel to measure visits and purchases and improve our campaigns. Meta may use cookies and device data. You can accept or continue without this measurement.',
+      text: 'We use the Meta pixel to measure visits, completed registrations and paid purchases and improve our campaigns. Meta may use cookies and device data. You can accept or continue without this measurement.',
       policy: 'View privacy policy',
       reject: 'Decline',
       accept: 'Accept',

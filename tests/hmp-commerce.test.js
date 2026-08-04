@@ -68,7 +68,7 @@ const payload = {
   event_code: 'hmp-2026-08-08',
   session_code: 'es-0830-cr',
   locale: 'es',
-  terms_version: 'registration-v3',
+  terms_version: 'registration-v4',
   terms_accepted: true
 };
 const checkoutContext = `ctx_v1_${'A'.repeat(43)}`;
@@ -245,7 +245,7 @@ test('keeps the idempotency key when registration outcome is unknown', async () 
   const {api, values} = runtime(async () => { throw new Error('network'); });
   await assert.rejects(api.register(payload), /network/);
   assert.equal(
-    values.get('hb-registration-v3-idempotency-key'),
+    values.get('hb-registration-v4-idempotency-key'),
     '10000000-0000-4000-8000-000000000001'
   );
 });
@@ -269,7 +269,7 @@ test('stores a separate status token only after a valid registration response', 
   assert.equal(observed.url, 'https://bot.harmonicbeacon.com/v1/registrations');
   assert.equal(observed.options.mode, 'cors');
   assert.equal(observed.options.headers['Idempotency-Key'], '10000000-0000-4000-8000-000000000001');
-  assert.equal(values.has('hb-registration-v3-idempotency-key'), false);
+  assert.equal(values.has('hb-registration-v4-idempotency-key'), false);
   assert.equal(api.readStatusContext().commerce_status_token, statusToken);
   assert.match(result.checkout.widget_url, /^https:\/\/tickets\.harmonicbeacon\.com\//);
 });
@@ -301,6 +301,19 @@ test('ignores malformed status context from session storage', () => {
   assert.equal(api.readStatusContext(), null);
 });
 
+test('reads a valid v3 status context after the v4 cutover', () => {
+  const {api, values} = runtime(async () => {});
+  values.set('hb-registration-v3-status-context', JSON.stringify({
+    schema_version: 'registration-status-context.v1',
+    registration_id: '20000000-0000-4000-8000-000000000001',
+    commerce_status_token: statusToken,
+    locale: 'es',
+    session_code: 'es-0830-cr'
+  }));
+
+  assert.equal(api.readStatusContext().commerce_status_token, statusToken);
+});
+
 test('aborts a stalled registration and keeps its idempotency key for a safe retry', async () => {
   const stalledFetch = (_url, options) => new Promise((_resolve, reject) => {
     if (options.signal.aborted) return reject(new Error('aborted'));
@@ -313,7 +326,7 @@ test('aborts a stalled registration and keeps its idempotency key for a safe ret
 
   await assert.rejects(api.register(payload), error => error.code === 'registration_timeout');
   assert.equal(
-    values.get('hb-registration-v3-idempotency-key'),
+    values.get('hb-registration-v4-idempotency-key'),
     '10000000-0000-4000-8000-000000000001'
   );
 });

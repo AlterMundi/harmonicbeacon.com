@@ -3,8 +3,9 @@
 
   const REGISTRATION_OPEN = true;
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
-  const IDEMPOTENCY_KEY = 'hb-registration-v3-idempotency-key';
-  const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
+  const IDEMPOTENCY_KEY = 'hb-registration-v4-idempotency-key';
+  const STATUS_CONTEXT_KEY = 'hb-registration-v4-status-context';
+  const LEGACY_STATUS_CONTEXT_KEYS = Object.freeze(['hb-registration-v3-status-context']);
   const REGISTRATION_TIMEOUT_MS = 15000;
   const STATUS_TIMEOUT_MS = 8000;
   const TICKET_TAILOR_WIDGET_SCRIPT = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
@@ -258,17 +259,18 @@
   }
 
   function readStatusContext() {
-    try {
-      const value = JSON.parse(storage().getItem(STATUS_CONTEXT_KEY) || 'null');
-      return value &&
-        value.schema_version === 'registration-status-context.v1' &&
-        REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
-        STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '')
-        ? value
-        : null;
-    } catch (_) {
-      return null;
+    for (const key of [STATUS_CONTEXT_KEY, ...LEGACY_STATUS_CONTEXT_KEYS]) {
+      try {
+        const value = JSON.parse(storage().getItem(key) || 'null');
+        if (
+          value &&
+          value.schema_version === 'registration-status-context.v1' &&
+          REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
+          STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '')
+        ) return value;
+      } catch (_) {}
     }
+    return null;
   }
 
   async function commerceStatus(context) {
