@@ -53,9 +53,11 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   assert.match(page, /STATUS_TIMEOUT/);
 });
 
-test('Meta Purchase is gated by the canonical commerce event', () => {
+test('Meta Purchase fails closed without canonical paid conversion facts', () => {
   const pixel = read('assets/meta-pixel.js');
-  assert.match(pixel, /hb:commerce-confirmed/);
+  assert.doesNotMatch(pixel, /fbq\('track', 'Purchase'/);
+  assert.doesNotMatch(pixel, /englishSession \? 50 : 20/);
+  assert.doesNotMatch(pixel, /en-1400-cr|es-0830-cr/);
   assert.doesNotMatch(pixel, /tt_order_id/);
 });
 
