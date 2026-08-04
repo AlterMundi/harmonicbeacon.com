@@ -85,10 +85,16 @@
     ) return;
     const registrationKey = `hb-meta-registration-${detail.registrationId}`;
     if (sentRegistrationIds.has(detail.registrationId)) return;
-    for (const browserStorage of [sessionStorage, localStorage]) {
-      try {
-        if (browserStorage.getItem(registrationKey)) return;
-      } catch (_) {}
+    let sentInCurrentTab = false;
+    try {
+      sentInCurrentTab = Boolean(sessionStorage.getItem(registrationKey));
+    } catch (_) {}
+    try {
+      if (localStorage.getItem(registrationKey)) return;
+      if (sentInCurrentTab) localStorage.setItem(registrationKey, 'sent');
+    } catch (_) {}
+    if (sentInCurrentTab) {
+      return;
     }
     for (const browserStorage of [sessionStorage, localStorage]) {
       try {
