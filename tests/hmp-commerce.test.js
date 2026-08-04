@@ -121,6 +121,32 @@ test('surfaces the backend email correction when server validation catches it', 
   );
 });
 
+test('surfaces an email domain that cannot receive mail', async () => {
+  const {api} = runtime(async () => ({
+    ok: false,
+    status: 422,
+    json: async () => ({detail: {code: 'email_domain_unreachable'}})
+  }));
+
+  await assert.rejects(
+    api.register({...payload, email: 'alma@monicca.com'}),
+    error => error.code === 'email_domain_unreachable'
+  );
+});
+
+test('surfaces temporary DNS validation failure as retryable', async () => {
+  const {api} = runtime(async () => ({
+    ok: false,
+    status: 503,
+    json: async () => ({detail: {code: 'email_domain_validation_unavailable'}})
+  }));
+
+  await assert.rejects(
+    api.register(payload),
+    error => error.code === 'email_domain_validation_unavailable'
+  );
+});
+
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
