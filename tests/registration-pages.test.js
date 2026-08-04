@@ -69,6 +69,16 @@ test('Meta Purchase fails closed without canonical paid conversion facts', () =>
   assert.doesNotMatch(pixel, /tt_order_id/);
 });
 
+test('Meta CompleteRegistration is gated by the canonical registration event', () => {
+  const commerce = read('assets/hmp-commerce.js');
+  const pixel = read('assets/meta-pixel.js');
+  assert.match(commerce, /result\.registration_status !== 'REGISTERED'/);
+  assert.match(commerce, /hb:registration-completed/);
+  assert.match(pixel, /trackCompletedRegistration/);
+  assert.match(pixel, /'CompleteRegistration'/);
+  assert.doesNotMatch(pixel, /detail\.email|detail\.firstName|detail\.lastName/);
+});
+
 test('registration-v3 remains byte-exact as immutable historical evidence', () => {
   const bytes = fs.readFileSync(path.join(root, 'legal/terms/registration-v3.html'));
   assert.equal(
