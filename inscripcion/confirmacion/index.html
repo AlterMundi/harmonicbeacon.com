@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07120f">
+  <meta name="theme-color" content="#0c0906">
   <meta name="description" content="Confirmación de pago para Harmonic Myth Projection.">
   <title>Verificando pago · Harmonic Beacon</title>
   <style>
     :root {
-      --night: #07120f;
-      --forest: #0d211a;
-      --panel: #10271f;
-      --paper: #fff9e9;
-      --text: #eef5e9;
-      --muted: #c4d1c7;
-      --lime: #c8ff7a;
-      --cyan: #7ceaff;
-      --gold: #ffd875;
-      --pink: #ff8fc8;
-      --line: rgba(238, 245, 233, .22);
+      --night: #0c0906;
+      --forest: #17100b;
+      --panel: #1b130d;
+      --paper: #f4eee2;
+      --text: #e7dccd;
+      --muted: #b9aa98;
+      --lime: #e2c47f;
+      --cyan: #c89a58;
+      --gold: #c9a24e;
+      --pink: #8f603f;
+      --line: rgba(201, 162, 78, .25);
       --display: Georgia, 'Times New Roman', serif;
       --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -38,10 +38,10 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(circle at 8% 8%, rgba(124, 234, 255, .14), transparent 30rem),
-        radial-gradient(circle at 92% 20%, rgba(255, 143, 200, .12), transparent 28rem),
-        radial-gradient(circle at 55% 90%, rgba(200, 255, 122, .11), transparent 30rem),
-        linear-gradient(145deg, #07120f 0%, #0a161b 55%, #07120f 100%);
+        radial-gradient(circle at 8% 8%, rgba(201, 162, 78, .12), transparent 30rem),
+        radial-gradient(circle at 92% 20%, rgba(143, 96, 63, .13), transparent 28rem),
+        radial-gradient(circle at 55% 90%, rgba(201, 162, 78, .08), transparent 30rem),
+        linear-gradient(145deg, #0c0906 0%, #17100b 55%, #0c0906 100%);
       font-family: var(--body);
       font-size: 16px;
       line-height: 1.65;
@@ -88,7 +88,7 @@
       z-index: -1;
       width: 18rem;
       height: 18rem;
-      border: 1px solid rgba(124, 234, 255, .18);
+      border: 1px solid rgba(201, 162, 78, .18);
       border-radius: 48% 52% 63% 37%;
       content: '';
       pointer-events: none;
@@ -99,7 +99,7 @@
     .page::after {
       right: -9rem;
       bottom: 7%;
-      border-color: rgba(255, 216, 117, .16);
+      border-color: rgba(143, 96, 63, .22);
       animation-delay: -7s;
     }
 
@@ -135,7 +135,7 @@
       border: 1px solid var(--gold);
       border-radius: 50%;
       color: var(--gold);
-      box-shadow: 0 0 24px rgba(255, 216, 117, .16);
+      box-shadow: 0 0 24px rgba(201, 162, 78, .16);
     }
 
     .language {
@@ -144,7 +144,7 @@
       padding: 4px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(7, 18, 15, .72);
+      background: rgba(23, 16, 11, .82);
     }
 
     .language button {
@@ -175,7 +175,7 @@
       border: 1px solid var(--line);
       border-radius: 28px;
       background:
-        linear-gradient(130deg, rgba(16, 39, 31, .96), rgba(9, 25, 28, .94)),
+        linear-gradient(130deg, rgba(31, 22, 15, .97), rgba(18, 12, 8, .96)),
         var(--panel);
       box-shadow: 0 30px 100px rgba(0, 0, 0, .38);
       overflow: hidden;
@@ -185,7 +185,7 @@
       position: absolute;
       inset: auto -5% -42% 35%;
       height: 70%;
-      border: 1px solid rgba(200, 255, 122, .18);
+      border: 1px solid rgba(201, 162, 78, .18);
       border-radius: 50%;
       content: '';
       pointer-events: none;
@@ -211,14 +211,14 @@
       color: var(--night);
       background: var(--lime);
       font-size: 1rem;
-      box-shadow: 0 0 24px rgba(200, 255, 122, .35);
+      box-shadow: 0 0 24px rgba(201, 162, 78, .28);
     }
 
     h1 {
       max-width: 750px;
       margin: 28px 0 24px;
       color: var(--paper);
-      font: 400 clamp(3.4rem, 7vw, 5.4rem)/.92 var(--display);
+      font: 400 clamp(2.8rem, 6vw, 4.4rem)/.95 var(--display);
       letter-spacing: -.045em;
     }
 
@@ -238,7 +238,7 @@
       max-width: 100%;
       margin: 24px 0 0;
       padding: 8px 12px;
-      border: 1px solid rgba(124, 234, 255, .42);
+      border: 1px solid rgba(201, 162, 78, .42);
       border-radius: 999px;
       color: var(--cyan);
       font: 700 .78rem var(--mono);
@@ -262,19 +262,19 @@
 
     .portal-ring:nth-child(1) {
       inset: 0;
-      color: rgba(255, 216, 117, .58);
+      color: rgba(226, 196, 127, .62);
       animation: spin 24s linear infinite;
     }
 
     .portal-ring:nth-child(2) {
       inset: 15%;
-      color: rgba(124, 234, 255, .55);
+      color: rgba(201, 162, 78, .52);
       animation: spin 17s linear infinite reverse;
     }
 
     .portal-ring:nth-child(3) {
       inset: 31%;
-      color: rgba(255, 143, 200, .58);
+      color: rgba(143, 96, 63, .66);
     }
 
     .portal-ring::before {
@@ -318,7 +318,7 @@
     .card {
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: rgba(13, 33, 26, .82);
+      background: rgba(27, 19, 13, .88);
       box-shadow: 0 20px 55px rgba(0, 0, 0, .22);
     }
 
@@ -360,7 +360,7 @@
       width: 44px;
       height: 44px;
       place-items: center;
-      border: 1px solid rgba(124, 234, 255, .5);
+      border: 1px solid rgba(201, 162, 78, .5);
       border-radius: 50%;
       color: var(--cyan);
       font: 800 .75rem var(--mono);
@@ -387,7 +387,7 @@
       border-left: 4px solid var(--gold);
       border-radius: 4px 12px 12px 4px;
       color: var(--text);
-      background: rgba(255, 216, 117, .09);
+      background: rgba(201, 162, 78, .09);
     }
 
     .important strong { color: var(--gold); }
@@ -441,11 +441,11 @@
       align-items: center;
       margin-top: 20px;
       padding: clamp(32px, 6vw, 64px);
-      border: 1px solid rgba(255, 143, 200, .38);
+      border: 1px solid rgba(143, 96, 63, .48);
       border-radius: 22px;
       background:
-        radial-gradient(circle at 12% 50%, rgba(255, 143, 200, .14), transparent 30%),
-        linear-gradient(120deg, rgba(24, 25, 48, .94), rgba(12, 39, 31, .94));
+        radial-gradient(circle at 12% 50%, rgba(143, 96, 63, .16), transparent 30%),
+        linear-gradient(120deg, rgba(36, 24, 16, .96), rgba(20, 14, 9, .96));
       box-shadow: 0 20px 60px rgba(0, 0, 0, .22);
       overflow: hidden;
     }
@@ -457,21 +457,21 @@
       aspect-ratio: 1;
       place-items: center;
       justify-self: center;
-      border: 1px solid rgba(255, 216, 117, .5);
+      border: 1px solid rgba(201, 162, 78, .5);
       border-radius: 50%;
-      box-shadow: 0 0 50px rgba(255, 143, 200, .1);
+      box-shadow: 0 0 50px rgba(143, 96, 63, .14);
     }
 
     .voice-orbit::before,
     .voice-orbit::after {
       position: absolute;
-      border: 1px solid rgba(124, 234, 255, .36);
+      border: 1px solid rgba(201, 162, 78, .36);
       border-radius: 50%;
       content: '';
     }
 
     .voice-orbit::before { inset: 17%; }
-    .voice-orbit::after { inset: 34%; border-color: rgba(255, 143, 200, .48); }
+    .voice-orbit::after { inset: 34%; border-color: rgba(143, 96, 63, .58); }
 
     .voice-wave {
       position: relative;
@@ -500,13 +500,13 @@
       padding: 14px 16px;
       border-left: 3px solid var(--cyan);
       color: var(--text);
-      background: rgba(124, 234, 255, .07);
+      background: rgba(201, 162, 78, .07);
     }
 
     .amplification .button {
       margin-top: 24px;
-      border-color: #8cffb4;
-      background: linear-gradient(110deg, #8cffb4, var(--lime));
+      border-color: var(--gold);
+      background: linear-gradient(110deg, var(--lime), var(--gold));
     }
 
     .amplification .button.session-es,
@@ -524,7 +524,7 @@
       padding: clamp(26px, 4vw, 38px);
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: linear-gradient(110deg, rgba(124, 234, 255, .09), rgba(255, 143, 200, .06));
+      background: linear-gradient(110deg, rgba(201, 162, 78, .09), rgba(143, 96, 63, .08));
     }
 
     .support h2 { font-size: clamp(2rem, 3.7vw, 2.75rem); }
@@ -540,7 +540,7 @@
       justify-content: center;
       min-height: 52px;
       padding: 0 22px;
-      border: 1px solid rgba(255, 216, 117, .65);
+      border: 1px solid rgba(201, 162, 78, .65);
       border-radius: 999px;
       color: var(--night);
       background: linear-gradient(110deg, var(--gold), var(--lime));
@@ -560,6 +560,25 @@
 
     footer a { color: var(--gold); }
 
+    body .hb-consent {
+      border-color: rgba(201, 162, 78, .34);
+      color: var(--paper);
+      background: #17100b;
+    }
+
+    body .hb-consent__title { color: var(--paper); }
+    body .hb-consent__text { color: var(--muted); }
+    body .hb-consent__link { color: var(--gold); }
+    body .hb-consent__button { border-color: rgba(201, 162, 78, .42); color: var(--paper); }
+    body .hb-consent__button--accept { border-color: var(--gold); color: var(--night); background: var(--gold); }
+    body .hb-consent__button:focus-visible,
+    body .hb-consent-settings:focus-visible { outline-color: var(--lime); }
+    body .hb-consent-settings {
+      border-color: rgba(201, 162, 78, .35);
+      color: var(--paper);
+      background: rgba(23, 16, 11, .94);
+    }
+
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .portal { width: 220px; }
@@ -574,7 +593,7 @@
       .topbar { margin-bottom: 18px; }
       .brand { font-size: .68rem; letter-spacing: .1em; }
       .hero { gap: 36px; padding: 32px 22px; border-radius: 20px; }
-      h1 { font-size: clamp(3.4rem, 16vw, 4.25rem); }
+      h1 { font-size: clamp(2.7rem, 13vw, 3.5rem); }
       .portal { width: 180px; }
       .card, .support, .amplification { border-radius: 18px; }
       .next-steps, .details { padding: 24px 20px; }
@@ -597,7 +616,7 @@
 
     @media (prefers-contrast: more) {
       :root { --muted: #e2ebe3; --line: rgba(255, 255, 255, .5); }
-      .card, .hero { background: #091b15; }
+      .card, .hero { background: #17100b; }
     }
   </style>
   <script src="/assets/meta-pixel.js" defer></script>
@@ -666,10 +685,10 @@
             <li class="step">
               <span class="step-number" aria-hidden="true">02</span>
               <div>
-                <h3 data-copy="es">El acceso llega el viernes</h3>
-                <h3 data-copy="en">Your access link arrives Friday</h3>
-                <p data-copy="es">El viernes 7 de agosto te enviaremos por correo el enlace para entrar a la experiencia online.</p>
-                <p data-copy="en">On Friday, August 7, we will email you the link to enter the online experience.</p>
+                <h3 data-copy="es">Tu acceso online llega por email</h3>
+                <h3 data-copy="en">Your online access arrives by email</h3>
+                <p data-copy="es">Una vez confirmado el pago, recibirás por correo el enlace de acceso y la información necesaria para participar.</p>
+                <p data-copy="en">Once payment is confirmed, you will receive the access link and everything you need to participate by email.</p>
               </div>
             </li>
             <li class="step">
@@ -748,8 +767,8 @@
       <section class="support" aria-labelledby="support-title">
         <div>
           <h2 id="support-title"><span data-copy="es">¿Necesitás ayuda?</span><span data-copy="en">Need help?</span></h2>
-          <p data-copy="es">Escribinos si tu entrada o el enlace de acceso no llegan.</p>
-          <p data-copy="en">Write to us if your ticket or access link does not arrive.</p>
+          <p data-copy="es">Escribinos si tu entrada, el acceso online o las indicaciones no llegan a tu correo.</p>
+          <p data-copy="en">Write to us if your ticket, online access or instructions do not arrive by email.</p>
         </div>
         <a class="button" href="mailto:info@harmonicbeacon.com">
           <span data-copy="es">Escribir a soporte</span>
@@ -786,8 +805,8 @@
     const messages = {
       es: {
         VERIFYING: ['Verificando pago', 'Un momento.', 'Estamos consultando el estado real de tu compra.', 'verificando'],
-        PAYMENT_CONFIRMED: ['Pago confirmado', 'Gracias.', 'Recibimos tu pago. Tu lugar está reservado mientras preparamos el acceso.', 'pago confirmado'],
-        ACCESS_READY: ['Acceso preparado', 'Gracias.', 'Tu pago y tu acceso están confirmados.', 'ya estás adentro'],
+        PAYMENT_CONFIRMED: ['Pago confirmado', 'Gracias.', 'Recibimos tu pago. Tu lugar está reservado y toda la información, incluido el acceso online, llegará a tu correo.', 'pago confirmado'],
+        ACCESS_READY: ['Acceso preparado', 'Gracias.', 'Tu pago está confirmado y enviamos el acceso online a tu correo.', 'ya estás adentro'],
         REVIEW_REQUIRED: ['Revisión necesaria', 'Te ayudamos.', 'Encontramos una diferencia en la compra. No vuelvas a pagar: escribinos para revisarla.', 'en revisión'],
         NOT_PAID: ['Pago no confirmado', 'Todavía no.', 'No encontramos un pago confirmado. Si pagaste, escribinos y lo revisamos.', 'sin confirmar'],
         REVOKED: ['Acceso revocado', 'Estado actualizado.', 'La entrada fue anulada o reembolsada. Escribinos si necesitás ayuda.', 'revocado'],
@@ -797,8 +816,8 @@
       },
       en: {
         VERIFYING: ['Verifying payment', 'One moment.', 'We are checking the canonical status of your purchase.', 'verifying'],
-        PAYMENT_CONFIRMED: ['Payment confirmed', 'Thank you.', 'We received your payment. Your place is reserved while access is prepared.', 'payment confirmed'],
-        ACCESS_READY: ['Access ready', 'Thank you.', 'Your payment and access are confirmed.', 'you are in'],
+        PAYMENT_CONFIRMED: ['Payment confirmed', 'Thank you.', 'We received your payment. Your place is reserved, and all information, including online access, will arrive by email.', 'payment confirmed'],
+        ACCESS_READY: ['Access ready', 'Thank you.', 'Your payment is confirmed, and we sent the online access link to your email.', 'you are in'],
         REVIEW_REQUIRED: ['Review required', 'We can help.', 'We found a mismatch in the purchase. Do not pay again; contact us so we can review it.', 'under review'],
         NOT_PAID: ['Payment not confirmed', 'Not yet.', 'We did not find a confirmed payment. If you paid, contact us and we will review it.', 'not confirmed'],
         REVOKED: ['Access revoked', 'Status updated.', 'The ticket was cancelled or refunded. Contact us if you need help.', 'revoked'],
