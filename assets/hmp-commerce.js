@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const REGISTRATION_OPEN = false;
+  const REGISTRATION_OPEN = true;
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
   const IDEMPOTENCY_KEY = 'hb-registration-v3-idempotency-key';
   const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';

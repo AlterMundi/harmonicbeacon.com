@@ -30,8 +30,8 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
     'utf8'
   );
   const evaluatedSource = registrationOpen
-    ? source.replace('const REGISTRATION_OPEN = false;', 'const REGISTRATION_OPEN = true;')
-    : source;
+    ? source
+    : source.replace('const REGISTRATION_OPEN = true;', 'const REGISTRATION_OPEN = false;');
   vm.runInContext(evaluatedSource, context);
   return {api: window.HMPCommerce, values};
 }
@@ -54,7 +54,7 @@ const checkout = {
   widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8804105/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
 
-test('production flag rejects registration before any network request', async () => {
+test('closed override rejects registration before any network request', async () => {
   let requested = false;
   const {api} = runtime(async () => { requested = true; }, {}, false);
 
