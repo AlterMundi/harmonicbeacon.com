@@ -135,6 +135,24 @@ test('an idempotent response in another browser tab does not resend CompleteRegi
   assert.equal(secondEvents.length, 0);
 });
 
+test('a legacy same-tab marker is migrated before another tab receives the response', () => {
+  const key = `hb-meta-registration-${registration.registrationId}`;
+  const localValues = new Map();
+  const legacySessionValues = new Map([[key, 'sent']]);
+  const migratedTab = pixelRuntime('granted', legacySessionValues, localValues);
+
+  migratedTab.triggerRegistration(registration);
+  assert.equal(localValues.get(key), 'sent');
+
+  const secondTab = pixelRuntime('granted', new Map(), localValues);
+  secondTab.triggerRegistration(registration);
+
+  const migratedEvents = migratedTab.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  const secondEvents = secondTab.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(migratedEvents.length, 0);
+  assert.equal(secondEvents.length, 0);
+});
+
 test('declined consent never loads Meta or tracks the registration', () => {
   const runtime = pixelRuntime('denied');
 
