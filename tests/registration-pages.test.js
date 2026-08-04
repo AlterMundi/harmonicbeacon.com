@@ -9,6 +9,9 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 
 test('events page announces only the August 8 virtual sessions while registration is closed', () => {
   const page = read('eventos/index.html');
+  assert.match(page, /online todos los fines de semana/);
+  assert.match(page, /online every weekend/);
+  assert.match(page, /Guardala para consultar la agenda vigente/);
   assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 2);
   assert.match(page, /2026-08-08T14:30:00Z/);
   assert.match(page, /2026-08-08T20:00:00Z/);
