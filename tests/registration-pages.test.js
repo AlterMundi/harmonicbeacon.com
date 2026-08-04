@@ -31,6 +31,9 @@ test('registration form requires v3 terms and never bypasses its backend', () =>
   assert.match(page, /registrationTermsVersion" value="registration-v3"/);
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
+  assert.match(page, /window\.HMPCommerce\.mountCheckoutWidget\(widget,payload,result\.checkout/);
+  assert.match(page, /id="ticketTailorWidget"/);
+  assert.doesNotMatch(page, /location\.assign\(result\.checkout\.widget_url\)/);
   assert.doesNotMatch(page, /mode:\s*['"]no-cors/);
   assert.doesNotMatch(page, /script\.google\.com\/macros/);
   assert.doesNotMatch(page, /buytickets\.at\/harmonicbeacon/);
