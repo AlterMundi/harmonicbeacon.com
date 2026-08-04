@@ -80,6 +80,21 @@
     return error;
   }
 
+  function announceCompletedRegistration(result, payload) {
+    const completedRegistration = Object.freeze({
+      registrationId: result.registration_id,
+      sessionCode: payload.session_code
+    });
+    window.__hbCompletedRegistration = completedRegistration;
+    if (typeof window.CustomEvent === 'function' && typeof window.dispatchEvent === 'function') {
+      try {
+        window.dispatchEvent(new window.CustomEvent('hb:registration-completed', {
+          detail: completedRegistration
+        }));
+      } catch (_) {}
+    }
+  }
+
   function storeStatusContext(payload, result) {
     const emailVerification = result.email_verification || null;
     const checkoutContext = result.checkout?.metadata_value || null;
@@ -288,6 +303,7 @@
     }
     storeStatusContext(payload, result);
     storage().removeItem(IDEMPOTENCY_KEY);
+    if (validCompletedRegistration(result, payload)) announceCompletedRegistration(result, payload);
     return result;
   }
 
@@ -332,6 +348,7 @@
       throw registrationError('invalid_email_verification_response');
     }
     storeStatusContext(payload, completed);
+    announceCompletedRegistration(completed, payload);
     return completed;
   }
 
