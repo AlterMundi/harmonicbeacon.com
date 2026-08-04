@@ -348,13 +348,15 @@ test('an analytics listener failure never blocks the validated checkout widget',
 
   const result = await api.register(payload);
   const script = api.mountCheckoutWidget(dom.container, payload, result.checkout);
+  const mountedUrl = new URL(script.attributes.get('data-url'));
+  const mountedHash = new URLSearchParams(mountedUrl.hash.slice(1));
 
   assert.equal(dom.container.children.length, 1);
   assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
-  assert.equal(
-    new URL(script.attributes.get('data-url')).hash,
-    `#p[meta_registration_context]=${checkoutContext}`
-  );
+  assert.equal(mountedHash.get('p[meta_registration_context]'), checkoutContext);
+  assert.equal(mountedHash.get('p[first_name]'), payload.first_name);
+  assert.equal(mountedHash.get('p[last_name]'), payload.last_name);
+  assert.equal(mountedHash.get('p[email]'), payload.email);
 });
 
 test('rejects a response without canonical REGISTERED status and emits no event', async () => {
