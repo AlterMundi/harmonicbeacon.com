@@ -44,6 +44,10 @@ test('registration form requires v3 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /'2026-08-01':/);
   assert.doesNotMatch(page, /'2026-08-15':/);
   assert.match(page, /error\?\.code==='registration_timeout'/);
+  assert.match(page, /error\?\.code==='email_domain_unreachable'/);
+  assert.match(page, /error\?\.code==='email_domain_validation_unavailable'/);
+  assert.match(page, /No pudimos verificar que este dominio de correo pueda recibir mensajes/);
+  assert.match(page, /We could not verify that this email domain can receive messages/);
 });
 
 test('confirmation starts neutral and unlocks content from canonical status', () => {

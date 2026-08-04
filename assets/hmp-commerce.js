@@ -70,6 +70,12 @@
     return error;
   }
 
+  function registrationError(code) {
+    const error = new Error(code);
+    error.code = code;
+    return error;
+  }
+
   function validWidgetPath(pathname, eventId) {
     const parts = pathname.split('/').filter(Boolean);
     return Boolean(
@@ -219,6 +225,15 @@
         typeof detail.suggested_email === 'string'
       ) {
         throw emailTypoError(detail.suggested_email);
+      }
+      if (response.status === 422 && detail?.code === 'email_domain_unreachable') {
+        throw registrationError('email_domain_unreachable');
+      }
+      if (
+        response.status === 503 &&
+        detail?.code === 'email_domain_validation_unavailable'
+      ) {
+        throw registrationError('email_domain_validation_unavailable');
       }
       throw new Error(`registration_${response.status}`);
     }
