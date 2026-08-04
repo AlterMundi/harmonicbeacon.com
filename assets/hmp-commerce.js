@@ -7,6 +7,7 @@
   const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
   const REGISTRATION_TIMEOUT_MS = 15000;
   const STATUS_TIMEOUT_MS = 8000;
+  const TICKET_TAILOR_WIDGET_SCRIPT = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
   const CHECKOUTS = Object.freeze({
@@ -91,6 +92,37 @@
     } catch (_) {
       return false;
     }
+  }
+
+  function mountCheckoutWidget(container, payload, checkout, onError = () => {}) {
+    if (!container || typeof container.replaceChildren !== 'function') {
+      throw new Error('checkout_widget_container_unavailable');
+    }
+    if (!validCheckoutUrl(checkout?.widget_url, payload, checkout)) {
+      throw new Error('invalid_checkout_widget_url');
+    }
+
+    const widget = window.document.createElement('div');
+    widget.className = 'tt-widget';
+
+    const script = window.document.createElement('script');
+    script.src = TICKET_TAILOR_WIDGET_SCRIPT;
+    script.async = true;
+    script.setAttribute('data-url', checkout.widget_url);
+    script.setAttribute('data-type', 'inline');
+    script.setAttribute('data-inline-minimal', 'true');
+    script.setAttribute('data-inline-show-logo', 'false');
+    script.setAttribute('data-inline-bg-fill', 'false');
+    script.setAttribute('data-inline-inherit-ref-from-url-param', '');
+    script.setAttribute('data-inline-ref', 'website_widget');
+    script.addEventListener('error', () => {
+      container.replaceChildren();
+      onError();
+    }, {once: true});
+
+    container.replaceChildren(widget);
+    widget.append(script);
+    return script;
   }
 
   async function fetchWithTimeout(url, options, timeoutMs, timeoutCode) {
@@ -193,6 +225,7 @@
     commerceStatus,
     fetchWithTimeout,
     getOrCreateIdempotencyKey,
+    mountCheckoutWidget,
     readStatusContext,
     registrationEvent,
     register,
