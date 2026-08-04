@@ -94,6 +94,21 @@ test('consent granted tracks CompleteRegistration once without PII', () => {
   assert.equal(JSON.stringify(events[0]).includes('Alma'), false);
 });
 
+test('English canonical session tracks the selected product without locale-derived values', () => {
+  const runtime = pixelRuntime('granted');
+
+  runtime.triggerRegistration({
+    registrationId: '20000000-0000-4000-8000-000000000002',
+    sessionCode: 'en-1400-cr'
+  });
+
+  const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(events.length, 1);
+  assert.deepEqual(Array.from(events[0][2].content_ids), ['en-1400-cr']);
+  assert.equal('value' in events[0][2], false);
+  assert.equal('currency' in events[0][2], false);
+});
+
 test('PageView fires once per page load and is not repeated by consent re-grant', () => {
   const runtime = pixelRuntime('granted');
 
