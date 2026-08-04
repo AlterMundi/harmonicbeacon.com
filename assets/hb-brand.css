@@ -172,9 +172,9 @@ a{ color:inherit; text-decoration:none; }
 .reveal[data-d="3"].in{ transition-delay:.36s; }
 
 /* ---- Layout helpers ---- */
-.wrap{ width:100%; max-width:1180px; margin-inline:auto; padding-inline:24px; }
-.wrap-narrow{ max-width:760px; }
-.section{ padding-block:clamp(64px,11vw,140px); position:relative; }
+.wrap{ width:100%; max-width:1080px; margin-inline:auto; padding-inline:24px; }
+.wrap-narrow{ max-width:720px; }
+.section{ padding-block:clamp(52px,8vw,96px); position:relative; }
 
 /* ---- Image treatments ---- */
 .img-cover{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -215,14 +215,14 @@ a{ color:inherit; text-decoration:none; }
 /* ============================================================
    Páginas de línea de trabajo (idea pages)
    ============================================================ */
-.idea-head{ padding-top:140px; }
+.idea-head{ padding-top:112px; padding-bottom:clamp(42px,7vw,72px); }
 .idea-head .crumb{ color:var(--gold); }
-.idea-head h1{ font-size:clamp(2.4rem,5.4vw,4rem); margin-top:1.1rem; line-height:1.06; }
-.idea-head .standfirst{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.2rem,2.2vw,1.55rem); color:var(--ink-800); line-height:1.5; max-width:52ch; margin-top:1.6rem; }
-.idea-sec{ padding-block:clamp(36px,6vw,68px); }
-.idea-sec h2{ font-size:clamp(1.6rem,3.4vw,2.3rem); }
+.idea-head h1{ font-size:clamp(2.05rem,4.3vw,3.25rem); margin-top:.9rem; line-height:1.08; }
+.idea-head .standfirst{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.08rem,1.8vw,1.35rem); color:var(--ink-800); line-height:1.5; max-width:52ch; margin-top:1.2rem; }
+.idea-sec{ padding-block:clamp(30px,4.5vw,50px); }
+.idea-sec h2{ font-size:clamp(1.45rem,2.7vw,1.95rem); }
 .idea-sec .eyebrow{ display:block; margin-bottom:.7rem; }
-.idea-sec .body{ color:var(--ink-600); font-size:1.06rem; line-height:1.8; max-width:64ch; margin-top:1.1rem; }
+.idea-sec .body{ color:var(--ink-600); font-size:1rem; line-height:1.72; max-width:64ch; margin-top:1rem; }
 .idea-sec .body p{ margin-top:1.1rem; }
 .idea-sec .body p:first-child{ margin-top:0; }
 .idea-sec .body b, .idea-sec .body strong{ color:var(--ink-800); font-weight:600; }
@@ -284,13 +284,13 @@ footer{ border-top:1px solid var(--hair-soft); padding-block:56px 30px; margin-t
 .ulink:hover{ border-color:var(--gold); }
 
 /* ---- Page hero (subpáginas) ---- */
-.page-hero{ padding-top:148px; padding-bottom:8px; }
-.page-hero h1{ font-size:clamp(2.4rem,5.5vw,4.2rem); margin-top:1rem; }
+.page-hero{ padding-top:116px; padding-bottom:8px; }
+.page-hero h1{ font-size:clamp(2.05rem,4.4vw,3.35rem); margin-top:.9rem; }
 
 /* ---- Componentes de contenido compartidos ---- */
 .head{ max-width:46ch; }
-.head h2{ font-size:clamp(2rem,4.4vw,3.4rem); margin-top:1rem; }
-.lead{ font-size:1.12rem; color:var(--ink-600); margin-top:1.3rem; line-height:1.75; }
+.head h2{ font-size:clamp(1.7rem,3.4vw,2.75rem); margin-top:.85rem; }
+.lead{ font-size:1.04rem; color:var(--ink-600); margin-top:1.1rem; line-height:1.7; }
 
 .team{ display:grid; gap:1px; background:var(--hair-soft); border:1px solid var(--hair-soft); border-radius:var(--r-card); overflow:hidden; margin-top:2.6rem; }
 @media(min-width:640px){ .team{ grid-template-columns:repeat(2,1fr); } }
@@ -300,9 +300,9 @@ footer{ border-top:1px solid var(--hair-soft); padding-block:56px 30px; margin-t
 .member .role{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); margin-top:.4rem; }
 .member p{ color:var(--ink-600); font-size:.92rem; margin-top:.8rem; line-height:1.65; }
 
-.split{ display:grid; gap:clamp(2rem,5vw,4.5rem); align-items:center; }
-@media(min-width:900px){ .split{ grid-template-columns:1fr 1fr; } .split.rev .split-media{ order:2; } }
-.split-media{ aspect-ratio:4/5; }
+.split{ display:grid; gap:clamp(1.7rem,4vw,3.4rem); align-items:center; }
+@media(min-width:900px){ .split{ grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); } .split.rev{ grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr); } .split.rev .split-media{ order:2; } }
+.split-media{ width:100%; max-width:440px; aspect-ratio:4/5; justify-self:center; }
 @media(min-width:900px){ .split-media{ aspect-ratio:5/6; } }
 .note{ border-left:2px solid var(--gold); padding:.4rem 0 .4rem 1.4rem; color:var(--ink-600); font-style:italic; font-family:var(--font-serif); font-size:1.2rem; line-height:1.5; }
 
