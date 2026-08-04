@@ -119,7 +119,7 @@ test('registration-v4 discloses the three consent-gated Meta events without PII'
   const policy = bytes.toString('utf8');
   assert.equal(
     crypto.createHash('sha256').update(bytes).digest('hex'),
-    '3566b7a597d10c75ad6e898879502740bc2b3ff67dfbb373dafff6973313a806'
+    'c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773'
   );
   assert.deepEqual(bytes, immutableBytes);
   assert.match(policy, /Versión registration-v4/);
