@@ -36,14 +36,14 @@ test('events page opens only the August 8 virtual sessions', () => {
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
 });
 
-test('registration form requires v3 terms and never bypasses its backend', () => {
+test('registration form requires v4 terms and never bypasses its backend', () => {
   const page = read('inscripcion/index.html');
   const commerce = read('assets/hmp-commerce.js');
   assert.match(commerce, /const REGISTRATION_OPEN = true;/);
   assert.match(page, /id="registrationClosed"/);
   assert.match(page, /id="registrationFlow" hidden/);
   assert.match(page, /registrationOpen&&Boolean\(eventConfig\)/);
-  assert.match(page, /registrationTermsVersion" value="registration-v3"/);
+  assert.match(page, /registrationTermsVersion" value="registration-v4"/);
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
   assert.match(page, /id="emailVerificationStep"/);
@@ -104,11 +104,30 @@ test('Meta Purchase fails closed without canonical paid conversion facts', () =>
   assert.doesNotMatch(pixel, /tt_order_id/);
 });
 
-test('registration-v3 legal page hash is pinned for server-side evidence', () => {
-  const bytes = fs.readFileSync(path.join(root, 'politica/index.html'));
+test('registration-v3 remains byte-exact as immutable historical evidence', () => {
+  const bytes = fs.readFileSync(path.join(root, 'legal/terms/registration-v3.html'));
   assert.equal(
     crypto.createHash('sha256').update(bytes).digest('hex'),
     '0d65e0c03acd635f08c3e04628a19ef0e674e08612e2ac2446502f3b10b6b54e'
   );
   assert.match(bytes.toString('utf8'), /Versión registration-v3/);
+});
+
+test('registration-v4 discloses the three consent-gated Meta events without PII', () => {
+  const bytes = fs.readFileSync(path.join(root, 'politica/index.html'));
+  const immutableBytes = fs.readFileSync(path.join(root, 'legal/terms/registration-v4.html'));
+  const policy = bytes.toString('utf8');
+  assert.equal(
+    crypto.createHash('sha256').update(bytes).digest('hex'),
+    '3566b7a597d10c75ad6e898879502740bc2b3ff67dfbb373dafff6973313a806'
+  );
+  assert.deepEqual(bytes, immutableBytes);
+  assert.match(policy, /Versión registration-v4/);
+  assert.match(policy, /PageView/);
+  assert.match(policy, /CompleteRegistration/);
+  assert.match(policy, /Purchase/);
+  assert.match(policy, /nunca enviamos a Meta los valores del formulario/);
+  assert.match(policy, /we never send Meta form values/);
+  assert.match(policy, /invitación, una cortesía o un acceso gratuito no bastan/);
+  assert.match(policy, /an invitation, a complimentary place or free access is not enough/);
 });

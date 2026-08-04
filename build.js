@@ -39,4 +39,12 @@ if (fs.existsSync('inscripcion')) {
   console.log('✓ Copiado: inscripcion/');
 }
 
+// Conservar la política vigente y sus evidencias legales versionadas.
+for (const directory of ['politica', 'legal']) {
+  if (fs.existsSync(directory)) {
+    copyRecursiveSync(directory, path.join('dist', directory));
+    console.log(`✓ Copiado: ${directory}/`);
+  }
+}
+
 console.log('\n✅ Build completado en dist/');
