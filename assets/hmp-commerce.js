@@ -10,6 +10,18 @@
   const TICKET_TAILOR_WIDGET_SCRIPT = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
+  const EMAIL_DOMAIN_CORRECTIONS = Object.freeze({
+    'gmai.com': 'gmail.com',
+    'gmail.co': 'gmail.com',
+    'gmail.con': 'gmail.com',
+    'gmial.com': 'gmail.com',
+    'gmal.com': 'gmail.com',
+    'hotmai.com': 'hotmail.com',
+    'hotnail.com': 'hotmail.com',
+    'icloud.con': 'icloud.com',
+    'outlook.con': 'outlook.com',
+    'yahoo.con': 'yahoo.com'
+  });
   const CHECKOUTS = Object.freeze({
     'hmp-2026-08-08': Object.freeze({
       date: '2026-08-08',
@@ -41,6 +53,21 @@
 
   function supportedRegistration(eventCode, sessionCode) {
     return REGISTRATION_OPEN && Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
+  }
+
+  function suggestedEmailCorrection(value) {
+    const email = String(value || '').trim().toLowerCase();
+    const separator = email.lastIndexOf('@');
+    if (separator <= 0) return null;
+    const correctedDomain = EMAIL_DOMAIN_CORRECTIONS[email.slice(separator + 1)];
+    return correctedDomain ? `${email.slice(0, separator)}@${correctedDomain}` : null;
+  }
+
+  function emailTypoError(suggestedEmail) {
+    const error = new Error('email_domain_typo');
+    error.code = 'email_domain_typo';
+    error.suggestedEmail = suggestedEmail;
+    return error;
   }
 
   function validWidgetPath(pathname, eventId) {
@@ -161,6 +188,8 @@
   }
 
   async function register(payload) {
+    const suggestedEmail = suggestedEmailCorrection(payload?.email);
+    if (suggestedEmail) throw emailTypoError(suggestedEmail);
     if (!supportedRegistration(payload?.event_code, payload?.session_code)) {
       const error = new Error('registration_unavailable');
       error.code = 'registration_unavailable';
@@ -177,7 +206,22 @@
       },
       body: JSON.stringify(payload)
     }, REGISTRATION_TIMEOUT_MS, 'registration_timeout');
-    if (!response.ok) throw new Error(`registration_${response.status}`);
+    if (!response.ok) {
+      let detail = null;
+      try {
+        detail = (await response.json())?.detail;
+      } catch (_) {
+        // Keep the generic HTTP error when the server did not return JSON.
+      }
+      if (
+        response.status === 422 &&
+        detail?.code === 'email_domain_typo' &&
+        typeof detail.suggested_email === 'string'
+      ) {
+        throw emailTypoError(detail.suggested_email);
+      }
+      throw new Error(`registration_${response.status}`);
+    }
     const result = await response.json();
     if (
       result.schema_version !== 'registration.response.v1' ||
@@ -247,6 +291,7 @@
     readStatusContext,
     registrationEvent,
     register,
+    suggestedEmailCorrection,
     supportedRegistration,
     validCheckoutUrl,
     validWidgetPath,
