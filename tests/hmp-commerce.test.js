@@ -36,6 +36,31 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
   return {api: window.HMPCommerce, values};
 }
 
+function widgetDom() {
+  const created = [];
+  const document = {
+    createElement(tagName) {
+      const listeners = new Map();
+      const element = {
+        tagName,
+        attributes: new Map(),
+        children: [],
+        append(...children) { this.children.push(...children); },
+        addEventListener(type, listener) { listeners.set(type, listener); },
+        setAttribute(name, value) { this.attributes.set(name, String(value)); },
+        dispatch(type) { listeners.get(type)?.(); }
+      };
+      created.push(element);
+      return element;
+    }
+  };
+  const container = {
+    children: [],
+    replaceChildren(...children) { this.children = children; }
+  };
+  return {container, created, document};
+}
+
 const payload = {
   first_name: 'Alma',
   last_name: 'Pérez',
@@ -86,6 +111,51 @@ test('accepts both official event-specific widget path variants', () => {
     widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/8804105/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
   };
   assert.equal(api.validCheckoutUrl(newSession.widget_url, payload, newSession), true);
+});
+
+test('mounts the validated checkout URL through the official inline widget', () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => {}, {document: dom.document});
+  const script = api.mountCheckoutWidget(dom.container, payload, checkout);
+
+  assert.equal(dom.container.children.length, 1);
+  assert.equal(dom.container.children[0].className, 'tt-widget');
+  assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
+  assert.equal(script.attributes.get('data-url'), checkout.widget_url);
+  assert.equal(script.attributes.get('data-type'), 'inline');
+  assert.equal(script.attributes.get('data-inline-minimal'), 'true');
+  assert.equal(script.attributes.get('data-inline-ref'), 'website_widget');
+  assert.match(script.attributes.get('data-url'), /#p\[meta_registration_context\]=ctx_v1_/);
+  assert.equal(dom.created.some(element => element.tagName === 'a'), false);
+});
+
+test('fails closed when the widget script cannot load', () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => {}, {document: dom.document});
+  let failed = false;
+  const script = api.mountCheckoutWidget(
+    dom.container,
+    payload,
+    checkout,
+    () => { failed = true; }
+  );
+
+  script.dispatch('error');
+  assert.equal(failed, true);
+  assert.deepEqual(dom.container.children, []);
+});
+
+test('refuses to mount an unvalidated checkout URL', () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => {}, {document: dom.document});
+  assert.throws(
+    () => api.mountCheckoutWidget(dom.container, payload, {
+      ...checkout,
+      widget_url: checkout.widget_url.replace('tickets.harmonicbeacon.com', 'example.test')
+    }),
+    /invalid_checkout_widget_url/
+  );
+  assert.deepEqual(dom.container.children, []);
 });
 
 test('matches the stable registration catalog contract and rejects series ids', () => {
