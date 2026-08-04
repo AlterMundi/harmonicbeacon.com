@@ -131,8 +131,27 @@
     .legal{color:var(--muted);font-size:13px}footer{color:var(--muted);font-size:11px;border-color:rgba(201,162,78,.22)}
     .toast{color:var(--paper);background:#16120df7;border-color:var(--gold);font-size:14px}
     .reveal,.reveal.visible{opacity:1;transform:none}
+    .booking-first{padding-top:140px}
+    .booking-summary{max-width:680px;margin:16px 0 0;color:var(--muted);font-size:16px;line-height:1.65}
+    .experience-guide{padding:42px 0 92px}
+    .guide-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:clamp(30px,5vw,64px);align-items:center}
+    .guide-kicker{display:block;color:var(--gold-light);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+    .guide-intro h2,.prep-head h2{margin-top:10px;font-size:clamp(2rem,4vw,3.25rem);line-height:1.05}
+    .guide-intro p,.prep-head p,.guide-card p,.mail-notice p,.myth-return p{color:var(--muted);font-size:16px;line-height:1.72}
+    .guide-intro p{margin:18px 0 0;max-width:62ch}
+    .experience-photo{margin:0;overflow:hidden;border:1px solid rgba(201,162,78,.38);border-radius:18px;aspect-ratio:4/3}
+    .experience-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.03)}
+    .prep-head{margin-top:72px;max-width:760px}.prep-head p{margin:14px 0 0}
+    .guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .guide-card{padding:24px;border:1px solid var(--line);border-radius:14px;background:rgba(244,238,226,.035)}
+    .guide-icon{font-size:24px}.guide-card h3{margin-top:12px;font-size:25px;line-height:1.12}.guide-card p{margin:10px 0 0;font-size:15px}
+    .mail-notice,.myth-return{margin-top:24px;padding:26px 28px;border:1px solid rgba(201,162,78,.34);border-radius:14px;background:rgba(201,162,78,.07)}
+    .mail-notice h3,.myth-return h3{font-size:27px}.mail-notice p,.myth-return p{margin:10px 0 0}.mail-notice strong{color:var(--paper)}
+    .myth-return{margin-top:16px;background:rgba(244,238,226,.035)}
+    .bot-link{display:inline-flex;margin-top:18px;padding:13px 18px;border-radius:999px;color:#1a140c;background:linear-gradient(135deg,var(--gold-light),var(--gold));font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
     @media(max-width:920px){.hero{grid-template-columns:1fr;min-height:auto}.art-scene{height:min(72vw,520px);min-height:400px;justify-self:start}.movements{grid-template-columns:1fr 1fr}.movement:nth-child(3){grid-column:1/-1}.booking-panel{grid-template-columns:1fr}.session-zone{border-right:0;border-bottom:1px solid rgba(201,162,78,.2)}}
-    @media(max-width:620px){.wrap,.nav{width:min(100% - 32px,1180px)}.hero{padding-top:100px;padding-bottom:54px;gap:34px}.hero h1{font-size:clamp(2.8rem,14vw,3.8rem)}.lead{font-size:16px}.art-scene{height:100vw;min-height:340px;max-height:460px}.event-photo{border-radius:46% 46% 14px 14px}.event-photo figcaption{left:20px;right:20px;bottom:18px}.manifesto{padding:70px 0 54px}.big-line{font-size:clamp(2.1rem,10vw,3.1rem)}.small-center{font-size:16px}.movements{grid-template-columns:1fr;padding-bottom:68px}.movement:nth-child(3){grid-column:auto}.booking{padding:70px 0}.booking h2{font-size:clamp(2.5rem,11vw,3.5rem)}.session-zone,.form-zone{padding:28px 20px}.session-zone h3,.form-zone h3{font-size:1.85rem}.session{grid-template-columns:16px 1fr auto;padding:14px 12px}.nav-center{display:none}}
+    @media(max-width:920px){.guide-intro{grid-template-columns:1fr}.experience-photo{max-width:520px}.guide-grid{grid-template-columns:1fr}}
+    @media(max-width:620px){.wrap,.nav{width:min(100% - 32px,1180px)}.hero{padding-top:100px;padding-bottom:54px;gap:34px}.hero h1{font-size:clamp(2.8rem,14vw,3.8rem)}.lead{font-size:16px}.art-scene{height:100vw;min-height:340px;max-height:460px}.event-photo{border-radius:46% 46% 14px 14px}.event-photo figcaption{left:20px;right:20px;bottom:18px}.manifesto{padding:70px 0 54px}.big-line{font-size:clamp(2.1rem,10vw,3.1rem)}.small-center{font-size:16px}.movements{grid-template-columns:1fr;padding-bottom:68px}.movement:nth-child(3){grid-column:auto}.booking{padding:70px 0}.booking-first{padding-top:112px}.booking h2{font-size:clamp(2.5rem,11vw,3.5rem)}.session-zone,.form-zone{padding:28px 20px}.session-zone h3,.form-zone h3{font-size:1.85rem}.session{grid-template-columns:16px 1fr auto;padding:14px 12px}.nav-center{display:none}.experience-guide{padding:30px 0 68px}.prep-head{margin-top:50px}.guide-card,.mail-notice,.myth-return{padding:22px}.guide-intro h2,.prep-head h2{font-size:2rem}}
   </style>
   <script src="/assets/meta-pixel.js" defer></script>
 </head>
@@ -146,22 +165,8 @@
   </nav>
 
   <main id="top">
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <p class="eyebrow"><span data-copy="es">sesión virtual · <span id="dateEs">sábado 8 de agosto</span></span><span data-copy="en">virtual session · <span id="dateEn">Saturday, August 8</span></span></p>
-        <h1 data-copy="es">El mito<br><em>está vivo.</em></h1><h1 data-copy="en">The myth<br><em>is alive.</em></h1>
-        <p class="lead" data-copy="es">Una experiencia grupal en vivo para bajar el ruido cotidiano, escuchar el cuerpo y darle forma simbólica a algo que ya pide ser visto.</p><p class="lead" data-copy="en">A live group experience to quiet everyday noise, listen to the body and give symbolic form to something already asking to be seen.</p>
-        <div class="hero-meta"><span><b>3—4 H</b> <span data-copy="es">de experiencia guiada</span><span data-copy="en">guided experience</span></span><span><b>EN VIVO</b> · ONLINE</span><span><b>CUPO LIMITADO</b></span></div>
-        <button class="cta" id="enterButton" aria-controls="inscripcion"><span data-copy="es">reservar mi lugar</span><span data-copy="en">reserve my place</span><i aria-hidden="true">↓</i></button>
-      </div>
-      <div class="art-scene" id="artScene">
-        <figure class="event-photo"><img src="/assets/img/hero-session.jpg" alt="Participantes recostados en círculo durante una experiencia Harmonic Beacon en Edge City 2025" width="720" height="720"><figcaption><b data-copy="es">Una experiencia real</b><b data-copy="en">A real experience</b><span data-copy="es">Cuerpo, escucha y presencia compartida dentro del campo armónico.</span><span data-copy="en">Body, listening and shared presence inside the harmonic field.</span></figcaption></figure>
-        <div id="stairs" hidden aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <section class="booking wrap reveal" id="inscripcion">
-      <div class="booking-head"><div><span class="section-tag">INSCRIPCIÓN · SESIÓN ONLINE</span><h2 data-copy="es">Reservá tu lugar<br><em>en la experiencia.</em></h2><h2 data-copy="en">Reserve your place<br><em>in the experience.</em></h2></div></div>
+    <section class="booking booking-first wrap reveal" id="inscripcion">
+      <div class="booking-head"><div><span class="section-tag"><span data-copy="es">INSCRIPCIÓN Y PAGO · <span id="dateEs">SÁBADO 8 DE AGOSTO</span></span><span data-copy="en">REGISTRATION AND PAYMENT · <span id="dateEn">SATURDAY, AUGUST 8</span></span></span><h2 data-copy="es">Completá tu inscripción</h2><h2 data-copy="en">Complete your registration</h2><p class="booking-summary" data-copy="es">Elegí tu sesión, completá tus datos y continuá al pago seguro. La confirmación y toda la información del encuentro llegarán a tu correo.</p><p class="booking-summary" data-copy="en">Choose your session, complete your details and continue to secure payment. Confirmation and all event information will arrive by email.</p></div></div>
       <div class="booking-panel" id="registrationClosed">
         <div class="session-zone" style="grid-column:1/-1">
           <h3 data-copy="es">Inscripciones próximamente</h3><h3 data-copy="en">Registrations opening soon</h3>
@@ -202,16 +207,22 @@
       </div>
     </section>
 
-    <section class="manifesto wrap reveal" id="experiencia">
-      <div class="constellation"><svg viewBox="0 0 1200 360"><path d="M15 275L184 116l186 87 164-155 199 184 173-102 279 102"/><circle cx="15" cy="275" r="3"/><circle cx="184" cy="116" r="4"/><circle cx="370" cy="203" r="3"/><circle cx="534" cy="48" r="4"/><circle cx="733" cy="232" r="3"/><circle cx="906" cy="130" r="4"/><circle cx="1185" cy="232" r="3"/></svg></div>
-      <p class="big-line" data-copy="es">No venís a que alguien te diga quién sos. Venís a escuchar lo que <em>tu propia intuición</em> sabe.</p><p class="big-line" data-copy="en">You are not coming for someone to tell you who you are. You are coming to hear what <em>your own intuition</em> knows.</p>
-      <p class="small-center" data-copy="es">La Proyección Armónica del Mito combina movimiento, sonido y trabajo simbólico en un encuentro facilitado. Es una práctica de bienestar y exploración personal; no es terapia ni tratamiento médico.</p><p class="small-center" data-copy="en">Harmonic Myth Projection combines movement, sound and symbolic work in a facilitated gathering. It is a wellness and personal exploration practice; it is not therapy or medical treatment.</p>
-    </section>
+    <section class="experience-guide wrap reveal" id="experiencia">
+      <div class="guide-intro">
+        <div><span class="guide-kicker"><span data-copy="es">Sobre la experiencia</span><span data-copy="en">About the experience</span></span><h2 data-copy="es">Un encuentro para escuchar lo que ya vive en vos</h2><h2 data-copy="en">A gathering to listen to what already lives within you</h2><p data-copy="es">La Proyección Armónica del Mito es una experiencia grupal en vivo que combina movimiento, escucha y trabajo simbólico dentro del campo sonoro del Harmonic Beacon. Durante tres a cuatro horas, la facilitación acompaña un recorrido de presencia corporal, exploración interior e integración. Es una práctica de bienestar y exploración personal; no es terapia ni tratamiento médico.</p><p data-copy="en">Harmonic Myth Projection is a live group experience combining movement, listening and symbolic work within the Harmonic Beacon sound field. Over three to four hours, facilitation supports a journey through bodily presence, inner exploration and integration. It is a wellness and personal exploration practice; it is not therapy or medical treatment.</p></div>
+        <figure class="experience-photo"><img src="/assets/img/hero-session.jpg" alt="Participantes durante una experiencia Harmonic Beacon" width="720" height="540" loading="lazy"></figure>
+      </div>
 
-    <section class="movements wrap">
-      <article class="movement reveal"><span class="movement-num">01 / CUERPO</span><h3 data-copy="es">Llegar al cuerpo</h3><h3 data-copy="en">Arrive in the body</h3><p data-copy="es">Movimiento, respiración y presencia para soltar el ritmo del día y disponerte a escuchar.</p><p data-copy="en">Movement, breath and presence to release the day's pace and become available to listen.</p></article>
-      <article class="movement reveal"><span class="movement-num">02 / ESCUCHA</span><h3 data-copy="es">Entrar en el campo</h3><h3 data-copy="en">Enter the field</h3><p data-copy="es">El sonido armónico sostiene una exploración interna donde aparecen sensaciones, imágenes y símbolos.</p><p data-copy="en">The harmonic sound sustains an inner exploration where sensations, images and symbols may emerge.</p></article>
-      <article class="movement reveal"><span class="movement-num">03 / INTEGRACIÓN</span><h3 data-copy="es">Volver con sentido</h3><h3 data-copy="en">Return with meaning</h3><p data-copy="es">Ponés en palabras lo vivido y lo integrás con la escucha respetuosa del grupo.</p><p data-copy="en">You put the experience into words and integrate it through the group's respectful listening.</p></article>
+      <div class="prep-head"><span class="guide-kicker"><span data-copy="es">Recordatorio</span><span data-copy="en">Reminder</span></span><h2 data-copy="es">¿Qué necesitás para el evento?</h2><h2 data-copy="en">What do you need for the event?</h2><p data-copy="es">Prepará tu entorno con anticipación para sumergirte de manera profunda y aprovechar este espacio vibratorio.</p><p data-copy="en">Prepare your environment in advance so you can immerse yourself deeply and make the most of this vibrational space.</p></div>
+      <div class="guide-grid">
+        <article class="guide-card"><span class="guide-icon" aria-hidden="true">🎧</span><h3 data-copy="es">Buen sistema de audio</h3><h3 data-copy="en">A good audio system</h3><p data-copy="es">Usá auriculares de buena calidad o parlantes con respuesta fiel para percibir la riqueza de la serie armónica natural.</p><p data-copy="en">Use good-quality headphones or accurate speakers to perceive the richness of the natural harmonic series.</p></article>
+        <article class="guide-card"><span class="guide-icon" aria-hidden="true">🛋️</span><h3 data-copy="es">Un lugar cómodo y seguro</h3><h3 data-copy="en">A comfortable, safe place</h3><p data-copy="es">Buscá un espacio tranquilo donde puedas acostarte o sentarte sin interrupciones y moverte libremente.</p><p data-copy="en">Find a quiet space where you can lie down or sit without interruption and move freely.</p></article>
+        <article class="guide-card"><span class="guide-icon" aria-hidden="true">⏳</span><h3 data-copy="es">Tiempo presente y sin prisas</h3><h3 data-copy="en">Unhurried, present time</h3><p data-copy="es">Reservá entre tres y cuatro horas sin distracciones externas para darle a la experiencia el tiempo que necesita para desplegarse.</p><p data-copy="en">Set aside three to four hours without outside distractions, giving the experience time to unfold.</p></article>
+      </div>
+
+      <div class="mail-notice"><h3 data-copy="es">Acceso y recordatorios por correo</h3><h3 data-copy="en">Access and reminders by email</h3><p data-copy="es"><strong>El enlace de ingreso a la sesión se envía por email el viernes.</strong> La confirmación, los horarios, las recomendaciones y cualquier actualización también llegarán al correo usado en la inscripción. Revisá spam y promociones.</p><p data-copy="en"><strong>The session access link is sent by email on Friday.</strong> Confirmation, schedules, recommendations and any updates will also arrive at the email used for registration. Please check spam and promotions.</p></div>
+
+      <div class="myth-return"><h3 data-copy="es">Para recibir tu Ampliación del Mito + imagen</h3><h3 data-copy="en">To receive your Myth Amplification + image</h3><p data-copy="es">Al finalizar la sesión, enviá por WhatsApp una síntesis, notas o un audio con lo que apareció: imágenes, escenas, sensaciones, personajes o palabras que recuerdes. No hace falta ordenarlo ni explicarlo perfectamente. Ese relato será el punto de partida para crear tu Ampliación Mítica escrita y la imagen de tu mito personal.</p><p data-copy="en">After the session, send a summary, notes or voice message through WhatsApp with what appeared: images, scenes, sensations, characters or words you remember. It does not need to be ordered or perfectly explained. That account will be the starting point for your written Myth Amplification and personal myth image.</p><a class="bot-link" href="https://wa.me/50663551803" target="_blank" rel="noopener"><span data-copy="es">Abrir el bot en WhatsApp →</span><span data-copy="en">Open the bot in WhatsApp →</span></a></div>
     </section>
   </main>
   <footer class="wrap"><span>HARMONIC MYTH PROJECTION · 2026</span><a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a><span>ALTERMUNDI / HARMONIC BEACON</span></footer>
@@ -228,8 +239,6 @@
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;all('[data-lang-button]').forEach(b=>{const active=b.dataset.langButton===next;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))})}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');
     function setSession(next){if(!eventAvailable){notify(lang==='en'?'This date is not open for registration yet. No checkout will be opened.':'Esta fecha todavía no está habilitada. No abriremos ningún checkout.');return}session=next;all('[data-session]').forEach(b=>{const selected=b.dataset.session===next;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected))});one('#sessionInput').value=next==='es'?'Español · 08:30 Costa Rica · US$20':'English · 14:00 Costa Rica · US$50';one('#sessionCodeInput').value=next==='es'?'es-0830-cr':'en-1400-cr';one('#paymentButtonLabel').textContent=next==='es'?'continuar al pago · US$20':'continue to payment · US$50';one('#paymentButton').hidden=false}
-    for(let i=1;i<=12;i++){const step=document.createElement('div');step.className='stair';step.style.setProperty('--i',i);step.innerHTML=`<span>${String(i).padStart(2,'0')}</span>`;one('#stairs').append(step)}
-    one('#enterButton').addEventListener('click',()=>{document.body.classList.add('entered');setTimeout(()=>one('#inscripcion').scrollIntoView({behavior:'smooth'}),650)});
     all('[data-lang-button]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.langButton)));all('[data-session]').forEach(b=>b.addEventListener('click',()=>setSession(b.dataset.session)));
     const registrationForm=one('#registrationForm'),toast=one('#toast');let toastTimer;
     function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),4500)}
