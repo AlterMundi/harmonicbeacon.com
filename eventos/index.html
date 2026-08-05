@@ -67,6 +67,7 @@
   .ev-main .ilink:hover{ color:var(--bone); border-color:var(--gold); }
 
   .agenda-note{ color:var(--ink-500); font-size:.9rem; margin-top:2rem; line-height:1.6; text-align:center; }
+  .catalog-empty{ border:1px solid var(--hair); border-radius:var(--r-card); background:var(--bg-card); padding:clamp(1.5rem,3vw,2.2rem); margin-bottom:2.4rem; color:var(--ink-600); line-height:1.65; }
 
   /* Menú de horarios (conversión de zona) */
   .tz{ display:flex; flex-wrap:wrap; align-items:center; gap:.6rem .9rem; margin-top:1.4rem;
@@ -127,6 +128,7 @@
   @media(prefers-reduced-motion:reduce){ .gal-strip button{ transition:none; } }
 </style>
   <script src="/assets/meta-pixel.js" defer></script>
+  <script src="/assets/events-catalog.js" defer></script>
 </head>
 
 <body data-page="eventos">
@@ -152,69 +154,12 @@
         <span data-lang="en">We gather online every weekend. Here you will find the confirmed time, language and access details for each event. Bookmark this page to keep up with the current schedule.</span>
       </p>
 
-      <!-- Virtuales · español -->
-      <article class="ev-feat reveal" id="virtuales" data-event-lang="es">
-        <div class="tags">
-          <span class="pill"><span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
-          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en español</span><span data-lang="en">Online · in Spanish</span></span>
+      <div id="virtuales"></div>
+      <div id="virtual-events-catalog" aria-live="polite" aria-busy="true">
+        <div class="catalog-empty" data-catalog-state="LOADING">
+          <p><span data-lang="es">Consultando los próximos horarios…</span><span data-lang="en">Retrieving the next times…</span></p>
         </div>
-        <h2><span data-lang="es">Encuentros virtuales · Proyección Armónica del Mito</span><span data-lang="en">Virtual gatherings · Harmonic Myth Projection</span></h2>
-        <p class="when"><span data-lang="es">Sábado 8 de agosto · 8:30 h (hora de Costa Rica)</span><span data-lang="en">Saturday, August 8 · 8:30 a.m. (Costa Rica time)</span></p>
-        <p class="where">
-          <span data-lang="es">Una experiencia de Proyección Armónica del Mito <b>en vivo y online</b>, dentro de la App del Beacon. La sala reúne el campo armónico, las voces del grupo y una presencia compartida; cada persona participa y escucha desde su propio dispositivo.</span>
-          <span data-lang="en">A <b>live online</b> Harmonic Myth Projection hosted in the Beacon App. The room brings together the harmonic field, the group’s voices and a shared sense of presence, while each person listens and participates from their own device.</span>
-        </p>
-        <div class="tz" data-utc="2026-08-08T14:30:00Z">
-          <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
-          <select id="tz1" aria-label="Zona horaria / Time zone">
-            <option value="America/Costa_Rica" selected>Costa Rica</option>
-            <option value="America/Mexico_City">México (CDMX)</option>
-            <option value="America/Bogota">Colombia / Perú / Ecuador</option>
-            <option value="America/Santiago">Chile</option>
-            <option value="America/Argentina/Buenos_Aires">Argentina / Uruguay</option>
-            <option value="America/Sao_Paulo">Brasil (São Paulo)</option>
-            <option value="America/New_York">New York</option>
-            <option value="America/Los_Angeles">Los Angeles</option>
-            <option value="Europe/Madrid">España</option>
-          </select>
-          <span class="tz-out"><b class="tz-time">08:30</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
-        </div>
-        <div class="dates">
-          <a class="date-chip" data-event-date="2026-08-08" href="/inscripcion/?fecha=2026-08-08&amp;idioma=es"><span class="dc-d"><span data-lang="es">8 ago</span><span data-lang="en">Aug 8</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
-        </div>
-      </article>
-
-      <!-- Virtuales · inglés · 11 de agosto -->
-      <article class="ev-feat reveal" id="virtual-en-2026-08-11" data-event-lang="en">
-        <div class="tags">
-          <span class="pill"><span data-lang="es">Inscripción abierta</span><span data-lang="en">Registration open</span></span>
-          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Online · en inglés</span><span data-lang="en">Online · in English</span></span>
-        </div>
-        <h2><span data-lang="es">Proyección Armónica del Mito · en inglés</span><span data-lang="en">Harmonic Myth Projection · in English</span></h2>
-        <p class="when"><span data-lang="es">Martes 11 de agosto · 16:00 h (hora de Costa Rica)</span><span data-lang="en">Tuesday, August 11 · 4:00 p.m. (Costa Rica time)</span></p>
-        <p class="where">
-          <span data-lang="es">Una experiencia de Proyección Armónica del Mito, guiada <b>en inglés</b>, en vivo y dentro de la App del Beacon.</span>
-          <span data-lang="en">A <b>live, English-language</b> Harmonic Myth Projection hosted in the Beacon App.</span>
-        </p>
-        <div class="tz" data-utc="2026-08-11T22:00:00Z">
-          <span class="tz-lb"><span data-lang="es">Tu horario</span><span data-lang="en">Your time</span></span>
-          <select id="tz2" aria-label="Zona horaria / Time zone">
-            <option value="America/Costa_Rica" selected>Costa Rica</option>
-            <option value="America/Mexico_City">México (CDMX)</option>
-            <option value="America/Bogota">Colombia / Perú / Ecuador</option>
-            <option value="America/Santiago">Chile</option>
-            <option value="America/Argentina/Buenos_Aires">Argentina / Uruguay</option>
-            <option value="America/Sao_Paulo">Brasil (São Paulo)</option>
-            <option value="America/New_York">New York</option>
-            <option value="America/Los_Angeles">Los Angeles</option>
-            <option value="Europe/Madrid">España</option>
-          </select>
-          <span class="tz-out"><b class="tz-time">16:00</b> <span data-lang="es">hora local</span><span data-lang="en">local time</span></span>
-        </div>
-        <div class="dates">
-          <a class="date-chip" data-event-date="2026-08-11" href="/inscripcion/?fecha=2026-08-11&amp;idioma=en"><span class="dc-d"><span data-lang="es">11 ago</span><span data-lang="en">Aug 11</span></span><span class="dc-a"><span data-lang="es">Inscribirme</span><span data-lang="en">Register</span></span></a>
-        </div>
-      </article>
+      </div>
 
       <!-- Presencial · Escazú -->
       <article class="ev-feat reveal" id="escazu">
@@ -359,22 +304,6 @@
 </div>
 
 <script>
-  /* Menú de horarios: convierte la hora del encuentro a la zona elegida. */
-  document.querySelectorAll('.tz').forEach(function (box) {
-    var when = new Date(box.getAttribute('data-utc'));
-    var select = box.querySelector('select');
-    var out = box.querySelector('.tz-time');
-    function paint() {
-      try {
-        out.textContent = new Intl.DateTimeFormat('es-AR', {
-          timeZone: select.value, hour: '2-digit', minute: '2-digit', hour12: false
-        }).format(when);
-      } catch (e) {}
-    }
-    select.addEventListener('change', paint);
-    paint();
-  });
-
   /* Galerías de los encuentros realizados */
   var galleries = {
     gaia: {
