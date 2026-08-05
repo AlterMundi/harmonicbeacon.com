@@ -35,6 +35,20 @@
       sessions: Object.freeze({
         'es-0830-cr': '8804105',
         'en-1400-cr': '8804106'
+      }),
+      options: Object.freeze({
+        es: Object.freeze({ session_code: 'es-0830-cr', label: 'Español · 08:30 Costa Rica · US$20', time: '08:30', price: 'US$20' })
+      })
+    }),
+    'hmp-2026-08-11': Object.freeze({
+      date: '2026-08-11',
+      label_es: 'martes 11 de agosto',
+      label_en: 'Tuesday, August 11',
+      sessions: Object.freeze({
+        'en-1600-cr': '8820853'
+      }),
+      options: Object.freeze({
+        en: Object.freeze({ session_code: 'en-1600-cr', label: 'English · 16:00 Costa Rica · US$50', time: '16:00', price: 'US$50' })
       })
     })
   });

@@ -22,7 +22,7 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page opens Spanish registration and keeps the new English time coming soon', () => {
+test('events page opens the coordinated August 8 and August 11 virtual sessions', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
@@ -39,6 +39,10 @@ test('events page opens Spanish registration and keeps the new English time comi
   assert.match(page, /Coming soon/);
   assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
   assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
+  assert.equal((page.match(/data-event-date="2026-08-11"/g) || []).length, 1);
+  assert.match(page, /2026-08-11T22:00:00Z/);
+  assert.match(page, /2026-08-11T22:00:00Z[\s\S]*?<b class="tz-time">16:00<\/b>/);
+  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-11&amp;idioma=en"/);
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
@@ -72,10 +76,9 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /function showVerification\(payload,result\).*setFlowStage\(2\)/);
   assert.match(page, /function showCheckout\(payload,result\).*setFlowStage\(3\)/);
   assert.match(page, /id="paymentButton"[^>]+form="registrationForm"/);
-  assert.equal((page.match(/data-session="/g) || []).length, 1);
-  assert.doesNotMatch(page, /data-session="en"/);
-  assert.match(page, /class="session session-coming"[^>]+disabled[^>]+aria-disabled="true"/);
-  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Sunday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?COMING SOON/);
+  assert.equal((page.match(/data-session="/g) || []).length, 2);
+  assert.match(page, /data-session="en"/);
+  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Tuesday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?US\$50/);
   assert.match(page, /id="changeDetails"/);
   assert.match(page, /classList\.add\('is-session-choice'\)/);
   assert.match(page, /\.booking-panel\.is-session-choice \.form-zone\{display:none\}/);
@@ -92,8 +95,10 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /buytickets\.at\/harmonicbeacon/);
   assert.match(page, /registrationEvent\(fecha\)/);
   assert.match(page, /if\(!eventAvailable\)/);
-  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-08'/);
-  assert.match(page, /value="hmp-2026-08-08"/);
+  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-11'/);
+  assert.match(page, /value="hmp-2026-08-11"/);
+  assert.match(page, /eventConfig\.options\?\.\[button\.dataset\.session\]/);
+  assert.match(page, /option\.session_code/);
   assert.doesNotMatch(page, /'2026-08-01':/);
   assert.doesNotMatch(page, /'2026-08-15':/);
   assert.match(page, /error\?\.code==='registration_timeout'/);

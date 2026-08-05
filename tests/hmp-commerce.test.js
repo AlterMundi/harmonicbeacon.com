@@ -248,15 +248,20 @@ test('matches the stable registration catalog contract and rejects series ids', 
 
   assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['es-0830-cr'], sessions['es-0830-cr'].ticket_tailor_checkout_event_id);
   assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['en-1400-cr'], sessions['en-1400-cr'].ticket_tailor_checkout_event_id);
+  const august11 = contract.events['hmp-2026-08-11'].sessions;
+  assert.equal(api.CHECKOUTS['hmp-2026-08-11'].sessions['en-1600-cr'], august11['en-1600-cr'].ticket_tailor_checkout_event_id);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '2334890'), payload, checkout), false);
 });
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.registrationEvent('2026-08-08').date, '2026-08-08');
+  assert.equal(api.registrationEvent('2026-08-11').date, '2026-08-11');
   assert.equal(api.registrationEvent('2026-08-01'), null);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'unknown'), false);
+  assert.equal(api.supportedRegistration('hmp-2026-08-11', 'en-1600-cr'), true);
+  assert.equal(api.supportedRegistration('hmp-2026-08-11', 'es-0830-cr'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), false);
 });
 
