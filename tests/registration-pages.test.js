@@ -22,18 +22,23 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page opens only the August 8 virtual sessions', () => {
+test('events page opens Spanish registration and keeps the new English time coming soon', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
   assert.match(page, /Guardala para consultar la agenda vigente/);
-  assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 2);
+  assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 1);
   assert.match(page, /2026-08-08T14:30:00Z/);
-  assert.match(page, /2026-08-08T20:00:00Z/);
-  assert.match(page, /2026-08-08T20:00:00Z[\s\S]*?<b class="tz-time">14:00<\/b>/);
+  assert.match(page, /2026-08-09T22:00:00Z/);
+  assert.match(page, /2026-08-09T22:00:00Z[\s\S]*?<b class="tz-time">16:00<\/b>/);
+  assert.doesNotMatch(page, /2026-08-08T20:00:00Z/);
+  assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
   assert.match(page, /Inscripción abierta/);
   assert.match(page, /Registration open/);
-  assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 2);
+  assert.match(page, /Próximamente disponible/);
+  assert.match(page, /Coming soon/);
+  assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
+  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
@@ -67,6 +72,10 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /function showVerification\(payload,result\).*setFlowStage\(2\)/);
   assert.match(page, /function showCheckout\(payload,result\).*setFlowStage\(3\)/);
   assert.match(page, /id="paymentButton"[^>]+form="registrationForm"/);
+  assert.equal((page.match(/data-session="/g) || []).length, 1);
+  assert.doesNotMatch(page, /data-session="en"/);
+  assert.match(page, /class="session session-coming"[^>]+disabled[^>]+aria-disabled="true"/);
+  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Sunday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?COMING SOON/);
   assert.match(page, /id="changeDetails"/);
   assert.match(page, /classList\.add\('is-session-choice'\)/);
   assert.match(page, /\.booking-panel\.is-session-choice \.form-zone\{display:none\}/);
