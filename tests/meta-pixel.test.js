@@ -20,11 +20,17 @@ const purchase = {
   content_id: 'hmp-2026-08-08:es-0830-cr'
 };
 
-function pixelRuntime(initialConsent = null, sessionValues = new Map(), localValues = new Map()) {
+function pixelRuntime(
+  initialConsent = null,
+  sessionValues = new Map(),
+  localValues = new Map(),
+  {consentMount = false} = {}
+) {
   if (initialConsent) localValues.set('hb-meta-consent', initialConsent);
   const listeners = new Map();
   const controls = new Map();
   const insertedScripts = [];
+  const placements = [];
   const localStorage = {
     getItem: key => localValues.has(key) ? localValues.get(key) : null,
     setItem: (key, value) => localValues.set(key, String(value)),
@@ -41,12 +47,14 @@ function pixelRuntime(initialConsent = null, sessionValues = new Map(), localVal
   const grant = button('grant');
   const deny = button('deny');
   const document = {
-    body: {append() {}},
+    body: {append: (...nodes) => placements.push({target: 'body', nodes})},
     cookie: '',
     documentElement: {lang: 'es'},
     head: {appendChild() {}},
     readyState: 'complete',
-    querySelector: () => null,
+    querySelector: selector => consentMount && selector === '#hb-meta-consent-mount'
+      ? {append: (...nodes) => placements.push({target: 'mount', nodes})}
+      : null,
     createElement: tag => {
       if (tag === 'section') {
         return {
@@ -88,11 +96,21 @@ function pixelRuntime(initialConsent = null, sessionValues = new Map(), localVal
     insertedScripts,
     sessionValues,
     localValues,
+    placements,
     triggerPurchase: detail => purchaseHandler({detail}),
     triggerRegistration: detail => registrationHandler({detail}),
     window
   };
 }
+
+test('registration page can mount the full consent choice inside its form', () => {
+  const runtime = pixelRuntime(null, new Map(), new Map(), {consentMount: true});
+
+  assert.equal(runtime.placements.length, 1);
+  assert.equal(runtime.placements[0].target, 'mount');
+  assert.equal(runtime.placements[0].nodes.length, 2);
+  assert.equal(runtime.window.fbq, undefined);
+});
 
 test('consent granted tracks CompleteRegistration once without PII', () => {
   const runtime = pixelRuntime('granted');
