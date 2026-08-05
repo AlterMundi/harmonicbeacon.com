@@ -66,6 +66,11 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /function setFlowStage\(step\)/);
   assert.match(page, /function showVerification\(payload,result\).*setFlowStage\(2\)/);
   assert.match(page, /function showCheckout\(payload,result\).*setFlowStage\(3\)/);
+  assert.match(page, /id="paymentButton"[^>]+form="registrationForm"/);
+  assert.match(page, /id="changeDetails"/);
+  assert.match(page, /classList\.add\('is-session-choice'\)/);
+  assert.match(page, /\.booking-panel\.is-session-choice \.form-zone\{display:none\}/);
+  assert.match(page, /\.booking-panel\.is-form-only \.session-zone\{display:none\}/);
   assert.match(page, /autocomplete="one-time-code"/);
   assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
   assert.match(page, /window\.HMPCommerce\.resendEmailVerification\(pendingVerification,pendingPayload\)/);
