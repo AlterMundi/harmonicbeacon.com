@@ -26,7 +26,7 @@ test('events page opens August 8 and keeps August 11 fail-closed until backend d
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
-  assert.match(page, /Guardala para consultar la agenda vigente/);
+  assert.match(page, /Guardá esta página para consultar la agenda vigente/);
   assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 1);
   assert.match(page, /2026-08-08T14:30:00Z/);
   assert.match(page, /2026-08-09T22:00:00Z/);
@@ -48,6 +48,30 @@ test('events page opens August 8 and keeps August 11 fail-closed until backend d
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
   assert.match(page, /date and time to be confirmed/);
+});
+
+test('Annie editorial refinements stay aligned in Spanish and English', () => {
+  const page = read('eventos/index.html');
+  const pairedCopy = [
+    [/detalles de acceso confirmados/, /confirmed time, language and access details/],
+    [/las voces del grupo y una presencia compartida/, /group’s voices and a shared sense of presence/],
+    [/narrativa personal de cada participante/, /through their personal narrative/],
+    [/la práctica corporal, la escucha y el trabajo simbólico/, /embodied practice, listening and symbolic work/],
+    [/un carácter íntimo y arraigado/, /an intimate, grounded quality/],
+    [/encontrarse con el cuerpo en movimiento/, /meet the moving body/],
+    [/sentadas oreja con oreja/, /sitting ear to ear/],
+    [/vínculos que dieron forma al resto de nuestro recorrido/, /relationships that shaped the rest of our journey/],
+    [/ofrecer una sesión al personal de enfermería y salud/, /hold a session for nursing and healthcare staff/],
+    [/recibirnos y abrirle espacio a la propuesta/, /welcoming us and our proposal/]
+  ];
+  pairedCopy.forEach(([spanish, english]) => {
+    assert.match(page, spanish);
+    assert.match(page, english);
+  });
+  assert.equal(
+    (page.match(/data-lang="es"/g) || []).length,
+    (page.match(/data-lang="en"/g) || []).length
+  );
 });
 
 test('registration form requires v4 terms and never bypasses its backend', () => {
