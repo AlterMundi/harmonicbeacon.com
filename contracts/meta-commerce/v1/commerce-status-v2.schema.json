@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harmonicbeacon.com/contracts/meta-commerce/v1/commerce-status-v2.schema.json",
+  "title": "Commerce status response v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registration_id", "state", "purchase"],
+  "properties": {
+    "schema_version": { "const": "commerce-status.response.v2" },
+    "registration_id": { "type": "string", "format": "uuid" },
+    "state": {
+      "enum": [
+        "VERIFYING",
+        "PAYMENT_CONFIRMED",
+        "ACCESS_READY",
+        "REVIEW_REQUIRED",
+        "NOT_PAID",
+        "REVOKED"
+      ]
+    },
+    "purchase": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "conversion_id",
+            "amount_minor",
+            "currency",
+            "event_code",
+            "session_code",
+            "content_id"
+          ],
+          "properties": {
+            "kind": { "const": "PAID_PURCHASE" },
+            "conversion_id": {
+              "type": "string",
+              "pattern": "^cnv_v1_[A-Za-z0-9_-]{22}$"
+            },
+            "amount_minor": { "type": "integer", "minimum": 1 },
+            "currency": { "const": "USD" },
+            "event_code": { "type": "string", "minLength": 1, "maxLength": 128 },
+            "session_code": { "type": "string", "minLength": 1, "maxLength": 128 },
+            "content_id": { "type": "string", "minLength": 3, "maxLength": 257 }
+          }
+        }
+      ]
+    }
+  }
+}

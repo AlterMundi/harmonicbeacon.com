@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://harmonicbeacon.com/contracts/meta-commerce/v1/public-catalog.schema.json",
+  "title": "Public commerce catalog response v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "events"],
+  "properties": {
+    "schema_version": { "const": "public-commerce-catalog.response.v1" },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["event_code", "sessions"],
+        "properties": {
+          "event_code": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "session_code",
+                "content_id",
+                "title",
+                "registration_opens_at",
+                "registration_closes_at",
+                "starts_at",
+                "ends_at",
+                "timezone",
+                "locale",
+                "modality",
+                "amount_minor",
+                "currency",
+                "availability"
+              ],
+              "properties": {
+                "session_code": { "type": "string", "minLength": 1, "maxLength": 128 },
+                "content_id": { "type": "string", "minLength": 3, "maxLength": 257 },
+                "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+                "registration_opens_at": { "type": "string", "format": "date-time" },
+                "registration_closes_at": { "type": "string", "format": "date-time" },
+                "starts_at": { "type": "string", "format": "date-time" },
+                "ends_at": { "type": "string", "format": "date-time" },
+                "timezone": { "type": "string", "minLength": 1, "maxLength": 100 },
+                "locale": { "enum": ["es", "en"] },
+                "modality": { "const": "ONLINE" },
+                "amount_minor": { "type": "integer", "minimum": 1 },
+                "currency": { "const": "USD" },
+                "availability": {
+                  "enum": ["OPEN", "CLOSED", "SOLD_OUT", "CANCELLED", "ENDED"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

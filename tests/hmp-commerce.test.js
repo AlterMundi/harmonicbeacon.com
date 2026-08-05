@@ -22,6 +22,12 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
     fetch: fetchImpl,
     sessionStorage,
     setTimeout,
+    CustomEvent: class CustomEvent {
+      constructor(type, options = {}) {
+        this.type = type;
+        this.detail = options.detail;
+      }
+    },
     ...overrides
   };
   const context = vm.createContext({URL, window});
@@ -33,7 +39,7 @@ function runtime(fetchImpl, overrides = {}, registrationOpen = true) {
     ? source
     : source.replace('const REGISTRATION_OPEN = true;', 'const REGISTRATION_OPEN = false;');
   vm.runInContext(evaluatedSource, context);
-  return {api: window.HMPCommerce, values};
+  return {api: window.HMPCommerce, values, window};
 }
 
 function widgetDom() {
@@ -68,7 +74,7 @@ const payload = {
   event_code: 'hmp-2026-08-08',
   session_code: 'es-0830-cr',
   locale: 'es',
-  terms_version: 'registration-v3',
+  terms_version: 'registration-v4',
   terms_accepted: true
 };
 const checkoutContext = `ctx_v1_${'A'.repeat(43)}`;
@@ -258,7 +264,7 @@ test('keeps the idempotency key when registration outcome is unknown', async () 
   const {api, values} = runtime(async () => { throw new Error('network'); });
   await assert.rejects(api.register(payload), /network/);
   assert.equal(
-    values.get('hb-registration-v3-idempotency-key'),
+    values.get('hb-registration-v4-idempotency-key'),
     '10000000-0000-4000-8000-000000000001'
   );
 });
@@ -283,9 +289,107 @@ test('stores a separate status token only after a valid registration response', 
   assert.equal(observed.url, 'https://bot.harmonicbeacon.com/v1/registrations');
   assert.equal(observed.options.mode, 'cors');
   assert.equal(observed.options.headers['Idempotency-Key'], '10000000-0000-4000-8000-000000000001');
-  assert.equal(values.has('hb-registration-v3-idempotency-key'), false);
+  assert.equal(values.has('hb-registration-v4-idempotency-key'), false);
   assert.equal(api.readStatusContext().commerce_status_token, statusToken);
   assert.match(result.checkout.widget_url, /^https:\/\/tickets\.harmonicbeacon\.com\//);
+});
+
+test('announces CompleteRegistration only after a canonical REGISTERED response', async () => {
+  const events = [];
+  const {api, window} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: event => { events.push(event); return true; }
+  });
+
+  await api.register(payload);
+
+  assert.equal(events.length, 1);
+  assert.equal(events[0].type, 'hb:registration-completed');
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(events[0].detail)),
+    {
+      registrationId: '20000000-0000-4000-8000-000000000001',
+      eventCode: 'hmp-2026-08-08',
+      sessionCode: 'es-0830-cr'
+    }
+  );
+  assert.equal(window.__hbCompletedRegistration.registrationId, events[0].detail.registrationId);
+});
+
+test('an analytics listener failure never rejects a valid registration response', async () => {
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+
+  assert.equal(result.registration_status, 'REGISTERED');
+  assert.equal(result.checkout.widget_url, checkout.widget_url);
+});
+
+test('an analytics listener failure never blocks the validated checkout widget', async () => {
+  const dom = widgetDom();
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'REGISTERED',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    document: dom.document,
+    dispatchEvent: () => { throw new Error('analytics unavailable'); }
+  });
+
+  const result = await api.register(payload);
+  const script = api.mountCheckoutWidget(dom.container, payload, result.checkout);
+  const mountedUrl = new URL(script.attributes.get('data-url'));
+  const mountedHash = new URLSearchParams(mountedUrl.hash.slice(1));
+
+  assert.equal(dom.container.children.length, 1);
+  assert.equal(script.src, 'https://cdn.tickettailor.com/js/widgets/min/widget.js');
+  assert.equal(mountedHash.get('p[meta_registration_context]'), checkoutContext);
+  assert.equal(mountedHash.get('p[first_name]'), payload.first_name);
+  assert.equal(mountedHash.get('p[last_name]'), payload.last_name);
+  assert.equal(mountedHash.get('p[email]'), payload.email);
+});
+
+test('rejects a response without canonical REGISTERED status and emits no event', async () => {
+  const events = [];
+  const {api} = runtime(async () => ({
+    ok: true,
+    json: async () => ({
+      schema_version: 'registration.response.v1',
+      registration_status: 'VERIFYING',
+      registration_id: '20000000-0000-4000-8000-000000000001',
+      commerce_status_token: statusToken,
+      checkout
+    })
+  }), {
+    dispatchEvent: event => { events.push(event); return true; }
+  });
+
+  await assert.rejects(api.register(payload), /invalid_registration_response/);
+  assert.equal(events.length, 0);
 });
 
 test('rejects malformed registration ids and status tokens before storing context', async () => {
@@ -316,6 +420,19 @@ test('ignores malformed status context from session storage', () => {
   assert.equal(api.readStatusContext(), null);
 });
 
+test('reads a valid v3 status context after the v4 cutover', () => {
+  const {api, values} = runtime(async () => {});
+  values.set('hb-registration-v3-status-context', JSON.stringify({
+    schema_version: 'registration-status-context.v1',
+    registration_id: '20000000-0000-4000-8000-000000000001',
+    commerce_status_token: statusToken,
+    locale: 'es',
+    session_code: 'es-0830-cr'
+  }));
+
+  assert.equal(api.readStatusContext().commerce_status_token, statusToken);
+});
+
 test('aborts a stalled registration and keeps its idempotency key for a safe retry', async () => {
   const stalledFetch = (_url, options) => new Promise((_resolve, reject) => {
     if (options.signal.aborted) return reject(new Error('aborted'));
@@ -328,13 +445,17 @@ test('aborts a stalled registration and keeps its idempotency key for a safe ret
 
   await assert.rejects(api.register(payload), error => error.code === 'registration_timeout');
   assert.equal(
-    values.get('hb-registration-v3-idempotency-key'),
+    values.get('hb-registration-v4-idempotency-key'),
     '10000000-0000-4000-8000-000000000001'
   );
 });
 
 test('stores a pending email verification without exposing checkout', async () => {
-  const {api, values} = runtime(async () => ({ok: true, json: async () => verification}));
+  const events = [];
+  const {api, values} = runtime(
+    async () => ({ok: true, json: async () => verification}),
+    {dispatchEvent: event => { events.push(event); return true; }}
+  );
 
   const result = await api.register(payload);
   const stored = JSON.parse(values.get(api.STATUS_CONTEXT_KEY));
@@ -345,10 +466,12 @@ test('stores a pending email verification without exposing checkout', async () =
   assert.equal(stored.registration_id, registrationId);
   assert.deepEqual(stored.email_verification, verification.email_verification);
   assert.equal(stored.registration_payload.email, payload.email);
+  assert.equal(events.length, 0);
 });
 
 test('verifies the code and stores the checkout context', async () => {
   let observed;
+  const events = [];
   const completed = {
     schema_version: 'registration.response.v1',
     registration_id: registrationId,
@@ -359,6 +482,8 @@ test('verifies the code and stores the checkout context', async () => {
   const {api} = runtime(async (url, options) => {
     observed = {url, options};
     return {ok: true, json: async () => completed};
+  }, {
+    dispatchEvent: event => { events.push(event); return true; }
   });
 
   const result = await api.verifyEmail(verification, '123456', payload);
@@ -371,6 +496,9 @@ test('verifies the code and stores the checkout context', async () => {
   assert.equal(stored.checkout_context, checkoutContext);
   assert.equal(stored.email_verification, null);
   assert.equal(stored.registration_payload, null);
+  assert.equal(events.length, 1);
+  assert.equal(events[0].type, 'hb:registration-completed');
+  assert.equal(events[0].detail.eventCode, payload.event_code);
 });
 
 test('surfaces invalid verification code with remaining attempts', async () => {
@@ -472,6 +600,72 @@ test('commerce status uses the private token and no credentials', async () => {
   assert.equal(result.state, 'PAYMENT_CONFIRMED');
   assert.equal(observed.options.credentials, 'omit');
   assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
+});
+
+test('commerce status v2 accepts only the canonical paid purchase contract', async () => {
+  let observed;
+  const purchase = {
+    kind: 'PAID_PURCHASE',
+    conversion_id: `cnv_v1_${'A'.repeat(22)}`,
+    amount_minor: 2000,
+    currency: 'USD',
+    event_code: 'hmp-2026-08-08',
+    session_code: 'es-0830-cr',
+    content_id: 'hmp-2026-08-08:es-0830-cr'
+  };
+  const {api} = runtime(async (url, options) => {
+    observed = {url, options};
+    return {
+      ok: true,
+      json: async () => ({
+        schema_version: 'commerce-status.response.v2',
+        registration_id: registrationId,
+        state: 'PAYMENT_CONFIRMED',
+        purchase
+      })
+    };
+  });
+
+  const result = await api.commerceStatusV2({
+    registration_id: registrationId,
+    commerce_status_token: statusToken
+  });
+
+  assert.equal(observed.url, `https://bot.harmonicbeacon.com/v2/registrations/${registrationId}/commerce-status`);
+  assert.equal(observed.options.credentials, 'omit');
+  assert.equal(observed.options.headers['X-Registration-Status-Token'], statusToken);
+  assert.equal(result.purchase.conversion_id, purchase.conversion_id);
+  assert.equal(api.validPaidPurchase(purchase), true);
+});
+
+test('commerce status v2 rejects malformed purchase facts and accepts purchase null', async () => {
+  const responses = [
+    {
+      schema_version: 'commerce-status.response.v2',
+      registration_id: registrationId,
+      state: 'REVIEW_REQUIRED',
+      purchase: null
+    },
+    {
+      schema_version: 'commerce-status.response.v2',
+      registration_id: registrationId,
+      state: 'PAYMENT_CONFIRMED',
+      purchase: {
+        kind: 'PAID_PURCHASE',
+        conversion_id: `cnv_v1_${'A'.repeat(22)}`,
+        amount_minor: 2000,
+        currency: 'EUR',
+        event_code: 'hmp-2026-08-08',
+        session_code: 'es-0830-cr',
+        content_id: 'hmp-2026-08-08:es-0830-cr'
+      }
+    }
+  ];
+  const {api} = runtime(async () => ({ok: true, json: async () => responses.shift()}));
+  const context = {registration_id: registrationId, commerce_status_token: statusToken};
+
+  assert.equal((await api.commerceStatusV2(context)).purchase, null);
+  await assert.rejects(api.commerceStatusV2(context), /invalid_commerce_status_response/);
 });
 
 test('aborts a stalled commerce status request with a distinct error code', async () => {

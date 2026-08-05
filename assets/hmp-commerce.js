@@ -3,8 +3,9 @@
 
   const REGISTRATION_OPEN = true;
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
-  const IDEMPOTENCY_KEY = 'hb-registration-v3-idempotency-key';
-  const STATUS_CONTEXT_KEY = 'hb-registration-v3-status-context';
+  const IDEMPOTENCY_KEY = 'hb-registration-v4-idempotency-key';
+  const STATUS_CONTEXT_KEY = 'hb-registration-v4-status-context';
+  const LEGACY_STATUS_CONTEXT_KEYS = Object.freeze(['hb-registration-v3-status-context']);
   const REGISTRATION_TIMEOUT_MS = 15000;
   const STATUS_TIMEOUT_MS = 8000;
   const EMAIL_VERIFICATION_TIMEOUT_MS = 10000;
@@ -12,6 +13,7 @@
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
   const CHECKOUT_CONTEXT_PATTERN = /^ctx_v1_[A-Za-z0-9_-]{40,64}$/;
+  const CONVERSION_ID_PATTERN = /^cnv_v1_[A-Za-z0-9_-]{22}$/;
   const VERIFICATION_CODE_PATTERN = /^[0-9]{6}$/;
   const EMAIL_DOMAIN_CORRECTIONS = Object.freeze({
     'gmai.com': 'gmail.com',
@@ -77,6 +79,22 @@
     const error = new Error(code);
     error.code = code;
     return error;
+  }
+
+  function announceCompletedRegistration(result, payload) {
+    const completedRegistration = Object.freeze({
+      registrationId: result.registration_id,
+      eventCode: payload.event_code,
+      sessionCode: payload.session_code
+    });
+    window.__hbCompletedRegistration = completedRegistration;
+    if (typeof window.CustomEvent === 'function' && typeof window.dispatchEvent === 'function') {
+      try {
+        window.dispatchEvent(new window.CustomEvent('hb:registration-completed', {
+          detail: completedRegistration
+        }));
+      } catch (_) {}
+    }
   }
 
   function storeStatusContext(payload, result) {
@@ -287,6 +305,7 @@
     }
     storeStatusContext(payload, result);
     storage().removeItem(IDEMPOTENCY_KEY);
+    if (validCompletedRegistration(result, payload)) announceCompletedRegistration(result, payload);
     return result;
   }
 
@@ -331,6 +350,7 @@
       throw registrationError('invalid_email_verification_response');
     }
     storeStatusContext(payload, completed);
+    announceCompletedRegistration(completed, payload);
     return completed;
   }
 
@@ -372,22 +392,25 @@
   }
 
   function readStatusContext() {
-    try {
-      const value = JSON.parse(storage().getItem(STATUS_CONTEXT_KEY) || 'null');
-      return value &&
-        ['registration-status-context.v1', 'registration-status-context.v2'].includes(value.schema_version) &&
-        REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
-        STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '') &&
-        (!value.checkout_context || CHECKOUT_CONTEXT_PATTERN.test(value.checkout_context))
-        ? value
-        : null;
-    } catch (_) {
-      return null;
+    for (const key of [STATUS_CONTEXT_KEY, ...LEGACY_STATUS_CONTEXT_KEYS]) {
+      try {
+        const value = JSON.parse(storage().getItem(key) || 'null');
+        if (
+          value &&
+          ['registration-status-context.v1', 'registration-status-context.v2'].includes(value.schema_version) &&
+          REGISTRATION_ID_PATTERN.test(value.registration_id || '') &&
+          STATUS_TOKEN_PATTERN.test(value.commerce_status_token || '') &&
+          (!value.checkout_context || CHECKOUT_CONTEXT_PATTERN.test(value.checkout_context))
+        ) return value;
+      } catch (_) {}
     }
+    return null;
   }
 
   function clearStatusContext() {
-    storage().removeItem(STATUS_CONTEXT_KEY);
+    for (const key of [STATUS_CONTEXT_KEY, ...LEGACY_STATUS_CONTEXT_KEYS]) {
+      storage().removeItem(key);
+    }
   }
 
   async function commerceClaim(context, externalOrderId) {
@@ -460,6 +483,56 @@
     return result;
   }
 
+  function validPaidPurchase(purchase) {
+    return Boolean(
+      purchase &&
+      purchase.kind === 'PAID_PURCHASE' &&
+      CONVERSION_ID_PATTERN.test(purchase.conversion_id || '') &&
+      Number.isInteger(purchase.amount_minor) &&
+      purchase.amount_minor > 0 &&
+      purchase.currency === 'USD' &&
+      typeof purchase.event_code === 'string' &&
+      purchase.event_code.length >= 1 &&
+      purchase.event_code.length <= 128 &&
+      typeof purchase.session_code === 'string' &&
+      purchase.session_code.length >= 1 &&
+      purchase.session_code.length <= 128 &&
+      typeof purchase.content_id === 'string' &&
+      purchase.content_id.length >= 3 &&
+      purchase.content_id.length <= 257 &&
+      purchase.content_id === `${purchase.event_code}:${purchase.session_code}`
+    );
+  }
+
+  async function commerceStatusV2(context) {
+    const response = await fetchWithTimeout(
+      `${API_ORIGIN}/v2/registrations/${encodeURIComponent(context.registration_id)}/commerce-status`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: {'X-Registration-Status-Token': context.commerce_status_token}
+      },
+      STATUS_TIMEOUT_MS,
+      'commerce_status_timeout'
+    );
+    if (!response.ok) throw new Error(`commerce_status_${response.status}`);
+    const result = await response.json();
+    if (
+      result?.schema_version !== 'commerce-status.response.v2' ||
+      result?.registration_id !== context.registration_id ||
+      !['VERIFYING', 'PAYMENT_CONFIRMED', 'ACCESS_READY', 'REVIEW_REQUIRED', 'NOT_PAID', 'REVOKED'].includes(result?.state) ||
+      (result.purchase !== null && (
+        !['PAYMENT_CONFIRMED', 'ACCESS_READY'].includes(result.state) ||
+        !validPaidPurchase(result.purchase)
+      ))
+    ) {
+      throw new Error('invalid_commerce_status_response');
+    }
+    return result;
+  }
+
   window.HMPCommerce = {
     API_ORIGIN,
     CHECKOUTS,
@@ -470,6 +543,7 @@
     clearStatusContext,
     commerceClaim,
     commerceStatus,
+    commerceStatusV2,
     fetchWithTimeout,
     getOrCreateIdempotencyKey,
     mountCheckoutWidget,
@@ -481,6 +555,7 @@
     supportedRegistration,
     verifyEmail,
     validCheckoutUrl,
+    validPaidPurchase,
     validWidgetPath,
     validWidgetQuery
   };

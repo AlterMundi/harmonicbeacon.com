@@ -1,0 +1,25 @@
+{
+  "schema_version": "public-commerce-catalog.response.v1",
+  "events": [
+    {
+      "event_code": "hmp-fixture-2099-08-08",
+      "sessions": [
+        {
+          "session_code": "es-0830-cr",
+          "content_id": "hmp-fixture-2099-08-08:es-0830-cr",
+          "title": "Harmonic Myth Projection",
+          "registration_opens_at": "2099-08-01T00:00:00-06:00",
+          "registration_closes_at": "2099-08-08T08:30:00-06:00",
+          "starts_at": "2099-08-08T08:30:00-06:00",
+          "ends_at": "2099-08-08T12:30:00-06:00",
+          "timezone": "America/Costa_Rica",
+          "locale": "es",
+          "modality": "ONLINE",
+          "amount_minor": 2000,
+          "currency": "USD",
+          "availability": "OPEN"
+        }
+      ]
+    }
+  ]
+}

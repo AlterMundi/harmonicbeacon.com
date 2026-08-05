@@ -1,0 +1,14 @@
+{
+  "schema_version": "commerce-status.response.v2",
+  "registration_id": "10000000-0000-4000-8000-000000000001",
+  "state": "PAYMENT_CONFIRMED",
+  "purchase": {
+    "kind": "PAID_PURCHASE",
+    "conversion_id": "cnv_v1_AAAAAAAAAAAAAAAAAAAAAA",
+    "amount_minor": 2000,
+    "currency": "USD",
+    "event_code": "hmp-fixture-2099-08-08",
+    "session_code": "es-0830-cr",
+    "content_id": "hmp-fixture-2099-08-08:es-0830-cr"
+  }
+}
