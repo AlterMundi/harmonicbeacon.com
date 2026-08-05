@@ -38,21 +38,21 @@
   const copy = {
     es: {
       label: 'Preferencias de privacidad',
-      title: 'Medición y publicidad',
-      text: 'Usamos el píxel de Meta para medir visitas, inscripciones completadas y compras pagas, y mejorar nuestras campañas. Meta puede usar cookies y datos del dispositivo. Podés aceptar o continuar sin esta medición.',
+      choice: 'Acepto la medición opcional de Meta.',
+      text: 'Permite medir visitas, inscripciones completadas y compras pagas para mejorar nuestras campañas. Meta puede usar cookies y datos del dispositivo.',
       policy: 'Ver política de privacidad',
-      reject: 'Continuar sin medición',
-      accept: 'Aceptar',
-      settings: 'Revisar preferencias de privacidad'
+      pending: 'Opcional: podés continuar sin marcar esta casilla.',
+      granted: 'Aceptado: la medición de Meta está activada.',
+      denied: 'No aceptado: continuarás sin medición de Meta.'
     },
     en: {
       label: 'Privacy preferences',
-      title: 'Measurement and advertising',
-      text: 'We use the Meta pixel to measure visits, completed registrations and paid purchases and improve our campaigns. Meta may use cookies and device data. You can accept or continue without this measurement.',
+      choice: 'I accept optional Meta measurement.',
+      text: 'This allows us to measure visits, completed registrations and paid purchases to improve our campaigns. Meta may use cookies and device data.',
       policy: 'View privacy policy',
-      reject: 'Continue without measurement',
-      accept: 'Accept',
-      settings: 'Review privacy preferences'
+      pending: 'Optional: you can continue without checking this box.',
+      granted: 'Accepted: Meta measurement is active.',
+      denied: 'Not accepted: you will continue without Meta measurement.'
     }
   };
 
@@ -280,8 +280,8 @@
     style.id = 'hb-meta-consent-styles';
     style.textContent = `
       .hb-consent{position:relative;width:min(760px,calc(100% - 36px));margin:44px auto 24px;padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:16px;color:#f7f4e8;background:#0b1715;font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-      .hb-consent[hidden],.hb-consent-settings[hidden]{display:none!important}.hb-consent__title{margin:0 0 8px;color:#fff9e9;font:700 20px/1.25 Inter,ui-sans-serif,system-ui,sans-serif}.hb-consent__text{margin:0;color:#d1ddd4}.hb-consent__link{display:inline-block;margin-top:10px;color:#ffd875;text-decoration:underline;text-underline-offset:3px}.hb-consent__actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.hb-consent__button{min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.4);border-radius:999px;color:#f7f4e8;background:transparent;font:700 13px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer}.hb-consent__button--accept{border-color:#c8ff7a;color:#07120f;background:#c8ff7a}.hb-consent__button:focus-visible,.hb-consent-settings:focus-visible{outline:3px solid #7ceaff;outline-offset:3px}.hb-consent-settings{display:block;position:relative;width:max-content;max-width:calc(100% - 36px);min-height:38px;margin:28px auto 18px;padding:0 14px;border:1px solid currentColor;border-radius:999px;color:inherit;background:transparent;font:700 11px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer}
-      @media(max-width:520px){.hb-consent{width:calc(100% - 20px);padding:19px}.hb-consent__actions{display:grid;grid-template-columns:1fr 1fr}.hb-consent__button{width:100%}}
+      .hb-consent__choice{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;color:inherit;cursor:pointer}.hb-consent__checkbox{width:22px;height:22px;margin:2px 0 0;accent-color:#c8ff7a}.hb-consent__choice-copy{min-width:0}.hb-consent__choice-title{display:block;color:#fff9e9;font:700 16px/1.35 Inter,ui-sans-serif,system-ui,sans-serif}.hb-consent__text{display:block;margin-top:5px;color:#d1ddd4;font:400 14px/1.5 Inter,ui-sans-serif,system-ui,sans-serif}.hb-consent__link{display:inline-block;margin:10px 0 0 34px;color:#ffd875;text-decoration:underline;text-underline-offset:3px}.hb-consent__status{margin:10px 0 0 34px;color:#d1ddd4;font:700 13px/1.45 Inter,ui-sans-serif,system-ui,sans-serif}.hb-consent__status[data-state="granted"]{color:#c8ff7a}.hb-consent__checkbox:focus-visible{outline:3px solid #7ceaff;outline-offset:3px}
+      @media(max-width:520px){.hb-consent{width:calc(100% - 20px);padding:19px}}
     `;
     document.head.appendChild(style);
   }
@@ -294,47 +294,44 @@
     panel.setAttribute('role', 'region');
     panel.setAttribute('aria-label', text.label);
     panel.innerHTML = `
-      <h2 class="hb-consent__title">${text.title}</h2>
-      <p class="hb-consent__text">${text.text}</p>
+      <label class="hb-consent__choice">
+        <input class="hb-consent__checkbox" type="checkbox" data-hb-consent-toggle aria-describedby="hb-meta-consent-status">
+        <span class="hb-consent__choice-copy">
+          <strong class="hb-consent__choice-title">${text.choice}</strong>
+          <span class="hb-consent__text">${text.text}</span>
+        </span>
+      </label>
       <a class="hb-consent__link" href="/politica/">${text.policy}</a>
-      <div class="hb-consent__actions">
-        <button class="hb-consent__button" type="button" data-hb-consent="deny">${text.reject}</button>
-        <button class="hb-consent__button hb-consent__button--accept" type="button" data-hb-consent="grant">${text.accept}</button>
-      </div>
+      <p class="hb-consent__status" id="hb-meta-consent-status" aria-live="polite"></p>
     `;
-    const settings = document.createElement('button');
-    settings.className = 'hb-consent-settings';
-    settings.type = 'button';
-    settings.textContent = text.settings;
-    settings.hidden = !readConsent();
-
-    const closePanel = () => {
-      panel.hidden = true;
-      settings.hidden = false;
+    const checkbox = panel.querySelector('[data-hb-consent-toggle]');
+    const status = panel.querySelector('#hb-meta-consent-status');
+    const syncInterface = () => {
+      const consent = readConsent();
+      checkbox.checked = consent === GRANTED;
+      status.dataset.state = consent || 'pending';
+      status.textContent = consent === GRANTED
+        ? text.granted
+        : consent === DENIED ? text.denied : text.pending;
     };
-    panel.querySelector('[data-hb-consent="grant"]').addEventListener('click', () => {
-      saveConsent(GRANTED);
-      closePanel();
-      loadPixel();
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        saveConsent(GRANTED);
+        loadPixel();
+      } else {
+        saveConsent(DENIED);
+        clearPendingEvents();
+        revokePixel();
+      }
+      syncInterface();
     });
-    panel.querySelector('[data-hb-consent="deny"]').addEventListener('click', () => {
-      saveConsent(DENIED);
-      clearPendingEvents();
-      revokePixel();
-      closePanel();
-    });
-    settings.addEventListener('click', () => {
-      panel.hidden = false;
-      settings.hidden = true;
-      panel.querySelector('[data-hb-consent="grant"]').focus();
-    });
+    syncInterface();
 
     const mount = document.querySelector('#hb-meta-consent-mount');
     const footer = document.querySelector('footer');
-    if (mount && typeof mount.append === 'function') mount.append(panel, settings);
-    else if (footer && typeof footer.before === 'function') footer.before(panel, settings);
-    else document.body.append(panel, settings);
-    if (readConsent()) panel.hidden = true;
+    if (mount && typeof mount.append === 'function') mount.append(panel);
+    else if (footer && typeof footer.before === 'function') footer.before(panel);
+    else document.body.append(panel);
   }
 
   if (document.readyState === 'loading') {

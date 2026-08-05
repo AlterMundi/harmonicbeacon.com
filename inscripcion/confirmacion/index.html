@@ -594,18 +594,12 @@
       background: #17100b;
     }
 
-    body .hb-consent__title { color: var(--paper); }
+    body .hb-consent__choice-title { color: var(--paper); }
     body .hb-consent__text { color: var(--muted); }
     body .hb-consent__link { color: var(--gold); }
-    body .hb-consent__button { border-color: rgba(201, 162, 78, .42); color: var(--paper); }
-    body .hb-consent__button--accept { border-color: var(--gold); color: var(--night); background: var(--gold); }
-    body .hb-consent__button:focus-visible,
-    body .hb-consent-settings:focus-visible { outline-color: var(--lime); }
-    body .hb-consent-settings {
-      border-color: rgba(201, 162, 78, .35);
-      color: var(--paper);
-      background: rgba(23, 16, 11, .94);
-    }
+    body .hb-consent__checkbox { accent-color: var(--gold); }
+    body .hb-consent__checkbox:focus-visible { outline-color: var(--lime); }
+    body .hb-consent__status[data-state="granted"] { color: var(--lime); }
 
     @media (max-width: 820px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -651,7 +645,7 @@
       .card, .hero { background: #17100b; }
     }
   </style>
-  <script src="/assets/meta-pixel.js?v=20260805-commerce-2" defer></script>
+  <script src="/assets/meta-pixel.js?v=20260805-commerce-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#confirmation">
