@@ -134,13 +134,15 @@ test('Meta CompleteRegistration is gated by the canonical registration event', (
 test('Meta consent stays in document flow and pending events expire after 24 hours', () => {
   const pixel = read('assets/meta-pixel.js');
   assert.doesNotMatch(pixel, /\.hb-consent\{position:fixed/);
-  assert.doesNotMatch(pixel, /\.hb-consent-settings\{position:fixed/);
-  assert.match(pixel, /footer\.before\(panel, settings\)/);
+  assert.match(pixel, /footer\.before\(panel\)/);
   assert.match(pixel, /const PENDING_MAX_AGE_MS = 24 \* 60 \* 60 \* 1000/);
   assert.match(pixel, /clearPendingEvents\(\)/);
   assert.match(pixel, /document\.querySelector\('#hb-meta-consent-mount'\)/);
-  assert.match(pixel, /mount\.append\(panel, settings\)/);
-  assert.match(pixel, /Continuar sin medición/);
+  assert.match(pixel, /mount\.append\(panel\)/);
+  assert.match(pixel, /data-hb-consent-toggle/);
+  assert.match(pixel, /Aceptado: la medición de Meta está activada/);
+  assert.match(pixel, /No aceptado: continuarás sin medición de Meta/);
+  assert.doesNotMatch(pixel, /Revisar preferencias de privacidad/);
 });
 
 test('Meta commerce contracts have a valid committed manifest', () => {

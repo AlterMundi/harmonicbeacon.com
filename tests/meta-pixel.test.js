@@ -40,12 +40,11 @@ function pixelRuntime(
     getItem: key => sessionValues.has(key) ? sessionValues.get(key) : null,
     setItem: (key, value) => sessionValues.set(key, String(value))
   };
-  const button = name => ({
-    addEventListener: (type, callback) => controls.set(`${name}:${type}`, callback),
-    focus() {}
-  });
-  const grant = button('grant');
-  const deny = button('deny');
+  const toggle = {
+    checked: initialConsent === 'granted',
+    addEventListener: (type, callback) => controls.set(`toggle:${type}`, callback)
+  };
+  const status = {dataset: {}, textContent: ''};
   const document = {
     body: {append: (...nodes) => placements.push({target: 'body', nodes})},
     cookie: '',
@@ -58,15 +57,8 @@ function pixelRuntime(
     createElement: tag => {
       if (tag === 'section') {
         return {
-          hidden: false,
           setAttribute() {},
-          querySelector: selector => selector.includes('grant') ? grant : deny
-        };
-      }
-      if (tag === 'button') {
-        return {
-          hidden: false,
-          addEventListener: (type, callback) => controls.set(`settings:${type}`, callback)
+          querySelector: selector => selector.includes('toggle') ? toggle : status
         };
       }
       return {};
@@ -95,21 +87,42 @@ function pixelRuntime(
     controls,
     insertedScripts,
     sessionValues,
+    status,
+    toggle,
     localValues,
     placements,
+    setConsent: checked => {
+      toggle.checked = checked;
+      controls.get('toggle:change')();
+    },
     triggerPurchase: detail => purchaseHandler({detail}),
     triggerRegistration: detail => registrationHandler({detail}),
     window
   };
 }
 
-test('registration page can mount the full consent choice inside its form', () => {
+test('registration page mounts a persistent consent checkbox inside its form', () => {
   const runtime = pixelRuntime(null, new Map(), new Map(), {consentMount: true});
 
   assert.equal(runtime.placements.length, 1);
   assert.equal(runtime.placements[0].target, 'mount');
-  assert.equal(runtime.placements[0].nodes.length, 2);
+  assert.equal(runtime.placements[0].nodes.length, 1);
+  assert.equal(runtime.toggle.checked, false);
+  assert.equal(runtime.status.dataset.state, 'pending');
+  assert.match(runtime.status.textContent, /Opcional/);
   assert.equal(runtime.window.fbq, undefined);
+});
+
+test('persisted Meta choice remains visible and explicit', () => {
+  const granted = pixelRuntime('granted', new Map(), new Map(), {consentMount: true});
+  assert.equal(granted.toggle.checked, true);
+  assert.equal(granted.status.dataset.state, 'granted');
+  assert.match(granted.status.textContent, /activada/);
+
+  const denied = pixelRuntime('denied', new Map(), new Map(), {consentMount: true});
+  assert.equal(denied.toggle.checked, false);
+  assert.equal(denied.status.dataset.state, 'denied');
+  assert.match(denied.status.textContent, /sin medición/);
 });
 
 test('consent granted tracks CompleteRegistration once without PII', () => {
@@ -148,8 +161,8 @@ test('PageView fires once per page load and is not repeated by consent re-grant'
   let pageViews = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'PageView');
   assert.equal(pageViews.length, 1);
 
-  runtime.controls.get('deny:click')();
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(false);
+  runtime.setConsent(true);
 
   pageViews = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'PageView');
   assert.equal(pageViews.length, 1);
@@ -216,7 +229,7 @@ test('registration completed before consent is sent once after explicit grant', 
   runtime.triggerRegistration(registration);
 
   assert.equal(runtime.window.fbq, undefined);
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(true);
 
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 1);
@@ -226,8 +239,8 @@ test('consent can be revoked and granted again without reloading the page', () =
   const runtime = pixelRuntime('granted');
   runtime.triggerRegistration(registration);
 
-  runtime.controls.get('deny:click')();
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(false);
+  runtime.setConsent(true);
 
   const consentCalls = runtime.calls().filter(call => call[0] === 'consent');
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
@@ -237,13 +250,13 @@ test('consent can be revoked and granted again without reloading the page', () =
 
 test('a registration completed after explicit decline is not added after a later grant', () => {
   const runtime = pixelRuntime('granted');
-  runtime.controls.get('deny:click')();
+  runtime.setConsent(false);
   runtime.triggerRegistration(registration);
 
   let events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 0);
 
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(true);
   events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 1);
 });
@@ -294,7 +307,7 @@ test('pending non-PII events flush after consent and are then removed', () => {
   assert.equal(queued.length, 2);
   assert.equal(JSON.stringify(queued).includes('email'), false);
 
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(true);
 
   const events = runtime.calls().filter(call => call[0] === 'track');
   assert.equal(events.filter(call => call[1] === 'CompleteRegistration').length, 1);
@@ -307,7 +320,7 @@ test('explicit decline clears pending events and never loads Meta', () => {
   runtime.triggerRegistration(registration);
   assert.equal(runtime.localValues.has('hb-meta-pending-events-v1'), true);
 
-  runtime.controls.get('deny:click')();
+  runtime.setConsent(false);
 
   assert.equal(runtime.localValues.has('hb-meta-pending-events-v1'), false);
   assert.equal(runtime.insertedScripts.length, 0);
@@ -320,7 +333,7 @@ test('expired pending events are discarded instead of sent', () => {
   ]]);
   const runtime = pixelRuntime(null, new Map(), localValues);
 
-  runtime.controls.get('grant:click')();
+  runtime.setConsent(true);
 
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 0);
