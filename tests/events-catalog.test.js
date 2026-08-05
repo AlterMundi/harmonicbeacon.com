@@ -74,11 +74,26 @@ test('normalizes the exact public catalog and sorts sessions chronologically', (
 test('fails closed on schema drift, malformed chronology, unsupported facts, and duplicates', () => {
   const api = loadApi();
   assert.throws(() => api.normalizeCatalog({...catalog([]), schema_version: 'v2'}), /invalid_catalog/);
+  assert.throws(() => api.normalizeCatalog({...catalog([]), debug: true}), /invalid_catalog/);
+  assert.throws(() => api.normalizeCatalog({
+    ...catalog([]),
+    events: [{...catalog([]).events[0], campaign: 'unexpected'}]
+  }), /invalid_catalog/);
   assert.throws(() => api.normalizeCatalog(catalog([session({currency: 'EUR'})])), /invalid_catalog/);
   assert.throws(() => api.normalizeCatalog(catalog([session({modality: 'IN_PERSON'})])), /invalid_catalog/);
   assert.throws(() => api.normalizeCatalog(catalog([session({availability: 'MAYBE'})])), /invalid_catalog/);
   assert.throws(() => api.normalizeCatalog(catalog([session({ends_at: '2026-08-08T07:00:00-06:00'})])), /invalid_catalog/);
   assert.throws(() => api.normalizeCatalog(catalog([session(), session()])), /duplicate_session/);
+});
+
+test('fails closed on unversioned free or coupon semantics instead of treating them as paid', () => {
+  const api = loadApi();
+  for (const accessKind of ['FREE', 'COUPON']) {
+    assert.throws(
+      () => api.normalizeCatalog(catalog([session({access_kind: accessKind})])),
+      /invalid_catalog/
+    );
+  }
 });
 
 test('derives registration state from canonical availability and bounded timestamps', () => {

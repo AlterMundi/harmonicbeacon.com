@@ -7,6 +7,23 @@
   const ACTIVE_STATES = new Set(['OPEN', 'CLOSED', 'SOLD_OUT', 'CANCELLED', 'ENDED']);
   const LOCALES = new Set(['es', 'en']);
   const CODE_PATTERN = /^[A-Za-z0-9._:-]{1,257}$/;
+  const DOCUMENT_KEYS = Object.freeze(['events', 'schema_version']);
+  const EVENT_KEYS = Object.freeze(['event_code', 'sessions']);
+  const SESSION_KEYS = Object.freeze([
+    'amount_minor',
+    'availability',
+    'content_id',
+    'currency',
+    'ends_at',
+    'locale',
+    'modality',
+    'registration_closes_at',
+    'registration_opens_at',
+    'session_code',
+    'starts_at',
+    'timezone',
+    'title'
+  ]);
   const TIME_ZONES = Object.freeze([
     ['America/Costa_Rica', 'Costa Rica'],
     ['America/Mexico_City', 'México (CDMX)'],
@@ -33,8 +50,16 @@
     }
   }
 
+  function hasExactKeys(value, expected) {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+    const actual = Object.keys(value);
+    return actual.length === expected.length && expected.every(key =>
+      Object.prototype.hasOwnProperty.call(value, key)
+    );
+  }
+
   function validSession(eventCode, session) {
-    if (!session || typeof session !== 'object' || Array.isArray(session)) return false;
+    if (!hasExactKeys(session, SESSION_KEYS)) return false;
     if (!CODE_PATTERN.test(eventCode) || eventCode.length > 128) return false;
     if (!CODE_PATTERN.test(session.session_code || '') || session.session_code.length > 128) return false;
     if (!CODE_PATTERN.test(session.content_id || '') || session.content_id.length > 257) return false;
@@ -51,13 +76,13 @@
   }
 
   function normalizeCatalog(document) {
-    if (!document || document.schema_version !== SCHEMA_VERSION || !Array.isArray(document.events)) {
+    if (!hasExactKeys(document, DOCUMENT_KEYS) || document.schema_version !== SCHEMA_VERSION || !Array.isArray(document.events)) {
       throw new Error('invalid_catalog');
     }
     const sessions = [];
     const identities = new Set();
     for (const event of document.events) {
-      if (!event || typeof event !== 'object' || !CODE_PATTERN.test(event.event_code || '') || !Array.isArray(event.sessions)) {
+      if (!hasExactKeys(event, EVENT_KEYS) || !CODE_PATTERN.test(event.event_code || '') || !Array.isArray(event.sessions)) {
         throw new Error('invalid_catalog');
       }
       for (const session of event.sessions) {
