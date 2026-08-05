@@ -22,7 +22,7 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page opens the coordinated August 8 and August 11 virtual sessions', () => {
+test('events page opens August 8 and keeps August 11 fail-closed until backend deploy', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
@@ -42,7 +42,8 @@ test('events page opens the coordinated August 8 and August 11 virtual sessions'
   assert.equal((page.match(/data-event-date="2026-08-11"/g) || []).length, 1);
   assert.match(page, /2026-08-11T22:00:00Z/);
   assert.match(page, /2026-08-11T22:00:00Z[\s\S]*?<b class="tz-time">16:00<\/b>/);
-  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-11&amp;idioma=en"/);
+  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=2026-08-11&amp;idioma=en"/);
+  assert.match(page, /data-event-date="2026-08-11" aria-disabled="true"/);
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
