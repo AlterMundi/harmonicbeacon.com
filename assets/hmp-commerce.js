@@ -2,6 +2,7 @@
   'use strict';
 
   const REGISTRATION_OPEN = true;
+  const REGISTRATION_BLOCKED_EVENTS = new Set(['hmp-2026-08-11']);
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
   const IDEMPOTENCY_KEY = 'hb-registration-v4-idempotency-key';
   const STATUS_CONTEXT_KEY = 'hb-registration-v4-status-context';
@@ -67,11 +68,12 @@
   }
 
   function registrationEvent(date) {
-    return CHECKOUTS[`hmp-${date}`] || null;
+    const eventCode = `hmp-${date}`;
+    return REGISTRATION_BLOCKED_EVENTS.has(eventCode) ? null : CHECKOUTS[eventCode] || null;
   }
 
   function supportedRegistration(eventCode, sessionCode) {
-    return REGISTRATION_OPEN && Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
+    return REGISTRATION_OPEN && !REGISTRATION_BLOCKED_EVENTS.has(eventCode) && Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
   }
 
   function suggestedEmailCorrection(value) {
