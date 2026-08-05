@@ -128,6 +128,9 @@
     label{color:var(--paper);font-size:13px;font-weight:600;letter-spacing:.08em}
     input{min-height:52px;border-color:rgba(201,162,78,.4);font-size:16px}.form-zone input:not([type="hidden"]):not([type="checkbox"]){color:#16120d;background:#f4eee2}.form-zone input:not([type="hidden"]):not([type="checkbox"]):focus{border-color:var(--gold-deep);box-shadow:0 0 0 4px rgba(227,199,126,.36)}
     .form-note,.payment-note{color:var(--muted);font-size:14px}.consent{color:var(--paper);font-size:15px}.consent input[type="checkbox"]{width:20px;height:20px;accent-color:var(--gold)}.consent a{color:var(--gold-light)}
+    #hb-meta-consent-mount .hb-consent{width:100%;margin:0 0 18px;padding:18px;border-color:rgba(201,162,78,.42);background:rgba(201,162,78,.07)}
+    #hb-meta-consent-mount .hb-consent__title{color:var(--paper);font-size:18px}#hb-meta-consent-mount .hb-consent__text{color:var(--muted);font-size:14px}#hb-meta-consent-mount .hb-consent__link{color:var(--gold-light)}
+    #hb-meta-consent-mount .hb-consent-settings{margin:0 0 18px;color:var(--gold-light)}
     .legal{color:var(--muted);font-size:13px}footer{color:var(--muted);font-size:11px;border-color:rgba(201,162,78,.22)}
     .toast{color:var(--paper);background:#16120df7;border-color:var(--gold);font-size:14px}
     .reveal,.reveal.visible{opacity:1;transform:none}
@@ -158,7 +161,7 @@
     @media(max-width:920px){.guide-intro{grid-template-columns:1fr}.experience-photo{max-width:520px}.guide-grid{grid-template-columns:1fr}}
     @media(max-width:620px){.wrap,.nav{width:min(100% - 32px,1180px)}.hero{padding-top:100px;padding-bottom:54px;gap:34px}.hero h1{font-size:clamp(2.8rem,14vw,3.8rem)}.lead{font-size:16px}.art-scene{height:100vw;min-height:340px;max-height:460px}.event-photo{border-radius:46% 46% 14px 14px}.event-photo figcaption{left:20px;right:20px;bottom:18px}.manifesto{padding:70px 0 54px}.big-line{font-size:clamp(2.1rem,10vw,3.1rem)}.small-center{font-size:16px}.movements{grid-template-columns:1fr;padding-bottom:68px}.movement:nth-child(3){grid-column:auto}.booking{padding:70px 0}.booking-first{padding-top:112px}.booking h2{font-size:clamp(2.5rem,11vw,3.5rem)}.session-zone,.form-zone{padding:28px 20px}.session-zone h3,.form-zone h3{font-size:1.85rem}.session{grid-template-columns:16px 1fr auto;padding:14px 12px}.nav-center{display:none}.flow-progress{grid-template-columns:1fr 1fr}.flow-progress li{min-height:66px;padding:13px 14px}.flow-progress li:nth-child(2){border-right:0}.flow-progress-copy small{display:none}.experience-guide{padding:30px 0 68px}.prep-head{margin-top:50px}.guide-card,.mail-notice{padding:22px}.guide-intro h2,.prep-head h2{font-size:2rem}}
   </style>
-  <script src="/assets/meta-pixel.js?v=20260805-commerce-1" defer></script>
+  <script src="/assets/meta-pixel.js?v=20260805-commerce-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#inscripcion"><span data-copy="es">Saltar a la inscripción</span><span data-copy="en">Skip to registration</span></a>
@@ -205,6 +208,7 @@
             <label><span data-copy="es">correo electrónico</span><span data-copy="en">email address</span><input type="email" name="email" autocomplete="email" required></label>
             <p class="form-note"><span data-copy="es">Ahí llegará la confirmación, el pago y el acceso. Revisá también spam y promociones.</span><span data-copy="en">Confirmation, payment details and access will arrive there. Check spam and promotions too.</span></p>
             <label class="consent"><input type="checkbox" name="registrationTermsAccepted" value="ACEPTO" required><span data-copy="es">Acepto los <a href="/politica/" target="_blank" rel="noopener">términos y la política de esta inscripción</a>.</span><span data-copy="en">I accept the <a href="/politica/" target="_blank" rel="noopener">terms and policy for this registration</a>.</span></label>
+            <div id="hb-meta-consent-mount" aria-live="polite"></div>
             <button class="cta submit" id="continueButton" type="button"><span data-copy="es">continuar</span><span data-copy="en">continue</span><i>↗</i></button>
             <button class="cta submit" id="paymentButton" type="submit" hidden><span id="paymentButtonLabel">continuar al pago</span><i>↗</i></button>
             <p class="legal"><span data-copy="es">Usamos tu email únicamente para esta experiencia.</span><span data-copy="en">We use your email only for this experience.</span></p>

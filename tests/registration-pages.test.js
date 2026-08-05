@@ -49,6 +49,13 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /registrationOpen&&Boolean\(eventConfig\)/);
   assert.match(page, /registrationTermsVersion" value="registration-v4"/);
   assert.match(page, /registrationTermsAccepted" value="ACEPTO" required/);
+  assert.match(page, /id="hb-meta-consent-mount"/);
+  assert.ok(
+    page.indexOf('name="registrationTermsAccepted"') <
+      page.indexOf('id="hb-meta-consent-mount"') &&
+      page.indexOf('id="hb-meta-consent-mount"') <
+      page.indexOf('id="continueButton"')
+  );
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
   assert.match(page, /id="emailVerificationStep"/);
   assert.match(page, /id="registrationProgress"/);
@@ -131,6 +138,9 @@ test('Meta consent stays in document flow and pending events expire after 24 hou
   assert.match(pixel, /footer\.before\(panel, settings\)/);
   assert.match(pixel, /const PENDING_MAX_AGE_MS = 24 \* 60 \* 60 \* 1000/);
   assert.match(pixel, /clearPendingEvents\(\)/);
+  assert.match(pixel, /document\.querySelector\('#hb-meta-consent-mount'\)/);
+  assert.match(pixel, /mount\.append\(panel, settings\)/);
+  assert.match(pixel, /Continuar sin medición/);
 });
 
 test('Meta commerce contracts have a valid committed manifest', () => {
