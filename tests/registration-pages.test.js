@@ -22,28 +22,28 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page opens August 8 and keeps August 11 fail-closed until backend deploy', () => {
+test('events page opens the confirmed August 8 and August 11 sessions', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
   assert.match(page, /Guardá esta página para consultar la agenda vigente/);
   assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 1);
   assert.match(page, /2026-08-08T14:30:00Z/);
-  assert.match(page, /2026-08-09T22:00:00Z/);
-  assert.match(page, /2026-08-09T22:00:00Z[\s\S]*?<b class="tz-time">16:00<\/b>/);
+  assert.doesNotMatch(page, /2026-08-09/);
+  assert.doesNotMatch(page, /Domingo 9 de agosto|Sunday, August 9/);
   assert.doesNotMatch(page, /2026-08-08T20:00:00Z/);
   assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
   assert.match(page, /Inscripción abierta/);
   assert.match(page, /Registration open/);
-  assert.match(page, /Próximamente disponible/);
-  assert.match(page, /Coming soon/);
+  assert.doesNotMatch(page, /Próximamente disponible/);
+  assert.doesNotMatch(page, /Coming soon/);
   assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
   assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
   assert.equal((page.match(/data-event-date="2026-08-11"/g) || []).length, 1);
   assert.match(page, /2026-08-11T22:00:00Z/);
   assert.match(page, /2026-08-11T22:00:00Z[\s\S]*?<b class="tz-time">16:00<\/b>/);
-  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=2026-08-11&amp;idioma=en"/);
-  assert.match(page, /data-event-date="2026-08-11" aria-disabled="true"/);
+  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-11&amp;idioma=en"/);
+  assert.doesNotMatch(page, /data-event-date="2026-08-11" aria-disabled="true"/);
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
