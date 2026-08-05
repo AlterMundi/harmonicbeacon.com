@@ -85,10 +85,10 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   assert.match(page, /id="confirmationProgress"/);
   assert.match(page, /<li aria-current="step">.*<span class="confirmation-progress-number">04<\/span>/);
   assert.match(page, /window\.HMPCommerce\.commerceClaim\(context, orderId\)/);
-  assert.match(page, /window\.HMPCommerce\.commerceStatus\(context\)/);
+  assert.match(page, /window\.HMPCommerce\.commerceStatusV2\(context\)/);
   assert.ok(
     page.indexOf('window.HMPCommerce.commerceClaim(context, orderId)') <
-      page.indexOf('window.HMPCommerce.commerceStatus(context)')
+      page.indexOf('window.HMPCommerce.commerceStatusV2(context)')
   );
   assert.match(page, /state === 'PAYMENT_CONFIRMED' \|\| state === 'ACCESS_READY'/);
   assert.match(page, /id="retryStatus"/);
@@ -96,22 +96,46 @@ test('confirmation starts neutral and unlocks content from canonical status', ()
   assert.match(page, /STATUS_TIMEOUT/);
 });
 
-test('Meta Purchase fails closed without canonical paid conversion facts', () => {
+test('Meta Purchase uses only canonical paid conversion facts', () => {
   const pixel = read('assets/meta-pixel.js');
-  assert.doesNotMatch(pixel, /fbq\('track', 'Purchase'/);
+  const confirmation = read('inscripcion/confirmacion/index.html');
+  assert.match(pixel, /window\.fbq\('track', 'Purchase'/);
+  assert.match(pixel, /value: normalized\.amountMinor \/ 100/);
+  assert.match(pixel, /currency: normalized\.currency/);
+  assert.match(pixel, /eventID: normalized\.conversionId/);
+  assert.match(confirmation, /if \(result\.purchase\) announcePurchase\(result\.purchase\)/);
   assert.doesNotMatch(pixel, /englishSession \? 50 : 20/);
-  assert.doesNotMatch(pixel, /en-1400-cr|es-0830-cr/);
   assert.doesNotMatch(pixel, /tt_order_id/);
 });
 
 test('Meta CompleteRegistration is gated by the canonical registration event', () => {
   const commerce = read('assets/hmp-commerce.js');
   const pixel = read('assets/meta-pixel.js');
-  assert.match(commerce, /result\.registration_status !== 'REGISTERED'/);
+  assert.match(commerce, /result\?\.registration_status === 'REGISTERED'/);
   assert.match(commerce, /hb:registration-completed/);
   assert.match(pixel, /trackCompletedRegistration/);
   assert.match(pixel, /'CompleteRegistration'/);
   assert.doesNotMatch(pixel, /detail\.email|detail\.firstName|detail\.lastName/);
+});
+
+test('Meta consent stays in document flow and pending events expire after 24 hours', () => {
+  const pixel = read('assets/meta-pixel.js');
+  assert.doesNotMatch(pixel, /\.hb-consent\{position:fixed/);
+  assert.doesNotMatch(pixel, /\.hb-consent-settings\{position:fixed/);
+  assert.match(pixel, /footer\.before\(panel, settings\)/);
+  assert.match(pixel, /const PENDING_MAX_AGE_MS = 24 \* 60 \* 60 \* 1000/);
+  assert.match(pixel, /clearPendingEvents\(\)/);
+});
+
+test('Meta commerce contracts have a valid committed manifest', () => {
+  const directory = path.join(root, 'contracts', 'meta-commerce', 'v1');
+  const lines = read('contracts/meta-commerce/v1/SHA256SUMS').trim().split('\n');
+  assert.equal(lines.length, 5);
+  for (const line of lines) {
+    const [expected, fileName] = line.split(/\s+/);
+    const bytes = fs.readFileSync(path.join(directory, fileName));
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), expected, fileName);
+  }
 });
 
 test('registration-v3 remains byte-exact as immutable historical evidence', () => {

@@ -7,7 +7,17 @@ const vm = require('node:vm');
 const source = fs.readFileSync(path.join(__dirname, '..', 'assets', 'meta-pixel.js'), 'utf8');
 const registration = {
   registrationId: '20000000-0000-4000-8000-000000000001',
+  eventCode: 'hmp-2026-08-08',
   sessionCode: 'es-0830-cr'
+};
+const purchase = {
+  kind: 'PAID_PURCHASE',
+  conversion_id: `cnv_v1_${'A'.repeat(22)}`,
+  amount_minor: 2000,
+  currency: 'USD',
+  event_code: 'hmp-2026-08-08',
+  session_code: 'es-0830-cr',
+  content_id: 'hmp-2026-08-08:es-0830-cr'
 };
 
 function pixelRuntime(initialConsent = null, sessionValues = new Map(), localValues = new Map()) {
@@ -17,7 +27,8 @@ function pixelRuntime(initialConsent = null, sessionValues = new Map(), localVal
   const insertedScripts = [];
   const localStorage = {
     getItem: key => localValues.has(key) ? localValues.get(key) : null,
-    setItem: (key, value) => localValues.set(key, String(value))
+    setItem: (key, value) => localValues.set(key, String(value)),
+    removeItem: key => localValues.delete(key)
   };
   const sessionStorage = {
     getItem: key => sessionValues.has(key) ? sessionValues.get(key) : null,
@@ -70,11 +81,14 @@ function pixelRuntime(initialConsent = null, sessionValues = new Map(), localVal
     window
   });
   const registrationHandler = listeners.get('hb:registration-completed');
+  const purchaseHandler = listeners.get('hb:purchase-confirmed');
   return {
     calls: () => window.fbq?.queue || [],
     controls,
     insertedScripts,
     sessionValues,
+    localValues,
+    triggerPurchase: detail => purchaseHandler({detail}),
     triggerRegistration: detail => registrationHandler({detail}),
     window
   };
@@ -88,7 +102,7 @@ test('consent granted tracks CompleteRegistration once without PII', () => {
 
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 1);
-  assert.deepEqual(Array.from(events[0][2].content_ids), ['es-0830-cr']);
+  assert.deepEqual(Array.from(events[0][2].content_ids), ['hmp-2026-08-08:es-0830-cr']);
   assert.equal(events[0].length, 3);
   assert.equal(JSON.stringify(events[0]).includes('email'), false);
   assert.equal(JSON.stringify(events[0]).includes('Alma'), false);
@@ -99,12 +113,13 @@ test('English canonical session tracks the selected product without locale-deriv
 
   runtime.triggerRegistration({
     registrationId: '20000000-0000-4000-8000-000000000002',
+    eventCode: 'hmp-2026-08-08',
     sessionCode: 'en-1400-cr'
   });
 
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
   assert.equal(events.length, 1);
-  assert.deepEqual(Array.from(events[0][2].content_ids), ['en-1400-cr']);
+  assert.deepEqual(Array.from(events[0][2].content_ids), ['hmp-2026-08-08:en-1400-cr']);
   assert.equal('value' in events[0][2], false);
   assert.equal('currency' in events[0][2], false);
 });
@@ -202,7 +217,7 @@ test('consent can be revoked and granted again without reloading the page', () =
   assert.equal(events.length, 1);
 });
 
-test('a registration completed while consent is revoked is sent after a later grant', () => {
+test('a registration completed after explicit decline is not added after a later grant', () => {
   const runtime = pixelRuntime('granted');
   runtime.controls.get('deny:click')();
   runtime.triggerRegistration(registration);
@@ -218,9 +233,89 @@ test('a registration completed while consent is revoked is sent after a later gr
 test('malformed identifiers never produce CompleteRegistration', () => {
   const runtime = pixelRuntime('granted');
 
-  runtime.triggerRegistration({registrationId: 'not-a-uuid', sessionCode: 'es-0830-cr'});
-  runtime.triggerRegistration({registrationId: registration.registrationId, sessionCode: '../private'});
+  runtime.triggerRegistration({registrationId: 'not-a-uuid', eventCode: 'hmp-2026-08-08', sessionCode: 'es-0830-cr'});
+  runtime.triggerRegistration({registrationId: registration.registrationId, eventCode: 'hmp-2026-08-08', sessionCode: '../private'});
 
   const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(events.length, 0);
+});
+
+test('canonical Purchase uses real facts and conversion id as eventID exactly once', () => {
+  const runtime = pixelRuntime('granted');
+
+  runtime.triggerPurchase(purchase);
+  runtime.triggerPurchase(purchase);
+
+  const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'Purchase');
+  assert.equal(events.length, 1);
+  assert.equal(events[0][2].value, 20);
+  assert.equal(events[0][2].currency, 'USD');
+  assert.deepEqual(Array.from(events[0][2].content_ids), [purchase.content_id]);
+  assert.equal(events[0][3].eventID, purchase.conversion_id);
+  assert.equal(JSON.stringify(events[0]).includes('registrationId'), false);
+});
+
+test('Purchase is deduplicated across refresh and state transitions', () => {
+  const localValues = new Map();
+  const firstPage = pixelRuntime('granted', new Map(), localValues);
+  firstPage.triggerPurchase(purchase);
+
+  const refreshedPage = pixelRuntime('granted', new Map(), localValues);
+  refreshedPage.triggerPurchase(purchase);
+
+  assert.equal(firstPage.calls().filter(call => call[0] === 'track' && call[1] === 'Purchase').length, 1);
+  assert.equal(refreshedPage.calls().filter(call => call[0] === 'track' && call[1] === 'Purchase').length, 0);
+});
+
+test('pending non-PII events flush after consent and are then removed', () => {
+  const runtime = pixelRuntime();
+
+  runtime.triggerRegistration(registration);
+  runtime.triggerPurchase(purchase);
+  const queued = JSON.parse(runtime.localValues.get('hb-meta-pending-events-v1'));
+  assert.equal(queued.length, 2);
+  assert.equal(JSON.stringify(queued).includes('email'), false);
+
+  runtime.controls.get('grant:click')();
+
+  const events = runtime.calls().filter(call => call[0] === 'track');
+  assert.equal(events.filter(call => call[1] === 'CompleteRegistration').length, 1);
+  assert.equal(events.filter(call => call[1] === 'Purchase').length, 1);
+  assert.equal(runtime.localValues.has('hb-meta-pending-events-v1'), false);
+});
+
+test('explicit decline clears pending events and never loads Meta', () => {
+  const runtime = pixelRuntime();
+  runtime.triggerRegistration(registration);
+  assert.equal(runtime.localValues.has('hb-meta-pending-events-v1'), true);
+
+  runtime.controls.get('deny:click')();
+
+  assert.equal(runtime.localValues.has('hb-meta-pending-events-v1'), false);
+  assert.equal(runtime.insertedScripts.length, 0);
+});
+
+test('expired pending events are discarded instead of sent', () => {
+  const localValues = new Map([[
+    'hb-meta-pending-events-v1',
+    JSON.stringify([{kind: 'CompleteRegistration', createdAt: Date.now() - 25 * 60 * 60 * 1000, detail: registration}])
+  ]]);
+  const runtime = pixelRuntime(null, new Map(), localValues);
+
+  runtime.controls.get('grant:click')();
+
+  const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'CompleteRegistration');
+  assert.equal(events.length, 0);
+  assert.equal(localValues.has('hb-meta-pending-events-v1'), false);
+});
+
+test('refund-style null or malformed facts never produce Purchase', () => {
+  const runtime = pixelRuntime('granted');
+  runtime.triggerPurchase(null);
+  runtime.triggerPurchase({...purchase, amount_minor: 0});
+  runtime.triggerPurchase({...purchase, currency: 'EUR'});
+  runtime.triggerPurchase({...purchase, conversion_id: 'or_80659999'});
+
+  const events = runtime.calls().filter(call => call[0] === 'track' && call[1] === 'Purchase');
   assert.equal(events.length, 0);
 });

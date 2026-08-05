@@ -13,6 +13,7 @@
   const REGISTRATION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const STATUS_TOKEN_PATTERN = /^st_v1_[A-Za-z0-9_-]{40,64}$/;
   const CHECKOUT_CONTEXT_PATTERN = /^ctx_v1_[A-Za-z0-9_-]{40,64}$/;
+  const CONVERSION_ID_PATTERN = /^cnv_v1_[A-Za-z0-9_-]{22}$/;
   const VERIFICATION_CODE_PATTERN = /^[0-9]{6}$/;
   const EMAIL_DOMAIN_CORRECTIONS = Object.freeze({
     'gmai.com': 'gmail.com',
@@ -83,6 +84,7 @@
   function announceCompletedRegistration(result, payload) {
     const completedRegistration = Object.freeze({
       registrationId: result.registration_id,
+      eventCode: payload.event_code,
       sessionCode: payload.session_code
     });
     window.__hbCompletedRegistration = completedRegistration;
@@ -481,6 +483,56 @@
     return result;
   }
 
+  function validPaidPurchase(purchase) {
+    return Boolean(
+      purchase &&
+      purchase.kind === 'PAID_PURCHASE' &&
+      CONVERSION_ID_PATTERN.test(purchase.conversion_id || '') &&
+      Number.isInteger(purchase.amount_minor) &&
+      purchase.amount_minor > 0 &&
+      purchase.currency === 'USD' &&
+      typeof purchase.event_code === 'string' &&
+      purchase.event_code.length >= 1 &&
+      purchase.event_code.length <= 128 &&
+      typeof purchase.session_code === 'string' &&
+      purchase.session_code.length >= 1 &&
+      purchase.session_code.length <= 128 &&
+      typeof purchase.content_id === 'string' &&
+      purchase.content_id.length >= 3 &&
+      purchase.content_id.length <= 257 &&
+      purchase.content_id === `${purchase.event_code}:${purchase.session_code}`
+    );
+  }
+
+  async function commerceStatusV2(context) {
+    const response = await fetchWithTimeout(
+      `${API_ORIGIN}/v2/registrations/${encodeURIComponent(context.registration_id)}/commerce-status`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-store',
+        headers: {'X-Registration-Status-Token': context.commerce_status_token}
+      },
+      STATUS_TIMEOUT_MS,
+      'commerce_status_timeout'
+    );
+    if (!response.ok) throw new Error(`commerce_status_${response.status}`);
+    const result = await response.json();
+    if (
+      result?.schema_version !== 'commerce-status.response.v2' ||
+      result?.registration_id !== context.registration_id ||
+      !['VERIFYING', 'PAYMENT_CONFIRMED', 'ACCESS_READY', 'REVIEW_REQUIRED', 'NOT_PAID', 'REVOKED'].includes(result?.state) ||
+      (result.purchase !== null && (
+        !['PAYMENT_CONFIRMED', 'ACCESS_READY'].includes(result.state) ||
+        !validPaidPurchase(result.purchase)
+      ))
+    ) {
+      throw new Error('invalid_commerce_status_response');
+    }
+    return result;
+  }
+
   window.HMPCommerce = {
     API_ORIGIN,
     CHECKOUTS,
@@ -491,6 +543,7 @@
     clearStatusContext,
     commerceClaim,
     commerceStatus,
+    commerceStatusV2,
     fetchWithTimeout,
     getOrCreateIdempotencyKey,
     mountCheckoutWidget,
@@ -502,6 +555,7 @@
     supportedRegistration,
     verifyEmail,
     validCheckoutUrl,
+    validPaidPurchase,
     validWidgetPath,
     validWidgetQuery
   };

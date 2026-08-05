@@ -40,7 +40,7 @@ if (fs.existsSync('inscripcion')) {
 }
 
 // Conservar la política vigente y sus evidencias legales versionadas.
-for (const directory of ['politica', 'legal']) {
+for (const directory of ['politica', 'legal', 'contracts']) {
   if (fs.existsSync(directory)) {
     copyRecursiveSync(directory, path.join('dist', directory));
     console.log(`✓ Copiado: ${directory}/`);

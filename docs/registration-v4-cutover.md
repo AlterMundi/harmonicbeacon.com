@@ -1,6 +1,6 @@
 # Registration v4 cutover
 
-Status: prepared, not authorized for production cutover.
+Status: backend compatibility deployed; landing cutover implemented for coordinated publication.
 
 ## Canonical legal artifacts
 
@@ -17,15 +17,14 @@ V4 adds an explicit bilingual disclosure of the consent-gated Meta events `PageV
 `CompleteRegistration` and `Purchase`, their canonical firing boundaries and the fields that are
 never sent to Meta. It does not authorize additional standard events.
 
-## Backend contract Mariano must incorporate
+## Backend contract
 
 The browser sends `terms_version=registration-v4`. PMP Myth Bot must associate that exact version
 with SHA-256 `c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773` and the canonical immutable
 URL `https://harmonicbeacon.com/legal/terms/registration-v4.html`. `/politica/` serves the same bytes
 as the human-facing current policy at cutover time.
 
-The current Bot accepts only one configured terms version. A no-downtime rollout therefore needs a
-small compatibility window in which both immutable pairs are accepted:
+The deployed Bot accepts both immutable pairs during the compatibility window:
 
 - `registration-v3` → `0d65e0c03acd635f08c3e04628a19ef0e674e08612e2ac2446502f3b10b6b54e`
 - `registration-v4` → `c062b63921bf9a0d175a9770eaeaee647e65347bb3a1188285bc7c3706a1b773`
@@ -35,8 +34,8 @@ from the browser. It must store the selected version/hash on the registration ex
 today. Unknown versions remain rejected. Idempotent retries made under v3 must continue resolving to
 their original v3 result; a v4 payload uses a version-scoped browser idempotency key.
 
-If dual acceptance is not implemented, registration must be closed for the coordinated cutover. Do
-not deploy backend-v4 and landing-v3, or landing-v4 and backend-v3, while registration is open.
+The backend status v2 and public catalog are versioned in `contracts/meta-commerce/v1/`, with a
+manifest that must remain byte-identical in both repositories.
 
 ## Safe rollout
 

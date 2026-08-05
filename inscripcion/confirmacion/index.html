@@ -651,7 +651,7 @@
       .card, .hero { background: #17100b; }
     }
   </style>
-  <script src="/assets/meta-pixel.js" defer></script>
+  <script src="/assets/meta-pixel.js?v=20260805-commerce-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#confirmation">
@@ -822,7 +822,7 @@
     </footer>
   </div>
 
-  <script src="/assets/hmp-commerce.js?v=20260804-email-verification-1"></script>
+  <script src="/assets/hmp-commerce.js?v=20260805-commerce-1"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const context = window.HMPCommerce.readStatusContext();
@@ -878,15 +878,13 @@
       confirmedContent.hidden = !confirmed;
       amplification.hidden = !confirmed;
       retryStatus.hidden = !context || !['STATUS_TIMEOUT', 'UNAVAILABLE'].includes(state);
-      if (confirmed && context && !purchaseAnnounced) {
-        purchaseAnnounced = true;
-        const confirmation = {
-          registrationId: context.registration_id,
-          sessionCode: context.session_code
-        };
-        window.__hbConfirmedCommerce = confirmation;
-        window.dispatchEvent(new CustomEvent('hb:commerce-confirmed', {detail: confirmation}));
-      }
+    }
+
+    function announcePurchase(purchase) {
+      if (purchaseAnnounced || !window.HMPCommerce.validPaidPurchase(purchase)) return;
+      purchaseAnnounced = true;
+      window.__hbCanonicalPurchase = purchase;
+      window.dispatchEvent(new CustomEvent('hb:purchase-confirmed', {detail: purchase}));
     }
 
     function setLanguage(language) {
@@ -931,8 +929,9 @@
         }
         for (let attempt = 0; attempt < 30; attempt += 1) {
           try {
-            const result = await window.HMPCommerce.commerceStatus(context);
+            const result = await window.HMPCommerce.commerceStatusV2(context);
             renderState(result.state);
+            if (result.purchase) announcePurchase(result.purchase);
             if (result.state !== 'VERIFYING') return;
           } catch (error) {
             if (attempt >= 2) {
