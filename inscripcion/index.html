@@ -206,7 +206,7 @@
           <p class="form-intro" data-copy="es">Dejanos los datos que necesitamos para preparar tu entrada.</p><p class="form-intro" data-copy="en">Leave the details we need to prepare your entrance.</p>
           <form id="registrationForm">
             <input type="hidden" name="session" id="sessionInput" value="">
-            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-11">
+            <input type="hidden" name="eventCode" id="eventCodeInput" value="hmp-2026-08-09">
             <input type="hidden" name="sessionCode" id="sessionCodeInput" value="">
             <input type="hidden" name="locale" id="localeInput" value="es">
             <input type="hidden" name="registrationTermsVersion" value="registration-v4">
@@ -264,7 +264,7 @@
     /* Sólo fechas presentes en el catálogo coordinado pueden abrir checkout. */
     const registrationOpen=window.HMPCommerce.REGISTRATION_OPEN;
     one('#registrationClosed').hidden=registrationOpen;one('#registrationFlow').hidden=!registrationOpen;
-    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-11',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
+    const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-09',eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
     if(eventConfig){one('#eventCodeInput').value='hmp-'+eventConfig.date;one('#dateEs').textContent=eventConfig.label_es;one('#dateEn').textContent=eventConfig.label_en;all('[data-session]').forEach(button=>{const option=eventConfig.options?.[button.dataset.session];button.hidden=!option;button.disabled=!option;button.setAttribute('aria-disabled',String(!option));if(option){button.querySelector('.session-side b').textContent=option.time;button.querySelector('.session-side small').textContent=option.price}})}else{one('#eventCodeInput').value='';one('#dateEs').textContent='fecha aún no disponible';one('#dateEn').textContent='date not available yet';all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')})}
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;one('#registrationProgress')?.setAttribute('aria-label',next==='en'?'Registration progress':'Progreso de inscripción');all('[data-lang-button]').forEach(b=>{const active=b.dataset.langButton===next;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))})}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');

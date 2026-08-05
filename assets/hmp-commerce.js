@@ -2,7 +2,7 @@
   'use strict';
 
   const REGISTRATION_OPEN = true;
-  const REGISTRATION_BLOCKED_EVENTS = new Set(['hmp-2026-08-11']);
+  const REGISTRATION_BLOCKED_EVENTS = new Set();
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
   const IDEMPOTENCY_KEY = 'hb-registration-v4-idempotency-key';
   const STATUS_CONTEXT_KEY = 'hb-registration-v4-status-context';
@@ -41,10 +41,10 @@
         es: Object.freeze({ session_code: 'es-0830-cr', label: 'Español · 08:30 Costa Rica · US$20', time: '08:30', price: 'US$20' })
       })
     }),
-    'hmp-2026-08-11': Object.freeze({
-      date: '2026-08-11',
-      label_es: 'martes 11 de agosto',
-      label_en: 'Tuesday, August 11',
+    'hmp-2026-08-09': Object.freeze({
+      date: '2026-08-09',
+      label_es: 'domingo 9 de agosto',
+      label_en: 'Sunday, August 9',
       sessions: Object.freeze({
         'en-1600-cr': '8820853'
       }),

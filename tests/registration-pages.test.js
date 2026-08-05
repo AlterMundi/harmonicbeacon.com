@@ -22,7 +22,7 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page closes the incorrect August 11 route while August 9 is coordinated', () => {
+test('events page opens the confirmed August 8 and August 9 sessions', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
@@ -36,14 +36,14 @@ test('events page closes the incorrect August 11 route while August 9 is coordin
   assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
   assert.match(page, /Inscripción abierta/);
   assert.match(page, /Registration open/);
-  assert.match(page, /Actualizando inscripción/);
-  assert.match(page, /Registration update in progress/);
+  assert.match(page, /Inscripción abierta/);
+  assert.match(page, /Registration open/);
   assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
   assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
   assert.doesNotMatch(page, /2026-08-11/);
   assert.doesNotMatch(page, /Martes 11 de agosto|Tuesday, August 11/);
-  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=2026-08-09&amp;idioma=en"/);
-  assert.match(page, /data-event-date="2026-08-09" aria-disabled="true"/);
+  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-09&amp;idioma=en"/);
+  assert.doesNotMatch(page, /data-event-date="2026-08-09" aria-disabled="true"/);
   assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
   assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
   assert.match(page, /fecha y horario por confirmar/);
@@ -120,8 +120,8 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /buytickets\.at\/harmonicbeacon/);
   assert.match(page, /registrationEvent\(fecha\)/);
   assert.match(page, /if\(!eventAvailable\)/);
-  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-11'/);
-  assert.match(page, /value="hmp-2026-08-11"/);
+  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-09'/);
+  assert.match(page, /value="hmp-2026-08-09"/);
   assert.match(page, /eventConfig\.options\?\.\[button\.dataset\.session\]/);
   assert.match(page, /option\.session_code/);
   assert.doesNotMatch(page, /'2026-08-01':/);
