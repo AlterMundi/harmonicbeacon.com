@@ -841,6 +841,10 @@
     let purchaseAnnounced = false;
     let verificationRunning = false;
     let claimCompleted = false;
+    const retryableClaimErrors = new Set([
+      'commerce_claim_timeout',
+      'commerce_claim_provider_error'
+    ]);
 
     const messages = {
       es: {
@@ -922,9 +926,13 @@
           try {
             await window.HMPCommerce.commerceClaim(context, orderId);
             claimCompleted = true;
-          } catch (_) {
+          } catch (error) {
             // The webhook may still be arriving. Canonical status polling remains authoritative,
             // and a manual retry will attempt the claim again if it is still needed.
+            if (!retryableClaimErrors.has(error?.code)) {
+              renderState('REVIEW_REQUIRED');
+              return;
+            }
           }
         }
         for (let attempt = 0; attempt < 30; attempt += 1) {
