@@ -256,11 +256,11 @@ test('matches the stable registration catalog contract and rejects series ids', 
 test('supports only registration dates and sessions in the coordinated catalog', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.registrationEvent('2026-08-08').date, '2026-08-08');
-  assert.equal(api.registrationEvent('2026-08-09'), null);
+  assert.equal(api.registrationEvent('2026-08-09').date, '2026-08-09');
   assert.equal(api.registrationEvent('2026-08-01'), null);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'unknown'), false);
-  assert.equal(api.supportedRegistration('hmp-2026-08-09', 'en-1600-cr'), false);
+  assert.equal(api.supportedRegistration('hmp-2026-08-09', 'en-1600-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-09', 'es-0830-cr'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), false);
 });
