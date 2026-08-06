@@ -15,12 +15,12 @@
         }
       }
     },
-    "hmp-2026-08-11": {
+    "hmp-2026-08-09": {
       "sessions": {
         "en-1600-cr": {
           "ticket_tailor_event_id": "ev_8820853",
           "ticket_tailor_checkout_event_id": "8820853",
-          "scheduled_session_id": "20000000-0000-4000-8000-202608110001"
+          "scheduled_session_id": "20000000-0000-4000-8000-202608090001"
         }
       }
     }

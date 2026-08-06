@@ -36,8 +36,8 @@ test('events page closes the incorrect August 11 route while August 9 is coordin
   assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
   assert.match(page, /Inscripción abierta/);
   assert.match(page, /Registration open/);
-  assert.match(page, /Actualizando inscripción/);
-  assert.match(page, /Registration update in progress/);
+  assert.match(page, /Próximamente/);
+  assert.match(page, /Coming soon/);
   assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
   assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
   assert.doesNotMatch(page, /2026-08-11/);
@@ -103,7 +103,7 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /id="paymentButton"[^>]+form="registrationForm"/);
   assert.equal((page.match(/data-session="/g) || []).length, 2);
   assert.match(page, /data-session="en"/);
-  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Tuesday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?US\$50/);
+  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Sunday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?US\$50/);
   assert.match(page, /id="changeDetails"/);
   assert.match(page, /classList\.add\('is-session-choice'\)/);
   assert.match(page, /\.booking-panel\.is-session-choice \.form-zone\{display:none\}/);
@@ -120,9 +120,15 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /buytickets\.at\/harmonicbeacon/);
   assert.match(page, /registrationEvent\(fecha\)/);
   assert.match(page, /if\(!eventAvailable\)/);
-  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-11'/);
-  assert.match(page, /value="hmp-2026-08-11"/);
-  assert.match(page, /eventConfig\.options\?\.\[button\.dataset\.session\]/);
+  assert.match(page, /catalogEvent=window\.HMPCommerce\.CHECKOUTS\['hmp-'\+fecha\]/);
+  assert.match(page, /registrationClosed'\)\.hidden=eventAvailable/);
+  assert.match(page, /registrationFlow'\)\.hidden=!eventAvailable/);
+  assert.match(page, /fecha=params\.get\('fecha'\)\|\|'2026-08-09'/);
+  assert.match(page, /value="hmp-2026-08-09"/);
+  assert.match(page, /DOMINGO 9 DE AGOSTO/);
+  assert.match(page, /SUNDAY, AUGUST 9/);
+  assert.doesNotMatch(page, /MARTES 11 DE AGOSTO|TUESDAY, AUGUST 11/);
+  assert.match(page, /catalogEvent\.options\?\.\[button\.dataset\.session\]/);
   assert.match(page, /option\.session_code/);
   assert.doesNotMatch(page, /'2026-08-01':/);
   assert.doesNotMatch(page, /'2026-08-15':/);
