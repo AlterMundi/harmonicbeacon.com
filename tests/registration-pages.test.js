@@ -165,6 +165,15 @@ test('private LOGOS reuses registration, email verification and Ticket Tailor ch
   assert.match(confirmation, /if \(result\.purchase\) announcePurchase\(result\.purchase\)/);
 });
 
+test('an in-progress event warns the participant without blocking registration', () => {
+  const page = fs.readFileSync(path.join(__dirname, '..', 'inscripcion', 'index.html'), 'utf8');
+
+  assert.match(page, /id="eventInProgressNotice"[^>]*role="status"[^>]*hidden/);
+  assert.match(page, /Este evento ya está en curso\./);
+  assert.match(page, /This event is already in progress\./);
+  assert.match(page, /eventInProgress\('hmp-'\+fecha\)/);
+});
+
 test('confirmation starts neutral and unlocks content from canonical status', () => {
   const page = read('inscripcion/confirmacion/index.html');
   assert.match(page, /<title>Verificando pago · Harmonic Beacon<\/title>/);

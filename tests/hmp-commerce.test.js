@@ -288,6 +288,18 @@ test('supports only registration dates and sessions in the coordinated catalog',
   assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), false);
 });
 
+test('identifies an active event window without treating it as unavailable', () => {
+  const {api} = runtime(async () => {});
+  const start = Date.parse('2026-08-07T16:00:00-06:00');
+  const end = Date.parse('2026-08-07T20:00:00-06:00');
+
+  assert.equal(api.eventInProgress('hmp-logos-2026-08-07', start - 1), false);
+  assert.equal(api.eventInProgress('hmp-logos-2026-08-07', start), true);
+  assert.equal(api.eventInProgress('hmp-logos-2026-08-07', end - 1), true);
+  assert.equal(api.eventInProgress('hmp-logos-2026-08-07', end), false);
+  assert.equal(api.supportedRegistration('hmp-logos-2026-08-07', 'es-1600-cr'), true);
+});
+
 test('keeps the idempotency key when registration outcome is unknown', async () => {
   const {api, values} = runtime(async () => { throw new Error('network'); });
   await assert.rejects(api.register(payload), /network/);

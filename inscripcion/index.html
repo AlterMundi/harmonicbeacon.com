@@ -128,6 +128,8 @@
     .session-stage-actions{display:grid;gap:12px;max-width:560px;margin-top:28px}
     .session-stage-actions .cta{margin-top:0}
     .change-details{justify-self:center;border:0;color:var(--gold-light);background:transparent;cursor:pointer;font:13px/1.4 var(--display);text-decoration:underline;text-underline-offset:3px}
+    .event-in-progress{margin:0 0 18px;padding:14px 16px;border:1px solid rgba(255,203,105,.5);border-radius:10px;color:var(--cream);background:rgba(255,203,105,.09);font:13px/1.55 var(--display)}
+    .event-in-progress strong{color:var(--gold-light);font-weight:600}
     .session-zone h3,.form-zone h3{font-size:clamp(2rem,3vw,2.5rem)}
     .form-intro{color:var(--muted);font-size:17px}.timezone{color:var(--gold-light);font-size:13px;font-weight:600}
     .session{min-height:78px;border-color:rgba(244,238,226,.2)}.session:hover,.session.selected{border-color:var(--gold-light);background:rgba(201,162,78,.08);transform:none}.session.session-coming,.session.session-coming:hover{cursor:not-allowed;opacity:.68;border-color:rgba(244,238,226,.2);background:transparent;transform:none}
@@ -182,6 +184,7 @@
   <main id="top">
     <section class="booking booking-first wrap reveal" id="inscripcion">
       <div class="booking-head"><div><span class="section-tag"><span data-copy="es"><span id="bookingModeEs">INSCRIPCIÓN Y PAGO</span> · <span id="dateEs">DOMINGO 9 DE AGOSTO</span></span><span data-copy="en"><span id="bookingModeEn">REGISTRATION AND PAYMENT</span> · <span id="dateEn">SUNDAY, AUGUST 9</span></span></span><h2 data-copy="es">Completá tu inscripción</h2><h2 data-copy="en">Complete your registration</h2><p class="booking-summary" id="bookingSummaryEs" data-copy="es">Completá tus datos y elegí la sesión. Después confirmá tu correo con el código que te enviamos y pagá de forma segura en Ticket Tailor.</p><p class="booking-summary" id="bookingSummaryEn" data-copy="en">Complete your details and choose a session. Then confirm your email with the code we send and pay securely through Ticket Tailor.</p></div></div>
+      <div class="event-in-progress" id="eventInProgressNotice" role="status" hidden><span data-copy="es"><strong>Este evento ya está en curso.</strong> Estás obteniendo una entrada para ingresar ahora.</span><span data-copy="en"><strong>This event is already in progress.</strong> You are getting a ticket to join now.</span></div>
       <div class="booking-panel" id="registrationClosed">
         <div class="session-zone" style="grid-column:1/-1">
           <h3 data-copy="es">Inscripciones próximamente</h3><h3 data-copy="en">Registrations opening soon</h3>
@@ -258,13 +261,14 @@
   <footer class="wrap"><span>HARMONIC MYTH PROJECTION · 2026</span><a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a><span>ALTERMUNDI / HARMONIC BEACON</span></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="/assets/hmp-commerce.js?v=20260805-commerce-2"></script>
+  <script src="/assets/hmp-commerce.js?v=20260807-commerce-4"></script>
   <script>
     const one=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];let lang='es',session=null;
     /* Sólo fechas presentes en el catálogo coordinado pueden abrir checkout. */
     const registrationOpen=window.HMPCommerce.REGISTRATION_OPEN;
     const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-09',catalogEvent=window.HMPCommerce.CHECKOUTS['hmp-'+fecha],eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
     one('#registrationClosed').hidden=eventAvailable;one('#registrationFlow').hidden=!eventAvailable;
+    one('#eventInProgressNotice').hidden=!window.HMPCommerce.eventInProgress('hmp-'+fecha);
     function applyPrivateFreeCopy(){
       if(!catalogEvent?.free)return;
       document.documentElement.dataset.commerce='free';

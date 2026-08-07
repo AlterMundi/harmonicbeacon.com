@@ -56,6 +56,8 @@
       date: 'logos-2026-08-07',
       label_es: 'viernes 7 de agosto · LOGOS',
       label_en: 'Friday, August 7 · LOGOS',
+      starts_at: '2026-08-07T16:00:00-06:00',
+      ends_at: '2026-08-07T20:00:00-06:00',
       private: true,
       free: true,
       sessions: Object.freeze({
@@ -95,6 +97,20 @@
 
   function supportedRegistration(eventCode, sessionCode) {
     return REGISTRATION_OPEN && !REGISTRATION_BLOCKED_EVENTS.has(eventCode) && Boolean(CHECKOUTS[eventCode]?.sessions[sessionCode]);
+  }
+
+  function eventInProgress(eventCode, now = Date.now()) {
+    const event = CHECKOUTS[eventCode];
+    const observedAt = typeof now === 'number' ? now : Number.NaN;
+    const startsAt = Date.parse(event?.starts_at || '');
+    const endsAt = Date.parse(event?.ends_at || '');
+    return Boolean(
+      Number.isFinite(observedAt) &&
+      Number.isFinite(startsAt) &&
+      Number.isFinite(endsAt) &&
+      startsAt <= observedAt &&
+      observedAt < endsAt
+    );
   }
 
   function suggestedEmailCorrection(value) {
@@ -581,6 +597,7 @@
     commerceClaim,
     commerceStatus,
     commerceStatusV2,
+    eventInProgress,
     fetchWithTimeout,
     getOrCreateIdempotencyKey,
     mountCheckoutWidget,
