@@ -3,137 +3,325 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Por qué funciona el Beacon · Harmonic Beacon</title>
-<meta name="description" content="Por qué el Beacon funciona como promotor de salud: la explicación completa desde la Teoría de la Información Armónica (HIT) — consonancia dinámica, baja fricción relacional y recuperación de coherencia." />
+<title>Qué es el Beacon y por qué funciona · Harmonic Beacon</title>
+<meta name="description" content="Qué es Harmonic Beacon, cómo produce su campo armónico y cuál es la hipótesis que guía su investigación: consonancia dinámica, escucha situada y reorientación." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Harmonic Beacon" />
-<meta property="og:title" content="Por qué funciona el Beacon como promotor de salud" />
-<meta property="og:description" content="La explicación completa desde HIT: consonancia dinámica, baja fricción relacional y recuperación de coherencia." />
+<meta property="og:title" content="Qué es el Beacon y por qué funciona" />
+<meta property="og:description" content="Un dispositivo acústico experimental que sostiene un campo de consonancia dinámica. Qué hace, cómo se escucha y qué sabemos hasta ahora." />
 <meta name="theme-color" content="#16120D" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-<style>
-  html[data-active-lang="es"] [data-lang="en"]{ display:none !important; }
-  html[data-active-lang="en"] [data-lang="es"]{ display:none !important; }
-</style>
 <link rel="stylesheet" href="/assets/hb-brand.css" />
 
 <style>
-  .article-head{ padding-top:140px; }
-  .article-head h1{ font-size:clamp(2.05rem,4.3vw,3.3rem); margin-top:.9rem; line-height:1.08; max-width:20ch; }
-  .article-head .standfirst{ font-family:var(--font-serif); font-style:italic; font-size:clamp(1.08rem,1.8vw,1.35rem); color:var(--ink-800); line-height:1.5; max-width:48ch; margin-top:1.2rem; }
-  .notice{ margin-top:2rem; font-size:.86rem; color:var(--ink-500); letter-spacing:.02em; }
+  .article-head{ padding-top:clamp(132px,16vw,184px); padding-bottom:clamp(58px,9vw,104px); overflow:hidden; }
+  .article-head::after{ content:""; position:absolute; width:min(680px,88vw); aspect-ratio:1; right:-24%; top:-34%; border:1px solid rgba(201,162,78,.12); border-radius:50%; box-shadow:0 0 0 70px rgba(201,162,78,.025),0 0 0 140px rgba(201,162,78,.018); pointer-events:none; }
+  .article-head h1{ font-size:clamp(2.75rem,7.2vw,5.35rem); line-height:.96; max-width:13ch; margin-top:1.3rem; text-wrap:balance; }
+  .standfirst{ font-family:var(--font-serif); font-size:clamp(1.35rem,2.8vw,1.85rem); color:var(--ink-800); line-height:1.35; max-width:38ch; margin-top:1.65rem; text-wrap:balance; }
+  .lead-note{ max-width:62ch; margin-top:1.45rem; color:var(--ink-600); font-size:.95rem; line-height:1.75; }
 
-  .prose{ max-width:62ch; margin-top:1rem; }
-  .prose p{ color:var(--ink-800); font-size:1.08rem; line-height:1.85; margin-top:1.5rem; }
-  .prose p:first-child{ margin-top:0; }
-  .prose .turn{ font-family:var(--font-serif); font-style:italic; color:var(--gold); font-size:1.3rem; line-height:1.4; margin-top:2.4rem; }
-  .prose blockquote{ margin:2.4rem 0 0; padding:1.4rem 0 1.4rem 1.6rem; border-left:2px solid var(--gold); }
-  .prose blockquote p{ font-family:var(--font-serif); font-style:italic; color:var(--bone); font-size:1.28rem; line-height:1.55; margin:0; }
-  .prose h2{ font-size:clamp(1.45rem,2.7vw,1.95rem); margin-top:2.7rem; }
-  .back-cta{ margin-top:3.6rem; display:flex; flex-wrap:wrap; gap:.9rem; }
+  .section-intro{ max-width:760px; }
+  .section-intro h2{ font-size:clamp(2.15rem,4.7vw,3.5rem); margin-top:.85rem; text-wrap:balance; }
+  .section-intro > p{ margin-top:1.2rem; color:var(--ink-600); font-size:1.02rem; line-height:1.8; max-width:64ch; }
+  .definition{ margin-top:2rem; padding:clamp(1.5rem,4vw,2.7rem); border:1px solid var(--hair); border-radius:24px; background:linear-gradient(135deg,rgba(201,162,78,.075),rgba(244,238,226,.025)); }
+  .definition p{ font-family:var(--font-serif); color:var(--bone); font-size:clamp(1.48rem,3.2vw,2.15rem); line-height:1.32; max-width:37ch; }
+
+  .anatomy{ display:grid; grid-template-columns:repeat(3,1fr); margin-top:2.3rem; border-top:1px solid var(--hair-soft); border-bottom:1px solid var(--hair-soft); }
+  .anatomy article{ padding:2rem clamp(1rem,2.5vw,2rem) 2.25rem 0; }
+  .anatomy article + article{ border-left:1px solid var(--hair-soft); padding-left:clamp(1rem,2.5vw,2rem); }
+  .step{ display:block; color:var(--gold); font-family:var(--font-serif); font-size:1.05rem; font-style:italic; margin-bottom:.8rem; }
+  .anatomy h3{ font-size:clamp(1.35rem,2.3vw,1.65rem); }
+  .anatomy p{ margin-top:.75rem; color:var(--ink-600); font-size:.92rem; line-height:1.72; }
+
+  .mechanism{ background:linear-gradient(180deg,rgba(244,238,226,.018),rgba(201,162,78,.035),rgba(244,238,226,.012)); border-block:1px solid var(--hair-soft); }
+  .sequence{ margin-top:2.5rem; display:grid; grid-template-columns:1fr 42px 1fr 42px 1fr; align-items:stretch; }
+  .sequence-card{ padding:clamp(1.3rem,3vw,2rem); border:1px solid var(--hair-soft); border-radius:18px; background:rgba(22,18,13,.58); }
+  .sequence-card h3{ font-size:clamp(1.3rem,2.4vw,1.65rem); }
+  .sequence-card p{ color:var(--ink-600); margin-top:.75rem; font-size:.92rem; line-height:1.72; }
+  .arrow{ display:grid; place-items:center; color:var(--gold); font-family:var(--font-serif); font-size:1.7rem; opacity:.65; }
+  .formula{ margin-top:2.5rem; padding-left:1.5rem; border-left:2px solid var(--gold); }
+  .formula p{ font-family:var(--font-serif); font-style:italic; color:var(--bone); font-size:clamp(1.35rem,2.7vw,1.8rem); line-height:1.45; max-width:45ch; }
+
+  .full-explanation{ scroll-margin-top:92px; border-bottom:1px solid var(--hair-soft); }
+  .essay-head{ max-width:820px; }
+  .essay-head h2{ font-size:clamp(2.25rem,5.2vw,3.8rem); margin-top:.85rem; text-wrap:balance; }
+  .essay-head .source-note{ color:var(--ink-600); margin-top:1.15rem; max-width:62ch; line-height:1.75; }
+  .essay{ max-width:720px; margin-top:clamp(2.3rem,5vw,4rem); }
+  .essay p{ color:var(--ink-800); font-size:clamp(1.02rem,1.5vw,1.1rem); line-height:1.88; margin-top:1.45rem; }
+  .essay p:first-child{ margin-top:0; }
+  .essay .turn{ font-family:var(--font-serif); font-style:italic; color:var(--gold-2); font-size:clamp(1.35rem,2.4vw,1.65rem); line-height:1.45; margin-top:2.5rem; }
+  .essay blockquote{ margin:2.3rem 0 2.5rem; padding:1.25rem 0 1.25rem 1.5rem; border-left:2px solid var(--gold); }
+  .essay blockquote p{ margin:0; color:var(--bone); font-family:var(--font-serif); font-style:italic; font-size:clamp(1.3rem,2.5vw,1.68rem); line-height:1.5; }
+  .essay h3{ font-size:clamp(1.7rem,3.5vw,2.35rem); margin-top:3.2rem; }
+
+  .two-col{ display:grid; grid-template-columns:minmax(0,1.05fr) minmax(260px,.75fr); gap:clamp(2rem,7vw,6rem); align-items:start; }
+  .body-copy p{ color:var(--ink-800); font-size:1.03rem; line-height:1.84; margin-top:1.25rem; }
+  .body-copy p:first-child{ margin-top:0; }
+  .side-card{ padding:1.6rem; border:1px solid var(--hair-soft); border-radius:18px; background:var(--surface); }
+  .side-card h3{ font-size:1.4rem; }
+  .side-card ul{ list-style:none; margin:1rem 0 0; padding:0; }
+  .side-card li{ position:relative; padding:.75rem 0 .75rem 1.2rem; border-top:1px solid var(--hair-soft); color:var(--ink-600); font-size:.9rem; line-height:1.6; }
+  .side-card li::before{ content:"·"; position:absolute; left:.15rem; color:var(--gold); }
+
+  .status-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:2rem; }
+  .status-card{ padding:clamp(1.35rem,3vw,2rem); border:1px solid var(--hair-soft); border-radius:18px; }
+  .status-card h3{ color:var(--gold-2); font-size:1.45rem; }
+  .status-card p{ color:var(--ink-600); margin-top:.75rem; font-size:.94rem; line-height:1.72; }
+  .status-card.boundary{ background:rgba(201,162,78,.045); }
+
+  details{ margin-top:2rem; border-top:1px solid var(--hair-soft); border-bottom:1px solid var(--hair-soft); }
+  summary{ cursor:pointer; padding:1.2rem 0; color:var(--bone); font-family:var(--font-serif); font-size:1.3rem; list-style:none; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; float:right; color:var(--gold); font-family:var(--font-sans); font-weight:300; }
+  details[open] summary::after{ content:"−"; }
+  details .detail-copy{ padding:0 0 1.5rem; max-width:66ch; color:var(--ink-600); line-height:1.8; }
+  .back-cta{ margin-top:3rem; display:flex; flex-wrap:wrap; gap:.9rem; }
+
+  @media (max-width:760px){
+    .anatomy,.status-grid{ grid-template-columns:1fr; }
+    .anatomy article + article{ border-left:0; border-top:1px solid var(--hair-soft); padding-left:0; }
+    .sequence{ grid-template-columns:1fr; gap:.7rem; }
+    .arrow{ height:24px; transform:rotate(90deg); }
+    .two-col{ grid-template-columns:1fr; }
+  }
 </style>
-  <script src="/assets/meta-pixel.js" defer></script>
+<script src="/assets/meta-pixel.js" defer></script>
 </head>
 
 <body data-page="porque">
 <div class="grain" style="position:fixed; inset:0; z-index:60; pointer-events:none;" aria-hidden="true"></div>
 
 <header class="section article-head">
-  <div class="wrap wrap-narrow">
-    <span class="eyebrow reveal"><a href="/" style="color:var(--gold);">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="en">Why it works</span><span data-lang="es">Por qué funciona</span></span>
-    <h1 class="reveal" data-d="1"><span data-lang="en">Why the Beacon works as a health promoter</span><span data-lang="es">Por qué funciona el Beacon como promotor de salud</span></h1>
+  <div class="wrap">
+    <span class="eyebrow reveal"><a href="/" style="color:var(--gold);">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="en">Field notes</span><span data-lang="es">Notas de campo</span></span>
+    <h1 class="reveal" data-d="1">
+      <span data-lang="en">What the Beacon is—and why it may work</span>
+      <span data-lang="es">Qué es el Beacon y por qué puede funcionar</span>
+    </h1>
     <p class="standfirst reveal" data-d="2">
-      <span data-lang="en">The Beacon offers a field of dynamic consonance where a living system can lower its corrective load, recover coherence, and stay open to variation — neither rigid nor scattered.</span>
-      <span data-lang="es">El Beacon ofrece un campo de consonancia dinámica donde el sistema vivo puede reducir carga correctiva, recuperar coherencia y permanecer abierto a variación sin caer ni en rigidez ni en dispersión.</span>
+      <span data-lang="en">Not a healing frequency. Not background music. A living harmonic field designed to be listened to with the whole body.</span>
+      <span data-lang="es">No es una frecuencia sanadora. No es música de fondo. Es un campo armónico vivo, diseñado para ser escuchado con todo el cuerpo.</span>
     </p>
-    <p class="notice reveal" data-d="2"><span data-lang="en">The full explanation below is in Spanish — its original language.</span><span data-lang="es">Texto completo a continuación.</span></p>
+    <p class="lead-note reveal" data-d="3">
+      <span data-lang="en">This page separates the device, our working hypothesis, and what has actually been observed. That distinction is part of the research.</span>
+      <span data-lang="es">Esta página distingue el dispositivo, nuestra hipótesis de trabajo y lo efectivamente observado. Esa diferencia es parte de la investigación.</span>
+    </p>
   </div>
 </header>
 
-<article class="section" style="padding-top:0;">
-  <div class="wrap wrap-narrow prose reveal">
+<main>
+  <section class="section" id="que-es">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <span class="eyebrow"><span data-lang="en">The device</span><span data-lang="es">El dispositivo</span></span>
+        <h2><span data-lang="en">What is Harmonic Beacon?</span><span data-lang="es">¿Qué es Harmonic Beacon?</span></h2>
+      </div>
 
-    <p>El Beacon funciona como promotor de salud porque ofrece un campo de consonancia dinámica donde el sistema vivo puede reducir carga correctiva, recuperar coherencia y permanecer abierto a variación sin caer ni en rigidez ni en dispersión.</p>
+      <div class="definition reveal" data-d="1">
+        <p data-lang="en">An experimental acoustic device designed to sustain a physically stable harmonic field: a resonant weave of partials, beats, interference, and proportional relationships that takes shape in a listening situation.</p>
+        <p data-lang="es">Un dispositivo acústico experimental diseñado para sostener un campo armónico físicamente estable: una trama resonante de parciales, batimentos, interferencias y relaciones proporcionales que toma forma en una situación de escucha.</p>
+      </div>
 
-    <p>La frase madre sería:</p>
-
-    <blockquote><p>El Beacon promueve salud porque crea una situación de baja fricción relacional: un campo armónico basado en la física natural de la armonía que facilita que cuerpo, atención y entorno entren en una forma de coherencia flexible, con menor costo de corrección y mayor capacidad de reorientación.</p></blockquote>
-
-    <p>La diferencia es importante. No se trata de decir que el Beacon "relaja" porque suena lindo. Tampoco de decir que una frecuencia cura. En HIT, la consonancia no es una cualidad estética simple ni una propiedad mágica de un intervalo. La consonancia es una función relacional: aparece cuando una proporción, un timbre, una materia resonante, un medio, un cuerpo receptor y un contexto logran organizarse en una relación de bajo conflicto. Consonante es aquello que puede sostener coordinación sin exigirle al sistema una corrección permanente.</p>
-
-    <p class="turn">Ahí entra la salud.</p>
-
-    <p>Un sistema vivo no está sano porque esté inmóvil, perfectamente ordenado o sin tensión. Eso sería una imagen muerta de la salud. Un sistema vivo está sano cuando puede sostener organización en medio de variación: responder, adaptarse, volver, diferenciar, descansar, activarse, integrar. Por eso HIT insiste en que la armonía natural no es rigidez máxima. Es una zona óptima entre orden y variabilidad. Demasiado desorden produce ruido, sobrecarga, pérdida de orientación. Demasiado orden produce congelamiento, empobrecimiento, muerte dinámica. La salud está más cerca de la coherencia flexible que del equilibrio perfecto.</p>
-
-    <p class="turn">Beacon trabaja justamente ahí.</p>
-
-    <p>Cuando el Beacon sostiene un campo armónico, no emite simplemente un sonido. Mantiene activa una trama de parciales, batimentos, interferencias y relaciones proporcionales. Ese campo no es plano: tiene densidad, recurrencia, microvariación, zonas de estabilidad, zonas de tensión, zonas de reorganización. El cuerpo no recibe un "mensaje"; entra en acoplamiento con una ecología acústica. La sala, la fuente resonante, el timbre, la duración, la atención y el cuerpo forman una misma situación.</p>
-
-    <p>En términos de HIT, esa situación puede funcionar como una cuenca de baja pérdida. No porque anule el gasto energético, sino porque reduce gasto correctivo innecesario. Un campo armónicamente coherente ofrece regularidades que el sistema puede anticipar, seguir y habitar. Si un entorno es caótico, saturado o mal diferenciado, el cuerpo tiene que gastar más en filtrar, defender, interpretar, corregir. Si un entorno es demasiado pobre o repetitivo, deja de ofrecer diferencia útil. El Beacon apunta a una tercera zona: suficiente recurrencia para que el sistema descanse en una estructura, suficiente variación para que siga habiendo percepción, presencia y vida.</p>
-
-    <p>Esto vuelve más precisa la idea de "promoción de salud". El Beacon no promueve salud por intervenir clínicamente sobre una patología. La promueve porque crea condiciones de regulación. Y regular no significa simplemente bajar intensidad. Regular significa poder encontrar una relación más habitable entre excitación y reposo, atención y entrega, cuerpo y entorno, estabilidad y cambio. En esa clave, el descanso que aparece en una sesión no es solo "relajación": puede leerse como una disminución del esfuerzo de sostenerse en un campo desorganizado.</p>
-
-    <p>La salud, vista desde HIT, tiene mucho que ver con la capacidad de recuperar consonancia.</p>
-
-    <p>No consonancia como música agradable, sino consonancia como compatibilidad estructural. Un sistema está más cerca de la salud cuando puede volver a relaciones donde sus partes no se estorban todo el tiempo. Respiración, tono muscular, atención, imaginación, afecto y percepción no tienen que volverse idénticos ni perfectamente sincronizados. Tienen que encontrar una relación suficientemente coherente como para que la experiencia pueda continuar sin exceso de fricción. El Beacon ofrece una referencia externa, física y sostenida para esa reorientación.</p>
-
-    <p>Por eso también importa que el Beacon esté basado en armonía natural y no en 12-TET como criterio rector. El temperamento igual es una tecnología musical extraordinaria, pero redistribuye las relaciones para ganar movilidad compositiva. El Beacon busca otra cosa: acercarse a los modos en que un cuerpo resonante, una sala y una escucha situada pueden producir coherencia desde armónicos naturales. La afinación no apunta a "la nota correcta" en abstracto. Apunta al punto donde el campo se vuelve más coherente, más habitable, más legible. Esa es una diferencia técnica y filosófica central.</p>
-
-    <p>El capítulo de consonancia también permite decir algo más fuerte: el Beacon no busca imponer armonía al cuerpo, sino ofrecer un campo con el cual el cuerpo pueda acoplarse. Esa distinción evita la fantasía de transmisión. En una lectura enactiva, un organismo no recibe información como si fuera un canal pasivo. Es perturbado por el entorno, y responde según su propia estructura, historia y estado. Por eso una misma sesión puede producir descanso, emoción, resistencia, imágenes, silencio, incomodidad o presencia. Esa variabilidad no es un defecto del Beacon. Es la señal de que el campo no funciona como orden externa impuesta, sino como condición de acoplamiento.</p>
-
-    <p class="turn">Ahí aparece la función de promoción de salud: el Beacon ofrece una perturbación ordenada.</p>
-
-    <p>No una perturbación caótica, no una instrucción verbal, no una sugestión simbólica, no una música narrativa. Una perturbación armónicamente organizada. El cuerpo puede encontrar allí una referencia para reorganizarse sin ser forzado a una forma única. En términos simples: el Beacon no le dice al sistema qué tiene que hacer; le ofrece una situación donde reorganizarse cuesta menos.</p>
-
-    <p>La noción de entropía ayuda a afinar esto. HIT no propone que la salud sea entropía cero. Entropía cero sería inmovilidad, cierre, muerte dinámica. Tampoco propone que cualquier aumento de variabilidad sea saludable. Lo que interesa es una reducción de entropía efectiva: que el sistema deje de estar sometido a tanta indeterminación inútil, tanta corrección permanente, tanta dispersión sin forma. El Beacon puede reducir esa indeterminación ofreciendo recurrencias estables. Pero esas recurrencias no clausuran la experiencia. La mantienen abierta dentro de un campo más legible.</p>
-
-    <p class="turn">Por eso la mejor imagen no es "calmar". Es "reorientar".</p>
-
-    <p>Calmar puede ser un efecto. Pero la operación más profunda es producir una referencia de orientación. En el lenguaje de HIT, la consonancia puede funcionar como un sentido: una capacidad del sistema para detectar configuraciones donde la relación entre sus partes y el entorno se vuelve menos conflictiva. El Beacon pone esa posibilidad en escena. Hace físicamente disponible un campo donde la persona puede sentir qué cambia cuando el entorno deja de ser una suma de estímulos y se vuelve una organización habitable.</p>
-
-    <p>También hay una dimensión de activación. Si solo habláramos de estabilidad, el Beacon quedaría reducido a reposo. Pero HIT distingue almacenamiento, activación y recuperación. Las relaciones recurrentes estabilizan; ciertas perturbaciones estructuradas pueden activar o hacer legible lo que estaba latente. En una experiencia Beacon, esto puede traducirse en algo muy concreto: a veces el campo no solo descansa, también hace aparecer material. Imágenes, recuerdos, tensiones, melodías percibidas, asociaciones, emociones o resistencias pueden volverse más disponibles. No porque el Beacon las "contenga", sino porque el campo altera las condiciones de legibilidad de la experiencia.</p>
-
-    <p>Eso conecta con la pareidolia armónica. En un campo suficientemente estructurado y suficientemente abierto, la percepción empieza a organizar figuras. Voces, melodías, coros, texturas, escenas internas. La lectura débil diría: "la gente imagina cosas". La lectura más interesante de HIT diría: el sistema perceptivo busca organización en un campo ambiguo pero no arbitrario. La pareidolia armónica no prueba por sí misma un mecanismo terapéutico, pero muestra que el campo Beacon no es perceptivamente neutro. Produce condiciones donde el organismo interpreta, completa, reconoce y organiza.</p>
-
-    <p>En promoción de salud, eso importa porque la salud no es solo fisiológica. También es orientación, sentido, capacidad de metabolizar experiencia. Un campo que favorece presencia corporal, reducción de fricción, escucha sostenida y aparición de material integrable puede operar como infraestructura de salud aunque no sea tratamiento médico. Es promotor de salud porque fortalece condiciones previas a muchas formas de elaboración: poder estar, poder sentir, poder escuchar, poder permanecer, poder volver.</p>
-
-    <p>Si lo dijera en una fórmula más completa:</p>
-
-    <blockquote><p>El Beacon funciona como promotor de salud porque sostiene una ecología acústica de consonancia dinámica. Esa ecología reduce carga correctiva, ofrece recurrencia sin rigidez, preserva variación sin dispersión, facilita acoplamiento entre cuerpo y entorno, y abre una zona de orientación donde la experiencia puede descansar, reorganizarse o volverse más legible.</p></blockquote>
-
-    <p>Y si lo dijera en una versión más simple, para alguien externo:</p>
-
-    <blockquote><p>El Beacon crea un campo sonoro vivo, basado en relaciones armónicas naturales. Ese campo le da al cuerpo una referencia estable pero no rígida. Muchas personas, al entrar en esa referencia, pueden descansar, regular la atención, percibir mejor el cuerpo y ordenar algo de lo que traían disperso. Por eso lo pensamos como promotor de salud: no porque cure, sino porque crea condiciones favorables para que el sistema recupere coherencia.</p></blockquote>
-
-    <p>La parte más importante, para mí, es no venderlo como "efecto sonoro" sino como "condición de acoplamiento". Beacon funciona cuando el campo se vuelve habitable. Y se vuelve habitable porque organiza el espacio en una relación de baja fricción: no elimina la diferencia, no apaga la vida, no fuerza una calma artificial. Sostiene una forma de orden suficientemente viva como para que el cuerpo pueda entrar en relación con ella.</p>
-
-    <p>Esa es probablemente la mejor explicación HIT de por qué el Beacon puede funcionar como promotor de salud: porque la salud, en este marco, no es ausencia de movimiento, sino recuperación de una coherencia dinámica con bajo costo de sostén.</p>
-
-    <h2>Respuesta resumida</h2>
-
-    <p>El Beacon funciona como promotor de salud porque crea un campo armónico basado en la física natural de la armonía que el cuerpo puede habitar con menor fricción.</p>
-
-    <p>Según HIT, la consonancia no es solo "sonar agradable": es una relación dinámica donde un sistema encuentra estabilidad sin volverse rígido. El Beacon sostiene esa zona: ofrece recurrencia, proporción y coherencia, pero conserva variación suficiente para que haya atención, percepción y adaptación.</p>
-
-    <p>Por eso puede favorecer descanso, presencia corporal, regulación atencional e integración. No porque una frecuencia cure, sino porque el campo reduce carga correctiva: el cuerpo no tiene que defenderse, filtrar o reorganizar estímulos dispersos todo el tiempo, y puede volver a una forma más coherente de estar.</p>
-
-    <p>En fórmula corta:</p>
-
-    <blockquote><p>Beacon promueve salud porque ofrece una ecología acústica de consonancia dinámica: orden sin rigidez, variación sin caos, y una referencia armónica que ayuda al cuerpo a recuperar coherencia.</p></blockquote>
-
-    <div class="back-cta">
-      <a class="btn btn-primary" href="/#trabajo"><span data-lang="en">Our work</span><span data-lang="es">Nuestro trabajo</span></a>
-      <a class="btn btn-ghost" href="https://hit.altermundi.net/" target="_blank" rel="noopener"><span data-lang="en">Read the HIT book</span><span data-lang="es">Leer el libro HIT</span></a>
+      <div class="anatomy reveal" data-d="2">
+        <article>
+          <span class="step">01</span>
+          <h3><span data-lang="en">A resonant source</span><span data-lang="es">Una fuente resonante</span></h3>
+          <p><span data-lang="en">A string and resonant body—or another Beacon architecture—are continuously excited to keep the field present over time.</span><span data-lang="es">Una cuerda y un cuerpo resonante —u otra arquitectura Beacon— reciben excitación continua para mantener el campo presente en el tiempo.</span></p>
+        </article>
+        <article>
+          <span class="step">02</span>
+          <h3><span data-lang="en">Harmonic relationships</span><span data-lang="es">Relaciones armónicas</span></h3>
+          <p><span data-lang="en">Sound is the physical medium. The design lies in the ratios between tones—not in the supposed power of an isolated frequency.</span><span data-lang="es">El sonido es el soporte físico. El diseño está en las proporciones entre tonos, no en el supuesto poder de una frecuencia aislada.</span></p>
+        </article>
+        <article>
+          <span class="step">03</span>
+          <h3><span data-lang="en">Situated listening</span><span data-lang="es">Escucha situada</span></h3>
+          <p><span data-lang="en">Source, room, body, duration, and attention form one situation. The Beacon is the field together with the conditions that make it perceptible.</span><span data-lang="es">Fuente, espacio, cuerpo, duración y atención forman una sola situación. El Beacon es el campo junto con las condiciones que permiten percibirlo.</span></p>
+        </article>
+      </div>
     </div>
+  </section>
 
-  </div>
-</article>
+  <section class="section mechanism" id="como-funciona">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <span class="eyebrow"><span data-lang="en">The working hypothesis</span><span data-lang="es">La hipótesis de trabajo</span></span>
+        <h2><span data-lang="en">Why might it work?</span><span data-lang="es">¿Por qué puede funcionar?</span></h2>
+        <p><span data-lang="en">Harmonic Information Theory proposes that consonance is not simply “pleasant sound,” but a relational condition: enough order to provide orientation, enough variation to remain alive.</span><span data-lang="es">La Teoría de la Información Armónica propone que la consonancia no es simplemente “sonar agradable”, sino una condición relacional: suficiente orden para ofrecer orientación y suficiente variación para seguir viva.</span></p>
+      </div>
+
+      <div class="sequence reveal" data-d="1" aria-label="Beacon working hypothesis">
+        <article class="sequence-card">
+          <h3><span data-lang="en">Dynamic consonance</span><span data-lang="es">Consonancia dinámica</span></h3>
+          <p><span data-lang="en">The field sustains recurrence, proportion, microvariation, and interference without becoming static or chaotic.</span><span data-lang="es">El campo sostiene recurrencia, proporción, microvariación e interferencia sin volverse estático ni caótico.</span></p>
+        </article>
+        <div class="arrow" aria-hidden="true">→</div>
+        <article class="sequence-card">
+          <h3><span data-lang="en">A habitable reference</span><span data-lang="es">Una referencia habitable</span></h3>
+          <p><span data-lang="en">A structured environment may demand less constant filtering and correction while remaining perceptually open.</span><span data-lang="es">Un entorno estructurado puede exigir menos filtrado y corrección constantes, sin dejar de estar perceptivamente abierto.</span></p>
+        </article>
+        <div class="arrow" aria-hidden="true">→</div>
+        <article class="sequence-card">
+          <h3><span data-lang="en">Reorientation</span><span data-lang="es">Reorientación</span></h3>
+          <p><span data-lang="en">The listener does not receive an instruction. Each body couples with the field according to its own state, history, and sensitivity.</span><span data-lang="es">Quien escucha no recibe una instrucción. Cada cuerpo se acopla al campo según su propio estado, historia y sensibilidad.</span></p>
+        </article>
+      </div>
+
+      <blockquote class="formula reveal" data-d="2">
+        <p data-lang="en">The Beacon does not tell the system what to do. It offers a situation in which reorientation may require less effort.</p>
+        <p data-lang="es">El Beacon no le dice al sistema qué hacer. Ofrece una situación en la que reorientarse puede requerir menos esfuerzo.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section full-explanation" id="explicacion-completa">
+    <div class="wrap">
+      <header class="essay-head reveal">
+        <span class="eyebrow"><span data-lang="en">Complete HIT framework</span><span data-lang="es">Marco HIT completo</span></span>
+        <h2><span data-lang="en">Why the Beacon works as a health promoter</span><span data-lang="es">Por qué funciona el Beacon como promotor de salud</span></h2>
+        <p class="source-note">
+          <span data-lang="en">Mariano's complete original explanation is presented below in Spanish, preserving its conceptual sequence and wording.</span>
+          <span data-lang="es">A continuación presentamos la explicación completa de Mariano, conservando su secuencia conceptual y su formulación original.</span>
+        </p>
+      </header>
+
+      <article class="essay reveal" data-d="1" lang="es">
+        <p>El Beacon funciona como promotor de salud porque ofrece un campo de consonancia dinámica donde el sistema vivo puede reducir carga correctiva, recuperar coherencia y permanecer abierto a variación sin caer ni en rigidez ni en dispersión.</p>
+
+        <p>La frase madre sería:</p>
+
+        <blockquote><p>El Beacon promueve salud porque crea una situación de baja fricción relacional: un campo armónico basado en la física natural de la armonía que facilita que cuerpo, atención y entorno entren en una forma de coherencia flexible, con menor costo de corrección y mayor capacidad de reorientación.</p></blockquote>
+
+        <p>La diferencia es importante. No se trata de decir que el Beacon “relaja” porque suena lindo. Tampoco de decir que una frecuencia cura. En HIT, la consonancia no es una cualidad estética simple ni una propiedad mágica de un intervalo. La consonancia es una función relacional: aparece cuando una proporción, un timbre, una materia resonante, un medio, un cuerpo receptor y un contexto logran organizarse en una relación de bajo conflicto. Consonante es aquello que puede sostener coordinación sin exigirle al sistema una corrección permanente.</p>
+
+        <p class="turn">Ahí entra la salud.</p>
+
+        <p>Un sistema vivo no está sano porque esté inmóvil, perfectamente ordenado o sin tensión. Eso sería una imagen muerta de la salud. Un sistema vivo está sano cuando puede sostener organización en medio de variación: responder, adaptarse, volver, diferenciar, descansar, activarse, integrar. Por eso HIT insiste en que la armonía natural no es rigidez máxima. Es una zona óptima entre orden y variabilidad. Demasiado desorden produce ruido, sobrecarga, pérdida de orientación. Demasiado orden produce congelamiento, empobrecimiento, muerte dinámica. La salud está más cerca de la coherencia flexible que del equilibrio perfecto.</p>
+
+        <p class="turn">Beacon trabaja justamente ahí.</p>
+
+        <p>Cuando el Beacon sostiene un campo armónico, no emite simplemente un sonido. Mantiene activa una trama de parciales, batimentos, interferencias y relaciones proporcionales. Ese campo no es plano: tiene densidad, recurrencia, microvariación, zonas de estabilidad, zonas de tensión, zonas de reorganización. El cuerpo no recibe un “mensaje”; entra en acoplamiento con una ecología acústica. La sala, la fuente resonante, el timbre, la duración, la atención y el cuerpo forman una misma situación.</p>
+
+        <p>En términos de HIT, esa situación puede funcionar como una cuenca de baja pérdida. No porque anule el gasto energético, sino porque reduce gasto correctivo innecesario. Un campo armónicamente coherente ofrece regularidades que el sistema puede anticipar, seguir y habitar. Si un entorno es caótico, saturado o mal diferenciado, el cuerpo tiene que gastar más en filtrar, defender, interpretar, corregir. Si un entorno es demasiado pobre o repetitivo, deja de ofrecer diferencia útil. El Beacon apunta a una tercera zona: suficiente recurrencia para que el sistema descanse en una estructura, suficiente variación para que siga habiendo percepción, presencia y vida.</p>
+
+        <p>Esto vuelve más precisa la idea de “promoción de salud”. El Beacon no promueve salud por intervenir clínicamente sobre una patología. La promueve porque crea condiciones de regulación. Y regular no significa simplemente bajar intensidad. Regular significa poder encontrar una relación más habitable entre excitación y reposo, atención y entrega, cuerpo y entorno, estabilidad y cambio. En esa clave, el descanso que aparece en una sesión no es solo “relajación”: puede leerse como una disminución del esfuerzo de sostenerse en un campo desorganizado.</p>
+
+        <p>La salud, vista desde HIT, tiene mucho que ver con la capacidad de recuperar consonancia.</p>
+
+        <p>No consonancia como música agradable, sino consonancia como compatibilidad estructural. Un sistema está más cerca de la salud cuando puede volver a relaciones donde sus partes no se estorban todo el tiempo. Respiración, tono muscular, atención, imaginación, afecto y percepción no tienen que volverse idénticos ni perfectamente sincronizados. Tienen que encontrar una relación suficientemente coherente como para que la experiencia pueda continuar sin exceso de fricción. El Beacon ofrece una referencia externa, física y sostenida para esa reorientación.</p>
+
+        <p>Por eso también importa que el Beacon esté basado en armonía natural y no en 12-TET como criterio rector. El temperamento igual es una tecnología musical extraordinaria, pero redistribuye las relaciones para ganar movilidad compositiva. El Beacon busca otra cosa: acercarse a los modos en que un cuerpo resonante, una sala y una escucha situada pueden producir coherencia desde armónicos naturales. La afinación no apunta a “la nota correcta” en abstracto. Apunta al punto donde el campo se vuelve más coherente, más habitable, más legible. Esa es una diferencia técnica y filosófica central.</p>
+
+        <p>El capítulo de consonancia también permite decir algo más fuerte: el Beacon no busca imponer armonía al cuerpo, sino ofrecer un campo con el cual el cuerpo pueda acoplarse. Esa distinción evita la fantasía de transmisión. En una lectura enactiva, un organismo no recibe información como si fuera un canal pasivo. Es perturbado por el entorno, y responde según su propia estructura, historia y estado. Por eso una misma sesión puede producir descanso, emoción, resistencia, imágenes, silencio, incomodidad o presencia. Esa variabilidad no es un defecto del Beacon. Es la señal de que el campo no funciona como orden externa impuesta, sino como condición de acoplamiento.</p>
+
+        <p class="turn">Ahí aparece la función de promoción de salud: el Beacon ofrece una perturbación ordenada.</p>
+
+        <p>No una perturbación caótica, no una instrucción verbal, no una sugestión simbólica, no una música narrativa. Una perturbación armónicamente organizada. El cuerpo puede encontrar allí una referencia para reorganizarse sin ser forzado a una forma única. En términos simples: el Beacon no le dice al sistema qué tiene que hacer; le ofrece una situación donde reorganizarse cuesta menos.</p>
+
+        <p>La noción de entropía ayuda a afinar esto. HIT no propone que la salud sea entropía cero. Entropía cero sería inmovilidad, cierre, muerte dinámica. Tampoco propone que cualquier aumento de variabilidad sea saludable. Lo que interesa es una reducción de entropía efectiva: que el sistema deje de estar sometido a tanta indeterminación inútil, tanta corrección permanente, tanta dispersión sin forma. El Beacon puede reducir esa indeterminación ofreciendo recurrencias estables. Pero esas recurrencias no clausuran la experiencia. La mantienen abierta dentro de un campo más legible.</p>
+
+        <p class="turn">Por eso la mejor imagen no es “calmar”. Es “reorientar”.</p>
+
+        <p>Calmar puede ser un efecto. Pero la operación más profunda es producir una referencia de orientación. En el lenguaje de HIT, la consonancia puede funcionar como un sentido: una capacidad del sistema para detectar configuraciones donde la relación entre sus partes y el entorno se vuelve menos conflictiva. El Beacon pone esa posibilidad en escena. Hace físicamente disponible un campo donde la persona puede sentir qué cambia cuando el entorno deja de ser una suma de estímulos y se vuelve una organización habitable.</p>
+
+        <p>También hay una dimensión de activación. Si solo habláramos de estabilidad, el Beacon quedaría reducido a reposo. Pero HIT distingue almacenamiento, activación y recuperación. Las relaciones recurrentes estabilizan; ciertas perturbaciones estructuradas pueden activar o hacer legible lo que estaba latente. En una experiencia Beacon, esto puede traducirse en algo muy concreto: a veces el campo no solo descansa, también hace aparecer material. Imágenes, recuerdos, tensiones, melodías percibidas, asociaciones, emociones o resistencias pueden volverse más disponibles. No porque el Beacon las “contenga”, sino porque el campo altera las condiciones de legibilidad de la experiencia.</p>
+
+        <p>Eso conecta con la pareidolia armónica. En un campo suficientemente estructurado y suficientemente abierto, la percepción empieza a organizar figuras. Voces, melodías, coros, texturas, escenas internas. La lectura débil diría: “la gente imagina cosas”. La lectura más interesante de HIT diría: el sistema perceptivo busca organización en un campo ambiguo pero no arbitrario. La pareidolia armónica no prueba por sí misma un mecanismo terapéutico, pero muestra que el campo Beacon no es perceptivamente neutro. Produce condiciones donde el organismo interpreta, completa, reconoce y organiza.</p>
+
+        <p>En promoción de salud, eso importa porque la salud no es solo fisiológica. También es orientación, sentido, capacidad de metabolizar experiencia. Un campo que favorece presencia corporal, reducción de fricción, escucha sostenida y aparición de material integrable puede operar como infraestructura de salud aunque no sea tratamiento médico. Es promotor de salud porque fortalece condiciones previas a muchas formas de elaboración: poder estar, poder sentir, poder escuchar, poder permanecer, poder volver.</p>
+
+        <p>Si lo dijera en una fórmula más completa:</p>
+
+        <blockquote><p>El Beacon funciona como promotor de salud porque sostiene una ecología acústica de consonancia dinámica. Esa ecología reduce carga correctiva, ofrece recurrencia sin rigidez, preserva variación sin dispersión, facilita acoplamiento entre cuerpo y entorno, y abre una zona de orientación donde la experiencia puede descansar, reorganizarse o volverse más legible.</p></blockquote>
+
+        <p>Y si lo dijera en una versión más simple, para alguien externo:</p>
+
+        <blockquote><p>El Beacon crea un campo sonoro vivo, basado en relaciones armónicas naturales. Ese campo le da al cuerpo una referencia estable pero no rígida. Muchas personas, al entrar en esa referencia, pueden descansar, regular la atención, percibir mejor el cuerpo y ordenar algo de lo que traían disperso. Por eso lo pensamos como promotor de salud: no porque cure, sino porque crea condiciones favorables para que el sistema recupere coherencia.</p></blockquote>
+
+        <p>La parte más importante, para mí, es no venderlo como “efecto sonoro” sino como “condición de acoplamiento”. Beacon funciona cuando el campo se vuelve habitable. Y se vuelve habitable porque organiza el espacio en una relación de baja fricción: no elimina la diferencia, no apaga la vida, no fuerza una calma artificial. Sostiene una forma de orden suficientemente viva como para que el cuerpo pueda entrar en relación con ella.</p>
+
+        <p>Esa es probablemente la mejor explicación HIT de por qué el Beacon puede funcionar como promotor de salud: porque la salud, en este marco, no es ausencia de movimiento, sino recuperación de una coherencia dinámica con bajo costo de sostén.</p>
+
+        <h3>Respuesta resumida</h3>
+
+        <p>El Beacon funciona como promotor de salud porque crea un campo armónico basado en la física natural de la armonía que el cuerpo puede habitar con menor fricción.</p>
+
+        <p>Según HIT, la consonancia no es solo “sonar agradable”: es una relación dinámica donde un sistema encuentra estabilidad sin volverse rígido. El Beacon sostiene esa zona: ofrece recurrencia, proporción y coherencia, pero conserva variación suficiente para que haya atención, percepción y adaptación.</p>
+
+        <p>Por eso puede favorecer descanso, presencia corporal, regulación atencional e integración. No porque una frecuencia cure, sino porque el campo reduce carga correctiva: el cuerpo no tiene que defenderse, filtrar o reorganizar estímulos dispersos todo el tiempo, y puede volver a una forma más coherente de estar.</p>
+
+        <p>En fórmula corta:</p>
+
+        <blockquote><p>Beacon promueve salud porque ofrece una ecología acústica de consonancia dinámica: orden sin rigidez, variación sin caos, y una referencia armónica que ayuda al cuerpo a recuperar coherencia.</p></blockquote>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="experiencia">
+    <div class="wrap two-col">
+      <div>
+        <div class="section-intro reveal">
+          <span class="eyebrow"><span data-lang="en">In experience</span><span data-lang="es">En la experiencia</span></span>
+          <h2><span data-lang="en">It is not always about calming down</span><span data-lang="es">No siempre se trata de calmar</span></h2>
+        </div>
+        <div class="body-copy reveal" data-d="1">
+          <p><span data-lang="en">Rest may appear, but the more precise word is <em>reorientation</em>. In a stable yet open field, attention can settle, bodily perception can become clearer, or inner material can become more legible.</span><span data-lang="es">El descanso puede aparecer, pero la palabra más precisa es <em>reorientación</em>. En un campo estable y a la vez abierto, la atención puede asentarse, la percepción corporal puede volverse más nítida o cierto material interno puede hacerse más legible.</span></p>
+          <p><span data-lang="en">Some people report calm, presence, images, memories, emotion, or a finer perception of sound. Others may encounter distraction, resistance, or discomfort. This variability matters: the field does not impose one state or transmit a universal message.</span><span data-lang="es">Algunas personas reportan calma, presencia, imágenes, recuerdos, emoción o una percepción más fina del sonido. Otras pueden encontrar distracción, resistencia o incomodidad. Esa variabilidad importa: el campo no impone un estado ni transmite un mensaje universal.</span></p>
+          <p><span data-lang="en">Voices, melodies, or textures can sometimes seem to emerge from the field. We call this harmonic pareidolia: perception organizing figures in an ambiguous but structured environment. It is an experiential phenomenon, not proof of a therapeutic mechanism.</span><span data-lang="es">A veces parecen emerger voces, melodías o texturas. Llamamos a esto pareidolia armónica: la percepción organizando figuras en un entorno ambiguo pero estructurado. Es un fenómeno experiencial, no la prueba de un mecanismo terapéutico.</span></p>
+        </div>
+      </div>
+
+      <aside class="side-card reveal" data-d="2">
+        <h3><span data-lang="en">One field, different responses</span><span data-lang="es">Un campo, respuestas distintas</span></h3>
+        <ul>
+          <li><span data-lang="en">Rest or activation</span><span data-lang="es">Descanso o activación</span></li>
+          <li><span data-lang="en">Presence or resistance</span><span data-lang="es">Presencia o resistencia</span></li>
+          <li><span data-lang="en">Images or silence</span><span data-lang="es">Imágenes o silencio</span></li>
+          <li><span data-lang="en">Clarity or discomfort</span><span data-lang="es">Claridad o incomodidad</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="evidencia" style="border-top:1px solid var(--hair-soft);">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <span class="eyebrow"><span data-lang="en">What we know</span><span data-lang="es">Qué sabemos</span></span>
+        <h2><span data-lang="en">An active line of research</span><span data-lang="es">Una investigación en curso</span></h2>
+        <p><span data-lang="en">Clarity about evidence is not a footnote. It is part of how Beacon is being built.</span><span data-lang="es">La claridad sobre la evidencia no es una nota al pie. Es parte de cómo estamos construyendo Beacon.</span></p>
+      </div>
+
+      <div class="status-grid reveal" data-d="1">
+        <article class="status-card">
+          <h3><span data-lang="en">Observed so far</span><span data-lang="es">Observado hasta ahora</span></h3>
+          <p><span data-lang="en">Exploratory sessions have produced recurring subjective reports of rest, bodily presence, introspection, attention, and harmonic pareidolia. These accounts help us refine the practice and its questions.</span><span data-lang="es">Las sesiones exploratorias han producido reportes subjetivos recurrentes de descanso, presencia corporal, introspección, atención y pareidolia armónica. Esos relatos ayudan a refinar la práctica y sus preguntas.</span></p>
+        </article>
+        <article class="status-card boundary">
+          <h3><span data-lang="en">Not established</span><span data-lang="es">No establecido</span></h3>
+          <p><span data-lang="en">These reports do not establish clinical efficacy or prove a psychophysiological mechanism. Beacon is a non-clinical wellness and exploration practice—not medical treatment, diagnosis, or a substitute for professional care.</span><span data-lang="es">Esos reportes no establecen eficacia clínica ni prueban un mecanismo psicofisiológico. Beacon es una práctica no clínica de bienestar y exploración: no es tratamiento médico, diagnóstico ni reemplazo de atención profesional.</span></p>
+        </article>
+      </div>
+
+      <details class="reveal" data-d="2">
+        <summary><span data-lang="en">Why natural harmonic relationships?</span><span data-lang="es">¿Por qué relaciones armónicas naturales?</span></summary>
+        <div class="detail-copy">
+          <p data-lang="en">Equal temperament is an extraordinary musical technology designed for compositional mobility. Beacon pursues a different criterion: coherence among the partials, beats, interference patterns, resonant material, and the specific room. Tuning is not about finding an abstract “correct note,” but about making the field more coherent and perceptually legible. This is a technical design choice, not a claim that natural harmonics cure.</p>
+          <p data-lang="es">El temperamento igual es una tecnología musical extraordinaria, diseñada para ganar movilidad compositiva. Beacon persigue otro criterio: la coherencia entre parciales, batimentos, interferencias, materia resonante y espacio concreto. Afinar no es encontrar una “nota correcta” abstracta, sino volver el campo más coherente y perceptivamente legible. Es una decisión técnica de diseño, no la afirmación de que los armónicos naturales curen.</p>
+        </div>
+      </details>
+
+      <div class="back-cta reveal" data-d="3">
+        <a class="btn btn-primary" href="/#trabajo"><span data-lang="en">Explore the project</span><span data-lang="es">Explorar el proyecto</span></a>
+        <a class="btn btn-ghost" href="https://hit.altermundi.net/" target="_blank" rel="noopener"><span data-lang="en">Read the HIT book</span><span data-lang="es">Leer el libro HIT</span></a>
+      </div>
+    </div>
+  </section>
+</main>
 
 <script src="/assets/hb-main.js" defer></script>
 </body>
