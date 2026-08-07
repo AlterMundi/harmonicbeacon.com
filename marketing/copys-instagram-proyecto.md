@@ -35,7 +35,7 @@ Si querés entender cómo se ofrece y en qué espacios encaja:
 
 **Harmonic Beacon** es un programa de investigación en bienestar armónico de la Asociación Civil **AlterMundi**.
 
-No es un producto de wellness más. Es un lugar donde la física acústica, la escucha corporal y el significado personal se cruzan.
+No es un producto genérico. Es un lugar donde la física acústica, la escucha corporal y el significado personal se cruzan.
 
 El proyecto se sostiene en tres pilares:
 
@@ -52,7 +52,7 @@ Todo lo publicado del proyecto está en dos lugares:
 🔗 **harmonicbeacon.com** — el programa, la experiencia, el equipo.
 📖 **hit.altermundi.net** — el libro de Harmonic Information Theory.
 
-#HarmonicBeacon #AlterMundi #HarmonicInformationTheory #BienestarArmónico #Investigación #Sonido #HIT #WellnessResearch #Transdisciplina
+#HarmonicBeacon #AlterMundi #HarmonicInformationTheory #Investigación #Sonido #HIT #Transdisciplina
 
 ---
 
