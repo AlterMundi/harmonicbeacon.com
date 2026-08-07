@@ -20,10 +20,13 @@ test('LOGOS is an unindexed, exact private invitation', () => {
 
 test('LOGOS delegates the invitation-code decision to Ticket Tailor', () => {
   assert.match(page, /checkout\/view-event\/id\/8828041\/chk\/fb1863e90b9a180488f50d379bb75b49\//);
-  assert.match(page, /checkout\.searchParams\.set\('a', code\)/);
   assert.match(page, /https:\/\/cdn\.tickettailor\.com\/js\/widgets\/min\/widget\.js/);
   assert.match(page, /script\.setAttribute\('data-type', 'inline'\)/);
   assert.match(page, /id="ticketTailorWidget"/);
+  assert.match(page, /Ingresá el código privado directamente en Ticket Tailor/);
+  assert.match(page, /showCheckout\(\);/);
+  assert.doesNotMatch(page, /id="accessForm"|id="accessCode"/);
+  assert.doesNotMatch(page, /searchParams\.set\('a'/);
   assert.doesNotMatch(page, /window\.location\.assign/);
   assert.doesNotMatch(page, /LOGOS-[A-Z0-9]{8}/);
   assert.doesNotMatch(page, /LOGOS100/);
