@@ -155,6 +155,7 @@ test('private LOGOS reuses registration, email verification and Ticket Tailor ch
   assert.match(page, /Reservá tu entrada gratuita/);
   assert.match(page, /No se solicita tarjeta/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
+  assert.match(page, /eventCode==='hmp-logos-2026-08-07'\?'es':requestedLocale/);
   assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
   assert.match(page, /window\.HMPCommerce\.mountCheckoutWidget\(widget,payload,result\.checkout/);
   assert.match(page, /\.checkout-widget iframe\{[^}]*min-height:760px!important/);
