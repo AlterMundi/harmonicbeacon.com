@@ -107,7 +107,7 @@
     '<footer><div class="wrap foot-grid">' +
       '<div class="foot-brand">' +
         '<a href="/" class="brandlock">' + markSvg(28) + '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon</span></a>' +
-        '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided wellness experience.', 'Una experiencia de bienestar en vivo y guiada.') + '</p>' +
+        '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided experience.', 'Una experiencia en vivo y guiada.') + '</p>' +
         '<p class="eyebrow" style="color:var(--ink-600);margin-top:1.4rem;">Asociación Civil AlterMundi</p>' +
         '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a></p>' +
         '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>' +
