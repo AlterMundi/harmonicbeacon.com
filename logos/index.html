@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{--brown:#160d05;--panel:#241509;--gold:#e7bd61;--cream:#fff8e7;--text:#e9dcc2;--muted:#bcae94;--line:#e7bd6142;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
-    *{box-sizing:border-box}html{background:var(--brown)}body{min-width:320px;min-height:100vh;margin:0;color:var(--text);background:radial-gradient(circle at 18% 5%,#e7bd6124,transparent 28rem),radial-gradient(circle at 90% 90%,#ad743d24,transparent 30rem),linear-gradient(145deg,#100903,#211307 56%,#100903);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.page{display:grid;min-height:100vh;place-items:center;padding:28px}.card{width:min(720px,100%);padding:clamp(32px,7vw,72px);border:1px solid var(--line);border-radius:28px;background:#211307e8;box-shadow:0 35px 100px #0007}.brand{margin:0 0 42px;color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.16em}.private{margin:0 0 12px;color:var(--muted);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}h1{margin:0;color:var(--cream);font:500 clamp(3.5rem,11vw,7rem)/.82 var(--serif);letter-spacing:-.045em}h2{margin:18px 0 0;color:var(--gold);font:400 clamp(1.55rem,4vw,2.1rem)/1.15 var(--serif)}.details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:34px 0}.detail{padding:15px 12px;border:1px solid var(--line);border-radius:12px;text-align:center}.detail strong{display:block;color:var(--cream);font-weight:500}.detail span{color:var(--muted);font-size:.75rem}.intro{max-width:530px;margin:0 0 28px;color:var(--text)}.error{margin:12px 0 0;color:#ffd6c2;font-size:.82rem}.checkout{margin-top:34px;padding:18px;border-radius:14px;background:#fff}.checkout-title{margin:0 0 14px;color:#211307;font:500 1.7rem/1.1 var(--serif)}[hidden]{display:none}@media(max-width:560px){.page{padding:14px}.card{padding:32px 24px;border-radius:20px}.brand{margin-bottom:34px}.details{grid-template-columns:1fr}.checkout{margin-inline:-12px;padding:14px}}
+    *{box-sizing:border-box}html{background:var(--brown)}body{min-width:320px;min-height:100vh;margin:0;color:var(--text);background:radial-gradient(circle at 18% 5%,#e7bd6124,transparent 28rem),radial-gradient(circle at 90% 90%,#ad743d24,transparent 30rem),linear-gradient(145deg,#100903,#211307 56%,#100903);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.page{display:grid;min-height:100vh;place-items:center;padding:28px}.card{width:min(720px,100%);padding:clamp(32px,7vw,72px);border:1px solid var(--line);border-radius:28px;background:#211307e8;box-shadow:0 35px 100px #0007}.brand{margin:0 0 42px;color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.16em}.private{margin:0 0 12px;color:var(--muted);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}h1{margin:0;color:var(--cream);font:500 clamp(3.5rem,11vw,7rem)/.82 var(--serif);letter-spacing:-.045em}h2{margin:18px 0 0;color:var(--gold);font:400 clamp(1.55rem,4vw,2.1rem)/1.15 var(--serif)}.details{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:34px 0}.detail{padding:15px 12px;border:1px solid var(--line);border-radius:12px;text-align:center}.detail strong{display:block;color:var(--cream);font-weight:500}.detail span{color:var(--muted);font-size:.75rem}.intro{max-width:530px;margin:0 0 28px;color:var(--text)}.cta{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border:1px solid var(--gold);border-radius:999px;color:#211307;background:var(--gold);font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s}.cta:hover{transform:translateY(-2px);box-shadow:0 12px 35px #0006}.note{margin:16px 0 0;color:var(--muted);font-size:.78rem}@media(max-width:560px){.page{padding:14px}.card{padding:32px 24px;border-radius:20px}.brand{margin-bottom:34px}.details{grid-template-columns:1fr}.cta{width:100%}}
   </style>
 </head>
 <body>
@@ -27,48 +27,10 @@
         <div class="detail"><strong>virtual</strong><span>en vivo</span></div>
         <div class="detail"><strong>sin costo</strong><span>1 entrada por persona</span></div>
       </div>
-      <p class="intro">Ingresá el código privado directamente en Ticket Tailor para reservar tu entrada gratuita. Allí te pediremos los datos necesarios para enviarte el acceso.</p>
-      <section id="checkoutStep" aria-live="polite">
-        <div class="checkout">
-          <h2 class="checkout-title">Reservá tu entrada gratuita</h2>
-          <div id="ticketTailorWidget"></div>
-        </div>
-        <p class="error" id="checkoutError" role="alert" hidden>No pudimos cargar Ticket Tailor. Recargá la página para intentar nuevamente.</p>
-      </section>
+      <p class="intro">Completá la inscripción en Harmonic Beacon, elegí LOGOS y confirmá tu correo. Después vas a reservar tu entrada gratuita en Ticket Tailor y volver a nuestra página de confirmación.</p>
+      <a class="cta" href="/inscripcion/?fecha=logos-2026-08-07&amp;idioma=es">Comenzar inscripción →</a>
+      <p class="note">Invitación privada · una entrada por persona · no se solicita tarjeta</p>
     </section>
   </main>
-  <script>
-    (() => {
-      const checkoutBase = 'https://tickets.harmonicbeacon.com/checkout/view-event/id/8828041/chk/fb1863e90b9a180488f50d379bb75b49/';
-      const widget = document.querySelector('#ticketTailorWidget');
-      const error = document.querySelector('#checkoutError');
-
-      const showCheckout = () => {
-        const checkout = new URL(checkoutBase);
-        checkout.searchParams.set('preset_data', '1');
-
-        const mount = document.createElement('div');
-        mount.className = 'tt-widget';
-        const script = document.createElement('script');
-        script.src = 'https://cdn.tickettailor.com/js/widgets/min/widget.js';
-        script.async = true;
-        script.setAttribute('data-url', checkout.toString());
-        script.setAttribute('data-type', 'inline');
-        script.setAttribute('data-inline-minimal', 'true');
-        script.setAttribute('data-inline-show-logo', 'false');
-        script.setAttribute('data-inline-bg-fill', 'false');
-        script.setAttribute('data-inline-ref', 'logos_private_web');
-        script.addEventListener('error', () => {
-          widget.replaceChildren();
-          error.hidden = false;
-        }, {once: true});
-
-        mount.append(script);
-        widget.replaceChildren(mount);
-      };
-
-      showCheckout();
-    })();
-  </script>
 </body>
 </html>

@@ -51,6 +51,27 @@
       options: Object.freeze({
         en: Object.freeze({ session_code: 'en-1600-cr', label: 'English · 16:00 Costa Rica · US$50', time: '16:00', price: 'US$50' })
       })
+    }),
+    'hmp-logos-2026-08-07': Object.freeze({
+      date: 'logos-2026-08-07',
+      label_es: 'viernes 7 de agosto · LOGOS',
+      label_en: 'Friday, August 7 · LOGOS',
+      private: true,
+      free: true,
+      sessions: Object.freeze({
+        'es-1600-cr': '8828041'
+      }),
+      options: Object.freeze({
+        es: Object.freeze({
+          session_code: 'es-1600-cr',
+          label: 'LOGOS · 16:00 Costa Rica · gratis',
+          name: 'LOGOS',
+          detail_es: 'Harmonic Myth Projection · invitación privada',
+          detail_en: 'Harmonic Myth Projection · private invitation',
+          time: '16:00',
+          price: 'GRATIS'
+        })
+      })
     })
   });
 

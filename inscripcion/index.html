@@ -181,7 +181,7 @@
 
   <main id="top">
     <section class="booking booking-first wrap reveal" id="inscripcion">
-      <div class="booking-head"><div><span class="section-tag"><span data-copy="es">INSCRIPCIÓN Y PAGO · <span id="dateEs">DOMINGO 9 DE AGOSTO</span></span><span data-copy="en">REGISTRATION AND PAYMENT · <span id="dateEn">SUNDAY, AUGUST 9</span></span></span><h2 data-copy="es">Completá tu inscripción</h2><h2 data-copy="en">Complete your registration</h2><p class="booking-summary" data-copy="es">Completá tus datos y elegí la sesión. Después confirmá tu correo con el código que te enviamos y pagá de forma segura en Ticket Tailor.</p><p class="booking-summary" data-copy="en">Complete your details and choose a session. Then confirm your email with the code we send and pay securely through Ticket Tailor.</p></div></div>
+      <div class="booking-head"><div><span class="section-tag"><span data-copy="es"><span id="bookingModeEs">INSCRIPCIÓN Y PAGO</span> · <span id="dateEs">DOMINGO 9 DE AGOSTO</span></span><span data-copy="en"><span id="bookingModeEn">REGISTRATION AND PAYMENT</span> · <span id="dateEn">SUNDAY, AUGUST 9</span></span></span><h2 data-copy="es">Completá tu inscripción</h2><h2 data-copy="en">Complete your registration</h2><p class="booking-summary" id="bookingSummaryEs" data-copy="es">Completá tus datos y elegí la sesión. Después confirmá tu correo con el código que te enviamos y pagá de forma segura en Ticket Tailor.</p><p class="booking-summary" id="bookingSummaryEn" data-copy="en">Complete your details and choose a session. Then confirm your email with the code we send and pay securely through Ticket Tailor.</p></div></div>
       <div class="booking-panel" id="registrationClosed">
         <div class="session-zone" style="grid-column:1/-1">
           <h3 data-copy="es">Inscripciones próximamente</h3><h3 data-copy="en">Registrations opening soon</h3>
@@ -194,12 +194,12 @@
         <ol class="flow-progress" id="registrationProgress" aria-label="Progreso de inscripción">
           <li data-flow-step="1" class="is-active" aria-current="step"><span class="flow-progress-number">01</span><span class="flow-progress-copy"><strong><span data-copy="es">Datos y sesión</span><span data-copy="en">Details and session</span></strong><small><span data-copy="es">Tu reserva</span><span data-copy="en">Your booking</span></small></span></li>
           <li data-flow-step="2"><span class="flow-progress-number">02</span><span class="flow-progress-copy"><strong><span data-copy="es">Confirmá tu email</span><span data-copy="en">Confirm your email</span></strong><small><span data-copy="es">Código de 6 dígitos</span><span data-copy="en">6-digit code</span></small></span></li>
-          <li data-flow-step="3"><span class="flow-progress-number">03</span><span class="flow-progress-copy"><strong><span data-copy="es">Entrada y pago</span><span data-copy="en">Ticket and payment</span></strong><small>Ticket Tailor</small></span></li>
+          <li data-flow-step="3"><span class="flow-progress-number">03</span><span class="flow-progress-copy"><strong><span id="ticketStepEs" data-copy="es">Entrada y pago</span><span id="ticketStepEn" data-copy="en">Ticket and payment</span></strong><small>Ticket Tailor</small></span></li>
           <li data-flow-step="4"><span class="flow-progress-number">04</span><span class="flow-progress-copy"><strong><span data-copy="es">Confirmación</span><span data-copy="en">Confirmation</span></strong><small><span data-copy="es">Todo por email</span><span data-copy="en">Everything by email</span></small></span></li>
         </ol>
         <div class="session-zone">
-          <div id="registrationIntro"><h3 data-copy="es">Datos y sesión</h3><h3 data-copy="en">Details and session</h3><p class="form-intro" data-copy="es">Primero dejanos tu nombre y correo. Después elegí el idioma, revisá el horario y el precio.</p><p class="form-intro" data-copy="en">First leave your name and email. Then choose the language and review the time and price.</p><p class="timezone"><span data-copy="es">PASO 1 DE 4 · TODAVÍA NO SE REALIZA NINGÚN PAGO</span><span data-copy="en">STEP 1 OF 4 · NO PAYMENT IS MADE YET</span></p></div>
-          <div id="sessionStep" hidden><h3 data-copy="es">Elegí tu sesión</h3><h3 data-copy="en">Choose your session</h3><p class="form-intro" data-copy="es">Seleccioná el idioma y el horario. En el próximo paso vas a confirmar tu correo.</p><p class="form-intro" data-copy="en">Select the language and time. In the next step, you will confirm your email.</p><div class="session-list"><button class="session" type="button" data-session="es" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b>ESPAÑOL</b><small><span data-copy="es">sábado · hora Costa Rica</span><span data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>08:30</b><small>US$20</small></span></button><button class="session" type="button" data-session="en" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b>ENGLISH</b><small><span data-copy="es">domingo · hora Costa Rica</span><span data-copy="en">Sunday · Costa Rica time</span></small></span><span class="session-side"><b>16:00</b><small>US$50</small></span></button></div><p class="timezone">◷ COSTA RICA · UTC−6</p><div class="session-stage-actions"><button class="cta submit" id="paymentButton" type="submit" form="registrationForm" hidden><span id="paymentButtonLabel">continuar</span><i>↗</i></button><button class="change-details" id="changeDetails" type="button"><span data-copy="es">Corregir mis datos</span><span data-copy="en">Edit my details</span></button></div></div>
+          <div id="registrationIntro"><h3 data-copy="es">Datos y sesión</h3><h3 data-copy="en">Details and session</h3><p class="form-intro" id="introCopyEs" data-copy="es">Primero dejanos tu nombre y correo. Después elegí el idioma, revisá el horario y el precio.</p><p class="form-intro" id="introCopyEn" data-copy="en">First leave your name and email. Then choose the language and review the time and price.</p><p class="timezone"><span data-copy="es">PASO 1 DE 4 · TODAVÍA NO SE REALIZA NINGÚN PAGO</span><span data-copy="en">STEP 1 OF 4 · NO PAYMENT IS MADE YET</span></p></div>
+          <div id="sessionStep" hidden><h3 data-copy="es">Elegí tu sesión</h3><h3 data-copy="en">Choose your session</h3><p class="form-intro" data-copy="es">Seleccioná el idioma y el horario. En el próximo paso vas a confirmar tu correo.</p><p class="form-intro" data-copy="en">Select the language and time. In the next step, you will confirm your email.</p><div class="session-list"><button class="session" type="button" data-session="es" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b data-option-name>ESPAÑOL</b><small><span data-option-detail data-copy="es">sábado · hora Costa Rica</span><span data-option-detail data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>08:30</b><small>US$20</small></span></button><button class="session" type="button" data-session="en" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b data-option-name>ENGLISH</b><small><span data-option-detail data-copy="es">domingo · hora Costa Rica</span><span data-option-detail data-copy="en">Sunday · Costa Rica time</span></small></span><span class="session-side"><b>16:00</b><small>US$50</small></span></button></div><p class="timezone">◷ COSTA RICA · UTC−6</p><div class="session-stage-actions"><button class="cta submit" id="paymentButton" type="submit" form="registrationForm" hidden><span id="paymentButtonLabel">continuar</span><i>↗</i></button><button class="change-details" id="changeDetails" type="button"><span data-copy="es">Corregir mis datos</span><span data-copy="en">Edit my details</span></button></div></div>
         </div>
         <div class="form-zone">
           <h3 data-copy="es">Tu nombre en este viaje</h3><h3 data-copy="en">Your name in this journey</h3>
@@ -213,7 +213,7 @@
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
             <div class="form-row"><label><span data-copy="es">nombre</span><span data-copy="en">first name</span><input name="firstName" autocomplete="given-name" required></label><label><span data-copy="es">apellido</span><span data-copy="en">last name</span><input name="lastName" autocomplete="family-name" required></label></div>
             <label><span data-copy="es">correo electrónico</span><span data-copy="en">email address</span><input type="email" name="email" autocomplete="email" required></label>
-            <p class="form-note"><span data-copy="es">Ahí llegará la confirmación, el pago y el acceso. Revisá también spam y promociones.</span><span data-copy="en">Confirmation, payment details and access will arrive there. Check spam and promotions too.</span></p>
+            <p class="form-note"><span id="formNoteEs" data-copy="es">Ahí llegará la confirmación, el pago y el acceso. Revisá también spam y promociones.</span><span id="formNoteEn" data-copy="en">Confirmation, payment details and access will arrive there. Check spam and promotions too.</span></p>
             <label class="consent"><input type="checkbox" name="registrationTermsAccepted" value="ACEPTO" required><span data-copy="es">Acepto los <a href="/politica/" target="_blank" rel="noopener">términos y la política de esta inscripción</a>.</span><span data-copy="en">I accept the <a href="/politica/" target="_blank" rel="noopener">terms and policy for this registration</a>.</span></label>
             <div id="hb-meta-consent-mount" aria-live="polite"></div>
             <button class="cta submit" id="continueButton" type="button"><span data-copy="es">continuar</span><span data-copy="en">continue</span><i>↗</i></button>
@@ -221,7 +221,7 @@
           </form>
           <section class="verification-step" id="emailVerificationStep" hidden aria-live="polite">
             <h3 data-copy="es">Confirmá tu correo</h3><h3 data-copy="en">Confirm your email</h3>
-            <p class="form-intro" data-copy="es">Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar al pago.</p><p class="form-intro" data-copy="en">We sent you a six-digit code. Enter it to confirm that the email belongs to you and continue to payment.</p>
+            <p class="form-intro" id="verificationCopyEs" data-copy="es">Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar al pago.</p><p class="form-intro" id="verificationCopyEn" data-copy="en">We sent you a six-digit code. Enter it to confirm that the email belongs to you and continue to payment.</p>
             <strong class="verification-destination" id="verificationDestination"></strong>
             <form id="emailVerificationForm">
               <label><span data-copy="es">código de verificación</span><span data-copy="en">verification code</span><input id="verificationCode" name="verificationCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required></label>
@@ -230,8 +230,8 @@
             <div class="verification-actions"><button id="resendVerification" type="button"><span data-copy="es">reenviar código</span><span data-copy="en">resend code</span></button><button id="changeEmail" type="button"><span data-copy="es">cambiar correo</span><span data-copy="en">change email</span></button></div>
           </section>
           <section class="checkout-step" id="checkoutStep" hidden aria-live="polite">
-            <h3 data-copy="es">Elegí tu entrada y pagá</h3><h3 data-copy="en">Choose your ticket and pay</h3>
-            <p class="form-intro" data-copy="es">Tu inscripción quedó registrada. Elegí tu entrada y completá el pago en el formulario seguro de Ticket Tailor.</p><p class="form-intro" data-copy="en">Your registration is saved. Choose your ticket and complete payment in Ticket Tailor's secure form.</p>
+            <h3 id="checkoutTitleEs" data-copy="es">Elegí tu entrada y pagá</h3><h3 id="checkoutTitleEn" data-copy="en">Choose your ticket and pay</h3>
+            <p class="form-intro" id="checkoutCopyEs" data-copy="es">Tu inscripción quedó registrada. Elegí tu entrada y completá el pago en el formulario seguro de Ticket Tailor.</p><p class="form-intro" id="checkoutCopyEn" data-copy="en">Your registration is saved. Choose your ticket and complete payment in Ticket Tailor's secure form.</p>
             <div class="checkout-widget" id="ticketTailorWidget"></div>
           </section>
         </div>
@@ -251,7 +251,7 @@
         <article class="guide-card"><span class="guide-icon" aria-hidden="true">⏳</span><h3 data-copy="es">Tiempo presente y sin prisas</h3><h3 data-copy="en">Unhurried, present time</h3><p data-copy="es">Reservá entre tres y cuatro horas sin distracciones externas para darle a la experiencia el tiempo que necesita para desplegarse.</p><p data-copy="en">Set aside three to four hours without outside distractions, giving the experience time to unfold.</p></article>
       </div>
 
-      <div class="mail-notice"><h3 data-copy="es">Acceso online y recordatorios por correo</h3><h3 data-copy="en">Online access and email reminders</h3><p data-copy="es"><strong>Una vez confirmado el pago, el enlace de acceso a la experiencia online se envía por email.</strong> Los horarios, las recomendaciones y cualquier actualización también llegarán al correo usado en la inscripción. Revisá spam y promociones.</p><p data-copy="en"><strong>Once payment is confirmed, the access link for the online experience is sent by email.</strong> Schedules, recommendations and any updates will also arrive at the email used for registration. Please check spam and promotions.</p><p data-copy="es"><strong>Reembolsos:</strong> podés solicitar el reembolso de tu pago escribiendo a <a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a>.</p><p data-copy="en"><strong>Refunds:</strong> you can request a refund by emailing <a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a>.</p></div>
+      <div class="mail-notice"><h3 data-copy="es">Acceso online y recordatorios por correo</h3><h3 data-copy="en">Online access and email reminders</h3><p id="accessNoticeEs" data-copy="es"><strong>Una vez confirmado el pago, el enlace de acceso a la experiencia online se envía por email.</strong> Los horarios, las recomendaciones y cualquier actualización también llegarán al correo usado en la inscripción. Revisá spam y promociones.</p><p id="accessNoticeEn" data-copy="en"><strong>Once payment is confirmed, the access link for the online experience is sent by email.</strong> Schedules, recommendations and any updates will also arrive at the email used for registration. Please check spam and promotions.</p><p id="refundNoticeEs" data-copy="es"><strong>Reembolsos:</strong> podés solicitar el reembolso de tu pago escribiendo a <a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a>.</p><p id="refundNoticeEn" data-copy="en"><strong>Refunds:</strong> you can request a refund by emailing <a href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a>.</p></div>
 
     </section>
   </main>
@@ -265,7 +265,53 @@
     const registrationOpen=window.HMPCommerce.REGISTRATION_OPEN;
     const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-09',catalogEvent=window.HMPCommerce.CHECKOUTS['hmp-'+fecha],eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
     one('#registrationClosed').hidden=eventAvailable;one('#registrationFlow').hidden=!eventAvailable;
-    if(catalogEvent){one('#eventCodeInput').value='hmp-'+catalogEvent.date;one('#dateEs').textContent=catalogEvent.label_es;one('#dateEn').textContent=catalogEvent.label_en;all('[data-session]').forEach(button=>{const option=catalogEvent.options?.[button.dataset.session];button.hidden=!option;button.disabled=!eventAvailable||!option;button.setAttribute('aria-disabled',String(!eventAvailable||!option));if(option){button.querySelector('.session-side b').textContent=option.time;button.querySelector('.session-side small').textContent=option.price}})}else{one('#eventCodeInput').value='';one('#dateEs').textContent='fecha aún no disponible';one('#dateEn').textContent='date not available yet';all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')})}
+    function applyPrivateFreeCopy(){
+      if(!catalogEvent?.free)return;
+      document.documentElement.dataset.commerce='free';
+      one('#bookingModeEs').textContent='INSCRIPCIÓN PRIVADA GRATUITA';
+      one('#bookingModeEn').textContent='FREE PRIVATE REGISTRATION';
+      one('#bookingSummaryEs').textContent='Completá tus datos, elegí LOGOS y confirmá tu correo. Después reservá tu entrada gratuita en Ticket Tailor.';
+      one('#bookingSummaryEn').textContent='Complete your details, choose LOGOS and confirm your email. Then reserve your free ticket through Ticket Tailor.';
+      one('#ticketStepEs').textContent='Entrada gratuita';
+      one('#ticketStepEn').textContent='Free ticket';
+      one('#introCopyEs').textContent='Primero dejanos tu nombre y correo. Después elegí LOGOS y revisá el horario de tu invitación gratuita.';
+      one('#introCopyEn').textContent='First leave your name and email. Then choose LOGOS and review the time of your free invitation.';
+      one('#formNoteEs').textContent='Ahí llegarán la confirmación de tu reserva y el acceso. Revisá también spam y promociones.';
+      one('#formNoteEn').textContent='Your booking confirmation and access will arrive there. Check spam and promotions too.';
+      one('#verificationCopyEs').textContent='Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar a la entrada gratuita.';
+      one('#verificationCopyEn').textContent='We sent you a six-digit code. Enter it to confirm that the email belongs to you and continue to the free ticket.';
+      one('#checkoutTitleEs').textContent='Reservá tu entrada gratuita';
+      one('#checkoutTitleEn').textContent='Reserve your free ticket';
+      one('#checkoutCopyEs').textContent='Tu inscripción quedó registrada. Confirmá la entrada sin costo en el formulario seguro de Ticket Tailor. No se solicita tarjeta.';
+      one('#checkoutCopyEn').textContent='Your registration is saved. Confirm the free ticket in Ticket Tailor’s secure form. No card is required.';
+      one('#accessNoticeEs').innerHTML='<strong>Una vez confirmada la reserva gratuita, el enlace de acceso a la experiencia online se envía por email.</strong> Los horarios, las recomendaciones y cualquier actualización también llegarán al correo usado en la inscripción. Revisá spam y promociones.';
+      one('#accessNoticeEn').innerHTML='<strong>Once the free booking is confirmed, the online access link is sent by email.</strong> Schedules, recommendations and any updates will also arrive at the email used for registration. Please check spam and promotions.';
+      one('#refundNoticeEs').hidden=true;
+      one('#refundNoticeEn').hidden=true;
+    }
+    if(catalogEvent){
+      one('#eventCodeInput').value='hmp-'+catalogEvent.date;
+      one('#dateEs').textContent=catalogEvent.label_es;
+      one('#dateEn').textContent=catalogEvent.label_en;
+      all('[data-session]').forEach(button=>{
+        const option=catalogEvent.options?.[button.dataset.session];
+        button.hidden=!option;
+        button.disabled=!eventAvailable||!option;
+        button.setAttribute('aria-disabled',String(!eventAvailable||!option));
+        if(option){
+          button.querySelector('.session-side b').textContent=option.time;
+          button.querySelector('.session-side small').textContent=option.price;
+          if(option.name)button.querySelector('[data-option-name]').textContent=option.name;
+          if(option.detail_es||option.detail_en)button.querySelectorAll('[data-option-detail]').forEach(detail=>{detail.textContent=detail.dataset.copy==='en'?(option.detail_en||''):(option.detail_es||'')});
+        }
+      });
+      applyPrivateFreeCopy();
+    }else{
+      one('#eventCodeInput').value='';
+      one('#dateEs').textContent='fecha aún no disponible';
+      one('#dateEn').textContent='date not available yet';
+      all('[data-session]').forEach(button=>{button.disabled=true;button.setAttribute('aria-disabled','true')});
+    }
     function setLang(next){lang=next;document.documentElement.dataset.lang=next;document.documentElement.lang=next;one('#localeInput').value=next;one('#registrationProgress')?.setAttribute('aria-label',next==='en'?'Registration progress':'Progreso de inscripción');all('[data-lang-button]').forEach(b=>{const active=b.dataset.langButton===next;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))})}
     if((params.get('idioma')||params.get('lang'))==='en')setLang('en');
     function setSession(next){const option=eventConfig?.options?.[next];if(!eventAvailable||!option){notify(lang==='en'?'This session is not open for registration yet. No checkout will be opened.':'Esta sesión todavía no está habilitada. No abriremos ningún checkout.');return}session=next;all('[data-session]').forEach(b=>{const selected=b.dataset.session===next;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected))});one('#sessionInput').value=option.label;one('#sessionCodeInput').value=option.session_code;one('#paymentButtonLabel').textContent=lang==='en'?'continue':'continuar';one('#paymentButton').hidden=false}

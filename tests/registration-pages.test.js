@@ -103,7 +103,7 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /id="paymentButton"[^>]+form="registrationForm"/);
   assert.equal((page.match(/data-session="/g) || []).length, 2);
   assert.match(page, /data-session="en"/);
-  assert.match(page, /<b>ENGLISH<\/b>[\s\S]*?Sunday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?US\$50/);
+  assert.match(page, /<b data-option-name>ENGLISH<\/b>[\s\S]*?Sunday · Costa Rica time[\s\S]*?<b>16:00<\/b>[\s\S]*?US\$50/);
   assert.match(page, /id="changeDetails"/);
   assert.match(page, /classList\.add\('is-session-choice'\)/);
   assert.match(page, /\.booking-panel\.is-session-choice \.form-zone\{display:none\}/);
@@ -140,6 +140,27 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.match(page, /error\?\.code==='email_domain_validation_unavailable'/);
   assert.match(page, /No pudimos verificar que este dominio de correo pueda recibir mensajes/);
   assert.match(page, /We could not verify that this email domain can receive messages/);
+});
+
+test('private LOGOS reuses registration, email verification and Ticket Tailor checkout', () => {
+  const page = read('inscripcion/index.html');
+  const commerce = read('assets/hmp-commerce.js');
+  const confirmation = read('inscripcion/confirmacion/index.html');
+
+  assert.match(commerce, /'hmp-logos-2026-08-07'/);
+  assert.match(commerce, /'es-1600-cr': '8828041'/);
+  assert.match(commerce, /private: true/);
+  assert.match(commerce, /free: true/);
+  assert.match(page, /INSCRIPCIÓN PRIVADA GRATUITA/);
+  assert.match(page, /Reservá tu entrada gratuita/);
+  assert.match(page, /No se solicita tarjeta/);
+  assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
+  assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
+  assert.match(page, /window\.HMPCommerce\.mountCheckoutWidget\(widget,payload,result\.checkout/);
+  assert.match(confirmation, /context\?\.event_code === 'hmp-logos-2026-08-07'/);
+  assert.match(confirmation, /Reserva confirmada/);
+  assert.match(confirmation, /tu entrada no tiene costo y no se solicita tarjeta/);
+  assert.match(confirmation, /if \(result\.purchase\) announcePurchase\(result\.purchase\)/);
 });
 
 test('confirmation starts neutral and unlocks content from canonical status', () => {
