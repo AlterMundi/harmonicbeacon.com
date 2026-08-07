@@ -33,10 +33,12 @@ if (fs.existsSync('assets')) {
   console.log('✓ Copiado: assets/');
 }
 
-// Copiar la landing de inscripción y conservar la ruta /inscripcion/
-if (fs.existsSync('inscripcion')) {
-  copyRecursiveSync('inscripcion', path.join('dist', 'inscripcion'));
-  console.log('✓ Copiado: inscripcion/');
+// Copiar las landings activas y conservar sus rutas públicas exactas.
+for (const directory of ['inscripcion', 'logos']) {
+  if (fs.existsSync(directory)) {
+    copyRecursiveSync(directory, path.join('dist', directory));
+    console.log(`✓ Copiado: ${directory}/`);
+  }
 }
 
 // Conservar la política vigente y sus evidencias legales versionadas.
