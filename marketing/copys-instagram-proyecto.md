@@ -12,7 +12,7 @@ Hay un umbral entre el ruido del día a día y tu propio silencio.
 
 **Harmonic Myth Projection** es una propuesta de bienestar que combina dos cosas que raramente se encuentran: una condición acústica cuidada y un método simbólico con linaje.
 
-La experiencia grupal dura entre 75 y 120 minutos. No usa sustancias. No es terapia. Es exploración, sostenida por el campo armónico del **Harmonic Beacon**.
+La experiencia grupal dura entre 75 y 120 minutos. No es terapia: es exploración sostenida por el campo armónico del **Harmonic Beacon**.
 
 Tres fases, un descenso:
 
