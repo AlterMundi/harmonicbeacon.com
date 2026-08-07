@@ -2,7 +2,6 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
-const vm = require('node:vm');
 
 const root = path.join(__dirname, '..');
 const page = fs.readFileSync(path.join(root, 'logos', 'index.html'), 'utf8');
@@ -18,32 +17,31 @@ test('LOGOS is an unindexed, exact private invitation', () => {
   assert.match(page, /1 entrada por persona/);
 });
 
-test('LOGOS delegates the invitation-code decision to Ticket Tailor', () => {
-  assert.match(page, /checkout\/view-event\/id\/8828041\/chk\/fb1863e90b9a180488f50d379bb75b49\//);
-  assert.match(page, /https:\/\/cdn\.tickettailor\.com\/js\/widgets\/min\/widget\.js/);
-  assert.match(page, /script\.setAttribute\('data-type', 'inline'\)/);
-  assert.match(page, /id="ticketTailorWidget"/);
-  assert.match(page, /Ingresá el código privado directamente en Ticket Tailor/);
-  assert.match(page, /showCheckout\(\);/);
-  assert.doesNotMatch(page, /id="accessForm"|id="accessCode"/);
-  assert.doesNotMatch(page, /searchParams\.set\('a'/);
-  assert.doesNotMatch(page, /window\.location\.assign/);
+test('LOGOS enters the canonical Harmonic Beacon registration flow', () => {
+  assert.match(page, /href="\/inscripcion\/\?fecha=logos-2026-08-07&amp;idioma=es"/);
+  assert.match(page, /Completá la inscripción en Harmonic Beacon/);
+  assert.match(page, /elegí LOGOS y confirmá tu correo/);
+  assert.match(page, /volver a nuestra página de confirmación/);
+  assert.match(page, /no se solicita tarjeta/);
+  assert.doesNotMatch(page, /cdn\.tickettailor\.com|ticketTailorWidget|showCheckout/);
+  assert.doesNotMatch(page, /checkout\/view-event|id="accessForm"|id="accessCode"/);
   assert.doesNotMatch(page, /LOGOS-[A-Z0-9]{8}/);
   assert.doesNotMatch(page, /LOGOS100/);
 });
 
-test('LOGOS inline controller compiles', () => {
+test('LOGOS has no duplicate inline checkout controller', () => {
   const scripts = [...page.matchAll(/<script>([\s\S]*?)<\/script>/g)];
-  assert.equal(scripts.length, 1);
-  assert.doesNotThrow(() => new vm.Script(scripts[0][1], {filename: 'logos/index.html#controller'}));
+  assert.equal(scripts.length, 0);
 });
 
 test('LOGOS remains absent from public navigation and event listings', () => {
-  for (const relative of ['index.html', 'eventos/index.html', 'inscripcion/index.html']) {
+  for (const relative of ['index.html', 'eventos/index.html']) {
     const publicPage = fs.readFileSync(path.join(root, relative), 'utf8');
     assert.doesNotMatch(publicPage, /href=["']\/logos\/?["']/);
     assert.doesNotMatch(publicPage, /hmp-logos-2026-08-07/);
   }
+  const registration = fs.readFileSync(path.join(root, 'inscripcion', 'index.html'), 'utf8');
+  assert.doesNotMatch(registration, /href=["']\/logos\/?["']/);
 });
 
 test('the production build includes the private LOGOS route', () => {

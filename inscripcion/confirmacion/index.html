@@ -668,7 +668,7 @@
     <ol class="confirmation-progress" id="confirmationProgress" aria-label="Progreso de inscripción">
       <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Datos y sesión</span><span data-copy="en">Details and session</span></strong></li>
       <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Email confirmado</span><span data-copy="en">Email confirmed</span></strong></li>
-      <li><span class="confirmation-progress-number">✓</span><strong><span data-copy="es">Entrada y pago</span><span data-copy="en">Ticket and payment</span></strong></li>
+      <li><span class="confirmation-progress-number">✓</span><strong><span id="confirmationTicketEs" data-copy="es">Entrada y pago</span><span id="confirmationTicketEn" data-copy="en">Ticket and payment</span></strong></li>
       <li aria-current="step"><span class="confirmation-progress-number">04</span><strong><span data-copy="es">Confirmación</span><span data-copy="en">Confirmation</span></strong></li>
     </ol>
 
@@ -720,8 +720,8 @@
               <div>
                 <h3 data-copy="es">Tu acceso online llega por email</h3>
                 <h3 data-copy="en">Your online access arrives by email</h3>
-                <p data-copy="es">Una vez confirmado el pago, recibirás por correo el enlace de acceso y la información necesaria para participar.</p>
-                <p data-copy="en">Once payment is confirmed, you will receive the access link and everything you need to participate by email.</p>
+                <p id="confirmationAccessEs" data-copy="es">Una vez confirmado el pago, recibirás por correo el enlace de acceso y la información necesaria para participar.</p>
+                <p id="confirmationAccessEn" data-copy="en">Once payment is confirmed, you will receive the access link and everything you need to participate by email.</p>
               </div>
             </li>
             <li class="step">
@@ -735,8 +735,8 @@
             </li>
           </ol>
 
-          <p class="important" data-copy="es"><strong>Importante:</strong> no necesitás pagar otra vez. Si no ves los correos, revisá Spam y Promociones.</p>
-          <p class="important" data-copy="en"><strong>Important:</strong> you do not need to pay again. If you cannot see the emails, check Spam and Promotions.</p>
+          <p class="important" id="confirmationImportantEs" data-copy="es"><strong>Importante:</strong> no necesitás pagar otra vez. Si no ves los correos, revisá Spam y Promociones.</p>
+          <p class="important" id="confirmationImportantEn" data-copy="en"><strong>Important:</strong> you do not need to pay again. If you cannot see the emails, check Spam and Promotions.</p>
         </section>
 
         <aside class="card details" aria-labelledby="details-title">
@@ -747,21 +747,21 @@
             <div class="fact">
               <dt data-copy="es">Experiencia</dt>
               <dt data-copy="en">Experience</dt>
-              <dd>Harmonic Myth Projection</dd>
+              <dd id="confirmationExperience">Harmonic Myth Projection</dd>
             </div>
             <div class="fact">
               <dt data-copy="es">Fecha</dt>
               <dt data-copy="en">Date</dt>
-              <dd data-copy="es">Sábado 8 de agosto de 2026</dd>
-              <dd data-copy="en">Saturday, August 8, 2026</dd>
+              <dd id="confirmationDateEs" data-copy="es">Sábado 8 de agosto de 2026</dd>
+              <dd id="confirmationDateEn" data-copy="en">Saturday, August 8, 2026</dd>
             </div>
             <div class="fact session-es">
               <dt>Sesión</dt>
-              <dd>Español · 08:30<br>US$20</dd>
+              <dd id="confirmationSessionEs">Español · 08:30<br>US$20</dd>
             </div>
             <div class="fact session-en">
               <dt>Session</dt>
-              <dd>English · 14:00<br>US$50</dd>
+              <dd id="confirmationSessionEn">English · 14:00<br>US$50</dd>
             </div>
             <div class="fact">
               <dt data-copy="es">Zona horaria</dt>
@@ -820,6 +820,7 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const context = window.HMPCommerce.readStatusContext();
+    const freeRegistration = context?.event_code === 'hmp-logos-2026-08-07';
     const initialLanguage = params.get('lang') === 'en' || (!params.get('lang') && context?.locale === 'en') ? 'en' : 'es';
     const rawOrderId = params.get('tt_order_id');
     const orderId = rawOrderId && /^(or_)?[0-9]{1,32}$/.test(rawOrderId) ? rawOrderId : null;
@@ -865,9 +866,35 @@
       }
     };
 
+    const freeMessages = {
+      es: {
+        VERIFYING: ['Verificando reserva', 'Un momento.', 'Estamos consultando el estado real de tu reserva gratuita.', 'verificando'],
+        PAYMENT_CONFIRMED: ['Reserva confirmada', 'Gracias.', 'Recibimos tu reserva gratuita. Tu lugar está guardado y toda la información llegará a tu correo.', 'reserva confirmada'],
+        ACCESS_READY: ['Acceso preparado', 'Gracias.', 'Tu reserva gratuita está confirmada y enviamos el acceso online a tu correo.', 'ya estás adentro'],
+        REVIEW_REQUIRED: ['Revisión necesaria', 'Te ayudamos.', 'Encontramos una diferencia en la reserva. No la repitas: escribinos para revisarla.', 'en revisión'],
+        NOT_PAID: ['Reserva no confirmada', 'Todavía no.', 'No encontramos una reserva gratuita confirmada. Si la completaste, escribinos y lo revisamos.', 'sin confirmar'],
+        REVOKED: ['Acceso revocado', 'Estado actualizado.', 'La entrada fue anulada. Escribinos si necesitás ayuda.', 'revocado'],
+        CONTEXT_MISSING: ['No pudimos verificar', 'Revisá tu correo.', 'Esta pestaña no conserva la referencia privada necesaria. No repitas la reserva; revisá Ticket Tailor o escribinos.', 'sin referencia'],
+        STATUS_TIMEOUT: ['La verificación tardó demasiado', 'Podés reintentar.', 'Tu referencia privada sigue segura en esta pestaña. Reintentar no crea otra reserva.', 'demorado'],
+        UNAVAILABLE: ['Verificación demorada', 'Seguimos procesando.', 'No pudimos consultar el estado ahora. Revisá tu correo de Ticket Tailor o escribinos.', 'demorado']
+      },
+      en: {
+        VERIFYING: ['Verifying booking', 'One moment.', 'We are checking the canonical status of your free booking.', 'verifying'],
+        PAYMENT_CONFIRMED: ['Booking confirmed', 'Thank you.', 'We received your free booking. Your place is reserved and all information will arrive by email.', 'booking confirmed'],
+        ACCESS_READY: ['Access ready', 'Thank you.', 'Your free booking is confirmed, and we sent the online access link to your email.', 'you are in'],
+        REVIEW_REQUIRED: ['Review required', 'We can help.', 'We found a mismatch in the booking. Do not repeat it; contact us so we can review it.', 'under review'],
+        NOT_PAID: ['Booking not confirmed', 'Not yet.', 'We did not find a confirmed free booking. If you completed it, contact us and we will review it.', 'not confirmed'],
+        REVOKED: ['Access revoked', 'Status updated.', 'The ticket was cancelled. Contact us if you need help.', 'revoked'],
+        CONTEXT_MISSING: ['Unable to verify', 'Check your email.', 'This tab no longer has the private reference required. Do not book again; check Ticket Tailor or contact us.', 'no reference'],
+        STATUS_TIMEOUT: ['Verification took too long', 'You can retry.', 'Your private reference is still safe in this tab. Retrying will not create another booking.', 'delayed'],
+        UNAVAILABLE: ['Verification delayed', 'Still processing.', 'We could not check the status now. Check your Ticket Tailor email or contact us.', 'delayed']
+      }
+    };
+
     function renderState(state) {
       currentState = state;
-      const text = messages[document.documentElement.dataset.lang][state] || messages.es.UNAVAILABLE;
+      const copy = freeRegistration ? freeMessages : messages;
+      const text = copy[document.documentElement.dataset.lang][state] || copy.es.UNAVAILABLE;
       statusLabel.textContent = text[0];
       pageTitle.textContent = text[1];
       pageLead.textContent = text[2];
@@ -890,8 +917,8 @@
       document.documentElement.lang = language;
       document.querySelector('#confirmationProgress').setAttribute('aria-label', language === 'en' ? 'Registration progress' : 'Progreso de inscripción');
       document.title = language === 'en'
-        ? 'Purchase status · Harmonic Beacon'
-        : 'Estado de compra · Harmonic Beacon';
+        ? `${freeRegistration ? 'Booking' : 'Purchase'} status · Harmonic Beacon`
+        : `${freeRegistration ? 'Estado de reserva' : 'Estado de compra'} · Harmonic Beacon`;
 
       document.querySelectorAll('[data-lang-button]').forEach((button) => {
         button.setAttribute('aria-pressed', String(button.dataset.langButton === language));
@@ -906,6 +933,20 @@
     document.querySelectorAll('[data-lang-button]').forEach((button) => {
       button.addEventListener('click', () => setLanguage(button.dataset.langButton));
     });
+
+    if (freeRegistration) {
+      document.querySelector('#confirmationTicketEs').textContent = 'Entrada gratuita';
+      document.querySelector('#confirmationTicketEn').textContent = 'Free ticket';
+      document.querySelector('#confirmationAccessEs').textContent = 'Una vez confirmada la reserva gratuita, recibirás por correo el enlace de acceso y la información necesaria para participar.';
+      document.querySelector('#confirmationAccessEn').textContent = 'Once the free booking is confirmed, you will receive the access link and everything you need to participate by email.';
+      document.querySelector('#confirmationImportantEs').innerHTML = '<strong>Importante:</strong> tu entrada no tiene costo y no se solicita tarjeta. Si no ves los correos, revisá Spam y Promociones.';
+      document.querySelector('#confirmationImportantEn').innerHTML = '<strong>Important:</strong> your ticket is free and no card is required. If you cannot see the emails, check Spam and Promotions.';
+      document.querySelector('#confirmationExperience').textContent = 'LOGOS · Harmonic Myth Projection';
+      document.querySelector('#confirmationDateEs').textContent = 'Viernes 7 de agosto de 2026';
+      document.querySelector('#confirmationDateEn').textContent = 'Friday, August 7, 2026';
+      document.querySelector('#confirmationSessionEs').innerHTML = 'LOGOS · 16:00<br>GRATIS';
+      document.querySelector('#confirmationSessionEn').innerHTML = 'LOGOS · 16:00<br>FREE';
+    }
 
     if (orderId) orderReference.style.display = 'block';
     setLanguage(initialLanguage);

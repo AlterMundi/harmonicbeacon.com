@@ -250,18 +250,41 @@ test('matches the stable registration catalog contract and rejects series ids', 
   assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['en-1400-cr'], sessions['en-1400-cr'].ticket_tailor_checkout_event_id);
   const august9 = contract.events['hmp-2026-08-09'].sessions;
   assert.equal(api.CHECKOUTS['hmp-2026-08-09'].sessions['en-1600-cr'], august9['en-1600-cr'].ticket_tailor_checkout_event_id);
+  assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].sessions['es-1600-cr'], '8828041');
+  assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].free, true);
+  assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].private, true);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '2334890'), payload, checkout), false);
+});
+
+test('accepts only the signed LOGOS checkout for the private free registration', () => {
+  const {api} = runtime(async () => {});
+  const logosPayload = {
+    ...payload,
+    event_code: 'hmp-logos-2026-08-07',
+    session_code: 'es-1600-cr'
+  };
+  const logosCheckout = {
+    metadata_name: 'registration_context',
+    metadata_value: checkoutContext,
+    widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8828041/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+  };
+
+  assert.equal(api.validCheckoutUrl(logosCheckout.widget_url, logosPayload, logosCheckout), true);
+  assert.equal(api.validCheckoutUrl(logosCheckout.widget_url.replace('8828041', '8804105'), logosPayload, logosCheckout), false);
 });
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.registrationEvent('2026-08-08').date, '2026-08-08');
   assert.equal(api.registrationEvent('2026-08-09').date, '2026-08-09');
+  assert.equal(api.registrationEvent('logos-2026-08-07').date, 'logos-2026-08-07');
   assert.equal(api.registrationEvent('2026-08-01'), null);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'unknown'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-09', 'en-1600-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-09', 'es-0830-cr'), false);
+  assert.equal(api.supportedRegistration('hmp-logos-2026-08-07', 'es-1600-cr'), true);
+  assert.equal(api.supportedRegistration('hmp-logos-2026-08-07', 'en-1600-cr'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-01', 'es-0830-cr'), false);
 });
 
