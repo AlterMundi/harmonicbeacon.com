@@ -8,21 +8,23 @@ const page = fs.readFileSync(path.join(root, 'logos', 'index.html'), 'utf8');
 
 test('LOGOS is an unindexed, exact private invitation', () => {
   assert.match(page, /name="robots" content="noindex, nofollow, noarchive"/);
-  assert.match(page, /invitación privada para LOGOS/);
+  assert.match(page, /<html lang="en">/);
+  assert.match(page, /private invitation for LOGOS/);
   assert.match(page, /Harmonic Myth Projection/);
-  assert.match(page, /viernes 7 de agosto/);
-  assert.match(page, /<strong>16:00<\/strong><span>Costa Rica<\/span>/);
+  assert.match(page, /Friday, August 7/);
+  assert.match(page, /<strong>4:00 PM<\/strong><span>to be confirmed with LOGOS<\/span>/);
   assert.match(page, /<strong>virtual<\/strong>/);
-  assert.match(page, /<strong>sin costo<\/strong>/);
-  assert.match(page, /1 entrada por persona/);
+  assert.match(page, /<strong>free<\/strong>/);
+  assert.match(page, /1 ticket per person/);
 });
 
 test('LOGOS enters the canonical Harmonic Beacon registration flow', () => {
-  assert.match(page, /href="\/inscripcion\/\?fecha=logos-2026-08-07&amp;idioma=es"/);
-  assert.match(page, /Completá la inscripción en Harmonic Beacon/);
-  assert.match(page, /elegí LOGOS y confirmá tu correo/);
-  assert.match(page, /volver a nuestra página de confirmación/);
-  assert.match(page, /no se solicita tarjeta/);
+  assert.match(page, /href="\/inscripcion\/\?fecha=logos-2026-08-07&amp;idioma=en"/);
+  assert.match(page, /Complete your registration with Harmonic Beacon/);
+  assert.match(page, /choose LOGOS and confirm your email/);
+  assert.match(page, /return to our confirmation page/);
+  assert.match(page, /no card required/);
+  assert.doesNotMatch(page, /idioma=es|invitación|viernes|sin costo|entrada por persona/);
   assert.doesNotMatch(page, /cdn\.tickettailor\.com|ticketTailorWidget|showCheckout/);
   assert.doesNotMatch(page, /checkout\/view-event|id="accessForm"|id="accessCode"/);
   assert.doesNotMatch(page, /LOGOS-[A-Z0-9]{8}/);
