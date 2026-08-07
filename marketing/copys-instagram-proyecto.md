@@ -1,7 +1,7 @@
 # Copys para Instagram — Harmonic Beacon (proyecto)
 
 > Voz de marca: sensorial, sobria, bilingüe. Frases madre cortas con una itálica clave.
-> NUNCA "tratamiento", "cura" ni claims médicos. Siempre "bienestar y exploración".
+> NUNCA "tratamiento", "cura" ni claims médicos. Hablar de escucha, presencia y exploración.
 > Fuentes verificadas: harmonicbeacon.com, harmonicbeacon.com/el-beacon/, hit.altermundi.net, y documento técnico de N. Echániz / M. Fernández Méndez.
 
 ---
@@ -10,7 +10,7 @@
 
 Hay un umbral entre el ruido del día a día y tu propio silencio.
 
-**Harmonic Myth Projection** es una propuesta de bienestar que combina dos cosas que raramente se encuentran: una condición acústica cuidada y un método simbólico con linaje.
+**Harmonic Myth Projection** es una experiencia guiada que combina dos cosas que raramente se encuentran: una condición acústica cuidada y un método simbólico con linaje.
 
 La experiencia grupal dura entre 75 y 120 minutos. No es terapia: es exploración sostenida por el campo armónico del **Harmonic Beacon**.
 
@@ -27,13 +27,13 @@ El resultado no es un diagnóstico ni una cura. Es una experiencia donde lo simb
 Si querés entender cómo se ofrece y en qué espacios encaja:
 🔗 **harmonicbeacon.com**
 
-#HarmonicMythProjection #ProyecciónArmónica #HarmonicBeacon #Bienestar #Exploración #ImaginaciónActiva #Psicodrama #Jung #ViajeDelHéroe #AlterMundi
+#HarmonicMythProjection #ProyecciónArmónica #HarmonicBeacon #Exploración #ImaginaciónActiva #Psicodrama #Jung #ViajeDelHéroe #AlterMundi
 
 ---
 
 ## POST 2 — El proyecto Harmonic Beacon y la web
 
-**Harmonic Beacon** es un programa de investigación en bienestar armónico de la Asociación Civil **AlterMundi**.
+**Harmonic Beacon** es un programa de investigación armónica de la Asociación Civil **AlterMundi**.
 
 No es un producto genérico. Es un lugar donde la física acústica, la escucha corporal y el significado personal se cruzan.
 
@@ -41,7 +41,7 @@ El proyecto se sostiene en tres pilares:
 
 · **The Beacon** — una sonda experiencial y fisiológica que sostiene un campo armónico vivo. No emite una frecuencia: sostiene proporciones, resonancias e interferencias.
 
-· **Harmonic Myth Projection** — un viaje grupal de bienestar y símbolo dentro de ese campo.
+· **Harmonic Myth Projection** — un viaje grupal de escucha y símbolo dentro de ese campo.
 
 · **Harmonic Information Theory** — el marco teórico que estudia si las relaciones proporcionales entre frecuencias pueden actuar como principio organizador en la computación, la percepción y la experiencia.
 
@@ -74,7 +74,7 @@ Más detalle:
 🔗 **harmonicbeacon.com/el-beacon**
 📖 **hit.altermundi.net**
 
-#HarmonicBeacon #CampoArmónico #SerieArmónicaNatural #Consonancia #HarmonicInformationTheory #HIT #Sonido #Bienestar #Exploración #AlterMundi
+#HarmonicBeacon #CampoArmónico #SerieArmónicaNatural #Consonancia #HarmonicInformationTheory #HIT #Sonido #Exploración #AlterMundi
 
 ---
 
@@ -88,5 +88,5 @@ Más detalle:
   - Post 3: Beacon, Lissajous o detalle de la cuerda resonante.
 - **Stories derivadas:** frases cortas tipo:
   - "No es una frecuencia. Es un campo."
-  - "Bienestar armónico, no terapia."
+  - "Escucha y exploración, no terapia."
   - "La consonancia como organización eficiente."
