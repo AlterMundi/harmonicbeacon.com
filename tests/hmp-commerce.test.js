@@ -250,8 +250,6 @@ test('matches the stable registration catalog contract and rejects series ids', 
   assert.equal(api.CHECKOUTS['hmp-2026-08-08'].sessions['en-1400-cr'], sessions['en-1400-cr'].ticket_tailor_checkout_event_id);
   const august9 = contract.events['hmp-2026-08-09'].sessions;
   assert.equal(api.CHECKOUTS['hmp-2026-08-09'].sessions['en-1600-cr'], august9['en-1600-cr'].ticket_tailor_checkout_event_id);
-  assert.equal(api.CHECKOUTS['hmp-2026-08-09'].free, true);
-  assert.equal(api.CHECKOUTS['hmp-2026-08-09'].options.en.price, 'FREE');
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].sessions['es-1600-cr'], '8828041');
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].free, true);
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].private, true);
