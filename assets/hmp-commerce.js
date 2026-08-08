@@ -45,11 +45,12 @@
       date: '2026-08-09',
       label_es: 'domingo 9 de agosto',
       label_en: 'Sunday, August 9',
+      free: true,
       sessions: Object.freeze({
         'en-1600-cr': '8820853'
       }),
       options: Object.freeze({
-        en: Object.freeze({ session_code: 'en-1600-cr', label: 'English · 16:00 Costa Rica · US$50', time: '16:00', price: 'US$50' })
+        en: Object.freeze({ session_code: 'en-1600-cr', label: 'English · 16:00 Costa Rica · FREE', time: '16:00', price: 'FREE' })
       })
     }),
     'hmp-logos-2026-08-07': Object.freeze({

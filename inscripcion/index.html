@@ -197,11 +197,11 @@
         <ol class="flow-progress" id="registrationProgress" aria-label="Progreso de inscripción">
           <li data-flow-step="1" class="is-active" aria-current="step"><span class="flow-progress-number">01</span><span class="flow-progress-copy"><strong><span data-copy="es">Datos y sesión</span><span data-copy="en">Details and session</span></strong><small><span data-copy="es">Tu reserva</span><span data-copy="en">Your booking</span></small></span></li>
           <li data-flow-step="2"><span class="flow-progress-number">02</span><span class="flow-progress-copy"><strong><span data-copy="es">Confirmá tu email</span><span data-copy="en">Confirm your email</span></strong><small><span data-copy="es">Código de 6 dígitos</span><span data-copy="en">6-digit code</span></small></span></li>
-          <li data-flow-step="3"><span class="flow-progress-number">03</span><span class="flow-progress-copy"><strong><span id="ticketStepEs" data-copy="es">Entrada y pago</span><span id="ticketStepEn" data-copy="en">Ticket and payment</span></strong><small>Ticket Tailor</small></span></li>
+          <li data-flow-step="3"><span class="flow-progress-number">03</span><span class="flow-progress-copy"><strong><span id="ticketStepEs" data-copy="es">Entrada gratuita</span><span id="ticketStepEn" data-copy="en">Free ticket</span></strong><small>Ticket Tailor</small></span></li>
           <li data-flow-step="4"><span class="flow-progress-number">04</span><span class="flow-progress-copy"><strong><span data-copy="es">Confirmación</span><span data-copy="en">Confirmation</span></strong><small><span data-copy="es">Todo por email</span><span data-copy="en">Everything by email</span></small></span></li>
         </ol>
         <div class="session-zone">
-          <div id="registrationIntro"><h3 data-copy="es">Datos y sesión</h3><h3 data-copy="en">Details and session</h3><p class="form-intro" id="introCopyEs" data-copy="es">Primero dejanos tu nombre y correo. Después elegí el idioma, revisá el horario y el precio.</p><p class="form-intro" id="introCopyEn" data-copy="en">First leave your name and email. Then choose the language and review the time and price.</p><p class="timezone"><span data-copy="es">PASO 1 DE 4 · TODAVÍA NO SE REALIZA NINGÚN PAGO</span><span data-copy="en">STEP 1 OF 4 · NO PAYMENT IS MADE YET</span></p></div>
+          <div id="registrationIntro"><h3 data-copy="es">Datos y sesión</h3><h3 data-copy="en">Details and session</h3><p class="form-intro" id="introCopyEs" data-copy="es">Primero dejanos tu nombre y correo. Después elegí el idioma y revisá el horario.</p><p class="form-intro" id="introCopyEn" data-copy="en">First leave your name and email. Then choose the language and review the time.</p><p class="timezone"><span data-copy="es">PASO 1 DE 4 · ESTA INSCRIPCIÓN ES GRATUITA</span><span data-copy="en">STEP 1 OF 4 · THIS REGISTRATION IS FREE</span></p></div>
           <div id="sessionStep" hidden><h3 data-copy="es">Elegí tu sesión</h3><h3 data-copy="en">Choose your session</h3><p class="form-intro" data-copy="es">Seleccioná el idioma y el horario. En el próximo paso vas a confirmar tu correo.</p><p class="form-intro" data-copy="en">Select the language and time. In the next step, you will confirm your email.</p><div class="session-list"><button class="session" type="button" data-session="es" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b data-option-name>ESPAÑOL</b><small><span data-option-detail data-copy="es">sábado · hora Costa Rica</span><span data-option-detail data-copy="en">Saturday · Costa Rica time</span></small></span><span class="session-side"><b>08:30</b><small>US$20</small></span></button><button class="session" type="button" data-session="en" aria-pressed="false"><span class="radio" aria-hidden="true"></span><span class="session-copy"><b data-option-name>ENGLISH</b><small><span data-option-detail data-copy="es">domingo · hora Costa Rica</span><span data-option-detail data-copy="en">Sunday · Costa Rica time</span></small></span><span class="session-side"><b>16:00</b><small>US$50</small></span></button></div><p class="timezone">◷ COSTA RICA · UTC−6</p><div class="session-stage-actions"><button class="cta submit" id="paymentButton" type="submit" form="registrationForm" hidden><span id="paymentButtonLabel">continuar</span><i>↗</i></button><button class="change-details" id="changeDetails" type="button"><span data-copy="es">Corregir mis datos</span><span data-copy="en">Edit my details</span></button></div></div>
         </div>
         <div class="form-zone">
@@ -216,7 +216,7 @@
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
             <div class="form-row"><label><span data-copy="es">nombre</span><span data-copy="en">first name</span><input name="firstName" autocomplete="given-name" required></label><label><span data-copy="es">apellido</span><span data-copy="en">last name</span><input name="lastName" autocomplete="family-name" required></label></div>
             <label><span data-copy="es">correo electrónico</span><span data-copy="en">email address</span><input type="email" name="email" autocomplete="email" required></label>
-            <p class="form-note"><span id="formNoteEs" data-copy="es">Ahí llegará la confirmación, el pago y el acceso. Revisá también spam y promociones.</span><span id="formNoteEn" data-copy="en">Confirmation, payment details and access will arrive there. Check spam and promotions too.</span></p>
+            <p class="form-note"><span id="formNoteEs" data-copy="es">Ahí llegarán la confirmación de tu reserva y el acceso. Revisá también spam y promociones.</span><span id="formNoteEn" data-copy="en">Your booking confirmation and access will arrive there. Check spam and promotions too.</span></p>
             <label class="consent"><input type="checkbox" name="registrationTermsAccepted" value="ACEPTO" required><span data-copy="es">Acepto los <a href="/politica/" target="_blank" rel="noopener">términos y la política de esta inscripción</a>.</span><span data-copy="en">I accept the <a href="/politica/" target="_blank" rel="noopener">terms and policy for this registration</a>.</span></label>
             <div id="hb-meta-consent-mount" aria-live="polite"></div>
             <button class="cta submit" id="continueButton" type="button"><span data-copy="es">continuar</span><span data-copy="en">continue</span><i>↗</i></button>
@@ -224,7 +224,7 @@
           </form>
           <section class="verification-step" id="emailVerificationStep" hidden aria-live="polite">
             <h3 data-copy="es">Confirmá tu correo</h3><h3 data-copy="en">Confirm your email</h3>
-            <p class="form-intro" id="verificationCopyEs" data-copy="es">Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar al pago.</p><p class="form-intro" id="verificationCopyEn" data-copy="en">We sent you a six-digit code. Enter it to confirm that the email belongs to you and continue to payment.</p>
+            <p class="form-intro" id="verificationCopyEs" data-copy="es">Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar a la entrada gratuita.</p><p class="form-intro" id="verificationCopyEn" data-copy="en">We sent you a six-digit code. Enter it to confirm that the email belongs to you and continue to the free ticket.</p>
             <strong class="verification-destination" id="verificationDestination"></strong>
             <form id="emailVerificationForm">
               <label><span data-copy="es">código de verificación</span><span data-copy="en">verification code</span><input id="verificationCode" name="verificationCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required></label>
@@ -234,7 +234,7 @@
           </section>
           <section class="checkout-step" id="checkoutStep" hidden aria-live="polite">
             <h3 id="checkoutTitleEs" data-copy="es">Elegí tu entrada y pagá</h3><h3 id="checkoutTitleEn" data-copy="en">Choose your ticket and pay</h3>
-            <p class="form-intro" id="checkoutCopyEs" data-copy="es">Tu inscripción quedó registrada. Elegí tu entrada y completá el pago en el formulario seguro de Ticket Tailor.</p><p class="form-intro" id="checkoutCopyEn" data-copy="en">Your registration is saved. Choose your ticket and complete payment in Ticket Tailor's secure form.</p>
+            <p class="form-intro" id="checkoutCopyEs" data-copy="es">Tu inscripción quedó registrada. Confirmá la entrada sin costo en el formulario seguro de Ticket Tailor. No se solicita tarjeta.</p><p class="form-intro" id="checkoutCopyEn" data-copy="en">Your registration is saved. Confirm the free ticket in Ticket Tailor's secure form. No card is required.</p>
             <div class="checkout-widget" id="ticketTailorWidget"></div>
           </section>
         </div>
@@ -269,17 +269,18 @@
     const params=new URLSearchParams(location.search),fecha=params.get('fecha')||'2026-08-09',catalogEvent=window.HMPCommerce.CHECKOUTS['hmp-'+fecha],eventConfig=window.HMPCommerce.registrationEvent(fecha),eventAvailable=registrationOpen&&Boolean(eventConfig);
     one('#registrationClosed').hidden=eventAvailable;one('#registrationFlow').hidden=!eventAvailable;
     one('#eventInProgressNotice').hidden=!window.HMPCommerce.eventInProgress('hmp-'+fecha);
-    function applyPrivateFreeCopy(){
+    function applyFreeCopy(){
       if(!catalogEvent?.free)return;
       document.documentElement.dataset.commerce='free';
-      one('#bookingModeEs').textContent='INSCRIPCIÓN PRIVADA GRATUITA';
-      one('#bookingModeEn').textContent='FREE PRIVATE REGISTRATION';
-      one('#bookingSummaryEs').textContent='Completá tus datos, elegí LOGOS y confirmá tu correo. Después reservá tu entrada gratuita en Ticket Tailor.';
-      one('#bookingSummaryEn').textContent='Complete your details, choose LOGOS and confirm your email. Then reserve your free ticket through Ticket Tailor.';
+      const privateEvent=catalogEvent.private===true;
+      one('#bookingModeEs').textContent=privateEvent?'INSCRIPCIÓN PRIVADA GRATUITA':'INSCRIPCIÓN GRATUITA';
+      one('#bookingModeEn').textContent=privateEvent?'FREE PRIVATE REGISTRATION':'FREE REGISTRATION';
+      one('#bookingSummaryEs').textContent=privateEvent?'Completá tus datos, elegí LOGOS y confirmá tu correo. Después reservá tu entrada gratuita en Ticket Tailor.':'Completá tus datos, elegí la sesión y confirmá tu correo. Después reservá tu entrada gratuita en Ticket Tailor.';
+      one('#bookingSummaryEn').textContent=privateEvent?'Complete your details, choose LOGOS and confirm your email. Then reserve your free ticket through Ticket Tailor.':'Complete your details, choose the session and confirm your email. Then reserve your free ticket through Ticket Tailor.';
       one('#ticketStepEs').textContent='Entrada gratuita';
       one('#ticketStepEn').textContent='Free ticket';
-      one('#introCopyEs').textContent='Primero dejanos tu nombre y correo. Después elegí LOGOS y revisá el horario de tu invitación gratuita.';
-      one('#introCopyEn').textContent='First leave your name and email. Then choose LOGOS and review the time of your free invitation.';
+      one('#introCopyEs').textContent=privateEvent?'Primero dejanos tu nombre y correo. Después elegí LOGOS y revisá el horario de tu invitación gratuita.':'Primero dejanos tu nombre y correo. Después elegí la sesión y revisá el horario de tu entrada gratuita.';
+      one('#introCopyEn').textContent=privateEvent?'First leave your name and email. Then choose LOGOS and review the time of your free invitation.':'First leave your name and email. Then choose the session and review the time of your free ticket.';
       one('#formNoteEs').textContent='Ahí llegarán la confirmación de tu reserva y el acceso. Revisá también spam y promociones.';
       one('#formNoteEn').textContent='Your booking confirmation and access will arrive there. Check spam and promotions too.';
       one('#verificationCopyEs').textContent='Te enviamos un código de seis dígitos. Ingresalo para confirmar que el correo es tuyo y continuar a la entrada gratuita.';
@@ -309,7 +310,7 @@
           if(option.detail_es||option.detail_en)button.querySelectorAll('[data-option-detail]').forEach(detail=>{detail.textContent=detail.dataset.copy==='en'?(option.detail_en||''):(option.detail_es||'')});
         }
       });
-      applyPrivateFreeCopy();
+      applyFreeCopy();
     }else{
       one('#eventCodeInput').value='';
       one('#dateEs').textContent='fecha aún no disponible';
