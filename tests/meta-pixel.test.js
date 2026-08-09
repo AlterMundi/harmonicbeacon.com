@@ -20,11 +20,37 @@ const purchase = {
   content_id: 'hmp-2026-08-08:es-0830-cr'
 };
 
+test('Meta is active only in the registration form; immutable legal snapshots stay inert', () => {
+  const root = path.join(__dirname, '..');
+  const pagesWithPixel = [];
+
+  function visit(directory) {
+    for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+      if (entry.name === '.git' || entry.name === 'dist' || entry.name === 'node_modules') continue;
+      const absolute = path.join(directory, entry.name);
+      if (entry.isDirectory()) visit(absolute);
+      if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+      if (fs.readFileSync(absolute, 'utf8').includes('/assets/meta-pixel.js')) {
+        pagesWithPixel.push(path.relative(root, absolute));
+      }
+    }
+  }
+
+  visit(root);
+  assert.deepEqual(pagesWithPixel.sort(), [
+    path.join('inscripcion', 'index.html'),
+    path.join('legal', 'terms', 'registration-v3.html'),
+    path.join('legal', 'terms', 'registration-v4.html'),
+    path.join('politica', 'index.html')
+  ]);
+  assert.match(source, /if \(!isRegistrationForm\) return;/);
+});
+
 function pixelRuntime(
   initialConsent = null,
   sessionValues = new Map(),
   localValues = new Map(),
-  {consentMount = false} = {}
+  {consentMount = false, pathname = '/inscripcion/'} = {}
 ) {
   if (initialConsent) localValues.set('hb-meta-consent', initialConsent);
   const listeners = new Map();
@@ -70,6 +96,7 @@ function pixelRuntime(
   };
   const window = {
     addEventListener: (type, callback) => listeners.set(type, callback),
+    location: {pathname},
     localStorage,
     sessionStorage
   };
@@ -100,6 +127,16 @@ function pixelRuntime(
     window
   };
 }
+
+test('an immutable legal page cannot activate Meta or render its consent control', () => {
+  const runtime = pixelRuntime('granted', new Map(), new Map(), {
+    pathname: '/legal/terms/registration-v4.html'
+  });
+
+  assert.equal(runtime.window.fbq, undefined);
+  assert.equal(runtime.insertedScripts.length, 0);
+  assert.equal(runtime.placements.length, 0);
+});
 
 test('registration page mounts a persistent consent checkbox inside its form', () => {
   const runtime = pixelRuntime(null, new Map(), new Map(), {consentMount: true});
