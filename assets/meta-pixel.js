@@ -1,6 +1,11 @@
 (() => {
   'use strict';
 
+  const registrationPath = /^\/inscripcion(?:\/index\.html)?\/?$/;
+  const isRegistrationForm = registrationPath.test(window.location?.pathname || '') ||
+    Boolean(document.querySelector('#hb-meta-consent-mount'));
+  if (!isRegistrationForm) return;
+
   const PIXEL_ID = '2232853310607122';
   const CONSENT_KEY = 'hb-meta-consent';
   const PENDING_KEY = 'hb-meta-pending-events-v1';
