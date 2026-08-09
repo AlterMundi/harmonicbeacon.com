@@ -200,8 +200,238 @@
     .slide{ transition:opacity .3s; transform:none; }
     .progress{ transition:none; }
   }
+
+  /* ==========================================================
+     V2 · Un deck como viaje: umbral, descenso y regreso
+     ========================================================== */
+  :root{
+    --amber:#D9AD56;
+    --cream:#F8F0DF;
+    --night:#0E0D0B;
+    --panel:rgba(20,17,13,.72);
+  }
+  body{ background:var(--night); }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(217,173,86,.09), transparent 30%),
+      radial-gradient(circle at 82% 78%, rgba(35,85,91,.12), transparent 34%);
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:50; pointer-events:none; opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+    mix-blend-mode:soft-light;
+  }
+  .deck{ background:linear-gradient(145deg,#11100d 0%,#18130e 52%,#0d1112 100%); }
+  .deck::before{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.48;
+    background:
+      radial-gradient(ellipse at 12% 0%,rgba(201,162,78,.13),transparent 33%),
+      radial-gradient(ellipse at 90% 100%,rgba(25,77,83,.15),transparent 38%);
+  }
+
+  .progress{ height:2px; background:linear-gradient(90deg,#725828,var(--gold-2),#fff1bf); }
+  .topbar{ padding:22px clamp(22px,4vw,58px); mix-blend-mode:normal; }
+  .brandmark{ gap:14px; }
+  .brandmark svg{ width:34px; height:34px; filter:drop-shadow(0 0 16px rgba(201,162,78,.25)); }
+  .brandmark .word{ font-size:11px; letter-spacing:.24em; }
+  .topright{ gap:26px; }
+  .langtoggle{ padding:3px; border:1px solid rgba(244,238,226,.1); border-radius:999px; background:rgba(11,10,8,.3); backdrop-filter:blur(10px); }
+  .langtoggle button{ min-width:32px; border-radius:999px; }
+  .home{ opacity:.72; }
+
+  .slide{
+    padding:92px clamp(32px,6vw,88px) 120px;
+    transform:translate3d(0,32px,0) scale(.985);
+    transition:opacity .75s var(--ease),transform .9s var(--ease),visibility .75s;
+  }
+  .slide.active{ transform:translate3d(0,0,0) scale(1); }
+  .inner{ max-width:1180px; position:relative; }
+  .slide-kicker{
+    position:absolute; top:-38px; left:0; display:flex; align-items:center; gap:12px;
+    color:var(--ink-500); font-size:9px; font-weight:600; letter-spacing:.24em; text-transform:uppercase;
+  }
+  .slide-kicker::before{ content:""; width:28px; height:1px; background:var(--gold); opacity:.7; }
+  .slide-index{
+    position:absolute; right:0; bottom:-30px; font-family:var(--font-serif); font-style:italic;
+    font-size:clamp(5rem,10vw,9rem); line-height:.7; color:rgba(244,238,226,.026); pointer-events:none;
+  }
+  .eyebrow{ margin:0 0 18px; font-size:9.5px; letter-spacing:.38em; }
+  h1.title{ font-size:clamp(3.6rem,7.4vw,7.2rem); letter-spacing:-.025em; line-height:.86; text-wrap:balance; }
+  h2.title{ font-size:clamp(2.7rem,5.4vw,5.4rem); letter-spacing:-.025em; line-height:.92; text-wrap:balance; }
+  .title .it{ margin-top:.06em; }
+  .lede{ font-size:clamp(1.15rem,2vw,1.55rem); color:var(--cream); }
+  hr.rule{ width:116px; opacity:.72; }
+  .body{ max-width:45ch; font-size:clamp(1.03rem,1.45vw,1.27rem); line-height:1.7; font-weight:400; color:rgba(248,240,223,.88); text-wrap:pretty; }
+
+  /* Portada y regreso */
+  .slide--title,.slide--outro{ isolation:isolate; }
+  .slide--title .inner,.slide--outro .inner{ max-width:1040px; padding:54px 7vw; }
+  .slide--title .inner::before,.slide--outro .inner::before{
+    content:""; position:absolute; inset:0; z-index:-1; border-radius:50%;
+    background:radial-gradient(ellipse,rgba(7,6,4,.75) 0%,rgba(7,6,4,.38) 46%,transparent 72%); filter:blur(8px);
+  }
+  .slide--title .eyebrow{ color:#f0c96f; }
+  .slide--title h1.title{ color:#f2cb70; text-shadow:0 4px 30px rgba(0,0,0,.42); }
+  .bgfull img{ transform:scale(1.035); transition:transform 8s var(--ease),filter 1s ease; }
+  .active .bgfull img{ transform:scale(1); }
+  .bgfull::after{
+    background:
+      linear-gradient(90deg,rgba(8,7,5,.54),transparent 24%,transparent 76%,rgba(8,7,5,.48)),
+      radial-gradient(55% 50% at 50% 49%,rgba(8,6,3,.5),transparent 72%),
+      linear-gradient(180deg,rgba(7,6,4,.3),rgba(7,6,4,.08) 48%,rgba(7,6,4,.66));
+  }
+
+  /* Slides editoriales: imagen y texto respiran lado a lado */
+  .slide--editorial .inner{
+    display:grid; grid-template-columns:minmax(0,1.14fr) minmax(320px,.86fr);
+    align-items:center; column-gap:clamp(42px,7vw,110px); text-align:left;
+  }
+  .slide--editorial .plate{ grid-column:1; grid-row:1 / span 6; width:100%; max-width:none; aspect-ratio:4/3; margin:0; border-radius:2px 80px 2px 2px; }
+  .slide--editorial .plate::before{
+    content:""; position:absolute; inset:18px -18px -18px 18px; z-index:-1;
+    border:1px solid rgba(201,162,78,.24); border-radius:2px 80px 2px 2px;
+  }
+  .slide--editorial .plate img{ transform:scale(1.02); transition:transform 1.5s var(--ease); }
+  .slide--editorial.active .plate img{ transform:scale(1); }
+  .slide--editorial .eyebrow,.slide--editorial .title,.slide--editorial .rule,.slide--editorial .body{ grid-column:2; }
+  .slide--editorial .title{ text-align:left; }
+  .slide--editorial hr.rule{ margin:25px 0; }
+  .slide--editorial:nth-of-type(even) .inner{ grid-template-columns:minmax(320px,.86fr) minmax(0,1.14fr); }
+  .slide--editorial:nth-of-type(even) .plate{ grid-column:2; border-radius:80px 2px 2px 2px; }
+  .slide--editorial:nth-of-type(even) .plate::before{ inset:18px 18px -18px -18px; border-radius:80px 2px 2px 2px; }
+  .slide--editorial:nth-of-type(even) .eyebrow,.slide--editorial:nth-of-type(even) .title,
+  .slide--editorial:nth-of-type(even) .rule,.slide--editorial:nth-of-type(even) .body{ grid-column:1; }
+
+  /* Escenas oscuras */
+  .slide--dark .inner{ max-width:980px; padding:clamp(34px,5vw,70px); }
+  .slide--dark .inner::before{
+    content:""; position:absolute; inset:0; z-index:-1; border:1px solid rgba(244,238,226,.08);
+    border-radius:34px; background:linear-gradient(145deg,rgba(244,238,226,.035),rgba(244,238,226,.012));
+    box-shadow:0 40px 100px rgba(0,0,0,.18); backdrop-filter:blur(4px);
+  }
+  .slide--dark .inner::after{
+    content:""; position:absolute; top:0; left:20%; right:20%; height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:.65;
+  }
+  .slide--dark .title{ max-width:14ch; }
+  .slide--dark .seq:not(.team){ width:100%; max-width:760px; }
+  .slide--dark .seq:not(.quotes) li{
+    display:grid; grid-template-columns:28px 1fr; gap:18px; text-align:left; padding:13px 0;
+    border-bottom:1px solid rgba(244,238,226,.07);
+  }
+  .slide--dark .seq:not(.quotes) li::before{ content:"✦"; color:var(--gold); font-size:10px; margin-top:.55em; }
+  .slide--dark .seq:not(.quotes) li:last-child{ border-bottom:0; }
+  .mark-liss{ filter:drop-shadow(0 0 20px rgba(201,162,78,.28)); }
+
+  /* El campo armónico: escena visual nueva */
+  .slide--visual{ align-items:flex-start; text-align:left; }
+  .slide--visual .bgfull img{ opacity:.82; }
+  .slide--visual .bgfull::after{
+    background:linear-gradient(90deg,rgba(8,8,7,.93) 0%,rgba(8,8,7,.76) 31%,rgba(8,8,7,.18) 68%,rgba(8,8,7,.28) 100%),
+      linear-gradient(0deg,rgba(8,8,7,.55),transparent 35%);
+  }
+  .slide--visual .inner{ align-items:flex-start; max-width:1180px; }
+  .slide--visual .title,.slide--visual .body{ max-width:10ch; text-align:left; }
+  .slide--visual .body{ max-width:38ch; }
+  .slide--visual hr.rule{ margin:24px 0; }
+
+  /* Testimonios */
+  .seq.quotes{ display:grid; grid-template-columns:1fr 1fr; gap:18px; width:100%; max-width:900px; }
+  .seq.quotes li{
+    min-height:190px; padding:34px; display:flex; align-items:center; position:relative; text-align:left;
+    border:1px solid rgba(201,162,78,.17); border-radius:24px 4px 24px 4px;
+    background:rgba(7,7,6,.18); font-size:clamp(1.25rem,2vw,1.65rem);
+  }
+  .seq.quotes li::before{ content:"“"; position:absolute; top:5px; left:18px; font-size:4rem; color:var(--gold); opacity:.18; }
+
+  /* Equipo */
+  .slide--dark .seq.team{ grid-template-columns:repeat(3,1fr); gap:1px; width:100%; max-width:1000px; }
+  .slide--dark .seq.team li{ display:block; padding:18px 20px; border:1px solid rgba(244,238,226,.07); background:rgba(0,0,0,.08); }
+  .slide--dark .seq.team li::before{ display:none; }
+  .seq.team .member{ font-size:1.08rem; }
+  .seq.team .desc{ font-size:.77rem; line-height:1.48; }
+  .scene-12 .inner{ padding:28px 70px 22px; }
+  .scene-12 h2.title{ font-size:clamp(2.4rem,4vw,4rem); }
+  .scene-12 hr.rule{ margin:14px auto; }
+  .scene-12 .seq.team li{ padding:13px 20px; }
+  .scene-12 .org{ margin-top:12px; }
+
+  /* Navegación compacta, como un instrumento */
+  .controls{ left:auto; right:clamp(22px,4vw,58px); bottom:clamp(22px,4vh,40px); padding:0; gap:8px; }
+  .deck-nav{ width:46px; height:46px; background:rgba(12,11,9,.5); }
+  .counter{ order:-1; margin-right:10px; }
+  .dots{ left:clamp(22px,4vw,58px); bottom:clamp(39px,5.3vh,56px); transform:none; gap:7px; }
+  .dots::before{ content:"JOURNEY"; margin-right:12px; color:var(--ink-500); font-size:8px; letter-spacing:.28em; line-height:7px; }
+  .dots button{ width:18px; height:2px; border-radius:0; background:rgba(244,238,226,.17); }
+  .dots button.on{ width:34px; height:2px; background:var(--gold-2); }
+  .hint{ display:none; }
+  .deck-nav:focus-visible,.dots button:focus-visible,.langtoggle button:focus-visible{
+    outline:2px solid var(--gold-2); outline-offset:4px;
+  }
+
+  @media (max-width:900px){
+    .slide{ padding:90px 26px 122px; }
+    h1.title{ font-size:clamp(3rem,10vw,5.2rem); }
+    h2.title{ font-size:clamp(2.2rem,7vw,3.8rem); }
+    .slide--editorial .inner,.slide--editorial:nth-of-type(even) .inner{ grid-template-columns:1fr 1fr; gap:32px; }
+    .slide--dark .seq.team{ grid-template-columns:repeat(2,1fr); }
+    .slide--dark .inner{ padding:32px; }
+  }
+  @media (max-width:640px){
+    .topbar{ padding:18px; }
+    .brandmark .word{ font-size:9px; }
+    .home{ display:none; }
+    .slide{ justify-content:flex-start; padding:84px 18px 112px; }
+    .inner{ max-width:100%; }
+    .slide-kicker,.slide-index{ display:none; }
+    h1.title{ font-size:clamp(2.8rem,14vw,4.3rem); line-height:.9; }
+    h2.title{ font-size:clamp(2.25rem,11vw,3.35rem); }
+    .slide--title,.slide--outro{ justify-content:center; }
+    .slide--title .inner,.slide--outro .inner{ padding:24px 0; }
+    .slide--editorial .inner,.slide--editorial:nth-of-type(even) .inner{ display:flex; gap:0; text-align:left; }
+    .slide--editorial .plate,.slide--editorial:nth-of-type(even) .plate{ width:100%; height:auto; aspect-ratio:16/9; margin:0 0 26px; border-radius:2px 38px 2px 2px; order:-1; }
+    .slide--editorial .plate::before{ display:none; }
+    .slide--editorial .title{ width:100%; }
+    .slide--editorial .body{ font-size:.97rem; line-height:1.55; }
+    .slide--dark .inner{ padding:24px 18px; }
+    .slide--dark .inner::before{ border-radius:22px; }
+    .slide--dark .seq:not(.quotes) li{ padding:9px 0; gap:10px; grid-template-columns:18px 1fr; font-size:.96rem; }
+    .seq.quotes{ grid-template-columns:1fr; gap:10px; }
+    .seq.quotes li{ min-height:auto; padding:22px; font-size:1.12rem; }
+    .slide--dark .seq.team{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .slide--dark .seq.team li{ min-width:0; padding:10px; }
+    .seq.team .member{ font-size:.92rem; overflow-wrap:anywhere; }
+    .seq.team .role{ font-size:8px; letter-spacing:.08em; overflow-wrap:anywhere; }
+    .seq.team .desc{ display:none; }
+    .scene-12 .inner{ padding:22px 16px; }
+    .scene-12 h2.title{ font-size:2.25rem; }
+    .scene-12 hr.rule{ margin:10px auto; }
+    .slide--visual .bgfull::after{ background:linear-gradient(180deg,rgba(8,8,7,.35),rgba(8,8,7,.82) 45%,rgba(8,8,7,.96)); }
+    .slide--visual{ justify-content:flex-end; }
+    .slide--visual .inner{ padding-bottom:10px; }
+    .slide--visual .title{ max-width:12ch; }
+    .dots{ left:18px; bottom:42px; max-width:45vw; overflow:hidden; }
+    .dots::before{ display:none; }
+    .dots button{ min-width:8px; width:8px; }
+    .dots button.on{ min-width:22px; width:22px; }
+    .controls{ right:18px; bottom:22px; }
+    .counter{ display:none; }
+  }
+  @media (max-height:720px) and (min-width:641px){
+    .slide{ padding-top:72px; padding-bottom:86px; }
+    .slide--editorial .plate{ height:min(52vh,390px); width:100%; max-height:none; }
+    .slide--dark .inner{ padding:24px 38px; }
+    .slide--dark .seq.team li{ padding:10px 14px; }
+    .seq.team .desc{ display:none; }
+    .seq.quotes li{ min-height:140px; padding:26px; }
+    .dots{ bottom:31px; }
+    .controls{ bottom:16px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .bgfull img,.slide--editorial .plate img{ transition:none; transform:none; }
+  }
 </style>
-  <script src="/assets/meta-pixel.js" defer></script>
 </head>
 <body class="antialiased">
 
@@ -310,7 +540,7 @@ const SLIDES = [
        en:"<span class='accent'>Symbolic structure through prompts:</span> A methodological scaffolding designed to evoke, hold, and open the space for one's own meaning to emerge."}
     ] },
 
-  { type:"dark", rings:true,
+  { type:"visual", img:"harmonic-field-v2",
     eyebrow:{es:"El Beacon",en:"The Beacon"},
     title:{es:"Proporciones,",en:"Proportions,"},
     titleIt:{es:"no frecuencias",en:"not frequencies"},
@@ -396,24 +626,36 @@ const SLIDES = [
 /* ---------- Render ---------- */
 const stage = document.getElementById('stage');
 const dotsBox = document.getElementById('dots');
+const CHAPTERS = [
+  {es:"Umbral",en:"Threshold"}, {es:"Anhelo",en:"Longing"},
+  {es:"Forma",en:"Form"}, {es:"Sostén",en:"Holding"},
+  {es:"Campo",en:"Field"}, {es:"Raíz",en:"Root"},
+  {es:"Práctica",en:"Practice"}, {es:"Ritual",en:"Ritual"},
+  {es:"Voces",en:"Voices"}, {es:"Voces",en:"Voices"},
+  {es:"Continuidad",en:"Continuity"}, {es:"Convergencia",en:"Convergence"},
+  {es:"Regreso",en:"Return"}
+];
 const L = (o)=> (typeof o === 'string') ? o
   : '<span data-lang="es">'+(o.es||'')+'</span><span data-lang="en">'+(o.en||'')+'</span>';
 
 function buildSlide(s, i){
   const el = document.createElement('section');
-  el.className = 'slide';
+  el.className = 'slide slide--'+s.type+' scene-'+String(i+1).padStart(2,'0');
   el.setAttribute('role','group');
   el.setAttribute('aria-roledescription','slide');
   el.dataset.index = i;
   let h = '';
   if(s.rings){ h += '<div class="rings">'+ringsSVG()+'</div>'; }
-  if((s.type==='title'||s.type==='outro') && s.img){
-    h += '<div class="bgfull"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
+  if((s.type==='title'||s.type==='outro'||s.type==='visual') && s.img){
+    h += '<div class="bgfull"><img src="img/'+s.img+'.'+(s.ext||'jpg')+'" alt="" loading="lazy"></div>';
   }
   h += '<div class="inner">';
+  h += '<span class="slide-kicker">'+L(CHAPTERS[i])+'</span>';
+  h += '<span class="slide-index" aria-hidden="true">'+String(i+1).padStart(2,'0')+'</span>';
   if(s.img && (s.type==='editorial')){
-    h += '<div class="plate"><img src="img/'+s.img+'.jpg" alt="" loading="lazy"></div>';
+    h += '<div class="plate"><img src="img/'+s.img+'.'+(s.ext||'jpg')+'" alt="" loading="lazy"></div>';
   }
+  if(s.mark){ h += '<svg class="mark-liss" width="58" height="58" viewBox="0 0 100 100" aria-hidden="true"></svg>'; }
   if(s.eyebrow){ h += '<p class="eyebrow">'+L(s.eyebrow)+'</p>'; }
   if(s.title){
     const tag = (s.type==='title')?'h1':'h2';
@@ -470,7 +712,11 @@ const curEl = document.getElementById('cur');
 function go(n, fromHash){
   cur = Math.max(0, Math.min(slides.length-1, n));
   slides.forEach((sl,i)=> sl.classList.toggle('active', i===cur));
-  dots.forEach((d,i)=> d.classList.toggle('on', i===cur));
+  dots.forEach((d,i)=>{
+    d.classList.toggle('on', i===cur);
+    d.setAttribute('aria-selected', i===cur ? 'true' : 'false');
+    d.tabIndex = i===cur ? 0 : -1;
+  });
   curEl.textContent = String(cur+1).padStart(2,'0');
   progress.style.width = ((cur)/(slides.length-1)*100)+'%';
   prevBtn.disabled = cur===0;
