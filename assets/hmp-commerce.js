@@ -2,7 +2,7 @@
   'use strict';
 
   const REGISTRATION_OPEN = true;
-  const REGISTRATION_BLOCKED_EVENTS = new Set();
+  const REGISTRATION_BLOCKED_EVENTS = new Set(['hmp-2026-08-08']);
   const API_ORIGIN = 'https://bot.harmonicbeacon.com';
   const IDEMPOTENCY_KEY = 'hb-registration-v4-idempotency-key';
   const STATUS_CONTEXT_KEY = 'hb-registration-v4-status-context';

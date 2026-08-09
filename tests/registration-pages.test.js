@@ -22,7 +22,7 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page opens the confirmed August 8 and August 9 sessions', () => {
+test('events page closes August 8 and keeps the confirmed August 9 session open', () => {
   const page = read('eventos/index.html');
   assert.match(page, /online todos los fines de semana/);
   assert.match(page, /online every weekend/);
@@ -36,10 +36,12 @@ test('events page opens the confirmed August 8 and August 9 sessions', () => {
   assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
   assert.match(page, /Inscripción abierta/);
   assert.match(page, /Registration open/);
-  assert.equal((page.match(/Inscripción abierta/g) || []).length, 2);
-  assert.equal((page.match(/Registration open/g) || []).length, 2);
-  assert.equal((page.match(/href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/g) || []).length, 1);
-  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=es"/);
+  assert.equal((page.match(/Inscripción abierta/g) || []).length, 1);
+  assert.equal((page.match(/Registration open/g) || []).length, 1);
+  assert.match(page, /No disponible/);
+  assert.match(page, /Unavailable/);
+  assert.match(page, /data-event-date="2026-08-08" aria-disabled="true"/);
+  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/);
   assert.doesNotMatch(page, /2026-08-11/);
   assert.doesNotMatch(page, /Martes 11 de agosto|Tuesday, August 11/);
   assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-09&amp;idioma=en"/);
