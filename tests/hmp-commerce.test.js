@@ -71,9 +71,9 @@ const payload = {
   first_name: 'Alma',
   last_name: 'Pérez',
   email: 'alma@example.test',
-  event_code: 'hmp-2026-08-08',
-  session_code: 'es-0830-cr',
-  locale: 'es',
+  event_code: 'hmp-2026-08-09',
+  session_code: 'en-1600-cr',
+  locale: 'en',
   terms_version: 'registration-v4',
   terms_accepted: true
 };
@@ -82,7 +82,7 @@ const statusToken = `st_v1_${'S'.repeat(43)}`;
 const checkout = {
   metadata_name: 'registration_context',
   metadata_value: checkoutContext,
-  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8804105/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+  widget_url: `https://tickets.harmonicbeacon.com/checkout/view-event/id/8820853/chk/widget-fixture/?modal_widget=true&widget=true&preset_data=1#p[meta_registration_context]=${checkoutContext}`
 };
 const registrationId = '20000000-0000-4000-8000-000000000001';
 const challengeId = '30000000-0000-4000-8000-000000000002';
@@ -169,8 +169,8 @@ test('surfaces temporary DNS validation failure as retryable', async () => {
 test('only accepts the exact configured Ticket Tailor widget for the selected session', () => {
   const {api} = runtime(async () => {});
   assert.equal(api.validCheckoutUrl(checkout.widget_url, payload, checkout), true);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '8804106'), payload, checkout), false);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/8804105/chk/widget-fixture/', '/checkout/x/'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8820853', '8804106'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/checkout/view-event/id/8820853/chk/widget-fixture/', '/checkout/x/'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('/chk/widget-fixture', ''), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('widget-fixture', 'REPLACE_WITH_EVENT_WIDGET_TOKEN'), payload, checkout), false);
   assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('tickets.harmonicbeacon.com', 'tickets.harmonicbeacon.com:8443'), payload, checkout), false);
@@ -185,7 +185,7 @@ test('accepts both official event-specific widget path variants', () => {
   const {api} = runtime(async () => {});
   const newSession = {
     ...checkout,
-    widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/8804105/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
+    widget_url: `https://tickets.harmonicbeacon.com/checkout/new-session/id/8820853/chk/widget-fixture/?ref=website_widget&preset_data=1#p[meta_registration_context]=${checkoutContext}`
   };
   assert.equal(api.validCheckoutUrl(newSession.widget_url, payload, newSession), true);
 });
@@ -255,7 +255,7 @@ test('matches the stable registration catalog contract and rejects series ids', 
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].sessions['es-1600-cr'], '8828041');
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].free, true);
   assert.equal(api.CHECKOUTS['hmp-logos-2026-08-07'].private, true);
-  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8804105', '2334890'), payload, checkout), false);
+  assert.equal(api.validCheckoutUrl(checkout.widget_url.replace('8820853', '2334890'), payload, checkout), false);
 });
 
 test('accepts only the signed LOGOS checkout for the private free registration', () => {
@@ -277,11 +277,11 @@ test('accepts only the signed LOGOS checkout for the private free registration',
 
 test('supports only registration dates and sessions in the coordinated catalog', () => {
   const {api} = runtime(async () => {});
-  assert.equal(api.registrationEvent('2026-08-08').date, '2026-08-08');
+  assert.equal(api.registrationEvent('2026-08-08'), null);
   assert.equal(api.registrationEvent('2026-08-09').date, '2026-08-09');
   assert.equal(api.registrationEvent('logos-2026-08-07').date, 'logos-2026-08-07');
   assert.equal(api.registrationEvent('2026-08-01'), null);
-  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), true);
+  assert.equal(api.supportedRegistration('hmp-2026-08-08', 'es-0830-cr'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-08', 'unknown'), false);
   assert.equal(api.supportedRegistration('hmp-2026-08-09', 'en-1600-cr'), true);
   assert.equal(api.supportedRegistration('hmp-2026-08-09', 'es-0830-cr'), false);
@@ -359,8 +359,8 @@ test('announces CompleteRegistration only after a canonical REGISTERED response'
     JSON.parse(JSON.stringify(events[0].detail)),
     {
       registrationId: '20000000-0000-4000-8000-000000000001',
-      eventCode: 'hmp-2026-08-08',
-      sessionCode: 'es-0830-cr'
+      eventCode: 'hmp-2026-08-09',
+      sessionCode: 'en-1600-cr'
     }
   );
   assert.equal(window.__hbCompletedRegistration.registrationId, events[0].detail.registrationId);
