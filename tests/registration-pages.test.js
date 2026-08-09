@@ -135,6 +135,8 @@ test('registration form requires v4 terms and never bypasses its backend', () =>
   assert.doesNotMatch(page, /MARTES 11 DE AGOSTO|TUESDAY, AUGUST 11/);
   assert.match(page, /catalogEvent\.options\?\.\[button\.dataset\.session\]/);
   assert.match(page, /option\.session_code/);
+  assert.match(page, /sessionLocale=\/\^\(es\|en\)-\/\.exec\(sessionCode\)\?\.\[1\]\|\|requestedLocale/);
+  assert.match(page, /session_code:sessionCode,locale:sessionLocale/);
   assert.doesNotMatch(page, /'2026-08-01':/);
   assert.doesNotMatch(page, /'2026-08-15':/);
   assert.match(page, /error\?\.code==='registration_timeout'/);
@@ -157,7 +159,8 @@ test('private LOGOS reuses registration, email verification and Ticket Tailor ch
   assert.match(page, /Reservá tu entrada gratuita/);
   assert.match(page, /No se solicita tarjeta/);
   assert.match(page, /window\.HMPCommerce\.register\(payload\)/);
-  assert.match(page, /eventCode==='hmp-logos-2026-08-07'\?'es':requestedLocale/);
+  assert.match(page, /sessionLocale=\/\^\(es\|en\)-\/\.exec\(sessionCode\)\?\.\[1\]\|\|requestedLocale/);
+  assert.doesNotMatch(page, /eventCode==='hmp-logos-2026-08-07'/);
   assert.match(page, /window\.HMPCommerce\.verifyEmail\(pendingVerification,code,pendingPayload\)/);
   assert.match(page, /window\.HMPCommerce\.mountCheckoutWidget\(widget,payload,result\.checkout/);
   assert.match(page, /\.checkout-widget iframe\{[^}]*min-height:760px!important/);
