@@ -23,7 +23,7 @@
         { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
         { page: 'bonobos',    href: '/bonobos/',                             en: 'bonob.os',                 es: 'bonob.os' },
         { page: 'formacion',  href: '/umbral/',                              en: 'Facilitator Training', es: 'Formación de facilitadores' },
-        { page: 'psicopompo', href: '/psicopompo/',                          en: 'Psychopomp',               es: 'Psicopompo' },
+        { page: 'psicopompo', href: '/psicopompo/',                          en: 'PsicopoMPo',               es: 'PsicopoMPo' },
         { page: 'mythbot',    href: '/mythbot/',                              en: 'MythBot',                  es: 'MythBot' },
         { page: 'app',        href: '/app-beacon/',                           en: 'Beacon App',               es: 'App del Beacon' }
     ] },
@@ -134,6 +134,18 @@
   function setLang(lang) {
     root.setAttribute('data-active-lang', lang);
     root.setAttribute('lang', lang);
+    document.querySelectorAll('[data-title-en][data-title-es]').forEach(function (el) {
+      el.textContent = el.getAttribute('data-title-' + lang);
+    });
+    document.querySelectorAll('[data-content-en][data-content-es]').forEach(function (el) {
+      el.setAttribute('content', el.getAttribute('data-content-' + lang));
+    });
+    document.querySelectorAll('[data-alt-en][data-alt-es]').forEach(function (el) {
+      el.setAttribute('alt', el.getAttribute('data-alt-' + lang));
+    });
+    document.querySelectorAll('[data-aria-en][data-aria-es]').forEach(function (el) {
+      el.setAttribute('aria-label', el.getAttribute('data-aria-' + lang));
+    });
     try { localStorage.setItem('hb-lang', lang); } catch (e) {}
     document.querySelectorAll('[data-lang-tag]').forEach(function (el) {
       var on = el.getAttribute('data-lang-tag') === lang;
