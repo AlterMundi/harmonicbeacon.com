@@ -16,8 +16,10 @@
 
   /* ---- NAV (con jerarquía + estado activo) ---- */
   var sections = [
-    { key: 'eventos',    href: '/eventos/',    en: 'Events',       es: 'Eventos' },
-    { key: 'porque',     href: '/#porque',     en: 'Why it works', es: 'Por qué funciona' },
+    { key: 'live',       href: 'https://live.harmonicbeacon.com/',   en: 'Events',       es: 'Eventos' },
+    { key: 'listen',     href: 'https://listen.harmonicbeacon.com/', en: 'Listen',       es: 'Escuchar' },
+    { key: 'eventos',    href: '/eventos/',                         en: 'News',         es: 'Novedades' },
+    { key: 'porque',     href: '/#porque',                           en: 'Why it works', es: 'Por qué funciona' },
     { key: 'trabajo',    href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo', navHide: true, sub: [
         { page: 'proyeccion', href: '/proyeccion-armonica-del-mito/',        en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' },
         { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
@@ -125,7 +127,12 @@
     '</div></footer>';
 
   /* ---- Inyectar chrome ---- */
-  document.body.insertAdjacentHTML('afterbegin', navHtml);
+  // The canonical cross-product web component mounts first. Retain this
+  // complete legacy nav only as an accessible fail-soft fallback if that
+  // externalized component could not be defined or mounted.
+  if (!document.querySelector('hb-global-nav')) {
+    document.body.insertAdjacentHTML('afterbegin', navHtml);
+  }
   document.body.insertAdjacentHTML('beforeend', footHtml);
   document.body.insertAdjacentHTML('beforeend',
     '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="hbmark" d="' + MARK + '" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></defs></svg>');
