@@ -25,6 +25,9 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
   assert.match(asset, /customElements\.define\(ELEMENT_NAME/);
+  assert.match(asset, /window\.self !== window\.top/);
+  assert.match(asset, /get\('surface'\) === 'cockpit'/);
+  assert.match(asset, /this\.hidden = true/);
 });
 
 test('every canonical branded page loads global navigation before local chrome', () => {
