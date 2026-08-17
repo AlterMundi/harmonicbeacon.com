@@ -146,7 +146,6 @@
         return;
       }
       this.language = currentLanguage();
-      persistLanguage(this.language);
       this.attachShadow({ mode: 'open' });
       this.render();
       this.observer = new MutationObserver(() => {
