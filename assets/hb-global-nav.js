@@ -31,10 +31,12 @@
 
   function currentLanguage() {
     var params = new URLSearchParams(location.search);
+    var documentLanguage = validLanguage(document.documentElement.getAttribute('data-lang')) ||
+      validLanguage(document.documentElement.getAttribute('data-active-lang'));
+    var mainSite = location.hostname === 'harmonicbeacon.com' || location.hostname === 'www.harmonicbeacon.com';
     return validLanguage(params.get('lang')) ||
-      validLanguage(document.documentElement.getAttribute('data-lang')) ||
-      validLanguage(document.documentElement.getAttribute('data-active-lang')) ||
-      storedLanguage() ||
+      (mainSite ? storedLanguage() : documentLanguage) ||
+      (mainSite ? documentLanguage : storedLanguage()) ||
       ((document.documentElement.lang || navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en');
   }
 
