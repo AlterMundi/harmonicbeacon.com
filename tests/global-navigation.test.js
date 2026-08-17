@@ -28,6 +28,11 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
   assert.match(asset, /this\.hidden = true/);
+  assert.equal(
+    asset.match(/persistLanguage\(/g)?.length,
+    3,
+    'loading the header must not turn an inferred document language into a stored user preference',
+  );
 });
 
 test('every canonical branded page loads global navigation before local chrome', () => {
