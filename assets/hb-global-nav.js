@@ -130,9 +130,21 @@
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .nav { background:#16120D; } }
   `;
 
+  function isCockpitEmbed() {
+    return window.self !== window.top && new URLSearchParams(window.location.search).get('surface') === 'cockpit';
+  }
+
   class HarmonicBeaconGlobalNav extends HTMLElement {
     connectedCallback() {
       if (this.shadowRoot) return;
+      // The conductor cockpit embeds the ordinary room as an operational
+      // surface. Its outer document already owns the product navigation;
+      // repeating it inside the iframe wastes scarce room space and creates
+      // two competing global headers.
+      if (isCockpitEmbed()) {
+        this.hidden = true;
+        return;
+      }
       this.language = currentLanguage();
       persistLanguage(this.language);
       this.attachShadow({ mode: 'open' });
