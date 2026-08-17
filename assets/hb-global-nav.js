@@ -151,7 +151,7 @@
 
     render() {
       var language = this.language;
-      var active = activeKey();
+      var active = this.getAttribute('data-surface') || activeKey();
       var items = links.map(function (item) {
         var current = active === item.key ? ' aria-current="page"' : '';
         return '<li><a data-key="' + item.key + '" href="' + localizedHref(item.href, language) + '"' + current + '>' + label(item, language) + '</a></li>';
