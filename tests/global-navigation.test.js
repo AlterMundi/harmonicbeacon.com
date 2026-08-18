@@ -21,6 +21,8 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /https:\/\/live\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/listen\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/account\.harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/account-staging\.harmonicbeacon\.com/);
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
@@ -28,6 +30,13 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
   assert.match(asset, /this\.hidden = true/);
+  assert.match(asset, /new URL\('\/nav-slot', accountOrigin\(\)\)/);
+  assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
+  assert.match(asset, /referrerpolicy="no-referrer"/);
+  assert.match(asset, /sandbox="allow-scripts allow-same-origin"/);
+  assert.match(asset, /pointer-events:none/);
+  assert.doesNotMatch(asset, /allow-top-navigation/);
+  assert.doesNotMatch(asset, /Domain=\.harmonicbeacon\.com/);
   assert.equal(
     asset.match(/persistLanguage\(/g)?.length,
     3,

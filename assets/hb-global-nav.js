@@ -5,6 +5,8 @@
   var MAIN_ORIGIN = 'https://harmonicbeacon.com';
   var LISTENER_ORIGIN = 'https://listen.harmonicbeacon.com';
   var LIVE_ORIGIN = 'https://live.harmonicbeacon.com';
+  var ACCOUNT_ORIGIN = 'https://account.harmonicbeacon.com';
+  var ACCOUNT_STAGING_ORIGIN = 'https://account-staging.harmonicbeacon.com';
   var ELEMENT_NAME = 'hb-global-nav';
 
   var links = [
@@ -91,6 +93,35 @@
     return null;
   }
 
+  function accountOrigin() {
+    return location.hostname === 'earlybirds-staging.harmonicbeacon.com'
+      ? ACCOUNT_STAGING_ORIGIN
+      : ACCOUNT_ORIGIN;
+  }
+
+  function accountReturnTo() {
+    var host = location.hostname.toLowerCase();
+    if (host === 'listen.harmonicbeacon.com') return LISTENER_ORIGIN + '/';
+    if (host === 'earlybirds-staging.harmonicbeacon.com') {
+      return 'https://earlybirds-staging.harmonicbeacon.com/';
+    }
+    if (host === 'live.harmonicbeacon.com') return LIVE_ORIGIN + '/';
+    return MAIN_ORIGIN + '/';
+  }
+
+  function accountSlotHref(language) {
+    var url = new URL('/nav-slot', accountOrigin());
+    url.searchParams.set('lang', language);
+    return url.toString();
+  }
+
+  function accountPageHref(language) {
+    var url = new URL('/account', accountOrigin());
+    url.searchParams.set('lang', language);
+    url.searchParams.set('return_to', accountReturnTo());
+    return url.toString();
+  }
+
   function label(item, language) {
     return language === 'es' ? item.es : item.en;
   }
@@ -113,6 +144,8 @@
     .language { min-width:60px; min-height:44px; padding:0 5px; border:0; border-radius:999px; color:#8A7F6B; background:transparent; cursor:pointer; font:500 11px/1 Inter,system-ui,sans-serif; letter-spacing:.1em; }
     .language strong { color:#C9A24E; font-weight:600; }
     .sep { opacity:.42; padding:0 2px; }
+    .account-link { display:block; width:44px; height:44px; border-radius:999px; }
+    .account { display:block; width:44px; height:44px; border:0; border-radius:999px; pointer-events:none; background:transparent; color-scheme:dark; }
     .toggle { display:none; width:44px; height:44px; padding:0 10px; border:0; background:transparent; cursor:pointer; }
     .toggle span { display:block; height:1.5px; margin:5px 0; background:#ADA089; transition:transform .25s ease,opacity .2s ease; }
     .toggle[aria-expanded=true] span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
@@ -172,6 +205,7 @@
       var brandHref = localizedHref(MAIN_ORIGIN + '/', language);
       var menuLabel = language === 'es' ? 'Menú' : 'Menu';
       var navLabel = language === 'es' ? 'Navegación principal' : 'Primary navigation';
+      var accountLabel = language === 'es' ? 'Cuenta y perfil de Harmonic Beacon' : 'Harmonic Beacon account and profile';
       this.shadowRoot.innerHTML = '<style>' + style + '</style>' +
         '<header class="nav"><div class="inner">' +
           '<a class="brand" href="' + brandHref + '" aria-label="Harmonic Beacon">' +
@@ -180,6 +214,9 @@
           '<nav aria-label="' + navLabel + '"><ul class="links">' + items + '</ul></nav>' +
           '<div style="display:flex;align-items:center;gap:2px">' +
             '<button class="language" type="button" aria-label="Language / Idioma"><span class="en">EN</span><span class="sep">/</span><span class="es">ES</span></button>' +
+            '<a class="account-link" href="' + accountPageHref(language) + '" aria-label="' + accountLabel + '">' +
+              '<iframe class="account" src="' + accountSlotHref(language) + '" title="' + accountLabel + '" aria-hidden="true" tabindex="-1" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>' +
+            '</a>' +
             '<button class="toggle" type="button" aria-label="' + menuLabel + '" aria-expanded="false"><span></span><span></span><span></span></button>' +
           '</div>' +
         '</div><nav class="mobile" aria-label="' + navLabel + '"><ul>' + items + '</ul></nav></header>';
