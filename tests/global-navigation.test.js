@@ -35,6 +35,9 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
   assert.match(asset, /class="account-trigger"/);
   assert.match(asset, /beaconMarkPath\(\)/);
+  assert.match(asset, /Math\.cos\(angle \* 3\)/);
+  assert.match(asset, /Math\.sin\(angle \* 2\)/);
+  assert.match(asset, /index <= 280/);
   assert.match(asset, /<svg class="mark"/);
   assert.match(asset, /<circle cx="12" cy="8" r="3\.25">/);
   assert.match(asset, /aria-haspopup="menu"/);
