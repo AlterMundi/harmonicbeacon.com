@@ -48,5 +48,6 @@ test('LOGOS remains absent from public navigation and event listings', () => {
 
 test('the production build includes the private LOGOS route', () => {
   const build = fs.readFileSync(path.join(root, 'build.js'), 'utf8');
-  assert.match(build, /\['inscripcion', 'logos'\]/);
+  assert.match(build, /'inscripcion'/);
+  assert.match(build, /'logos'/);
 });

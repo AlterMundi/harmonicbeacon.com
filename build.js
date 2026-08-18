@@ -34,7 +34,12 @@ if (fs.existsSync('assets')) {
 }
 
 // Copiar las landings activas y conservar sus rutas públicas exactas.
-for (const directory of ['inscripcion', 'logos']) {
+for (const directory of [
+  'eventos',
+  'proyeccion-armonica-del-mito',
+  'inscripcion',
+  'logos',
+]) {
   if (fs.existsSync(directory)) {
     copyRecursiveSync(directory, path.join('dist', directory));
     console.log(`✓ Copiado: ${directory}/`);

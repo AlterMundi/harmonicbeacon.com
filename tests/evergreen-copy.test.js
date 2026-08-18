@@ -6,10 +6,10 @@ const test = require('node:test');
 const homepage = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const virtualGatherings = homepage.match(/<section class="section" id="virtuales"[\s\S]*?<\/section>/)?.[0] || '';
 
-test('homepage sends recurring weekend gathering CTAs to Live', () => {
+test('homepage sends the current cycle CTA to the complete event information', () => {
   assert.match(virtualGatherings, /Virtual gatherings every weekend/);
   assert.match(virtualGatherings, /Encuentros virtuales todos los fines de semana/);
-  assert.match(virtualGatherings, /href="https:\/\/live\.harmonicbeacon\.com\/"/);
+  assert.match(virtualGatherings, /href="\/eventos\/"/);
   assert.doesNotMatch(virtualGatherings, /August 8 and 15|8 y 15 de agosto/);
   assert.doesNotMatch(virtualGatherings, /Registration open|Inscripción abierta/);
 });
