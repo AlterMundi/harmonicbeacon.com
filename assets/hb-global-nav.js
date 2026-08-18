@@ -254,6 +254,12 @@
       accountTrigger.addEventListener('click', function () {
         setAccountMenuOpen(accountTrigger.getAttribute('aria-expanded') !== 'true');
       });
+      accountTrigger.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowDown') return;
+        event.preventDefault();
+        setAccountMenuOpen(true);
+        accountMenuLink.focus();
+      });
       [accountTrigger, accountMenuLink].forEach(function (control) {
         control.addEventListener('keydown', function (event) {
           if (event.key !== 'Escape') return;
