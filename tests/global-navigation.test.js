@@ -32,19 +32,20 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
   assert.match(asset, /this\.hidden = true/);
-  assert.match(asset, /new URL\('\/nav-slot', accountOrigin\(\)\)/);
   assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
   assert.match(asset, /class="account-trigger"/);
+  assert.match(asset, /beaconMarkPath\(\)/);
+  assert.match(asset, /<svg class="mark"/);
+  assert.match(asset, /<circle cx="12" cy="8" r="3\.25">/);
   assert.match(asset, /aria-haspopup="menu"/);
   assert.match(asset, /class="account-menu"/);
   assert.match(asset, /role="menuitem"/);
   assert.match(asset, /accountMenu\.hidden = !open/);
   assert.match(asset, /event\.key !== 'ArrowDown'/);
   assert.doesNotMatch(asset, /class="account-link"/);
-  assert.match(asset, /referrerpolicy="no-referrer"/);
-  assert.match(asset, /sandbox="allow-scripts allow-same-origin"/);
-  assert.match(asset, /pointer-events:none/);
-  assert.doesNotMatch(asset, /allow-top-navigation/);
+  assert.doesNotMatch(asset, /<iframe/);
+  assert.doesNotMatch(asset, /\/favicon\.svg/);
+  assert.doesNotMatch(asset, /allow-same-origin/);
   assert.doesNotMatch(asset, /Domain=\.harmonicbeacon\.com/);
   assert.equal(
     asset.match(/persistLanguage\(/g)?.length,
