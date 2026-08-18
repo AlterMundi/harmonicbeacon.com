@@ -22,41 +22,25 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page closes August 8 and keeps the confirmed August 9 session open', () => {
+test('events page replaces past registration cards with the four free Saturdays', () => {
   const page = read('eventos/index.html');
-  assert.match(page, /online todos los fines de semana/);
-  assert.match(page, /online every weekend/);
-  assert.match(page, /Guardá esta página para consultar la agenda vigente/);
-  assert.equal((page.match(/data-event-date="2026-08-08"/g) || []).length, 1);
-  assert.match(page, /2026-08-08T14:30:00Z/);
-  assert.equal((page.match(/data-event-date="2026-08-09"/g) || []).length, 1);
-  assert.match(page, /2026-08-09T22:00:00Z/);
-  assert.match(page, /Domingo 9 de agosto|Sunday, August 9/);
-  assert.doesNotMatch(page, /2026-08-08T20:00:00Z/);
-  assert.doesNotMatch(page, /Sábado 8 de agosto · 14:00|Saturday, August 8 · 2:00 p\.m\./);
-  assert.match(page, /Inscripción abierta/);
-  assert.match(page, /Registration open/);
-  assert.equal((page.match(/Inscripción abierta/g) || []).length, 1);
-  assert.equal((page.match(/Registration open/g) || []).length, 1);
-  assert.match(page, /No disponible/);
-  assert.match(page, /Unavailable/);
-  assert.match(page, /data-event-date="2026-08-08" aria-disabled="true"/);
-  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=2026-08-08&amp;idioma=/);
-  assert.doesNotMatch(page, /2026-08-11/);
-  assert.doesNotMatch(page, /Martes 11 de agosto|Tuesday, August 11/);
-  assert.match(page, /href="\/inscripcion\/\?fecha=2026-08-09&amp;idioma=en"/);
-  assert.doesNotMatch(page, /data-event-date="2026-08-09" aria-disabled="true"/);
-  assert.doesNotMatch(page, /data-event-date="2026-08-15"/);
-  assert.doesNotMatch(page, /Sábado 15 de agosto|Saturday, August 15/);
-  assert.match(page, /fecha y horario por confirmar/);
-  assert.match(page, /date and time to be confirmed/);
+  assert.match(page, /Cuatro sábados para participar desde cualquier lugar/);
+  assert.match(page, /Four Saturdays you can join from anywhere/);
+  for (const date of ['2026-08-22', '2026-08-29', '2026-09-05', '2026-09-12']) {
+    assert.equal((page.match(new RegExp(`data-event-date="${date}"`, 'g')) || []).length, 1);
+  }
+  assert.equal((page.match(/Ingresar al evento/g) || []).length, 4);
+  assert.equal((page.match(/Enter event/g) || []).length, 4);
+  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=/);
+  assert.doesNotMatch(page, /Inscripción abierta|Registration open|No disponible|Unavailable/);
+  assert.doesNotMatch(page, /fecha y horario por confirmar|date and time to be confirmed/);
 });
 
 test('Annie editorial refinements stay aligned in Spanish and English', () => {
   const page = read('eventos/index.html');
   const pairedCopy = [
-    [/detalles de acceso confirmados/, /confirmed time, language and access details/],
-    [/las voces del grupo y una presencia compartida/, /group’s voices and a shared sense of presence/],
+    [/cuerpo, sonido y símbolo/, /body, sound, and symbol/],
+    [/participar de varias fechas permite profundizar el proceso/, /attending several dates allows the process to deepen/],
     [/narrativa personal de cada participante/, /through their personal narrative/],
     [/la práctica corporal, la escucha y el trabajo simbólico/, /embodied practice, listening and symbolic work/],
     [/un carácter íntimo y arraigado/, /an intimate, grounded quality/],
