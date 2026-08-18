@@ -67,6 +67,12 @@ test('every canonical branded page loads global navigation before local chrome',
   }
 });
 
+test('keeps the 44px mobile menu reachable across narrow phone viewports', () => {
+  assert.match(asset, /@media \(max-width:365px\) \{ \.wordmark \{ display:none; \} \}/);
+  assert.match(asset, /\.toggle \{ display:none; width:44px; height:44px;/);
+  assert.ok(asset.includes('.toggle { display:block; }'));
+});
+
 test('legacy chrome remains a fail-soft fallback with the same destinations', () => {
   assert.match(legacy, /if \(!document\.querySelector\('hb-global-nav'\)\)/);
   assert.match(legacy, /https:\/\/live\.harmonicbeacon\.com/);
