@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Eventos y archivo · Harmonic Beacon</title>
-<meta name="description" lang="es" content="Próximos eventos, crónicas y archivo de encuentros de Harmonic Beacon." />
-<meta name="description" lang="en" content="Upcoming events, field notes and an archive of Harmonic Beacon gatherings." />
+<title>Novedades · Harmonic Beacon</title>
+<meta name="description" lang="es" content="La bitácora informal de Harmonic Beacon: novedades, encuentros, aprendizajes y próximos pasos." />
+<meta name="description" lang="en" content="Harmonic Beacon's informal journal: news, gatherings, what we are learning, and what comes next." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Harmonic Beacon" />
-<meta property="og:title" content="Eventos y archivo · Harmonic Beacon" />
-<meta property="og:description" content="Próximos eventos, crónicas y archivo de encuentros de Harmonic Beacon." />
+<meta property="og:title" content="Novedades · Harmonic Beacon" />
+<meta property="og:description" content="La bitácora informal de Harmonic Beacon: novedades, encuentros, aprendizajes y próximos pasos." />
 <meta name="theme-color" content="#16120D" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,27 +23,8 @@
 </style>
 <link rel="stylesheet" href="/assets/hb-brand.css" />
 <style>
-  /* ---- Agenda de eventos ---- */
+  /* ---- Bitácora de novedades ---- */
   .agenda{ max-width:800px; margin:2.2rem auto 0; }
-
-  /* Evento destacado */
-  .ev-feat{
-    position:relative; overflow:hidden;
-    border:1px solid var(--hair); border-radius:var(--r-card);
-    background:
-      radial-gradient(90% 120% at 90% -10%, rgba(127,179,213,.14), transparent 60%),
-      var(--bg-card);
-    padding:clamp(1.5rem,3vw,2.2rem); margin-bottom:2.4rem;
-    box-shadow:var(--shadow-card);
-  }
-  .ev-feat .tags{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
-  .ev-feat h2{ font-size:clamp(1.55rem,3vw,2.05rem); line-height:1.08; }
-  .ev-feat .when{ font-family:var(--font-serif); font-style:italic; color:var(--gold-2); font-size:1.2rem; margin-top:.5rem; }
-  .ev-feat .where{ color:var(--ink-600); margin-top:.9rem; font-size:1rem; line-height:1.6; max-width:56ch; }
-  .ev-feat .where b{ color:var(--ink-800); font-weight:600; }
-  .ev-feat .cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.6rem; }
-  .pill-sky{ border-color:var(--hair); color:var(--ink-800); }
-  .pill-sky .d{ width:6px; height:6px; border-radius:999px; background:#7FB3D5; display:inline-block; }
 
   /* Lista de eventos */
   .ev-h{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin:.5rem 0 .3rem; }
@@ -67,27 +48,6 @@
   .ev-main .ilink:hover{ color:var(--bone); border-color:var(--gold); }
 
   .agenda-note{ color:var(--ink-500); font-size:.9rem; margin-top:2rem; line-height:1.6; text-align:center; }
-
-  /* Menú de horarios (conversión de zona) */
-  .tz{ display:flex; flex-wrap:wrap; align-items:center; gap:.6rem .9rem; margin-top:1.4rem;
-       padding:.9rem 1rem; border:1px solid var(--hair-soft); border-radius:14px; background:var(--surface); }
-  .tz-lb{ font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
-  .tz select{ font-family:var(--font-sans); font-size:.95rem; color:var(--bone); background:var(--bg-0);
-              border:1px solid var(--hair); border-radius:10px; padding:.45rem .6rem; }
-  .tz-out{ font-family:var(--font-serif); font-style:italic; font-size:1.15rem; color:var(--gold-2); }
-  .tz-out b{ font-style:normal; font-family:var(--font-sans); font-weight:600; color:var(--bone); }
-
-  /* Fechas anunciadas */
-  .dates{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.4rem; }
-  .date-chip{ display:inline-flex; flex-direction:column; gap:.15rem; min-width:104px;
-              padding:.7rem .9rem; border:1px solid var(--hair); border-radius:14px; background:var(--surface);
-              transition:border-color .3s var(--ease), transform .3s var(--ease); }
-  .date-chip:hover{ border-color:var(--gold); transform:translateY(-2px); }
-  .date-chip-closed{ cursor:default; opacity:.82; }
-  .date-chip-closed:hover{ border-color:var(--hair); transform:none; }
-  .date-chip .dc-d{ font-family:var(--font-serif); font-size:1.25rem; color:var(--bone); line-height:1; }
-  .date-chip .dc-a{ font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
-  @media(prefers-reduced-motion:reduce){ .date-chip{ transition:none; } }
 
   /* Galería de fotos */
   .gal-strip{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.9rem; }
@@ -133,8 +93,12 @@
 
 <header class="section idea-head">
   <div class="wrap wrap-narrow">
-    <span class="eyebrow reveal"><a href="/" class="crumb">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="es">Eventos y archivo</span><span data-lang="en">Events and archive</span></span>
-    <h1 class="reveal" data-d="1"><span data-lang="es">Eventos</span><span data-lang="en">Events</span></h1>
+    <span class="eyebrow reveal"><a href="/" class="crumb">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="es">Nuestra bitácora</span><span data-lang="en">Our journal</span></span>
+    <h1 class="reveal" data-d="1"><span data-lang="es">Novedades</span><span data-lang="en">News</span></h1>
+    <p class="standfirst reveal" data-d="2">
+      <span data-lang="es">Esta es nuestra bitácora informal: un cuaderno de viaje donde compartimos las novedades de Harmonic Beacon, los encuentros que vivimos, lo que vamos aprendiendo y los próximos pasos del recorrido.</span>
+      <span data-lang="en">This is our informal journal: a travel log where we share what is new at Harmonic Beacon, the gatherings we experience, what we are learning, and where the journey is taking us next.</span>
+    </p>
   </div>
 </header>
 
@@ -142,50 +106,8 @@
   <div class="wrap">
     <div class="agenda">
 
-      <!-- ============ PRÓXIMOS EVENTOS ============ -->
-      <div class="ev-h">
-        <span class="eyebrow"><span data-lang="es">Agenda y novedades</span><span data-lang="en">Schedule and news</span></span>
-      </div>
-      <p class="agenda-note" style="margin:0 0 1.5rem;">
-        <span data-lang="es">Cuatro sábados para participar desde cualquier lugar. Los encuentros son gratuitos, virtuales, sincrónicos y en castellano. No requieren inscripción: elegí una fecha e ingresá desde la App del Beacon.</span>
-        <span data-lang="en">Four Saturdays you can join from anywhere. The gatherings are free, virtual, live, and held in Spanish. No registration is required: choose a date and enter through the Beacon App.</span>
-      </p>
-
-      <article class="ev-feat reveal" id="ciclo-umbral-2026" data-event-lang="es">
-        <div class="tags">
-          <span class="pill"><span data-lang="es">Gratis</span><span data-lang="en">Free</span></span>
-          <span class="pill pill-sky"><span class="d"></span> <span data-lang="es">Virtual · sincrónico · en castellano</span><span data-lang="en">Virtual · live · in Spanish</span></span>
-        </div>
-        <h2><span data-lang="es">Del otro lado del umbral · ciclo de eventos de Proyección Armónica del Mito</span><span data-lang="en">Beyond the threshold · a Harmonic Myth Projection event series</span></h2>
-        <p class="where">
-          <span data-lang="es">Un ciclo gratuito de cuatro encuentros grupales para habitar una experiencia que combina <b>cuerpo, sonido y símbolo</b>. Integra técnicas de psicodrama, la Proyección Armónica del Mito y el acompañamiento del Harmonic Beacon. Cada encuentro es una experiencia completa; participar de varias fechas permite profundizar el proceso.</span>
-          <span data-lang="en">A free four-part group series combining <b>body, sound, and symbol</b>. It brings together psychodrama practices, Harmonic Myth Projection, and the Harmonic Beacon. Each gathering is a complete experience; attending several dates allows the process to deepen.</span>
-        </p>
-        <p class="when">
-          <span data-lang="es">Sábados 22 y 29 de agosto · 5 y 12 de septiembre de 2026 · duración aproximada: 3 a 4 horas, con un momento libre intermedio.</span>
-          <span data-lang="en">Saturdays, August 22 and 29 · September 5 and 12, 2026 · approximately 3 to 4 hours, with a break.</span>
-        </p>
-        <p class="agenda-note" style="margin:1rem 0; text-align:left;">
-          <span data-lang="es"><b>Horario de inicio:</b> 11:00 Argentina y Uruguay · 10:00 Estados Unidos (ET), Bolivia y Venezuela · 08:00 Costa Rica y México (CDMX) · 16:00 España peninsular. En Chile continental: 10:00 los tres primeros sábados y 11:00 el 12 de septiembre.</span>
-          <span data-lang="en"><b>Start time:</b> 11:00 a.m. Argentina and Uruguay · 10:00 a.m. US Eastern Time, Bolivia, and Venezuela · 8:00 a.m. Costa Rica and Mexico City · 4:00 p.m. mainland Spain. In continental Chile: 10:00 a.m. for the first three Saturdays and 11:00 a.m. on September 12.</span>
-        </p>
-        <div class="cta" style="margin-bottom:1.2rem;">
-          <a class="btn btn-ghost" href="/proyeccion-armonica-del-mito/"><span data-lang="es">Leer más</span><span data-lang="en">Read more</span> <span class="arr">→</span></a>
-        </div>
-        <div class="dates" aria-label="Fechas del ciclo">
-          <a class="date-chip" data-event-date="2026-08-22" href="https://live.harmonicbeacon.com/api/public-sessions/50000000-0000-4000-8000-202608220001/enter"><span class="dc-d"><span data-lang="es">22 ago</span><span data-lang="en">Aug 22</span></span><span class="dc-a"><span data-lang="es">Ingresar al evento</span><span data-lang="en">Enter event</span></span></a>
-          <a class="date-chip" data-event-date="2026-08-29" href="https://live.harmonicbeacon.com/api/public-sessions/50000000-0000-4000-8000-202608290001/enter"><span class="dc-d"><span data-lang="es">29 ago</span><span data-lang="en">Aug 29</span></span><span class="dc-a"><span data-lang="es">Ingresar al evento</span><span data-lang="en">Enter event</span></span></a>
-          <a class="date-chip" data-event-date="2026-09-05" href="https://live.harmonicbeacon.com/api/public-sessions/50000000-0000-4000-8000-202609050001/enter"><span class="dc-d"><span data-lang="es">5 sep</span><span data-lang="en">Sep 5</span></span><span class="dc-a"><span data-lang="es">Ingresar al evento</span><span data-lang="en">Enter event</span></span></a>
-          <a class="date-chip" data-event-date="2026-09-12" href="https://live.harmonicbeacon.com/api/public-sessions/50000000-0000-4000-8000-202609120001/enter"><span class="dc-d"><span data-lang="es">12 sep</span><span data-lang="en">Sep 12</span></span><span class="dc-a"><span data-lang="es">Ingresar al evento</span><span data-lang="en">Enter event</span></span></a>
-        </div>
-        <p class="agenda-note" style="margin:1rem 0 0; text-align:left;">
-          <span data-lang="es">La sala se habilita en la App del Beacon. Si todavía no iniciaste sesión, Beacon Account te pedirá ingresar antes de abrirla.</span>
-          <span data-lang="en">The room opens in the Beacon App. If you are not signed in yet, Beacon Account will ask you to sign in before opening it.</span>
-        </p>
-      </article>
-
       <!-- ============ BITÁCORA ============ -->
-      <div class="ev-h" style="margin-top:2.8rem;">
+      <div class="ev-h">
         <span class="eyebrow"><span data-lang="es">Bitácora del recorrido</span><span data-lang="en">Field notes from the journey</span></span>
       </div>
       <p class="agenda-note" style="margin:.5rem 0 1.5rem; text-align:left;">

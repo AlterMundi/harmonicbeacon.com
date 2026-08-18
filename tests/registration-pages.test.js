@@ -22,25 +22,18 @@ test('registration inline scripts compile before publication', () => {
   }
 });
 
-test('events page replaces past registration cards with the four free Saturdays', () => {
+test('news page is an informal journal without the four-Saturday promotion', () => {
   const page = read('eventos/index.html');
-  assert.match(page, /Cuatro sábados para participar desde cualquier lugar/);
-  assert.match(page, /Four Saturdays you can join from anywhere/);
-  for (const date of ['2026-08-22', '2026-08-29', '2026-09-05', '2026-09-12']) {
-    assert.equal((page.match(new RegExp(`data-event-date="${date}"`, 'g')) || []).length, 1);
-  }
-  assert.equal((page.match(/Ingresar al evento/g) || []).length, 4);
-  assert.equal((page.match(/Enter event/g) || []).length, 4);
-  assert.doesNotMatch(page, /href="\/inscripcion\/\?fecha=/);
-  assert.doesNotMatch(page, /Inscripción abierta|Registration open|No disponible|Unavailable/);
-  assert.doesNotMatch(page, /fecha y horario por confirmar|date and time to be confirmed/);
+  assert.match(page, /Esta es nuestra bitácora informal/);
+  assert.match(page, /This is our informal journal/);
+  assert.doesNotMatch(page, /Cuatro sábados para participar desde cualquier lugar/);
+  assert.doesNotMatch(page, /data-event-date=/);
+  assert.doesNotMatch(page, /Ingresar al evento|Enter event|Beacon Account/);
 });
 
 test('Annie editorial refinements stay aligned in Spanish and English', () => {
   const page = read('eventos/index.html');
   const pairedCopy = [
-    [/cuerpo, sonido y símbolo/, /body, sound, and symbol/],
-    [/participar de varias fechas permite profundizar el proceso/, /attending several dates allows the process to deepen/],
     [/narrativa personal de cada participante/, /through their personal narrative/],
     [/la práctica corporal, la escucha y el trabajo simbólico/, /embodied practice, listening and symbolic work/],
     [/un carácter íntimo y arraigado/, /an intimate, grounded quality/],

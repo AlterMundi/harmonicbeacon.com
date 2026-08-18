@@ -15,9 +15,7 @@
     { key: 'listen', href: LISTENER_ORIGIN + '/', en: 'Listen', es: 'Escuchar' },
     { key: 'news', href: MAIN_ORIGIN + '/eventos/', en: 'News', es: 'Novedades' },
     { key: 'why', href: MAIN_ORIGIN + '/#porque', en: 'Why it works', es: 'Por qué funciona' },
-    { key: 'team', href: MAIN_ORIGIN + '/#team', en: 'Team', es: 'Equipo' },
-    { key: 'foundation', href: MAIN_ORIGIN + '/#foundation', en: 'HIT', es: 'HIT' },
-    { key: 'contact', href: MAIN_ORIGIN + '/#contact', en: 'Contact', es: 'Contacto' }
+    { key: 'foundation', href: MAIN_ORIGIN + '/#foundation', en: 'HIT', es: 'HIT' }
   ];
 
   function validLanguage(value) {
@@ -88,9 +86,7 @@
     if (host === 'live.harmonicbeacon.com') return 'events';
     if (location.pathname.indexOf('/eventos') === 0) return 'news';
     if (location.hash === '#porque') return 'why';
-    if (location.hash === '#team') return 'team';
     if (location.hash === '#foundation') return 'foundation';
-    if (location.hash === '#contact') return 'contact';
     return null;
   }
 

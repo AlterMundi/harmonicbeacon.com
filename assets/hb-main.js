@@ -29,9 +29,7 @@
         { page: 'mythbot',    href: '/mythbot/',                              en: 'MythBot',                  es: 'MythBot' },
         { page: 'app',        href: '/app-beacon/',                           en: 'Beacon App',               es: 'App del Beacon' }
     ] },
-    { key: 'team',       href: '/#team',       en: 'Team',         es: 'Equipo' },
-    { key: 'foundation', href: '/#foundation', en: 'HIT',          es: 'HIT' },
-    { key: 'contact',    href: '/#contact',    en: 'Contact',      es: 'Contacto' }
+    { key: 'foundation', href: '/#foundation', en: 'HIT',          es: 'HIT' }
   ];
   var workPages = { proyeccion: 1, beacon: 1, bonobos: 1, formacion: 1, psicopompo: 1, mythbot: 1, app: 1 };
   var pageSection = workPages[page] ? 'trabajo' : (page === 'porque' ? 'porque' : (page === 'eventos' ? 'eventos' : null));
@@ -76,13 +74,10 @@
       '<div class="nav-right">' +
         '<button class="lang" id="lang" type="button" aria-label="Language / Idioma">' +
           '<span data-lang-tag="en">EN</span><span class="sep">/</span><span data-lang-tag="es">ES</span></button>' +
-        '<a href="/#contact" class="btn btn-primary nav-cta">' + L('Contact', 'Contacto') + '</a>' +
         '<button class="nav-toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
       '</div>' +
     '</div>' +
-    '<div class="nav-mobile" id="navMobile"><ul>' + mobileItems() +
-      '<li><a href="/#contact" class="mob-cta">' + L('Contact', 'Contacto') + '</a></li>' +
-    '</ul></div></header>';
+    '<div class="nav-mobile" id="navMobile"><ul>' + mobileItems() + '</ul></div></header>';
 
   /* ---- FOOTER (sitemap) ---- */
   var workSub = (function () { for (var i = 0; i < sections.length; i++) { if (sections[i].sub) return sections[i].sub; } return []; })();
@@ -112,7 +107,7 @@
         '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided wellness experience.', 'Una experiencia de bienestar en vivo y guiada.') + '</p>' +
         '<p class="eyebrow" style="color:var(--ink-600);margin-top:1.4rem;">Asociación Civil AlterMundi</p>' +
         '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a></p>' +
-        '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/5493547469632" target="_blank" rel="noopener">WhatsApp +54 9 3547 46-9632</a></p>' +
+        '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/50687163152" target="_blank" rel="noopener">WhatsApp +506 8716 3152</a></p>' +
       '</div>' +
       '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'El proyecto' : 'The project') + '">' +
         '<h4 class="foot-h">' + L('The project', 'El proyecto') + '</h4><ul>' + footList(footProject) + '</ul></nav>' +
@@ -186,7 +181,7 @@
 
   /* ---- Nav: sección activa en el home (scroll-spy) ---- */
   if (page === 'home' && nav && 'IntersectionObserver' in window) {
-    var spyKeys = ['porque', 'trabajo', 'team', 'foundation', 'contact'];
+    var spyKeys = ['porque', 'trabajo', 'foundation'];
     var topLinks = {};
     spyKeys.forEach(function (k) { topLinks[k] = nav.querySelector('.top-link[data-key="' + k + '"]'); });
     var spyTargets = spyKeys.map(function (k) { return document.getElementById(k); }).filter(Boolean);

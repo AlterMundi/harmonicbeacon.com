@@ -27,6 +27,8 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
+  assert.doesNotMatch(asset, /en: 'Team', es: 'Equipo'/);
+  assert.doesNotMatch(asset, /en: 'Contact', es: 'Contacto'/);
   assert.match(asset, /customElements\.define\(ELEMENT_NAME/);
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
@@ -86,4 +88,19 @@ test('legacy chrome remains a fail-soft fallback with the same destinations', ()
   assert.match(legacy, /https:\/\/live\.harmonicbeacon\.com/);
   assert.match(legacy, /https:\/\/listen\.harmonicbeacon\.com/);
   assert.match(legacy, /en: 'News',\s+es: 'Novedades'/);
+  assert.doesNotMatch(legacy, /key: 'team'/);
+  assert.doesNotMatch(legacy, /key: 'contact'/);
+  assert.doesNotMatch(legacy, /class="btn btn-primary nav-cta"/);
+  assert.doesNotMatch(legacy, /class="mob-cta"/);
+});
+
+test('home alone carries the primary contact invitation and current WhatsApp number', () => {
+  const home = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(home, /id="contact"/);
+  assert.match(home, /Si querés saber más sobre Harmonic Beacon/);
+  assert.match(home, /explorar una colaboración con nosotros/);
+  assert.match(home, /https:\/\/wa\.me\/50687163152/);
+  assert.match(home, /WhatsApp \+506 8716 3152/);
+  assert.match(home, /mailto:info@harmonicbeacon\.com/);
+  assert.doesNotMatch(home, /5493547469632|\+54 9 3547/);
 });
