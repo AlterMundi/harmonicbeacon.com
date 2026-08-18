@@ -156,6 +156,8 @@
     .account-control { position:relative; width:44px; height:44px; flex:0 0 44px; }
     .account-trigger { position:absolute; z-index:2; inset:0; display:grid; place-items:center; width:44px; height:44px; padding:0; border:1px solid rgba(201,162,78,.32); border-radius:999px; color:#E9E0D0; background:rgba(244,238,226,.045); cursor:pointer; transition:color .2s ease,border-color .2s ease,background .2s ease; }
     .account-trigger:hover,.account-trigger[aria-expanded=true] { color:#F4EEE2; border-color:rgba(201,162,78,.62); background:rgba(201,162,78,.12); }
+    .account-trigger.signed-in { border-color:rgba(201,162,78,.72); background:rgba(201,162,78,.1); }
+    .account-trigger.signed-in::after { content:""; position:absolute; right:3px; bottom:3px; width:7px; height:7px; border:2px solid #16120D; border-radius:999px; background:#C9A24E; }
     .account-trigger svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; }
     .account-menu { position:absolute; z-index:4; top:calc(100% + 8px); right:0; min-width:164px; padding:6px; border:1px solid rgba(201,162,78,.34); border-radius:12px; background:#16120D; box-shadow:0 18px 48px rgba(0,0,0,.34); }
     .account-menu[hidden] { display:none; }
@@ -184,6 +186,14 @@
   }
 
   class HarmonicBeaconGlobalNav extends HTMLElement {
+    static get observedAttributes() {
+      return ['data-account-signed-in'];
+    }
+
+    attributeChangedCallback(name, previous, next) {
+      if (name === 'data-account-signed-in' && previous !== next && this.shadowRoot) this.render();
+    }
+
     connectedCallback() {
       if (this.shadowRoot) return;
       // The conductor cockpit embeds the ordinary room as an operational
@@ -222,11 +232,14 @@
       var brandHref = localizedHref(MAIN_ORIGIN + '/', language);
       var menuLabel = language === 'es' ? 'Menú' : 'Menu';
       var navLabel = language === 'es' ? 'Navegación principal' : 'Primary navigation';
-      var userMenuLabel = language === 'es' ? 'Menú de usuario' : 'User menu';
+      var accountSignedIn = this.hasAttribute('data-account-signed-in');
+      var userMenuLabel = language === 'es'
+        ? (accountSignedIn ? 'Menú de usuario, sesión iniciada' : 'Menú de usuario')
+        : (accountSignedIn ? 'User menu, signed in' : 'User menu');
       var accountLabel = language === 'es' ? 'Cuenta' : 'Account';
       var accountControl = accountControlAvailable()
         ? '<div class="account-control">' +
-            '<button class="account-trigger" type="button" aria-label="' + userMenuLabel + '" aria-haspopup="menu" aria-controls="hb-account-menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg></button>' +
+            '<button class="account-trigger' + (accountSignedIn ? ' signed-in' : '') + '" type="button" aria-label="' + userMenuLabel + '" aria-haspopup="menu" aria-controls="hb-account-menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg></button>' +
             '<div class="account-menu" id="hb-account-menu" role="menu" hidden><a role="menuitem" href="' + accountPageHref(language) + '">' + accountLabel + '</a></div>' +
           '</div>'
         : '';

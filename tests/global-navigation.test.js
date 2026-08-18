@@ -34,7 +34,14 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /new URL\('\/account', ACCOUNT_STAGING_ORIGIN\)/);
   assert.match(asset, /function accountControlAvailable\(\)/);
   assert.doesNotMatch(asset, /https:\/\/account\.harmonicbeacon\.com/);
-  assert.match(asset, /class="account-trigger"/);
+  assert.match(asset, /return \['data-account-signed-in'\]/);
+  assert.match(asset, /this\.hasAttribute\('data-account-signed-in'\)/);
+  assert.match(asset, /User menu, signed in/);
+  assert.match(asset, /Menú de usuario, sesión iniciada/);
+  assert.match(asset, /account-trigger\.signed-in::after/);
+  assert.doesNotMatch(asset, /document\.cookie[^\n]*account/i);
+  assert.doesNotMatch(asset, /fetch\(/);
+  assert.match(asset, /class="account-trigger/);
   assert.match(asset, /beaconMarkPath\(\)/);
   assert.match(asset, /Math\.cos\(angle \* 3\)/);
   assert.match(asset, /Math\.sin\(angle \* 2\)/);
