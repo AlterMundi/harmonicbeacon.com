@@ -23,6 +23,8 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /https:\/\/harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/account\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/account-staging\.harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/live-staging\.harmonicbeacon\.com/);
+  assert.match(asset, /location\.hostname === 'account-staging\.harmonicbeacon\.com'/);
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
