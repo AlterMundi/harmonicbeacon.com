@@ -34,6 +34,12 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /this\.hidden = true/);
   assert.match(asset, /new URL\('\/nav-slot', accountOrigin\(\)\)/);
   assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
+  assert.match(asset, /class="account-trigger"/);
+  assert.match(asset, /aria-haspopup="menu"/);
+  assert.match(asset, /class="account-menu"/);
+  assert.match(asset, /role="menuitem"/);
+  assert.match(asset, /accountMenu\.hidden = !open/);
+  assert.doesNotMatch(asset, /class="account-link"/);
   assert.match(asset, /referrerpolicy="no-referrer"/);
   assert.match(asset, /sandbox="allow-scripts allow-same-origin"/);
   assert.match(asset, /pointer-events:none/);
