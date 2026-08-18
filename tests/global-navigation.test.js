@@ -21,6 +21,10 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /https:\/\/live\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/listen\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/account\.harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/account-staging\.harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/live-staging\.harmonicbeacon\.com/);
+  assert.match(asset, /location\.hostname === 'account-staging\.harmonicbeacon\.com'/);
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
@@ -28,6 +32,24 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
   assert.match(asset, /this\.hidden = true/);
+  assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
+  assert.match(asset, /class="account-trigger"/);
+  assert.match(asset, /beaconMarkPath\(\)/);
+  assert.match(asset, /Math\.cos\(angle \* 3\)/);
+  assert.match(asset, /Math\.sin\(angle \* 2\)/);
+  assert.match(asset, /index <= 280/);
+  assert.match(asset, /<svg class="mark"/);
+  assert.match(asset, /<circle cx="12" cy="8" r="3\.25">/);
+  assert.match(asset, /aria-haspopup="menu"/);
+  assert.match(asset, /class="account-menu"/);
+  assert.match(asset, /role="menuitem"/);
+  assert.match(asset, /accountMenu\.hidden = !open/);
+  assert.match(asset, /event\.key !== 'ArrowDown'/);
+  assert.doesNotMatch(asset, /class="account-link"/);
+  assert.doesNotMatch(asset, /<iframe/);
+  assert.doesNotMatch(asset, /\/favicon\.svg/);
+  assert.doesNotMatch(asset, /allow-same-origin/);
+  assert.doesNotMatch(asset, /Domain=\.harmonicbeacon\.com/);
   assert.equal(
     asset.match(/persistLanguage\(/g)?.length,
     3,
