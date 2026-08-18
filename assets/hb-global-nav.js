@@ -7,7 +7,6 @@
   var LISTENER_STAGING_ORIGIN = 'https://earlybirds-staging.harmonicbeacon.com';
   var LIVE_ORIGIN = 'https://live.harmonicbeacon.com';
   var LIVE_STAGING_ORIGIN = 'https://live-staging.harmonicbeacon.com';
-  var ACCOUNT_ORIGIN = 'https://account.harmonicbeacon.com';
   var ACCOUNT_STAGING_ORIGIN = 'https://account-staging.harmonicbeacon.com';
   var ELEMENT_NAME = 'hb-global-nav';
 
@@ -95,12 +94,11 @@
     return null;
   }
 
-  function accountOrigin() {
-    return (location.hostname === 'earlybirds-staging.harmonicbeacon.com' ||
-      location.hostname === 'live-staging.harmonicbeacon.com' ||
-      location.hostname === 'account-staging.harmonicbeacon.com')
-      ? ACCOUNT_STAGING_ORIGIN
-      : ACCOUNT_ORIGIN;
+  function accountControlAvailable() {
+    var host = location.hostname.toLowerCase();
+    return host === 'earlybirds-staging.harmonicbeacon.com' ||
+      host === 'live-staging.harmonicbeacon.com' ||
+      host === 'account-staging.harmonicbeacon.com';
   }
 
   function accountReturnTo() {
@@ -115,7 +113,7 @@
   }
 
   function accountPageHref(language) {
-    var url = new URL('/account', accountOrigin());
+    var url = new URL('/account', ACCOUNT_STAGING_ORIGIN);
     url.searchParams.set('lang', language);
     url.searchParams.set('return_to', accountReturnTo());
     return url.toString();
@@ -226,6 +224,12 @@
       var navLabel = language === 'es' ? 'Navegación principal' : 'Primary navigation';
       var userMenuLabel = language === 'es' ? 'Menú de usuario' : 'User menu';
       var accountLabel = language === 'es' ? 'Cuenta' : 'Account';
+      var accountControl = accountControlAvailable()
+        ? '<div class="account-control">' +
+            '<button class="account-trigger" type="button" aria-label="' + userMenuLabel + '" aria-haspopup="menu" aria-controls="hb-account-menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg></button>' +
+            '<div class="account-menu" id="hb-account-menu" role="menu" hidden><a role="menuitem" href="' + accountPageHref(language) + '">' + accountLabel + '</a></div>' +
+          '</div>'
+        : '';
       this.shadowRoot.innerHTML = '<style>' + style + '</style>' +
         '<header class="nav"><div class="inner">' +
           '<a class="brand" href="' + brandHref + '" aria-label="Harmonic Beacon">' +
@@ -234,10 +238,7 @@
           '<nav aria-label="' + navLabel + '"><ul class="links">' + items + '</ul></nav>' +
           '<div style="display:flex;align-items:center;gap:2px">' +
             '<button class="language" type="button" aria-label="Language / Idioma"><span class="en">EN</span><span class="sep">/</span><span class="es">ES</span></button>' +
-            '<div class="account-control">' +
-              '<button class="account-trigger" type="button" aria-label="' + userMenuLabel + '" aria-haspopup="menu" aria-controls="hb-account-menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg></button>' +
-              '<div class="account-menu" id="hb-account-menu" role="menu" hidden><a role="menuitem" href="' + accountPageHref(language) + '">' + accountLabel + '</a></div>' +
-            '</div>' +
+            accountControl +
             '<button class="toggle" type="button" aria-label="' + menuLabel + '" aria-expanded="false"><span></span><span></span><span></span></button>' +
           '</div>' +
         '</div><nav class="mobile" aria-label="' + navLabel + '"><ul>' + items + '</ul></nav></header>';
@@ -253,32 +254,34 @@
       });
       var accountTrigger = this.shadowRoot.querySelector('.account-trigger');
       var accountMenu = this.shadowRoot.querySelector('.account-menu');
-      var accountMenuLink = accountMenu.querySelector('a');
-      var setAccountMenuOpen = function (open) {
-        accountTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        accountMenu.hidden = !open;
-      };
-      accountTrigger.addEventListener('click', function () {
-        setAccountMenuOpen(accountTrigger.getAttribute('aria-expanded') !== 'true');
-      });
-      accountTrigger.addEventListener('keydown', function (event) {
-        if (event.key !== 'ArrowDown') return;
-        event.preventDefault();
-        setAccountMenuOpen(true);
-        accountMenuLink.focus();
-      });
-      [accountTrigger, accountMenuLink].forEach(function (control) {
-        control.addEventListener('keydown', function (event) {
-          if (event.key !== 'Escape') return;
-          setAccountMenuOpen(false);
-          accountTrigger.focus();
+      if (accountTrigger && accountMenu) {
+        var accountMenuLink = accountMenu.querySelector('a');
+        var setAccountMenuOpen = function (open) {
+          accountTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          accountMenu.hidden = !open;
+        };
+        accountTrigger.addEventListener('click', function () {
+          setAccountMenuOpen(accountTrigger.getAttribute('aria-expanded') !== 'true');
         });
-      });
-      if (this.outsideClick) document.removeEventListener('click', this.outsideClick);
-      this.outsideClick = function (event) {
-        if (event.target !== this) setAccountMenuOpen(false);
-      }.bind(this);
-      document.addEventListener('click', this.outsideClick);
+        accountTrigger.addEventListener('keydown', function (event) {
+          if (event.key !== 'ArrowDown') return;
+          event.preventDefault();
+          setAccountMenuOpen(true);
+          accountMenuLink.focus();
+        });
+        [accountTrigger, accountMenuLink].forEach(function (control) {
+          control.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') return;
+            setAccountMenuOpen(false);
+            accountTrigger.focus();
+          });
+        });
+        if (this.outsideClick) document.removeEventListener('click', this.outsideClick);
+        this.outsideClick = function (event) {
+          if (event.target !== this) setAccountMenuOpen(false);
+        }.bind(this);
+        document.addEventListener('click', this.outsideClick);
+      }
       var toggle = this.shadowRoot.querySelector('.toggle');
       var mobile = this.shadowRoot.querySelector('.mobile');
       toggle.addEventListener('click', function () {
