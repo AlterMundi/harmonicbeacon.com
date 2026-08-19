@@ -8,6 +8,7 @@ const root = path.join(__dirname, '..');
 const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const why = fs.readFileSync(path.join(root, 'porque-funciona', 'index.html'), 'utf8');
 const main = fs.readFileSync(path.join(root, 'assets', 'hb-main.js'), 'utf8');
+const build = fs.readFileSync(path.join(root, 'build.js'), 'utf8');
 
 test('the homepage keeps the former project catalogue paused and replaces it with an experiential narrative', () => {
   assert.match(home, /id="trabajo" hidden aria-hidden="true" data-public-state="paused"/);
@@ -51,6 +52,7 @@ test('the team is a compact profile list with one concrete contribution per pers
 });
 
 test('the deep explanation remains its own page and labels knowledge boundaries', () => {
+  assert.match(build, /'porque-funciona'/);
   assert.match(why, /Qué significa una proporción en el sonido/);
   assert.match(why, /La armonía natural y la música temperada responden a necesidades distintas/);
   assert.match(why, /Los grillos escuchan mientras cantan/);
