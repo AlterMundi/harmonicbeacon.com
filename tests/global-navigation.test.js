@@ -22,6 +22,7 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /https:\/\/listen\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/account-staging\.harmonicbeacon\.com/);
+  assert.match(asset, /https:\/\/account\.harmonicbeacon\.com/);
   assert.match(asset, /https:\/\/live-staging\.harmonicbeacon\.com/);
   assert.match(asset, /host === 'account-staging\.harmonicbeacon\.com'/);
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
@@ -33,10 +34,10 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /window\.self !== window\.top/);
   assert.match(asset, /get\('surface'\) === 'cockpit'/);
   assert.match(asset, /this\.hidden = true/);
-  assert.match(asset, /new URL\('\/account', ACCOUNT_STAGING_ORIGIN\)/);
-  assert.match(asset, /function accountControlAvailable\(\)/);
-  assert.doesNotMatch(asset, /https:\/\/account\.harmonicbeacon\.com/);
-  assert.match(asset, /return \['data-account-signed-in'\]/);
+  assert.match(asset, /new URL\('\/account', accountOrigin\(\)\)/);
+  assert.match(asset, /function accountControlAvailable\(element\)/);
+  assert.match(asset, /element\.hasAttribute\('data-account-available'\)/);
+  assert.match(asset, /return \['data-account-available', 'data-account-signed-in'\]/);
   assert.match(asset, /this\.hasAttribute\('data-account-signed-in'\)/);
   assert.match(asset, /User menu, signed in/);
   assert.match(asset, /Menú de usuario, sesión iniciada/);
