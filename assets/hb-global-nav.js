@@ -15,7 +15,7 @@
     { key: 'events', href: LIVE_ORIGIN + '/', en: 'Events', es: 'Eventos' },
     { key: 'listen', href: LISTENER_ORIGIN + '/', en: 'Listen', es: 'Escuchar' },
     { key: 'news', href: MAIN_ORIGIN + '/eventos/', en: 'News', es: 'Novedades' },
-    { key: 'why', href: MAIN_ORIGIN + '/#porque', en: 'Why it works', es: 'Por qué funciona' },
+    { key: 'why', href: MAIN_ORIGIN + '/porque-funciona/', en: 'Why it works', es: 'Por qué funciona' },
     { key: 'foundation', href: MAIN_ORIGIN + '/#foundation', en: 'HIT', es: 'HIT' }
   ];
 
@@ -86,7 +86,7 @@
     if (host === 'listen.harmonicbeacon.com' || host === 'earlybirds-staging.harmonicbeacon.com') return 'listen';
     if (host === 'live.harmonicbeacon.com') return 'events';
     if (location.pathname.indexOf('/eventos') === 0) return 'news';
-    if (location.hash === '#porque') return 'why';
+    if (location.pathname.indexOf('/porque-funciona') === 0) return 'why';
     if (location.hash === '#foundation') return 'foundation';
     return null;
   }

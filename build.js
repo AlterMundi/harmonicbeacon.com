@@ -36,6 +36,7 @@ if (fs.existsSync('assets')) {
 // Copiar las landings activas y conservar sus rutas públicas exactas.
 for (const directory of [
   'eventos',
+  'porque-funciona',
   'proyeccion-armonica-del-mito',
   'inscripcion',
   'logos',

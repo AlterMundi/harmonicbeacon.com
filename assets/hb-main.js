@@ -19,7 +19,7 @@
     { key: 'live',       href: 'https://live.harmonicbeacon.com/',   en: 'Events',       es: 'Eventos' },
     { key: 'listen',     href: 'https://listen.harmonicbeacon.com/', en: 'Listen',       es: 'Escuchar' },
     { key: 'eventos',    href: '/eventos/',                         en: 'News',         es: 'Novedades' },
-    { key: 'porque',     href: '/#porque',                           en: 'Why it works', es: 'Por qué funciona' },
+    { key: 'porque',     href: '/porque-funciona/',                  en: 'Why it works', es: 'Por qué funciona' },
     { key: 'trabajo',    href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo', navHide: true, sub: [
         { page: 'proyeccion', href: '/proyeccion-armonica-del-mito/',        en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' },
         { page: 'beacon',     href: '/el-beacon/',                           en: 'The Beacon',               es: 'El Beacon' },
@@ -82,15 +82,19 @@
   /* ---- FOOTER (sitemap) ---- */
   var workSub = (function () { for (var i = 0; i < sections.length; i++) { if (sections[i].sub) return sections[i].sub; } return []; })();
   var footProject = [
-    { href: '/#porque',     en: 'Why it works', es: 'Por qué funciona' },
-    { href: '/#trabajo',    en: 'Our work',     es: 'Nuestro trabajo' },
+    { href: '/porque-funciona/', en: 'Why it works', es: 'Por qué funciona' },
+    { href: '/eventos/',     en: 'News',         es: 'Novedades' },
     { href: '/#team',       en: 'Team',         es: 'Equipo' },
     { href: '/#foundation', en: 'HIT',          es: 'HIT' },
     { href: '/#contact',    en: 'Contact',      es: 'Contacto' }
   ];
+  var footParticipate = [
+    { href: 'https://listen.harmonicbeacon.com/', en: 'Listen', es: 'Escuchar', ext: true },
+    { href: 'https://live.harmonicbeacon.com/', en: 'Free events', es: 'Eventos gratuitos', ext: true },
+    { href: '/proyeccion-armonica-del-mito/', en: 'Harmonic Myth Projection', es: 'Proyección Armónica del Mito' }
+  ];
   var footMore = [
-    { href: '/proyecciones/', en: 'Myth Projections (gallery)', es: 'Proyecciones del Mito (galería)' },
-    { href: '/retreat/',      en: 'Retreat · Costa Rica',      es: 'Retreat · Costa Rica' },
+    { href: 'https://altermundi.net/', en: 'AlterMundi', es: 'AlterMundi', ext: true },
     { href: 'https://hit.altermundi.net/', en: 'HIT book', es: 'Libro HIT', ext: true },
     { href: '/politica/',     en: 'Privacy policy',            es: 'Política de privacidad' }
   ];
@@ -104,17 +108,17 @@
     '<footer><div class="wrap foot-grid">' +
       '<div class="foot-brand">' +
         '<a href="/" class="brandlock">' + markSvg(28) + '<span class="hb-wordmark" style="font-size:12px;">Harmonic Beacon</span></a>' +
-        '<p class="boundary" style="margin-top:1.1rem;">' + L('A live, guided wellness experience.', 'Una experiencia de bienestar en vivo y guiada.') + '</p>' +
+        '<p class="boundary" style="margin-top:1.1rem;">' + L('A harmonic field for listening, research, and collective practice.', 'Un campo armónico para la escucha, la investigación y la práctica colectiva.') + '</p>' +
         '<p class="eyebrow" style="color:var(--ink-600);margin-top:1.4rem;">Asociación Civil AlterMundi</p>' +
         '<p style="margin-top:.7rem;font-size:.9rem;"><a class="ulink" href="mailto:info@harmonicbeacon.com">info@harmonicbeacon.com</a></p>' +
         '<p style="margin-top:.3rem;font-size:.9rem;"><a class="ulink" href="https://wa.me/50687163152" target="_blank" rel="noopener">WhatsApp +506 8716 3152</a></p>' +
       '</div>' +
       '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'El proyecto' : 'The project') + '">' +
         '<h4 class="foot-h">' + L('The project', 'El proyecto') + '</h4><ul>' + footList(footProject) + '</ul></nav>' +
-      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Líneas de trabajo' : 'Lines of work') + '">' +
-        '<h4 class="foot-h">' + L('Lines of work', 'Líneas de trabajo') + '</h4><ul>' + footList(workSub) + '</ul></nav>' +
-      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Más' : 'More') + '">' +
-        '<h4 class="foot-h">' + L('More', 'Más') + '</h4><ul>' + footList(footMore) + '</ul></nav>' +
+      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Escuchar y participar' : 'Listen and take part') + '">' +
+        '<h4 class="foot-h">' + L('Listen and take part', 'Escuchar y participar') + '</h4><ul>' + footList(footParticipate) + '</ul></nav>' +
+      '<nav class="foot-col" aria-label="' + (root.getAttribute('data-active-lang') === 'es' ? 'Ecosistema' : 'Ecosystem') + '">' +
+        '<h4 class="foot-h">' + L('Ecosystem', 'Ecosistema') + '</h4><ul>' + footList(footMore) + '</ul></nav>' +
     '</div>' +
     '<div class="wrap foot-base">' +
       '<span>© 2026 Asociación Civil AlterMundi · Costa Rica</span>' +
@@ -265,5 +269,25 @@
       else if (e.key === 'ArrowRight') { show(idx + 1); e.preventDefault(); }
     });
     show(0);
+  }
+
+  /* ---- Testimonios: constelación seleccionable ---- */
+  var voiceDialog = document.getElementById('voiceDialog');
+  var voiceBody = document.getElementById('voiceDialogBody');
+  if (voiceDialog && voiceBody) {
+    document.querySelectorAll('[data-voice]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var source = document.getElementById(button.getAttribute('data-voice'));
+        if (!source || source.tagName !== 'TEMPLATE') return;
+        voiceBody.replaceChildren(source.content.cloneNode(true));
+        if (typeof voiceDialog.showModal === 'function') voiceDialog.showModal();
+        else voiceDialog.setAttribute('open', '');
+      });
+    });
+    var voiceClose = voiceDialog.querySelector('.voice-close');
+    if (voiceClose) voiceClose.addEventListener('click', function () { voiceDialog.close(); });
+    voiceDialog.addEventListener('click', function (event) {
+      if (event.target === voiceDialog) voiceDialog.close();
+    });
   }
 })();
