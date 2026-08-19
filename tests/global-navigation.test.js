@@ -27,6 +27,8 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /en: 'Events', es: 'Eventos'/);
   assert.match(asset, /en: 'Listen', es: 'Escuchar'/);
   assert.match(asset, /en: 'News', es: 'Novedades'/);
+  assert.match(asset, /MAIN_ORIGIN \+ '\/porque-funciona\/'/);
+  assert.doesNotMatch(asset, /MAIN_ORIGIN \+ '\/#porque'/);
   assert.doesNotMatch(asset, /en: 'Team', es: 'Equipo'/);
   assert.doesNotMatch(asset, /en: 'Contact', es: 'Contacto'/);
   assert.match(asset, /customElements\.define\(ELEMENT_NAME/);
@@ -88,6 +90,7 @@ test('legacy chrome remains a fail-soft fallback with the same destinations', ()
   assert.match(legacy, /https:\/\/live\.harmonicbeacon\.com/);
   assert.match(legacy, /https:\/\/listen\.harmonicbeacon\.com/);
   assert.match(legacy, /en: 'News',\s+es: 'Novedades'/);
+  assert.match(legacy, /href: '\/porque-funciona\/'/);
   assert.doesNotMatch(legacy, /key: 'team'/);
   assert.doesNotMatch(legacy, /key: 'contact'/);
   assert.doesNotMatch(legacy, /class="btn btn-primary nav-cta"/);

@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Qué es y cómo funciona · Harmonic Beacon</title>
-<meta name="description" content="Qué es Harmonic Beacon, cómo se forma su campo armónico y por qué investigamos su relación con la escucha, el cuerpo y la atención." />
+<title>Por qué funciona · Harmonic Beacon</title>
+<meta name="description" content="Por qué funciona Harmonic Beacon: serie armónica natural, consonancia continua, ratios, escucha corporal, evidencia disponible y preguntas de investigación." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Harmonic Beacon" />
-<meta property="og:title" content="Qué es y cómo funciona Harmonic Beacon" />
+<meta property="og:title" content="Por qué funciona Harmonic Beacon" />
 <meta property="og:description" content="Del dispositivo a la experiencia: la física del campo, la consonancia dinámica y el estado actual de la investigación." />
 <meta name="theme-color" content="#16120D" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,8 +44,42 @@
   .flow h3{ font-size:1.4rem; }
   .flow p{ color:var(--ink-600); margin-top:.7rem; font-size:.9rem; line-height:1.7; }
   .experience-grid{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(270px,.7fr); gap:clamp(2rem,7vw,6rem); align-items:start; }
+  .ratio-section{ overflow:hidden; border-block:1px solid var(--hair-soft); background:radial-gradient(circle at 78% 28%,rgba(201,162,78,.09),transparent 34%); }
+  .ratio-display{ display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:clamp(2.5rem,8vw,7rem); margin-top:2.6rem; align-items:start; }
+  .ratio-stack{ display:grid; gap:.7rem; }
+  .ratio{ display:grid; grid-template-columns:4.2rem 1fr; align-items:center; gap:1rem; padding:.9rem 0; border-bottom:1px solid var(--hair-soft); }
+  .ratio b{ color:var(--gold-2); font:400 clamp(2rem,4vw,3.2rem)/1 var(--font-serif); }
+  .ratio span{ color:var(--ink-600); line-height:1.55; }
+  .sound-demo{ margin-top:2rem; padding:1.4rem; border:1px solid var(--hair); border-radius:18px; background:rgba(22,18,13,.58); }
+  .sound-demo h4{ color:var(--bone); font-family:var(--font-serif); font-size:1.35rem; font-weight:400; }
+  .sound-demo p{ color:var(--ink-600); font-size:.86rem; line-height:1.65; margin-top:.55rem; }
+  .sound-actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.1rem; }
+  .sound-button{ min-height:44px; padding:.72rem 1rem; border:1px solid var(--hair); border-radius:999px; color:var(--ink-800); background:var(--surface); cursor:pointer; font:500 .72rem/1 var(--font-sans); letter-spacing:.08em; text-transform:uppercase; }
+  .sound-button:hover,.sound-button.is-playing{ color:#1a140c; border-color:transparent; background:var(--gold); }
+  .sound-status{ min-height:1.4em; margin-top:.8rem; color:var(--gold); font-size:.78rem; }
+  .temperament-copy p,.nature-copy p{ color:var(--ink-800); font-size:1.02rem; line-height:1.84; margin-top:1.15rem; }
+  .temperament-copy p:first-child,.nature-copy p:first-child{ margin-top:0; }
+  .spectral-figure{ margin:0 0 2rem; border:1px solid var(--hair); border-radius:20px; overflow:hidden; background:var(--bg-card); }
+  .spectral-figure img{ display:block; width:100%; aspect-ratio:16/9; object-fit:cover; opacity:.92; }
+  .spectral-figure figcaption{ padding:1rem 1.15rem 1.15rem; color:var(--ink-600); font-size:.8rem; line-height:1.65; border-top:1px solid var(--hair-soft); }
+  .spectral-figure strong{ display:block; color:var(--bone); font:400 1.2rem/1.2 var(--font-serif); margin-bottom:.35rem; }
+  .present-note{ margin:1.8rem 0; padding:1.4rem 1.5rem; border-left:2px solid var(--gold); background:rgba(201,162,78,.045); }
+  .present-note strong{ display:block; color:var(--gold-2); font:400 clamp(1.35rem,2.7vw,1.8rem)/1.3 var(--font-serif); }
+  .present-note p{ margin-top:.7rem; color:var(--ink-600); font-size:.94rem; line-height:1.72; }
+  .nature-grid{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(2.5rem,8vw,7rem); margin-top:clamp(4rem,9vw,7rem); align-items:center; }
+  .cricket-field{ min-height:300px; position:relative; border:1px solid var(--hair-soft); border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%,transparent 0 18px,rgba(201,162,78,.12) 19px 20px),radial-gradient(circle,rgba(201,162,78,.1),transparent 65%); }
+  .cricket-field::before,.cricket-field::after{ content:""; position:absolute; width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 20px rgba(201,162,78,.9); }
+  .cricket-field::before{ left:29%; top:43%; }.cricket-field::after{ right:26%; top:54%; }
+  .research-lines{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:2.4rem; border:1px solid var(--hair-soft); background:var(--hair-soft); }
+  .research-line{ background:var(--bg-1); padding:clamp(1.4rem,3vw,2.2rem); }
+  .research-line small{ color:var(--gold); font-size:.65rem; letter-spacing:.16em; text-transform:uppercase; }
+  .research-line h3{ font-size:clamp(1.4rem,2.5vw,1.85rem); margin-top:.6rem; }
+  .research-line p{ color:var(--ink-600); font-size:.92rem; line-height:1.72; margin-top:.7rem; }
   .body-copy p{ color:var(--ink-800); font-size:1.03rem; line-height:1.84; margin-top:1.25rem; }
   .body-copy p:first-child{ margin-top:0; }
+  .polyphony{ margin-top:1.8rem; padding:1.4rem 1.5rem; border-left:2px solid var(--gold); background:rgba(201,162,78,.04); }
+  .polyphony h3{ font-size:1.5rem; }
+  .polyphony p{ color:var(--ink-600); font-size:.94rem; margin-top:.7rem; }
   .side-card{ padding:1.6rem; border:1px solid var(--hair-soft); border-radius:18px; background:var(--surface); }
   .side-card h3{ font-size:1.4rem; }
   .side-card ul{ list-style:none; margin:1rem 0 0; padding:0; }
@@ -64,7 +98,7 @@
   .detail{ padding:1.25rem 0 1.5rem; color:var(--ink-600); line-height:1.8; max-width:68ch; }
   .actions{ margin-top:3rem; display:flex; flex-wrap:wrap; gap:.9rem; }
   @media(max-width:860px){ .flow{ grid-template-columns:repeat(2,1fr); } .flow article::after{ display:none; } }
-  @media(max-width:700px){ .three-grid,.four-grid,.evidence-grid,.flow,.experience-grid{ grid-template-columns:1fr; } .three-grid,.evidence-grid{ gap:1px; } }
+  @media(max-width:700px){ .three-grid,.four-grid,.evidence-grid,.flow,.experience-grid,.ratio-display,.nature-grid,.research-lines{ grid-template-columns:1fr; } .three-grid,.evidence-grid{ gap:1px; } .cricket-field{ min-height:240px; } }
 </style>
 </head>
 <body data-page="porque">
@@ -73,9 +107,9 @@
 <header class="section hero">
   <div class="wrap">
     <span class="eyebrow reveal"><a href="/" style="color:var(--gold);">Harmonic Beacon</a> <span style="opacity:.5;">·</span> <span data-lang="en">Foundation</span><span data-lang="es">Fundamento</span></span>
-    <h1 class="reveal" data-d="1"><span data-lang="en">What it is and how it works</span><span data-lang="es">Qué es y cómo funciona</span></h1>
-    <p class="standfirst reveal" data-d="2"><span data-lang="en">A sustained harmonic field. A body listening within it. A research question about what becomes possible in that encounter.</span><span data-lang="es">Un campo armónico sostenido. Un cuerpo que escucha dentro de él. Una pregunta de investigación sobre lo que ese encuentro puede hacer posible.</span></p>
-    <p class="hero-note reveal" data-d="3"><span data-lang="en">Here we separate what the device physically does, our working hypothesis, and what has actually been observed.</span><span data-lang="es">Acá distinguimos lo que el dispositivo hace físicamente, nuestra hipótesis de trabajo y lo que efectivamente hemos observado.</span></p>
+    <h1 class="reveal" data-d="1"><span data-lang="en">Why it works</span><span data-lang="es">Por qué funciona</span></h1>
+    <p class="standfirst reveal" data-d="2"><span data-lang="en">Beacon physically works by sustaining the natural harmonic series as a living harmonic field. What we investigate is what a body can recognize and reorganize while listening within that continuous reference.</span><span data-lang="es">El Beacon funciona físicamente al sostener la serie armónica natural como un campo armónico vivo. Lo que investigamos es qué puede reconocer y reorganizar un cuerpo que escucha dentro de esa referencia continua.</span></p>
+    <p class="hero-note reveal" data-d="3"><span data-lang="en">The acoustic phenomenon is observable. Its relationship with presence, lower relational friction, and wellbeing is our working hypothesis, informed by exploratory listening reports.</span><span data-lang="es">El fenómeno acústico es observable. Su relación con la presencia, la menor fricción relacional y el bienestar es nuestra hipótesis de trabajo, orientada por reportes exploratorios de escucha.</span></p>
   </div>
 </header>
 
@@ -84,16 +118,16 @@
     <div class="wrap">
       <header class="section-head reveal">
         <span class="eyebrow"><span data-lang="en">The device</span><span data-lang="es">El dispositivo</span></span>
-        <h2><span data-lang="en">What is Harmonic Beacon?</span><span data-lang="es">¿Qué es Harmonic Beacon?</span></h2>
+        <h2><span data-lang="en">An open, continuous reference</span><span data-lang="es">Una referencia abierta y continua</span></h2>
       </header>
       <div class="definition reveal" data-d="1">
-        <p data-lang="en">An experimental acoustic device that sustains a harmonic field: a resonant weave of partials, beats, interference, and proportional relationships unfolding through time and space.</p>
-        <p data-lang="es">Un dispositivo acústico experimental que sostiene un campo armónico: una trama resonante de parciales, batimentos, interferencias y relaciones proporcionales que se despliega en el tiempo y el espacio.</p>
+        <p data-lang="en">A continuously excited resonant element holds open its natural harmonic series. Its fundamental and partials meet in the source, the room, and the listener's body, forming a field that remains consonant while never becoming static.</p>
+        <p data-lang="es">Un elemento resonante excitado de forma continua mantiene abierta su serie armónica natural. Su fundamental y sus parciales se encuentran en la fuente, el espacio y el cuerpo de quien escucha, formando un campo que permanece consonante sin volverse estático.</p>
       </div>
       <div class="three-grid reveal" data-d="2">
         <article class="info-card"><span class="n">01</span><h3><span data-lang="en">A continuous source</span><span data-lang="es">Una fuente continua</span></h3><p><span data-lang="en">A resonant element is continuously excited so its vibration and harmonic components remain present over time.</span><span data-lang="es">Un elemento resonante recibe excitación continua para que su vibración y sus componentes armónicos permanezcan presentes.</span></p></article>
-        <article class="info-card"><span class="n">02</span><h3><span data-lang="en">A relational design</span><span data-lang="es">Un diseño relacional</span></h3><p><span data-lang="en">Sound is the medium. The design lies in the ratios and interactions between frequencies, not in one isolated “special” frequency.</span><span data-lang="es">El sonido es el medio. El diseño está en las proporciones e interacciones entre frecuencias, no en una frecuencia “especial” aislada.</span></p></article>
-        <article class="info-card"><span class="n">03</span><h3><span data-lang="en">A listening situation</span><span data-lang="es">Una situación de escucha</span></h3><p><span data-lang="en">Source, room, body, duration, and attention shape the field together. Beacon is not simply an audio track.</span><span data-lang="es">Fuente, espacio, cuerpo, duración y atención dan forma al campo. Beacon no es simplemente una pista de audio.</span></p></article>
+        <article class="info-card"><span class="n">02</span><h3><span data-lang="en">A relational design</span><span data-lang="es">Un diseño relacional</span></h3><p><span data-lang="en">Sound is the medium. Ratios and interactions between frequencies organize the field as a whole.</span><span data-lang="es">El sonido es el medio. Las proporciones y las interacciones entre frecuencias organizan el campo como un conjunto.</span></p></article>
+        <article class="info-card"><span class="n">03</span><h3><span data-lang="en">A listening situation</span><span data-lang="es">Una situación de escucha</span></h3><p><span data-lang="en">Source, room, body, duration, and attention shape the field together. Listening is part of the phenomenon.</span><span data-lang="es">Fuente, espacio, cuerpo, duración y atención dan forma al campo. La escucha es parte del fenómeno.</span></p></article>
       </div>
     </div>
   </section>
@@ -103,22 +137,66 @@
       <header class="section-head reveal">
         <span class="eyebrow"><span data-lang="en">The physics of the field</span><span data-lang="es">La física del campo</span></span>
         <h2><span data-lang="en">How the harmonic field is formed</span><span data-lang="es">Cómo se forma el campo armónico</span></h2>
-        <p class="lead"><span data-lang="en">A resonant body does not produce a single pure tone. It produces a fundamental together with partials. As those components meet in the source and the room, they reinforce, cancel, pulse, and reorganize the acoustic space.</span><span data-lang="es">Un cuerpo resonante no produce un único tono puro. Produce una fundamental junto con parciales. Cuando esos componentes se encuentran en la fuente y en el espacio, se refuerzan, se cancelan, pulsan y reorganizan el entorno acústico.</span></p>
+        <p class="lead"><span data-lang="en">Every resonant body produces a fundamental together with partials. As those components meet in the source and the room, they reinforce, cancel, pulse, and reorganize the acoustic space.</span><span data-lang="es">Todo cuerpo resonante produce una fundamental junto con parciales. Cuando esos componentes se encuentran en la fuente y en el espacio, se refuerzan, se cancelan, pulsan y reorganizan el entorno acústico.</span></p>
       </header>
       <div class="four-grid reveal" data-d="1">
         <article class="info-card"><h3><span data-lang="en">Partials</span><span data-lang="es">Parciales</span></h3><p><span data-lang="en">The simultaneous frequency components that give a resonant sound its internal structure and timbre.</span><span data-lang="es">Los componentes de frecuencia simultáneos que dan estructura interna y timbre a un sonido resonante.</span></p></article>
         <article class="info-card"><h3><span data-lang="en">Beats</span><span data-lang="es">Batimentos</span></h3><p><span data-lang="en">Audible pulsations created when nearby frequencies interact. They introduce movement without requiring a musical rhythm.</span><span data-lang="es">Pulsaciones audibles que aparecen cuando interactúan frecuencias cercanas. Introducen movimiento sin necesitar un ritmo musical.</span></p></article>
         <article class="info-card"><h3><span data-lang="en">Interference</span><span data-lang="es">Interferencias</span></h3><p><span data-lang="en">Waves meet differently across the room, creating changing areas of reinforcement and cancellation.</span><span data-lang="es">Las ondas se encuentran de manera diferente en el espacio y crean zonas cambiantes de refuerzo y cancelación.</span></p></article>
-        <article class="info-card"><h3><span data-lang="en">Harmonic ratios</span><span data-lang="es">Proporciones armónicas</span></h3><p><span data-lang="en">Relationships between frequencies organize the field. The relevant unit is the relationship, not the frequency by itself.</span><span data-lang="es">Las relaciones entre frecuencias organizan el campo. La unidad relevante es la relación, no la frecuencia por sí sola.</span></p></article>
+        <article class="info-card"><h3><span data-lang="en">Harmonic ratios</span><span data-lang="es">Proporciones armónicas</span></h3><p><span data-lang="en">Relationships between frequencies organize the field. Each frequency acquires meaning through the relationships it forms.</span><span data-lang="es">Las relaciones entre frecuencias organizan el campo. Cada frecuencia adquiere sentido por las relaciones que forma.</span></p></article>
       </div>
-      <blockquote class="relation reveal" data-d="2"><p><span data-lang="en">Beacon does not work through a healing frequency. Its physical basis is a field of relationships that remains stable enough to orient perception and variable enough to stay alive.</span><span data-lang="es">Beacon no funciona por una frecuencia sanadora. Su base física es un campo de relaciones suficientemente estable para orientar la percepción y suficientemente variable para permanecer vivo.</span></p></blockquote>
+      <blockquote class="relation reveal" data-d="2"><p><span data-lang="en">Beacon's physical basis is a field of relationships: stable enough to become a perceptual reference and variable enough to remain alive.</span><span data-lang="es">La base física del Beacon es un campo de relaciones: suficientemente estable para volverse una referencia perceptiva y suficientemente variable para permanecer vivo.</span></p></blockquote>
 
       <h3 class="subhead reveal"><span data-lang="en">From physics to experience: the working hypothesis</span><span data-lang="es">De la física a la experiencia: la hipótesis de trabajo</span></h3>
       <div class="flow reveal" data-d="1">
         <article><h3><span data-lang="en">Dynamic consonance</span><span data-lang="es">Consonancia dinámica</span></h3><p><span data-lang="en">Order without rigidity; variation without chaos. Consonance is understood as structural compatibility, not merely pleasant sound.</span><span data-lang="es">Orden sin rigidez; variación sin caos. La consonancia se entiende como compatibilidad estructural, no solo como sonido agradable.</span></p></article>
         <article><h3><span data-lang="en">A legible environment</span><span data-lang="es">Un entorno legible</span></h3><p><span data-lang="en">Stable recurrences may make the field easier to anticipate and inhabit, while microvariation keeps attention open.</span><span data-lang="es">Las recurrencias estables pueden volver el campo más previsible y habitable, mientras la microvariación mantiene abierta la atención.</span></p></article>
-        <article><h3><span data-lang="en">Coupling</span><span data-lang="es">Acoplamiento</span></h3><p><span data-lang="en">The body does not receive an instruction. It responds according to its own state, history, and sensitivity.</span><span data-lang="es">El cuerpo no recibe una instrucción. Responde según su propio estado, historia y sensibilidad.</span></p></article>
-        <article><h3><span data-lang="en">Reorientation</span><span data-lang="es">Reorientación</span></h3><p><span data-lang="en">The field may offer a reference from which attention, bodily perception, or inner experience can reorganize.</span><span data-lang="es">El campo puede ofrecer una referencia desde la cual la atención, la percepción corporal o la experiencia interna puedan reorganizarse.</span></p></article>
+        <article><h3><span data-lang="en">Coupling</span><span data-lang="es">Acoplamiento</span></h3><p><span data-lang="en">The body responds from its own state, history, and sensitivity, becoming an active part of the listening situation.</span><span data-lang="es">El cuerpo responde desde su propio estado, historia y sensibilidad, y se vuelve parte activa de la situación de escucha.</span></p></article>
+        <article><h3><span data-lang="en">A felt contrast</span><span data-lang="es">Un contraste sensible</span></h3><p><span data-lang="en">The field may make changes in attention, bodily perception, and inner experience easier to notice.</span><span data-lang="es">El campo puede volver más perceptibles los cambios en la atención, la percepción corporal y la experiencia interna.</span></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ratio-section" id="relaciones">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <span class="eyebrow"><span data-lang="en">Relationships organize the field</span><span data-lang="es">Las relaciones organizan el campo</span></span>
+        <h2><span data-lang="en">What a ratio means in sound</span><span data-lang="es">Qué significa una proporción en el sonido</span></h2>
+        <p class="lead"><span data-lang="en">A ratio compares two frequencies. When their cycles meet through simple integer relationships, their recurrences become easier to follow. The complete experience also depends on timbre, partials, intensity, the room, duration, and the listener.</span><span data-lang="es">Una proporción compara dos frecuencias. Cuando sus ciclos se encuentran mediante relaciones simples entre números enteros, sus recurrencias se vuelven más fáciles de seguir. La experiencia completa también depende del timbre, los parciales, la intensidad, el espacio, la duración y quien escucha.</span></p>
+      </header>
+      <div class="ratio-display">
+        <div class="ratio-stack reveal" data-d="1">
+          <div class="ratio"><b>2:1</b><span><span data-lang="en">Two cycles against one: the octave relationship.</span><span data-lang="es">Dos ciclos frente a uno: la relación de octava.</span></span></div>
+          <div class="ratio"><b>3:2</b><span><span data-lang="en">Three cycles against two: the perfect fifth.</span><span data-lang="es">Tres ciclos frente a dos: la quinta justa.</span></span></div>
+          <div class="ratio"><b>4:3</b><span><span data-lang="en">Four cycles against three: the perfect fourth.</span><span data-lang="es">Cuatro ciclos frente a tres: la cuarta justa.</span></span></div>
+          <div class="ratio"><b>5:4</b><span><span data-lang="en">Five cycles against four: the natural major third.</span><span data-lang="es">Cinco ciclos frente a cuatro: la tercera mayor natural.</span></span></div>
+          <div class="sound-demo">
+            <h4><span data-lang="en">Hear one relationship</span><span data-lang="es">Escuchá una relación</span></h4>
+            <p><span data-lang="en">Compare a natural 5:4 major third with its equal-tempered approximation. These simple sine tones are a tuning demonstration, separate from the much richer Beacon field.</span><span data-lang="es">Compará una tercera mayor natural 5:4 con su aproximación en temperamento igual. Estos tonos sinusoidales simples son una demostración de afinación, separada del campo mucho más rico del Beacon.</span></p>
+            <div class="sound-actions"><button class="sound-button" type="button" data-tone-ratio="1.25"><span data-lang="en">Natural third · 5:4</span><span data-lang="es">Tercera natural · 5:4</span></button><button class="sound-button" type="button" data-tone-ratio="1.259921"><span data-lang="en">Tempered third</span><span data-lang="es">Tercera temperada</span></button><button class="sound-button" type="button" data-tone-stop><span data-lang="en">Stop</span><span data-lang="es">Detener</span></button></div>
+            <p class="sound-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="temperament-copy reveal" data-d="2">
+          <figure class="spectral-figure">
+            <img src="/assets/img/harmonic-series-spectrogram.png" alt="Espectrograma didáctico de una fundamental de 110 hercios y sus primeros siete armónicos" loading="lazy" />
+            <figcaption><strong><span data-lang="en">A family of frequencies, visible</span><span data-lang="es">Una familia de frecuencias, a la vista</span></strong><span data-lang="en">Time runs from left to right; frequency rises from bottom to top. Each horizontal line is a sinusoidal component in the sequence 110, 220, 330… 880 Hz. This is an educational synthesis, not a recording or measurement of Beacon.</span><span data-lang="es">El tiempo avanza de izquierda a derecha; la frecuencia crece de abajo hacia arriba. Cada línea horizontal es un componente sinusoidal de la secuencia 110, 220, 330… 880 Hz. Es una síntesis didáctica, no una grabación ni una medición del Beacon.</span></figcaption>
+          </figure>
+          <h3 class="subhead" style="margin-top:0;"><span data-lang="en">Natural harmony and tempered music answer different needs</span><span data-lang="es">La armonía natural y la música temperada responden a necesidades distintas</span></h3>
+          <p><span data-lang="en">In the natural harmonic series, intervals arise from the behavior of a vibrating body and its partials. Equal temperament divides the octave into twelve equal steps. That slight redistribution makes it possible to move freely between keys: an extraordinary cultural and musical technology.</span><span data-lang="es">En la serie armónica natural, los intervalos surgen del comportamiento de un cuerpo vibrante y sus parciales. El temperamento igual divide la octava en doce pasos iguales. Esa leve redistribución permite moverse libremente entre tonalidades: una tecnología cultural y musical extraordinaria.</span></p>
+          <div class="present-note"><strong><span data-lang="en">Music makes a journey. Beacon sustains a present.</span><span data-lang="es">La música construye un recorrido. El Beacon sostiene un presente.</span></strong><p><span data-lang="en">This is Nicolás Echániz's central distinction. Much of Western music uses tension and release to create direction, expectation, and arrival. Beacon does not try to replace that language: it holds a continuous reference of consonance so that listening can remain with what is happening now.</span><span data-lang="es">Esta es la distinción central que propone Nicolás Echániz. Buena parte de la música occidental usa tensión y reposo para crear dirección, expectativa y llegada. El Beacon no busca reemplazar ese lenguaje: mantiene una referencia continua de consonancia para que la escucha pueda permanecer con lo que está sucediendo ahora.</span></p></div>
+          <p><span data-lang="en">Natural tuning and equal temperament are different designs for different purposes: one privileges exact proportional recurrences; the other enables free movement between keys. Within HIT, the further idea that consonance can be understood as a more efficient system configuration is a research proposition—not proof of lower energy use in the listener's body.</span><span data-lang="es">La afinación natural y el temperamento igual son diseños diferentes para propósitos distintos: una privilegia recurrencias proporcionales exactas; el otro permite moverse libremente entre tonalidades. Dentro de HIT, la idea adicional de que la consonancia puede entenderse como una configuración más eficiente del sistema es una proposición de investigación, no la prueba de un menor gasto de energía en el cuerpo de quien escucha.</span></p>
+        </div>
+      </div>
+
+      <div class="nature-grid">
+        <div class="cricket-field reveal" role="img" aria-label="Coupled cricket chorus · Coro acoplado de grillos"></div>
+        <div class="nature-copy reveal" data-d="1">
+          <span class="eyebrow"><span data-lang="en">A clue from nature</span><span data-lang="es">Una pista en la naturaleza</span></span>
+          <h3 class="subhead" style="margin-top:.8rem;"><span data-lang="en">Crickets listen while they sing</span><span data-lang="es">Los grillos escuchan mientras cantan</span></h3>
+          <p><span data-lang="en">Some cricket species adjust the phase of their chirps in response to nearby individuals. Through mutual listening among coupled oscillators, a coordinated pattern emerges.</span><span data-lang="es">Algunas especies de grillos ajustan la fase de su canto en respuesta a los individuos cercanos. Mediante la escucha mutua entre osciladores acoplados emerge un patrón coordinado.</span></p>
+          <p><span data-lang="en">This scene gives HIT a concrete image of relational coordination. Its scope is specific: it describes temporal adjustment in certain choruses and opens a broader question—what forms of order emerge when systems find compatible relationships?</span><span data-lang="es">Esta escena ofrece a HIT una imagen concreta de coordinación relacional. Su alcance es específico: describe el ajuste temporal en ciertos coros y abre una pregunta más amplia: ¿qué formas de orden emergen cuando los sistemas encuentran relaciones compatibles?</span></p>
+        </div>
       </div>
     </div>
   </section>
@@ -126,11 +204,12 @@
   <section class="section" id="experiencia">
     <div class="wrap experience-grid">
       <div>
-        <header class="section-head reveal"><span class="eyebrow"><span data-lang="en">In experience</span><span data-lang="es">En la experiencia</span></span><h2><span data-lang="en">Reorientation, not a prescribed state</span><span data-lang="es">Reorientación, no un estado impuesto</span></h2></header>
+        <header class="section-head reveal"><span class="eyebrow"><span data-lang="en">In experience</span><span data-lang="es">En la experiencia</span></span><h2><span data-lang="en">One field, different ways of being present</span><span data-lang="es">Un mismo campo, distintas formas de estar presentes</span></h2></header>
         <div class="body-copy reveal" data-d="1">
-          <p><span data-lang="en">Rest can occur, but “calming down” is not the only possible response. A sustained field may also bring clearer bodily perception, images, memories, emotion, resistance, distraction, or discomfort.</span><span data-lang="es">El descanso puede aparecer, pero “calmarse” no es la única respuesta posible. Un campo sostenido también puede traer mayor percepción corporal, imágenes, recuerdos, emoción, resistencia, distracción o incomodidad.</span></p>
-          <p><span data-lang="en">That variability is essential to the hypothesis: Beacon does not impose harmony on the body. It offers an organized perturbation with which each person couples differently.</span><span data-lang="es">Esa variabilidad es esencial para la hipótesis: Beacon no impone armonía al cuerpo. Ofrece una perturbación organizada con la que cada persona se acopla de manera diferente.</span></p>
-          <p><span data-lang="en">Sometimes voices, melodies, or textures seem to emerge. We call this harmonic pareidolia: perception finding figures in an ambiguous but structured field. It is a phenomenon of listening, not proof of a therapeutic mechanism.</span><span data-lang="es">A veces parecen emerger voces, melodías o texturas. Llamamos a esto pareidolia armónica: la percepción encuentra figuras en un campo ambiguo pero estructurado. Es un fenómeno de la escucha, no la prueba de un mecanismo terapéutico.</span></p>
+          <p><span data-lang="en">Responses vary. Rest may appear alongside clearer bodily perception, images, memories, emotion, resistance, distraction, or discomfort.</span><span data-lang="es">Las respuestas son diversas. El descanso puede aparecer junto con mayor percepción corporal, imágenes, recuerdos, emoción, resistencia, distracción o incomodidad.</span></p>
+          <p><span data-lang="en">That variability is central to the hypothesis. Beacon offers an organized perturbation, and each person couples with it from their own state, history, and sensitivity.</span><span data-lang="es">Esa variabilidad es central para la hipótesis. El Beacon ofrece una perturbación organizada y cada persona se acopla con ella desde su propio estado, historia y sensibilidad.</span></p>
+          <p><span data-lang="en">Sometimes voices, melodies, or textures seem to emerge. We call this harmonic pareidolia: perception finding figures in an ambiguous but structured field. The phenomenon describes an organization of listening; research into its mechanisms remains open.</span><span data-lang="es">A veces parecen emerger voces, melodías o texturas. Llamamos a esto pareidolia armónica: la percepción encuentra figuras en un campo ambiguo pero estructurado. El fenómeno describe una organización de la escucha; la investigación sobre sus mecanismos permanece abierta.</span></p>
+          <div class="polyphony"><h3><span data-lang="en">We listen polyphonically</span><span data-lang="es">Escuchamos polifónicamente</span></h3><p><span data-lang="en">The voices some listeners perceive invite another question: human listening can organize several simultaneous lines as a meaningful whole. Our own voice also carries a distinctive spectrum of harmonics. That is why voice matters to the next generation of Listen: it can become a personal threshold into the field.</span><span data-lang="es">Las voces que algunas personas perciben abren otra pregunta: la escucha humana puede organizar varias líneas simultáneas como un conjunto significativo. Nuestra propia voz también contiene un espectro singular de armónicos. Por eso la voz importa en la próxima generación de Listen: puede convertirse en un umbral personal de entrada al campo.</span></p></div>
         </div>
       </div>
       <aside class="side-card reveal" data-d="2"><h3><span data-lang="en">One field, different responses</span><span data-lang="es">Un campo, respuestas distintas</span></h3><ul><li><span data-lang="en">Rest or activation</span><span data-lang="es">Descanso o activación</span></li><li><span data-lang="en">Presence or resistance</span><span data-lang="es">Presencia o resistencia</span></li><li><span data-lang="en">Images or silence</span><span data-lang="es">Imágenes o silencio</span></li><li><span data-lang="en">Clarity or discomfort</span><span data-lang="es">Claridad o incomodidad</span></li></ul></aside>
@@ -142,7 +221,7 @@
       <header class="section-head reveal"><span class="eyebrow"><span data-lang="en">Current status</span><span data-lang="es">Estado actual</span></span><h2><span data-lang="en">What we observe, what we propose, what remains open</span><span data-lang="es">Qué observamos, qué proponemos y qué sigue abierto</span></h2></header>
       <div class="evidence-grid reveal" data-d="1">
         <article class="evidence-card"><h3><span data-lang="en">Observed</span><span data-lang="es">Observado</span></h3><p><span data-lang="en">Exploratory sessions have produced recurring subjective reports of rest, bodily presence, introspection, attention, and harmonic pareidolia.</span><span data-lang="es">Las sesiones exploratorias han producido reportes subjetivos recurrentes de descanso, presencia corporal, introspección, atención y pareidolia armónica.</span></p></article>
-        <article class="evidence-card"><h3><span data-lang="en">Working hypothesis</span><span data-lang="es">Hipótesis de trabajo</span></h3><p><span data-lang="en">Dynamic consonance may offer a low-friction reference that supports attention, bodily presence, and reorientation under carefully held listening conditions.</span><span data-lang="es">La consonancia dinámica puede ofrecer una referencia de baja fricción que favorezca atención, presencia corporal y reorientación bajo condiciones cuidadas de escucha.</span></p></article>
+        <article class="evidence-card"><h3><span data-lang="en">Working hypothesis</span><span data-lang="es">Hipótesis de trabajo</span></h3><p><span data-lang="en">Dynamic consonance may offer a low-friction reference that supports attention, bodily presence, and inner reorganization under carefully held listening conditions.</span><span data-lang="es">La consonancia dinámica puede ofrecer una referencia de baja fricción que favorezca atención, presencia corporal y reorganización interna bajo condiciones cuidadas de escucha.</span></p></article>
         <article class="evidence-card"><h3><span data-lang="en">Not established</span><span data-lang="es">No establecido</span></h3><p><span data-lang="en">Subjective reports do not establish clinical efficacy or prove a psychophysiological mechanism. Those questions require specific research.</span><span data-lang="es">Los reportes subjetivos no establecen eficacia clínica ni prueban un mecanismo psicofisiológico. Esas preguntas requieren investigación específica.</span></p></article>
       </div>
       <p class="boundary reveal" data-d="2"><span data-lang="en"><strong>Scope:</strong> Harmonic Beacon is a non-clinical wellness and exploration practice. It is not medical treatment, diagnosis, or a substitute for professional care.</span><span data-lang="es"><strong>Alcance:</strong> Harmonic Beacon es una práctica no clínica de bienestar y exploración. No es tratamiento médico, diagnóstico ni reemplazo de atención profesional.</span></p>
@@ -150,13 +229,83 @@
       <details class="reveal" data-d="2"><summary><span data-lang="en">Why natural harmonic relationships rather than 12-TET?</span><span data-lang="es">¿Por qué relaciones armónicas naturales y no 12-TET?</span></summary><div class="detail"><span data-lang="en">Equal temperament is a musical tuning system that slightly redistributes intervals to make modulation between keys possible. Beacon follows another criterion: the audible coherence among partials, beats, resonant material, and the room. This is a technical design choice, not a claim that natural harmonics cure.</span><span data-lang="es">El temperamento igual es un sistema de afinación musical que redistribuye levemente los intervalos para permitir la modulación entre tonalidades. Beacon sigue otro criterio: la coherencia audible entre parciales, batimentos, materia resonante y espacio. Es una decisión técnica de diseño, no la afirmación de que los armónicos naturales curen.</span></div></details>
       <details class="reveal"><summary><span data-lang="en">Where does Harmonic Information Theory enter?</span><span data-lang="es">¿Dónde entra la Teoría de la Información Armónica?</span></summary><div class="detail"><span data-lang="en">HIT provides the research framework behind Beacon's design. It asks whether proportional relationships can help organize physical, perceptual, biological, or computational systems under specific conditions. Beacon is one experimental front within that broader program; it does not prove the whole theory.</span><span data-lang="es">HIT aporta el marco de investigación detrás del diseño de Beacon. Pregunta si las relaciones proporcionales pueden ayudar a organizar sistemas físicos, perceptivos, biológicos o computacionales bajo condiciones específicas. Beacon es un frente experimental dentro de ese programa más amplio; no demuestra por sí solo toda la teoría.</span></div></details>
 
-      <div class="actions reveal"><a class="btn btn-primary" href="/#trabajo"><span data-lang="en">Explore the project</span><span data-lang="es">Explorar el proyecto</span></a><a class="btn btn-ghost" href="https://hit.altermundi.net/" target="_blank" rel="noopener"><span data-lang="en">Read the HIT book</span><span data-lang="es">Leer el libro HIT</span></a></div>
+      <div class="actions reveal"><a class="btn btn-primary" href="/#programa"><span data-lang="en">Return to the experience</span><span data-lang="es">Volver a la experiencia</span></a><a class="btn btn-ghost" href="https://hit.altermundi.net/" target="_blank" rel="noopener"><span data-lang="en">Read the HIT book</span><span data-lang="es">Leer el libro HIT</span></a></div>
+    </div>
+  </section>
+
+  <section class="section" id="tecnologias" style="border-top:1px solid var(--hair-soft);">
+    <div class="wrap">
+      <header class="section-head reveal"><span class="eyebrow"><span data-lang="en">Questions becoming instruments</span><span data-lang="es">Preguntas que se vuelven instrumentos</span></span><h2><span data-lang="en">Different developments, different genealogies</span><span data-lang="es">Desarrollos distintos, genealogías diferentes</span></h2><p class="lead"><span data-lang="en">Beacon opens research into body, signal, movement, and distributed listening. Its encounter with Personal Myth Projection opens another line with its own symbolic and psychodramatic history.</span><span data-lang="es">Beacon abre investigaciones sobre cuerpo, señal, movimiento y escucha distribuida. Su encuentro con la Proyección del Mito Personal abre otra línea con una historia simbólica y psicodramática propia.</span></p></header>
+      <div class="research-lines reveal" data-d="1">
+        <article class="research-line"><small><span data-lang="en">Beacon branch · exploratory research</span><span data-lang="es">Rama Beacon · investigación exploratoria</span></small><h3>Corazófono</h3><p><span data-lang="en">Reads thoracic resonance spectrally and asks whether a harmonic field can be calibrated in relation to each body's resonant organization.</span><span data-lang="es">Lee espectralmente la resonancia torácica y pregunta si un campo armónico puede calibrarse en relación con la organización resonante de cada cuerpo.</span></p></article>
+        <article class="research-line"><small><span data-lang="en">Beacon branch · prototype</span><span data-lang="es">Rama Beacon · prototipo</span></small><h3>HarMoCAP</h3><p><span data-lang="en">Explores how body movement can modulate a harmonic field in real time, making gesture part of the acoustic system.</span><span data-lang="es">Explora cómo el movimiento corporal puede modular un campo armónico en tiempo real, haciendo del gesto una parte del sistema acústico.</span></p></article>
+        <article class="research-line"><small><span data-lang="en">HMP convergence · experimental development</span><span data-lang="es">Convergencia HMP · desarrollo experimental</span></small><h3>PsicopoMPo</h3><p><span data-lang="en">Connects protocol, voice, memory, Beacon, and AI-assisted symbolic accompaniment within Harmonic Myth Projection.</span><span data-lang="es">Articula protocolo, voz, memoria, Beacon y acompañamiento simbólico asistido por IA dentro de la Proyección Armónica del Mito.</span></p></article>
+        <article class="research-line"><small><span data-lang="en">Listen · in progress</span><span data-lang="es">Listen · en proceso</span></small><h3><span data-lang="en">Voices for Listen</span><span data-lang="es">Voces para Listen</span></h3><p><span data-lang="en">Introductions in different languages so each person can enter the listening practice through a familiar voice.</span><span data-lang="es">Introducciones en distintos idiomas para que cada persona pueda entrar a la práctica de escucha mediante una voz cercana.</span></p></article>
+      </div>
+      <div class="boundary reveal" data-d="2"><strong style="color:var(--gold-2);font-family:var(--font-serif);font-size:1.35rem;font-weight:400;">Harmonically Aware Technology · HAT</strong><br><span data-lang="en">At another scale, HAT names a wider design criterion for devices, rooms, networks, and infrastructures. Its long horizon brings together Beacon's capacity to generate and adjust harmonic fields with Phideus's capacity to read and compare proportional organization.</span><span data-lang="es">En otra escala, HAT nombra un criterio de diseño más amplio para dispositivos, habitaciones, redes e infraestructuras. Su horizonte largo reúne la capacidad del Beacon para generar y ajustar campos armónicos con la capacidad de Phideus para leer y comparar organización proporcional.</span></div>
     </div>
   </section>
 </main>
 <script src="/assets/hb-global-nav.js" defer></script>
 <script src="/assets/hb-main.js" defer></script>
 <script>
+  (function () {
+    var context;
+    var activeNodes = [];
+    var stopTimer;
+    var status = document.querySelector('.sound-status');
+    var buttons = document.querySelectorAll('[data-tone-ratio]');
+
+    function language() {
+      return document.documentElement.getAttribute('data-active-lang') === 'en' ? 'en' : 'es';
+    }
+
+    function stop() {
+      if (stopTimer) window.clearTimeout(stopTimer);
+      stopTimer = null;
+      activeNodes.forEach(function (node) {
+        try { node.stop(); } catch (error) { /* already stopped */ }
+      });
+      activeNodes = [];
+      buttons.forEach(function (button) { button.classList.remove('is-playing'); });
+      if (status) status.textContent = '';
+    }
+
+    function play(button) {
+      stop();
+      var AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) {
+        if (status) status.textContent = language() === 'en' ? 'Audio is not available in this browser.' : 'El audio no está disponible en este navegador.';
+        return;
+      }
+      context = context || new AudioContext();
+      var ratio = Number(button.getAttribute('data-tone-ratio'));
+      var now = context.currentTime;
+      var gain = context.createGain();
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.035, now + 0.08);
+      gain.gain.setValueAtTime(0.035, now + 3.2);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+      gain.connect(context.destination);
+      [220, 220 * ratio].forEach(function (frequency) {
+        var oscillator = context.createOscillator();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(frequency, now);
+        oscillator.connect(gain);
+        oscillator.start(now);
+        oscillator.stop(now + 3.85);
+        activeNodes.push(oscillator);
+      });
+      button.classList.add('is-playing');
+      if (status) status.textContent = button.textContent.trim();
+      stopTimer = window.setTimeout(stop, 3900);
+    }
+
+    buttons.forEach(function (button) { button.addEventListener('click', function () { play(button); }); });
+    var stopButton = document.querySelector('[data-tone-stop]');
+    if (stopButton) stopButton.addEventListener('click', stop);
+  })();
+
   window.addEventListener('load', function () {
     if (window.location.hash !== '#explicacion-completa') return;
     window.setTimeout(function () {

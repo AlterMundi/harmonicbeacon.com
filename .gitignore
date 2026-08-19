@@ -10,7 +10,10 @@
 !marketing/copys-instagram-proyecto.md
 *.txt
 !seccionesvirtuales/copys-difusion.txt
+!emails/del-otro-lado-del-umbral-2026/email.txt
 *.png
+!assets/img/hit-foundations-cover.png
+!assets/img/harmonic-series-spectrogram.png
 
 # Image library no usada actualmente por el sitio
 becon/
