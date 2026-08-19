@@ -52,6 +52,10 @@ test('one canonical asset owns the exact cross-product destinations', () => {
   assert.match(asset, /<circle cx="12" cy="8" r="3\.25">/);
   assert.match(asset, /aria-haspopup="menu"/);
   assert.match(asset, /class="account-menu"/);
+  assert.match(asset, /<slot name="account-menu">/);
+  assert.match(asset, /assignedElements\(\{ flatten:true \}\)/);
+  assert.match(asset, /querySelectorAll\('\[role="menuitem"\]'\)/);
+  assert.match(asset, /event\.composedPath\(\)\.includes\(this\)/);
   assert.match(asset, /role="menuitem"/);
   assert.match(asset, /accountMenu\.hidden = !open/);
   assert.match(asset, /event\.key !== 'ArrowDown'/);
