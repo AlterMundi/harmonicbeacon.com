@@ -59,7 +59,8 @@ test('the deep explanation remains its own page and labels knowledge boundaries'
   assert.match(why, /La armonía natural y la música temperada responden a necesidades distintas/);
   assert.match(why, /Los grillos escuchan mientras cantan/);
   assert.match(why, /Su alcance es específico: describe el ajuste temporal en ciertos coros/);
-  assert.match(why, /Harmonically Aware Technology · HAT/);
+  assert.match(why, /Harmonically Aware Technology/);
+  assert.doesNotMatch(why, /Harmonically Aware Technology · HAT|\bHAT\b/);
   assert.match(why, /Corazófono/);
   assert.match(why, /HarMoCAP/);
   assert.match(why, /PsicopoMPo/);
@@ -69,7 +70,7 @@ test('the deep explanation remains its own page and labels knowledge boundaries'
   assert.ok(why.indexOf('id="evidencia"') < why.indexOf('id="tecnologias"'));
 });
 
-test('the ecosystem preserves distinct genealogies and keeps HAT at its wider scale', () => {
+test('the ecosystem preserves distinct genealogies and keeps harmonically aware technology at its wider scale', () => {
   assert.doesNotMatch(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
   assert.doesNotMatch(home, /class="eco-field"/);
   assert.doesNotMatch(home, /La rama Beacon/);
@@ -78,8 +79,8 @@ test('the ecosystem preserves distinct genealogies and keeps HAT at its wider sc
   assert.match(home, /proporciones, consonancia y los principios relacionales que desarrolla HIT/);
   assert.match(home, /Harmonic Beacon[\s\S]*Phideus[\s\S]*LibreAgro[\s\S]*Conectividad/);
   assert.match(home, /Suscribite a Listen · USD 5\/mes/);
-  assert.doesNotMatch(home, /HAT[\s\S]{0,500}abre líneas como Corazófono/);
-  assert.match(why, /HAT es un programa de investigación de AlterMundi/);
+  assert.doesNotMatch(home, /Harmonically Aware Technology · HAT|\bHAT\b/);
+  assert.match(why, /Harmonically Aware Technology es el programa de investigación de AlterMundi/);
   assert.match(why, /incluido el dominio subsónico/);
 });
 
