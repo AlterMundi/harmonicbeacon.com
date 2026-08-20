@@ -18,8 +18,10 @@ test('the homepage keeps the former project catalogue paused and replaces it wit
   assert.match(home, /USD 5/);
   assert.match(home, /por mes para acceder a Listen sin límite de horas/);
   assert.doesNotMatch(home, /La armonía se vuelve una experiencia que podés habitar/);
-  assert.match(home, /class="program-visual reveal"/);
-  assert.match(home, /beacon-instrumento\.jpg/);
+  assert.doesNotMatch(home, /class="program-visual reveal"/);
+  assert.doesNotMatch(home, /id="harmonicLissajous"/);
+  assert.doesNotMatch(main, /drawHarmonicField/);
+  assert.doesNotMatch(home, /beacon-instrumento\.jpg/);
   assert.match(home, /Te invito a escuchar/);
   assert.match(home, /elemento resonante excitado de forma continua/);
 });
@@ -68,13 +70,17 @@ test('the deep explanation remains its own page and labels knowledge boundaries'
 });
 
 test('the ecosystem preserves distinct genealogies and keeps HAT at its wider scale', () => {
-  assert.match(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /class="eco-field"/);
   assert.doesNotMatch(home, /La rama Beacon/);
   assert.doesNotMatch(home, /Una convergencia independiente/);
-  assert.match(home, /HAT nombra un criterio de diseño para dispositivos, habitaciones, redes e infraestructuras/);
-  assert.match(home, /Es más amplio que el Beacon/);
+  assert.match(home, /Queremos crear tecnología armónicamente consciente/);
+  assert.match(home, /proporciones, consonancia y los principios relacionales que desarrolla HIT/);
+  assert.match(home, /Harmonic Beacon[\s\S]*Phideus[\s\S]*LibreAgro[\s\S]*Conectividad/);
+  assert.match(home, /Suscribite a Listen · USD 5\/mes/);
   assert.doesNotMatch(home, /HAT[\s\S]{0,500}abre líneas como Corazófono/);
-  assert.match(why, /En otra escala, HAT nombra un criterio de diseño más amplio/);
+  assert.match(why, /HAT es un programa de investigación de AlterMundi/);
+  assert.match(why, /incluido el dominio subsónico/);
 });
 
 test('the sound comparison controller compiles and remains user initiated', () => {
@@ -88,21 +94,34 @@ test('the sound comparison controller compiles and remains user initiated', () =
 });
 
 test('the ecosystem stays concise while the practice section explains experimentation', () => {
-  assert.match(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
   assert.match(home, /<b>Phideus<\/b>/);
   assert.match(home, /una experiencia pareidólica que cada persona organiza de manera singular/);
   assert.match(home, /surge al abrir ese campo a la experimentación/);
   assert.match(home, /búsqueda de visión y psicodrama/);
   assert.match(home, /Un campo para explorar la presencia/);
   assert.match(home, /Eventos gratuitos de experimentación grupal, virtual y sincrónica/);
-  assert.match(home, /<video controls playsinline preload="metadata" poster="\/assets\/img\/team-room\.jpg">/);
-  assert.match(home, /\/assets\/beacon-gente\.mp4/);
+  assert.doesNotMatch(home, /<video/);
+  assert.doesNotMatch(home, /\/assets\/beacon-gente\.mp4/);
   assert.doesNotMatch(home, /class="ecosystem-path/);
+});
+
+test('the complete public English surface reads as native English', () => {
+  assert.match(home, /A sustained harmonic field grounded in the natural physics of sound/);
+  assert.match(home, /A resonant element under continuous excitation/);
+  assert.match(home, /an experience of harmonic pareidolia/);
+  assert.match(home, /Free, live, virtual group experiments/);
+  assert.match(home, /Read more/);
+  assert.match(home, /We carry projects within us, too/);
+  assert.match(home, /We aim to create harmonically aware technology/);
+  assert.doesNotMatch(home, /Open account|As listening remains within it|this composition of harmonic field|become pregnant with projects/);
+  assert.match(home, /aria-label="Close \/ Cerrar"/);
+  assert.match(home, /Publication details \/ Datos editoriales/);
 });
 
 test('the HIT book is presented as a real open publication, not a stray external link', () => {
   assert.match(home, /class="book-feature/);
-  assert.match(home, /hit-foundations-cover\.png/);
+  assert.match(home, /hit-foundations-book\.webp/);
   assert.match(home, /Hay un libro detrás de esta investigación/);
   assert.match(home, /Mariano Fernández Méndez y Nicolás Echániz/);
   assert.match(home, /ISBN 978-631-91761-0-0/);
@@ -112,6 +131,8 @@ test('the HIT book is presented as a real open publication, not a stray external
 
 test('the spectral visualization is explicitly educational and Nico music framing stays bounded', () => {
   assert.match(why, /harmonic-series-spectrogram\.png/);
+  assert.match(why, /beacon-spatializer-interface\.webp/);
+  assert.match(why, /fundamental de 40 Hz y despliega sus múltiplos enteros/);
   assert.match(why, /Es una síntesis didáctica, no una grabación ni una medición del Beacon/);
   assert.match(why, /La música construye un recorrido\. El Beacon sostiene un presente/);
   assert.match(why, /no la prueba de un menor gasto de energía en el cuerpo/);
