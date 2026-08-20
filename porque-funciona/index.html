@@ -43,6 +43,11 @@
   .flow article:not(:last-child)::after{ content:"→"; position:absolute; right:-.82rem; top:50%; z-index:2; color:var(--gold); font-family:var(--font-serif); font-size:1.5rem; transform:translateY(-50%); }
   .flow h3{ font-size:1.4rem; }
   .flow p{ color:var(--ink-600); margin-top:.7rem; font-size:.9rem; line-height:1.7; }
+  .beacon-console{ display:grid; grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr); gap:clamp(1.5rem,5vw,4rem); align-items:center; margin-top:clamp(3rem,7vw,5rem); padding:clamp(1rem,2.5vw,1.5rem); border:1px solid var(--hair); border-radius:22px; background:rgba(13,11,8,.58); }
+  .beacon-console img{ display:block; width:100%; border:1px solid rgba(0,196,229,.15); border-radius:14px; box-shadow:0 18px 45px rgba(0,0,0,.32); }
+  .beacon-console h3{ margin-top:.65rem; font-size:clamp(1.7rem,3vw,2.35rem); line-height:1.12; }
+  .beacon-console p{ margin-top:.9rem; color:var(--ink-600); font-size:.92rem; line-height:1.75; }
+  .beacon-console small{ display:block; margin-top:1rem; color:var(--ink-500); font-size:.68rem; letter-spacing:.08em; line-height:1.55; text-transform:uppercase; }
   .experience-grid{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(270px,.7fr); gap:clamp(2rem,7vw,6rem); align-items:start; }
   .ratio-section{ overflow:hidden; border-block:1px solid var(--hair-soft); background:radial-gradient(circle at 78% 28%,rgba(201,162,78,.09),transparent 34%); }
   .ratio-display{ display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:clamp(2.5rem,8vw,7rem); margin-top:2.6rem; align-items:start; }
@@ -98,7 +103,7 @@
   .detail{ padding:1.25rem 0 1.5rem; color:var(--ink-600); line-height:1.8; max-width:68ch; }
   .actions{ margin-top:3rem; display:flex; flex-wrap:wrap; gap:.9rem; }
   @media(max-width:860px){ .flow{ grid-template-columns:repeat(2,1fr); } .flow article::after{ display:none; } }
-  @media(max-width:700px){ .three-grid,.four-grid,.evidence-grid,.flow,.experience-grid,.ratio-display,.nature-grid,.research-lines{ grid-template-columns:1fr; } .three-grid,.evidence-grid{ gap:1px; } .cricket-field{ min-height:240px; } }
+  @media(max-width:700px){ .three-grid,.four-grid,.evidence-grid,.flow,.experience-grid,.ratio-display,.nature-grid,.research-lines,.beacon-console{ grid-template-columns:1fr; } .three-grid,.evidence-grid{ gap:1px; } .cricket-field{ min-height:240px; } }
 </style>
 </head>
 <body data-page="porque">
@@ -154,6 +159,15 @@
         <article><h3><span data-lang="en">Coupling</span><span data-lang="es">Acoplamiento</span></h3><p><span data-lang="en">The body responds from its own state, history, and sensitivity, becoming an active part of the listening situation.</span><span data-lang="es">El cuerpo responde desde su propio estado, historia y sensibilidad, y se vuelve parte activa de la situación de escucha.</span></p></article>
         <article><h3><span data-lang="en">A felt contrast</span><span data-lang="es">Un contraste sensible</span></h3><p><span data-lang="en">The field may make changes in attention, bodily perception, and inner experience easier to notice.</span><span data-lang="es">El campo puede volver más perceptibles los cambios en la atención, la percepción corporal y la experiencia interna.</span></p></article>
       </div>
+      <figure class="beacon-console reveal" data-d="2">
+        <img src="/assets/img/beacon-spatializer-interface.webp" alt="Interfaz del software Beacon con una serie de 40 hercios y controles espaciales por banda" loading="lazy" />
+        <figcaption>
+          <span class="eyebrow"><span data-lang="en">From ratios to spatial design</span><span data-lang="es">De las proporciones al diseño espacial</span></span>
+          <h3><span data-lang="en">Each harmonic can occupy the field differently</span><span data-lang="es">Cada armónico puede ocupar el campo de una manera distinta</span></h3>
+          <p><span data-lang="en">This development interface starts from a 40 Hz fundamental and unfolds its integer multiples: 80, 120, 160, 200 Hz, and onward. Each band can be adjusted in gain, azimuth, distance, and resonance to compose the field in space.</span><span data-lang="es">Esta interfaz de desarrollo parte de una fundamental de 40 Hz y despliega sus múltiplos enteros: 80, 120, 160, 200 Hz y los siguientes. Cada banda puede ajustarse en ganancia, azimut, distancia y resonancia para componer el campo en el espacio.</span></p>
+          <small><span data-lang="en">Beacon sound-design software · development interface</span><span data-lang="es">Software de diseño sonoro del Beacon · interfaz de desarrollo</span></small>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -242,7 +256,7 @@
         <article class="research-line"><small><span data-lang="en">HMP convergence · experimental development</span><span data-lang="es">Convergencia HMP · desarrollo experimental</span></small><h3>PsicopoMPo</h3><p><span data-lang="en">Connects protocol, voice, memory, Beacon, and AI-assisted symbolic accompaniment within Harmonic Myth Projection.</span><span data-lang="es">Articula protocolo, voz, memoria, Beacon y acompañamiento simbólico asistido por IA dentro de la Proyección Armónica del Mito.</span></p></article>
         <article class="research-line"><small><span data-lang="en">Listen · in progress</span><span data-lang="es">Listen · en proceso</span></small><h3><span data-lang="en">Voices for Listen</span><span data-lang="es">Voces para Listen</span></h3><p><span data-lang="en">Introductions in different languages so each person can enter the listening practice through a familiar voice.</span><span data-lang="es">Introducciones en distintos idiomas para que cada persona pueda entrar a la práctica de escucha mediante una voz cercana.</span></p></article>
       </div>
-      <div class="boundary reveal" data-d="2"><strong style="color:var(--gold-2);font-family:var(--font-serif);font-size:1.35rem;font-weight:400;">Harmonically Aware Technology · HAT</strong><br><span data-lang="en">At another scale, HAT names a wider design criterion for devices, rooms, networks, and infrastructures. Its long horizon brings together Beacon's capacity to generate and adjust harmonic fields with Phideus's capacity to read and compare proportional organization.</span><span data-lang="es">En otra escala, HAT nombra un criterio de diseño más amplio para dispositivos, habitaciones, redes e infraestructuras. Su horizonte largo reúne la capacidad del Beacon para generar y ajustar campos armónicos con la capacidad de Phideus para leer y comparar organización proporcional.</span></div>
+      <div class="boundary reveal" data-d="2"><strong style="color:var(--gold-2);font-family:var(--font-serif);font-size:1.35rem;font-weight:400;">Harmonically Aware Technology · HAT</strong><br><span data-lang="en">HAT is an AlterMundi research program for creating technology capable of recognizing and working with ratios, consonance, and the relational principles developed by HIT. That common question takes different forms in Beacon and Phideus, in regenerative technology with LibreAgro, and in connectivity and community infrastructure. Its horizon extends from sound—including the subsonic domain—to software, networks, devices, and inhabited environments.</span><span data-lang="es">HAT es un programa de investigación de AlterMundi para crear tecnología capaz de reconocer y trabajar con proporciones, consonancia y los principios relacionales que desarrolla HIT. Esa pregunta común toma formas diferentes en Beacon y Phideus, en la tecnología regenerativa con LibreAgro y en la conectividad y la infraestructura comunitaria. Su horizonte va desde el sonido —incluido el dominio subsónico— hasta el software, las redes, los dispositivos y los entornos habitados.</span></div>
     </div>
   </section>
 </main>
