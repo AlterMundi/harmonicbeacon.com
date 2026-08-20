@@ -40,7 +40,7 @@ test('the homepage offers a selectable cloud of accounts without public identiti
   assert.doesNotThrow(() => new vm.Script(main, {filename: 'hb-main.js'}));
 });
 
-test('the team is a compact profile list with one concrete contribution per person', () => {
+test('the team keeps the compact profile layout and the curated biographies', () => {
   assert.match(home, /class="team-constellation"/);
   assert.equal((home.match(/class="portrait" data-initials=/g) || []).length, 7);
   assert.doesNotMatch(home, /class="member reveal"/);
@@ -48,8 +48,11 @@ test('the team is a compact profile list with one concrete contribution per pers
     assert.match(home, new RegExp(name));
   }
   assert.equal((home.match(/class="story"/g) || []).length, 0);
-  assert.match(home, /Desarrollo acústico y conceptual del Beacon/);
-  assert.match(home, /Proyección del Mito Personal, psicodrama y facilitación/);
+  assert.equal((home.match(/class="bio"/g) || []).length, 7);
+  assert.match(home, /Presidente de AlterMundi y co-autor de HIT/);
+  assert.match(home, /más de 15 años desarrollándola y practicándola/);
+  assert.match(home, /con experiencia en salud pública y comunitaria/);
+  assert.match(home, /garantiza la calidad de señal de la que depende la experiencia/);
   assert.match(home, /Los agentes de IA forman parte del equipo de trabajo/);
 });
 
