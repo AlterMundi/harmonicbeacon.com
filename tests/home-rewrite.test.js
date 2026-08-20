@@ -70,7 +70,8 @@ test('the deep explanation remains its own page and labels knowledge boundaries'
 });
 
 test('the ecosystem preserves distinct genealogies and keeps HAT at its wider scale', () => {
-  assert.match(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /class="eco-field"/);
   assert.doesNotMatch(home, /La rama Beacon/);
   assert.doesNotMatch(home, /Una convergencia independiente/);
   assert.match(home, /Queremos crear tecnología armónicamente consciente/);
@@ -93,7 +94,7 @@ test('the sound comparison controller compiles and remains user initiated', () =
 });
 
 test('the ecosystem stays concise while the practice section explains experimentation', () => {
-  assert.match(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
+  assert.doesNotMatch(home, /Estas sondas no nacieron como aplicaciones de una doctrina terminada/);
   assert.match(home, /<b>Phideus<\/b>/);
   assert.match(home, /una experiencia pareidólica que cada persona organiza de manera singular/);
   assert.match(home, /surge al abrir ese campo a la experimentación/);
@@ -103,6 +104,19 @@ test('the ecosystem stays concise while the practice section explains experiment
   assert.doesNotMatch(home, /<video/);
   assert.doesNotMatch(home, /\/assets\/beacon-gente\.mp4/);
   assert.doesNotMatch(home, /class="ecosystem-path/);
+});
+
+test('the complete public English surface reads as native English', () => {
+  assert.match(home, /A sustained harmonic field grounded in the natural physics of sound/);
+  assert.match(home, /A resonant element under continuous excitation/);
+  assert.match(home, /an experience of harmonic pareidolia/);
+  assert.match(home, /Free, live, virtual group experiments/);
+  assert.match(home, /Read more/);
+  assert.match(home, /We carry projects within us, too/);
+  assert.match(home, /We aim to create harmonically aware technology/);
+  assert.doesNotMatch(home, /Open account|As listening remains within it|this composition of harmonic field|become pregnant with projects/);
+  assert.match(home, /aria-label="Close \/ Cerrar"/);
+  assert.match(home, /Publication details \/ Datos editoriales/);
 });
 
 test('the HIT book is presented as a real open publication, not a stray external link', () => {
