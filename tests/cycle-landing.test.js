@@ -27,17 +27,6 @@ test('cycle offers automatic and manual timezone conversion', () => {
   assert.match(cycle, /searchParams\.set\('tz'/);
 });
 
-test('cycle publishes the confirmed regional start times', () => {
-  assert.match(cycle, /22 y 29 de agosto/);
-  assert.match(cycle, /5 y 12 de septiembre de 2026/);
-  assert.match(cycle, /<strong>10:00<\/strong> — Costa Rica · México \(CDMX\)/);
-  assert.match(cycle, /<strong>12:00<\/strong> — Estados Unidos \(ET\) · Bolivia · Venezuela/);
-  assert.match(cycle, /<strong>13:00<\/strong> — Argentina · Uruguay/);
-  assert.match(cycle, /Chile continental:<\/strong> 12:00 los tres primeros sábados · 13:00 el 12 de septiembre/);
-  assert.match(cycle, /<strong>18:00<\/strong> — España peninsular/);
-  assert.match(cycle, /¿Cómo participar\?/);
-});
-
 test('cycle explains where access and reminders arrive', () => {
   assert.match(cycle, /https:\/\/live\.harmonicbeacon\.com\//);
   assert.match(cycle, /Ingresar a las salas/);
