@@ -47,6 +47,21 @@
   .ev-main .ilink{ display:inline-flex; align-items:center; gap:.4rem; margin-top:.8rem; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--hair); padding-bottom:2px; }
   .ev-main .ilink:hover{ color:var(--bone); border-color:var(--gold); }
 
+  /* Entradas extensas de la bitácora */
+  .ev-journal{ padding-block:clamp(2rem,5vw,3.4rem); }
+  .ev-journal .ev-main h3{ font-size:clamp(1.75rem,3.5vw,2.45rem); max-width:22ch; }
+  .ev-journal .entry-lead{ margin-top:1rem; color:var(--ink-800); font-family:var(--font-serif); font-size:clamp(1.22rem,2.5vw,1.55rem); line-height:1.46; max-width:38ch; }
+  .entry-body{ max-width:64ch; margin-top:1.35rem; }
+  .entry-body p{ color:var(--ink-600); font-size:.98rem; line-height:1.75; margin-top:1rem; }
+  .entry-body h4{ color:var(--bone); font-size:1.28rem; margin-top:1.75rem; }
+  .entry-body .entry-note{ padding:1.1rem 1.2rem; border-left:2px solid var(--gold); background:rgba(201,162,78,.05); color:var(--ink-800); }
+  .entry-modes{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; margin:1.25rem 0 .3rem; }
+  .entry-modes div{ padding:.9rem 1rem; border:1px solid var(--hair-soft); border-radius:12px; background:var(--surface); }
+  .entry-modes b{ display:block; color:var(--gold-2); font-family:var(--font-serif); font-size:1.08rem; font-weight:500; }
+  .entry-modes span{ display:block; color:var(--ink-600); font-size:.84rem; line-height:1.55; margin-top:.25rem; }
+  .entry-actions{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.4rem; }
+  @media(max-width:620px){ .ev-journal{ grid-template-columns:1fr; } .ev-journal .ev-date{ width:76px; } .entry-modes{ grid-template-columns:1fr; } }
+
   .agenda-note{ color:var(--ink-500); font-size:.9rem; margin-top:2rem; line-height:1.6; text-align:center; }
 
   /* Galería de fotos */
@@ -116,6 +131,80 @@
       </p>
 
       <div class="ev-list">
+        <article class="ev ev-journal reveal" id="listen-una-puerta-para-habitar-el-beacon">
+          <div class="ev-date"><div class="d">27</div><div class="m"><span data-lang="es">Ago</span><span data-lang="en">Aug</span></div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Listen: una puerta para habitar el Beacon</span><span data-lang="en">Listen: a doorway into inhabiting the Beacon</span></h3>
+            <div class="meta"><span data-lang="es">Desarrollo · Laboratorio local de voces · Escucha guiada</span><span data-lang="en">Development · Local voice lab · Guided listening</span></div>
+            <div data-lang="es">
+              <p class="entry-lead">Listen nació de una pregunta sencilla: ¿cómo acompañar el primer encuentro con el campo armónico sin decirle a cada persona qué debería sentir?</p>
+              <div class="entry-body">
+                <p>No alcanzaba con poner un botón de reproducción. Queríamos construir un umbral: una introducción capaz de acercar la atención al sonido, al cuerpo y al presente, y luego retirarse para que cada experiencia pudiera encontrar su propio curso.</p>
+                <h4>Un laboratorio de voces propio</h4>
+                <p>Para buscar esa presencia montamos nuestro propio laboratorio local de voces. Allí trabajamos versiones, pronunciaciones, temperaturas, ritmos y silencios. La intención no era encontrar una voz espectacular, sino una voz baja, cálida y sin apuro, que permaneciera con quien escucha sin adelantarse a su experiencia.</p>
+                <p>El guion también fue tratado como una partitura. Marcamos respiraciones pequeñas, pausas sostenidas, énfasis suaves, descensos de la frase y silencios de distinta duración. El Beacon llena esos espacios: la narración no necesita competir con él ni explicar lo que está ocurriendo.</p>
+                <h4>Diferentes formas de habitar el Beacon</h4>
+                <p>La inducción recorre varias puertas de entrada. Ninguna prescribe un resultado; cada una propone una manera distinta de estar dentro del mismo campo.</p>
+                <div class="entry-modes">
+                  <div><b>Escuchar figuras</b><span>Seguir capas, texturas, ritmos o voces que la percepción encuentra en un campo siempre cambiante.</span></div>
+                  <div><b>Escuchar con el cuerpo</b><span>Notar el peso, los apoyos, la piel, el centro de gravedad y las pequeñas transformaciones de la postura.</span></div>
+                  <div><b>Volver al pulso</b><span>Encontrar la respiración y el latido como ritmos propios que entran en relación con el sonido.</span></div>
+                  <div><b>Dejar espacio</b><span>Permitir que el silencio, la imaginación y la atención continúen cuando la voz deja de guiar.</span></div>
+                </div>
+                <p class="entry-note">Listen es hoy la forma más directa de entrar al Beacon desde el navegador, sin instalar nada. Cada persona dispone de <strong>tres horas gratuitas por semana</strong> para escuchar a su propio ritmo.</p>
+                <div class="entry-actions"><a class="btn btn-primary" href="https://listen.harmonicbeacon.com/" target="_blank" rel="noopener">Entrar a Listen ↗</a></div>
+              </div>
+            </div>
+            <div data-lang="en">
+              <p class="entry-lead">Listen began with a simple question: how could we accompany a first encounter with the harmonic field without telling anyone what they should feel?</p>
+              <div class="entry-body">
+                <p>A play button was not enough. We wanted to build a threshold: an introduction that could bring attention closer to sound, body and present time, then step away so each experience could find its own course.</p>
+                <h4>A voice lab of our own</h4>
+                <p>To find that presence, we built our own local voice laboratory. There we worked through versions, pronunciation, vocal warmth, pacing and silence. We were not searching for a spectacular voice, but for one that felt low, warm and unhurried—staying with the listener without moving ahead of their experience.</p>
+                <p>The script was also treated as a score. We marked small breaths, held pauses, gentle emphasis, settling cadences and silences of different lengths. The Beacon fills those spaces: the narration does not need to compete with it or explain what is taking place.</p>
+                <h4>Different ways of inhabiting the Beacon</h4>
+                <p>The induction moves through several points of entry. None prescribes an outcome; each proposes a different way of being inside the same field.</p>
+                <div class="entry-modes">
+                  <div><b>Listening for figures</b><span>Following layers, textures, rhythms or voices that perception finds within an ever-changing field.</span></div>
+                  <div><b>Listening through the body</b><span>Noticing weight, contact, skin, centre of gravity and the subtle transformations of posture.</span></div>
+                  <div><b>Returning to pulse</b><span>Finding breath and heartbeat as rhythms of our own entering into relationship with sound.</span></div>
+                  <div><b>Leaving room</b><span>Allowing silence, imagination and attention to continue once the voice stops guiding.</span></div>
+                </div>
+                <p class="entry-note">Listen is now the most direct way to enter the Beacon from a browser, with nothing to install. Everyone has <strong>three free hours each week</strong> to listen at their own pace.</p>
+                <div class="entry-actions"><a class="btn btn-primary" href="https://listen.harmonicbeacon.com/" target="_blank" rel="noopener">Enter Listen ↗</a></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ev ev-journal reveal" id="cruzar-el-umbral">
+          <div class="ev-date"><div class="d">22</div><div class="m"><span data-lang="es">Ago</span><span data-lang="en">Aug</span></div></div>
+          <div class="ev-main">
+            <h3><span data-lang="es">Del otro lado del umbral</span><span data-lang="en">Beyond the threshold</span></h3>
+            <div class="meta"><span data-lang="es">#CruzarElUmbral · Ciclo virtual · Cuatro encuentros gratuitos</span><span data-lang="en">#CrossingTheThreshold · Online series · Four free gatherings</span></div>
+            <div data-lang="es">
+              <p class="entry-lead">Abrimos un ciclo de cuatro sábados para sostener en el tiempo una experiencia que, hasta ahora, muchas personas habían conocido en un único encuentro.</p>
+              <div class="entry-body">
+                <p><em>Del otro lado del umbral</em> reúne cuerpo en movimiento, escucha del Harmonic Beacon, imaginación activa y trabajo con símbolos personales. No es una charla ni una clase: es una inmersión sincrónica, compartida con otras personas, en la que cada participante puede formular una pregunta interna y prestar atención a lo que comienza a emerger.</p>
+                <p>Cada encuentro tiene un recorrido completo y se puede participar de manera individual. A la vez, atravesar los cuatro permite volver sobre la experiencia, reconocer continuidades y profundizar el proceso semana a semana.</p>
+                <p>El ciclo comenzó el sábado 22 de agosto y continúa el 29 de agosto, 5 y 12 de septiembre de 2026. Los encuentros son virtuales, gratuitos y duran aproximadamente entre tres y cuatro horas, con una pausa intermedia.</p>
+                <p class="entry-note">Para participar no hace falta inscripción: entrá a la agenda virtual, elegí el encuentro y accedé a la sala. La sala se habilita diez minutos antes del horario de inicio.</p>
+                <div class="entry-actions"><a class="btn btn-primary" href="https://live.harmonicbeacon.com/" target="_blank" rel="noopener">Ver eventos virtuales ↗</a><a class="btn btn-ghost" href="https://whatsapp.com/channel/0029VbCuGepBFLgWCFA0BP34" target="_blank" rel="noopener">Canal de WhatsApp ↗</a></div>
+              </div>
+            </div>
+            <div data-lang="en">
+              <p class="entry-lead">We opened a four-Saturday series to sustain over time an experience that many people had previously encountered in a single gathering.</p>
+              <div class="entry-body">
+                <p><em>Beyond the threshold</em> brings together the moving body, listening to Harmonic Beacon, active imagination and work with personal symbols. It is neither a talk nor a class: it is a synchronous immersion shared with others, where each participant can hold an inner question and attend to what begins to emerge.</p>
+                <p>Each gathering offers a complete journey and can be attended on its own. Moving through all four, however, makes it possible to return to the experience, recognise continuities and deepen the process from week to week.</p>
+                <p>The series began on Saturday, August 22 and continues on August 29, September 5 and September 12, 2026. The gatherings are online, free of charge and last approximately three to four hours, with a break midway through.</p>
+                <p class="entry-note">No registration is needed: open the online agenda, choose the gathering and enter the room. The room becomes available ten minutes before the starting time.</p>
+                <div class="entry-actions"><a class="btn btn-primary" href="https://live.harmonicbeacon.com/" target="_blank" rel="noopener">See online events ↗</a><a class="btn btn-ghost" href="https://whatsapp.com/channel/0029VbCuGepBFLgWCFA0BP34" target="_blank" rel="noopener">WhatsApp channel ↗</a></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
         <article class="ev reveal">
           <div class="ev-date"><div class="d">1</div><div class="m">Ago</div></div>
           <div class="ev-main">
