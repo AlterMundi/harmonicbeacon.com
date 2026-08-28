@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Verify contract manifests
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          while IFS= read -r manifest; do
+            directory="$(dirname "$manifest")"
+            (cd "$directory" && sha256sum -c SHA256SUMS)
+          done < <(find contracts -name SHA256SUMS -type f -print | sort)
