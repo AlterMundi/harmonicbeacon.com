@@ -252,3 +252,12 @@ test('registration-v4 discloses the three consent-gated Meta events without PII'
   assert.match(policy, /invitación, una cortesía o un acceso gratuito no bastan/);
   assert.match(policy, /an invitation, a complimentary place or free access is not enough/);
 });
+
+test('bot-v9 PDF remains byte-exact as the active Myth Bot authorization', () => {
+  const bytes = fs.readFileSync(path.join(root, 'legal/terms/bot-v9.pdf'));
+  assert.equal(
+    crypto.createHash('sha256').update(bytes).digest('hex'),
+    'aae264d8f1e2e5cdf398cd1496a64323440c70e57575d4461ae40ee7aebe04d0'
+  );
+  assert.match(bytes.subarray(0, 5).toString('ascii'), /^%PDF-/);
+});
