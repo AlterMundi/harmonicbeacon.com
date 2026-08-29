@@ -55,5 +55,5 @@ Las evidencias HTML exactas de inscripción permanecen en `legal/terms/registrat
 `legal/terms/registration-v4.html`; `/politica/` refleja la versión vigente y cada URL/hash
 inmutable se coordina con el Bot antes del cutover.
 La autorización vigente del bot de Harmonic Myth Projection está en
-`legal/terms/bot-v9.pdf`; `bot-v6.pdf`, `bot-v7.pdf` y `bot-v8.pdf` permanecen como evidencia
-histórica y no se sobrescriben.
+`legal/terms/bot-v10.pdf`; `bot-v6.pdf`, `bot-v7.pdf`, `bot-v8.pdf` y `bot-v9.pdf` permanecen como
+evidencia histórica y no se sobrescriben.
