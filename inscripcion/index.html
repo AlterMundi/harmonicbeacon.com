@@ -359,5 +359,6 @@
     const canvas=one('#cosmos'),ctx=canvas.getContext('2d'),stars=Array.from({length:110},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.25,s:Math.random()*.00025+.00004,c:Math.random()}));
     function resize(){const d=Math.min(devicePixelRatio||1,2);canvas.width=innerWidth*d;canvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0)}function paint(t=0){ctx.clearRect(0,0,innerWidth,innerHeight);stars.forEach((p,i)=>{p.y-=p.s;if(p.y<0)p.y=1;const a=.25+Math.sin(t*.001+i)*.2;ctx.beginPath();ctx.arc(p.x*innerWidth,p.y*innerHeight,p.r,0,Math.PI*2);ctx.fillStyle=p.c<.3?`rgba(255,113,189,${a})`:p.c<.6?`rgba(99,237,255,${a})`:`rgba(255,211,109,${a})`;ctx.fill()});requestAnimationFrame(paint)}resize();addEventListener('resize',resize);requestAnimationFrame(paint);
   </script>
+<script src="https://live.harmonicbeacon.com/_a/v1/tracker.js" data-collector="https://live.harmonicbeacon.com/_a" data-surface="home" data-environment="production" defer></script>
 </body>
 </html>

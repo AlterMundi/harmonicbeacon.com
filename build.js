@@ -40,6 +40,7 @@ for (const directory of [
   'proyeccion-armonica-del-mito',
   'inscripcion',
   'logos',
+  'analitica-y-privacidad',
 ]) {
   if (fs.existsSync(directory)) {
     copyRecursiveSync(directory, path.join('dist', directory));
