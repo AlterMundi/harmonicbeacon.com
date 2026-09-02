@@ -9,5 +9,6 @@ test('the public homepage links visibly to the Listener app in both languages', 
     home,
     /<a href="https:\/\/listen\.harmonicbeacon\.com\/" class="btn btn-primary">\s*<span data-lang="en">Listen to the Beacon<\/span><span data-lang="es">Escuchar el Beacon<\/span>/,
   );
-  assert.match(home, /<section class="section program" id="programa">[\s\S]*?href="https:\/\/listen\.harmonicbeacon\.com\/"[\s\S]*?Listen or subscribe[\s\S]*?Escuchar o suscribirme/);
+  assert.match(home, /<section class="section program" id="programa">[\s\S]*?href="https:\/\/listen\.harmonicbeacon\.com\/"[\s\S]*?Listen now[\s\S]*?Escuchar ahora/);
+  assert.match(home, /href="https:\/\/listen\.harmonicbeacon\.com\/listener\/membership"[\s\S]*?Subscribe · USD 5\/month[\s\S]*?Suscribite · USD 5\/mes/);
 });

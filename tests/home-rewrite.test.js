@@ -26,6 +26,15 @@ test('the homepage keeps the former project catalogue paused and replaces it wit
   assert.match(home, /elemento resonante excitado de forma continua/);
 });
 
+test('the homepage makes the Listen membership explicit and links directly to checkout', () => {
+  const membershipUrl = 'https://listen.harmonicbeacon.com/listener/membership';
+  assert.ok((home.match(new RegExp(membershipUrl, 'g')) || []).length >= 3);
+  assert.match(home, /Subscribe · USD 5\/month/);
+  assert.match(home, /Suscribite · USD 5\/mes/);
+  assert.match(home, /Listen now/);
+  assert.match(home, /Escuchar ahora/);
+});
+
 test('the homepage offers a selectable cloud of accounts without public identities', () => {
   const voices = home.match(/<div class="voice-cloud"[\s\S]*?<dialog class="voice-dialog"/)?.[0] || '';
   assert.equal((voices.match(/class="voice-chip reveal"/g) || []).length, 10);
