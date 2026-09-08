@@ -32,3 +32,9 @@ test('English-language clips can be found and are labeled before playback', () =
   assert.match(app, /clip\.language === 'en'/);
   assert.match(app, /Audio en inglés/);
 });
+
+test('new cuts have a dedicated review filter and visible label', () => {
+  assert.match(page, /data-filter="new"/);
+  assert.match(app, /clip\.newCut/);
+  assert.match(app, /Nuevo corte/);
+});

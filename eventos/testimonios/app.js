@@ -31,12 +31,17 @@
     return person.clips.reduce(function (set, clip) {
       set[clip.kind] = true;
       if (clip.language === 'en') set.english = true;
+      if (clip.newCut) set.new = true;
       return set;
     }, {});
   }
 
   function hasEnglish(person) {
     return person.clips.some(function (clip) { return clip.language === 'en'; });
+  }
+
+  function hasNewCut(person) {
+    return person.clips.some(function (clip) { return clip.newCut; });
   }
 
   function matches(person) {
@@ -63,7 +68,8 @@
     copy.appendChild(el('h2', '', person.name));
     var meta = el('span', 'person-meta');
     meta.appendChild(el('span', '', person.clips.length + ' ' + label(person.clips.length === 1 ? 'corto' : 'cortos', person.clips.length === 1 ? 'clip' : 'clips')));
-    if (hasEnglish(person)) meta.appendChild(el('span', 'language-badge', label('En inglés', 'In English')));
+    if (hasEnglish(person)) meta.appendChild(el('span', 'clip-badge', label('En inglés', 'In English')));
+    if (hasNewCut(person)) meta.appendChild(el('span', 'clip-badge', label('Nuevo', 'New')));
     meta.appendChild(el('span', 'open', label('Conocer su voz →', 'Meet their voice →')));
     copy.appendChild(meta);
     button.appendChild(portrait);
@@ -90,7 +96,8 @@
     var copy = el('div', 'clip-copy');
     var heading = el('div', 'clip-heading');
     heading.appendChild(el('span', 'clip-kicker', kindLabel(clip.kind) + ' · ' + clip.dateLabel));
-    if (clip.language === 'en') heading.appendChild(el('span', 'language-badge', label('Audio en inglés', 'English audio')));
+    if (clip.language === 'en') heading.appendChild(el('span', 'clip-badge', label('Audio en inglés', 'English audio')));
+    if (clip.newCut) heading.appendChild(el('span', 'clip-badge', label('Nuevo corte', 'New clip')));
     copy.appendChild(heading);
     copy.appendChild(el('h3', '', clip.title));
     copy.appendChild(el('p', 'clip-summary', clip.summary));
