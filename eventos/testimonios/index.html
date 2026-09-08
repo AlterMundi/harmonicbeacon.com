@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Voces del mito · Harmonic Beacon</title>
+  <meta name="description" content="Relatos de quienes participaron en encuentros de Proyección Armónica del Mito." />
+  <meta name="theme-color" content="#16120D" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html[data-active-lang="es"] [data-lang="en"]{display:none!important}
+    html[data-active-lang="en"] [data-lang="es"]{display:none!important}
+  </style>
+  <link rel="stylesheet" href="/assets/hb-brand.css" />
+  <style>
+    .review-ribbon{position:relative;z-index:4;padding:.72rem 1rem;border-bottom:1px solid var(--hair);background:rgba(201,162,78,.08);color:var(--ink-600);font-size:.72rem;letter-spacing:.12em;text-align:center;text-transform:uppercase}
+    .voices-hero{position:relative;overflow:hidden;padding:clamp(5.5rem,12vw,9.5rem) 0 clamp(3.5rem,8vw,6rem)}
+    .voices-hero::before{content:"";position:absolute;width:min(66vw,720px);aspect-ratio:1;left:50%;top:43%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(201,162,78,.14),rgba(201,162,78,.03) 42%,transparent 70%);filter:blur(8px);pointer-events:none}
+    .voices-hero .wrap{position:relative;text-align:center}
+    .voices-hero h1{max-width:12ch;margin:.9rem auto 0;font-size:clamp(3rem,8vw,6.6rem);line-height:.92}
+    .voices-hero .lead{max-width:54ch;margin:1.5rem auto 0;color:var(--ink-600);font-size:clamp(1rem,2vw,1.16rem);line-height:1.75}
+    .hero-mark{display:grid;width:62px;height:62px;margin:0 auto;place-items:center;color:var(--gold);filter:drop-shadow(0 0 24px rgba(201,162,78,.22))}
+    .hero-note{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.5rem;color:var(--ink-500);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase}
+    .hero-note::before{content:"";width:18px;height:1px;background:var(--gold)}
+    .voice-tools{position:sticky;z-index:20;top:68px;padding:1rem 0;border-block:1px solid var(--hair-soft);background:rgba(22,18,13,.92);backdrop-filter:blur(14px)}
+    .tools-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem}
+    .search-group{display:grid;width:min(100%,310px);gap:.4rem;color:var(--ink-500);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase}
+    .voice-search{width:100%;min-height:44px;padding:.78rem 1rem;border:1px solid var(--hair);border-radius:999px;outline:0;color:var(--bone);background:var(--surface);font:400 .85rem var(--font-sans)}
+    .voice-search:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,78,.1)}
+    .filters{display:flex;flex-wrap:wrap;gap:.45rem}
+    .filter{min-height:40px;padding:.65rem .9rem;border:1px solid var(--hair-soft);border-radius:999px;color:var(--ink-600);background:transparent;font:500 .67rem var(--font-sans);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+    .filter:hover,.filter[aria-pressed="true"]{border-color:var(--gold);color:var(--bone);background:rgba(201,162,78,.1)}
+    .voices-section{padding:clamp(3rem,7vw,6rem) 0 clamp(5rem,10vw,9rem)}
+    .result-line{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;color:var(--ink-500);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+    .result-line strong{color:var(--gold);font-weight:500}
+    .people-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1px;border:1px solid var(--hair-soft);border-radius:22px;overflow:hidden;background:var(--hair-soft)}
+    .person-card{position:relative;min-width:0;padding:0;border:0;color:inherit;background:var(--bg-card);text-align:left;cursor:pointer;transition:transform .4s var(--ease),background .4s var(--ease)}
+    .person-card:hover{z-index:2;transform:translateY(-4px);background:#21190f}
+    .portrait{position:relative;display:block;aspect-ratio:1;overflow:hidden;background:var(--bg-0)}
+    .portrait::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -70px 70px rgba(22,18,13,.62);pointer-events:none}
+    .portrait img{width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(1.02);transition:transform .7s var(--ease)}
+    .person-card:hover img{transform:scale(1.035)}
+    .faceless{position:absolute;right:.8rem;top:.8rem;z-index:2;padding:.35rem .55rem;border:1px solid rgba(244,238,226,.2);border-radius:999px;color:var(--ink-800);background:rgba(22,18,13,.7);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;backdrop-filter:blur(8px)}
+    .person-copy{display:block;padding:1.2rem 1.25rem 1.35rem}
+    .person-copy h2{font-size:clamp(1.5rem,3vw,1.9rem);line-height:1.05}
+    .person-meta{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:.7rem;color:var(--ink-500);font-size:.67rem;letter-spacing:.11em;text-transform:uppercase}
+    .person-meta .open{color:var(--gold)}
+    .empty{grid-column:1/-1;padding:4rem 1rem;text-align:center;color:var(--ink-600)}
+    .profile-dialog{width:min(1080px,calc(100% - 1rem));max-height:calc(100svh - 1rem);margin:auto;padding:0;border:1px solid var(--hair);border-radius:22px;color:var(--ink-800);background:var(--bg-0);box-shadow:0 36px 100px rgba(0,0,0,.68);overflow:auto}
+    .profile-dialog::backdrop{background:rgba(9,7,5,.82);backdrop-filter:blur(8px)}
+    .dialog-close{position:sticky;z-index:4;float:right;top:.8rem;margin:.8rem .8rem 0 0;width:46px;height:46px;border:1px solid var(--hair);border-radius:50%;color:var(--bone);background:rgba(22,18,13,.88);font-size:1.5rem;cursor:pointer}
+    .dialog-head{display:grid;gap:clamp(1.4rem,4vw,3rem);padding:clamp(1.2rem,4vw,3rem);padding-top:4.5rem}
+    @media(min-width:720px){.dialog-head{grid-template-columns:minmax(220px,330px) 1fr;align-items:center;padding-top:2rem}}
+    .dialog-avatar{width:100%;aspect-ratio:1;border:1px solid var(--hair-soft);border-radius:18px;object-fit:cover}
+    .dialog-title{font-size:clamp(2.5rem,6vw,4.5rem);line-height:.94}
+    .dialog-intro{max-width:50ch;margin-top:1rem;color:var(--ink-600);line-height:1.7}
+    .ai-label{display:inline-flex;margin-top:1.1rem;padding:.45rem .7rem;border:1px solid var(--hair-soft);border-radius:999px;color:var(--ink-500);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+    .clips{display:grid;gap:1px;border-top:1px solid var(--hair-soft);background:var(--hair-soft)}
+    .clip{display:grid;gap:1.2rem;padding:clamp(1.25rem,4vw,2.2rem);background:var(--bg-card)}
+    @media(min-width:820px){.clip{grid-template-columns:minmax(280px,44%) 1fr;align-items:start}}
+    .clip video{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--hair-soft);border-radius:14px;background:#090705;object-fit:contain}
+    .clip-kicker{color:var(--gold);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase}
+    .clip h3{margin-top:.45rem;font-size:clamp(1.55rem,3vw,2rem);line-height:1.08}
+    .clip-summary{margin-top:.8rem;color:var(--ink-600);line-height:1.65}
+    .clip blockquote{margin:1rem 0 0;padding:.2rem 0 .2rem 1rem;border-left:2px solid var(--gold);color:var(--ink-800);font:italic 1.12rem/1.45 var(--font-serif)}
+    .profile-dialog:focus-visible,.person-card:focus-visible,.filter:focus-visible,.dialog-close:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    @media(max-width:640px){.voice-tools{position:relative;top:auto}.tools-inner,.search-group{width:100%}.filters{width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:.2rem}.filter{flex:0 0 auto}.people-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.person-copy{padding:1rem}.person-copy h2{font-size:1.25rem}.person-meta{align-items:flex-start;flex-direction:column}.dialog-head{padding-top:4.5rem}}
+    @media(max-width:380px){.people-grid{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){.person-card,.portrait img{transition:none}}
+  </style>
+</head>
+<body data-page="proyeccion">
+  <hb-global-nav></hb-global-nav>
+  <div class="grain" style="position:fixed;inset:0;z-index:60;pointer-events:none" aria-hidden="true"></div>
+
+  <div class="review-ribbon" role="status">
+    <span data-lang="es">Vista privada de revisión · todavía no publicada</span>
+    <span data-lang="en">Private review preview · not published yet</span>
+  </div>
+
+  <main>
+    <section class="voices-hero">
+      <div class="wrap">
+        <span class="hero-mark reveal"><svg viewBox="0 0 200 200" width="62" height="62" fill="none" aria-hidden="true"><use href="#hbmark"/></svg></span>
+        <span class="eyebrow reveal" data-d="1"><span data-lang="es">Proyección Armónica del Mito</span><span data-lang="en">Harmonic Myth Projection</span></span>
+        <h1 class="reveal" data-d="1"><span data-lang="es">Voces del mito</span><span data-lang="en">Voices of the myth</span></h1>
+        <p class="lead reveal" data-d="2">
+          <span data-lang="es">Cada encuentro deja una forma singular de nombrar lo vivido. Acá reunimos esas voces, sus recorridos y lo que el campo del Beacon abrió en la experiencia.</span>
+          <span data-lang="en">Each gathering leaves a singular way of naming what was lived. Here we gather those voices, their journeys, and what the Beacon field opened in their experience.</span>
+        </p>
+        <span class="hero-note reveal" data-d="3"><span data-lang="es">Retratos ilustrados con IA, revisados con cada participante</span><span data-lang="en">AI-illustrated portraits, reviewed with each participant</span></span>
+      </div>
+    </section>
+
+    <section class="voice-tools" aria-label="Explorar testimonios">
+      <div class="wrap tools-inner">
+        <label class="search-group" for="voiceSearch"><span data-lang="es">Buscar una persona</span><span data-lang="en">Find a person</span><input class="voice-search" id="voiceSearch" type="search" autocomplete="off" aria-label="Buscar una persona" /></label>
+        <div class="filters" id="voiceFilters" aria-label="Filtrar testimonios">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true"><span data-lang="es">Todas las voces</span><span data-lang="en">All voices</span></button>
+          <button class="filter" type="button" data-filter="myth" aria-pressed="false"><span data-lang="es">El mito</span><span data-lang="en">The myth</span></button>
+          <button class="filter" type="button" data-filter="experience" aria-pressed="false"><span data-lang="es">La experiencia</span><span data-lang="en">The experience</span></button>
+          <button class="filter" type="button" data-filter="beacon" aria-pressed="false"><span data-lang="es">El Beacon</span><span data-lang="en">The Beacon</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="voices-section">
+      <div class="wrap">
+        <div class="result-line"><span data-lang="es">Archivo de participantes</span><span data-lang="en">Participant archive</span><strong id="resultCount">0</strong></div>
+        <div class="people-grid" id="peopleGrid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="profile-dialog" id="profileDialog" aria-labelledby="dialogTitle">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Cerrar">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="/assets/hb-global-nav.js" defer></script>
+  <script src="/assets/hb-main.js" defer></script>
+  <script src="/eventos/testimonios/review-data.js"></script>
+  <script src="/eventos/testimonios/app.js"></script>
+</body>
+</html>
