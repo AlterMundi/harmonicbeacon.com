@@ -26,3 +26,9 @@ test('profile experience is keyboard-friendly and groups clips by person', () =>
   assert.match(app, /dialog\.addEventListener\('cancel'/);
   assert.match(app, /video\.pause\(\)/);
 });
+
+test('English-language clips can be found and are labeled before playback', () => {
+  assert.match(page, /data-filter="english"/);
+  assert.match(app, /clip\.language === 'en'/);
+  assert.match(app, /Audio en inglés/);
+});
