@@ -12,6 +12,8 @@ test('testimonial review page uses canonical branding and remains clearly privat
   assert.match(page, /<hb-global-nav><\/hb-global-nav>/);
   assert.match(page, /\/assets\/hb-brand\.css/);
   assert.match(page, /Vista privada de revisión · todavía no publicada/);
+  assert.match(page, /Relatos y testimonios de la Proyección Armónica del Mito/);
+  assert.match(page, /Todavía no están autorizados para publicarse en redes sociales ni para difusión pública/);
   assert.match(page, /Ilustraciones creadas con IA/);
   assert.ok(page.indexOf('/assets/hb-global-nav.js') < page.indexOf('/assets/hb-main.js'));
 });
