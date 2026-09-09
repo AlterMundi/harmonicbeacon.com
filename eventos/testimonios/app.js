@@ -2,15 +2,19 @@
   'use strict';
 
   var data = Array.isArray(window.HMP_REVIEW_DATA) ? window.HMP_REVIEW_DATA : [];
+  var translations = window.HMP_TESTIMONIAL_TRANSLATIONS || { profiles: {}, clips: {} };
   var root = document.documentElement;
   var grid = document.getElementById('peopleGrid');
   var count = document.getElementById('resultCount');
   var search = document.getElementById('voiceSearch');
+  var toolsRegion = document.getElementById('voiceTools');
+  var filtersRegion = document.getElementById('voiceFilters');
   var filters = [].slice.call(document.querySelectorAll('[data-filter]'));
   var dialog = document.getElementById('profileDialog');
   var dialogContent = document.getElementById('dialogContent');
   var closeButton = document.getElementById('dialogClose');
   var activeFilter = 'all';
+  var activePerson = null;
 
   function language() {
     return root.getAttribute('data-active-lang') === 'en' ? 'en' : 'es';
@@ -18,6 +22,14 @@
 
   function label(es, en) {
     return language() === 'en' ? en : es;
+  }
+
+  function profileCopy(person) {
+    return translations.profiles[person.name] || {};
+  }
+
+  function clipCopy(clip) {
+    return translations.clips[clip.code] || {};
   }
 
   function el(tag, className, text) {
@@ -46,8 +58,10 @@
 
   function matches(person) {
     var query = (search.value || '').trim().toLocaleLowerCase();
-    var searchable = [person.name, person.context || ''].concat(person.clips.map(function (clip) {
-      return [clip.title, clip.summary, clip.quote].join(' ');
+    var profileTranslation = profileCopy(person);
+    var searchable = [person.name, person.context || '', person.intro, profileTranslation.introEn || '', profileTranslation.testimonyEs || '', profileTranslation.testimonyEn || ''].concat(person.clips.map(function (clip) {
+      var translated = clipCopy(clip);
+      return [clip.title, clip.summary, clip.quote, translated.titleEn, translated.summaryEn, translated.quoteEn].join(' ');
     })).join(' ').toLocaleLowerCase();
     var hasFilter = activeFilter === 'all' || kinds(person)[activeFilter];
     return hasFilter && (!query || searchable.indexOf(query) !== -1);
@@ -84,7 +98,13 @@
     return label('La experiencia', 'The experience');
   }
 
+  function dateLabel(clip) {
+    if (language() !== 'en') return clip.dateLabel;
+    return new Intl.DateTimeFormat('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(clip.date + 'T12:00:00Z'));
+  }
+
   function clipView(clip, person) {
+    var translated = clipCopy(clip);
     var article = el('article', 'clip');
     var video = document.createElement('video');
     video.controls = true;
@@ -92,48 +112,59 @@
     video.preload = 'metadata';
     video.poster = person.avatar;
     video.src = clip.video;
-    video.setAttribute('aria-label', clip.title + ' — ' + person.name);
+    video.setAttribute('aria-label', label(clip.title, translated.titleEn || clip.title) + ' — ' + person.name);
     var copy = el('div', 'clip-copy');
     var heading = el('div', 'clip-heading');
-    heading.appendChild(el('span', 'clip-kicker', kindLabel(clip.kind) + ' · ' + clip.dateLabel));
+    heading.appendChild(el('span', 'clip-kicker', kindLabel(clip.kind) + ' · ' + dateLabel(clip)));
     if (clip.language === 'en') heading.appendChild(el('span', 'clip-badge', label('Audio en inglés', 'English audio')));
     if (clip.newCut) heading.appendChild(el('span', 'clip-badge', label('Nuevo corte', 'New clip')));
     copy.appendChild(heading);
-    copy.appendChild(el('h3', '', clip.title));
-    copy.appendChild(el('p', 'clip-summary', clip.summary));
-    copy.appendChild(el('blockquote', '', '“' + clip.quote + '”'));
+    copy.appendChild(el('h3', '', label(clip.title, translated.titleEn || clip.title)));
+    copy.appendChild(el('p', 'clip-summary', label(clip.summary, translated.summaryEn || clip.summary)));
+    copy.appendChild(el('blockquote', '', '“' + label(clip.quote, translated.quoteEn || clip.quote) + '”'));
     article.appendChild(video);
     article.appendChild(copy);
     return article;
   }
 
   function openProfile(person) {
+    activePerson = person;
+    var translated = profileCopy(person);
     var head = el('div', 'dialog-head');
+    var figure = el('figure', 'myth-figure');
     var image = document.createElement('img');
     image.className = 'dialog-avatar';
-    image.src = person.avatar;
-    image.alt = label('Retrato ilustrado de ', 'Illustrated portrait of ') + person.name;
+    image.src = person.mythImage || person.avatar;
+    image.alt = label('Imagen inspirada en el relato de ', 'Image inspired by the account of ') + person.name;
+    figure.appendChild(image);
+    figure.appendChild(el('figcaption', 'myth-caption', label('Imagen inspirada en su relato', 'Image inspired by their account')));
     var copy = el('div');
     copy.appendChild(el('span', 'eyebrow', person.context || label('Participante', 'Participant')));
     var title = el('h2', 'dialog-title', person.name);
     title.id = 'dialogTitle';
     copy.appendChild(title);
-    copy.appendChild(el('p', 'dialog-intro', person.intro));
-    copy.appendChild(el('span', 'ai-label', label('Retrato ilustrado generado con IA', 'AI-generated illustrated portrait')));
-    head.appendChild(image);
+    copy.appendChild(el('p', 'dialog-intro', label(person.intro, translated.introEn || person.intro)));
+    copy.appendChild(el('span', 'ai-label', label('Interpretación visual generada con IA', 'AI-generated visual interpretation')));
+    var testimony = el('div', 'testimony-text');
+    testimony.appendChild(el('span', 'testimony-label', label('En su propia voz', 'In their own words')));
+    testimony.appendChild(el('blockquote', '', '“' + label(translated.testimonyEs || '', translated.testimonyEn || translated.testimonyEs || '') + '”'));
+    testimony.appendChild(el('span', 'translation-note', label('Traducción al inglés disponible en EN', 'Editorial translation from the original testimony')));
+    copy.appendChild(testimony);
+    head.appendChild(figure);
     head.appendChild(copy);
     var clips = el('div', 'clips');
     person.clips.slice().sort(function (a, b) { return a.date.localeCompare(b.date) || a.code.localeCompare(b.code); }).forEach(function (clip) {
       clips.appendChild(clipView(clip, person));
     });
     dialogContent.replaceChildren(head, clips);
-    dialog.showModal();
+    if (!dialog.open) dialog.showModal();
     closeButton.focus();
   }
 
   function closeDialog() {
     dialog.querySelectorAll('video').forEach(function (video) { video.pause(); });
     dialog.close();
+    activePerson = null;
   }
 
   function render() {
@@ -143,6 +174,9 @@
     if (!visible.length) grid.appendChild(el('p', 'empty', label('No encontramos voces con ese filtro.', 'No voices match that filter.')));
     count.textContent = visible.length + ' / ' + data.length;
     search.setAttribute('aria-label', label('Buscar una persona', 'Find a person'));
+    toolsRegion.setAttribute('aria-label', label('Explorar testimonios', 'Explore testimonials'));
+    filtersRegion.setAttribute('aria-label', label('Filtrar testimonios', 'Filter testimonials'));
+    closeButton.setAttribute('aria-label', label('Cerrar', 'Close'));
   }
 
   filters.forEach(function (button) {
@@ -157,6 +191,9 @@
   dialog.addEventListener('click', function (event) { if (event.target === dialog) closeDialog(); });
   dialog.addEventListener('cancel', function (event) { event.preventDefault(); closeDialog(); });
 
-  new MutationObserver(render).observe(root, { attributes: true, attributeFilter: ['data-active-lang'] });
+  new MutationObserver(function () {
+    render();
+    if (dialog.open && activePerson) openProfile(activePerson);
+  }).observe(root, { attributes: true, attributeFilter: ['data-active-lang'] });
   render();
 }());

@@ -55,10 +55,17 @@
     .dialog-close{position:sticky;z-index:4;float:right;top:.8rem;margin:.8rem .8rem 0 0;width:46px;height:46px;border:1px solid var(--hair);border-radius:50%;color:var(--bone);background:rgba(22,18,13,.88);font-size:1.5rem;cursor:pointer}
     .dialog-head{display:grid;gap:clamp(1.4rem,4vw,3rem);padding:clamp(1.2rem,4vw,3rem);padding-top:4.5rem}
     @media(min-width:720px){.dialog-head{grid-template-columns:minmax(220px,330px) 1fr;align-items:center;padding-top:2rem}}
-    .dialog-avatar{width:100%;aspect-ratio:1;border:1px solid var(--hair-soft);border-radius:18px;object-fit:cover}
+    .myth-figure{position:relative;margin:0}
+    .dialog-avatar{display:block;width:100%;aspect-ratio:1;border:1px solid var(--hair-soft);border-radius:18px;object-fit:cover}
+    .myth-caption{display:flex;align-items:center;gap:.55rem;margin-top:.75rem;color:var(--ink-500);font-size:.62rem;letter-spacing:.11em;text-transform:uppercase}
+    .myth-caption::before{content:"";width:16px;height:1px;background:var(--gold)}
     .dialog-title{font-size:clamp(2.5rem,6vw,4.5rem);line-height:.94}
     .dialog-intro{max-width:50ch;margin-top:1rem;color:var(--ink-600);line-height:1.7}
     .ai-label{display:inline-flex;margin-top:1.1rem;padding:.45rem .7rem;border:1px solid var(--hair-soft);border-radius:999px;color:var(--ink-500);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+    .testimony-text{max-width:58ch;margin-top:1.35rem;padding:1.2rem 1.25rem;border:1px solid var(--hair-soft);border-radius:14px;background:rgba(201,162,78,.045)}
+    .testimony-label{display:block;margin-bottom:.65rem;color:var(--gold);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+    .testimony-text blockquote{margin:0;color:var(--ink-800);font:italic clamp(1.08rem,2.4vw,1.3rem)/1.5 var(--font-serif)}
+    .translation-note{display:block;margin-top:.75rem;color:var(--ink-500);font-size:.68rem;line-height:1.5}
     .clips{display:grid;gap:1px;border-top:1px solid var(--hair-soft);background:var(--hair-soft)}
     .clip{display:grid;gap:1.2rem;padding:clamp(1.25rem,4vw,2.2rem);background:var(--bg-card)}
     @media(min-width:820px){.clip{grid-template-columns:minmax(280px,44%) 1fr;align-items:start}}
@@ -93,11 +100,11 @@
           <span data-lang="es">Cada encuentro deja una forma singular de nombrar lo vivido. Acá reunimos esas voces, sus recorridos y lo que el campo del Beacon abrió en la experiencia.</span>
           <span data-lang="en">Each gathering leaves a singular way of naming what was lived. Here we gather those voices, their journeys, and what the Beacon field opened in their experience.</span>
         </p>
-        <span class="hero-note reveal" data-d="3"><span data-lang="es">Retratos ilustrados con IA, revisados con cada participante</span><span data-lang="en">AI-illustrated portraits, reviewed with each participant</span></span>
+        <span class="hero-note reveal" data-d="3"><span data-lang="es">Ilustraciones creadas con IA · pendientes de revisión con cada participante</span><span data-lang="en">AI-created illustrations · pending review with each participant</span></span>
       </div>
     </section>
 
-    <section class="voice-tools" aria-label="Explorar testimonios">
+    <section class="voice-tools" id="voiceTools" aria-label="Explorar testimonios">
       <div class="wrap tools-inner">
         <label class="search-group" for="voiceSearch"><span data-lang="es">Buscar una persona</span><span data-lang="en">Find a person</span><input class="voice-search" id="voiceSearch" type="search" autocomplete="off" aria-label="Buscar una persona" /></label>
         <div class="filters" id="voiceFilters" aria-label="Filtrar testimonios">
@@ -127,6 +134,7 @@
   <script src="/assets/hb-global-nav.js" defer></script>
   <script src="/assets/hb-main.js" defer></script>
   <script src="/eventos/testimonios/review-data.js"></script>
+  <script src="/eventos/testimonios/translations.js"></script>
   <script src="/eventos/testimonios/app.js"></script>
 </body>
 </html>

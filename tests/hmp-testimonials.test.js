@@ -1,15 +1,18 @@
 const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const test = require('node:test');
+const vm = require('node:vm');
 
 const page = readFileSync('eventos/testimonios/index.html', 'utf8');
 const app = readFileSync('eventos/testimonios/app.js', 'utf8');
+const reviewData = readFileSync('eventos/testimonios/review-data.js', 'utf8');
+const translationsSource = readFileSync('eventos/testimonios/translations.js', 'utf8');
 
 test('testimonial review page uses canonical branding and remains clearly private', () => {
   assert.match(page, /<hb-global-nav><\/hb-global-nav>/);
   assert.match(page, /\/assets\/hb-brand\.css/);
   assert.match(page, /Vista privada de revisión · todavía no publicada/);
-  assert.match(page, /Retratos ilustrados con IA/);
+  assert.match(page, /Ilustraciones creadas con IA/);
   assert.ok(page.indexOf('/assets/hb-global-nav.js') < page.indexOf('/assets/hb-main.js'));
 });
 
@@ -37,4 +40,41 @@ test('new cuts have a dedicated review filter and visible label', () => {
   assert.match(page, /data-filter="new"/);
   assert.match(app, /clip\.newCut/);
   assert.match(app, /Nuevo corte/);
+});
+
+test('every profile and clip has English editorial copy', () => {
+  const context = { window: {} };
+  vm.runInNewContext(reviewData, context);
+  vm.runInNewContext(translationsSource, context);
+  const data = context.window.HMP_REVIEW_DATA;
+  const translations = context.window.HMP_TESTIMONIAL_TRANSLATIONS;
+
+  assert.equal(data.length, 18);
+  for (const person of data) {
+    const profile = translations.profiles[person.name];
+    assert.ok(profile, `missing profile translation for ${person.name}`);
+    assert.ok(profile.introEn);
+    assert.ok(profile.testimonyEs);
+    assert.ok(profile.testimonyEn);
+    for (const clip of person.clips) {
+      const translatedClip = translations.clips[clip.code];
+      assert.ok(translatedClip, `missing clip translation for ${clip.code}`);
+      assert.ok(translatedClip.titleEn);
+      assert.ok(translatedClip.summaryEn);
+      assert.ok(translatedClip.quoteEn);
+    }
+  }
+});
+
+test('profile dialog identifies the AI image as inspired by the account', () => {
+  assert.match(app, /person\.mythImage \|\| person\.avatar/);
+  assert.match(app, /Imagen inspirada en su relato/);
+  assert.match(app, /testimonyEn/);
+  assert.match(page, /translations\.js/);
+});
+
+test('an open profile follows the global language switch', () => {
+  assert.match(app, /activePerson/);
+  assert.match(app, /if \(dialog\.open && activePerson\) openProfile\(activePerson\)/);
+  assert.match(app, /if \(!dialog\.open\) dialog\.showModal\(\)/);
 });
