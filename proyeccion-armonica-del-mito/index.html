@@ -115,6 +115,17 @@
   .open-card .ttl{ display:block; font-family:var(--font-serif); font-size:1.5rem; color:var(--bone); }
   .open-card .dsc{ display:block; color:var(--ink-600); font-size:.95rem; margin-top:.5rem; line-height:1.6; }
 
+  /* ---------- Myth gallery invitation ---------- */
+  .myth-gallery-invite{ position:relative; isolation:isolate; overflow:hidden; display:grid; gap:2rem; align-items:center; padding:clamp(2rem,5vw,4.25rem); border:1px solid var(--hair); border-radius:var(--r-card); background:linear-gradient(135deg,rgba(201,162,78,.1),rgba(244,238,226,.025) 48%,rgba(201,162,78,.045)); }
+  .myth-gallery-invite::before{ content:""; position:absolute; z-index:-1; width:min(48vw,520px); aspect-ratio:1; right:-12%; top:50%; transform:translateY(-50%); border-radius:50%; background:radial-gradient(circle,rgba(201,162,78,.16),rgba(201,162,78,.025) 42%,transparent 69%); }
+  .myth-gallery-copy{ max-width:58ch; }
+  .myth-gallery-copy h2{ margin-top:.85rem; font-size:clamp(2rem,4.4vw,3.7rem); line-height:.98; }
+  .myth-gallery-copy p{ margin-top:1.25rem; color:var(--ink-600); font-size:1.02rem; line-height:1.75; }
+  .myth-gallery-action{ margin-top:1.8rem; }
+  .myth-gallery-mark{ display:grid; width:min(32vw,220px); aspect-ratio:1; place-items:center; justify-self:center; color:var(--gold); opacity:.78; filter:drop-shadow(0 0 35px rgba(201,162,78,.22)); }
+  @media(min-width:780px){ .myth-gallery-invite{ grid-template-columns:minmax(0,1.35fr) minmax(180px,.65fr); } }
+  @media(max-width:779px){ .myth-gallery-mark{ display:none; } }
+
   /* ---------- CTA band ---------- */
   .cta-band{ text-align:center; position:relative; }
   .cta-band h2{ font-size:clamp(1.75rem,3.8vw,2.8rem); max-width:20ch; margin-inline:auto; }
@@ -292,6 +303,28 @@
       <div class="img-frame split-media reveal" data-d="1">
         <img class="img-cover duotone" src="/assets/img/origin-edgecity.jpg" alt="Edge City 2025 — a group resting during a Beacon session" />
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MYTHBOT ART GALLERY ================= -->
+<section class="section" id="galeria-del-mito">
+  <div class="wrap">
+    <div class="myth-gallery-invite">
+      <div class="myth-gallery-copy">
+        <span class="eyebrow"><span data-lang="en">Gallery of myth expansions</span><span data-lang="es">Galería de ampliaciones del mito</span></span>
+        <h2><span data-lang="en">When a story returns as an image</span><span data-lang="es">Cuando un relato vuelve como imagen</span></h2>
+        <p>
+          <span data-lang="en">After each gathering, the Mythbot transforms participants&rsquo; accounts into visual interpretations of their symbols and atmospheres. The gallery brings together these expansions without names: each work keeps only the date of the experience that gave rise to it.</span>
+          <span data-lang="es">Después de cada encuentro, el Mythbot transforma los relatos de quienes participaron en interpretaciones visuales de sus símbolos y atmósferas. La galería reúne estas ampliaciones sin nombres: cada obra conserva solamente la fecha de la experiencia que le dio origen.</span>
+        </p>
+        <div class="myth-gallery-action">
+          <a class="btn btn-primary" href="/eventos/testimonios/">
+            <span data-lang="en">Visit the art gallery</span><span data-lang="es">Visitar la galería de arte</span>
+          </a>
+        </div>
+      </div>
+      <span class="myth-gallery-mark" aria-hidden="true"><svg viewBox="0 0 200 200" width="100%" height="100%" fill="none"><use href="#hbmark"/></svg></span>
     </div>
   </div>
 </section>

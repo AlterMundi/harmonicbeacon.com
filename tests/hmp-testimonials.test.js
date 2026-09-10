@@ -4,6 +4,7 @@ const test = require('node:test');
 
 const page = readFileSync('eventos/testimonios/index.html', 'utf8');
 const app = readFileSync('eventos/testimonios/app.js', 'utf8');
+const projectionPage = readFileSync('proyeccion-armonica-del-mito/index.html', 'utf8');
 const publicSource = `${page}\n${app}`;
 
 test('Mythbot gallery explains the artwork and remains a private review', () => {
@@ -48,4 +49,14 @@ test('artwork lightbox is keyboard-friendly and language-aware', () => {
   assert.match(app, /lightbox\.showModal\(\)/);
   assert.match(app, /lightbox\.addEventListener\('cancel'/);
   assert.match(app, /new MutationObserver\(render\)/);
+});
+
+test('the projection journey leads naturally into the Mythbot art gallery', () => {
+  assert.match(projectionPage, /Galería de ampliaciones del mito/);
+  assert.match(projectionPage, /Cuando un relato vuelve como imagen/);
+  assert.match(projectionPage, /cada obra conserva solamente la fecha/);
+  assert.match(projectionPage, /href="\/eventos\/testimonios\/"/);
+  assert.match(projectionPage, /Visitar la galería de arte/);
+  assert.ok(projectionPage.indexOf('id="recorrido"') < projectionPage.indexOf('id="galeria-del-mito"'));
+  assert.ok(projectionPage.indexOf('id="galeria-del-mito"') < projectionPage.indexOf('id="equipo"'));
 });
