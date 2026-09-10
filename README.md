@@ -46,7 +46,9 @@ npm run build
 
 ## Deploy
 
-GitHub Pages desde `main` / root.
+See the [Home operating, delivery, and recovery contract v1](docs/ops/home-delivery-contract-v1.md).
+It supersedes the previous one-line deployment procedure; the current mechanism remains the legacy
+GitHub Pages branch source `main:/`.
 
 ## Documentos legales públicos
 
