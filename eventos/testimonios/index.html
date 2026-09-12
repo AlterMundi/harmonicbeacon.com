@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es" data-active-lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Galería de arte del Mythbot · Harmonic Beacon</title>
+  <meta name="description" content="Interpretaciones visuales creadas por el Mythbot a partir de relatos de la Proyección Armónica del Mito." />
+  <meta name="theme-color" content="#100d0a" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    html[data-active-lang="es"] [data-lang="en"]{display:none!important}
+    html[data-active-lang="en"] [data-lang="es"]{display:none!important}
+  </style>
+  <link rel="stylesheet" href="/assets/hb-brand.css" />
+  <style>
+    :root{--gallery-bg:#100d0a;--gallery-panel:#17120e;--gallery-gold:#c9a24e;--gallery-cream:#f1e9db}
+    body{background:var(--gallery-bg)}
+    .review-ribbon{position:relative;z-index:4;padding:.72rem 1rem;border-bottom:1px solid var(--hair);background:rgba(201,162,78,.08);color:var(--ink-600);font-size:.68rem;letter-spacing:.13em;text-align:center;text-transform:uppercase}
+    .gallery-hero{position:relative;min-height:min(780px,88svh);overflow:hidden;display:grid;align-items:center;padding:clamp(5rem,12vw,10rem) 0 clamp(4rem,9vw,7rem)}
+    .gallery-hero::before{content:"";position:absolute;width:min(84vw,920px);aspect-ratio:1;left:50%;top:44%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(201,162,78,.17),rgba(201,162,78,.045) 38%,transparent 70%);filter:blur(10px);pointer-events:none}
+    .gallery-hero .wrap{position:relative;text-align:center}
+    .hero-mark{display:grid;width:64px;height:64px;margin:0 auto 1.15rem;place-items:center;color:var(--gallery-gold);filter:drop-shadow(0 0 26px rgba(201,162,78,.28))}
+    .gallery-hero h1{max-width:13ch;margin:1rem auto 0;font-size:clamp(3rem,8.4vw,7.4rem);font-weight:400;line-height:.86;letter-spacing:-.035em}
+    .gallery-hero .lead{max-width:66ch;margin:clamp(1.7rem,4vw,2.5rem) auto 0;color:var(--ink-700);font-size:clamp(1rem,1.7vw,1.2rem);line-height:1.8}
+    .gallery-hero .lead em{color:var(--gallery-cream);font-family:var(--font-serif);font-size:1.12em}
+    .gallery-note{max-width:60ch;margin:1.4rem auto 0;color:var(--ink-500);font-size:.78rem;line-height:1.65}
+    .gallery-enter{display:inline-flex;align-items:center;gap:.7rem;margin-top:2.2rem;color:var(--gallery-gold);font-size:.65rem;letter-spacing:.16em;text-decoration:none;text-transform:uppercase}
+    .gallery-enter::after{content:"↓";font-size:1rem;transition:transform .3s var(--ease)}
+    .gallery-enter:hover::after{transform:translateY(4px)}
+    .gallery-section{padding:clamp(3.5rem,8vw,7rem) 0 clamp(6rem,12vw,11rem);border-top:1px solid var(--hair-soft)}
+    .gallery-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:clamp(1.5rem,4vw,2.5rem)}
+    .gallery-heading h2{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:400;line-height:1}
+    .gallery-count{color:var(--ink-500);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase}
+    .art-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(.7rem,1.5vw,1.2rem)}
+    .art-card{grid-column:span 4;min-width:0;padding:0;border:0;color:inherit;background:transparent;text-align:left;cursor:zoom-in}
+    .art-card:nth-child(7n+1),.art-card:nth-child(7n+5){grid-column:span 6}
+    .art-frame{position:relative;display:block;aspect-ratio:1;overflow:hidden;background:var(--gallery-panel)}
+    .art-frame::after{content:"";position:absolute;inset:0;border:1px solid rgba(244,238,226,.09);box-shadow:inset 0 0 60px rgba(0,0,0,.14);pointer-events:none;transition:border-color .35s var(--ease)}
+    .art-frame img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.92) contrast(1.02);transition:transform .7s var(--ease),filter .7s var(--ease)}
+    .art-date{display:flex;align-items:center;gap:.65rem;padding:.72rem .1rem 1.1rem;color:var(--ink-800);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase}
+    .art-date::before{content:"";width:18px;height:1px;background:var(--gallery-gold)}
+    .art-card:hover .art-frame img{transform:scale(1.018);filter:saturate(1) contrast(1.03)}
+    .art-card:hover .art-frame::after{border-color:rgba(201,162,78,.42)}
+    .art-card:focus-visible{outline:2px solid var(--gallery-gold);outline-offset:5px}
+    .lightbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;color:var(--gallery-cream);background:rgba(7,6,5,.96);overflow:hidden}
+    .lightbox::backdrop{background:#070605}
+    .lightbox-inner{display:grid;height:100%;grid-template-rows:1fr auto;place-items:center;padding:clamp(3.8rem,7vw,5.5rem) clamp(1rem,4vw,3rem) clamp(1.25rem,3vw,2rem)}
+    .lightbox img{display:block;min-width:0;min-height:0;max-width:100%;max-height:calc(100svh - 8.5rem);object-fit:contain;box-shadow:0 22px 80px rgba(0,0,0,.42)}
+    .lightbox-date{margin-top:1rem;color:var(--ink-600);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
+    .lightbox-close{position:fixed;z-index:2;right:clamp(1rem,3vw,2rem);top:clamp(1rem,3vw,2rem);width:44px;height:44px;border:1px solid var(--hair);border-radius:50%;color:var(--gallery-cream);background:rgba(22,18,13,.74);font-size:1.35rem;line-height:1;cursor:pointer;backdrop-filter:blur(10px)}
+    .lightbox-close:focus-visible{outline:2px solid var(--gallery-gold);outline-offset:3px}
+    .empty{grid-column:1/-1;padding:4rem 1rem;color:var(--ink-600);text-align:center}
+    @media(max-width:760px){.gallery-hero{min-height:auto}.art-card,.art-card:nth-child(7n+1),.art-card:nth-child(7n+5){grid-column:span 6}.gallery-heading{align-items:start;flex-direction:column}.gallery-heading h2{max-width:12ch}}
+    @media(max-width:440px){.art-grid{gap:.6rem}.art-date{font-size:.55rem;letter-spacing:.1em}.art-date::before{width:10px}.gallery-hero .lead{line-height:1.68}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.gallery-enter::after,.art-frame img{transition:none}}
+  </style>
+</head>
+<body data-page="proyeccion">
+  <hb-global-nav></hb-global-nav>
+  <div class="grain" style="position:fixed;inset:0;z-index:60;pointer-events:none" aria-hidden="true"></div>
+
+  <div class="review-ribbon" role="status">
+    <span data-lang="es">Vista privada de revisión · todavía no publicada</span>
+    <span data-lang="en">Private review preview · not published yet</span>
+  </div>
+
+  <main>
+    <section class="gallery-hero" aria-labelledby="galleryTitle">
+      <div class="wrap">
+        <span class="hero-mark"><svg viewBox="0 0 200 200" width="64" height="64" fill="none" aria-hidden="true"><use href="#hbmark"/></svg></span>
+        <span class="eyebrow"><span data-lang="es">Proyección Armónica del Mito</span><span data-lang="en">Harmonic Myth Projection</span></span>
+        <h1 id="galleryTitle"><span data-lang="es">Galería de arte del Mythbot</span><span data-lang="en">The Mythbot art gallery</span></h1>
+        <p class="lead">
+          <span data-lang="es">El Mythbot escucha los relatos nacidos en los encuentros de Proyección Armónica del Mito y los transforma en imágenes. Esta galería reúne esas <em>interpretaciones visuales</em>: rastros de símbolos, paisajes y sensaciones compartidas durante cada experiencia.</span>
+          <span data-lang="en">The Mythbot listens to stories born in Harmonic Myth Projection gatherings and transforms them into images. This gallery brings together those <em>visual interpretations</em>: traces of symbols, landscapes and sensations shared during each experience.</span>
+        </p>
+        <p class="gallery-note">
+          <span data-lang="es">No son registros documentales ni reproducciones literales. Las obras se presentan sin nombres; cada fecha señala el encuentro que les dio origen.</span>
+          <span data-lang="en">They are not documentary records or literal reproductions. The works are presented without names; each date marks the gathering that gave rise to them.</span>
+        </p>
+        <a class="gallery-enter" href="#obras"><span data-lang="es">Recorrer la galería</span><span data-lang="en">Enter the gallery</span></a>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="obras" aria-labelledby="worksTitle">
+      <div class="wrap">
+        <div class="gallery-heading">
+          <h2 id="worksTitle"><span data-lang="es">Imágenes de la experiencia</span><span data-lang="en">Images from the experience</span></h2>
+          <span class="gallery-count" id="galleryCount" aria-live="polite"></span>
+        </div>
+        <div class="art-grid" id="artGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="lightbox" id="artLightbox" aria-label="Obra ampliada">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar">×</button>
+    <div class="lightbox-inner">
+      <img id="lightboxImage" alt="" />
+      <time class="lightbox-date" id="lightboxDate"></time>
+    </div>
+  </dialog>
+
+  <script src="/assets/hb-global-nav.js" defer></script>
+  <script src="/assets/hb-main.js" defer></script>
+  <script src="/eventos/testimonios/review-data.js"></script>
+  <script src="/eventos/testimonios/app.js"></script>
+</body>
+</html>

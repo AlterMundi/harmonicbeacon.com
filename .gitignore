@@ -32,3 +32,9 @@ Thumbs.db
 dist/
 node_modules/
 *.zip
+
+# Testimonios HMP: material privado de revisión local
+eventos/testimonios/review-data.js
+assets/img/testimonios-review/
+assets/video/testimonios-review/
+assets/img/mythbot-gallery/

@@ -118,6 +118,9 @@
   .voice-chip:nth-child(4),.voice-chip:nth-child(9){ grid-column:span 2; }
   .voice-chip:hover,.voice-chip:focus-visible{ transform:translateY(-4px); border-color:var(--gold); background:rgba(201,162,78,.08); outline:none; }
   .voice-chip small{ display:block; margin-top:.65rem; color:var(--gold); font:500 .58rem/1.4 var(--font-sans); letter-spacing:.14em; text-transform:uppercase; }
+  .gallery-chip{ display:flex; flex-direction:column; justify-content:center; text-decoration:none; background:linear-gradient(135deg,rgba(201,162,78,.13),rgba(244,238,226,.035)); }
+  .gallery-chip .gallery-label{ display:block; color:var(--gold); font:500 .58rem/1.4 var(--font-sans); letter-spacing:.2em; text-transform:uppercase; }
+  .gallery-chip strong{ display:block; margin-top:.42rem; color:var(--bone); font:400 clamp(1.08rem,1.7vw,1.35rem)/1.15 var(--font-serif); }
   .voice-dialog{ width:min(680px,calc(100% - 2rem)); padding:0; border:1px solid var(--hair); border-radius:24px; background:var(--bg-1); color:var(--bone); box-shadow:0 30px 90px rgba(0,0,0,.65); }
   .voice-dialog::backdrop{ background:rgba(8,6,4,.78); backdrop-filter:blur(5px); }
   .voice-dialog-inner{ position:relative; padding:clamp(2rem,6vw,4rem); }
@@ -277,6 +280,7 @@
       <button class="voice-chip reveal" type="button" data-voice="voice-8">“<span data-lang="en">I felt I was embracing my son.</span><span data-lang="es">Sentí que abrazaba a mi hijo.</span>”<small><span data-lang="en">Read more</span><span data-lang="es">Abrir relato</span></small></button>
       <button class="voice-chip reveal" type="button" data-voice="voice-9">“<span data-lang="en">We carry projects within us, too.</span><span data-lang="es">También nos embarazamos de proyectos.</span>”<small><span data-lang="en">Read more</span><span data-lang="es">Abrir relato</span></small></button>
       <button class="voice-chip reveal" type="button" data-voice="voice-10">“<span data-lang="en">The embrace had always been there.</span><span data-lang="es">El abrazo estaba siempre.</span>”<small><span data-lang="en">Read more</span><span data-lang="es">Abrir relato</span></small></button>
+      <a class="voice-chip gallery-chip reveal" href="/eventos/testimonios/" aria-label="Ver galería de arte del Mythbot / View Mythbot art gallery"><span class="gallery-label"><span data-lang="en">Gallery</span><span data-lang="es">Galería</span></span><strong><span data-lang="en">Voices from the gatherings</span><span data-lang="es">Voces de los encuentros</span></strong><small><span data-lang="en">View gallery</span><span data-lang="es">Ver galería</span></small></a>
     </div>
     <template id="voice-1"><blockquote>“<span data-lang="en">This harmony amazes me. I breathe it in; I live it. Today I let it work through me more fully, and I felt its energy change.</span><span data-lang="es">Estoy sorprendida con esta armonía. Me la respiro, me la vivo. Hoy me dejé armonizar más y sentí cómo su energía se transformaba.</span>”</blockquote><p class="voice-source"><span data-lang="en">Virtual gathering · May 20</span><span data-lang="es">Encuentro virtual · 20 de mayo</span></p></template>
     <template id="voice-2"><blockquote>“<span data-lang="en">Sound took on another dimension, another force, another intensity.</span><span data-lang="es">El sonido cobró otra dimensión, otra fuerza, otra intensidad.</span>”</blockquote><p class="voice-source"><span data-lang="en">Virtual gathering</span><span data-lang="es">Encuentro virtual</span></p></template>
