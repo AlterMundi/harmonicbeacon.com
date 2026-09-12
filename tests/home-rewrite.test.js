@@ -37,7 +37,10 @@ test('the homepage makes the Listen membership explicit and links directly to ch
 
 test('the homepage offers a selectable cloud of accounts without public identities', () => {
   const voices = home.match(/<div class="voice-cloud"[\s\S]*?<dialog class="voice-dialog"/)?.[0] || '';
-  assert.equal((voices.match(/class="voice-chip reveal"/g) || []).length, 10);
+  assert.equal((voices.match(/<button class="voice-chip reveal"/g) || []).length, 10);
+  assert.match(voices, /class="voice-chip gallery-chip reveal"/);
+  assert.match(voices, /Voces de los encuentros/);
+  assert.match(voices, /Ver galería/);
   assert.equal((voices.match(/<template id="voice-/g) || []).length, 10);
   assert.doesNotMatch(voices, /Participante anónima|Anonymous participant/);
   assert.match(voices, /El sonido cobró otra dimensión/);
