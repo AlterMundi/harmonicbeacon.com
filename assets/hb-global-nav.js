@@ -166,6 +166,9 @@
     .account-trigger.signed-in { border-color:rgba(201,162,78,.72); background:rgba(201,162,78,.1); }
     .account-trigger.signed-in::after { content:""; position:absolute; right:3px; bottom:3px; width:7px; height:7px; border:2px solid #16120D; border-radius:999px; background:#C9A24E; }
     .account-trigger svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; }
+    .account-entry { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:9px 12px; border:1px solid rgba(201,162,78,.5); border-radius:999px; color:#F4EEE2; font-size:16px; line-height:1.2; white-space:nowrap; }
+    .account-entry:hover { background:rgba(201,162,78,.12); border-color:#C9A24E; }
+    .account-entry svg { width:20px; height:20px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; }
     .account-menu { position:absolute; z-index:4; top:calc(100% + 8px); right:0; min-width:164px; padding:6px; border:1px solid rgba(201,162,78,.34); border-radius:12px; background:#16120D; box-shadow:0 18px 48px rgba(0,0,0,.34); }
     .account-menu[hidden] { display:none; }
     .account-menu slot { display:block; }
@@ -184,6 +187,7 @@
     :focus-visible { outline:2px solid #C9A24E; outline-offset:3px; }
     @media (max-width:1120px) { .links { display:none; } .toggle { display:block; } .inner { min-height:68px; padding-top:10px; padding-bottom:10px; } :host { height:68px; } :host([overlay]) { height:0; } }
     @media (max-width:430px) { .inner { padding-left:16px; padding-right:12px; } .wordmark { font-size:10.5px; letter-spacing:.14em; } .mark { width:27px; height:27px; } .language { min-width:54px; } }
+    @media (max-width:600px) { .inner.has-public-account { gap:8px; } .inner.has-public-account .wordmark { display:none; } }
     @media (max-width:365px) { .wordmark { display:none; } }
     @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; transition:none !important; } }
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .nav { background:#16120D; } }
@@ -240,19 +244,27 @@
       var brandHref = localizedHref(MAIN_ORIGIN + '/', language);
       var menuLabel = language === 'es' ? 'Menú' : 'Menu';
       var navLabel = language === 'es' ? 'Navegación principal' : 'Primary navigation';
+      var publicSite = location.hostname === 'harmonicbeacon.com' || location.hostname === 'www.harmonicbeacon.com';
       var accountSignedIn = this.hasAttribute('data-account-signed-in');
       var userMenuLabel = language === 'es'
         ? (accountSignedIn ? 'Menú de usuario, sesión iniciada' : 'Menú de usuario')
         : (accountSignedIn ? 'User menu, signed in' : 'User menu');
       var accountLabel = language === 'es' ? 'Cuenta' : 'Account';
-      var accountControl = accountControlAvailable(this)
+      // Public Home links directly to the existing authority. Account resolves
+      // sign-in versus the person's profile; Home never guesses from cookies.
+      var accountEntryLabel = language === 'es'
+        ? (accountSignedIn ? 'Mi cuenta' : 'Iniciar sesión')
+        : (accountSignedIn ? 'My account' : 'Sign in');
+      var accountControl = publicSite
+        ? '<a class="account-entry" href="' + accountPageHref(language) + '"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg><span>' + accountEntryLabel + '</span></a>'
+        : accountControlAvailable(this)
         ? '<div class="account-control">' +
             '<button class="account-trigger' + (accountSignedIn ? ' signed-in' : '') + '" type="button" aria-label="' + userMenuLabel + '" aria-haspopup="menu" aria-controls="hb-account-menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.75 19c.6-3.25 2.7-5 6.25-5s5.65 1.75 6.25 5"></path></svg></button>' +
             '<div class="account-menu" id="hb-account-menu" role="menu" hidden><slot name="account-menu"><a role="menuitem" href="' + accountPageHref(language) + '">' + accountLabel + '</a></slot></div>' +
           '</div>'
         : '';
       this.shadowRoot.innerHTML = '<style>' + style + '</style>' +
-        '<header class="nav"><div class="inner">' +
+        '<header class="nav"><div class="inner' + (publicSite ? ' has-public-account' : '') + '">' +
           '<a class="brand" href="' + brandHref + '" aria-label="Harmonic Beacon">' +
             '<svg class="mark" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><path d="' + beaconMarkPath() + '"></path></svg>' +
             '<span class="wordmark">Harmonic Beacon</span></a>' +
