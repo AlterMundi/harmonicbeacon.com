@@ -8,7 +8,7 @@
 @font-face{font-family:'HB Lato';src:url('./fonts/material/Lato-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
 html:root{
   --hb-wine:#6d2939;--hb-wine-deep:#46202b;--hb-clay:#a65442;
-  --hb-olive:#5e694b;--hb-cream:#f7f1e7;--hb-paper:#fffbf5;
+  --hb-olive:#5e694b;--hb-olive-deep:#48523a;--hb-sage:#e5e9dd;--hb-cream:#f7f1e7;--hb-paper:#fffbf5;
   --hb-skin:#f0d8b9;--hb-text:#372c28;--hb-muted:#655951;--hb-line:#d5c6b5;
   --font-serif:'HB Alegreya',Georgia,serif;--font-sans:'HB Lato',Arial,sans-serif;
   --bg-0:var(--hb-cream);--bg-1:var(--hb-paper);--bg-2:var(--hb-skin);--bg-card:var(--hb-paper);
@@ -36,20 +36,25 @@ html .eyebrow,html .eco-label,html .entry-modes span,html .meta{color:var(--hb-o
 html .btn,html .cta{font:600 16px/1.4 var(--font-sans);letter-spacing:.035em;min-height:48px}
 html .btn-primary,html .cta,html .work-card .wk-login{background:var(--hb-wine);color:var(--hb-paper);border-color:var(--hb-wine);box-shadow:none}
 html .btn-primary:hover,html .cta:hover{background:var(--hb-wine-deep);color:var(--hb-paper);box-shadow:0 8px 24px rgb(109 41 57 / 14%)}
-html .btn-ghost{background:var(--hb-paper);color:var(--hb-wine);border-color:var(--hb-line)}
-html .btn-ghost:hover{background:var(--hb-skin);color:var(--hb-wine-deep);border-color:var(--hb-wine)}
+html .btn-ghost{background:var(--hb-paper);color:var(--hb-olive);border-color:var(--hb-olive)}
+html .btn-ghost:hover{background:var(--hb-sage);color:var(--hb-olive-deep);border-color:var(--hb-olive-deep)}
 html :where(a,button,input,summary,select,textarea):focus-visible{outline:3px solid var(--hb-olive);outline-offset:4px}
 html .pill{color:var(--hb-olive);background:var(--hb-paper);font-size:14px}
 html .pill.live{background:var(--hb-wine);color:var(--hb-paper)}
 html .dot-live{background:var(--hb-olive);box-shadow:none;animation:none}
 html .hb-mark{color:var(--hb-wine);filter:none}
 html .program{background:linear-gradient(180deg,var(--hb-cream),var(--hb-paper))}
-html .listen-hours,html .why-bridge,html .book-feature{background:var(--hb-skin)}
-html .listen-hours{border-left-color:var(--hb-line)}
-html .hat-horizon{border-color:var(--hb-olive);background:var(--hb-paper)}
+html .listen-hours,html .book-feature{background:var(--hb-skin)}
+html .why-bridge{background:var(--hb-sage);border-color:var(--hb-olive)}
+html .listen-hours{border-left-color:var(--hb-olive)}
+html .hat-horizon{border-color:var(--hb-olive);background:linear-gradient(180deg,var(--hb-sage),var(--hb-paper))}
+html .eco-root{background:var(--hb-sage);border-color:var(--hb-olive)}
+html .eco-root strong{color:var(--hb-olive-deep)}
 html .voice-chip,html .voice-dialog,html .voice-dialog-inner,html .lb,html .event-block,html .event-facts>div{background:var(--hb-paper);color:var(--hb-text);border-color:var(--hb-line)}
 html .voice-close{width:44px;height:44px}
-html .voice-chip small{font-size:14px}
+html .voice-chip small{font-size:14px;color:var(--hb-olive)}
+html .voice-chip:hover,html .voice-chip:focus-visible{background:var(--hb-sage);border-color:var(--hb-olive)}
+html .voice-chip:focus-visible{outline:3px solid var(--hb-olive);outline-offset:4px}
 html .voice-dialog::backdrop{background:rgb(70 32 43 / 65%)}
 html .event-page .eyebrow,html .event-facts dt{color:var(--hb-olive)}
 html .event-page .note,html .event-page .facts-note,html .listen-support,html .voice-source,
@@ -58,8 +63,9 @@ html .ev-date .m,html .ev-main .meta,html .ev-main .ilink,html .work-card .wk-st
 html .lb-cap,html .lb-bar{color:var(--hb-muted)}
 html .subnav,html .nav-mobile,html .nav.scrolled{background:var(--hb-paper);border-color:var(--hb-line)}
 html .foot-brand .hb-mark{color:var(--hb-wine)}
-/* Details on skin surfaces use wine to retain small-text contrast. */
-html .why-bridge .eyebrow,html .book-feature .eyebrow{color:var(--hb-wine)}
+/* Keep small labels readable on their selected surface. */
+html .why-bridge .eyebrow{color:var(--hb-olive)}
+html .book-feature .eyebrow{color:var(--hb-wine)}
 html .portrait{background:var(--hb-paper)}
 html .portrait::before{color:var(--hb-wine)}
 html .portrait::after{border-color:var(--hb-line)}
@@ -76,6 +82,10 @@ html .hero:has(.hero-bg) .hero-bg::after{background:linear-gradient(180deg,rgb(7
 html .hero:has(.hero-bg) .btn-primary{background:var(--hb-skin);color:var(--hb-wine-deep);border-color:var(--hb-skin)}
 html .hero:has(.hero-bg) .btn-ghost{background:rgb(70 32 43 / 80%);color:var(--hb-paper);border-color:var(--hb-skin)}
 html .hero:has(.hero-bg) .btn-ghost:hover{background:var(--hb-wine);color:var(--hb-paper)}
+html .hero:has(.hero-bg) :where(a,button):focus-visible{outline-color:var(--hb-skin)}
+/* Olive joins the wine hero through its secondary listening action. */
+html .hero:has(.hero-bg) .btn-ghost[href*="/listener/membership"]{background:var(--hb-olive);color:var(--hb-paper);border-color:var(--hb-olive)}
+html .hero:has(.hero-bg) .btn-ghost[href*="/listener/membership"]:hover{background:var(--hb-olive-deep);border-color:var(--hb-olive-deep)}
 /* Existing registration and confirmation retain controllers, state and terms. */
 html label,html legend{font-size:16px}
 html .booking-panel,html .session-zone,html .form-zone,html .account-card{background:var(--hb-paper);color:var(--hb-text);border-color:var(--hb-line)}

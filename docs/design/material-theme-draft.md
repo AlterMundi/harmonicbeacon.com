@@ -1,6 +1,6 @@
 # Beacon material theme — review draft
 
-Date: 2026-11-11. Status: **review candidate, not selected for publication**.
+Date: 2026-11-11. Status: **palette direction approved; olive-accent refinement prepared, not published**.
 
 This candidate carries the owner-selected HBC material palette and revised
 poster r2 into the existing Beacon website. HBC supplies a design reference;
@@ -20,16 +20,26 @@ permission to publish another project's content.
 | Deep wine | `#46202b` | Photo overlay and action hover |
 | Cream | `#f7f1e7` | Main background |
 | Paper | `#fffbf5` | Cards and light foreground on wine |
-| Skin | `#f0d8b9` | Listening, question and book panels |
-| Olive | `#5e694b` | Labels, supporting details and focus |
+| Skin | `#f0d8b9` | Listening and book panels |
+| Olive | `#5e694b` | Labels, secondary actions, supporting details and focus |
+| Deep olive | `#48523a` | Green action hover and ecosystem heading |
+| Light sage | `#e5e9dd` | Question and ecosystem panels |
 | Clay | `#a65442` | Secondary accent |
 | Ink | `#372c28` | Body text |
 | Muted | `#655951` | Supporting text |
 | Line | `#d5c6b5` | Dividers and outlines |
 
 Alegreya and Lato are served locally with their SIL OFL licenses. Small olive
-labels on skin panels use wine instead to preserve text contrast. Documentary
+labels on the skin book panel use wine instead to preserve text contrast. Documentary
 photographs remain unchanged beneath a wine overlay.
+
+## Green-accent refinement
+
+The selected wine/cream/skin direction is retained. Olive is more visible in the
+hero membership action, secondary button outlines, testimonial prompts, question
+panel and ecosystem section. Light sage and deep olive extend the existing olive
+for readable surfaces and hover states. This refinement changes CSS and this
+record only; the previous content and functional checks remain applicable.
 
 ## Scope and implementation
 
