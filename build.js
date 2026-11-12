@@ -40,6 +40,7 @@ for (const directory of [
   'proyeccion-armonica-del-mito',
   'inscripcion',
   'logos',
+  'comunidad',
   'analitica-y-privacidad',
 ]) {
   if (fs.existsSync(directory)) {
