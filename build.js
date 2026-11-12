@@ -20,7 +20,7 @@ function copyRecursiveSync(src, dest) {
 if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true });
 
 // Copiar archivos raíz necesarios
-['index.html', '.htaccess'].forEach(file => {
+['index.html', '.htaccess', 'favicon.svg'].forEach(file => {
   if (fs.existsSync(file)) {
     fs.copyFileSync(file, path.join('dist', file));
     console.log(`✓ Copiado: ${file}`);
@@ -40,6 +40,7 @@ for (const directory of [
   'proyeccion-armonica-del-mito',
   'inscripcion',
   'logos',
+  'comunidad',
   'analitica-y-privacidad',
 ]) {
   if (fs.existsSync(directory)) {
