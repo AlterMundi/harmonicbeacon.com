@@ -244,20 +244,11 @@
 <div class="hint" data-lang="en">← → to navigate</div>
 
 <script>
-/* ---------- Símbolo Lissajous 3:2 (perla / Beacon) ---------- */
-function lissajousPath(a, b, delta, R, cx, cy, n){
-  let d = "";
-  for(let i=0;i<=n;i++){
-    const t = (i/n) * 2*Math.PI;
-    const x = cx + R*Math.sin(a*t + delta);
-    const y = cy + R*Math.sin(b*t);
-    d += (i===0?"M":"L") + x.toFixed(2) + " " + y.toFixed(2) + " ";
-  }
-  return d.trim();
-}
+/* ---------- Selected source-grounded Beacon mark ---------- */
 function renderMark(svg, stroke){
-  const d = lissajousPath(3, 2, Math.PI/2, 38, 50, 50, 240);
-  svg.innerHTML = '<path d="'+d+'" fill="none" stroke="'+stroke+'" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
+  svg.setAttribute('viewBox', '0 0 200 200');
+  svg.style.color = stroke;
+  svg.innerHTML = '<use href="/assets/brand/beacon-mark/beacon-mark-symbol.svg#beacon-mark"/>';
 }
 renderMark(document.getElementById('mark-top'), 'var(--gold)');
 

@@ -83,24 +83,40 @@ Dos familias (Google Fonts):
 
 ---
 
-## 4. El símbolo (logo)
+## 4. El símbolo seleccionado — 13 noviembre 2026
 
-**Curva de Lissajous de proporción 3:2** (la quinta justa — vínculo directo con la armonía/HIT).
-Es una línea continua dorada, sin relleno, trazo redondeado. Se usa sola como marca/ícono.
+Sai eligió la curva de su referencia fotográfica vertical. El maestro conserva
+su silueta, el lazo inferior amplio y sus cruces; excluye el destello aislado de
+la esquina inferior derecha. No conocemos los parámetros físicos del oscilador:
+la reconstrucción no afirma una frecuencia ni una proporción 3:2.
 
-- Trazo: `stroke:#C9A24E`, `stroke-width:2.6–3.4`, `stroke-linecap/linejoin:round`, `fill:none`.
-- Favicon / app-icon: la misma curva centrada en un cuadrado redondeado `#16120D`, `rx:38`, curva al 78% de escala.
-- En código se inyecta como `MARK` (path SVG) en `assets/hb-main.js` y como `#hbmark` (símbolo reutilizable).
+La única geometría editable está en
+`assets/brand/beacon-mark/geometry.json`; `render_mark.py` genera todos los SVG.
+Los controles son puntos de una curva cerrada en el espacio de la imagen, con
+interpolación periódica. No son parámetros de un aparato físico.
 
-### SVG listo para pegar (viewBox 0 0 200 200)
-```html
-<svg viewBox="0 0 200 200" width="64" height="64" fill="none" aria-hidden="true">
-  <path d="M 192 100 L 191.79 104.13 L 191.17 108.25 L 190.13 112.35 L 188.68 116.43 L 186.84 120.47 L 184.6 124.48 L 181.97 128.43 L 178.98 132.33 L 175.62 136.16 L 171.93 139.92 L 167.91 143.6 L 163.58 147.19 L 158.96 150.68 L 154.08 154.08 L 148.95 157.36 L 143.6 160.53 L 138.05 163.58 L 132.33 166.5 L 126.46 169.28 L 120.47 171.93 L 114.39 174.43 L 108.25 176.78 L 102.06 178.98 L 95.87 181.01 L 89.7 182.89 L 83.57 184.6 L 77.52 186.13 L 71.57 187.5 L 65.75 188.68 L 60.08 189.69 L 54.6 190.52 L 49.32 191.17 L 44.27 191.63 L 39.47 191.91 L 34.95 192 L 30.72 191.91 L 26.8 191.63 L 23.22 191.17 L 19.98 190.52 L 17.11 189.69 L 14.61 188.68 L 12.5 187.5 L 10.79 186.13 L 9.48 184.6 L 8.58 182.89 L 8.09 181.01 L 8.02 178.98 L 8.37 176.78 L 9.13 174.43 L 10.31 171.93 L 11.89 169.28 L 13.87 166.5 L 16.24 163.58 L 18.99 160.53 L 22.1 157.36 L 25.57 154.08 L 29.38 150.68 L 33.5 147.19 L 37.93 143.6 L 42.64 139.92 L 47.61 136.16 L 52.81 132.33 L 58.23 128.43 L 63.84 124.48 L 69.61 120.47 L 75.52 116.43 L 81.55 112.35 L 87.65 108.25 L 93.81 104.13 L 100 100 L 106.19 95.87 L 112.35 91.75 L 118.45 87.65 L 124.48 83.57 L 130.39 79.53 L 136.16 75.52 L 141.77 71.57 L 147.19 67.67 L 152.39 63.84 L 157.36 60.08 L 162.07 56.4 L 166.5 52.81 L 170.62 49.32 L 174.43 45.92 L 177.9 42.64 L 181.01 39.47 L 183.76 36.42 L 186.13 33.5 L 188.11 30.72 L 189.69 28.07 L 190.87 25.57 L 191.63 23.22 L 191.98 21.02 L 191.91 18.99 L 191.42 17.11 L 190.52 15.4 L 189.21 13.87 L 187.5 12.5 L 185.39 11.32 L 182.89 10.31 L 180.02 9.48 L 176.78 8.83 L 173.2 8.37 L 169.28 8.09 L 165.05 8 L 160.53 8.09 L 155.73 8.37 L 150.68 8.83 L 145.4 9.48 L 139.92 10.31 L 134.25 11.32 L 128.43 12.5 L 122.48 13.87 L 116.43 15.4 L 110.3 17.11 L 104.13 18.99 L 97.94 21.02 L 91.75 23.22 L 85.61 25.57 L 79.53 28.07 L 73.54 30.72 L 67.67 33.5 L 61.95 36.42 L 56.4 39.47 L 51.05 42.64 L 45.92 45.92 L 41.04 49.32 L 36.42 52.81 L 32.09 56.4 L 28.07 60.08 L 24.38 63.84 L 21.02 67.67 L 18.03 71.57 L 15.4 75.52 L 13.16 79.53 L 11.32 83.57 L 9.87 87.65 L 8.83 91.75 L 8.21 95.87 L 8 100 L 8.21 104.13 L 8.83 108.25 L 9.87 112.35 L 11.32 116.43 L 13.16 120.47 L 15.4 124.48 L 18.03 128.43 L 21.02 132.33 L 24.38 136.16 L 28.07 139.92 L 32.09 143.6 L 36.42 147.19 L 41.04 150.68 L 45.92 154.08 L 51.05 157.36 L 56.4 160.53 L 61.95 163.58 L 67.67 166.5 L 73.54 169.28 L 79.53 171.93 L 85.61 174.43 L 91.75 176.78 L 97.94 178.98 L 104.13 181.01 L 110.3 182.89 L 116.43 184.6 L 122.48 186.13 L 128.43 187.5 L 134.25 188.68 L 139.92 189.69 L 145.4 190.52 L 150.68 191.17 L 155.73 191.63 L 160.53 191.91 L 165.05 192 L 169.28 191.91 L 173.2 191.63 L 176.78 191.17 L 180.02 190.52 L 182.89 189.69 L 185.39 188.68 L 187.5 187.5 L 189.21 186.13 L 190.52 184.6 L 191.42 182.89 L 191.91 181.01 L 191.98 178.98 L 191.63 176.78 L 190.87 174.43 L 189.69 171.93 L 188.11 169.28 L 186.13 166.5 L 183.76 163.58 L 181.01 160.53 L 177.9 157.36 L 174.43 154.08 L 170.62 150.68 L 166.5 147.19 L 162.07 143.6 L 157.36 139.92 L 152.39 136.16 L 147.19 132.33 L 141.77 128.43 L 136.16 124.48 L 130.39 120.47 L 124.48 116.43 L 118.45 112.35 L 112.35 108.25 L 106.19 104.13 L 100 100 L 93.81 95.87 L 87.65 91.75 L 81.55 87.65 L 75.52 83.57 L 69.61 79.53 L 63.84 75.52 L 58.23 71.57 L 52.81 67.67 L 47.61 63.84 L 42.64 60.08 L 37.93 56.4 L 33.5 52.81 L 29.38 49.32 L 25.57 45.92 L 22.1 42.64 L 18.99 39.47 L 16.24 36.42 L 13.87 33.5 L 11.89 30.72 L 10.31 28.07 L 9.13 25.57 L 8.37 23.22 L 8.02 21.02 L 8.09 18.99 L 8.58 17.11 L 9.48 15.4 L 10.79 13.87 L 12.5 12.5 L 14.61 11.32 L 17.11 10.31 L 19.98 9.48 L 23.22 8.83 L 26.8 8.37 L 30.72 8.09 L 34.95 8 L 39.47 8.09 L 44.27 8.37 L 49.32 8.83 L 54.6 9.48 L 60.08 10.31 L 65.75 11.32 L 71.57 12.5 L 77.52 13.87 L 83.57 15.4 L 89.7 17.11 L 95.87 18.99 L 102.06 21.02 L 108.25 23.22 L 114.39 25.57 L 120.47 28.07 L 126.46 30.72 L 132.33 33.5 L 138.05 36.42 L 143.6 39.47 L 148.95 42.64 L 154.08 45.92 L 158.96 49.32 L 163.58 52.81 L 167.91 56.4 L 171.93 60.08 L 175.62 63.84 L 178.98 67.67 L 181.97 71.57 L 184.6 75.52 L 186.84 79.53 L 188.68 83.57 L 190.13 87.65 L 191.17 91.75 L 191.79 95.87 L 192 100 Z"
-    fill="none" stroke="#C9A24E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-```
-> Reglas del logo: solo en oro `#C9A24E` (o hueso `#F4EEE2` sobre fondos muy claros). Nunca relleno,
-> nunca degradés multicolor, nunca rotarlo ni deformarlo. Acompañado del wordmark "Harmonic Beacon" en Inter.
+- Fuente humana: selección del 13 noviembre 2026,
+  `ec8b8591-1e2e-4116-bc92-0b0d1a5aaa60`.
+- Referencia original: PNG 868×1229, SHA256
+  `2483ec2ed9b9e9ebbbd354a846ca11b02eea1f9daf4aea5a01fb067cc2410790`.
+  Sus bytes originales y la comparación se conservan en el proyecto; no se
+  convierte el fondo fotográfico en parte del logotipo.
+- Uso web general: `beacon-mark.svg`, transparente, sin relleno, trazo redondeado.
+- Uso inline del mismo origen: `beacon-mark-symbol.svg#beacon-mark`.
+- Navegación compartida entre dominios: bloque SVG inline generado por el mismo
+  maestro (`--sync-consumers`). No requiere imágenes externas ni relajar la CSP
+  del login. No usar un `use` externo entre orígenes.
+- Bordó `#6d2939`, oliva `#48523a` y beige `#f7f1e7` son variantes de rol;
+  también hay negro/blanco y una versión turquesa `#13cec2` inspirada en la
+  referencia. Oro conserva la compatibilidad del tema web actualmente publicado.
+- Grosor estándar 6/200; variante pequeña 10/200. Ajustar el grosor por soporte,
+  conservando la geometría, proporción y orientación. No rellenar ni deformar.
+- El favicon conserva su fondo oscuro y usa este mismo trazo, reforzado para
+  tamaños pequeños. La nueva selección no cambia AlterMundi, HIT ni PsicopoMPo.
+
+Los antiguos ejemplos trigonométricos quedan en el historial de Git como
+referencias anteriores, no como la definición vigente de esta marca. El resto
+de esta guía y la selección del tema permanecen bajo su contrato existente.
 
 ---
 
