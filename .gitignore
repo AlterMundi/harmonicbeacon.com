@@ -32,3 +32,7 @@ Thumbs.db
 dist/
 node_modules/
 *.zip
+
+# Public selected mark consumer record and generated-tool cache
+!docs/brand/MARK-CONSUMERS.md
+assets/brand/beacon-mark/__pycache__/
