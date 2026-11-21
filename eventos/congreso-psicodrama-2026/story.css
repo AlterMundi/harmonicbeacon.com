@@ -1,0 +1,39 @@
+@font-face{font-family:BeaconStorySerif;src:url('/assets/fonts/Alegreya-Medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:BeaconStorySans;src:url('/assets/fonts/Lato-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:BeaconStorySans;src:url('/assets/fonts/Lato-Bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+.congress-story{background:#f7f1e7;color:#372c28;font-family:BeaconStorySans,system-ui,sans-serif}
+.story-shell{width:min(1140px,calc(100% - 64px));margin:0 auto;padding:112px 0 0}
+.story-header{max-width:850px;margin:0 auto;text-align:center;padding:0 0 42px}
+.story-back{display:block;width:fit-content;margin:0 0 48px;text-decoration:none;color:#5e694b;font-size:16px;line-height:1.5;padding:8px 0}
+.story-mark{display:block;margin:0 auto 26px}
+.story-kicker{font-size:14px;line-height:1.7;color:#5e694b;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.story-date{font-size:16px;line-height:1.6;color:#6e5e55;margin:12px 0 28px}
+.story-header h1{font-family:BeaconStorySerif,Georgia,serif;color:#6d2939;font-weight:500;font-size:clamp(44px,6.5vw,80px);line-height:1.04;letter-spacing:-.025em;margin:0 0 30px}
+.story-intro{max-width:620px;margin:0 auto;font-size:20px;line-height:1.65;color:#5e694b}
+.story-photo{margin:0;min-width:0}
+.story-photo a{display:block;cursor:zoom-in;border-radius:6px}
+.story-photo img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 10px 28px rgba(70,32,43,.08)}
+.story-hero{margin:12px 0 0}
+.story-prose{max-width:700px;margin:62px auto}
+.story-prose p{font-size:20px;line-height:1.85;letter-spacing:.005em;margin:0}
+.story-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.story-wide{grid-column:1/-1}
+.story-ceremony{margin:30px 0 0;gap:26px}
+.story-moments{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;margin-top:30px}
+.story-portrait .story-photo img{max-height:700px;object-fit:contain;width:auto;max-width:100%;margin:auto;background:#141312}
+.story-details{display:grid;gap:28px}
+.story-thanks{position:relative;margin:72px auto 44px;padding:36px 32px;border-top:1px solid rgba(109,41,57,.22);border-bottom:1px solid rgba(109,41,57,.22);max-width:900px}
+.story-thanks .story-prose{margin:0 auto}
+.story-thanks p{color:#6d2939;font-family:BeaconStorySerif,Georgia,serif;font-weight:500;font-size:clamp(24px,3vw,31px);line-height:1.6}
+.story-embrace{max-width:760px;margin:0 auto}
+.story-footer{text-align:center;padding:58px 0 64px;max-width:850px;margin:auto}
+.story-footer>p:first-child{font-family:BeaconStorySerif,Georgia,serif;font-weight:500;font-size:34px;line-height:1.2;color:#6d2939;margin:0 0 24px}
+.story-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+.story-actions a{padding:14px 24px;border-radius:999px;font-size:16px;line-height:1.5;min-height:48px;background:#5e694b;color:#f7f1e7;text-decoration:none}
+.story-actions a+a{background:transparent;color:#6d2939;border:1px solid #6d2939}
+.story-tags{font-size:14px;line-height:1.8;color:#6e5e55;margin-top:28px;overflow-wrap:anywhere}
+.congress-story a:focus-visible{outline:3px solid #5e694b;outline-offset:5px}
+.congress-story>footer{background:#46202b;color:#f7f1e7;--ink-800:#f4eee2;--ink-600:#ded2c3;--ink-500:#cbbba9;--surface:rgba(247,241,231,.06)}
+.congress-story>footer p,.congress-story>footer a{font-size:14px}
+@media(max-width:650px){.story-shell{width:calc(100% - 36px);padding-top:94px}.story-header{padding-bottom:30px}.story-back{margin-bottom:26px}.story-mark{width:60px;height:60px;margin-bottom:20px}.story-kicker{font-size:14px;letter-spacing:.06em}.story-date{margin:10px 0 20px;font-size:14px}.story-header h1{font-size:46px;margin-bottom:24px}.story-intro{font-size:18px;line-height:1.65}.story-prose{margin:38px 6px}.story-prose p{font-size:18px;line-height:1.8}.story-grid{grid-template-columns:1fr;gap:20px}.story-ceremony{margin-top:22px}.story-moments{grid-template-columns:1fr;gap:22px}.story-portrait .story-photo img{max-height:660px}.story-details{gap:22px}.story-thanks{margin:42px 0 28px;padding:26px 6px}.story-thanks .story-prose{margin:0}.story-thanks p{font-size:25px;line-height:1.55}.story-footer{padding-top:42px}.story-footer>p:first-child{font-size:30px}.story-actions{display:grid}.story-actions a{width:100%;padding-inline:20px}.story-tags{text-align:left}}
+@media(max-width:360px){.story-header h1{font-size:40px}.story-shell{width:calc(100% - 28px)}}
